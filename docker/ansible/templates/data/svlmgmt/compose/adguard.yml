@@ -1,0 +1,55 @@
+services:
+  unbound:
+    container_name: unbound
+    image: mvance/unbound:1.19.0
+    restart: always
+    environment:
+      - TZ=${TZ}
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - $DOCKERDIR/data/unbound/a-records.conf:/opt/unbound/etc/unbound/a-records.conf:ro
+      - $DOCKERDIR/data/unbound/forward-records.conf:/opt/unbound/etc/unbound/forward-records.conf:ro
+
+  adguard:
+    container_name: adguard
+    image: adguard/adguardhome:v0.107.43
+    depends_on:
+      - traefik
+      - unbound
+    networks:
+      - t2_proxy
+      - adguard-backend
+    ports:
+      - '53:53/tcp'
+      - '53:53/udp'
+      - '853:853/tcp'
+    volumes:
+      - adguard_data:/opt/adguardhome/work
+      - $DOCKERDIR/data/adguard/conf:/opt/adguardhome/conf
+    environment:
+      - TZ=${TZ}
+    restart: always
+    security_opt:
+      - no-new-privileges:true
+    labels:
+      # Backup
+      - docker-volume-backup.stop-during-backup=false # true - otherwise backup can't work with socketproxy
+      - "traefik.enable=true"
+      ## HTTP Routers
+      - "traefik.http.routers.adguard-rtr.entrypoints=https"
+      - "traefik.http.routers.adguard-rtr.rule=Host(`adguard.$DOMAINNAME`)"
+      - "traefik.http.routers.adguard-rtr.tls=true"
+      ## Middlewares
+      - "traefik.http.routers.adguard-rtr.middlewares=chain-no-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.adguard-rtr.service=adguard"
+      # Enable the management port 80
+      - "traefik.http.services.adguard.loadbalancer.server.port=80"
+
+networks:
+  adguard-backend:
+    name: adguard-backend
+
+volumes:
+  adguard_data:

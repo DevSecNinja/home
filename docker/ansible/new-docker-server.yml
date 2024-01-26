@@ -83,5 +83,46 @@
         state: touch
         mode: '0755'
 
+    - name: Set DNS Server
+      ini_file:
+        path: /etc/systemd/resolved.conf
+        section: Resolve
+        option: DNS
+        value: 9.9.9.9
+        no_extra_spaces: yes
+      notify:
+        - "Restart systemd-resolved"
+
+    - name: Set DNS Fallback Server
+      ini_file:
+        path: /etc/systemd/resolved.conf
+        section: Resolve
+        option: FallbackDNS
+        value: 149.112.112.112
+        no_extra_spaces: yes
+      notify:
+        - "Restart systemd-resolved"
+
+    - name: Set default as DNS operational mode
+      ini_file:
+        path: /etc/NetworkManager/NetworkManager.conf
+        section: main
+        option: dns
+        value: default
+        no_extra_spaces: yes
+      notify:
+        - "Remove STUB"
+        - "Restart systemd-resolved"
+
+    - name: Disable systemd-resolved
+      systemd:
+        name: systemd-resolved
+        state: stopped
+        enabled: no
+        masked: yes
+      notify:
+        - "Remove STUB"
+        - "Restart systemd-resolved"
+
   handlers:
     - import_tasks: handlers/main.yml

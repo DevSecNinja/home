@@ -11,3 +11,13 @@
 
 - name: restart server
   command: /sbin/reboot
+
+- name: Remove STUB
+  file:
+    path: /etc/resolv.conf
+    state: absent
+
+- name: Restart systemd-resolved
+  systemd:
+    name: systemd-resolved
+    state: restarted
