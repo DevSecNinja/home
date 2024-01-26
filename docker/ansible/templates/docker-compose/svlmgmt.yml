@@ -228,6 +228,9 @@ services:
       - "traefik.http.services.unifi.loadbalancer.server.port=8443"
       - "traefik.http.services.unifi-guest.loadbalancer.server.port=8843"
 
+# include:
+#   - $DOCKERDIR/data/compose/oauth.yml
+
 volumes:
   unifi_data:
   unifi_db_data:
