@@ -1,0 +1,31 @@
+services:
+  portainer:
+    container_name: portainer
+    image: portainer/portainer-ce:2.19.4-alpine
+    depends_on:
+      - traefik
+    command: -H unix:///var/run/docker.sock
+    networks:
+      - t2_proxy
+    restart: always
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - portainer_data:/data
+    environment:
+      - TZ=${TZ}
+    labels:
+      - "traefik.enable=true"
+      ## HTTP Routers
+      - "traefik.http.routers.portainer-rtr.entrypoints=https"
+      - "traefik.http.routers.portainer-rtr.rule=Host(`portainer.$DOMAINNAME`)"
+      - "traefik.http.routers.portainer-rtr.tls=true"
+      ## Middlewares
+      - "traefik.http.routers.portainer-rtr.middlewares=chain-no-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.portainer-rtr.service=portainer-svc"
+      - "traefik.http.services.portainer-svc.loadbalancer.server.port=9000"
+
+volumes:
+  portainer_data:

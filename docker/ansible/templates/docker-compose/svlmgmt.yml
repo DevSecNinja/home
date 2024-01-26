@@ -4,8 +4,10 @@ include:
   - $DOCKERDIR/data/compose/adguard.yml
   - $DOCKERDIR/data/compose/cloudflare.yml
   #- $DOCKERDIR/data/compose/oauth.yml
+  - $DOCKERDIR/data/compose/portainer.yml
   - $DOCKERDIR/data/compose/traefik-proxy.yml
   - $DOCKERDIR/data/compose/unifi.yml
+  - $DOCKERDIR/data/compose/watchtower.yml
 
 networks:
   default:
