@@ -37,6 +37,14 @@
         group: "docker"
         mode: "0755"
 
+    - name: Copy compose-modules folder
+      copy:
+        src: "templates/compose-modules/"
+        dest: "/srv/docker/data/compose"
+        owner: "{{ansible_user}}"
+        group: "docker"
+        mode: "0755"
+
     - name: Run containers
       shell:
         cmd: "docker compose up -d --remove-orphans"
