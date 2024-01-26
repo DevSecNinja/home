@@ -1,0 +1,47 @@
+services:
+  cloudflare-companion:
+    container_name: cloudflare-companion
+    image: tiredofit/traefik-cloudflare-companion:7.2.0
+    depends_on:
+      - traefik
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - TIMEZONE=${TZ}
+
+      - LOG_TYPE=BOTH
+      - LOG_LEVEL=INFO
+
+      - TRAEFIK_VERSION=2
+      - ENABLE_TRAEFIK_POLL=TRUE
+      - CF_TOKEN=$CLOUDFLARE_API_TOKEN
+      - RC_TYPE=CNAME
+
+      - TARGET_DOMAIN=SVLMGMT.$CLOUDFLARE_DOMAIN_1_FQDN
+      - DOMAIN1=$CLOUDFLARE_DOMAIN_1_FQDN
+      - DOMAIN1_ZONE_ID=$CLOUDFLARE_DOMAIN_1_ZONE_ID
+      - DOMAIN1_PROXIED=FALSE
+    restart: always
+    security_opt:
+      - no-new-privileges:true
+
+  cloudflare-ddns:
+    container_name: cloudflare-ddns
+    image: favonia/cloudflare-ddns:1.11.0
+    restart: always
+    cap_add:
+      - SETUID
+      - SETGID
+    cap_drop:
+      - all
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - IP6_PROVIDER=none # Disable IPv6
+      - CF_API_TOKEN=$CLOUDFLARE_API_TOKEN
+      - DOMAINS=$CLOUDFLARE_DOMAIN_1_OBFUSCATED_FQDN
+      - PROXIED=false
