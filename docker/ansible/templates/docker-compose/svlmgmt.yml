@@ -238,7 +238,7 @@ services:
     networks:
       - t2_proxy
       - default
-      - oauth2-proxy-backend
+      #- oauth2-proxy-backend
     restart: always
     security_opt:
       - no-new-privileges:true
