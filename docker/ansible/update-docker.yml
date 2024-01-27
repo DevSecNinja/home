@@ -1,6 +1,10 @@
 ---
 - hosts: all
   become: yes
+  vars:
+    # Directories
+    templates_src_path: "templates/data/{{inventory_hostname_short}}"
+    templates_dest_path: "/srv/docker/data"
   tasks:
 
     - include_tasks: tasks/ufw.yml
@@ -29,13 +33,17 @@
         group: "docker"
         mode: "0755"
 
-    - name: Copy data folder
-      copy:
-        src: "templates/data/{{inventory_hostname_short}}/"
-        dest: "/srv/docker/data"
-        owner: "{{ansible_user}}"
-        group: "docker"
-        mode: "0755"
+    - name: Copy all data directories recursively
+      file: dest={{templates_dest_path}}/{{ item|replace(templates_src_path+'/', '') }} state=directory owner={{ansible_user}} group=docker mode=0755
+      with_items: "{{ lookup('pipe', 'find '+ templates_src_path +'/ -type d').split('\n') }}"
+
+    - name: Copy all data files recursively
+      copy: src={{ item }} dest={{templates_dest_path}}/{{ item|replace(templates_src_path+'/', '') }}  owner={{ansible_user}} group=docker mode=0755
+      with_items: "{{ lookup('pipe', 'find '+ templates_src_path +'/ -type f -not -name *.j2 ').split('\n') }}"
+
+    - name: Copy data templates files recursively
+      template: src={{ item }} dest={{templates_dest_path}}/{{ item|replace(templates_src_path+'/', '')|replace('.j2', '') }}  owner={{ansible_user}} group=docker mode=0755
+      with_items: "{{ lookup('pipe', 'find '+ templates_src_path +'/ -type f -name *.j2').split('\n') }}"
 
     - name: Copy compose-modules folder
       copy:
