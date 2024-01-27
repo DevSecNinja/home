@@ -4,6 +4,10 @@ services:
     container_name: watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    security_opt:
+      - no-new-privileges:true
     environment:
       - TZ=${TZ}
-    command: --cleanup --monitor-only
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_MONITOR_ONLY=true
+      - WATCHTOWER_NOTIFICATION_URL=${NOTIFICATIONS_TEAMS_WEBHOOK_CONTAINRRR}
