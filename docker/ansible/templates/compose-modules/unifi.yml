@@ -1,6 +1,6 @@
 services:
   unifi-db:
-    image: docker.io/mongo:6.0.13
+    image: docker.io/mongo:7.0.5
     container_name: unifi-db
     networks:
       - unifi-backend
