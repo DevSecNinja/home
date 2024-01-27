@@ -11,25 +11,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  yay:
-    name: yay
-    runs-on: ubuntu-latest
-    container:
-      image: greyltc/archlinux-aur:yay
-      options: --user root
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Test Arch dependencies
-        shell: bash
-        run: >-
-          sudo -E -u ab -D~ bash -c '
-          cd $GITHUB_WORKSPACE;
-          yay -Syu --needed --noconfirm --noprogressbar go-task;
-          go-task workstation:yay
-          '
-
   configure:
     name: configure
     runs-on: ubuntu-latest
@@ -40,9 +21,7 @@ jobs:
           - k0s
           - k3s-ipv4
           - k3s-ipv6
-          - k3s-no-kube-vip
           - talos
-        addon-files: ["addons"]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -77,60 +56,51 @@ jobs:
         shell: bash
         run: brew install go-task
 
-      - name: Install Brew dependencies
+      - name: Run Workstation Brew tasks
         if: ${{ github.event_name == 'pull_request' && steps.cache-homebrew-packages.outputs.cache-hit != 'true' }}
         shell: bash
         run: task workstation:brew
 
-      - name: Initialize Direnv
+      - name: Run Workstation venv tasks
         shell: bash
-        run: direnv allow .
+        run: task workstation:venv
 
-      - name: Initialize Sops Age key
+      - name: Run Workstation direnv tasks
+        shell: bash
+        run: task workstation:direnv
+
+      - name: Run Sops Age key task
         shell: bash
         run: task sops:age-keygen
 
-      - name: Install Ansible dependencies
-        shell: bash
-        run: task ansible:deps force=false
-
-      - name: Generate bootstrap config file
+      - name: Run init tasks
         shell: bash
         run: |
           task init
           cp ./.github/tests/config-${{ matrix.config-files }}.yaml ./bootstrap/vars/config.yaml
-          cp ./.github/tests/${{ matrix.addon-files }}.yaml ./bootstrap/vars/addons.yaml
           export BOOTSTRAP_AGE_PUBLIC_KEY=$(sed -n 's/# public key: //gp' age.key)
           envsubst < ./bootstrap/vars/config.yaml | sponge ./bootstrap/vars/config.yaml
 
-      - name: Export Env from config.yaml
-        shell: bash
-        id: config-env
-        run: |
-          echo "distribution=$(yq '.bootstrap_distribution' ./bootstrap/vars/config.yaml)" >> $GITHUB_OUTPUT
-
-      - name: Run configure
+      - name: Run configure task
         shell: bash
         run: task configure --yes
 
-      - name: Run Talos configure
-        if: ${{ steps.config-env.outputs.distribution == 'talos' }}
+      - name: Run Talos tasks
+        if: ${{ startsWith(matrix.config-files, 'talos') }}
         shell: bash
         run: |
           task talos:gensecret --yes
           task talos:genconfig
 
-      - name: Run Ansible lint
-        if: ${{ steps.config-env.outputs.distribution == 'k3s' || steps.config-env.outputs.distribution == 'k0s' }}
+      - name: Run Ansible tasks
+        if: ${{ startsWith(matrix.config-files, 'k0s') || startsWith(matrix.config-files, 'k3s') }}
         shell: bash
-        run: task ansible:lint
+        run: |
+          task ansible:deps force=false
+          task ansible:lint
+          task ansible:list
 
-      - name: List Hosts with Ansible
-        if: ${{ steps.config-env.outputs.distribution == 'k3s' || steps.config-env.outputs.distribution == 'k0s' }}
-        shell: bash
-        run: task ansible:list
-
-      - name: Run repo clean and reset
+      - name: Run repo clean and reset tasks
         shell: bash
         run: |
           task repository:clean

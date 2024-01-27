@@ -1,4 +1,3 @@
-#% if bootstrap_distribution in ['k3s', 'k0s'] %#
 ---
 kubernetes:
   children:
@@ -6,16 +5,15 @@ kubernetes:
       hosts:
       #% for item in bootstrap_nodes.master %#
         "#{ item.name }#":
-          ansible_user: "#{ item.username }#"
+          ansible_user: "#{ item.ssh.username }#"
           ansible_host: "#{ item.address }#"
       #% endfor %#
-    #% if bootstrap_nodes.worker|default([]) | length > 0 %#
+    #% if bootstrap_nodes.worker|length > 0 %#
     worker:
       hosts:
       #% for item in bootstrap_nodes.worker %#
         "#{ item.name }#":
-          ansible_user: "#{ item.username }#"
+          ansible_user: "#{ item.ssh.username }#"
           ansible_host: "#{ item.address }#"
       #% endfor %#
     #% endif %#
-#% endif %#

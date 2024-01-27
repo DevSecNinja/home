@@ -4,6 +4,3 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./addons/ks.yaml
-  #% if weave_gitops|default({}) and weave_gitops.enabled|default(false) %#
-  - ./weave-gitops/ks.yaml
-  #% endif %#

@@ -1,4 +1,4 @@
-#% if bootstrap_distribution == 'k3s' %#
+#% if bootstrap_distribution in ['k3s'] %#
 ---
 - name: Cluster Nuke
   hosts: kubernetes
@@ -93,7 +93,7 @@
 
     - name: Remove local storage path
       ansible.builtin.file:
-        path: "#{ bootstrap_local_storage_path }#"
+        path: /var/openebs/local
         state: absent
 
     - name: Reboot

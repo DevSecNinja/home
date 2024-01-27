@@ -41,12 +41,12 @@ If you are new to Flux and GitOps it is important to understand that **all chang
 
 Hopefully some of this peeked your interests!
 
-If you are marching forward, now is a good time to choose whether you will deploy a Kubernetes cluster with [k0s](https://github.com/k0sproject/k0s), [k3s](https://k3s.io) or [Talos](https://github.com/siderolabs/talos). Talos and k0s support was recently added so I would advise using k3s until those have been tested more however feel free to use Talos or k0s and report ant issues that you find. Keep the one you decide in mind as you continue along, some steps may vary on what you choose.
+If you are marching forward, now is a good time to choose whether you will deploy a Kubernetes cluster with [k0s](https://github.com/k0sproject/k0s), [k3s](https://k3s.io) or [Talos](https://github.com/siderolabs/talos). Talos and k0s support was recently added so I would advise using k3s until those have been tested more however feel free to use Talos or k0s and report any issues that you find. Keep the one you decide in mind as you continue along, some steps may vary on what you choose.
 
 ### System requirements
 
 > [!IMPORTANT]
-> 1. The included behaviour of Talos, k0s or k3s is that all nodes are able to run workloads, **including** control nodes. Worker nodes are therefore optional.
+> 1. The included behaviour of Talos, k3s or k0s is that all nodes are able to run workloads, **including** control nodes. Worker nodes are therefore optional.
 > 2. Do you have 3 or more nodes? It is strongly recommended to make 3 of them control nodes for a highly available control plane.
 > 3. Running the cluster on Proxmox VE? My thoughts and recommendations about that are documented [here](https://onedr0p.github.io/home-ops/notes/proxmox-considerations.html).
 
@@ -158,56 +158,66 @@ Once you have installed Talos or Debian on your nodes, there are six stages to g
 
 3. Continue on to 🌱 [**Stage 2**](#-stage-2-setup-your-local-workstation-environment)
 
-### 🌱 Stage 2: Setup your local workstation environment
+### 🌱 Stage 2: Setup your local workstation
+
+You have two different options for setting up your local workstation. First one is using a `devcontainer` which requires you to have Docker and VSCode installed. This method is the fastest to get going because all the required CLI tools are provided for you in my `devcontainer` image. This image is built weekly and should always have the most up-to-date packages and tools. The second method is setting up the CLI tools directly on your workstation.
+
+#### devcontainer method
+
+1. Start Docker and open your repository in VSCode. There will be a pop-up asking you to use the `devcontainer`, click the button to start using it.
+
+2. Continue on to 🔧 [**Stage 3**](#-stage-3-do-bootstrap-configuration)
+
+#### Non-devcontainer method
 
 1. Install the most recent version of [task](https://taskfile.dev/), see the [installation docs](https://taskfile.dev/installation/) for other supported platforms.
-
-    📍 _If using **ArchLinux** the `task` command is `go-task` in your shell_
 
     ```sh
     # Homebrew
     brew install go-task
-    # or, Arch / yay
-    yay -S go-task
+    # or, Arch
+    pacman -S --noconfirm go-task && ln -sf /usr/bin/go-task /usr/local/bin/task
     ```
 
 2. Install the most recent version of [direnv](https://direnv.net/), see the [installation docs](https://direnv.net/docs/installation.html) for other supported platforms.
 
-    📍 _After installing `direnv` be sure to **[hook it into your shell](https://direnv.net/docs/hook.html)** and after that is done run `direnv allow` while in your repos' directory._
-
     ```sh
     # Homebrew
     brew install direnv
-    # or, Arch / yay
-    yay -S direnv
+    # or, Arch
+    pacman -S --noconfirm direnv
     ```
 
-3. Install **required** CLI tools: [age](https://github.com/FiloSottile/age), [cloudflared](https://github.com/cloudflare/cloudflared), [flux](https://toolkit.fluxcd.io/), [kubeconform](https://github.com/yannh/kubeconform), [kubectl](https://kubectl.docs.kubernetes.io/installation/), [kustomize](https://kubectl.docs.kubernetes.io/installation/), [sops](https://github.com/getsops/sops). [k0sctl](https://github.com/k0sproject/k0sctl) is required for k0s. [talosctl](https://www.talos.dev/latest/learn-more/talosctl/) and [talhelper](https://github.com/budimanjojo/talhelper) is required for Talos.
+    📍 _After `direnv` is installed be sure to **[hook it into your preferred shell](https://direnv.net/docs/hook.html)** and then run `task workstation:direnv`_
 
-   📍 _Not using Homebrew or ArchLinux? Make sure to look up how to install the latest version of each of these CLI tools and install them._
+3. Install the additional **required** CLI tools
+
+   📍 _**Not using Homebrew or ArchLinux?** Try using the generic Linux task below, if that fails check out the [Brewfile](.taskfiles/Workstation/Brewfile)/[Archfile](.taskfiles/Workstation/Archfile) for what CLI tools needed and install them._
 
     ```sh
     # Homebrew
     task workstation:brew
-    # or, Arch / yay
-    go-task workstation:yay
+    # or, Arch with yay/paru
+    task workstation:arch
+    # or, Generic Linux (this pulls binaires in to ./bin)
+    task workstation:generic-linux
     ```
 
-4. Setup a Python virual env and install Ansible by running the following task command.
+4. Setup a Python virual environment by running the following task command.
 
     📍 _This commands requires Python 3.11+ to be installed._
 
     ```sh
-    task ansible:deps
+    task workstation:venv
     ```
 
 5. Continue on to 🔧 [**Stage 3**](#-stage-3-do-bootstrap-configuration)
 
 ### 🔧 Stage 3: Do bootstrap configuration
 
-📍 _Both `bootstrap/vars/config.yaml` and `bootstrap/vars/addons.yaml` files contain necessary information that is **vital** to the bootstrap process._
+📍 _The_ `bootstrap/vars/config.yaml` contain necessary information that is **vital** to the bootstrap process._
 
-1. Generate the `bootstrap/vars/config.yaml` and `bootstrap/vars/addons.yaml` configuration files.
+1. Generate the `bootstrap/vars/config.yaml` configuration file.
 
     ```sh
     task init
@@ -274,25 +284,25 @@ Once you have installed Talos or Debian on your nodes, there are six stages to g
 
     6a. Ensure `bootstrap_acme_production_enabled` is set to `false`.
 
-    6b. [Optional] Update `bootstrap/vars/addons.yaml` and enable applications you would like included.
-
 7. Once done run the following command which will verify and generate all the files needed to continue.
 
-    > [!NOTE]
-    > The following configure task will create a `./ansible` directory for k3s or k0s and the following directories under `./kubernetes`.
-    > ```sh
-    > 📁 kubernetes      # Kubernetes cluster defined as code
-    > ├─📁 bootstrap     # Flux installation (not tracked by Flux)
-    > ├─📁 flux          # Main Flux configuration of repository
-    > └─📁 apps          # Apps deployed into the cluster grouped by namespace
-    > ```
+    📍 _The following configure task will create a `./ansible` directory for k3s or k0s and the following directories under `./kubernetes` for all distributions_
 
     ```sh
     task configure
     ```
 
-8. Continue on to ⚡ [**Stage 4**](#-stage-4-prepare-your-nodes-for-kubernetes)
+8. Push you changes to git
 
+   📍 **Verify** all the `*.sops.yaml` and `*.sops.yaml` files under the `./ansible`, and `./kubernetes` directories are **encrypted** with SOPS
+
+    ```sh
+    git add -A
+    git commit -m "Initial commit :rocket:"
+    git push
+    ```
+
+9. Continue on to ⚡ [**Stage 4**](#-stage-4-prepare-your-nodes-for-kubernetes)
 
 ### ⚡ Stage 4: Prepare your nodes for Kubernetes
 
@@ -305,25 +315,31 @@ Once you have installed Talos or Debian on your nodes, there are six stages to g
 
 1. Ensure you are able to SSH into your nodes from your workstation using a private SSH key **without a passphrase** (for example using a SSH agent). This lets Ansible interact with your nodes.
 
-2. Verify Ansible can view your config
+3. Install the Ansible dependencies
+
+    ```sh
+    task ansible:deps
+    ```
+
+4. Verify Ansible can view your config
 
     ```sh
     task ansible:list
     ```
 
-3. Verify Ansible can ping your nodes
+5. Verify Ansible can ping your nodes
 
     ```sh
     task ansible:ping
     ```
 
-4. Run the Ansible prepare playbook (nodes wil reboot when done)
+6. Run the Ansible prepare playbook (nodes wil reboot when done)
 
     ```sh
     task ansible:run playbook=cluster-prepare
     ```
 
-5. Continue on to ⛵ [**Stage 5**](#-stage-5-install-kubernetes)
+7. Continue on to ⛵ [**Stage 5**](#-stage-5-install-kubernetes)
 
 ### ⛵ Stage 5: Install Kubernetes
 
@@ -346,7 +362,7 @@ Once you have installed Talos or Debian on your nodes, there are six stages to g
 
     ```sh
     task talos:bootstrap
-    task talos:kubeconfig
+    task talos:kubeconfig node=$master_node_ip_address
     ```
 
 4. Install Cilium and kubelet-csr-approver into the cluster
@@ -354,8 +370,6 @@ Once you have installed Talos or Debian on your nodes, there are six stages to g
     ```sh
     task talos:apply-extras
     ```
-
-5. Continue on to 🔹 [**Stage 6**](#-stage-6-install-flux-in-your-cluster)
 
 #### k3s or k0s
 
@@ -368,6 +382,10 @@ Once you have installed Talos or Debian on your nodes, there are six stages to g
     task k0s:apply
     ```
 
+#### Cluster validation
+
+1. The `kubeconfig` for interacting with your cluster should have been created in the root of your repository.
+
 2. Verify the nodes are online
 
     📍 _If this command **fails** you likely haven't configured `direnv` as mentioned previously in the guide._
@@ -375,13 +393,11 @@ Once you have installed Talos or Debian on your nodes, there are six stages to g
     ```sh
     kubectl get nodes -o wide
     # NAME           STATUS   ROLES                       AGE     VERSION
-    # k8s-0          Ready    control-plane,etcd,master   1h      v1.27.3+k3s1
-    # k8s-1          Ready    worker                      1h      v1.27.3+k3s1
+    # k8s-0          Ready    control-plane,etcd,master   1h      v1.29.1
+    # k8s-1          Ready    worker                      1h      v1.29.1
     ```
 
-3. The `kubeconfig` for interacting with your cluster should have been created in the root of your repository.
-
-4. Continue on to 🔹 [**Stage 6**](#-stage-6-install-flux-in-your-cluster)
+3. Continue on to 🔹 [**Stage 6**](#-stage-6-install-flux-in-your-cluster)
 
 ### 🔹 Stage 6: Install Flux in your cluster
 
@@ -397,17 +413,7 @@ Once you have installed Talos or Debian on your nodes, there are six stages to g
     # ✔ prerequisites checks passed
     ```
 
-2. Push you changes to git
-
-   📍 **Verify** all the `*.sops.yaml` and `*.sops.yaml` files under the `./ansible`, and `./kubernetes` directories are **encrypted** with SOPS
-
-    ```sh
-    git add -A
-    git commit -m "Initial commit :rocket:"
-    git push
-    ```
-
-3. Install Flux and sync the cluster to the Git repository
+2. Install Flux and sync the cluster to the Git repository
 
     ```sh
     task flux:bootstrap
@@ -416,7 +422,7 @@ Once you have installed Talos or Debian on your nodes, there are six stages to g
     # ...
     ```
 
-4. Verify Flux components are running in the cluster
+3. Verify Flux components are running in the cluster
 
     ```sh
     kubectl -n flux-system get pods -o wide
@@ -449,7 +455,7 @@ _Mic check, 1, 2_ - In a few moments applications should be lighting up like Chr
 
 #### 🌐 Public DNS
 
-The `external-dns` application created in the `networking` namespace will handle creating public DNS records. By default, `echo-server` and the `flux-webhook` are the only subdomains reachable from the public internet. In order to make additional applications public you must set set the correct ingress class name and ingress annotations like in the HelmRelease for `echo-server`.
+The `external-dns` application created in the `networking` namespace will handle creating public DNS records. By default, `echo-server-external` and the `flux-webhook` are the only subdomains reachable from the public internet. In order to make additional applications public you must set set the correct ingress class name and ingress annotations like in the HelmRelease for `echo-server`.
 
 #### 🏠 Home DNS
 
@@ -463,7 +469,7 @@ The `external-dns` application created in the `networking` namespace will handle
 > server=/${bootstrap_cloudflare_domain}/${bootstrap_k8s_gateway_addr}
 > ```
 > 2. Restart dnsmasq on the server.
-> 3. Query an internal-only subdomain from your workstation (any `internal` class ingresses): `dig @${home-dns-server-ip} hubble.${bootstrap_cloudflare_domain}`. It should resolve to `${bootstrap_internal_ingress_addr}`.
+> 3. Query an internal-only subdomain from your workstation (any `internal` class ingresses): `dig @${home-dns-server-ip} echo-server-internal.${bootstrap_cloudflare_domain}`. It should resolve to `${bootstrap_internal_ingress_addr}`.
 
 If you're having trouble with DNS be sure to check out these two GitHub discussions: [Internal DNS](https://github.com/onedr0p/flux-cluster-template/discussions/719) and [Pod DNS resolution broken](https://github.com/onedr0p/flux-cluster-template/discussions/635).
 
