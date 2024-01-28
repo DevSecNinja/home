@@ -3,15 +3,15 @@
   become: yes
   vars:
     # Directories
-    templates_src_path: "templates/data/{{inventory_hostname_short}}"
+    templates_src_path: "../templates/data/{{inventory_hostname_short}}"
     templates_dest_path: "/srv/docker/data"
   tasks:
 
-    - include_tasks: tasks/ufw.yml
+    - include_tasks: ../tasks/ufw.yml
 
     - name: Load encrypted credentials
       community.sops.load_vars:
-        file: group_vars/all/secrets.sops.yml
+        file: ../inventory/group_vars/all/secrets.sops.yml
         age_keyfile: $HOME/git/home/age.key
         config_path: $HOME/git/home/.sops.yaml
         expressions: ignore  # explicitly do not evaluate expressions
@@ -19,7 +19,7 @@
 
     - name: Write docker-compose configuration file
       copy:
-        src: "templates/docker-compose/{{inventory_hostname_short}}.yml"
+        src: "../templates/docker-compose/{{inventory_hostname_short}}.yml"
         dest: "/srv/docker/docker-compose.yml"
         owner: "{{ansible_user}}"
         group: "docker"
@@ -27,7 +27,7 @@
 
     - name: Dynamically create .env file
       ansible.builtin.template:
-        src: "templates/env/env.j2"
+        src: "../templates/env/env.j2"
         dest: "/srv/docker/.env"
         owner: "{{ansible_user}}"
         group: "docker"
@@ -47,7 +47,7 @@
 
     - name: Copy compose-modules folder
       copy:
-        src: "templates/compose-modules/"
+        src: "../templates/compose-modules/"
         dest: "/srv/docker/data/compose"
         owner: "{{ansible_user}}"
         group: "docker"
@@ -59,4 +59,4 @@
         chdir: /srv/docker
 
   handlers:
-    - import_tasks: handlers/main.yml
+    - import_tasks: ../handlers/main.yml

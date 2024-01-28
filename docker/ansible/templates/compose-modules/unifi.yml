@@ -1,4 +1,9 @@
 services:
+  # NOTE: MongoDB doesn't support auto upgrade of container
+  # Before upgrading to a new major version, run (change MONGO_VERSION to CURRENT version):
+  # export MONGO_VERSION=6.0
+  # docker compose exec unifi-db mongosh --eval 'db.adminCommand( { setFeatureCompatibilityVersion: "'$MONGO_VERSION'" } )'
+
   unifi-db:
     image: docker.io/mongo:7.0.5
     container_name: unifi-db

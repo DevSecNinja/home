@@ -21,3 +21,5 @@ Brewfile.lock.json
 .idea
 # wiki
 wiki
+# SOPS Decrypted Secrets
+.decrypted~*.sops.yml

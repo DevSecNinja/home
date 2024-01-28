@@ -1,0 +1,9 @@
+---
+docker:
+  children:
+    webservers:
+      children:
+        management:
+          hosts:
+            svlmgmt.MANAGEMENT:
+              ansible_user: "jean-paul"

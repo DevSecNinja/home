@@ -5,6 +5,7 @@ version: "3"
 vars:
   # Directories
   ANSIBLE_DIR: "{{.ROOT_DIR}}/ansible"
+  DOCKER_DIR: "{{.ROOT_DIR}}/docker"
   BOOTSTRAP_DIR: "{{.ROOT_DIR}}/bootstrap"
   KUBERNETES_DIR: "{{.ROOT_DIR}}/kubernetes"
   PRIVATE_DIR: "{{.ROOT_DIR}}/.private"
@@ -25,6 +26,9 @@ env:
 
 includes:
   ansible: .taskfiles/Ansible/Taskfile.yaml
+  docker:
+    aliases: ["do"]
+    taskfile: .taskfiles/Docker/Taskfile.yaml
   kubernetes:
     aliases: ["k8s"]
     taskfile: .taskfiles/Kubernetes/Taskfile.yaml
