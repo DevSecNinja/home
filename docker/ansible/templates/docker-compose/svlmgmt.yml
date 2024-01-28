@@ -3,6 +3,7 @@ version: "3.8"
 include:
   - $DOCKERDIR/data/compose/adguard.yml
   - $DOCKERDIR/data/compose/cloudflare.yml
+  - $DOCKERDIR/data/compose/homepage.yml
   #- $DOCKERDIR/data/compose/oauth.yml
   - $DOCKERDIR/data/compose/portainer.yml
   - $DOCKERDIR/data/compose/traefik-proxy.yml

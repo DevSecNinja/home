@@ -37,6 +37,13 @@ services:
     labels:
       # Backup
       - docker-volume-backup.stop-during-backup=false # true - otherwise backup can't work with socketproxy
+      # Homepage
+      - homepage.group=Networking
+      - homepage.name=AdGuard
+      - homepage.icon=adguard-home.svg
+      - homepage.href=https://adguard.$DOMAINNAME
+      - homepage.description=DNS Service
+      # Traefik
       - "traefik.enable=true"
       ## HTTP Routers
       - "traefik.http.routers.adguard-rtr.entrypoints=https"

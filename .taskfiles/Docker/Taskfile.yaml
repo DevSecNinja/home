@@ -16,7 +16,7 @@ tasks:
     summary: |
       Args:
         playbook: Playbook to run (required)
-    prompt: Run Ansible playbook '{{.playbook}}'... continue?
+    # prompt: Run Ansible playbook '{{.playbook}}'... continue?
     cmd: "{{.VIRTUAL_ENV}}/bin/ansible-playbook --inventory {{.ANSIBLE_INVENTORY_FILE}} {{.DOCKER_DIR}}/ansible/playbooks/{{.playbook}}.yaml {{.CLI_ARGS}}"
     requires:
       vars: ["playbook"]

@@ -16,6 +16,13 @@ services:
     environment:
       - TZ=${TZ}
     labels:
+      # Homepage
+      - homepage.group=Orchestration
+      - homepage.name=Portainer
+      - homepage.icon=portainer.svg
+      - homepage.href=https://portainer.$DOMAINNAME
+      - homepage.description=Container Orchestration
+      # Traefik
       - "traefik.enable=true"
       ## HTTP Routers
       - "traefik.http.routers.portainer-rtr.entrypoints=https"

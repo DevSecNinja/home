@@ -59,6 +59,7 @@ services:
       # - OAUTH2_PROXY_SESSION_STORE_TYPE=redis
       # - OAUTH2_PROXY_REDIS_CONNECTION_URL=redis://oauth2-proxy-redis:6379
     labels:
+      # Traefik
       - "traefik.enable=true"
       ## HTTP Routers
       - "traefik.http.routers.oauth-rtr.entrypoints=https"

@@ -56,8 +56,15 @@ services:
     security_opt:
       - no-new-privileges:true
     labels:
+      # Homepage
+      - homepage.group=Networking
+      - homepage.name=Unifi
+      - homepage.icon=unifi.svg
+      - homepage.href=https://unifi.$DOMAINNAME
+      - homepage.description=Ubiquiti Network Controller
       # Backup
       - docker-volume-backup.stop-during-backup=false # true - otherwise backup can't work with socketproxy
+      # Traefik
       - "traefik.enable=true"
       ## HTTP Routers
       - "traefik.http.routers.unifi-rtr.entrypoints=https"
