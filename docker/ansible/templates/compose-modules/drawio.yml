@@ -1,0 +1,37 @@
+services:
+  drawio:
+    image: jgraph/drawio:23.0.2
+    container_name: drawio
+    depends_on:
+      - traefik
+    restart: always
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    networks:
+      - t2_proxy
+    labels:
+      # Homepage
+      - homepage.group=Productivity
+      - homepage.name=Draw.io
+      - homepage.icon=mdi-draw
+      - homepage.href=https://draw.$DOMAINNAME
+      - homepage.description=Flowchart & Diagram Maker
+      # Traefik
+      - "traefik.enable=true"
+      ## HTTP Routers
+      - "traefik.http.routers.drawio-rtr.entrypoints=https"
+      - "traefik.http.routers.drawio-rtr.rule=Host(`draw.$DOMAINNAME`)"
+      - "traefik.http.routers.drawio-rtr.tls=true"
+      ## Middlewares
+      - "traefik.http.routers.drawio-rtr.middlewares=chain-no-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.drawio-rtr.service=drawio-svc"
+      - "traefik.http.services.drawio-svc.loadbalancer.server.port=8080"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://drawio:8080 || exit 1"]
+      interval: 20s
+      timeout: 3s
+      retries: 5
+      start_period: 3s
