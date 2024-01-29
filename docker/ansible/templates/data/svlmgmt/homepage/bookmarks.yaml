@@ -4,17 +4,22 @@
 
 # Inspiration: https://technotim.live/posts/homepage-dashboard/
 
-# - Developer:
-#     - Github:
-#         - abbr: GH
-#           href: https://github.com/
-
-# - Social:
-#     - Reddit:
-#         - abbr: RE
-#           href: https://reddit.com/
-
-# - Entertainment:
-#     - YouTube:
-#         - abbr: YT
-#           href: https://youtube.com/
+- Developer:
+    - GitHub Repository:
+        - abbr: GH
+          icon: github
+          href: https://github.com/DevSecNinja/Home
+    - Microsoft Azure:
+        - abbr: Azure
+          icon: azure
+          href: https://portal.azure.com
+    - Renovate Dashboard:
+        - abbr: Reno
+          icon: si-renovatebot
+          href: https://github.com/DevSecNinja/home/issues/21
+    - Renovate Jobs:
+        - icon: si-renovatebot
+          href: https://developer.mend.io/github/DevSecNinja/home
+    - Speedtest:
+        - href: https://speed.cloudflare.com
+          icon: cloudflare
