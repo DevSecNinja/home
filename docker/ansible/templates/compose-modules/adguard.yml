@@ -12,6 +12,9 @@ services:
     volumes:
       - $DOCKERDIR/data/unbound/a-records.conf:/opt/unbound/etc/unbound/a-records.conf:ro
       - $DOCKERDIR/data/unbound/forward-records.conf:/opt/unbound/etc/unbound/forward-records.conf:ro
+    labels:
+      # Watchtower
+      - com.centurylinklabs.watchtower.monitor-only="true"
 
   adguard:
     container_name: adguard
@@ -35,6 +38,8 @@ services:
     security_opt:
       - no-new-privileges:true
     labels:
+      # Watchtower
+      - com.centurylinklabs.watchtower.monitor-only="true"
       # Backup
       - docker-volume-backup.stop-during-backup=false # true - otherwise backup can't work with socketproxy
       # Homepage

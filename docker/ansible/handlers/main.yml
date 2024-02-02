@@ -21,3 +21,6 @@
   systemd:
     name: systemd-resolved
     state: restarted
+
+- name: Docker Prune
+  command: docker image prune --force

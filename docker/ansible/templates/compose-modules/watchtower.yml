@@ -9,5 +9,4 @@ services:
     environment:
       - TZ=${TZ}
       - WATCHTOWER_CLEANUP=true
-      - WATCHTOWER_MONITOR_ONLY=true
       - WATCHTOWER_NOTIFICATION_URL=${NOTIFICATIONS_TEAMS_WEBHOOK_CONTAINRRR}

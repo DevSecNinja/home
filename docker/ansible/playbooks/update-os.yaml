@@ -4,3 +4,10 @@
   vars:
   tasks:
     - include_tasks: ../tasks/update-os.yaml
+
+    - name: Include Docker specific tasks
+      ansible.builtin.include_tasks: "../tasks/cleanup-docker.yaml"
+      when: inventory_hostname in groups['docker']
+
+  handlers:
+    - import_tasks: ../handlers/main.yml

@@ -1,10 +1,8 @@
 ---
 development:
-  children:
-    management:
-      hosts:
-        localhost:
-          ansible_user: "jean-paul"
+  hosts:
+    svldev.MANAGEMENT:
+      ansible_user: "jean-paul"
 
 docker:
   children:

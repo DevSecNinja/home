@@ -75,6 +75,8 @@ services:
         - CF_API_EMAIL=$CLOUDFLARE_EMAIL
         - CF_DNS_API_TOKEN=$CLOUDFLARE_API_TOKEN
     labels:
+      # Watchtower
+      - com.centurylinklabs.watchtower.monitor-only="true"
       # Homepage
       - homepage.group=Networking
       - homepage.name=Traefik

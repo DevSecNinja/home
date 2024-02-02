@@ -12,6 +12,9 @@ services:
     volumes:
       - unifi_db_data:/data/db
       - $DOCKERDIR/data/mongodb/init-mongo-unifi-db.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+    labels:
+      # Watchtower
+      - com.centurylinklabs.watchtower.monitor-only="true"
     restart: unless-stopped
 
   unifi:
@@ -56,6 +59,8 @@ services:
     security_opt:
       - no-new-privileges:true
     labels:
+      # Watchtower
+      - com.centurylinklabs.watchtower.monitor-only="true"
       # Homepage
       - homepage.group=Networking
       - homepage.name=Unifi
