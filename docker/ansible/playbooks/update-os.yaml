@@ -1,0 +1,6 @@
+---
+- hosts: all
+  become: yes
+  vars:
+  tasks:
+    - include_tasks: ../tasks/update-os.yaml

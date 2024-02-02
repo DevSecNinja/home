@@ -1,4 +1,11 @@
 ---
+development:
+  children:
+    management:
+      hosts:
+        localhost:
+          ansible_user: "jean-paul"
+
 docker:
   children:
     webservers:

@@ -1,12 +1,8 @@
 ---
-- hosts: all
+- hosts: docker
   become: yes
   tasks:
-    - name: Update apt cache
-      apt: update_cache=yes cache_valid_time=3600
-
-    - name: Upgrade all apt packages
-      apt: upgrade=dist
+    - include_tasks: ../tasks/update-os.yaml
 
     - name: Install dependencies
       apt:
@@ -26,7 +22,7 @@
       vars:
         sops_version: "3.8.1"  # leaving this blank installs the latest version
 
-    - include_tasks: tasks/ufw.yml
+    - include_tasks: tasks/ufw.yaml
 
     - name: Add Docker's APT repository key
       ansible.builtin.get_url:

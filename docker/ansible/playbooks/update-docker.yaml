@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: docker
   become: yes
   vars:
     # Directories
@@ -7,7 +7,7 @@
     templates_dest_path: "/srv/docker/data"
   tasks:
 
-    - include_tasks: ../tasks/ufw.yml
+    - include_tasks: ../tasks/ufw.yaml
 
     - name: Load encrypted credentials
       community.sops.load_vars:
