@@ -1,6 +1,6 @@
 services:
   drawio:
-    image: jgraph/drawio:23.0.2
+    image: jgraph/drawio:23.1.0
     container_name: drawio
     depends_on:
       - traefik
