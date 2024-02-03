@@ -6,7 +6,7 @@ development:
 
 hypervisor:
   hosts:
-    HOST01.management:
+    HOST01.MANAGEMENT:
       ansible_user: "root"
 
 docker:
