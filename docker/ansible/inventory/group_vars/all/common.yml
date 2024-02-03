@@ -95,7 +95,7 @@ sops_version: "3.8.1"
 # Generic
 #
 
-puid: 1000
-pgid: 998
+puid: 1000 # Admin user
+pgid: 994 # Docker group is 994
 tz: "Europe/Amsterdam"
 docker_dir: "/srv/docker"

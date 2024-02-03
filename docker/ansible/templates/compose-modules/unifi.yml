@@ -31,7 +31,7 @@ services:
       - USER_DBBACKUP=${PUID}
       - GROUP_DBBACKUP=${PGID}
       - CONTAINER_NAME=unifi-db-backup
-      # - CONTAINER_ENABLE_MONITORING=FALSE
+      # - CONTAINER_ENABLE_MONITORING=FALSE # Disables Zabbix backup statistics
 
       - ENABLE_NOTIFICATIONS=FALSE # TODO: [db-backup] Use notifications (SMTP auth not supported)
 
