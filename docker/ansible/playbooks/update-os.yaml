@@ -1,6 +1,7 @@
 ---
 - hosts: all
   become: yes
+  order: sorted # Runs alphabetically
   vars:
   tasks:
     - include_tasks: ../tasks/update-os.yaml

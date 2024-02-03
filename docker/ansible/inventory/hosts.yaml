@@ -4,6 +4,11 @@ development:
     svldev.MANAGEMENT:
       ansible_user: "jean-paul"
 
+hypervisor:
+  hosts:
+    HOST01.management:
+      ansible_user: "root"
+
 docker:
   children:
     webservers:
