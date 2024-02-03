@@ -33,14 +33,15 @@ services:
       - CONTAINER_NAME=unifi-db-backup
       - CONTAINER_ENABLE_MONITORING=FALSE # Disables Zabbix backup statistics
 
-      - ENABLE_NOTIFICATIONS=FALSE # TODO: [db-backup] Use notifications (SMTP auth not supported)
+      - ENABLE_NOTIFICATIONS=FALSE   # TODO: [db-backup] Use notifications (SMTP auth not supported)
 
       - DEFAULT_CHECKSUM=SHA1        # Set standard checksum to SHA1
       - DEFAULT_COMPRESSION=ZSTD     # Compress all with ZSTD
       - DEFAULT_BACKUP_INTERVAL=1440 # Backup every 1440 minutes = 24 hours
       - DEFAULT_BACKUP_BEGIN=0000    # Start backing up at midnight
       - DEFAULT_CLEANUP_TIME=2880    # Cleanup backups after two days
-      - DEFAULT_ENCRYPT=TRUE         # Encrypt backup files with GPG
+
+      - DEFAULT_ENCRYPT=TRUE                            # Encrypt backup files with GPG
       - DEFAULT_ENCRYPT_PASSPHRASE=${DB_ENC_PASSPHRASE} # Set encryption password
 
       - DB01_TYPE=mongo
