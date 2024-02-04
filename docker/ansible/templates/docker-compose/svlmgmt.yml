@@ -4,6 +4,7 @@ include:
   - $DOCKERDIR/data/compose/adguard.yml
   - $DOCKERDIR/data/compose/cloudflare.yml
   - $DOCKERDIR/data/compose/drawio.yml # To be moved to prod server
+  - $DOCKERDIR/data/compose/grafana.yml
   - $DOCKERDIR/data/compose/homepage.yml
   #- $DOCKERDIR/data/compose/oauth.yml
   - $DOCKERDIR/data/compose/portainer.yml
