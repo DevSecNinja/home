@@ -1,10 +1,14 @@
 ---
-- name: Update apt repo and cache on all Debian/Ubuntu boxes
-  apt: update_cache=yes cache_valid_time=3600
+- name: Update apt repo and cache
+  ansible.builtin.apt:
+    autoclean: true
+    update_cache: true
+    cache_valid_time: 3600
 
 - name: Upgrade all packages on servers
   ansible.builtin.apt:
     upgrade: dist
+    autoremove: true
 
 - name: Check if a reboot is needed on all servers
   stat:

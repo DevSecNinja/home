@@ -20,7 +20,7 @@ services:
       - homepage.name=Echo-Server
       - homepage.icon=mdi-test-tube
       - homepage.href=https://echo.$DOMAINNAME
-      - homepage.description=Testing web requests
+      - homepage.description=Testing Web Requests
       # Traefik
       - "traefik.enable=true"
       ## HTTP Routers
