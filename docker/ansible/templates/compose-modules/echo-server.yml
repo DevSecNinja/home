@@ -1,0 +1,35 @@
+services:
+  echo-server:
+    image: mendhak/http-https-echo:31
+    container_name: echo-server
+    depends_on:
+      - traefik
+    environment:
+        - TZ=${TZ}
+        - HTTP_PORT=80
+        - HTTPS_PORT=443
+    restart: always
+    networks:
+      - t2_proxy
+    security_opt:
+      - no-new-privileges:true
+    # No Healthcheck possible since curl is not available in image
+    labels:
+      # Homepage
+      - homepage.group=Monitoring
+      - homepage.name=Echo-Server
+      - homepage.icon=mdi-test-tube
+      - homepage.href=https://echo.$DOMAINNAME
+      - homepage.description=Testing web requests
+      # Traefik
+      - "traefik.enable=true"
+      ## HTTP Routers
+      - "traefik.http.routers.echo-server-rtr.entrypoints=https"
+      - "traefik.http.routers.echo-server-rtr.rule=Host(`echo.$DOMAINNAME`)"
+      - "traefik.http.routers.echo-server-rtr.tls=true"
+      ## Middlewares
+      - "traefik.http.routers.echo-server-rtr.middlewares=chain-no-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.echo-server-rtr.service=echo-server"
+      # Enable the server port
+      - "traefik.http.services.echo-server.loadbalancer.server.port=80"

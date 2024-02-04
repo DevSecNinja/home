@@ -58,5 +58,7 @@
         cmd: "docker compose up -d --remove-orphans"
         chdir: /srv/docker
 
+    # TODO: [ansible] Restart containers if content in config folder has changed
+
   handlers:
     - import_tasks: ../handlers/main.yml
