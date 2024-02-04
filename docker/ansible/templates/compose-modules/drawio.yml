@@ -21,9 +21,7 @@ services:
       # Traefik
       - "traefik.enable=true"
       ## HTTP Routers
-      - "traefik.http.routers.drawio-rtr.entrypoints=https"
       - "traefik.http.routers.drawio-rtr.rule=Host(`draw.$DOMAINNAME`)"
-      - "traefik.http.routers.drawio-rtr.tls=true"
       ## Middlewares
       - "traefik.http.routers.drawio-rtr.middlewares=chain-no-auth@file"
       ## HTTP Services

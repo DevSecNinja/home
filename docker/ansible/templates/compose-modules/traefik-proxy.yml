@@ -7,6 +7,7 @@ services:
       - --global.sendAnonymousUsage=false
       - --entrypoints.http.address=:80
       - --entrypoints.https.address=:443
+      - --entrypoints.https.http.tls=true # Enable TLS by default
       - --entrypoints.unifi-guest.address=:8843
       - --entryPoints.ping.address=:8267
       # Allow these IPs to set the X-Forwarded-* headers - Cloudflare IPs: https://www.cloudflare.com/ips/
@@ -81,7 +82,7 @@ services:
       - homepage.group=Networking
       - homepage.name=Traefik
       - homepage.icon=traefik.svg
-      - homepage.href=https://traefik.$DOMAINNAME
+      - homepage.href=https://traefik-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
       - homepage.description=Application Proxy
       # Traefik
       - "traefik.enable=true"
@@ -91,9 +92,7 @@ services:
       - "traefik.http.routers.http-catchall.middlewares=redirect-to-https"
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
       # HTTP Routers
-      - "traefik.http.routers.traefik-rtr.entrypoints=https"
-      - "traefik.http.routers.traefik-rtr.rule=Host(`traefik.$DOMAINNAME`)"
-      - "traefik.http.routers.traefik-rtr.tls=true"
+      - "traefik.http.routers.traefik-rtr.rule=Host(`traefik-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
       - "traefik.http.routers.traefik-rtr.tls.certresolver=dns-cloudflare"
       - "traefik.http.routers.traefik-rtr.tls.domains[0].main=$DOMAINNAME"
       - "traefik.http.routers.traefik-rtr.tls.domains[0].sans=*.$DOMAINNAME"

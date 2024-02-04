@@ -16,6 +16,7 @@
 
 - name: Configure ufw rules
   ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }}
+  # TODO: [ufw] Dynamically generate rules based on a map per server
   with_items:
     - { rule: 'limit', port: '{{ ssh_port | default("22") }}', proto: 'tcp' }
     - { rule: 'allow', port: '80', proto: 'tcp' } # Traefik

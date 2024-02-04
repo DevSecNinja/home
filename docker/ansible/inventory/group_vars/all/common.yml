@@ -5,9 +5,9 @@
 #
 
 tz: "Europe/Amsterdam"
-generic__hostname_prefix: "{{ inventory_hostname[:3] }}"
-generic__hostname_suffix: "{{ inventory_hostname[3:] }}"
-generic__hostname_os_type: "{{ inventory_hostname[2] }}"
+generic__hostname_prefix: "{{ inventory_hostname_short[:3] }}"
+generic__hostname_suffix: "{{ inventory_hostname_short[3:] }}"
+generic__hostname_os_type: "{{ inventory_hostname_short[2] }}"
 
 #
 # Sops

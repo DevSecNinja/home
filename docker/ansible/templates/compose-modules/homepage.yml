@@ -21,10 +21,6 @@ services:
     labels:
       # Traefik
       - "traefik.enable=true"
-      ## HTTP Routers
-      - "traefik.http.routers.homepage-rtr.entrypoints=https"
-      - "traefik.http.routers.homepage-rtr.rule=Host(`homepage.$DOMAINNAME`)"
-      - "traefik.http.routers.homepage-rtr.tls=true"
       ## Middlewares
       - "traefik.http.routers.homepage-rtr.middlewares=chain-no-auth@file"
       ## HTTP Services

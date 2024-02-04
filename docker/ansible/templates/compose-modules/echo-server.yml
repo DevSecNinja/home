@@ -24,9 +24,7 @@ services:
       # Traefik
       - "traefik.enable=true"
       ## HTTP Routers
-      - "traefik.http.routers.echo-server-rtr.entrypoints=https"
       - "traefik.http.routers.echo-server-rtr.rule=Host(`echo.$DOMAINNAME`)"
-      - "traefik.http.routers.echo-server-rtr.tls=true"
       ## Middlewares
       - "traefik.http.routers.echo-server-rtr.middlewares=chain-no-auth@file"
       ## HTTP Services

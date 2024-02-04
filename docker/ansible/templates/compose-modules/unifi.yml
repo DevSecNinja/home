@@ -109,13 +109,9 @@ services:
       # Traefik
       - "traefik.enable=true"
       ## HTTP Routers
-      - "traefik.http.routers.unifi-rtr.entrypoints=https"
       - "traefik.http.routers.unifi-rtr.rule=Host(`unifi.$DOMAINNAME`)"
-      - "traefik.http.routers.unifi-rtr.tls=true"
-
       - "traefik.http.routers.unifi-guest-rtr.entrypoints=unifi-guest"
       - "traefik.http.routers.unifi-guest-rtr.rule=Host(`unifi-guest.$DOMAINNAME`)"
-      - "traefik.http.routers.unifi-guest-rtr.tls=true"
       ## Middlewares
       - "traefik.http.routers.unifi-rtr.middlewares=chain-no-auth@file" # No Authentication
       - "traefik.http.routers.unifi-guest-rtr.middlewares=chain-no-auth@file" # No Authentication

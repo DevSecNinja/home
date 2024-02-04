@@ -50,10 +50,6 @@ services:
       - homepage.description=DNS Service
       # Traefik
       - "traefik.enable=true"
-      ## HTTP Routers
-      - "traefik.http.routers.adguard-rtr.entrypoints=https"
-      - "traefik.http.routers.adguard-rtr.rule=Host(`adguard.$DOMAINNAME`)"
-      - "traefik.http.routers.adguard-rtr.tls=true"
       ## Middlewares
       - "traefik.http.routers.adguard-rtr.middlewares=chain-no-auth@file"
       ## HTTP Services
