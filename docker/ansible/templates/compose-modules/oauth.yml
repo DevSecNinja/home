@@ -71,7 +71,7 @@ services:
 
   oauth2_proxy_redis:
     container_name: oauth2-proxy-redis
-    image: redis:7.2.4-alpine3.19@sha256:995e6eaab954e92cadf1a0bb1eab71ae3baae8e02ea4354fd8aa136a61e42247
+    image: redis:7.2.4-alpine@sha256:1b503bb77079ba644371969e06e1a6a1670bb34c2251107c0fc3a21ef9fdaeca
     volumes:
       - oauth2_proxy_redis_data:/data
     networks:
