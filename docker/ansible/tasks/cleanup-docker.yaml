@@ -1,11 +1,16 @@
 ---
 
-- name: Prune unused images
+- name: Pull the latest images
+  shell:
+    cmd: "docker compose pull"
+    chdir: /srv/docker
+
+- name: Bring up Docker containers
   shell:
     cmd: "docker compose up -d --remove-orphans"
     chdir: /srv/docker
 
-- name: Pull the latest images
+- name: Prune unused images
   shell:
-    cmd: "docker compose pull"
+    cmd: "docker image prune --all --force"
     chdir: /srv/docker
