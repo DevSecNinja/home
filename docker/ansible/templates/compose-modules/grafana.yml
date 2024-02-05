@@ -1,6 +1,6 @@
 services:
   grafana:
-    image: grafana/grafana:10.3.1
+    image: grafana/grafana:10.3.1@sha256:7567a7c70a3c1d75aeeedc968d1304174a16651e55a60d1fb132a05e1e63a054
     container_name: grafana
     depends_on:
       - traefik

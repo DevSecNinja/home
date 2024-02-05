@@ -1,7 +1,7 @@
 services:
   cloudflare-ddns:
     container_name: cloudflare-ddns
-    image: favonia/cloudflare-ddns:1.11.0
+    image: favonia/cloudflare-ddns:1.11.0@sha256:d4bca5975591da91a9c69ca1123267974ad0d76b676e709c42efd2695fafe4de
     restart: always
     cap_add:
       - SETUID

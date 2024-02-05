@@ -2,7 +2,7 @@
 services:
   ## OAuth2 Proxy
   oauth2_proxy:
-    image: bitnami/oauth2-proxy:7.5.1
+    image: bitnami/oauth2-proxy:7.5.1@sha256:53bf5ce46e23797616a634c980c63931900882237ae084216ea79ed1062b3a77
     container_name: oauth2-proxy
     command: oauth2-proxy
     depends_on:
@@ -71,7 +71,7 @@ services:
 
   oauth2_proxy_redis:
     container_name: oauth2-proxy-redis
-    image: redis:7.2.4-alpine3.19
+    image: redis:7.2.4-alpine3.19@sha256:995e6eaab954e92cadf1a0bb1eab71ae3baae8e02ea4354fd8aa136a61e42247
     volumes:
       - oauth2_proxy_redis_data:/data
     networks:

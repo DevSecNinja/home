@@ -5,7 +5,7 @@ services:
   # docker compose exec unifi-db mongosh --eval 'db.adminCommand( { setFeatureCompatibilityVersion: "'$MONGO_VERSION'" } )'
 
   unifi-db:
-    image: docker.io/mongo:7.0.5
+    image: mongo:7.0.5@sha256:732ad31aaea90f5afd3efb1420ef494cb44ac19224b9eacc25dc4b9eb27f00af
     container_name: unifi-db
     networks:
       - unifi-backend
@@ -19,7 +19,7 @@ services:
 
   unifi-db-backup:
     container_name: unifi-db-backup
-    image: tiredofit/db-backup:4.0.35
+    image: tiredofit/db-backup:4.0.35@sha256:794ffd160cf01057d0f64ef7baf5da3cd8925a48f1f65653e016f58c7d69b13c
     depends_on:
       - unifi-db
     volumes:
@@ -56,7 +56,7 @@ services:
 
   unifi:
     container_name: unifi
-    image: lscr.io/linuxserver/unifi-network-application:8.0.26-ls25
+    image: linuxserver/unifi-network-application:8.0.26-ls25@sha256:d1890fb3ea7458bff95849f0582230cdb9d218449270b5d5394221620e84f6f1
     depends_on:
       - traefik
       - unifi-db

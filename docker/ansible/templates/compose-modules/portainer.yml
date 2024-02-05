@@ -1,7 +1,7 @@
 services:
   portainer:
     container_name: portainer
-    image: portainer/portainer-ce:2.19.4-alpine
+    image: portainer/portainer-ce:2.19.4-alpine@sha256:214cb7f6c4034420d4f74de81492bf8fddede0677d2f12171955e075ac2ac341
     depends_on:
       - traefik
     command: -H unix:///var/run/docker.sock

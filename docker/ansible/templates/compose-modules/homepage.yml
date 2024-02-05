@@ -1,7 +1,7 @@
 services:
   homepage:
     container_name: homepage
-    image: ghcr.io/gethomepage/homepage:v0.8.7
+    image: ghcr.io/gethomepage/homepage:v0.8.7@sha256:06203a4aeb0dac75a8419f86d950ea01f3b9e5ca3f1fcd6c7065e34d3700b05f
     depends_on:
       - traefik
     restart: always
