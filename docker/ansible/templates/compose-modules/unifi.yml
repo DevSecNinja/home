@@ -5,7 +5,7 @@ services:
   # docker compose exec unifi-db mongosh --eval 'db.adminCommand( { setFeatureCompatibilityVersion: "'$MONGO_VERSION'" } )'
 
   unifi-db:
-    image: mongo:7.0.5@sha256:732ad31aaea90f5afd3efb1420ef494cb44ac19224b9eacc25dc4b9eb27f00af
+    image: mongo:7.0.5@sha256:593a394e77cab35eee83404d51f9297339ce11e05bea6285e3e9688a97a9708b
     container_name: unifi-db
     networks:
       - unifi-backend
