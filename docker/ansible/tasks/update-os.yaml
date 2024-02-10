@@ -9,6 +9,16 @@
   ansible.builtin.apt:
     upgrade: dist
     autoremove: true
+  register: debian_updates
+
+- name: List installed and updated packages
+  shell: grep -E "^$(date +%Y-%m-%d).+ (install|upgrade) " /var/log/dpkg.log |cut -d " " -f 3-5
+  register: debian_updates_result
+  when: debian_updates.changed
+
+- name: Show Output
+  debug: msg="{{ debian_update_result.stdout_lines }}"
+  when: debian_updates.changed
 
 - name: Check if a reboot is needed on all servers
   stat:

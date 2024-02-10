@@ -15,6 +15,7 @@
         "./kubernetes/**/*.sops.toml": "plaintext"
     },
     "sops.defaults.ageKeyFile": "age.key",
+    "terminal.integrated.defaultProfile.linux": "zsh",
     "yaml.schemas": {
         "ansible": "./ansible/*.yaml",
         "Kubernetes": "./kubernetes/*.yaml"
