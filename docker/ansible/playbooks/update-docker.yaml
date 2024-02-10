@@ -54,10 +54,14 @@
         mode: "0755"
 
     - name: Run containers
+      register: docker_container_run_result
       shell:
-        cmd: "docker compose up -d --remove-orphans"
+        cmd: "docker compose up -d --remove-orphans --wait 2>&1"
         chdir: /srv/docker
 
+    - name: Show Output
+      debug: msg="{{ docker_container_run_result.stdout_lines }}"
+      when: docker_container_run_result.changed
     # TODO: [ansible] Restart containers if content in config folder has changed
 
   handlers:
