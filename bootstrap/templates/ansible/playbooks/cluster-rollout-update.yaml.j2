@@ -1,5 +1,4 @@
 ---
-# https://github.com/kevincoakley/ansible-role-k8s-rolling-update
 - name: Cluster rollout update
   hosts: kubernetes
   become: true
@@ -12,13 +11,9 @@
         seconds: 5
   tasks:
     - name: Details
-      #% if bootstrap_distribution in ['k3s'] %#
-      ansible.builtin.command: "k3s kubectl get node {{ inventory_hostname }} -o json"
-      #% elif bootstrap_distribution in ['k0s'] %#
-      ansible.builtin.command: "k0s kubectl get node {{ inventory_hostname }} -o json"
-      #% endif %#
+      ansible.builtin.command: "k3s kubectl get node {% raw %}{{ inventory_hostname }}{% endraw %} -o json"
       register: kubectl_get_node
-      delegate_to: "{{ groups['master'][0] }}"
+      delegate_to: "{% raw %}{{ groups['controllers'][0] }}{% endraw %}"
       failed_when: false
       changed_when: false
 
@@ -31,23 +26,15 @@
       block:
         - name: Cordon
           kubernetes.core.k8s_drain:
-            name: "{{ inventory_hostname }}"
-            #% if bootstrap_distribution in ['k3s'] %#
+            name: "{% raw %}{{ inventory_hostname }}{% endraw %}"
             kubeconfig: /etc/rancher/k3s/k3s.yaml
-            #% elif bootstrap_distribution in ['k0s'] %#
-            kubeconfig: /var/lib/k0s/pki/admin.conf
-            #% endif %#
             state: cordon
-          delegate_to: "{{ groups['master'][0] }}"
+          delegate_to: "{% raw %}{{ groups['controllers'][0] }}{% endraw %}"
 
         - name: Drain
           kubernetes.core.k8s_drain:
-            name: "{{ inventory_hostname }}"
-            #% if bootstrap_distribution in ['k3s'] %#
+            name: "{% raw %}{{ inventory_hostname }}{% endraw %}"
             kubeconfig: /etc/rancher/k3s/k3s.yaml
-            #% elif bootstrap_distribution in ['k0s'] %#
-            kubeconfig: /var/lib/k0s/pki/admin.conf
-            #% endif %#
             state: drain
             delete_options:
               delete_emptydir_data: true
@@ -56,7 +43,7 @@
               wait_timeout: 900
             pod_selectors:
               - app!=rook-ceph-osd # Rook Ceph
-          delegate_to: "{{ groups['master'][0] }}"
+          delegate_to: "{% raw %}{{ groups['controllers'][0] }}{% endraw %}"
 
         - name: Update
           ansible.builtin.apt:
@@ -77,11 +64,7 @@
 
         - name: Uncordon
           kubernetes.core.k8s_drain:
-            name: "{{ inventory_hostname }}"
-            #% if bootstrap_distribution  in ['k3s'] %#
+            name: "{% raw %}{{ inventory_hostname }}{% endraw %}"
             kubeconfig: /etc/rancher/k3s/k3s.yaml
-            #% elif bootstrap_distribution in ['k0s'] %#
-            kubeconfig: /var/lib/k0s/pki/admin.conf
-            #% endif %#
             state: uncordon
-          delegate_to: "{{ groups['master'][0] }}"
+          delegate_to: "{% raw %}{{ groups['controllers'][0] }}{% endraw %}"

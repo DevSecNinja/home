@@ -23,3 +23,5 @@ Brewfile.lock.json
 wiki
 # SOPS Decrypted Secrets
 .decrypted~*.sops.yml
+# Bootstrap
+/config.yaml

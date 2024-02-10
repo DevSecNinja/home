@@ -9,7 +9,7 @@ apk add --no-cache \
 
 apk add --no-cache \
     --repository=https://dl-cdn.alpinelinux.org/alpine/edge/community \
-        helm kubectl sops
+        age helm kubectl sops
 
 sudo apk add --no-cache \
     --repository=https://dl-cdn.alpinelinux.org/alpine/edge/testing \
@@ -22,10 +22,8 @@ for app in \
     "cloudflare/cloudflared!!?as=cloudflared&type=script" \
     "derailed/k9s!!?as=k9s&type=script" \
     "direnv/direnv!!?as=direnv&type=script" \
-    "FiloSottile/age!!?as=age&type=script" \
     "fluxcd/flux2!!?as=flux&type=script" \
     "go-task/task!!?as=task&type=script" \
-    "k0sproject/k0sctl!!?as=k0sctl&type=script" \
     "kubecolor/kubecolor!!?as=kubecolor&type=script" \
     "kubernetes-sigs/krew!!?as=krew&type=script" \
     "kubernetes-sigs/kustomize!!?as=kustomize&type=script" \
@@ -46,7 +44,6 @@ for tool in cilium flux helm k9s kubectl kustomize talhelper talosctl; do
     $tool completion fish > /home/vscode/.config/fish/completions/$tool.fish
 done
 gh completion --shell fish > /home/vscode/.config/fish/completions/gh.fish
-k0sctl completion --shell fish > /home/vscode/.config/fish/completions/k0sctl.fish
 stern --completion fish > /home/vscode/.config/fish/completions/stern.fish
 yq shell-completion fish > /home/vscode/.config/fish/completions/yq.fish
 

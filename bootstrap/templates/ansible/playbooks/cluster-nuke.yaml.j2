@@ -1,4 +1,3 @@
-#% if bootstrap_distribution in ['k3s'] %#
 ---
 - name: Cluster Nuke
   hosts: kubernetes
@@ -37,17 +36,17 @@
       block:
         - name: Networking | Delete Cilium links
           ansible.builtin.command:
-            cmd: "ip link delete {{ item }}"
-            removes: "/sys/class/net/{{ item }}"
+            cmd: "ip link delete {% raw %}{{ item }}{% endraw %}"
+            removes: "/sys/class/net/{% raw %}{{ item }}{% endraw %}"
           loop: ["cilium_host", "cilium_net", "cilium_vxlan"]
         - name: Networking | Flush iptables
           ansible.builtin.iptables:
-            table: "{{ item }}"
+            table: "{% raw %}{{ item }}{% endraw %}"
             flush: true
           loop: ["filter", "nat", "mangle", "raw"]
         - name: Networking | Flush ip6tables
           ansible.builtin.iptables:
-            table: "{{ item }}"
+            table: "{% raw %}{{ item }}{% endraw %}"
             flush: true
             ip_version: ipv6
           loop: ["filter", "nat", "mangle", "raw"]
@@ -87,7 +86,7 @@
         - k3s_install_hard_links
         - not ansible_check_mode
       ansible.builtin.file:
-        path: "{{ k3s_install_dir }}/{{ item }}"
+        path: "{% raw %}{{ k3s_install_dir }}{% endraw %}/{% raw %}{{ item }}{% endraw %}"
         state: absent
       loop: ["kubectl", "crictl", "ctr"]
 
@@ -98,6 +97,5 @@
 
     - name: Reboot
       ansible.builtin.reboot:
-        msg: Rebooting nodes
+        msg: Rebooting hosts
         reboot_timeout: 3600
-#% endif %#

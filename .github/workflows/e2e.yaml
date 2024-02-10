@@ -1,4 +1,5 @@
 ---
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 name: "e2e"
 
 on:
@@ -18,7 +19,6 @@ jobs:
       fail-fast: false
       matrix:
         config-files:
-          - k0s
           - k3s-ipv4
           - k3s-ipv6
           - talos
@@ -77,9 +77,9 @@ jobs:
         shell: bash
         run: |
           task init
-          cp ./.github/tests/config-${{ matrix.config-files }}.yaml ./bootstrap/vars/config.yaml
+          cp ./.github/tests/config-${{ matrix.config-files }}.yaml ./config.yaml
           export BOOTSTRAP_AGE_PUBLIC_KEY=$(sed -n 's/# public key: //gp' age.key)
-          envsubst < ./bootstrap/vars/config.yaml | sponge ./bootstrap/vars/config.yaml
+          envsubst < ./config.yaml | sponge ./config.yaml
 
       - name: Run configure task
         shell: bash
@@ -93,7 +93,7 @@ jobs:
           task talos:genconfig
 
       - name: Run Ansible tasks
-        if: ${{ startsWith(matrix.config-files, 'k0s') || startsWith(matrix.config-files, 'k3s') }}
+        if: ${{ startsWith(matrix.config-files, 'k3s') }}
         shell: bash
         run: |
           task ansible:deps force=false
