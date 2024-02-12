@@ -1,0 +1,64 @@
+---
+- name: Mount data disks and create a filesystem
+  hosts: docker
+  become: yes
+  tasks:
+    - name: Install required packages
+      package:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - parted
+        - e2fsprogs
+        - util-linux
+
+    - block:
+        # TODO: [ansible] Use a mapping between disk and VM name as input for data disk playbook
+        - name: Set disk ID for SVLPROD
+          set_fact:
+            disk_id: "scsi-0QEMU_QEMU_HARDDISK_drive-scsi1"
+          when: inventory_hostname_short == "svlprod"
+
+        - name: Get the device path from the disk ID
+          ansible.builtin.shell: "readlink -f /dev/disk/by-id/{{ disk_id }}"
+          register: device_path
+          when: disk_id is defined
+          changed_when: False
+
+        - name: Set device path variable
+          set_fact:
+            device_path: "{{ device_path.stdout }}"
+          when: disk_id is defined and device_path is defined
+
+        - name: Create a new partition
+          parted:
+            device: "{{ device_path }}"
+            state: present
+            number: 1
+            part_start: 0%
+            part_end: 100%
+          when: disk_id is defined and device_path is defined
+
+        - name: Create a filesystem on the new partition
+          filesystem:
+            fstype: ext4
+            dev: "{{ device_path }}"
+            resizefs: true
+          when: disk_id is defined and device_path is defined
+
+        - name: Create a mount point
+          file:
+            path: /mnt/data
+            state: directory
+            owner: root
+            group: root
+            mode: '0755'
+          when: disk_id is defined and device_path is defined
+
+        - name: Mount the new partition
+          ansible.posix.mount:
+            path: /mnt/data
+            src: "{{ device_path }}"
+            fstype: ext4
+            state: mounted
+          when: disk_id is defined and device_path is defined
