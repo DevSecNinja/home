@@ -7,7 +7,6 @@ services:
       - samba
     ports:
       - "445:445/tcp"
-    read_only: true
     security_opt:
       - no-new-privileges:true
     environment:
