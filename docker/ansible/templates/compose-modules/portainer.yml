@@ -20,13 +20,14 @@ services:
       - homepage.group=Orchestration
       - homepage.name=Portainer
       - homepage.icon=portainer.svg
-      - homepage.href=https://portainer.$DOMAINNAME
+      - homepage.href=https://portainer-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
       - homepage.description=Container Orchestration
       # Traefik
       - "traefik.enable=true"
       ## Middlewares
       - "traefik.http.routers.portainer-rtr.middlewares=chain-no-auth@file"
       ## HTTP Services
+      - "traefik.http.routers.portainer-rtr.rule=Host(`portainer-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
       - "traefik.http.routers.portainer-rtr.service=portainer-svc"
       - "traefik.http.services.portainer-svc.loadbalancer.server.port=9000"
 

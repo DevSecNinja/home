@@ -19,12 +19,12 @@ services:
       - homepage.group=Monitoring
       - homepage.name=Echo-Server
       - homepage.icon=mdi-test-tube
-      - homepage.href=https://echo.$DOMAINNAME
+      - homepage.href=https://echo-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
       - homepage.description=Testing Web Requests
       # Traefik
       - "traefik.enable=true"
       ## HTTP Routers
-      - "traefik.http.routers.echo-server-rtr.rule=Host(`echo.$DOMAINNAME`)"
+      - "traefik.http.routers.echo-server-rtr.rule=Host(`echo-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
       ## Middlewares
       - "traefik.http.routers.echo-server-rtr.middlewares=chain-no-auth@file"
       ## HTTP Services

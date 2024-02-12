@@ -24,5 +24,6 @@ services:
       ## Middlewares
       - "traefik.http.routers.homepage-rtr.middlewares=chain-no-auth@file"
       ## HTTP Services
+      - "traefik.http.routers.homepage-rtr.rule=Host(`homepage-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
       - "traefik.http.routers.homepage-rtr.service=homepage"
       - "traefik.http.services.homepage.loadbalancer.server.port=3000"

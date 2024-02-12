@@ -9,8 +9,10 @@ include:
   - $DOCKERDIR/data/compose/grafana.yml
   - $DOCKERDIR/data/compose/unifi.yml
 {% endif %}
+{% if 'production' in group_names %}
+  - $DOCKERDIR/data/compose/drawio.yml
+{% endif %}
 {% if 'webservers' in group_names %}
-  - $DOCKERDIR/data/compose/drawio.yml # To be moved to prod server
   - $DOCKERDIR/data/compose/echo-server.yml
   - $DOCKERDIR/data/compose/homepage.yml
   #- $DOCKERDIR/data/compose/oauth.yml
