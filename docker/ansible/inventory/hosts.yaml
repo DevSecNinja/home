@@ -17,6 +17,10 @@ docker:
           hosts:
             svlmgmt.MANAGEMENT:
               ansible_user: "jean-paul"
+        production:
+          hosts:
+            svlprod.PRODUCTION:
+              ansible_user: "jean-paul"
 
     dnsservers:
       hosts:
