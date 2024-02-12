@@ -1,16 +1,22 @@
 version: "3.8"
 
 include:
+{% if 'dnsservers' in group_names %}
   - $DOCKERDIR/data/compose/adguard.yml
+{% endif %}
+{% if 'management' in group_names %}
   - $DOCKERDIR/data/compose/cloudflare.yml
+  - $DOCKERDIR/data/compose/grafana.yml
+  - $DOCKERDIR/data/compose/unifi.yml
+{% endif %}
+{% if 'webservers' in group_names %}
   - $DOCKERDIR/data/compose/drawio.yml # To be moved to prod server
   - $DOCKERDIR/data/compose/echo-server.yml
-  - $DOCKERDIR/data/compose/grafana.yml
   - $DOCKERDIR/data/compose/homepage.yml
   #- $DOCKERDIR/data/compose/oauth.yml
   - $DOCKERDIR/data/compose/portainer.yml
   - $DOCKERDIR/data/compose/traefik-proxy.yml
-  - $DOCKERDIR/data/compose/unifi.yml
+{% endif %}
   #- $DOCKERDIR/data/compose/watchtower.yml
 
 networks:

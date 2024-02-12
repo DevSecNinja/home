@@ -17,3 +17,8 @@ docker:
           hosts:
             svlmgmt.MANAGEMENT:
               ansible_user: "jean-paul"
+
+    dnsservers:
+      hosts:
+        svlmgmt.MANAGEMENT:
+          ansible_user: "jean-paul"

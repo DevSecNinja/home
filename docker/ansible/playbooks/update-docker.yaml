@@ -17,9 +17,9 @@
         expressions: ignore  # explicitly do not evaluate expressions
                              # on load (this is the default)
 
-    - name: Write docker-compose configuration file
-      copy:
-        src: "../templates/docker-compose/{{inventory_hostname_short}}.yml"
+    - name: Dynamically create compose file
+      ansible.builtin.template:
+        src: "../templates/compose/compose.yml.j2"
         dest: "/srv/docker/docker-compose.yml"
         owner: "{{ansible_user}}"
         group: "docker"
