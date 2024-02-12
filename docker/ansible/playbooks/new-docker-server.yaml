@@ -22,7 +22,7 @@
       vars:
         sops_version: "3.8.1"  # leaving this blank installs the latest version
 
-    - include_tasks: tasks/ufw.yaml
+    - include_tasks: ../tasks/ufw.yaml
 
     - name: Add Docker's APT repository key
       ansible.builtin.get_url:
@@ -96,7 +96,9 @@
         value: 9.9.9.9
         no_extra_spaces: yes
       notify:
+        - "Unmask systemd-resolved"
         - "Restart systemd-resolved"
+      when: inventory_hostname in groups['dnsservers']
 
     - name: Set DNS Fallback Server
       ini_file:
@@ -106,7 +108,9 @@
         value: 149.112.112.112
         no_extra_spaces: yes
       notify:
+        - "Unmask systemd-resolved"
         - "Restart systemd-resolved"
+      when: inventory_hostname in groups['dnsservers']
 
     - name: Set default as DNS operational mode
       ini_file:
@@ -117,7 +121,9 @@
         no_extra_spaces: yes
       notify:
         - "Remove STUB"
+        - "Unmask systemd-resolved"
         - "Restart systemd-resolved"
+      when: inventory_hostname in groups['dnsservers']
 
     - name: Disable systemd-resolved
       systemd:
@@ -127,7 +133,7 @@
         masked: yes
       notify:
         - "Remove STUB"
-        - "Restart systemd-resolved"
+      when: inventory_hostname in groups['dnsservers']
 
   handlers:
     - import_tasks: ../handlers/main.yml

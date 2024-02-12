@@ -22,5 +22,10 @@
     name: systemd-resolved
     state: restarted
 
+- name: Unmask systemd-resolved
+  systemd:
+    name: systemd-resolved
+    masked: no
+
 - name: Docker Prune
   command: docker image prune --force
