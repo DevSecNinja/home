@@ -3,7 +3,7 @@ services:
   image: dperson/samba
   restart: always
   networks:
-    - samba
+    samba:
   ports:
     - "445:445/tcp"
   read_only: true
