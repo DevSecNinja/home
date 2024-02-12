@@ -1,0 +1,23 @@
+services:
+  container_name: samba
+  image: dperson/samba
+  restart: always
+  networks:
+    - samba
+  ports:
+    - "445:445/tcp"
+  read_only: true
+  security_opt:
+    - no-new-privileges:true
+  environment:
+    - PUID=${PUID}
+    - PGID=${PGID}
+    - TZ=${TZ}
+  volumes:
+    - $DOCKERDATADIR/data:/data
+  command: '-s "Data;/data;yes;no;no;${SAMBA_USERNAME}" -s "Study;/data/study;yes;no;no;${SAMBA_USERNAME}" -s "Backup;/data/backup;yes;no;no;${SAMBA_USERNAME}" -u "${SAMBA_USERNAME};${SAMBA_PASSWORD}" -p'
+
+networks:
+  samba:
+    name: samba
+    driver: bridge

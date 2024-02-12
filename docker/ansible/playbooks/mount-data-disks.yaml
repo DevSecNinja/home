@@ -30,6 +30,7 @@
             device_path: "{{ device_path.stdout }}"
           when: disk_id is defined and device_path is defined
 
+        # TODO: [ansible] Parted doesn't seem to be idempotent
         - name: Create a new partition
           parted:
             device: "{{ device_path }}"
@@ -61,4 +62,17 @@
             src: "{{ device_path }}"
             fstype: ext4
             state: mounted
+          when: disk_id is defined and device_path is defined
+
+        - name: Create directories in new partition
+          ansible.builtin.file:
+            path: "{{ item }}"
+            state: "directory"
+            owner: "{{ansible_user}}"
+            group: "docker"
+            mode: "0755"
+          loop:
+            - "/mnt/data"
+            - "/mnt/data/backup"
+            - "/mnt/data/study"
           when: disk_id is defined and device_path is defined

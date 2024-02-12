@@ -34,6 +34,8 @@
     - { rule: 'allow', port: '1900', proto: 'udp' } # Unifi
     - { rule: 'allow', port: '6789', proto: 'tcp' } # Unifi
 
+    - { rule: 'allow', port: '445', proto: 'tcp' } # Samba
+
   notify:
     - restart ufw
 

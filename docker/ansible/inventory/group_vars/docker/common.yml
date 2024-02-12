@@ -8,6 +8,7 @@ puid: 1000 # Admin user
 pgid: 994 # Docker group is 994
 
 docker_dir: "/srv/docker"
+docker_data_dir: "/mnt/data"
 
 docker__channel: ["stable"]
 docker__version: ""
