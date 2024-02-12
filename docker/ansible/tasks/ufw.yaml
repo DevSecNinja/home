@@ -24,6 +24,10 @@
     - { rule: 'allow', port: '8843', proto: 'tcp' } # Traefik
     - { rule: 'allow', port: '8085', proto: 'tcp' } # Traefik
 
+    - { rule: 'allow', port: '53', proto: 'tcp' } # AdGuard
+    - { rule: 'allow', port: '53', proto: 'udp' } # AdGuard
+    - { rule: 'allow', port: '853', proto: 'tcp' } # AdGuard
+
     - { rule: 'allow', port: '3478', proto: 'udp' } # Unifi
     - { rule: 'allow', port: '10001', proto: 'udp' } # Unifi
     - { rule: 'allow', port: '8080', proto: 'tcp' } # Unifi

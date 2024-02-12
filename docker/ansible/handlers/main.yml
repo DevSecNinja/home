@@ -17,14 +17,10 @@
     path: /etc/resolv.conf
     state: absent
 
-- name: Restart systemd-resolved
+- name: Unmask and Restart systemd-resolved
   systemd:
     name: systemd-resolved
     state: restarted
-
-- name: Unmask systemd-resolved
-  systemd:
-    name: systemd-resolved
     masked: no
 
 - name: Docker Prune

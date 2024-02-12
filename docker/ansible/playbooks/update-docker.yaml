@@ -4,6 +4,7 @@
   vars:
     # Directories
     templates_src_path: "../templates/data/{{inventory_hostname_short}}"
+    templates_common_src_path: "../templates/data/common"
     templates_dest_path: "/srv/docker/data"
   tasks:
 
@@ -33,17 +34,64 @@
         group: "docker"
         mode: "0755"
 
-    - name: Copy all data directories recursively
+    # Common
+    - name: "[Common] Copy all data directories recursively"
+      file: dest={{templates_dest_path}}/{{ item|replace(templates_common_src_path+'/', '') }} state=directory owner={{ansible_user}} group=docker mode=0755
+      with_items: "{{ lookup('pipe', 'find '+ templates_common_src_path +'/ -type d').split('\n') }}"
+
+    - name: "[Common] Copy all data files recursively"
+      copy: src={{ item }} dest={{templates_dest_path}}/{{ item|replace(templates_common_src_path+'/', '') }}  owner={{ansible_user}} group=docker mode=0755
+      with_items: "{{ lookup('pipe', 'find '+ templates_common_src_path +'/ -type f -not -name *.j2 ').split('\n') }}"
+
+    - name: "[Common] Copy data templates files recursively"
+      template: src={{ item }} dest={{templates_dest_path}}/{{ item|replace(templates_common_src_path+'/', '')|replace('.j2', '') }}  owner={{ansible_user}} group=docker mode=0755
+      with_items: "{{ lookup('pipe', 'find '+ templates_common_src_path +'/ -type f -name *.j2').split('\n') }}"
+
+    # Server specific
+    - name: Check if server specific folder exists
+      stat:
+        path: "{{ templates_src_path }}"
+      register: check_server_folder_exists
+      delegate_to: localhost
+
+    - name: "[Server] Get data directories"
+      shell: "find {{ templates_src_path }}/ -type d || true"
+      register: data_directories
+      delegate_to: localhost
+      when: check_server_folder_exists.stat.exists == true
+
+    - name: "[Server] Copy all data directories recursively"
       file: dest={{templates_dest_path}}/{{ item|replace(templates_src_path+'/', '') }} state=directory owner={{ansible_user}} group=docker mode=0755
-      with_items: "{{ lookup('pipe', 'find '+ templates_src_path +'/ -type d').split('\n') }}"
+      with_items: "{{ data_directories.stdout_lines }}"
+      when:
+        - check_server_folder_exists.stat.exists == true
+        - item != ""
 
-    - name: Copy all data files recursively
+    - name: "[Server] Get data files and templates"
+      shell: "find {{ templates_src_path }}/ -type f -not -name *.j2 || true"
+      register: data_files
+      delegate_to: localhost
+      when: check_server_folder_exists.stat.exists == true
+
+    - name: "[Server] Copy all data files recursively"
       copy: src={{ item }} dest={{templates_dest_path}}/{{ item|replace(templates_src_path+'/', '') }}  owner={{ansible_user}} group=docker mode=0755
-      with_items: "{{ lookup('pipe', 'find '+ templates_src_path +'/ -type f -not -name *.j2 ').split('\n') }}"
+      with_items: "{{ data_files.stdout_lines }}"
+      when:
+        - check_server_folder_exists.stat.exists == true
+        - item != ""
 
-    - name: Copy data templates files recursively
+    - name: "[Server] Get data templates"
+      shell: "find {{ templates_src_path }}/ -type f -name *.j2 || true"
+      register: data_templates
+      delegate_to: localhost
+      when: check_server_folder_exists.stat.exists == true
+
+    - name: "[Server] Copy data templates files recursively"
       template: src={{ item }} dest={{templates_dest_path}}/{{ item|replace(templates_src_path+'/', '')|replace('.j2', '') }}  owner={{ansible_user}} group=docker mode=0755
-      with_items: "{{ lookup('pipe', 'find '+ templates_src_path +'/ -type f -name *.j2').split('\n') }}"
+      with_items: "{{ data_templates.stdout_lines }}"
+      when:
+        - check_server_folder_exists.stat.exists == true
+        - item != ""
 
     - name: Copy compose-modules folder
       copy:

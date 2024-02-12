@@ -88,41 +88,34 @@
         state: touch
         mode: '0755'
 
-    - name: Set DNS Server
-      ini_file:
-        path: /etc/systemd/resolved.conf
-        section: Resolve
-        option: DNS
-        value: 9.9.9.9
-        no_extra_spaces: yes
-      notify:
-        - "Unmask systemd-resolved"
-        - "Restart systemd-resolved"
-      when: inventory_hostname in groups['dnsservers']
+    - name: Configure DNS settings
+      block:
+        - name: Set DNS Server
+          ini_file:
+            path: /etc/systemd/resolved.conf
+            section: Resolve
+            option: DNS
+            value: 9.9.9.9
+            no_extra_spaces: yes
 
-    - name: Set DNS Fallback Server
-      ini_file:
-        path: /etc/systemd/resolved.conf
-        section: Resolve
-        option: FallbackDNS
-        value: 149.112.112.112
-        no_extra_spaces: yes
-      notify:
-        - "Unmask systemd-resolved"
-        - "Restart systemd-resolved"
-      when: inventory_hostname in groups['dnsservers']
+        - name: Set DNS Fallback Server
+          ini_file:
+            path: /etc/systemd/resolved.conf
+            section: Resolve
+            option: FallbackDNS
+            value: 149.112.112.112
+            no_extra_spaces: yes
 
-    - name: Set default as DNS operational mode
-      ini_file:
-        path: /etc/NetworkManager/NetworkManager.conf
-        section: main
-        option: dns
-        value: default
-        no_extra_spaces: yes
+        - name: Set default as DNS operational mode
+          ini_file:
+            path: /etc/NetworkManager/NetworkManager.conf
+            section: main
+            option: dns
+            value: default
+            no_extra_spaces: yes
       notify:
         - "Remove STUB"
-        - "Unmask systemd-resolved"
-        - "Restart systemd-resolved"
+        - "Unmask and Restart systemd-resolved"
       when: inventory_hostname in groups['dnsservers']
 
     - name: Disable systemd-resolved
