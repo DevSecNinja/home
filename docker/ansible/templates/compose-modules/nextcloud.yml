@@ -1,22 +1,40 @@
 services:
   nextcloud:
+    image: nextcloud:28.0.2-apache@sha256:2893d6e5c79ed2e7712fadcce9ddf76e9ff29c0654ecddc7866a87640f5b4a70
     container_name: nextcloud
-    image: linuxserver/nextcloud:28.0.2@sha256:82ed45edc381c9474f5e85d3d37ee6019002becc4620f7303145e4f6b9c81176
     depends_on:
       - traefik
+      - nextcloud-db
+      - nextcloud-redis
     restart: always
     networks:
       - t2_proxy
+      - nextcloud-backend
     security_opt:
       - no-new-privileges:true
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - REDIS_HOST=nextcloud-redis
+      - MYSQL_HOST=nextcloud-db
+      - MYSQL_PASSWORD=${NEXTCLOUD_MYSQL_PASSWORD}
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      # Nextcloud
+      - NEXTCLOUD_ADMIN_USER=${NEXTCLOUD_ADMIN_USER}
+      - NEXTCLOUD_ADMIN_PASSWORD=${NEXTCLOUD_ADMIN_PASSWORD}
+      - NEXTCLOUD_TRUSTED_DOMAINS=${NEXTCLOUD_TRUSTED_DOMAINS}
+      - REDIS_HOST=nextcloud-redis
+      - REDIS_HOST_PASSWORD=${NEXTCLOUD_REDIS_PASSWORD}
     volumes:
       - nextcloud_data:/var/www/html
     labels:
       # Homepage
       - homepage.group=Productivity
-      - homepage.name=NextCloud
+      - homepage.name=Nextcloud
       - homepage.icon=nextcloud.svg
-      - homepage.href=https://nextcloud.$DOMAINNAME
+      - homepage.href=https://cloud.$DOMAINNAME
       - homepage.description=Cloud Service
       # Group
       - org.label-schema.group=productivity
@@ -25,9 +43,108 @@ services:
       ## Middlewares
       - "traefik.http.routers.nextcloud-rtr.middlewares=chain-no-auth@file"
       ## HTTP Services
+      - "traefik.http.routers.nextcloud-rtr.rule=Host(`cloud.$DOMAINNAME`)"
       - "traefik.http.routers.nextcloud-rtr.service=nextcloud"
       ### Enable the server port
       - "traefik.http.services.nextcloud.loadbalancer.server.port=80"
 
+  nextcloud-db:
+    image: mariadb:11.2.3@sha256:452ddcb84e3e9c78f84dd4b163027ad87c1d83e9359f60710b1e7b712a7357ce
+    container_name: nextcloud-db
+    command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
+    restart: always
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - nextcloud-backend
+    volumes:
+      - nextcloud_db_data:/var/lib/mysql
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - MYSQL_ROOT_PASSWORD=${NEXTCLOUD_MYSQL_ROOT_PASSWORD}
+      - MYSQL_PASSWORD=${NEXTCLOUD_MYSQL_PASSWORD}
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MARIADB_AUTO_UPGRADE=1
+      - MARIADB_DISABLE_UPGRADE_BACKUP=1
+
+  nextcloud-redis:
+    image: redis:alpine3.19@sha256:c1ac6782927e574394225a790b6eb476154d1a16681b1374c62625d9bc324b18
+    container_name: nextcloud-redis
+    restart: always
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - REDIS_PASSWORD${NEXTCLOUD_REDIS_PASSWORD}
+    networks:
+      - nextcloud-backend
+
+  nextcloud-cron:
+    image: nextcloud:28.0.2-apache@sha256:2893d6e5c79ed2e7712fadcce9ddf76e9ff29c0654ecddc7866a87640f5b4a70
+    container_name: nextcloud-cron
+    restart: always
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - nextcloud-backend
+    volumes:
+      - nextcloud_data:/var/www/html
+    entrypoint: /cron.sh
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    depends_on:
+      - nextcloud-db
+      - nextcloud-redis
+
+  nextcloud-db-backup:
+    container_name: nextcloud-db-backup
+    image: tiredofit/db-backup:4.0.35@sha256:794ffd160cf01057d0f64ef7baf5da3cd8925a48f1f65653e016f58c7d69b13c
+    depends_on:
+      - nextcloud-db
+    volumes:
+      - $DOCKERDIR/data/backup:/backup
+    networks:
+      - nextcloud-backend
+    environment:
+      - TIMEZONE=${TZ}
+      - USER_DBBACKUP=${PUID}
+      - GROUP_DBBACKUP=${PGID}
+      - CONTAINER_NAME=nextcloud-db-backup
+      - CONTAINER_ENABLE_MONITORING=FALSE # Disables Zabbix backup statistics
+
+      - ENABLE_NOTIFICATIONS=FALSE   # TODO: [db-backup] Use notifications (SMTP auth not supported)
+
+      - DEFAULT_CHECKSUM=SHA1        # Set standard checksum to SHA1
+      - DEFAULT_COMPRESSION=ZSTD     # Compress all with ZSTD
+      - DEFAULT_BACKUP_INTERVAL=1440 # Backup every 1440 minutes = 24 hours
+      - DEFAULT_BACKUP_BEGIN=0000    # Start backing up at midnight
+      - DEFAULT_CLEANUP_TIME=2880    # Cleanup backups after two days
+
+      - DEFAULT_ENCRYPT=TRUE                            # Encrypt backup files with GPG
+      - DEFAULT_ENCRYPT_PASSPHRASE=${DB_ENC_PASSPHRASE} # Set encryption password
+
+      - DB01_TYPE=mysql
+      - DB01_HOST=nextcloud-db
+      - DB01_NAME=nextcloud
+      - DB01_USER=nextcloud
+      - DB01_PORT=27017
+      - DB01_PASS=${NEXTCLOUD_MYSQL_PASSWORD}
+    restart: always
+    security_opt:
+      - no-new-privileges:true
+
 volumes:
   nextcloud_data:
+  nextcloud_db_data:
+
+networks:
+  nextcloud-backend:
+    name: nextcloud-backend
+    driver: bridge
