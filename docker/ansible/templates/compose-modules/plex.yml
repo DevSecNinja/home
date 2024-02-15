@@ -3,6 +3,8 @@ services:
     container_name: plex
     image: ghcr.io/linuxserver/plex:1.40.0@sha256:8e9513d4d83d8e5518270db6311266df1ba894f21a97bdedc2b42eb748a7f1c2
     restart: always
+    depends_on:
+      - traefik
     networks:
       - t2_proxy
     # ports:

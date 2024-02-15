@@ -1,0 +1,33 @@
+services:
+  nextcloud:
+    container_name: nextcloud
+    image: linuxserver/nextcloud:28.0.2@sha256:82ed45edc381c9474f5e85d3d37ee6019002becc4620f7303145e4f6b9c81176
+    depends_on:
+      - traefik
+    restart: always
+    networks:
+      - t2_proxy
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - nextcloud_data:/var/www/html
+    labels:
+      # Homepage
+      - homepage.group=Productivity
+      - homepage.name=NextCloud
+      - homepage.icon=nextcloud.svg
+      - homepage.href=https://nextcloud.$DOMAINNAME
+      - homepage.description=Cloud Service
+      # Group
+      - org.label-schema.group=productivity
+      # Traefik
+      - "traefik.enable=true"
+      ## Middlewares
+      - "traefik.http.routers.nextcloud-rtr.middlewares=chain-no-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.nextcloud-rtr.service=nextcloud"
+      ### Enable the server port
+      - "traefik.http.services.nextcloud.loadbalancer.server.port=80"
+
+volumes:
+  nextcloud_data:
