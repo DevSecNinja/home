@@ -29,5 +29,5 @@ services:
       - "traefik.http.routers.echo-server-rtr.middlewares=chain-no-auth@file"
       ## HTTP Services
       - "traefik.http.routers.echo-server-rtr.service=echo-server"
-      # Enable the server port
+      ### Enable the server port
       - "traefik.http.services.echo-server.loadbalancer.server.port=80"

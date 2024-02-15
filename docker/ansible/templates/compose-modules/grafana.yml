@@ -42,7 +42,7 @@ services:
       - "traefik.http.routers.grafana-rtr.middlewares=chain-no-auth@file"
       ## HTTP Services
       - "traefik.http.routers.grafana-rtr.service=grafana"
-      # Enable the server port
+      ### Enable the server port
       - "traefik.http.services.grafana.loadbalancer.server.port=3000"
 
 volumes:
