@@ -73,6 +73,8 @@ services:
   nextcloud-redis:
     image: redis:alpine3.19@sha256:c1ac6782927e574394225a790b6eb476154d1a16681b1374c62625d9bc324b18
     container_name: nextcloud-redis
+    command: >
+      --requirepass ${NEXTCLOUD_REDIS_PASSWORD}
     restart: always
     security_opt:
       - no-new-privileges:true
