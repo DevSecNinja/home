@@ -10,6 +10,7 @@ include:
   - $DOCKERDIR/data/compose/unifi.yml
 {% endif %}
 {% if 'production' in group_names %}
+  - $DOCKERDIR/data/compose/code-server.yml
   - $DOCKERDIR/data/compose/drawio.yml
   - $DOCKERDIR/data/compose/nextcloud.yml
   - $DOCKERDIR/data/compose/plex.yml

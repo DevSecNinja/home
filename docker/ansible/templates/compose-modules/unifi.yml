@@ -121,7 +121,7 @@ services:
       # Fixes 'This combination of host and port requires TLS' issue
       - "traefik.http.services.unifi.loadbalancer.server.scheme=https"
       - "traefik.http.services.unifi-guest.loadbalancer.server.scheme=https"
-      # Enable the management port 8443
+      # Enable the management port
       - "traefik.http.services.unifi.loadbalancer.server.port=8443"
       - "traefik.http.services.unifi-guest.loadbalancer.server.port=8843"
 

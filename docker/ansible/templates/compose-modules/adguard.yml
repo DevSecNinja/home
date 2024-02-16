@@ -54,7 +54,7 @@ services:
       - "traefik.http.routers.adguard-rtr.middlewares=chain-no-auth@file"
       ## HTTP Services
       - "traefik.http.routers.adguard-rtr.service=adguard"
-      # Enable the management port 80
+      # Enable the management port
       - "traefik.http.services.adguard.loadbalancer.server.port=80"
 
 networks:

@@ -1,0 +1,42 @@
+services:
+  code-server:
+    image: lscr.io/linuxserver/code-server:4.21.1@sha256:c7595681c4c2d547ef239591dd929aa72b59eca17f46227b5c406cadc9f4f5a6
+    container_name: code-server
+    depends_on:
+      - traefik
+    restart: always
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - PROXY_DOMAIN=code.$DOMAINNAME
+      # - PASSWORD=password #optional
+      # - HASHED_PASSWORD= #optional
+      # - SUDO_PASSWORD=password #optional
+      # - SUDO_PASSWORD_HASH= #optional
+      # - DEFAULT_WORKSPACE=/config/workspace #optional
+    networks:
+      - t2_proxy
+    volumes:
+      - code_server_data:/config
+    labels:
+      # Homepage
+      - homepage.group=Productivity
+      - homepage.name=Visual Studio Code
+      - homepage.icon=code.svg
+      - homepage.href=https://code.$DOMAINNAME
+      - homepage.description=Code Server in the Browser
+      # Traefik
+      - "traefik.enable=true"
+      ## Middlewares
+      - "traefik.http.routers.code-server-rtr.middlewares=chain-no-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.code-server-rtr.rule=Host(`code.$DOMAINNAME`)"
+      - "traefik.http.routers.code-server-rtr.service=code-server"
+      # Enable the management port
+      - "traefik.http.services.code-server.loadbalancer.server.port=8443"
+
+volumes:
+  code_server_data:
