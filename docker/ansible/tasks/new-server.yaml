@@ -1,0 +1,13 @@
+---
+
+- name: Set timezone to "{{ tz }}"
+  community.general.timezone:
+    name: "{{ tz }}"
+
+- name: Ensure the locale "{{ locale }}"" exists
+  locale_gen:
+    name: "{{ locale }}"
+    state: present
+
+- name: Set "{{ locale }}" as default locale
+  command: localectl set-locale LANG="{{ locale }}"
