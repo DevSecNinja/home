@@ -9,10 +9,12 @@
     "files.autoSave": "onWindowChange",
     "files.associations": {
         "*.json5": "jsonc",
+        "*.y*ml.j2": "yaml",
+        "*.conf.j2": "properties",
         "./ansible/**/*.yaml": "ansible",
         "./ansible/**/*.sops.yaml": "yaml",
         "./ansible/**/inventory/**/*.yaml": "yaml",
-        "./kubernetes/**/*.sops.toml": "plaintext"
+        "./kubernetes/**/*.sops.toml": "plaintext",
     },
     "sops.defaults.ageKeyFile": "age.key",
     "terminal.integrated.defaultProfile.linux": "zsh",
