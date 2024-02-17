@@ -1,0 +1,35 @@
+services:
+  change-detection:
+    image: ghcr.io/dgtlmoon/changedetection.io:dev@sha256:66e503b125fc605aa68fcc0ec26e1ed2225f8c577f2b895834efcf7777b03cdc
+    container_name: change-detection
+    depends_on:
+      - traefik
+    restart: always
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - PORT=5000
+      - BASE_URL=https://changedetection.${DOMAINNAME}
+      - HIDE_REFERER=true # Hide the referer header in outgoing requests
+    networks:
+      - t2_proxy
+    volumes:
+      - change_detection_data:/datastore
+    labels:
+      # Homepage
+      - homepage.group=Monitoring
+      - homepage.name=Change Detection
+      - homepage.icon=mdi-cloud-sync
+      - homepage.href=https://change-detection.$DOMAINNAME
+      - homepage.description=Detect changes on web sites
+      # Traefik
+      - "traefik.enable=true"
+      ## Middlewares
+      - "traefik.http.routers.change-detection-rtr.middlewares=chain-no-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.change-detection-rtr.service=change-detection-svc"
+      - "traefik.http.services.change-detection-svc.loadbalancer.server.port=5000"
+
+volumes:
+  change_detection_data:
