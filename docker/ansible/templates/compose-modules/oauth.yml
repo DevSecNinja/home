@@ -2,7 +2,7 @@
 services:
   ## OAuth2 Proxy
   oauth2_proxy:
-    image: bitnami/oauth2-proxy:7.5.1@sha256:39cded48dfe73e18744a91535a666241f9e3673b1ddba348af3b5c4851a629e8
+    image: bitnami/oauth2-proxy:7.5.1@sha256:93977ae66f0df1d69963e37d177a5b1d8a0bd5206bd97598df91ec57087e1f6d
     container_name: oauth2-proxy
     command: oauth2-proxy
     depends_on:
