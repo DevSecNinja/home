@@ -7,6 +7,7 @@ include:
 {% if 'management' in group_names %}
   - $DOCKERDIR/data/compose/cloudflare.yml
   - $DOCKERDIR/data/compose/grafana.yml
+  - $DOCKERDIR/data/compose/uptime-kuma.yml
   - $DOCKERDIR/data/compose/unifi.yml
 {% endif %}
 {% if 'production' in group_names %}

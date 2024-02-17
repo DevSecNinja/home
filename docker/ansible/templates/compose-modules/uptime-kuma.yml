@@ -1,0 +1,33 @@
+services:
+  uptime-kuma:
+    image: louislam/uptime-kuma:1.23.11-alpine@sha256:ba742a482f235e7c4b482bc2e0572f5037d73199ef46ece2375088d944917e6f
+    container_name: uptime-kuma
+    depends_on:
+      - traefik
+    restart: always
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    networks:
+      - t2_proxy
+    volumes:
+      - uptime_kuma_data:/app/data
+    labels:
+      # Homepage
+      - homepage.group=Monitoring
+      - homepage.name=Uptime Kuma
+      - homepage.icon=si-uptimekuma
+      - homepage.href=https://uptime.$DOMAINNAME
+      - homepage.description=Uptime Monitoring
+      # Traefik
+      - "traefik.enable=true"
+      ## Middlewares
+      - "traefik.http.routers.uptime-kuma-rtr.middlewares=chain-no-auth@file"
+      - "traefik.http.routers.uptime-kuma-rtr.rule=Host(`uptime.$DOMAINNAME`)"
+      ## HTTP Services
+      - "traefik.http.routers.uptime-kuma-rtr.service=uptime-kuma-svc"
+      - "traefik.http.services.uptime-kuma-svc.loadbalancer.server.port=3001"
+
+volumes:
+  uptime_kuma_data:
