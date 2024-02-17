@@ -110,7 +110,13 @@
     - name: Show Output
       debug: msg="{{ docker_container_run_result.stdout_lines }}"
       when: docker_container_run_result.changed
+
     # TODO: [ansible] Restart containers if content in config folder has changed
+    - name: Restart Unbound DNS container
+      shell:
+        cmd: "docker restart unbound 2>&1"
+        chdir: /srv/docker
+      when: inventory_hostname in groups['dnsservers']
 
   handlers:
     - import_tasks: ../handlers/main.yml

@@ -1,0 +1,27 @@
+services:
+  excalidraw:
+    image: excalidraw/excalidraw:latest@sha256:648edf36c55793fdeed475e09a86fb6c16a68783dc442d37d5070adfc0362a8f
+    container_name: excalidraw
+    depends_on:
+      - traefik
+    restart: always
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    networks:
+      - t2_proxy
+    labels:
+      # Homepage
+      - homepage.group=Productivity
+      - homepage.name=Excalidraw
+      - homepage.icon=excalidraw
+      - homepage.href=https://excalidraw.$DOMAINNAME
+      - homepage.description=Virtual Whiteboard
+      # Traefik
+      - "traefik.enable=true"
+      ## Middlewares
+      - "traefik.http.routers.excalidraw-rtr.middlewares=chain-no-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.excalidraw-rtr.service=excalidraw-svc"
+      - "traefik.http.services.excalidraw-svc.loadbalancer.server.port=80"
