@@ -23,7 +23,7 @@
       vars:
         sops_version: "3.8.1"  # leaving this blank installs the latest version
 
-    - include_tasks: ../tasks/ufw.yaml
+    - include_tasks: ../tasks/configure-ufw.yaml
 
     - name: Add Docker's APT repository key
       ansible.builtin.get_url:

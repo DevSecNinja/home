@@ -1,5 +1,4 @@
 ---
-
 # to verify ufw configuration run:
 # sudo ufw status verbose
 

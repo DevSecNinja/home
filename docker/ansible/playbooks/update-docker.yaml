@@ -8,7 +8,7 @@
     templates_dest_path: "/srv/docker/data"
   tasks:
 
-    - include_tasks: ../tasks/ufw.yaml
+    - include_tasks: ../tasks/configure-ufw.yaml
 
     - name: Load encrypted credentials
       community.sops.load_vars:

@@ -1,5 +1,4 @@
 ---
-
 - name: Set timezone to "{{ tz }}"
   community.general.timezone:
     name: "{{ tz }}"

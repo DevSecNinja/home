@@ -1,5 +1,4 @@
 ---
-
 - name: Pull the latest images
   shell:
     cmd: "docker compose pull"
