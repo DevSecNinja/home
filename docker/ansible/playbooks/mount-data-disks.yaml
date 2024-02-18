@@ -1,4 +1,8 @@
 ---
+# TODO: [ansible] Fix mount data disk playbook
+# Problem 1: playbook not idempotent
+# Problem 2: doesn't seem to create the partition correctly as it doesn't work with my disk_resize functin
+
 - name: Mount data disks and create a filesystem
   hosts: docker
   become: yes
