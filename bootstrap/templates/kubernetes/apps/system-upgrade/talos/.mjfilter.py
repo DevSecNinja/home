@@ -1,7 +1,4 @@
 main = lambda data: (
-    data.get("distribution", {}).get("type", "k3s") in ["talos"] and
-        data.get("distribution", {})
-            .get("talos", {})
-            .get("schematics", {})
-            .get("enabled", False) == True
+    data.get("bootstrap_distribution", "k3s") in ["talos"] and
+        data.get("talos", {}).get("schematic_id", {})
 )
