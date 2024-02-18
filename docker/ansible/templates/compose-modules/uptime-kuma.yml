@@ -1,6 +1,6 @@
 services:
   uptime-kuma:
-    image: louislam/uptime-kuma:1.23.11-alpine@sha256:ba742a482f235e7c4b482bc2e0572f5037d73199ef46ece2375088d944917e6f
+    image: louislam/uptime-kuma:1.23.11-alpine@sha256:f7c59b4ba04a63b57f4f8210be77cf90221991a3250ec301136183c56de579ab
     container_name: uptime-kuma
     depends_on:
       - traefik
