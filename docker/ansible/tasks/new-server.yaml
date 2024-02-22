@@ -10,3 +10,9 @@
 
 - name: Set "{{ locale }}" as default locale
   command: localectl set-locale LANG="{{ locale }}"
+
+- name: Set authorized key for remote user copying it from local user
+  ansible.posix.authorized_key:
+    user: "{{ansible_user}}"
+    state: present
+    key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/authorized_keys') }}"
