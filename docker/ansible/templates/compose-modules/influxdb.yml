@@ -1,0 +1,44 @@
+services:
+  influxdb:
+    image: influxdb:2.7.5-alpine@sha256:fc475192490358ddd34fb3978f17ed31202f5c17b754635c26ebb401e88cce98
+    container_name: influxdb
+    depends_on:
+      - traefik
+    volumes:
+      # Mount for influxdb data directory and configuration
+      - influxdb_data:/var/lib/influxdb2:rw
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    restart: always
+    networks:
+      - t2_proxy
+      - influxdb
+    security_opt:
+      - no-new-privileges:true
+    labels:
+      # Homepage
+      - homepage.group=Monitoring
+      - homepage.name=InfluxDB
+      - homepage.icon=influxdb.svg
+      - homepage.href=https://influxdb.$DOMAINNAME
+      - homepage.description=Time Series Data Platform
+      # Group
+      - org.label-schema.group=monitoring
+      # Traefik
+      - "traefik.enable=true"
+      ## Middlewares
+      - "traefik.http.routers.influxdb-rtr.middlewares=chain-no-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.influxdb-rtr.service=influxdb"
+      ### Enable the server port
+      - "traefik.http.services.influxdb.loadbalancer.server.port=8086"
+
+volumes:
+  influxdb_data:
+
+networks:
+  influxdb:
+    name: influxdb
+    driver: bridge

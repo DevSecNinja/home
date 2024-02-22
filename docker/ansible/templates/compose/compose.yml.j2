@@ -22,6 +22,7 @@ include:
 {% if 'webservers' in group_names %}
   - $DOCKERDIR/data/compose/echo-server.yml
   - $DOCKERDIR/data/compose/homepage.yml
+  - $DOCKERDIR/data/compose/influxdb.yml
   #- $DOCKERDIR/data/compose/oauth.yml
   - $DOCKERDIR/data/compose/portainer.yml
   - $DOCKERDIR/data/compose/traefik-proxy.yml
