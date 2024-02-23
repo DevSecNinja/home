@@ -10,8 +10,6 @@
   with_items:
     - { direction: 'incoming', policy: 'deny' }
     - { direction: 'outgoing', policy: 'allow' }
-  notify:
-    - restart ufw
 
 - name: Configure ufw rules
   ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }}
@@ -34,7 +32,6 @@
     - { rule: 'allow', port: '6789', proto: 'tcp' } # Unifi
 
     - { rule: 'allow', port: '445', proto: 'tcp' } # Samba
-
   notify:
     - restart ufw
 
