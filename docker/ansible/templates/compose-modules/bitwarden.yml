@@ -1,0 +1,115 @@
+services:
+  bitwarden:
+    image: bitwarden/self-host:2024.2.1-beta@sha256:887d2f789485815af9620afbefe55368a65cea600a6ba8578e5a462d159b3f1f
+    container_name: bitwarden
+    depends_on:
+      - traefik
+      - bitwarden-db
+    restart: always
+    networks:
+      - t2_proxy
+      - bitwarden-backend
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 200m
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      # MySQL
+      - BW_DB_PROVIDER=mysql
+      - BW_DB_SERVER=bitwarden-db
+      - BW_DB_DATABASE=bitwarden
+      - BW_DB_USERNAME=bitwarden
+      - BW_DB_PASSWORD=${BITWARDEN_MYSQL_PASSWORD}
+      # Bitwarden
+      - BW_DOMAIN=bitwarden.$DOMAINNAME
+      - BW_INSTALLATION_ID=${BITWARDEN_INSTALLATION_ID}
+      - BW_INSTALLATION_KEY=${BITWARDEN_INSTALLATION_KEY}
+    volumes:
+      - bitwarden_data:/etc/bitwarden
+    labels:
+      # Homepage
+      - homepage.group=Productivity
+      - homepage.name=bitwarden
+      - homepage.icon=bitwarden.svg
+      - homepage.href=https://bitwarden.$DOMAINNAME
+      - homepage.description=Password Vault
+      # Group
+      - org.label-schema.group=productivity
+      # Traefik
+      - "traefik.enable=true"
+      ## Middlewares
+      - "traefik.http.routers.bitwarden-rtr.middlewares=chain-no-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.bitwarden-rtr.service=bitwarden"
+      ### Enable the server port
+      - "traefik.http.services.bitwarden.loadbalancer.server.port=8080"
+
+  bitwarden-db:
+    image: mariadb:11.2.3@sha256:55d9608d84658cbc691f52cd6389386a15e6c671cb5708b9f3af5782af3b4dbb
+    container_name: bitwarden-db
+    command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
+    restart: always
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - bitwarden-backend
+    volumes:
+      - bitwarden_db_data:/var/lib/mysql
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - MYSQL_ROOT_PASSWORD=${BITWARDEN_MYSQL_ROOT_PASSWORD}
+      - MYSQL_PASSWORD=${BITWARDEN_MYSQL_PASSWORD}
+      - MYSQL_DATABASE=bitwarden
+      - MYSQL_USER=bitwarden
+      - MARIADB_AUTO_UPGRADE=1
+      - MARIADB_DISABLE_UPGRADE_BACKUP=1
+
+  bitwarden-db-backup:
+    container_name: bitwarden-db-backup
+    image: tiredofit/db-backup:4.0.35@sha256:794ffd160cf01057d0f64ef7baf5da3cd8925a48f1f65653e016f58c7d69b13c
+    depends_on:
+      - bitwarden-db
+    volumes:
+      - $DOCKERDIR/data/backup:/backup
+    networks:
+      - bitwarden-backend
+    environment:
+      - TIMEZONE=${TZ}
+      - USER_DBBACKUP=${PUID}
+      - GROUP_DBBACKUP=${PGID}
+      - CONTAINER_NAME=bitwarden-db-backup
+      - CONTAINER_ENABLE_MONITORING=FALSE # Disables Zabbix backup statistics
+
+      - ENABLE_NOTIFICATIONS=FALSE   # TODO: [db-backup] Use notifications (SMTP auth not supported)
+
+      - DEFAULT_CHECKSUM=SHA1        # Set standard checksum to SHA1
+      - DEFAULT_COMPRESSION=ZSTD     # Compress all with ZSTD
+      - DEFAULT_BACKUP_INTERVAL=1440 # Backup every 1440 minutes = 24 hours
+      - DEFAULT_BACKUP_BEGIN=0000    # Start backing up at midnight
+      - DEFAULT_CLEANUP_TIME=2880    # Cleanup backups after two days
+
+      - DEFAULT_ENCRYPT=TRUE                            # Encrypt backup files with GPG
+      - DEFAULT_ENCRYPT_PASSPHRASE=${DB_ENC_PASSPHRASE} # Set encryption password
+
+      - DB01_TYPE=mysql
+      - DB01_HOST=bitwarden-db
+      - DB01_NAME=bitwarden
+      - DB01_USER=bitwarden
+      - DB01_PORT=3306
+      - DB01_PASS=${BITWARDEN_MYSQL_PASSWORD}
+    restart: always
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  bitwarden_data:
+  bitwarden_db_data:
+
+networks:
+  bitwarden-backend:
+    name: bitwarden-backend
+    driver: bridge

@@ -15,4 +15,5 @@
   ansible.posix.authorized_key:
     user: "{{ansible_user}}"
     state: present
+    exclusive: true
     key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/authorized_keys') }}"

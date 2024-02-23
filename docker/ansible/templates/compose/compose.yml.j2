@@ -5,6 +5,7 @@ include:
   - $DOCKERDIR/data/compose/adguard.yml
 {% endif %}
 {% if 'management' in group_names %}
+  - $DOCKERDIR/data/compose/bitwarden.yml
   - $DOCKERDIR/data/compose/cloudflare.yml
   - $DOCKERDIR/data/compose/grafana.yml
   - $DOCKERDIR/data/compose/uptime-kuma.yml
