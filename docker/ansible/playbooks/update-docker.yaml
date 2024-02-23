@@ -128,6 +128,11 @@
         group: "docker"
         mode: "0755"
 
+    - name: Pull images
+      shell:
+        cmd: "docker compose pull 2>&1"
+        chdir: /srv/docker
+
     - name: Run containers
       register: docker_container_run_result
       shell:
