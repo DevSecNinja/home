@@ -11,29 +11,43 @@
     - { direction: 'incoming', policy: 'deny' }
     - { direction: 'outgoing', policy: 'allow' }
 
-- name: Configure ufw rules
+- name: Configure ufw rules - all
   ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }}
-  # TODO: [ufw] Dynamically generate rules based on a map per server
   with_items:
-    - { rule: 'limit', port: '{{ ssh_port | default("22") }}', proto: 'tcp' }
-    - { rule: 'allow', port: '80', proto: 'tcp' } # Traefik
-    - { rule: 'allow', port: '443', proto: 'tcp' } # Traefik
-    - { rule: 'allow', port: '8843', proto: 'tcp' } # Traefik
-    - { rule: 'allow', port: '8085', proto: 'tcp' } # Traefik
+    - { rule: 'limit', port: '{{ ssh_port | default("22") }}', proto: 'tcp', comment: 'SSH' }
 
-    - { rule: 'allow', port: '53', proto: 'tcp' } # AdGuard
-    - { rule: 'allow', port: '53', proto: 'udp' } # AdGuard
-    - { rule: 'allow', port: '853', proto: 'tcp' } # AdGuard
+- name: Configure ufw rules - webservers
+  ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }}
+  with_items:
+    - { rule: 'allow', port: '80', proto: 'tcp', comment: 'Traefik' }
+    - { rule: 'allow', port: '443', proto: 'tcp', comment: 'Traefik'  }
+    # - { rule: 'allow', port: '8085', proto: 'tcp', comment: 'Traefik'  }
+  when: "'webservers' in group_names"
 
-    - { rule: 'allow', port: '3478', proto: 'udp' } # Unifi
-    - { rule: 'allow', port: '10001', proto: 'udp' } # Unifi
-    - { rule: 'allow', port: '8080', proto: 'tcp' } # Unifi
-    - { rule: 'allow', port: '1900', proto: 'udp' } # Unifi
-    - { rule: 'allow', port: '6789', proto: 'tcp' } # Unifi
+- name: Configure ufw rules - management
+  ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }}
+  with_items:
+    - { rule: 'allow', port: '3478', proto: 'udp', comment: 'Unifi' }
+    - { rule: 'allow', port: '8843', proto: 'tcp', comment: 'Unifi' }
+    - { rule: 'allow', port: '10001', proto: 'udp', comment: 'Unifi' }
+    - { rule: 'allow', port: '8080', proto: 'tcp', comment: 'Unifi' }
+    - { rule: 'allow', port: '1900', proto: 'udp', comment: 'Unifi' }
+    - { rule: 'allow', port: '6789', proto: 'tcp', comment: 'Unifi' }
+  when: "'management' in group_names"
 
-    - { rule: 'allow', port: '445', proto: 'tcp' } # Samba
-  notify:
-    - restart ufw
+- name: Configure ufw rules - dnsservers
+  ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }}
+  with_items:
+    - { rule: 'allow', port: '53', proto: 'tcp', comment: 'AdGuard' }
+    - { rule: 'allow', port: '53', proto: 'udp', comment: 'AdGuard' }
+    - { rule: 'allow', port: '853', proto: 'tcp', comment: 'AdGuard' }
+  when: "'dnsservers' in group_names"
+
+- name: Configure ufw rules - production
+  ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }}
+  with_items:
+    - { rule: 'allow', port: '445', proto: 'tcp', comment: 'Samba' }
+  when: "'production' in group_names"
 
 - name: Enable ufw logging
   ufw: logging=on
