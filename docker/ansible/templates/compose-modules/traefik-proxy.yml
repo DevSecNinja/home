@@ -79,7 +79,7 @@ services:
       # Watchtower
       - com.centurylinklabs.watchtower.monitor-only=true
       # Homepage
-      - homepage.group=Networking
+      - homepage.group=Infrastructure
       - homepage.name=Traefik
       - homepage.icon=traefik.svg
       - homepage.href=https://traefik-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME

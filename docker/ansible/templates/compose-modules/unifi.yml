@@ -99,7 +99,7 @@ services:
       # Watchtower
       - com.centurylinklabs.watchtower.monitor-only=true
       # Homepage
-      - homepage.group=Networking
+      - homepage.group=Infrastructure
       - homepage.name=Unifi
       - homepage.icon=unifi.svg
       - homepage.href=https://unifi.$DOMAINNAME

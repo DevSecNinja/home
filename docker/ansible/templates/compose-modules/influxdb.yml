@@ -24,13 +24,13 @@ services:
       - no-new-privileges:true
     labels:
       # Homepage
-      - homepage.group=Monitoring
+      - homepage.group=Infrastructure
       - homepage.name=InfluxDB
       - homepage.icon=influxdb.svg
       - homepage.href=https://influxdb-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
       - homepage.description=Time Series Data Platform
       # Group
-      - org.label-schema.group=monitoring
+      - org.label-schema.group=infrastructure
       # Traefik
       - "traefik.enable=true"
       ## HTTP Routers

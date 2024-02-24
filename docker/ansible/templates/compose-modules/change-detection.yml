@@ -18,11 +18,11 @@ services:
       - change_detection_data:/datastore
     labels:
       # Homepage
-      - homepage.group=Monitoring
+      - homepage.group=Infrastructure
       - homepage.name=Change Detection
       - homepage.icon=mdi-cloud-sync
       - homepage.href=https://change-detection.$DOMAINNAME
-      - homepage.description=Detect changes on web sites
+      - homepage.description=Detect Changes on Web Sites
       # Traefik
       - "traefik.enable=true"
       ## Middlewares

@@ -17,7 +17,7 @@ services:
       - TZ=${TZ}
     labels:
       # Homepage
-      - homepage.group=Management
+      - homepage.group=Infrastructure
       - homepage.name=Portainer
       - homepage.icon=portainer.svg
       - homepage.href=https://portainer-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME

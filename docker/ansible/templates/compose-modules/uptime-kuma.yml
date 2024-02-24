@@ -15,7 +15,7 @@ services:
       - uptime_kuma_data:/app/data
     labels:
       # Homepage
-      - homepage.group=Monitoring
+      - homepage.group=Infrastructure
       - homepage.name=Uptime Kuma
       - homepage.icon=si-uptimekuma
       - homepage.href=https://uptime.$DOMAINNAME
