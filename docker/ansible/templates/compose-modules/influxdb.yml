@@ -42,6 +42,44 @@ services:
       ### Enable the server port
       - "traefik.http.services.influxdb.loadbalancer.server.port=8086"
 
+  influxdb-db-backup:
+    container_name: influxdb-db-backup
+    image: tiredofit/db-backup:4.0.35@sha256:794ffd160cf01057d0f64ef7baf5da3cd8925a48f1f65653e016f58c7d69b13c
+    depends_on:
+      - influxdb
+    volumes:
+      - $DOCKERDIR/data/backup:/backup
+    networks:
+      - influxdb
+    environment:
+      - TIMEZONE=${TZ}
+      - USER_DBBACKUP=${PUID}
+      - GROUP_DBBACKUP=${PGID}
+      - CONTAINER_NAME=influxdb-db-backup
+      - CONTAINER_ENABLE_MONITORING=FALSE # Disables Zabbix backup statistics
+
+      - ENABLE_NOTIFICATIONS=FALSE   # TODO: [db-backup] Use notifications (SMTP auth not supported)
+
+      - DEFAULT_CHECKSUM=SHA1        # Set standard checksum to SHA1
+      - DEFAULT_COMPRESSION=ZSTD     # Compress all with ZSTD
+      - DEFAULT_BACKUP_INTERVAL=1440 # Backup every 1440 minutes = 24 hours
+      - DEFAULT_BACKUP_BEGIN=0000    # Start backing up at midnight
+      - DEFAULT_CLEANUP_TIME=2880    # Cleanup backups after two days
+
+      - DEFAULT_ENCRYPT=TRUE                            # Encrypt backup files with GPG
+      - DEFAULT_ENCRYPT_PASSPHRASE=${DB_ENC_PASSPHRASE} # Set encryption password
+
+      - DB01_TYPE=influx
+      - DB01_HOST=influxdb
+      - DB01_NAME=ALL
+      - DB01_USER=${INFLUXDB_USERNAME}
+      - DB01_PORT=8086
+      - DB01_PASS=${INFLUXDB_PASSWORD}
+      - DB01_INFLUX_VERSION=2
+    restart: always
+    security_opt:
+      - no-new-privileges:true
+
 volumes:
   influxdb_data:
 
