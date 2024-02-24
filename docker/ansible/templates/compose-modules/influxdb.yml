@@ -42,8 +42,8 @@ services:
       ### Enable the server port
       - "traefik.http.services.influxdb.loadbalancer.server.port=8086"
 
-  influxdb-db-backup:
-    container_name: influxdb-db-backup
+  influxdb-backup:
+    container_name: influxdb-backup
     image: tiredofit/db-backup:4.0.35@sha256:794ffd160cf01057d0f64ef7baf5da3cd8925a48f1f65653e016f58c7d69b13c
     depends_on:
       - influxdb
@@ -55,7 +55,7 @@ services:
       - TIMEZONE=${TZ}
       - USER_DBBACKUP=${PUID}
       - GROUP_DBBACKUP=${PGID}
-      - CONTAINER_NAME=influxdb-db-backup
+      - CONTAINER_NAME=influxdb-backup
       - CONTAINER_ENABLE_MONITORING=FALSE # Disables Zabbix backup statistics
 
       - ENABLE_NOTIFICATIONS=FALSE   # TODO: [db-backup] Use notifications (SMTP auth not supported)
