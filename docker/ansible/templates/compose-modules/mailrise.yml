@@ -1,0 +1,23 @@
+services:
+  mailrise:
+    image: yoryan/mailrise:1.3.0@sha256:0d0770cdb61a429a29cace11a6dfd961c83d94b145155e9eee3c7067d6878179
+    container_name: mailrise
+    depends_on:
+      - traefik
+    restart: always
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    networks:
+      - t2_proxy
+    volumes:
+      - $DOCKERDIR/data/mailrise/mailrise.yml:/etc/mailrise.conf:ro
+    labels:
+      # Traefik
+      - "traefik.enable=true"
+      ## Middlewares
+      - "traefik.http.routers.mailrise-rtr.middlewares=chain-no-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.mailrise-rtr.service=mailrise-svc"
+      - "traefik.http.services.mailrise-svc.loadbalancer.server.port=8025"

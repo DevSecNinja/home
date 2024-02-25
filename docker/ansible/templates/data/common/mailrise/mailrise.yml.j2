@@ -1,0 +1,9 @@
+configs:
+  msteams:
+    urls:
+      - {{ notifications__teams_webhook_containrrr }}
+
+smtp:
+  auth:
+    basic:
+      {{ notifications__mailrise_smtp_username }}: {{ notifications__mailrise_smtp_password }}
