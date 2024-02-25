@@ -10,14 +10,9 @@ services:
       - PGID=${PGID}
       - TZ=${TZ}
     networks:
-      - t2_proxy
+      - mailrise
     volumes:
       - $DOCKERDIR/data/mailrise/mailrise.yml:/etc/mailrise.conf:ro
-    labels:
-      # Traefik
-      - "traefik.enable=true"
-      ## Middlewares
-      - "traefik.http.routers.mailrise-rtr.middlewares=chain-no-auth@file"
-      ## HTTP Services
-      - "traefik.http.routers.mailrise-rtr.service=mailrise-svc"
-      - "traefik.http.services.mailrise-svc.loadbalancer.server.port=8025"
+
+networks:
+  mailrise:

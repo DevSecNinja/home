@@ -77,6 +77,7 @@ services:
       - $DOCKERDIR/data/backup:/backup
     networks:
       - bitwarden-backend
+      - mailrise
     environment:
       - TIMEZONE=${TZ}
       - USER_DBBACKUP=${PUID}
@@ -84,7 +85,12 @@ services:
       - CONTAINER_NAME=bitwarden-db-backup
       - CONTAINER_ENABLE_MONITORING=FALSE # Disables Zabbix backup statistics
 
-      - ENABLE_NOTIFICATIONS=FALSE   # TODO: [db-backup] Use notifications (SMTP auth not supported)
+      - ENABLE_NOTIFICATIONS=TRUE
+      - NOTIFICATION_TYPE=EMAIL
+      - SMTP_HOST=mailrise
+      - SMTP_PORT=${NOTIFICATIONS_MAILRISE_SMTP_PORT}
+      - MAIL_TO=msteams@mailrise.xyz
+      - MAIL_FROM=bitwarden-db-backup
 
       - DEFAULT_CHECKSUM=SHA1        # Set standard checksum to SHA1
       - DEFAULT_COMPRESSION=ZSTD     # Compress all with ZSTD
