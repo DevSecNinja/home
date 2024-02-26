@@ -78,5 +78,6 @@
           loop:
             - "/mnt/data"
             - "/mnt/data/backup"
-            - "/mnt/data/study"
+            - "/mnt/data/media/study"
+            - "/mnt/data/media/transcode"
           when: disk_id is defined and device_path is defined

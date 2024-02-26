@@ -1,0 +1,126 @@
+services:
+  paperless-redis:
+    image: redis:alpine3.19@sha256:c1ac6782927e574394225a790b6eb476154d1a16681b1374c62625d9bc324b18
+    container_name: paperless-redis
+    # Requirepass is needed as environment variable isn't picked up
+    command: >
+      --requirepass ${PAPERLESS_REDIS_PASSWORD}
+    restart: always
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - REDIS_PASSWORD=${PAPERLESS_REDIS_PASSWORD}
+    networks:
+      - paperless-backend
+
+  paperless-db:
+    image: docker.io/library/postgres:16.2-alpine@sha256:b89a4e92591810eac1fbce6107485d7c6b9449df51c1ccfcfed514a7fdd69955
+    container_name: paperless-db
+    restart: always
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - paperless_db_data:/var/lib/postgresql/data
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - POSTGRES_DB=paperless
+      - POSTGRES_USER=paperless
+      - POSTGRES_PASSWORD=${PAPERLESS_DB_PASSWORD}
+    networks:
+      - paperless-backend
+
+  paperless-web:
+    image: ghcr.io/paperless-ngx/paperless-ngx:2.5.4@sha256:ce3aab0002d459af2fd13933c8ca8df87ecb92bf26fbffdba208149b8ee6f851
+    container_name: paperless-web
+    restart: always
+    security_opt:
+      - no-new-privileges:true
+    depends_on:
+      - paperless-db
+      - paperless-redis
+      - paperless-gotenberg
+      - paperless-tika
+    volumes:
+      - paperless_data:/usr/src/paperless/data
+      - paperless_media_data:/usr/src/paperless/paperless_media_data
+      - $DOCKERDIR/data/paperless-ngx/export:/usr/src/paperless/export
+      - $DOCKERDIR/data/paperless-ngx/consume:/usr/src/paperless/consume
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - PAPERLESS_REDIS=redis://:${PAPERLESS_REDIS_PASSWORD}@paperless-redis:6379
+      - PAPERLESS_DBHOST=paperless-db
+      - PAPERLESS_TIKA_ENABLED=1
+      - PAPERLESS_TIKA_GOTENBERG_ENDPOINT=http://paperless-gotenberg:3000
+      - PAPERLESS_TIKA_ENDPOINT=http://paperless-tika:9998
+      - PAPERLESS_URL=https://paperless.$DOMAINNAME
+      - PAPERLESS_ADMIN_USER=${PAPERLESS_ADMIN_USER}
+      - PAPERLESS_ADMIN_PASSWORD=${PAPERLESS_ADMIN_PASSWORD}
+      - PAPERLESS_APPS="allauth.socialaccount.providers.openid_connect"
+      - PAPERLESS_OCR_LANGUAGES=nld
+    networks:
+      - paperless-backend
+      - t2_proxy
+    labels:
+      # Homepage
+      - homepage.group=Productivity
+      - homepage.name=Paperless NGX
+      - homepage.icon=paperless.svg
+      - homepage.href=https://paperless.$DOMAINNAME
+      - homepage.description=Document Service
+      # Group
+      - org.label-schema.group=productivity
+      # Traefik
+      - "traefik.enable=true"
+      ## Middlewares
+      - "traefik.http.routers.paperless-ngx-rtr.middlewares=chain-no-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.paperless-ngx-rtr.rule=Host(`paperless.$DOMAINNAME`)"
+      - "traefik.http.routers.paperless-ngx-rtr.service=paperless-ngx"
+      ### Enable the server port
+      - "traefik.http.services.paperless-ngx.loadbalancer.server.port=8000"
+
+  paperless-gotenberg:
+    image: docker.io/gotenberg/gotenberg:8.2.0@sha256:ed2775004461692cedf11dc968f11618ca2234738b228bc455db89b7fbdae13b
+    container_name: paperless-gotenberg
+    restart: always
+    security_opt:
+      - no-new-privileges:true
+    command:
+      - "gotenberg"
+      - "--chromium-disable-javascript=true"
+      - "--chromium-allow-list=file:///tmp/.*"
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    networks:
+      - paperless-backend
+
+  paperless-tika:
+    image: ghcr.io/paperless-ngx/tika:2.9.1-minimal@sha256:8765f135f5c9d58d8a8fe56fdacc589aebaa812301d184c53e1aeb6e5a054145
+    container_name: paperless-tika
+    restart: always
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    networks:
+      - paperless-backend
+
+volumes:
+  paperless_data:
+  paperless_media_data:
+  paperless_db_data:
+  paperless_redis_data:
+
+networks:
+  paperless-backend:
