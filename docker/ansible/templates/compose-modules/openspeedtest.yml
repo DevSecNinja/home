@@ -1,0 +1,28 @@
+services:
+  openspeedtest:
+    container_name: openspeedtest
+    image: openspeedtest/latest:v2.0.5@sha256:12cb104a9c10ee2b3a9ffcc1992dfb72236e8c2e3a08aa700f19b705fe3f2f04
+    depends_on:
+      - traefik
+    networks:
+      - t2_proxy
+    restart: always
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      - TZ=${TZ}
+    labels:
+      # Homepage
+      - homepage.group=Infrastructure
+      - homepage.name=Speedtest
+      - homepage.icon=si-speedtest
+      - homepage.href=https://speedtest.$DOMAINNAME
+      - homepage.description=Network Speedtest
+      # Traefik
+      - "traefik.enable=true"
+      ## Middlewares
+      - "traefik.http.routers.openspeedtest-rtr.middlewares=chain-no-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.openspeedtest-rtr.rule=Host(`speedtest.$DOMAINNAME`)"
+      - "traefik.http.routers.openspeedtest-rtr.service=openspeedtest-svc"
+      - "traefik.http.services.openspeedtest-svc.loadbalancer.server.port=3000"
