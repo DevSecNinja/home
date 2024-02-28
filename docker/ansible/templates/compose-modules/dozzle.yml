@@ -17,7 +17,7 @@ services:
     labels:
       # Homepage
       - homepage.group=Infrastructure
-      - homepage.name=dozzle
+      - homepage.name=Dozzle
       - homepage.icon=dozzle.svg
       - homepage.href=https://dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
       - homepage.description=Container Log Viewer
