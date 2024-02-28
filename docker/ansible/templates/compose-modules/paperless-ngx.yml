@@ -47,7 +47,7 @@ services:
       - paperless-tika
     volumes:
       - paperless_data:/usr/src/paperless/data
-      - paperless_media_data:/usr/src/paperless/paperless_media_data
+      - paperless_media_data:/usr/src/paperless/media
       - $DOCKERDIR/data/paperless-ngx/export:/usr/src/paperless/export
       - $DOCKERDIR/data/paperless-ngx/consume:/usr/src/paperless/consume
     environment:
