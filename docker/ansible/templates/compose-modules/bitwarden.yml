@@ -47,7 +47,7 @@ services:
       - "traefik.http.services.bitwarden.loadbalancer.server.port=8080"
 
   bitwarden-db:
-    image: mariadb:11.2.3@sha256:55d9608d84658cbc691f52cd6389386a15e6c671cb5708b9f3af5782af3b4dbb
+    image: mariadb:11.3.2@sha256:851f05fe1e4cb290442c1b12b7108436a33fd8f6a733d4989950322d06d45c65
     container_name: bitwarden-db
     command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
     restart: always
