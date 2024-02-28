@@ -10,7 +10,8 @@ services:
       - no-new-privileges:true
     environment:
       - TZ=${TZ}
-      - PMA_ARBITRARY=1
+      #- PMA_ARBITRARY=1 # Allows you to select a DB server on login screen
+      - HIDE_PHP_VERSION=true
     labels:
       # Homepage
       - homepage.group=Infrastructure
