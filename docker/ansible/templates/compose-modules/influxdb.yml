@@ -14,6 +14,7 @@ services:
       - DOCKER_INFLUXDB_INIT_MODE=setup
       - DOCKER_INFLUXDB_INIT_USERNAME=${INFLUXDB_USERNAME}
       - DOCKER_INFLUXDB_INIT_PASSWORD=${INFLUXDB_PASSWORD}
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=${INFLUXDB_ADMIN_TOKEN}
       - DOCKER_INFLUXDB_INIT_ORG=${INFLUXDB_ORGANIZATION}
       - DOCKER_INFLUXDB_INIT_BUCKET=init-bucket
     restart: always
@@ -70,11 +71,11 @@ services:
       - DEFAULT_ENCRYPT_PASSPHRASE=${DB_ENC_PASSPHRASE} # Set encryption password
 
       - DB01_TYPE=influx
-      - DB01_HOST=influxdb
+      - DB01_HOST=http://influxdb
+      - DB01_PORT=8086
       - DB01_NAME=ALL
       - DB01_USER=${INFLUXDB_USERNAME}
-      - DB01_PORT=8086
-      - DB01_PASS=${INFLUXDB_PASSWORD}
+      - DB01_PASS=${INFLUXDB_ADMIN_TOKEN}
       - DB01_INFLUX_VERSION=2
     restart: always
     security_opt:
