@@ -23,6 +23,7 @@ include:
   - $DOCKERDIR/data/compose/samba.yml
 {% endif %}
 {% if 'webservers' in group_names %}
+  - $DOCKERDIR/data/compose/authelia.yml
   - $DOCKERDIR/data/compose/dozzle.yml
   - $DOCKERDIR/data/compose/echo-server.yml
   - $DOCKERDIR/data/compose/homepage.yml
