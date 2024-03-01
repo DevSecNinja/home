@@ -11,8 +11,15 @@ log:
 theme: dark
 jwt_secret: {{ apps__authelia_jwt_secret }}
 default_redirection_url: https://auth-{{ generic__hostname_suffix }}.{{ generic__domain_name }}
+
 totp:
-  issuer: authelia.com
+  issuer: "{{ generic__hostname_suffix }}.{{ generic__domain_name }}"
+  algorithm: sha512
+
+webauthn:
+  display_name: "{{ generic__hostname_suffix }}.{{ generic__domain_name }}"
+  attestation_conveyance_preference: indirect
+  user_verification: preferred
 
 authentication_backend:
   file:
@@ -75,4 +82,4 @@ notifier:
   #   port: 25
   #   sender: admin@example.com
   filesystem:
-    filename: /config/notification.txt
+    filename: /data/notification.txt
