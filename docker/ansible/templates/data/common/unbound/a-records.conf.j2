@@ -13,7 +13,8 @@ local-data: "receiver.{{ generic__domain_name }} A 192.168.50.2"
 
 # TODO: [unbound] Dynamically generate list of records to create
 local-data: "adguard.{{ generic__domain_name }} A 192.168.1.11"
-local-data: "auth.{{ generic__domain_name }} A 192.168.1.11"
+local-data: "auth-mgmt.{{ generic__domain_name }} A 192.168.1.11"
+local-data: "auth-prod.{{ generic__domain_name }} A 192.168.60.2"
 local-data: "bitwarden.{{ generic__domain_name }} A 192.168.1.11"
 local-data: "change-detection.{{ generic__domain_name }} A 192.168.60.2"
 local-data: "cloud.{{ generic__domain_name }} A 192.168.60.2"
