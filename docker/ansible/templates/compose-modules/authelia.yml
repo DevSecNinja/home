@@ -25,10 +25,7 @@ services:
       - "traefik.enable=true"
       ## Middlewares
       - "traefik.http.routers.authelia-rtr.middlewares=chain-no-auth@file"
-      ### Authelia middleware
-      - 'traefik.http.middlewares.authelia.forwardauth.address=http://authelia:9091/api/verify?rd=https://auth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME'
-      - 'traefik.http.middlewares.authelia.forwardauth.trustForwardHeader=true'
-      - 'traefik.http.middlewares.authelia.forwardauth.authResponseHeaders=Remote-User,Remote-Groups,Remote-Name,Remote-Email'
+      ## Note: Authelia middleware can be found in middlewares.yml file in Traefik
       ## HTTP Services
       - "traefik.http.routers.authelia-rtr.rule=Host(`auth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
       - "traefik.http.routers.authelia-rtr.service=authelia-svc"

@@ -1,0 +1,82 @@
+api:
+  dashboard: true
+
+global:
+  checkNewVersion: false
+  sendAnonymousUsage: false
+
+entryPoints:
+  http:
+    address: ":80"
+    # proxyProtocol:
+    #   insecure: false
+    #   trustedIPs: {}
+    forwardedHeaders:
+      insecure: false
+      trustedIPs: {}
+  https:
+    address: ":443"
+    http:
+      tls: {}
+    # proxyProtocol:
+    #   insecure: false
+    #   trustedIPs: {}
+    forwardedHeaders:
+      insecure: false
+      trustedIPs: {}
+  # TODO: [traefik] Only expose endpoints on relevant servers
+  unifi-guest:
+    address: ":8843"
+
+http:
+  routers:
+    # HTTP-to-HTTPS Redirect
+    http-catchall:
+      entrypoints: "http"
+      rule: "HostRegexp(`{host:.+}`)"
+      middlewares: "middlewares-redirect-to-https"
+
+providers:
+  docker:
+    endpoint: "unix:///var/run/docker.sock"
+    # endpoint: tcp://socket-proxy:2375
+    exposedByDefault: false
+    defaultRule: Host(`{{ '{{' }} index .Labels "com.docker.compose.service"{{ '}}' }}.{{ generic__domain_name }}`)
+    network: t2_proxy
+    swarmMode: false
+  file:
+    directory: "/rules"
+    watch: true
+
+certificatesResolvers:
+  dns-cloudflare:
+    acme:
+      # caServer: "https://acme-staging-v02.api.letsencrypt.org/directory" # LetsEncrypt Staging Server - uncomment when testing
+      email: {{ apps_cloudflare_email }}
+      storage: "/acme.json"
+      dnsChallenge:
+        provider: "cloudflare"
+        resolvers:
+          - "1.1.1.1:53"
+          - "1.0.0.1:53"
+        delayBeforeCheck: 90
+
+serversTransport:
+  # TODO: [traefik] Investigate insecureSkipVerify still need to be set to true
+  # Required for Unifi to function. Prevents "Internal Server Error"
+  insecureSkipVerify: true
+
+accessLog:
+  bufferingSize: 500
+  filePath: "/logs/access.log"
+  filters:
+    statusCodes: 400-499
+  fields:
+    headers:
+      names:
+        User-Agent: keep
+
+log:
+  filePath: "/logs/traefik.log"
+  # (Default: error) DEBUG, INFO, WARN, ERROR, FATAL, PANIC
+  level: INFO
