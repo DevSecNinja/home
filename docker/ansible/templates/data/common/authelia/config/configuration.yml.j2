@@ -47,6 +47,8 @@ access_control:
     #   policy: bypass
     - domain: draw.{{ generic__domain_name }}
       policy: one_factor
+    - domain: echo-{{ generic__hostname_suffix }}.{{ generic__domain_name }}
+      policy: one_factor
     - domain: unifi.{{ generic__domain_name }}
       policy: two_factor
 

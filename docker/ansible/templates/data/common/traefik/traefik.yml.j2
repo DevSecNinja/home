@@ -8,22 +8,30 @@ global:
 entryPoints:
   http:
     address: ":80"
-    # proxyProtocol:
-    #   insecure: false
-    #   trustedIPs: {}
+    proxyProtocol:
+      insecure: false
+      trustedIPs:
+        - 192.168.101.201 # Oauth2-Proxy
+        - 192.168.101.202 # Authelia
     forwardedHeaders:
       insecure: false
-      trustedIPs: {}
+      trustedIPs:
+        - 192.168.101.201 # Oauth2-Proxy
+        - 192.168.101.202 # Authelia
   https:
     address: ":443"
     http:
       tls: {}
-    # proxyProtocol:
-    #   insecure: false
-    #   trustedIPs: {}
+    proxyProtocol:
+      insecure: false
+      trustedIPs:
+        - 192.168.101.201 # Oauth2-Proxy
+        - 192.168.101.202 # Authelia
     forwardedHeaders:
       insecure: false
-      trustedIPs: {}
+      trustedIPs:
+        - 192.168.101.201 # Oauth2-Proxy
+        - 192.168.101.202 # Authelia
 {% if 'management' in group_names %}
   unifi-guest:
     address: ":8843"
