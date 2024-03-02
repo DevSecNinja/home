@@ -24,9 +24,10 @@ entryPoints:
     forwardedHeaders:
       insecure: false
       trustedIPs: {}
-  # TODO: [traefik] Only expose endpoints on relevant servers
+{% if 'management' in group_names %}
   unifi-guest:
     address: ":8843"
+{% endif %}
 
 http:
   routers:
@@ -61,10 +62,12 @@ certificatesResolvers:
           - "1.0.0.1:53"
         delayBeforeCheck: 90
 
+{% if 'management' in group_names %}
 serversTransport:
   # TODO: [traefik] Investigate insecureSkipVerify still need to be set to true
   # Required for Unifi to function. Prevents "Internal Server Error"
   insecureSkipVerify: true
+{% endif %}
 
 accessLog:
   bufferingSize: 500
