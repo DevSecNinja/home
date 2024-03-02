@@ -1,7 +1,7 @@
 services:
   dozzle:
     container_name: dozzle
-    image: amir20/dozzle:v6.2.5@sha256:6908cb2f892ee7d6425cc6383eaaf3e10ba3a55563740277242ff41bba131d47
+    image: amir20/dozzle:v6.2.5@sha256:b1c80b5afa0e200601d05c70f223c7a246b33fbbd8ad30cf22670a2566105ea3
     depends_on:
       - traefik
     networks:
