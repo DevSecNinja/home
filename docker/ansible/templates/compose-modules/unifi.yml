@@ -76,12 +76,13 @@ services:
       - MEM_LIMIT=1024 #optional
     volumes:
       - unifi_data:/config
-    healthcheck:
-      test: ["CMD", "curl", "-f", "-k", "https://localhost:8443"]
-      interval: 1m
-      timeout: 10s
-      retries: 3
-      start_period: 1m
+    # Saves some CPU cycles + healthcheck doesn't do anything on failure
+    # healthcheck:
+    #   test: ["CMD", "curl", "-f", "-k", "https://localhost:8443"]
+    #   interval: 1m
+    #   timeout: 10s
+    #   retries: 3
+    #   start_period: 1m
     ports:
       - 3478:3478/udp # used for STUN
       - 10001:10001/udp # used for device discovery

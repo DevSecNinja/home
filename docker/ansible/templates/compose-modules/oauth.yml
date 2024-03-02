@@ -76,11 +76,12 @@ services:
       - oauth2_proxy_redis_data:/data
     networks:
       - oauth2-proxy-backend
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
+    # Saves some CPU cycles + healthcheck doesn't do anything on failure
+    # healthcheck:
+    #   test: ["CMD", "redis-cli", "ping"]
+    #   interval: 30s
+    #   timeout: 10s
+    #   retries: 5
 
 volumes:
   oauth2_proxy_redis_data:

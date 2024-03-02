@@ -21,10 +21,11 @@ services:
       - grafana
     security_opt:
       - no-new-privileges:true
-    healthcheck:
-      test: ["CMD-SHELL", "curl -f localhost:3000/api/health && echo 'ready'"]
-      interval: 10s
-      retries: 30
+    # Saves some CPU cycles + healthcheck doesn't do anything on failure
+    # healthcheck:
+    #   test: ["CMD-SHELL", "curl -f localhost:3000/api/health && echo 'ready'"]
+    #   interval: 10s
+    #   retries: 30
     labels:
       # Watchtower
       - com.centurylinklabs.watchtower.monitor-only=true
