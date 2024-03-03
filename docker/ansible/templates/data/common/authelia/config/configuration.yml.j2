@@ -55,8 +55,9 @@ access_control:
 session:
   name: authelia_session_{{ generic__hostname_suffix }}
   secret: {{ apps__authelia_session_secret }}
-  expiration: 3600  # 1 hour
-  inactivity: 300  # 5 minutes
+  expiration: 1h
+  inactivity: 5m
+  remember_me_duration: 1M
   domain: {{ generic__domain_name }}
 
   # redis:
