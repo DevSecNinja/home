@@ -27,8 +27,6 @@ services:
     #   interval: 10s
     #   retries: 30
     labels:
-      # Watchtower
-      - com.centurylinklabs.watchtower.monitor-only=true
       # Homepage
       - homepage.group=Infrastructure
       - homepage.name=Grafana

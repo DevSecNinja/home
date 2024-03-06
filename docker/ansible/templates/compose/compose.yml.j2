@@ -11,6 +11,7 @@ include:
   #- $DOCKERDIR/data/compose/bitwarden.yml
   - $DOCKERDIR/data/compose/cloudflare.yml
   - $DOCKERDIR/data/compose/grafana.yml
+  - $DOCKERDIR/data/compose/prometheus.yml
   - $DOCKERDIR/data/compose/uptime-kuma.yml
   - $DOCKERDIR/data/compose/unifi.yml
 {% endif %}
@@ -27,6 +28,7 @@ include:
 {% endif %}
 {% if 'webservers' in group_names %}
   - $DOCKERDIR/data/compose/authelia.yml
+  - $DOCKERDIR/data/compose/cadvisor.yml
   - $DOCKERDIR/data/compose/dozzle.yml
   - $DOCKERDIR/data/compose/echo-server.yml
   - $DOCKERDIR/data/compose/homepage.yml

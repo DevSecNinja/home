@@ -12,9 +12,6 @@ services:
     volumes:
       - unifi_db_data:/data/db
       - $DOCKERDIR/data/mongodb/init-mongo-unifi-db.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
-    labels:
-      # Watchtower
-      - com.centurylinklabs.watchtower.monitor-only=true
     restart: unless-stopped
 
   unifi-db-backup:
@@ -62,7 +59,6 @@ services:
       - unifi-db
     networks:
       - t2_proxy
-      - default
       - unifi-backend
     environment:
       - PUID=${PUID}
@@ -97,8 +93,6 @@ services:
     security_opt:
       - no-new-privileges:true
     labels:
-      # Watchtower
-      - com.centurylinklabs.watchtower.monitor-only=true
       # Homepage
       - homepage.group=Infrastructure
       - homepage.name=Unifi

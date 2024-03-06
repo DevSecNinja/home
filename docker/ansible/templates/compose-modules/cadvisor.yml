@@ -1,0 +1,35 @@
+services:
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.49.1@sha256:3cde6faf0791ebf7b41d6f8ae7145466fed712ea6f252c935294d2608b1af388
+    container_name: cadvisor
+    privileged: true
+    devices:
+      - /dev/kmsg:/dev/kmsg
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker:/var/lib/docker:ro
+    restart: always
+    networks:
+      - t2_proxy
+    environment:
+      - TZ=${TZ}
+    labels:
+      # Homepage
+      - homepage.group=Infrastructure
+      - homepage.name=cAdvisor
+      - homepage.icon=cadvisor.svg
+      - homepage.href=https://cadvisor-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
+      - homepage.description=Docker Monitoring
+      # Group
+      - org.label-schema.group=infrastructure
+      # Traefik
+      - "traefik.enable=true"
+      ## Middlewares
+      - "traefik.http.routers.cadvisor-rtr.middlewares=chain-no-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.cadvisor-rtr.rule=Host(`cadvisor-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
+      - "traefik.http.routers.cadvisor-rtr.service=cadvisor"
+      ### Enable the server port
+      - "traefik.http.services.cadvisor.loadbalancer.server.port=8080"

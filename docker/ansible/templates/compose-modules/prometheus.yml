@@ -1,0 +1,41 @@
+services:
+  prometheus:
+    image: prom/prometheus:v2.50.1@sha256:e7f5a279d674f110beef9b9d473c86f5c0c4e003ba73d8a83a72321d8229260b
+    container_name: prometheus
+    volumes:
+      - prometheus_data:/prometheus
+      - $DOCKERDIR/data/prometheus:/etc/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    environment:
+      - TZ=${TZ}
+    restart: always
+    networks:
+      - t2_proxy
+    security_opt:
+      - no-new-privileges:true
+    labels:
+      # Homepage
+      - homepage.group=Infrastructure
+      - homepage.name=Prometheus
+      - homepage.icon=prometheus.svg
+      - homepage.href=https://prometheus.$DOMAINNAME
+      - homepage.description=Resource Monitoring
+      # Group
+      - org.label-schema.group=infrastructure
+      # Traefik
+      - "traefik.enable=true"
+      ## Middlewares
+      - "traefik.http.routers.prometheus-rtr.middlewares=chain-no-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.prometheus-rtr.service=prometheus"
+      ### Enable the server port
+      - "traefik.http.services.prometheus.loadbalancer.server.port=9090"
+
+volumes:
+  prometheus_data:
