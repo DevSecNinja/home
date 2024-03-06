@@ -19,7 +19,7 @@ services:
       # Homepage
       - homepage.group=Infrastructure
       - homepage.name=cAdvisor
-      - homepage.icon=cadvisor.svg
+      - homepage.icon=mdi-owl-#ffffff
       - homepage.href=https://cadvisor-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
       - homepage.description=Docker Monitoring
       # Group

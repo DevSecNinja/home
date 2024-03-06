@@ -15,7 +15,7 @@ services:
       # Homepage
       - homepage.group=Productivity
       - homepage.name=Draw.io
-      - homepage.icon=mdi-draw
+      - homepage.icon=mdi-draw-#ffffff
       - homepage.href=https://draw.$DOMAINNAME
       - homepage.description=Flowchart & Diagram Maker
       # Traefik

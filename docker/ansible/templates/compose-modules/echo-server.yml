@@ -18,7 +18,7 @@ services:
       # Homepage
       - homepage.group=Infrastructure
       - homepage.name=Echo-Server
-      - homepage.icon=mdi-test-tube
+      - homepage.icon=mdi-test-tube-#ffffff
       - homepage.href=https://echo-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
       - homepage.description=Testing Web Requests
       # Traefik
