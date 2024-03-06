@@ -1,0 +1,15 @@
+---
+- name: "Get container info"
+  docker_container_info:
+    name: "{{item}}"
+  register: container_info
+
+- name: "Extract FQDN"
+  debugger: always
+  set_fact:
+    docker_host: "{{ Config.Labels }}"
+  loop: "{{ container_info.container }}"
+
+- name: "Append IPs"
+  set_fact:
+    docker_ips: "{{ traefik_fqdns + [traefik_fqdn] }}"

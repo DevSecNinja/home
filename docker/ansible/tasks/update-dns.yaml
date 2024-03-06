@@ -1,0 +1,18 @@
+---
+- name: "Get info on docker containers"
+  docker_host_info:
+    containers: yes
+    verbose_output: yes
+  register: containers
+
+- name: "Initialize an empty list for Traefik FQDNS"
+  set_fact:
+    traefik_fqdns: []
+
+- name: "Gather the Traefik FQDNS"
+  include_tasks: traefik_fqdns.yaml
+  loop: "{{ containers.containers | map(attribute='Id') }}"
+
+- name: Print FQDNs of Docker containers behind Traefik proxy
+  debug:
+    var: fqdns

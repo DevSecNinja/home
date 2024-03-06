@@ -1,0 +1,9 @@
+---
+- hosts: dnsservers
+  become: yes
+  vars:
+  tasks:
+    - include_tasks: ../tasks/update-dns.yaml
+
+  handlers:
+    - import_tasks: ../handlers/main.yml
