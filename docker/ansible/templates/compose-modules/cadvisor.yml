@@ -37,3 +37,10 @@ services:
       - "traefik.http.routers.cadvisor-rtr.service=cadvisor"
       ### Enable the server port
       - "traefik.http.services.cadvisor.loadbalancer.server.port=8080"
+    # Saves some CPU cycles + healthcheck doesn't do anything on failure
+    # healthcheck:
+    #   test: wget --quiet --tries=1 --spider http://localhost:9102/healthz || exit 1
+    #   interval: 15s
+    #   timeout: 15s
+    #   retries: 5
+    #   start_period: 30s
