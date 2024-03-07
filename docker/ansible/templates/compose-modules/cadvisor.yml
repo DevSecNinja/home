@@ -15,6 +15,10 @@ services:
       - t2_proxy
     environment:
       - TZ=${TZ}
+    command:
+      - "--housekeeping_interval=30s" # Housekeeping is the periodic actions cAdvisor takes. During these actions, cAdvisor will gather container stats.
+      - "--docker_only=true" # do not report raw cgroup metrics, except the root cgroup.
+      # - "--disable_metrics=percpu,sched,tcp,udp,disk,diskIO,accelerator,hugetlb,referenced_memory,cpu_topology,resctrl"
     labels:
       # Homepage
       - homepage.group=Infrastructure
