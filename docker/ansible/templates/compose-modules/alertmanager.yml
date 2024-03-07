@@ -1,0 +1,33 @@
+services:
+  alertmanager:
+    image: prom/alertmanager:v0.27.0@sha256:45c3a586d4332d710bef92b06e90380c0b1f588968c00100d4b5e4e44c40ca5f
+    container_name: alertmanager
+    volumes:
+      - $DOCKERDIR/data/alertmanager:/etc/alertmanager
+    command:
+      - '--config.file=/etc/alertmanager/config.yml'
+      - '--storage.path=/alertmanager'
+    environment:
+      - TZ=${TZ}
+    restart: always
+    networks:
+      - t2_proxy
+    security_opt:
+      - no-new-privileges:true
+    labels:
+      # Homepage
+      - homepage.group=Infrastructure
+      - homepage.name=Alertmanager
+      - homepage.icon=alertmanager.svg
+      - homepage.href=https://alertmanager.$DOMAINNAME
+      - homepage.description=Alert System
+      # Group
+      - org.label-schema.group=infrastructure
+      # Traefik
+      - "traefik.enable=true"
+      ## Middlewares
+      - "traefik.http.routers.alertmanager-rtr.middlewares=chain-no-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.alertmanager-rtr.service=alertmanager"
+      ### Enable the server port
+      - "traefik.http.services.alertmanager.loadbalancer.server.port=9093"

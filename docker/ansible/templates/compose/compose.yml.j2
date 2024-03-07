@@ -9,8 +9,10 @@ include:
   # This caused power consumption of the server to double.
   # TODO: [monitoring] Find a tool to monitor CPU and MEM usage on containers
   #- $DOCKERDIR/data/compose/bitwarden.yml
+  - $DOCKERDIR/data/compose/alertmanager.yml
   - $DOCKERDIR/data/compose/cloudflare.yml
   - $DOCKERDIR/data/compose/grafana.yml
+  - $DOCKERDIR/data/compose/nodeexporter.yml
   - $DOCKERDIR/data/compose/prometheus.yml
   - $DOCKERDIR/data/compose/uptime-kuma.yml
   - $DOCKERDIR/data/compose/unifi.yml

@@ -18,7 +18,7 @@ services:
     command:
       - "--housekeeping_interval=30s" # Housekeeping is the periodic actions cAdvisor takes. During these actions, cAdvisor will gather container stats.
       - "--docker_only=true" # do not report raw cgroup metrics, except the root cgroup.
-      # - "--disable_metrics=percpu,sched,tcp,udp,disk,diskIO,accelerator,hugetlb,referenced_memory,cpu_topology,resctrl"
+      - "--disable_metrics=percpu,sched,network,tcp,udp,disk,diskIO,hugetlb,referenced_memory,cpu_topology,resctrl,process"
     labels:
       # Homepage
       - homepage.group=Infrastructure

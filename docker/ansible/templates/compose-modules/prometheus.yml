@@ -37,5 +37,33 @@ services:
       ### Enable the server port
       - "traefik.http.services.prometheus.loadbalancer.server.port=9090"
 
+  pushgateway:
+    image: prom/pushgateway:v1.7.0@sha256:ea184974db6c847ba06e0abcc8c4c5112d26e49b92af1738428ffba344751db8
+    container_name: pushgateway
+    environment:
+      - TZ=${TZ}
+    restart: always
+    networks:
+      - t2_proxy
+    security_opt:
+      - no-new-privileges:true
+    labels:
+      # Homepage
+      - homepage.group=Infrastructure
+      - homepage.name=Pushgateway
+      - homepage.icon=prometheus.svg
+      - homepage.href=https://pushgateway.$DOMAINNAME
+      - homepage.description=Resource Monitoring
+      # Group
+      - org.label-schema.group=infrastructure
+      # Traefik
+      - "traefik.enable=true"
+      ## Middlewares
+      - "traefik.http.routers.pushgateway-rtr.middlewares=chain-no-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.pushgateway-rtr.service=pushgateway"
+      ### Enable the server port
+      - "traefik.http.services.pushgateway.loadbalancer.server.port=9091"
+
 volumes:
   prometheus_data:
