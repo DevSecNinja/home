@@ -23,3 +23,9 @@ http:
           - "middlewares-rate-limit"
           - "middlewares-secure-headers"
           - "middlewares-authelia"
+    chain-no-auth-mgmt-whitelist:
+      chain:
+        middlewares:
+          - "middlewares-rate-limit"
+          - "middlewares-secure-headers"
+          - "middlewares-whitelist-mgmt"
