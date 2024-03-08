@@ -37,6 +37,15 @@ entryPoints:
     address: ":8843"
 {% endif %}
 
+metrics:
+  prometheus:
+    buckets:
+      - 0.1
+      - 0.3
+      - 1.2
+      - 5.0
+      - 10.0
+
 http:
   routers:
     # HTTP-to-HTTPS Redirect
