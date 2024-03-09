@@ -87,16 +87,18 @@ serversTransport:
 {% endif %}
 
 accessLog:
-  bufferingSize: 500
-  filePath: "/logs/access.log"
+  # bufferingSize: 500
+  # filePath: "/logs/access.log" # Commenting the file path ensures logs are written to stdout and therefore docker logs
   filters:
     statusCodes: 400-499
   fields:
     headers:
       names:
         User-Agent: keep
+        Authorization: drop
+        Content-Type: keep
 
 log:
-  filePath: "/logs/traefik.log"
+  # filePath: "/logs/traefik.log" # Commenting the file path ensures logs are written to stdout and therefore docker logs
   # (Default: error) DEBUG, INFO, WARN, ERROR, FATAL, PANIC
   level: INFO
