@@ -26,7 +26,7 @@ services:
     volumes:
       - $DOCKERDIR/data/traefik/traefik.yml:/etc/traefik/traefik.yml:ro
       - $DOCKERDIR/data/traefik/rules:/rules
-      - $DOCKERDIR/data/traefik/logs:/logs
+      # - $DOCKERDIR/data/traefik/logs:/logs
       - $DOCKERDIR/data/traefik/acme/acme.json:/acme.json
       - /var/run/docker.sock:/var/run/docker.sock:ro # Use Docker Socket Proxy instead for improved security
     environment:
