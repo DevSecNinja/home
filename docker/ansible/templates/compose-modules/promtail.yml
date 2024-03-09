@@ -1,0 +1,35 @@
+services:
+  promtail:
+    image: grafana/promtail:2.9.5@sha256:7762f1d481301b4f3035c2b06934df5a02d0eca8e3ce5ec7550fc54c0e56772a
+    container_name: promtail
+    depends_on:
+      - loki
+    volumes:
+      - $DOCKERDIR/data/promtail/promtail.yml:/etc/promtail/promtail.yml
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - TZ=${TZ}
+    command: -config.file=/etc/promtail/promtail.yml
+    restart: always
+    networks:
+      - t2_proxy
+    security_opt:
+      - no-new-privileges:true
+    labels:
+      # Homepage
+      - homepage.group=Infrastructure
+      - homepage.name=Promtail
+      - homepage.icon=grafana.svg
+      - homepage.href=https://promtail.$DOMAINNAME
+      - homepage.description=Log Collector
+      # Group
+      - org.label-schema.group=infrastructure
+      # Traefik
+      - "traefik.enable=true"
+      ## Middlewares
+      - "traefik.http.routers.promtail-rtr.middlewares=chain-no-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.promtail-rtr.service=promtail"
+      ### Enable the server port
+      - "traefik.http.services.promtail.loadbalancer.server.port=9080"

@@ -51,9 +51,11 @@ http:
     middlewares-whitelist-mgmt:
       ipWhiteList:
         sourceRange:
+          - "127.0.0.1/32"
           - "192.168.1.11"
     middlewares-whitelist-webservers:
       ipWhiteList:
         sourceRange:
+          - "127.0.0.1/32"
           - "192.168.1.11"
           - "192.168.60.2"
