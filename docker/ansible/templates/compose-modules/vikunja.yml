@@ -1,70 +1,71 @@
 services:
-  bitwarden:
-    image: bitwarden/self-host:2024.2.1-beta@sha256:9b2e42d3e4b8a2fb1139109d35027b1f3b76cdd44536420e92dea6b0b3ffea0d
-    container_name: bitwarden
+  vikunja:
+    image: vikunja/vikunja:0.23.0@sha256:8756e990c4cd842c981f586ab26f543ecdfc5c925b1b3469118156d418c79550
+    container_name: vikunja
     depends_on:
       - traefik
-      - bitwarden-db
+      - vikunja-db
     restart: always
     networks:
       - t2_proxy
-      - bitwarden-backend
+      - vikunja-backend
     security_opt:
       - no-new-privileges:true
     mem_limit: 200m
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
       - TZ=${TZ}
       # MySQL
-      - BW_DB_PROVIDER=mysql
-      - BW_DB_SERVER=bitwarden-db
-      - BW_DB_DATABASE=bitwarden
-      - BW_DB_USERNAME=bitwarden
-      - BW_DB_PASSWORD=${BITWARDEN_MYSQL_PASSWORD}
-      # Bitwarden
-      - BW_DOMAIN=bitwarden.$DOMAINNAME
-      - BW_INSTALLATION_ID=${BITWARDEN_INSTALLATION_ID}
-      - BW_INSTALLATION_KEY=${BITWARDEN_INSTALLATION_KEY}
+      - VIKUNJA_DATABASE_TYPE=mysql
+      - VIKUNJA_DATABASE_HOST=vikunja-db
+      - VIKUNJA_DATABASE_DATABASE=vikunja
+      - VIKUNJA_DATABASE_USER=vikunja
+      - VIKUNJA_DATABASE_PASSWORD=${VIKUNJA_MYSQL_PASSWORD}
+      # Vikunja
+      - VIKUNJA_SERVICE_PUBLICURL=vikunja.$DOMAINNAME
+      - VIKUNJA_SERVICE_JWTSECRET=${VIKUNJA_JWT_SECRET}
+      - VIKUNJA_SERVICE_ENABLEREGISTRATION=false
+      - VIKUNJA_SERVICE_TIMEZONE=${TZ}
+      # TODO: [vikunja] Add mail notifications
+      # TODO: [vikunja] Add OpenID Auth
     volumes:
-      - bitwarden_data:/etc/bitwarden
+      - vikunja_data:/app/vikunja/files
     labels:
       # Homepage
       - homepage.group=Productivity
-      - homepage.name=Bitwarden
-      - homepage.icon=bitwarden.svg
-      - homepage.href=https://bitwarden.$DOMAINNAME
-      - homepage.description=Password Vault
+      - homepage.name=Vikunja
+      - homepage.icon=vikunja.svg
+      - homepage.href=https://vikunja.$DOMAINNAME
+      - homepage.description=To-do Application
       # Group
       - org.label-schema.group=productivity
       # Traefik
       - "traefik.enable=true"
       ## Middlewares
-      - "traefik.http.routers.bitwarden-rtr.middlewares=chain-no-auth@file"
+      - "traefik.http.routers.vikunja-rtr.middlewares=chain-no-auth@file"
       ## HTTP Services
-      - "traefik.http.routers.bitwarden-rtr.service=bitwarden"
+      - "traefik.http.routers.vikunja-rtr.service=vikunja"
       ### Enable the server port
-      - "traefik.http.services.bitwarden.loadbalancer.server.port=8080"
+      - "traefik.http.services.vikunja.loadbalancer.server.port=3456"
 
-  bitwarden-db:
+  vikunja-db:
     image: mariadb:11.3.2@sha256:851f05fe1e4cb290442c1b12b7108436a33fd8f6a733d4989950322d06d45c65
-    container_name: bitwarden-db
-    command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
+    container_name: vikunja-db
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
     restart: always
     security_opt:
       - no-new-privileges:true
     networks:
-      - bitwarden-backend
+      - vikunja-backend
     volumes:
-      - bitwarden_db_data:/var/lib/mysql
+      - vikunja_db_data:/var/lib/mysql
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TZ}
-      - MYSQL_ROOT_PASSWORD=${BITWARDEN_MYSQL_ROOT_PASSWORD}
-      - MYSQL_PASSWORD=${BITWARDEN_MYSQL_PASSWORD}
-      - MYSQL_DATABASE=bitwarden
-      - MYSQL_USER=bitwarden
+      - MYSQL_ROOT_PASSWORD=${VIKUNJA_MYSQL_ROOT_PASSWORD}
+      - MYSQL_PASSWORD=${VIKUNJA_MYSQL_PASSWORD}
+      - MYSQL_DATABASE=vikunja
+      - MYSQL_USER=vikunja
       - MARIADB_AUTO_UPGRADE=1
       - MARIADB_DISABLE_UPGRADE_BACKUP=1
     healthcheck:
@@ -80,21 +81,21 @@ services:
         ]
       timeout: 30s
 
-  bitwarden-db-backup:
-    container_name: bitwarden-db-backup
+  vikunja-db-backup:
+    container_name: vikunja-db-backup
     image: tiredofit/db-backup:4.0.35@sha256:794ffd160cf01057d0f64ef7baf5da3cd8925a48f1f65653e016f58c7d69b13c
     depends_on:
-      - bitwarden-db
+      - vikunja-db
     volumes:
       - $DOCKERDIR/data/backup:/backup
     networks:
-      - bitwarden-backend
+      - vikunja-backend
       - mailrise
     environment:
       - TIMEZONE=${TZ}
       - USER_DBBACKUP=${PUID}
       - GROUP_DBBACKUP=${PGID}
-      - CONTAINER_NAME=bitwarden-db-backup
+      - CONTAINER_NAME=vikunja-db-backup
       - CONTAINER_ENABLE_MONITORING=FALSE # Disables Zabbix backup statistics
 
       - ENABLE_NOTIFICATIONS=TRUE
@@ -102,7 +103,7 @@ services:
       - SMTP_HOST=mailrise
       - SMTP_PORT=${NOTIFICATIONS_MAILRISE_SMTP_PORT}
       - MAIL_TO=msteams@mailrise.xyz
-      - MAIL_FROM=bitwarden-db-backup
+      - MAIL_FROM=vikunja-db-backup
 
       - DEFAULT_CHECKSUM=SHA1        # Set standard checksum to SHA1
       - DEFAULT_COMPRESSION=ZSTD     # Compress all with ZSTD
@@ -114,20 +115,20 @@ services:
       - DEFAULT_ENCRYPT_PASSPHRASE=${DB_ENC_PASSPHRASE} # Set encryption password
 
       - DB01_TYPE=mysql
-      - DB01_HOST=bitwarden-db
-      - DB01_NAME=bitwarden
-      - DB01_USER=bitwarden
+      - DB01_HOST=vikunja-db
+      - DB01_NAME=vikunja
+      - DB01_USER=vikunja
       - DB01_PORT=3306
-      - DB01_PASS=${BITWARDEN_MYSQL_PASSWORD}
+      - DB01_PASS=${VIKUNJA_MYSQL_PASSWORD}
     restart: always
     security_opt:
       - no-new-privileges:true
 
 volumes:
-  bitwarden_data:
-  bitwarden_db_data:
+  vikunja_data:
+  vikunja_db_data:
 
 networks:
-  bitwarden-backend:
-    name: bitwarden-backend
+  vikunja-backend:
+    name: vikunja-backend
     driver: bridge
