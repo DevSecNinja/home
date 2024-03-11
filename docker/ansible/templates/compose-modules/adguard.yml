@@ -1,7 +1,7 @@
 services:
   unbound:
     container_name: unbound
-    image: mvance/unbound:1.19.0@sha256:c7981ac1677e18c7629de0cc67131a48c401f4448666d72bb963e47cf4594294
+    image: mvance/unbound:1.19.2@sha256:3dd37666e8abcf551d52a288dc7942c9a0d5241849b8da9204ddb3a23a03619c
     restart: always
     networks:
       - adguard-backend
@@ -15,7 +15,7 @@ services:
 
   adguard:
     container_name: adguard
-    image: adguard/adguardhome:v0.107.44@sha256:049ef6c019a629b33db2ef957665b257fbd5761970a1517a309807fb128befb1
+    image: adguard/adguardhome:v0.107.45@sha256:52a9c2e7b4c56e5f08e1b2f3196d500c931adadc8917712ff9ef9ea922c030fe
     depends_on:
       - traefik
       - unbound
