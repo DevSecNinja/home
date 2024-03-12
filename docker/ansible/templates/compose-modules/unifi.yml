@@ -53,7 +53,7 @@ services:
 
   unifi:
     container_name: unifi
-    image: linuxserver/unifi-network-application:8.0.28@sha256:3b3f24ada244b96b829a9ac13374b4d429ed8875f8cf9c94509ca6bbf1a8d3f6
+    image: linuxserver/unifi-network-application:8.0.28@sha256:b0d06fbee0cf184308a5c322bfbf4bf75e12e74782e764bca67da5f6191e23ae
     depends_on:
       - traefik
       - unifi-db
