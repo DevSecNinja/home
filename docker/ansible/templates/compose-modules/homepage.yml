@@ -22,7 +22,7 @@ services:
       # Traefik
       - "traefik.enable=true"
       ## Middlewares
-      - "traefik.http.routers.homepage-rtr.middlewares=chain-no-auth@file"
+      - "traefik.http.routers.homepage-rtr.middlewares=chain-auth@file"
       ## HTTP Services
       - "traefik.http.routers.homepage-rtr.rule=Host(`homepage-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
       - "traefik.http.routers.homepage-rtr.service=homepage"

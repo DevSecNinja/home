@@ -21,7 +21,7 @@ services:
       # Traefik
       - "traefik.enable=true"
       ## Middlewares
-      - "traefik.http.routers.openspeedtest-rtr.middlewares=chain-no-auth@file"
+      - "traefik.http.routers.openspeedtest-rtr.middlewares=chain-auth@file"
       ## HTTP Services
       - "traefik.http.routers.openspeedtest-rtr.rule=Host(`speedtest.$DOMAINNAME`)"
       - "traefik.http.routers.openspeedtest-rtr.service=openspeedtest-svc"

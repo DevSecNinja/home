@@ -32,7 +32,7 @@ services:
       # Traefik
       - "traefik.enable=true"
       ## Middlewares
-      - "traefik.http.routers.cadvisor-rtr.middlewares=chain-no-auth@file"
+      - "traefik.http.routers.cadvisor-rtr.middlewares=chain-auth@file"
       ## HTTP Services
       - "traefik.http.routers.cadvisor-rtr.rule=Host(`cadvisor-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
       - "traefik.http.routers.cadvisor-rtr.service=cadvisor"

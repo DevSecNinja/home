@@ -26,7 +26,7 @@ services:
       # Traefik
       - "traefik.enable=true"
       ## Middlewares
-      - "traefik.http.routers.alertmanager-rtr.middlewares=chain-no-auth@file"
+      - "traefik.http.routers.alertmanager-rtr.middlewares=chain-auth@file"
       ## HTTP Services
       - "traefik.http.routers.alertmanager-rtr.service=alertmanager"
       ### Enable the server port

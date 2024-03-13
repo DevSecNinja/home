@@ -46,7 +46,7 @@ services:
       # Traefik
       - "traefik.enable=true"
       ## Middlewares
-      - "traefik.http.routers.adguard-rtr.middlewares=chain-no-auth@file"
+      - "traefik.http.routers.adguard-rtr.middlewares=chain-auth@file"
       ## HTTP Services
       - "traefik.http.routers.adguard-rtr.service=adguard"
       # Enable the management port

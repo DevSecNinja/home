@@ -23,7 +23,7 @@ services:
       # Traefik
       - "traefik.enable=true"
       ## Middlewares
-      - "traefik.http.routers.phpmyadmin-rtr.middlewares=chain-no-auth@file"
+      - "traefik.http.routers.phpmyadmin-rtr.middlewares=chain-auth@file"
       ## HTTP Services
       - "traefik.http.routers.phpmyadmin-rtr.rule=Host(`phpmyadmin-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
       - "traefik.http.routers.phpmyadmin-rtr.service=phpmyadmin-svc"

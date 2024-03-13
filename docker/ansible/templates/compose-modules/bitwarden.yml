@@ -40,7 +40,7 @@ services:
       # Traefik
       - "traefik.enable=true"
       ## Middlewares
-      - "traefik.http.routers.bitwarden-rtr.middlewares=chain-no-auth@file"
+      - "traefik.http.routers.bitwarden-rtr.middlewares=chain-auth@file"
       ## HTTP Services
       - "traefik.http.routers.bitwarden-rtr.service=bitwarden"
       ### Enable the server port

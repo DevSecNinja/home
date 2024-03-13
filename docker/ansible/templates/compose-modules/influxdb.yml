@@ -37,7 +37,7 @@ services:
       ## HTTP Routers
       - "traefik.http.routers.influxdb-rtr.rule=Host(`influxdb-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
       ## Middlewares
-      - "traefik.http.routers.influxdb-rtr.middlewares=chain-no-auth@file"
+      - "traefik.http.routers.influxdb-rtr.middlewares=chain-auth@file"
       ## HTTP Services
       - "traefik.http.routers.influxdb-rtr.service=influxdb"
       ### Enable the server port

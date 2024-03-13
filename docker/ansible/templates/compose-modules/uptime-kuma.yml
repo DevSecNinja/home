@@ -23,7 +23,7 @@ services:
       # Traefik
       - "traefik.enable=true"
       ## Middlewares
-      - "traefik.http.routers.uptime-kuma-rtr.middlewares=chain-no-auth@file"
+      - "traefik.http.routers.uptime-kuma-rtr.middlewares=chain-auth@file"
       - "traefik.http.routers.uptime-kuma-rtr.rule=Host(`uptime.$DOMAINNAME`)"
       ## HTTP Services
       - "traefik.http.routers.uptime-kuma-rtr.service=uptime-kuma-svc"

@@ -26,7 +26,7 @@ services:
       # Traefik
       - "traefik.enable=true"
       ## Middlewares
-      - "traefik.http.routers.change-detection-rtr.middlewares=chain-no-auth@file"
+      - "traefik.http.routers.change-detection-rtr.middlewares=chain-auth@file"
       ## HTTP Services
       - "traefik.http.routers.change-detection-rtr.service=change-detection-svc"
       - "traefik.http.services.change-detection-svc.loadbalancer.server.port=5000"

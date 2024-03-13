@@ -87,7 +87,7 @@ services:
       # Traefik
       - "traefik.enable=true"
       ## Middlewares
-      - "traefik.http.routers.paperless-ngx-rtr.middlewares=chain-no-auth@file"
+      - "traefik.http.routers.paperless-ngx-rtr.middlewares=chain-auth@file"
       ## HTTP Services
       - "traefik.http.routers.paperless-ngx-rtr.rule=Host(`paperless.$DOMAINNAME`)"
       - "traefik.http.routers.paperless-ngx-rtr.service=paperless-ngx"

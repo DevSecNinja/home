@@ -31,7 +31,7 @@ services:
       # Traefik
       - "traefik.enable=true"
       ## Middlewares
-      - "traefik.http.routers.prometheus-rtr.middlewares=chain-no-auth@file"
+      - "traefik.http.routers.prometheus-rtr.middlewares=chain-auth@file"
       ## HTTP Services
       - "traefik.http.routers.prometheus-rtr.service=prometheus"
       ### Enable the server port

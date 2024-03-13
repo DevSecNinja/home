@@ -25,7 +25,7 @@ services:
       # Traefik
       - "traefik.enable=true"
       ## Middlewares
-      - "traefik.http.routers.portainer-rtr.middlewares=chain-no-auth@file"
+      - "traefik.http.routers.portainer-rtr.middlewares=chain-auth@file"
       ## HTTP Services
       - "traefik.http.routers.portainer-rtr.rule=Host(`portainer-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
       - "traefik.http.routers.portainer-rtr.service=portainer-svc"

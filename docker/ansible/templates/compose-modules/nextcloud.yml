@@ -45,7 +45,7 @@ services:
       # Traefik
       - "traefik.enable=true"
       ## Middlewares
-      - "traefik.http.routers.nextcloud-rtr.middlewares=chain-no-auth@file"
+      - "traefik.http.routers.nextcloud-rtr.middlewares=chain-auth@file"
       ## HTTP Services
       - "traefik.http.routers.nextcloud-rtr.rule=Host(`cloud.$DOMAINNAME`)"
       - "traefik.http.routers.nextcloud-rtr.service=nextcloud"

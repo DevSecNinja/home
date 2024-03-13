@@ -57,7 +57,7 @@ services:
       # Traefik
       - "traefik.enable=true"
       ## Middlewares
-      - "traefik.http.routers.wallabag-rtr.middlewares=chain-no-auth@file"
+      - "traefik.http.routers.wallabag-rtr.middlewares=chain-auth@file"
       ## HTTP Services
       - "traefik.http.routers.wallabag-rtr.service=wallabag"
       ### Enable the server port

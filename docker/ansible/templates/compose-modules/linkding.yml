@@ -38,7 +38,7 @@ services:
       # Traefik
       - "traefik.enable=true"
       ## Middlewares
-      - "traefik.http.routers.linkding-rtr.middlewares=chain-no-auth@file"
+      - "traefik.http.routers.linkding-rtr.middlewares=chain-auth@file"
       ## HTTP Services
       - "traefik.http.routers.linkding-rtr.service=linkding"
       ### Enable the server port

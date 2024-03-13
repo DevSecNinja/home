@@ -31,7 +31,7 @@ services:
       # Traefik
       - "traefik.enable=true"
       ## Middlewares
-      - "traefik.http.routers.code-server-rtr.middlewares=chain-no-auth@file"
+      - "traefik.http.routers.code-server-rtr.middlewares=chain-auth@file"
       ## HTTP Services
       - "traefik.http.routers.code-server-rtr.rule=Host(`code.$DOMAINNAME`)"
       - "traefik.http.routers.code-server-rtr.service=code-server"
