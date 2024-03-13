@@ -33,9 +33,9 @@ http:
         customResponseHeaders:
           X-Robots-Tag: "none,noarchive,nosnippet,notranslate,noimageindex,"
           server: ""
-    middlewares-oauth:
+    middlewares-auth:
       forwardAuth:
-        address: "http://oauth2-proxy:4180"
+        address: "http://traefik-forward-auth:4181"
         trustForwardHeader: true
         authResponseHeaders:
           - "X-Forwarded-User"

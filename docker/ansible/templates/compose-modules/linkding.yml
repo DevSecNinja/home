@@ -1,0 +1,115 @@
+services:
+  linkding:
+    image: sissbruecker/linkding:1.24.0-alpine@sha256:88593415bbe7b61d97ab4a7bf792e2f011779182a05dd5c255efc102167968d6
+    container_name: linkding
+    depends_on:
+      - traefik
+      - linkding-db
+    restart: always
+    networks:
+      - t2_proxy
+      - linkding-backend
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 200m
+    environment:
+      - TZ=${TZ}
+      # Database
+      - LD_DB_ENGINE=postgres
+      - LD_DB_DATABASE=linkding
+      - LD_DB_USER=linkding
+      - LD_DB_PASSWORD=${LINKDING_DB_PASSWORD}
+      - LD_DB_HOST=linkding-db
+      - LD_DB_PORT=5432
+      # Linkding
+      - LD_SUPERUSER_NAME=${LINKDING_ADMIN_USERNAME}
+      - LD_SUPERUSER_PASSWORD=${LINKDING_ADMIN_PASSWORD}
+    volumes:
+      - linkding_data:/etc/linkding/data"
+    labels:
+      # Homepage
+      - homepage.group=Productivity
+      - homepage.name=Linkding
+      - homepage.icon=linkding.svg
+      - homepage.href=https://linkding.$DOMAINNAME
+      - homepage.description=Bookmark Collector
+      # Group
+      - org.label-schema.group=productivity
+      # Traefik
+      - "traefik.enable=true"
+      ## Middlewares
+      - "traefik.http.routers.linkding-rtr.middlewares=chain-no-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.linkding-rtr.service=linkding"
+      ### Enable the server port
+      - "traefik.http.services.linkding.loadbalancer.server.port=9090"
+
+  linkding-db:
+    image: docker.io/library/postgres:16.2-alpine@sha256:b89a4e92591810eac1fbce6107485d7c6b9449df51c1ccfcfed514a7fdd69955
+    container_name: linkding-db
+    restart: always
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - linkding_db_data:/var/lib/postgresql/data
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - POSTGRES_DB=linkding
+      - POSTGRES_USER=linkding
+      - POSTGRES_PASSWORD=${LINKDING_DB_PASSWORD}
+    networks:
+      - linkding-backend
+
+  linkding-db-backup:
+    container_name: linkding-db-backup
+    image: tiredofit/db-backup:4.0.35@sha256:794ffd160cf01057d0f64ef7baf5da3cd8925a48f1f65653e016f58c7d69b13c
+    depends_on:
+      - linkding-db
+    volumes:
+      - $DOCKERDIR/data/backup:/backup
+    networks:
+      - linkding-backend
+      - mailrise
+    environment:
+      - TIMEZONE=${TZ}
+      - USER_DBBACKUP=${PUID}
+      - GROUP_DBBACKUP=${PGID}
+      - CONTAINER_NAME=linkding-db-backup
+      - CONTAINER_ENABLE_MONITORING=FALSE # Disables Zabbix backup statistics
+
+      - ENABLE_NOTIFICATIONS=TRUE
+      - NOTIFICATION_TYPE=EMAIL
+      - SMTP_HOST=mailrise
+      - SMTP_PORT=${NOTIFICATIONS_MAILRISE_SMTP_PORT}
+      - MAIL_TO=msteams@mailrise.xyz
+      - MAIL_FROM=linkding-db-backup
+
+      - DEFAULT_CHECKSUM=SHA1        # Set standard checksum to SHA1
+      - DEFAULT_COMPRESSION=ZSTD     # Compress all with ZSTD
+      - DEFAULT_BACKUP_INTERVAL=1440 # Backup every 1440 minutes = 24 hours
+      - DEFAULT_BACKUP_BEGIN=0000    # Start backing up at midnight
+      - DEFAULT_CLEANUP_TIME=2880    # Cleanup backups after two days
+
+      - DEFAULT_ENCRYPT=TRUE                            # Encrypt backup files with GPG
+      - DEFAULT_ENCRYPT_PASSPHRASE=${DB_ENC_PASSPHRASE} # Set encryption password
+
+      - DB01_TYPE=pgsql
+      - DB01_HOST=linkding-db
+      - DB01_NAME=linkding
+      - DB01_USER=linkding
+      - DB01_PORT=5432
+      - DB01_PASS=${LINKDING_DB_PASSWORD}
+    restart: always
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  linkding_data:
+  linkding_db_data:
+
+networks:
+  linkding-backend:
+    name: linkding-backend
+    driver: bridge

@@ -20,7 +20,7 @@ services:
       - homepage.group=Infrastructure
       - homepage.name=Authelia
       - homepage.icon=authelia.svg
-      - homepage.href=https://auth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
+      - homepage.href=https://authelia-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
       - homepage.description=Authentication Service
       # Traefik
       - "traefik.enable=true"
@@ -28,7 +28,7 @@ services:
       - "traefik.http.routers.authelia-rtr.middlewares=chain-no-auth@file"
       ## Note: Authelia middleware can be found in middlewares.yml file in Traefik
       ## HTTP Services
-      - "traefik.http.routers.authelia-rtr.rule=Host(`auth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
+      - "traefik.http.routers.authelia-rtr.rule=Host(`authelia-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
       - "traefik.http.routers.authelia-rtr.service=authelia-svc"
       - "traefik.http.services.authelia-svc.loadbalancer.server.port=9091"
 

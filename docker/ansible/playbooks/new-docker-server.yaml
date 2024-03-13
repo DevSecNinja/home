@@ -25,6 +25,12 @@
 
     - include_tasks: ../tasks/configure-ufw.yaml
 
+    - name: "Fix Redis - vm.overcommit_memory=1"
+      lineinfile:
+        dest=/etc/sysctl.conf
+        regexp="^vm.overcommit_memory"
+        line="vm.overcommit_memory = 1"
+
     - name: Add Docker's APT repository key
       ansible.builtin.get_url:
         url: "{{ docker__apt_repository_url }}/gpg"

@@ -6,6 +6,10 @@ services:
     command: >
       --requirepass ${PAPERLESS_REDIS_PASSWORD}
     restart: always
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 20s
+      timeout: 3s
     security_opt:
       - no-new-privileges:true
     environment:

@@ -1,8 +1,13 @@
-# TODO: [oauth2-proxy] Make OAuth2-Proxy work
+#
+#### DEPRECATION NOTICE
+## This compose module is no longer in use
+## Last used version: 7.6.0@sha256:fb746ec93c22ba83c66a88ca5f1f5be5a37073f8e4d62994503c911a08abbaaa
+#
+
 services:
   ## OAuth2 Proxy
   oauth2_proxy:
-    image: bitnami/oauth2-proxy:7.6.0@sha256:fb746ec93c22ba83c66a88ca5f1f5be5a37073f8e4d62994503c911a08abbaaa
+    image: bitnami/oauth2-proxy
     container_name: oauth2-proxy
     command: oauth2-proxy
     depends_on:
@@ -30,7 +35,7 @@ services:
       - OAUTH2_PROXY_REVERSE_PROXY=true
       - OAUTH2_PROXY_REDIRECT_URL=$OAUTH2_PROXY_REDIRECT_URL
 
-      # TODO: [OAuth2-Proxy] Validate the configuration against best practices
+      # [OAuth2-Proxy] Validate the configuration against best practices
       #- OAUTH2_PROXY_SET_AUTHORIZATION_HEADER=true
       #- OAUTH2_PROXY_PASS_AUTHORIZATION_HEADER=true
       #- OAUTH2_PROXY_PASS_USER_HEADERS=true
@@ -43,12 +48,12 @@ services:
       - OAUTH2_PROXY_CLIENT_ID=$OAUTH2_PROXY_CLIENT_ID
       - OAUTH2_PROXY_CLIENT_SECRET=$OAUTH2_PROXY_CLIENT_SECRET
       - OAUTH2_PROXY_EMAIL_DOMAINS=*
-      - OAUTH2_PROXY_GITHUB_USER=DevSecNinja
-      - OAUTH2_PROXY_GITHUB_REPO=DevSecNinja/home
+      - OAUTH2_PROXY_GITHUB_USER=YourGitHubUserAccount
+      - OAUTH2_PROXY_GITHUB_REPO=YourGitHubUserAccount/home
       - OAUTH2_PROXY_GITHUB_SCOPE=user:email # Fixes 404: https://github.com/oauth2-proxy/oauth2-proxy/issues/1669#issuecomment-1546990955
       ##
 
-      # TODO: [OAuth2-proxy] Fix the Entra ID configuration
+      # [OAuth2-proxy] Fix the Entra ID configuration
       # - OAUTH2_PROXY_PROVIDER=azure
       # - OAUTH2_PROXY_AZURE_TENANT=$OAUTH2_PROXY_AZURE_TENANT_ID
       # - OAUTH2_PROXY_CLIENT_ID=$OAUTH2_PROXY_AZURE_CLIENT_ID
@@ -56,19 +61,19 @@ services:
       # - OAUTH2_PROXY_OIDC_ISSUER_URL=https://login.microsoftonline.com/${OAUTH2_PROXY_AZURE_TENANT_ID}/v2.0
       # - OAUTH2_PROXY_EMAIL_DOMAINS=$OAUTH2_PROXY_AZURE_EMAIL_DOMAIN
 
-      # TODO: [OAuth2-proxy] Fix the Redis configuration
+      # [OAuth2-proxy] Fix the Redis configuration
       # - OAUTH2_PROXY_SESSION_STORE_TYPE=redis
       # - OAUTH2_PROXY_REDIS_CONNECTION_URL=redis://oauth2-proxy-redis:6379
     labels:
       # Traefik
       - "traefik.enable=true"
       ## HTTP Routers
-      - "traefik.http.routers.oauth-rtr.rule=Host(`auth.$DOMAINNAME`)"
+      - "traefik.http.routers.oauth-rtr.rule=Host(`oauth2-proxy.$DOMAINNAME`)"
       ## HTTP Services
       - "traefik.http.routers.oauth-rtr.service=oauth-svc"
       - "traefik.http.services.oauth-svc.loadbalancer.server.port=4180"
       ## Middlewares
-      - "traefik.http.routers.oauth-rtr.middlewares=chain-oauth@file"
+      - "traefik.http.routers.oauth-rtr.middlewares=chain-oauth2-proxy@file"
 
   oauth2_proxy_redis:
     container_name: oauth2-proxy-redis
