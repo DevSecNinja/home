@@ -39,15 +39,6 @@ http:
         trustForwardHeader: true
         authResponseHeaders:
           - "X-Forwarded-User"
-    middlewares-authelia:
-      forwardAuth:
-        address: "http://authelia:9091/api/verify?rd=https%3A%2F%2Fauth-{{ generic__hostname_suffix }}.{{ generic__domain_name }}%2F"
-        trustForwardHeader: true
-        authResponseHeaders:
-          - Remote-User
-          - Remote-Groups
-          - Remote-Name
-          - Remote-Email
     middlewares-whitelist-mgmt:
       ipAllowList:
         sourceRange:

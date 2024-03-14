@@ -7,7 +7,6 @@ include:
 {% if 'management' in group_names %}
   # TODO: [bitwarden] Find out why CPU is 149 %
   # This caused power consumption of the server to double.
-  # TODO: [monitoring] Find a tool to monitor CPU and MEM usage on containers
   #- $DOCKERDIR/data/compose/bitwarden.yml
   - $DOCKERDIR/data/compose/alertmanager.yml
   - $DOCKERDIR/data/compose/cloudflare.yml
@@ -33,7 +32,7 @@ include:
   - $DOCKERDIR/data/compose/wallabag.yml
 {% endif %}
 {% if 'webservers' in group_names %}
-  - $DOCKERDIR/data/compose/authelia.yml
+  # - $DOCKERDIR/data/compose/authelia.yml
   - $DOCKERDIR/data/compose/cadvisor.yml
   - $DOCKERDIR/data/compose/dozzle.yml
   - $DOCKERDIR/data/compose/echo-server.yml

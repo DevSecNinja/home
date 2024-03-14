@@ -72,6 +72,11 @@ services:
       - PAPERLESS_ADMIN_USER=${PAPERLESS_ADMIN_USER}
       - PAPERLESS_ADMIN_PASSWORD=${PAPERLESS_ADMIN_PASSWORD}
       - PAPERLESS_OCR_LANGUAGES=nld
+      ## Authentication
+      ### Manual step needed to grant access: https://github.com/paperless-ngx/paperless-ngx/issues/2228#issuecomment-1455179830
+      - PAPERLESS_ENABLE_HTTP_REMOTE_USER=TRUE
+      - PAPERLESS_ENABLE_HTTP_REMOTE_USER_API=FALSE
+      - PAPERLESS_HTTP_REMOTE_USER_HEADER_NAME=HTTP_X_FORWARDED_USER
     networks:
       - paperless-backend
       - t2_proxy

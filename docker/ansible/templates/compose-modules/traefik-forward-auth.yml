@@ -1,7 +1,7 @@
 services:
   # TODO: [traefik-fw-auth] Find a replacement fork since this image is old
   traefik-forward-auth:
-    image: thomseddon/traefik-forward-auth:latest@sha256:b364aa6a4117569163eff793999901f9f5a0c4f7f2da18b4ecbcd140d7b6107b
+    image: ghcr.io/jordemort/traefik-forward-auth:latest@sha256:c10f091b1acc84612b78e07d52a819b4f6721647a53ccfe231e1558ac85d85c6
     container_name: traefik-forward-auth
     depends_on:
       - traefik
@@ -28,14 +28,14 @@ services:
       - PROVIDERS_OIDC_ISSUER_URL=https://login.microsoftonline.com/${OAUTH2_PROXY_AZURE_TENANT_ID}/v2.0
       - SECRET=$TRAEFIK_FORWARD_AUTH_SECRET
       - URL_PATH=/oauth2/callback
-      - WHITELIST=$GENERIC_USER_EMAIL
+      # - WHITELIST=$GENERIC_USER_EMAIL # Make sure to either whitelist emails here or on the Entra ID App
     labels:
       # Homepage
-      - homepage.group=Infrastructure
-      - homepage.name=Traefik Forward Auth
-      - homepage.icon=traefik.svg
-      - homepage.href=https://auth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
-      - homepage.description=Authentication Service
+      # - homepage.group=Infrastructure
+      # - homepage.name=Traefik Forward Auth
+      # - homepage.icon=traefik.svg
+      # - homepage.href=https://auth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
+      # - homepage.description=Authentication Service
       # Group
       - org.label-schema.group=Infrastructure
       # Traefik
