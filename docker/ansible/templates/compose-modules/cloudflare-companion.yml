@@ -4,8 +4,9 @@ services:
     image: tiredofit/traefik-cloudflare-companion:7.2.0@sha256:3cb8d8ea9c35a5ff58120261e16723650468835d25130a53326679a109084a24
     depends_on:
       - traefik
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+    # volumes:
+      # Since I only use keep one domain in sync, it doesn't need the socket proxy
+      # - /var/run/docker.sock:/var/run/docker.sock
     environment:
       - TIMEZONE=${TZ}
 
@@ -13,7 +14,7 @@ services:
       - LOG_LEVEL=INFO
 
       - TRAEFIK_VERSION=2
-      - ENABLE_TRAEFIK_POLL=TRUE
+      # - ENABLE_TRAEFIK_POLL=TRUE
       - CF_TOKEN=$CLOUDFLARE_API_TOKEN
       - RC_TYPE=CNAME
 

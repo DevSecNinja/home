@@ -4,6 +4,7 @@ services:
     container_name: promtail
     depends_on:
       - loki
+      - promtail-docker-proxy
     volumes:
       - $DOCKERDIR/data/promtail/promtail.yml:/etc/promtail/promtail.yml
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
@@ -14,6 +15,7 @@ services:
     restart: always
     networks:
       - t2_proxy
+      - promtail-backend
     security_opt:
       - no-new-privileges:true
     labels:
@@ -33,3 +35,26 @@ services:
       - "traefik.http.routers.promtail-rtr.service=promtail"
       ### Enable the server port
       - "traefik.http.services.promtail.loadbalancer.server.port=9080"
+
+  promtail-docker-proxy:
+    image: ghcr.io/tecnativa/docker-socket-proxy:latest@sha256:da4addb776070a9d2ae2bb91d8f57225c1028779c161ca0d137e36901ba1751b
+    container_name: promtail-docker-proxy
+    restart: always
+    networks:
+      - promtail-backend
+    environment:
+      - TZ=${TZ}
+      - NODES=1
+      - NETWORKS=1
+      - SERVICES=1
+      - TASKS=1
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 50m
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+networks:
+  promtail-backend:
+    name: promtail-backend
+    driver: bridge

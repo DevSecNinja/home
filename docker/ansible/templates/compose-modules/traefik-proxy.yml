@@ -2,11 +2,13 @@ services:
   traefik:
     container_name: traefik
     image: traefik:v2.11.0@sha256:4be302e188b5be7637a3404033e8088c005059fd29e05b7ff04a403fac3d13ea
+    depends_on:
+      - traefik-docker-proxy
     restart: always
     networks:
       t2_proxy:
         ipv4_address: 192.168.101.200
-      ##### socket_proxy:
+      traefik-backend:
     security_opt:
       - no-new-privileges:true
     ports:
@@ -24,11 +26,9 @@ services:
         protocol: tcp
         mode: host
     volumes:
-      - $DOCKERDIR/data/traefik/traefik.yml:/etc/traefik/traefik.yml:ro
-      - $DOCKERDIR/data/traefik/rules:/rules
-      # - $DOCKERDIR/data/traefik/logs:/logs
       - $DOCKERDIR/data/traefik/acme/acme.json:/acme.json
-      - /var/run/docker.sock:/var/run/docker.sock:ro # Use Docker Socket Proxy instead for improved security
+      - $DOCKERDIR/data/traefik/rules:/rules
+      - $DOCKERDIR/data/traefik/traefik.yml:/etc/traefik/traefik.yml:ro
     environment:
       - TZ=${TZ}
       - CF_API_EMAIL=$CLOUDFLARE_EMAIL
@@ -55,6 +55,21 @@ services:
     # healthcheck:
     #   test: ["CMD-SHELL","traefik healthcheck --ping.entrypoint ping --entryPoints.ping.address=:8267 --ping"]
 
+  traefik-docker-proxy:
+    image: ghcr.io/tecnativa/docker-socket-proxy:latest@sha256:da4addb776070a9d2ae2bb91d8f57225c1028779c161ca0d137e36901ba1751b
+    container_name: traefik-docker-proxy
+    restart: always
+    networks:
+      - traefik-backend
+    environment:
+      - TZ=${TZ}
+      - CONTAINERS=1 # Allow access to viewing containers
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 50m
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
 networks:
   t2_proxy:
     name: t2_proxy
@@ -62,3 +77,7 @@ networks:
     ipam:
       config:
         - subnet: 192.168.101.0/24
+
+  traefik-backend:
+    name: traefik-backend
+    driver: bridge

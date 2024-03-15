@@ -1,6 +1,7 @@
 #
 #### DEPRECATION NOTICE
 ## This compose module is no longer in use
+## Replaced by: Traefik Forward Auth with Entra ID authentication
 ## Last used version: 7.6.0@sha256:fb746ec93c22ba83c66a88ca5f1f5be5a37073f8e4d62994503c911a08abbaaa
 #
 

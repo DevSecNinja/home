@@ -4,9 +4,11 @@ services:
     image: ghcr.io/gethomepage/homepage:v0.8.8@sha256:0f066a6d6fba3a810a85aa79a483302b0fee21139b67adaeb245edae5051f3e8
     depends_on:
       - traefik
+      - homepage-docker-proxy
     restart: always
     networks:
       - t2_proxy
+      - homepage-backend
     environment:
       # TODO: [Docker API] Enable Docker API so that Homepage doesn't need to run as root
       # https://gethomepage.dev/latest/configs/docker/
@@ -15,9 +17,9 @@ services:
       - TZ=${TZ}
     security_opt:
       - no-new-privileges:true
+    mem_limit: 200m
     volumes:
       - $DOCKERDIR/data/homepage:/app/config
-      - /var/run/docker.sock:/var/run/docker.sock:ro
     labels:
       # Traefik
       - "traefik.enable=true"
@@ -27,3 +29,26 @@ services:
       - "traefik.http.routers.homepage-rtr.rule=Host(`homepage-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
       - "traefik.http.routers.homepage-rtr.service=homepage"
       - "traefik.http.services.homepage.loadbalancer.server.port=3000"
+
+  homepage-docker-proxy:
+    image: ghcr.io/tecnativa/docker-socket-proxy:latest@sha256:da4addb776070a9d2ae2bb91d8f57225c1028779c161ca0d137e36901ba1751b
+    container_name: homepage-docker-proxy
+    restart: always
+    networks:
+      - homepage-backend
+    environment:
+      - TZ=${TZ}
+      - CONTAINERS=1 # Allow access to viewing containers
+      #- SERVICES=1 # Allow access to viewing services (necessary when using Docker Swarm)
+      #- TASKS=1 # Allow access to viewing tasks (necessary when using Docker Swarm)
+      - POST=0 # Disallow any POST operations (effectively read-only)
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 50m
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+networks:
+  homepage-backend:
+    name: homepage-backend
+    driver: bridge

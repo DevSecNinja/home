@@ -12,6 +12,10 @@ clients:
 scrape_configs:
   - job_name: flog_scrape
     docker_sd_configs:
+      # TODO: [promtail] Fix socket proxy
+      # Error: docker config=flog_scrape/tcp://promtail-docker-proxy:2375:80
+      # So it seems to always add :80 at the end and the 2375 port is hardcoded in the socket proxy app
+      # - host: tcp://promtail-docker-proxy:2375
       - host: unix:///var/run/docker.sock
         refresh_interval: 5s
         # filters:

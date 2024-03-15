@@ -4,13 +4,14 @@ services:
     image: amir20/dozzle:v6.2.7@sha256:53dcf1a377998f492de9fc0626171e6313b4500b4e3db5a87e0e6af257fe8fa4
     depends_on:
       - traefik
+      - dozzle-docker-proxy
+    command: --remote-host tcp://dozzle-docker-proxy:2375|Docker
     networks:
       - t2_proxy
+      - dozzle-backend
     restart: always
     security_opt:
       - no-new-privileges:true
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
       - TZ=${TZ}
       - DOZZLE_NO_ANALYTICS=true
@@ -29,3 +30,25 @@ services:
       - "traefik.http.routers.dozzle-rtr.rule=Host(`dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
       - "traefik.http.routers.dozzle-rtr.service=dozzle-svc"
       - "traefik.http.services.dozzle-svc.loadbalancer.server.port=8080"
+
+  dozzle-docker-proxy:
+    image: ghcr.io/tecnativa/docker-socket-proxy:latest@sha256:da4addb776070a9d2ae2bb91d8f57225c1028779c161ca0d137e36901ba1751b
+    container_name: dozzle-docker-proxy
+    restart: always
+    networks:
+      - dozzle-backend
+    environment:
+      - TZ=${TZ}
+      - CONTAINERS=1 # Allow access to viewing containers'
+      - EVENTS=1 # Enabled by default
+      - POST=0 # Disallow any POST operations (effectively read-only)
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 50m
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+networks:
+  dozzle-backend:
+    name: dozzle-backend
+    driver: bridge
