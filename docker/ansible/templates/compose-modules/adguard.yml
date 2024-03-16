@@ -1,7 +1,7 @@
 services:
   unbound:
     container_name: unbound
-    image: mvance/unbound:1.19.2@sha256:3dd37666e8abcf551d52a288dc7942c9a0d5241849b8da9204ddb3a23a03619c
+    image: mvance/unbound:1.19.3@sha256:2b19bdb4db8d6f9ebd39d060e1a0ea66f198e5c7272c8b711fd7835594014385
     restart: always
     networks:
       - adguard-backend
