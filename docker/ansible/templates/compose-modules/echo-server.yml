@@ -11,6 +11,7 @@ services:
     restart: always
     networks:
       - t2_proxy
+    mem_limit: 1024m
     security_opt:
       - no-new-privileges:true
     # No Healthcheck possible since curl is not available in image

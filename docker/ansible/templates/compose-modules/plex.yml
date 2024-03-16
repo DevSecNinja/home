@@ -19,6 +19,7 @@ services:
       core: 0
     security_opt:
       - no-new-privileges:true
+    mem_limit: 2048m
     environment:
       - PUID=${PUID}
       - PGID=${PGID}

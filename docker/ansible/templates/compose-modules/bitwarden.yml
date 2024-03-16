@@ -57,6 +57,7 @@ services:
       - bitwarden-backend
     volumes:
       - bitwarden_db_data:/var/lib/mysql
+    mem_limit: 1024m
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
@@ -90,6 +91,7 @@ services:
     networks:
       - bitwarden-backend
       - mailrise
+    mem_limit: 1024m
     environment:
       - TIMEZONE=${TZ}
       - USER_DBBACKUP=${PUID}

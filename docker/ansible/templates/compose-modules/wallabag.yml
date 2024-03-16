@@ -73,6 +73,7 @@ services:
       - wallabag-backend
     volumes:
       - wallabag_db_data:/var/lib/mysql
+    mem_limit: 1024m
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
@@ -103,6 +104,7 @@ services:
       - wallabag-db
     volumes:
       - $DOCKERDIR/data/backup:/backup
+    mem_limit: 1024m
     networks:
       - wallabag-backend
       - mailrise
@@ -152,6 +154,7 @@ services:
       timeout: 3s
     security_opt:
       - no-new-privileges:true
+    mem_limit: 1024m
     environment:
       - PUID=${PUID}
       - PGID=${PGID}

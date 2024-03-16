@@ -13,6 +13,9 @@ services:
     restart: always
     networks:
       - t2_proxy
+    mem_limit: 2048m
+    security_opt:
+      - no-new-privileges:true
     environment:
       - TZ=${TZ}
     command:

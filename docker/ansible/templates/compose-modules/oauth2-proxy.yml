@@ -21,6 +21,7 @@ services:
     restart: always
     security_opt:
       - no-new-privileges:true
+    mem_limit: 1024m
     environment:
       - OAUTH2_PROXY_HTTP_ADDRESS=http://0.0.0.0:4180
 
@@ -79,6 +80,9 @@ services:
   oauth2_proxy_redis:
     container_name: oauth2-proxy-redis
     image: redis:7.2.4-alpine@sha256:1b503bb77079ba644371969e06e1a6a1670bb34c2251107c0fc3a21ef9fdaeca
+    mem_limit: 1024m
+    security_opt:
+      - no-new-privileges:true
     volumes:
       - oauth2_proxy_redis_data:/data
     networks:

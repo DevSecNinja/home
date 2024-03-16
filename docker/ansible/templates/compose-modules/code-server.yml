@@ -7,6 +7,7 @@ services:
     restart: always
     security_opt:
       - no-new-privileges:true
+    mem_limit: 1024m
     environment:
       - PUID=${PUID}
       - PGID=${PGID}

@@ -11,6 +11,7 @@ services:
       - no-new-privileges:true
     volumes:
       - jupyter_data:/home/jovyan/work
+    mem_limit: 2048m
     environment:
       - TZ=${TZ}
       - JUPYTER_ENABLE_LAB=yes

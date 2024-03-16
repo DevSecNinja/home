@@ -5,6 +5,7 @@ services:
     restart: always
     networks:
       - adguard-backend
+    mem_limit: 1024m
     environment:
       - TZ=${TZ}
     security_opt:
@@ -19,6 +20,7 @@ services:
     depends_on:
       - traefik
       - unbound
+    mem_limit: 1024m
     networks:
       - t2_proxy
       - adguard-backend

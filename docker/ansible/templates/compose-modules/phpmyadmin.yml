@@ -9,6 +9,7 @@ services:
     restart: always
     security_opt:
       - no-new-privileges:true
+    mem_limit: 1024m
     environment:
       - TZ=${TZ}
       #- PMA_ARBITRARY=1 # Allows you to select a DB server on login screen

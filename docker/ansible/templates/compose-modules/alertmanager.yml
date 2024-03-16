@@ -7,6 +7,7 @@ services:
     command:
       - '--config.file=/etc/alertmanager/config.yml'
       - '--storage.path=/alertmanager'
+    mem_limit: 1024m
     environment:
       - TZ=${TZ}
     restart: always

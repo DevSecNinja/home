@@ -16,6 +16,7 @@ services:
     networks:
       - t2_proxy
       - promtail-backend
+    mem_limit: 1024m
     security_opt:
       - no-new-privileges:true
     labels:

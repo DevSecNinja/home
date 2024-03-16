@@ -7,6 +7,9 @@ services:
   unifi-db:
     image: mongo:7.0.6@sha256:a064093062c2e97499cd88544d3afb1d86b00dbe94153984a07774857034631e
     container_name: unifi-db
+    mem_limit: 1024m
+    security_opt:
+      - no-new-privileges:true
     networks:
       - unifi-backend
     volumes:
@@ -23,6 +26,7 @@ services:
       - $DOCKERDIR/data/backup:/backup # TODO: [db-backup] Backup directly to SMB Share
     networks:
       - unifi-backend
+    mem_limit: 1024m
     environment:
       - TIMEZONE=${TZ}
       - USER_DBBACKUP=${PUID}
@@ -60,6 +64,7 @@ services:
     networks:
       - t2_proxy
       - unifi-backend
+    mem_limit: 1024m
     environment:
       - PUID=${PUID}
       - PGID=${PGID}

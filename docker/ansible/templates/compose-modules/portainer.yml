@@ -14,6 +14,7 @@ services:
       - no-new-privileges:true
     volumes:
       - portainer_data:/data
+    mem_limit: 1024m
     environment:
       - TZ=${TZ}
     labels:

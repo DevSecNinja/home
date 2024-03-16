@@ -7,6 +7,7 @@ services:
     volumes:
       # Mount for influxdb data directory and configuration
       - influxdb_data:/var/lib/influxdb2:rw
+    mem_limit: 1024m
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
@@ -52,6 +53,7 @@ services:
       - $DOCKERDIR/data/backup:/backup
     networks:
       - influxdb
+    mem_limit: 1024m
     environment:
       - TIMEZONE=${TZ}
       - USER_DBBACKUP=${PUID}

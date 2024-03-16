@@ -20,6 +20,7 @@ services:
     volumes:
       - $DOCKERDIR/data/authelia/config:/config:ro
       - authelia_data:/data
+    mem_limit: 1024m
     environment:
       - TZ=${TZ}
     labels:
@@ -46,6 +47,7 @@ services:
     volumes:
       - $DOCKERDIR/data/backup:/backup # TODO: [db-backup] Backup directly to SMB Share
       - authelia_data:/data
+    mem_limit: 1024m
     environment:
       - TIMEZONE=${TZ}
       - USER_DBBACKUP=${PUID}

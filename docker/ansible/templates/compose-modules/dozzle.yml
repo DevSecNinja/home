@@ -12,6 +12,7 @@ services:
     restart: always
     security_opt:
       - no-new-privileges:true
+    mem_limit: 1024m
     environment:
       - TZ=${TZ}
       - DOZZLE_NO_ANALYTICS=true

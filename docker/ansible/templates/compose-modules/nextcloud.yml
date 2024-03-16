@@ -12,6 +12,7 @@ services:
       - nextcloud-backend
     security_opt:
       - no-new-privileges:true
+    mem_limit: 1024m
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
@@ -64,6 +65,7 @@ services:
       - nextcloud-backend
     volumes:
       - nextcloud_db_data:/var/lib/mysql
+    mem_limit: 1024m
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
@@ -98,6 +100,7 @@ services:
       test: ["CMD", "redis-cli", "ping"]
       interval: 20s
       timeout: 3s
+    mem_limit: 1024m
     security_opt:
       - no-new-privileges:true
     environment:
@@ -118,6 +121,7 @@ services:
       - nextcloud-backend
     volumes:
       - nextcloud_data:/var/www/html
+    mem_limit: 1024m
     entrypoint: /cron.sh
     environment:
       - PUID=${PUID}
@@ -136,6 +140,7 @@ services:
       - $DOCKERDIR/data/backup:/backup
     networks:
       - nextcloud-backend
+    mem_limit: 1024m
     environment:
       - TIMEZONE=${TZ}
       - USER_DBBACKUP=${PUID}

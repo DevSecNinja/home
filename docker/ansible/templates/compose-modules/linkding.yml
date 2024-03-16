@@ -50,6 +50,7 @@ services:
     restart: always
     security_opt:
       - no-new-privileges:true
+    mem_limit: 1024m
     volumes:
       - linkding_db_data:/var/lib/postgresql/data
     environment:
@@ -69,6 +70,7 @@ services:
       - linkding-db
     volumes:
       - $DOCKERDIR/data/backup:/backup
+    mem_limit: 1024m
     networks:
       - linkding-backend
       - mailrise

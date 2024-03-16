@@ -27,6 +27,7 @@ services:
     networks:
       - t2_proxy
       - grafana
+    mem_limit: 1024m
     security_opt:
       - no-new-privileges:true
     # Saves some CPU cycles + healthcheck doesn't do anything on failure
@@ -61,6 +62,7 @@ services:
       - TZ=${TZ}
     command: -config.file=/etc/loki/loki.yml
     restart: always
+    mem_limit: 1024m
     networks:
       - t2_proxy
     security_opt:

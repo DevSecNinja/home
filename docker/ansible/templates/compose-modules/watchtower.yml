@@ -11,6 +11,7 @@ services:
     container_name: watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # Note: more secure to use Docker socket proxy here
+    mem_limit: 1024m
     security_opt:
       - no-new-privileges:true
     environment:

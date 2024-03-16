@@ -57,6 +57,7 @@ services:
       - vikunja-backend
     volumes:
       - vikunja_db_data:/var/lib/mysql
+    mem_limit: 1024m
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
@@ -90,6 +91,7 @@ services:
     networks:
       - vikunja-backend
       - mailrise
+    mem_limit: 1024m
     environment:
       - TIMEZONE=${TZ}
       - USER_DBBACKUP=${PUID}

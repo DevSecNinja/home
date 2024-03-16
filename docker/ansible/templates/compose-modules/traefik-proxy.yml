@@ -29,6 +29,7 @@ services:
       - $DOCKERDIR/data/traefik/acme/acme.json:/acme.json
       - $DOCKERDIR/data/traefik/rules:/rules
       - $DOCKERDIR/data/traefik/traefik.yml:/etc/traefik/traefik.yml:ro
+    mem_limit: 1024m
     environment:
       - TZ=${TZ}
       - CF_API_EMAIL=$CLOUDFLARE_EMAIL

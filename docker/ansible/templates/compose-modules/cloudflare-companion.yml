@@ -7,6 +7,7 @@ services:
     # volumes:
       # Since I only use keep one domain in sync, it doesn't need the socket proxy
       # - /var/run/docker.sock:/var/run/docker.sock
+    mem_limit: 1024m
     environment:
       - TIMEZONE=${TZ}
 
