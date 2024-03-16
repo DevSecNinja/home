@@ -28,16 +28,16 @@ groups:
       severity: warning
     annotations:
       summary: "Server memory is almost full"
-      description: "Docker host memory usage is {{ humanize $value}}%. Reported by instance {{ $labels.instance }} of job {{ $labels.job }}."
+      description: "Docker host memory usage is {{ humanize $value}} %. Reported by instance {{ $labels.instance }} of job {{ $labels.job }}."
 
   - alert: high_storage_load
-    expr: (node_filesystem_size_bytes{fstype="aufs"} - node_filesystem_free_bytes{fstype!="rootfs"}) / node_filesystem_size_bytes{fstype="aufs"}  * 100 > 85
+    expr: 100 - ((node_filesystem_avail_bytes{mountpoint="/",fstype!="rootfs"} * 100) / node_filesystem_size_bytes{mountpoint="/",fstype!="rootfs"}) > 85
     for: 30s
     labels:
       severity: warning
     annotations:
       summary: "Server storage is almost full"
-      description: "Docker host storage usage is {{ humanize $value}}%. Reported by instance {{ $labels.instance }} of job {{ $labels.job }}."
+      description: "Docker host storage usage is {{ humanize $value}} %. Reported by instance {{ $labels.instance }} of job {{ $labels.job }}."
 
 - name: ContainerHealthAlerts
   rules:
@@ -74,7 +74,7 @@ groups:
         severity: warning
       annotations:
         summary: Container High Memory usage (instance {{ $labels.instance }})
-        description: "Container Memory usage is above 80%\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        description: "Container Memory usage is above 80 %\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: ContainerHighThrottleRate
       expr: 'rate(container_cpu_cfs_throttled_seconds_total[3m]) > 1'
@@ -92,7 +92,7 @@ groups:
     #     severity: info
     #   annotations:
     #     summary: Container Low CPU utilization (instance {{ $labels.instance }})
-    #     description: "Container CPU utilization is under 20% for 1 week. Consider reducing the allocated CPU.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+    #     description: "Container CPU utilization is under 20 % for 1 week. Consider reducing the allocated CPU.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: ContainerLowMemoryUsage
       expr: '(sum(container_memory_working_set_bytes{name!=""}) BY (instance, name) / sum(container_spec_memory_limit_bytes > 0) BY (instance, name) * 100) < 20'
@@ -101,7 +101,7 @@ groups:
         severity: info
       annotations:
         summary: Container Low Memory usage (instance {{ $labels.instance }})
-        description: "Container Memory usage is under 20% for 1 week. Consider reducing the allocated memory.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        description: "Container Memory usage is under 20 % for 1 week. Consider reducing the allocated memory.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
 - name: MySQLDatabaseHealth
   rules:
@@ -120,8 +120,8 @@ groups:
       labels:
         severity: warning
       annotations:
-        summary: MySQL too many connections (> 80%) (instance {{ $labels.instance }})
-        description: "More than 80% of MySQL connections are in use on {{ $labels.instance }}\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: MySQL too many connections (> 80 %) (instance {{ $labels.instance }})
+        description: "More than 80 % of MySQL connections are in use on {{ $labels.instance }}\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: MysqlHighThreadsRunning
       expr: 'max_over_time(mysql_global_status_threads_running[1m]) / mysql_global_variables_max_connections * 100 > 60'
@@ -130,7 +130,7 @@ groups:
         severity: warning
       annotations:
         summary: MySQL high threads running (instance {{ $labels.instance }})
-        description: "More than 60% of MySQL connections are in running state on {{ $labels.instance }}\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        description: "More than 60 % of MySQL connections are in running state on {{ $labels.instance }}\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: MysqlSlowQueries
       expr: 'increase(mysql_global_status_slow_queries[1m]) > 0'
