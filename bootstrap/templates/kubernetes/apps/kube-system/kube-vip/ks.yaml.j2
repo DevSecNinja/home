@@ -2,16 +2,14 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app system-upgrade-k3s
+  name: &app kube-vip
   namespace: flux-system
 spec:
-  targetNamespace: system-upgrade
+  targetNamespace: kube-system
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  dependsOn:
-    - name: system-upgrade-controller
-  path: ./kubernetes/apps/system-upgrade/k3s/app
+  path: ./kubernetes/apps/kube-system/kube-vip/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -20,7 +18,3 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 5m
-  postBuild:
-    substitute:
-      # renovate: datasource=github-releases depName=k3s-io/k3s
-      KUBE_VERSION: v1.29.2+k3s1

@@ -11,7 +11,7 @@ The features included will depend on the type of configuration you want to use. 
 1. **"Flux cluster"** - a Kubernetes distribution of your choosing: [k3s](https://github.com/k3s-io/k3s) or [Talos](https://github.com/siderolabs/talos). Deploys an opinionated implementation of [Flux](https://github.com/fluxcd/flux2) using [GitHub](https://github.com/) as the Git provider and [sops](https://github.com/getsops/sops) to manage secrets.
 
     - **Required:** Debian 12 or Talos Linux installed on bare metal (or VMs) and some knowledge of [Containers](https://opencontainers.org/) and [YAML](https://yaml.org/). Some knowledge of [Git](https://git-scm.com/) practices & terminology is also required.
-    - **Components:** [Cilium](https://github.com/cilium/cilium) and [kube-vip](https://github.com/kube-vip/kube-vip) _(k3s)_. [flux](https://github.com/fluxcd/flux2), [cert-manager](https://github.com/cert-manager/cert-manager), [spegel](https://github.com/XenitAB/spegel), [reloader](https://github.com/stakater/Reloader), [system-upgrade-controller](https://github.com/rancher/system-upgrade-controller), and [openebs](https://github.com/openebs/openebs).
+    - **Components:** [Cilium](https://github.com/cilium/cilium) and [kube-vip](https://github.com/kube-vip/kube-vip) _(k3s)_. [flux](https://github.com/fluxcd/flux2), [cert-manager](https://github.com/cert-manager/cert-manager), [spegel](https://github.com/XenitAB/spegel), [reloader](https://github.com/stakater/Reloader), [system-upgrade-controller](https://github.com/rancher/system-upgrade-controller) _(k3s)_, and [openebs](https://github.com/openebs/openebs).
 
 3. **"Flux cluster with Cloudflare"** - An addition to "**Flux cluster**" that provides DNS and SSL with [Cloudflare](https://www.cloudflare.com/). [Cloudflare Tunnel](https://www.cloudflare.com/products/tunnel/) is also included to provide external access to certain applications deployed in your cluster.
 
@@ -318,7 +318,7 @@ You have two different options for setting up your local workstation.
 
 2. Install Flux and sync the cluster to the Git repository
 
-  📍 _Run `task flux:github-deploy-key` first if using a private repository._
+    📍 _Run `task flux:github-deploy-key` first if using a private repository._
 
     ```sh
     task flux:bootstrap
@@ -360,7 +360,7 @@ _Mic check, 1, 2_ - In a few moments applications should be lighting up like Chr
 
 #### 🌐 Public DNS
 
-The `external-dns` application created in the `networking` namespace will handle creating public DNS records. By default, `echo-server-external` and the `flux-webhook` are the only subdomains reachable from the public internet. In order to make additional applications public you must set set the correct ingress class name and ingress annotations like in the HelmRelease for `echo-server`.
+The `external-dns` application created in the `networking` namespace will handle creating public DNS records. By default, `echo-server` and the `flux-webhook` are the only subdomains reachable from the public internet. In order to make additional applications public you must set set the correct ingress class name and ingress annotations like in the HelmRelease for `echo-server`.
 
 #### 🏠 Home DNS
 
