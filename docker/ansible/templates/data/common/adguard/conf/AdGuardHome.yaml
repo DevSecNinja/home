@@ -152,6 +152,9 @@ user_rules:
   - '@@||api.ipify.org^$important'
   - '@@||login.windows.net^$important'
   - /(^|\.)xn--/
+  - '||aa.tweakers.nl^$important'
+  - '||ab.tweakers.nl^$important'
+
 dhcp:
   enabled: false
   interface_name: ""
