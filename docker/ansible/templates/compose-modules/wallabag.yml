@@ -38,7 +38,6 @@ services:
       - SYMFONY__ENV__FOSUSER_CONFIRMATION=false
       - SYMFONY__ENV__TWOFACTOR_AUTH=false
       # TODO: [wallabag] Add mail notifications
-      # TODO: [wallabag] Add OpenID Auth
     volumes:
       - wallabag_data:/var/www/wallabag/web/assets/images
     # healthcheck:

@@ -26,7 +26,6 @@ services:
       - VIKUNJA_SERVICE_ENABLEREGISTRATION=false
       - VIKUNJA_SERVICE_TIMEZONE=${TZ}
       # TODO: [vikunja] Add mail notifications
-      # TODO: [vikunja] Add OpenID Auth
     volumes:
       - vikunja_data:/app/vikunja/files
     labels:
