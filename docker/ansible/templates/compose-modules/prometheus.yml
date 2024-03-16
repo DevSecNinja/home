@@ -48,18 +48,19 @@ services:
     security_opt:
       - no-new-privileges:true
     labels:
-      # Homepage
-      - homepage.group=Infrastructure
-      - homepage.name=Pushgateway
-      - homepage.icon=prometheus.svg
-      - homepage.href=https://pushgateway.$DOMAINNAME
-      - homepage.description=Resource Monitoring
+      # # Homepage
+      # - homepage.group=Infrastructure
+      # - homepage.name=Pushgateway
+      # - homepage.icon=prometheus.svg
+      # - homepage.href=https://pushgateway.$DOMAINNAME
+      # - homepage.description=Resource Monitoring
       # Group
       - org.label-schema.group=infrastructure
       # Traefik
       - "traefik.enable=true"
       ## Middlewares
-      - "traefik.http.routers.pushgateway-rtr.middlewares=chain-no-auth@file"
+      ## Using no-auth chain but whitelisting management traffic so I can push logs from different servers
+      - "traefik.http.routers.pushgateway-rtr.middlewares=chain-no-auth-mgmt-whitelist@file"
       ## HTTP Services
       - "traefik.http.routers.pushgateway-rtr.service=pushgateway"
       ### Enable the server port

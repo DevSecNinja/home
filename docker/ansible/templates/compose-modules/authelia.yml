@@ -32,6 +32,7 @@ services:
       # Traefik
       - "traefik.enable=true"
       ## Middlewares
+      ## Using no-auth chain to use the Authelia service
       - "traefik.http.routers.authelia-rtr.middlewares=chain-no-auth@file"
       ## Note: Authelia middleware can be found in middlewares.yml file in Traefik
       ## HTTP Services

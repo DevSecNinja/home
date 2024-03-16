@@ -78,6 +78,7 @@ services:
       # Traefik
       - "traefik.enable=true"
       ## Middlewares
+      ## Using no-auth chain but whitelisting management traffic so I can still push logs
       - "traefik.http.routers.loki-rtr.middlewares=chain-no-auth-mgmt-whitelist@file"
       ## HTTP Services
       - "traefik.http.routers.loki-rtr.service=loki"

@@ -46,6 +46,7 @@ services:
       # Traefik
       - "traefik.enable=true"
       ## Middlewares
+      ## Using no-auth chain since Plex app doesn't support auth proxy
       - "traefik.http.routers.plex-rtr.middlewares=chain-no-auth@file"
       ## HTTP Services
       - "traefik.http.routers.plex-rtr.service=plex"

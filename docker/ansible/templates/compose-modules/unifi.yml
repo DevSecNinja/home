@@ -108,7 +108,10 @@ services:
       - "traefik.http.routers.unifi-guest-rtr.entrypoints=unifi-guest"
       - "traefik.http.routers.unifi-guest-rtr.rule=Host(`unifi-guest.$DOMAINNAME`)"
       ## Middlewares
+      ## Using no-auth chain so that Home Assistant can still access the portal
+      ## TODO: [unifi] Create a new router just for Home Assistant traffic
       - "traefik.http.routers.unifi-rtr.middlewares=chain-no-auth@file" # No Authentication
+      ## Using no-auth chain so that guests can still access the guest portal
       - "traefik.http.routers.unifi-guest-rtr.middlewares=chain-no-auth@file" # No Authentication
       ## HTTP Services
       - "traefik.http.routers.unifi-rtr.service=unifi"

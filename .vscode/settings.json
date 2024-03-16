@@ -15,6 +15,7 @@
         "./ansible/**/*.sops.yaml": "yaml",
         "./ansible/**/inventory/**/*.yaml": "yaml",
         "./kubernetes/**/*.sops.toml": "plaintext",
+        "alert.rules": "yaml",
     },
     "sops.defaults.ageKeyFile": "age.key",
     "terminal.integrated.defaultProfile.linux": "zsh",
