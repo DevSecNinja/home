@@ -64,7 +64,6 @@
       loop:
         - "/mnt/data"
         - "/mnt/data/media/study"
-        - "/mnt/data/media/transcode"
 
         - "/mnt/archive"
         - "/mnt/archive/backup"
