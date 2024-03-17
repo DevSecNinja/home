@@ -22,6 +22,8 @@ services:
       # Paperless
       - $DOCKERDIR/data/paperless-ngx:/docker/data/paperless-ngx
       - paperless_media_data:/docker/data/docs:ro
+    # -r = disable recycle bin
+    # -p = set ownership and permissions on the shares
     command: >
       -s "Backup;/data/backup;yes;no;no;${SAMBA_USERNAME}"
       -s "Data;/data;yes;no;no;${SAMBA_USERNAME}"
@@ -30,6 +32,7 @@ services:
       -s "Study;/data/media/study;yes;no;no;${SAMBA_USERNAME}"
       -u "${SAMBA_USERNAME};${SAMBA_PASSWORD}"
       -p
+      -r
 
 networks:
   samba:
