@@ -1,0 +1,42 @@
+---
+- name: Update data disks and its partition, file system and mounts
+  hosts: production
+  become: yes
+  gather_facts: yes
+  vars:
+    disk_name: "/dev/sdc"
+    partition_number: 1
+    mount_path: "/mnt/datatest"
+    volume_fstype: "ext4"
+
+  roles:
+    - role: robertdebock.storage
+      storage_partitions:
+        - name: "{{ disk_name }}"
+          number: "{{ partition_number }}"
+          part_end: 100%
+          label: gpt
+      storage_filesystems:
+        - name: "{{ disk_name }}{{ partition_number }}"
+          fstype: "{{ volume_fstype }}"
+      storage_mounts:
+        - name: "{{ mount_path }}"
+          src: "{{ disk_name }}{{ partition_number }}"
+          fstype: "{{ volume_fstype }}"
+          owner: root
+          group: root
+          mode: "0755"
+
+  post_tasks:
+    - name: Create directories in new partition
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: "directory"
+        owner: "{{ansible_user}}"
+        group: "docker"
+        mode: "0755"
+      loop:
+        - "{{ mount_path }}"
+        - "{{ mount_path }}/backup"
+        - "{{ mount_path }}/media/study"
+        - "{{ mount_path }}/media/transcode"

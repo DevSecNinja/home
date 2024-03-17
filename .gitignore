@@ -14,6 +14,7 @@ talosconfig
 .bin
 # Ansible
 .venv*
+docker/ansible/playbooks/roles
 # Taskfile
 .task
 # Brew
