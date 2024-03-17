@@ -1,31 +1,57 @@
 ---
 - name: Update data disks and its partition, file system and mounts
-  hosts: production
+  hosts: svlprod.PRODUCTION
   become: yes
   gather_facts: yes
   vars:
-    disk_name: "/dev/sdc"
     partition_number: 1
-    mount_path: "/mnt/datatest"
     volume_fstype: "ext4"
+  tasks:
+    - name: Run the storage role for the data disk
+      include_role:
+        name: robertdebock.storage
+      vars:
+        disk_name: "/dev/sdb"
+        mount_path: "/mnt/data"
 
-  roles:
-    - role: robertdebock.storage
-      storage_partitions:
-        - name: "{{ disk_name }}"
-          number: "{{ partition_number }}"
-          part_end: 100%
-          label: gpt
-      storage_filesystems:
-        - name: "{{ disk_name }}{{ partition_number }}"
-          fstype: "{{ volume_fstype }}"
-      storage_mounts:
-        - name: "{{ mount_path }}"
-          src: "{{ disk_name }}{{ partition_number }}"
-          fstype: "{{ volume_fstype }}"
-          owner: root
-          group: root
-          mode: "0755"
+        storage_partitions:
+          - name: "{{ disk_name }}"
+            number: "{{ partition_number }}"
+            part_end: 100%
+            label: gpt
+        storage_filesystems:
+          - name: "{{ disk_name }}{{ partition_number }}"
+            fstype: "{{ volume_fstype }}"
+        storage_mounts:
+          - name: "{{ mount_path }}"
+            src: "{{ disk_name }}{{ partition_number }}"
+            fstype: "{{ volume_fstype }}"
+            owner: root
+            group: root
+            mode: "0755"
+
+    - name: Run the storage role for the archive disk
+      include_role:
+        name: robertdebock.storage
+      vars:
+        disk_name: "/dev/sdc"
+        mount_path: "/mnt/archive"
+
+        storage_partitions:
+          - name: "{{ disk_name }}"
+            number: "{{ partition_number }}"
+            part_end: 100%
+            label: gpt
+        storage_filesystems:
+          - name: "{{ disk_name }}{{ partition_number }}"
+            fstype: "{{ volume_fstype }}"
+        storage_mounts:
+          - name: "{{ mount_path }}"
+            src: "{{ disk_name }}{{ partition_number }}"
+            fstype: "{{ volume_fstype }}"
+            owner: root
+            group: root
+            mode: "0755"
 
   post_tasks:
     - name: Create directories in new partition
@@ -36,7 +62,9 @@
         group: "docker"
         mode: "0755"
       loop:
-        - "{{ mount_path }}"
-        - "{{ mount_path }}/backup"
-        - "{{ mount_path }}/media/study"
-        - "{{ mount_path }}/media/transcode"
+        - "/mnt/data"
+        - "/mnt/data/media/study"
+        - "/mnt/data/media/transcode"
+
+        - "/mnt/archive"
+        - "/mnt/archive/backup"

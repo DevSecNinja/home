@@ -9,6 +9,7 @@ pgid: 994 # Docker group is 994
 
 docker_dir: "/srv/docker"
 docker_data_dir: "/mnt/data"
+docker_archive_dir: "/mnt/archive"
 
 docker__channel: ["stable"]
 docker__version: ""

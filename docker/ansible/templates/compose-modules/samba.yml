@@ -19,13 +19,15 @@ services:
       - TZ=${TZ}
     volumes:
       - $DOCKERDATADIR:/data
+      - $DOCKERARCHIVEDIR:/archive
       # Paperless
       - $DOCKERDIR/data/paperless-ngx:/docker/data/paperless-ngx
       - paperless_media_data:/docker/data/docs:ro
     # -r = disable recycle bin
     # -p = set ownership and permissions on the shares
     command: >
-      -s "Backup;/data/backup;yes;no;no;${SAMBA_USERNAME}"
+      -s "Archive;/archive;yes;no;no;${SAMBA_USERNAME}"
+      -s "Backup;/archive/backup;yes;no;no;${SAMBA_USERNAME}"
       -s "Data;/data;yes;no;no;${SAMBA_USERNAME}"
       -s "Docs;/docker/data/docs/documents/originals;yes;no;no;${SAMBA_USERNAME}"
       -s "Paperless;/docker/data/paperless-ngx;yes;no;no;${SAMBA_USERNAME}"

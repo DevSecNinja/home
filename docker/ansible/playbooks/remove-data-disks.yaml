@@ -1,6 +1,6 @@
 ---
 - name: Removing the data disk
-  hosts: production
+  hosts: svlprod.PRODUCTION
   become: yes
   gather_facts: yes
   vars:

@@ -1,6 +1,6 @@
 ---
 - name: Mount data disks and create a filesystem
-  hosts: production
+  hosts: svlprod.PRODUCTION
   become: yes
   gather_facts: yes
   vars:
