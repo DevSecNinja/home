@@ -64,7 +64,7 @@ services:
     networks:
       - t2_proxy
       - unifi-backend
-    mem_limit: 1024m
+    mem_limit: 2048m
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
