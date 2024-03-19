@@ -90,7 +90,9 @@ services:
       sleep 1
       ; done
       && traefik-certs-dumper file --version v2 --watch
-      --source /data/acme/acme.json --dest /data/certs'
+      --source /data/acme/acme.json --dest /data/certs
+      && wget -qO- https://letsencrypt.org/certs/isrgrootx1.pem >> /data/certs/RootCA.pem
+      && wget -qO- https://letsencrypt.org/certs/lets-encrypt-r3.pem >> /data/certs/IntermediateCA.pem'
     volumes:
       - $DOCKERDIR/data/traefik:/data
 
