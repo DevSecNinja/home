@@ -3,6 +3,7 @@ http:
     middlewares-redirect-to-https:
       redirectscheme:
         scheme: "https"
+        permanent: true
     middlewares-rate-limit:
       rateLimit:
         average: 100
@@ -49,3 +50,15 @@ http:
           - "127.0.0.1/32"
           - "192.168.1.11"
           - "192.168.60.2"
+    middlewares-whitelist-localnetwork:
+      ipAllowList:
+        sourceRange:
+          - "192.168.0.0/16"
+    middlewares-mtls:
+      passTLSClientCert:
+        pem: true
+        info:
+          sans: true
+          subject:
+            commonName: true
+            serialNumber: true

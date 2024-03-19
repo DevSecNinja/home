@@ -36,11 +36,19 @@ services:
       - "traefik.enable=true"
       ## Middlewares
       - "traefik.http.routers.cadvisor-rtr.middlewares=chain-auth@file"
+
+      - "traefik.http.routers.cadvisor-mtls-rtr.middlewares=chain-mtls@file"
       ## HTTP Services
       - "traefik.http.routers.cadvisor-rtr.rule=Host(`cadvisor-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
       - "traefik.http.routers.cadvisor-rtr.service=cadvisor"
+
+      - "traefik.http.routers.cadvisor-mtls-rtr.rule=Host(`cadvisor-$GENERIC_HOSTNAME_SUFFIX-mtls.$DOMAINNAME`)"
+      - "traefik.http.routers.cadvisor-mtls-rtr.service=cadvisor-mtls"
+      - "traefik.http.routers.cadvisor-mtls-rtr.tls.options=mtls@file"
       ### Enable the server port
       - "traefik.http.services.cadvisor.loadbalancer.server.port=8080"
+
+      - "traefik.http.services.cadvisor-mtls.loadbalancer.server.port=8080"
     # Saves some CPU cycles + healthcheck doesn't do anything on failure
     # healthcheck:
     #   test: wget --quiet --tries=1 --spider http://localhost:9102/healthz || exit 1

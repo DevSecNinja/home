@@ -27,7 +27,7 @@ services:
         mode: host
     volumes:
       - $DOCKERDIR/data/traefik/acme/acme.json:/acme.json
-      - $DOCKERDIR/data/traefik/certs:/certs
+      - $DOCKERDIR/data/traefik/certchain:/certchain
       - $DOCKERDIR/data/traefik/rules:/rules
       - $DOCKERDIR/data/traefik/traefik.yml:/etc/traefik/traefik.yml:ro
     mem_limit: 1024m
@@ -85,14 +85,15 @@ services:
     mem_limit: 50m
     entrypoint: sh -c '
       apk add jq
+      ; mkdir -p /data/certchain
+      ; wget -qO- https://letsencrypt.org/certs/isrgrootx1.pem >> /data/certchain/RootCA.pem
+      ; wget -qO- https://letsencrypt.org/certs/lets-encrypt-r3.pem >> /data/certchain/IntermediateCA.pem
       ; while ! [ -e /data/acme/acme.json ]
       || ! [ `jq ".[] | .Certificates | length" /data/acme/acme.json` != 0 ]; do
       sleep 1
       ; done
       && traefik-certs-dumper file --version v2 --watch
-      --source /data/acme/acme.json --dest /data/certs
-      && wget -qO- https://letsencrypt.org/certs/isrgrootx1.pem >> /data/certs/RootCA.pem
-      && wget -qO- https://letsencrypt.org/certs/lets-encrypt-r3.pem >> /data/certs/IntermediateCA.pem'
+      --source /data/acme/acme.json --dest /data/certs'
     volumes:
       - $DOCKERDIR/data/traefik:/data
 

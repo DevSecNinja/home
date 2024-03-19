@@ -11,6 +11,13 @@ http:
           - "middlewares-rate-limit"
           - "middlewares-secure-headers"
           - "middlewares-auth"
+    chain-mtls:
+      chain:
+        middlewares:
+          - "middlewares-rate-limit"
+          - "middlewares-secure-headers"
+          - "middlewares-mtls"
+          - "middlewares-whitelist-localnetwork"
     chain-no-auth-mgmt-whitelist:
       chain:
         middlewares:
