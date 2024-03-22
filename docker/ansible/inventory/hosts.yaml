@@ -13,14 +13,16 @@ docker:
   children:
     webservers:
       children:
-        management:
-          hosts:
-            svlmgmt.MANAGEMENT:
-              ansible_user: "jean-paul"
-        production:
-          hosts:
-            svlprod.PRODUCTION:
-              ansible_user: "jean-paul"
+        linux_amd64:
+          children:
+            management:
+              hosts:
+                svlmgmt.MANAGEMENT:
+                  ansible_user: "jean-paul"
+            production:
+              hosts:
+                svlprod.PRODUCTION:
+                  ansible_user: "jean-paul"
 
     dnsservers:
       hosts:
