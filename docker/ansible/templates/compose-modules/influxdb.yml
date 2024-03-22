@@ -41,6 +41,10 @@ services:
       - "traefik.http.routers.influxdb-rtr.service=influxdb"
       ### Enable the server port
       - "traefik.http.services.influxdb.loadbalancer.server.port=8086"
+      ## Extra no-auth endpoint. No need to create a new service
+      - "traefik.http.routers.influxdb-noauth-rtr.rule=Host(`influxdb-noauth.$DOMAINNAME`)"
+      - "traefik.http.routers.influxdb-noauth-rtr.middlewares=chain-no-auth@file"
+      - "traefik.http.routers.influxdb-noauth-rtr.service=influxdb"
 
   influxdb-backup:
     container_name: influxdb-backup
