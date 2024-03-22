@@ -1,5 +1,2 @@
-services:
-  adguard:
-    image: adguard/adguardhome:v0.107.45@sha256:52a9c2e7b4c56e5f08e1b2f3196d500c931adadc8917712ff9ef9ea922c030fe
-  traefik:
-    image: traefik:v2.11.0@sha256:0a5157f742d2900389da6ce60ea80cc476801dc951917a993cd848d982f58265
+os__architecture: "arm64"
+os__architecture_long: "arm64_v8"
