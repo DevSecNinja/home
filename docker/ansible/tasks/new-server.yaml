@@ -7,9 +7,13 @@
   locale_gen:
     name: "{{ locale }}"
     state: present
+  # Doesn't seem to work with ARM or Ubuntu. Excluding RPI for now.
+  when: ansible_architecture == "x86_64"
 
 - name: Set "{{ locale }}" as default locale
   command: localectl set-locale LANG="{{ locale }}"
+  # Doesn't seem to work with ARM or Ubuntu
+  when: ansible_architecture == "x86_64"
 
 - name: Set authorized key for remote user copying it from local user
   ansible.posix.authorized_key:

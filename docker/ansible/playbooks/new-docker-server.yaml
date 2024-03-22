@@ -22,6 +22,9 @@
         name: community.sops.install
       vars:
         sops_version: "3.8.1"  # leaving this blank installs the latest version
+      # Need to manually install SOPS on ARM
+      # Error: FAILED! => {"changed": false, "msg": "Unable to install package: E:read, still have 8 to read but none left"}
+      when: ansible_architecture == "x86_64"
 
     - include_tasks: ../tasks/configure-ufw.yaml
 
@@ -141,7 +144,8 @@
         masked: yes
       notify:
         - "Remove STUB"
-      when: inventory_hostname in groups['dnsservers']
+      # ansible_architecture == "x86_64" because the service doesn't seem to exist on my RPI with Debian ARM
+      when: inventory_hostname in groups['dnsservers'] and ansible_architecture == "x86_64"
 
   handlers:
     - import_tasks: ../handlers/main.yml

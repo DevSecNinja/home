@@ -1,7 +1,9 @@
 services:
   unbound:
     container_name: unbound
-    image: mvance/unbound:1.19.3@sha256:2b19bdb4db8d6f9ebd39d060e1a0ea66f198e5c7272c8b711fd7835594014385
+    # image: mvance/unbound:1.19.3@sha256:2b19bdb4db8d6f9ebd39d060e1a0ea66f198e5c7272c8b711fd7835594014385
+    # [unbound] Fix unbound using different image for arm vs amd
+    image: pedantic/unbound:latest
     restart: always
     networks:
       - adguard-backend
@@ -43,13 +45,14 @@ services:
       - homepage.group=Infrastructure
       - homepage.name=AdGuard
       - homepage.icon=adguard-home.svg
-      - homepage.href=https://adguard.$DOMAINNAME
+      - homepage.href=https://adguard-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
       - homepage.description=DNS Service
       # Traefik
       - "traefik.enable=true"
       ## Middlewares
       - "traefik.http.routers.adguard-rtr.middlewares=chain-auth@file"
       ## HTTP Services
+      - "traefik.http.routers.adguard-rtr.rule=Host(`adguard-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
       - "traefik.http.routers.adguard-rtr.service=adguard"
       # Enable the management port
       - "traefik.http.services.adguard.loadbalancer.server.port=80"

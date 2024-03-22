@@ -1,7 +1,8 @@
 services:
   # TODO: [traefik-fw-auth] Find a replacement fork since this image is old
   traefik-forward-auth:
-    image: ghcr.io/jordemort/traefik-forward-auth:latest@sha256:c10f091b1acc84612b78e07d52a819b4f6721647a53ccfe231e1558ac85d85c6
+    # @sha256:c10f091b1acc84612b78e07d52a819b4f6721647a53ccfe231e1558ac85d85c6
+    image: ghcr.io/jordemort/traefik-forward-auth:latest
     container_name: traefik-forward-auth
     depends_on:
       - traefik

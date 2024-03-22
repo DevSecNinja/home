@@ -58,7 +58,9 @@ services:
     #   test: ["CMD-SHELL","traefik healthcheck --ping.entrypoint ping --entryPoints.ping.address=:8267 --ping"]
 
   traefik-docker-proxy:
-    image: ghcr.io/tecnativa/docker-socket-proxy:latest@sha256:da4addb776070a9d2ae2bb91d8f57225c1028779c161ca0d137e36901ba1751b
+    # TODO: [docker] Restore version pinning for ghcr.io hosted images since they have a distinct digest per arch
+    # @sha256:da4addb776070a9d2ae2bb91d8f57225c1028779c161ca0d137e36901ba1751b
+    image: ghcr.io/tecnativa/docker-socket-proxy:latest
     container_name: traefik-docker-proxy
     restart: always
     networks:

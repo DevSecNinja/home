@@ -24,7 +24,16 @@ docker:
                 svlprod.PRODUCTION:
                   ansible_user: "jean-paul"
 
+        linux_arm64_v8:
+          children:
+            fallback:
+              hosts:
+                svlfall.MANAGEMENT:
+                  ansible_user: "jean-paul"
+
     dnsservers:
       hosts:
         svlmgmt.MANAGEMENT:
+          ansible_user: "jean-paul"
+        svlfall.MANAGEMENT:
           ansible_user: "jean-paul"

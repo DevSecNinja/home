@@ -1,5 +1,3 @@
-version: "3.8"
-
 include:
 {% if 'dnsservers' in group_names %}
   - $DOCKERDIR/data/compose/adguard.yml
@@ -11,7 +9,9 @@ include:
   - $DOCKERDIR/data/compose/alertmanager.yml
   - $DOCKERDIR/data/compose/cloudflare.yml
   - $DOCKERDIR/data/compose/grafana.yml
+  - $DOCKERDIR/data/compose/influxdb.yml
   - $DOCKERDIR/data/compose/nodeexporter.yml
+  - $DOCKERDIR/data/compose/phpmyadmin.yml
   - $DOCKERDIR/data/compose/prometheus.yml
   - $DOCKERDIR/data/compose/promtail.yml
   - $DOCKERDIR/data/compose/uptime-kuma.yml
@@ -33,20 +33,15 @@ include:
   - $DOCKERDIR/data/compose/wallabag.yml
 {% endif %}
 {% if 'webservers' in group_names %}
-  # - $DOCKERDIR/data/compose/authelia.yml
   - $DOCKERDIR/data/compose/cadvisor.yml
   - $DOCKERDIR/data/compose/dozzle.yml
   - $DOCKERDIR/data/compose/echo-server.yml
   - $DOCKERDIR/data/compose/homepage.yml
-  - $DOCKERDIR/data/compose/influxdb.yml
   - $DOCKERDIR/data/compose/mailrise.yml
-  #- $DOCKERDIR/data/compose/oauth.yml
-  - $DOCKERDIR/data/compose/phpmyadmin.yml
   - $DOCKERDIR/data/compose/portainer.yml
   - $DOCKERDIR/data/compose/traefik-forward-auth.yml
   - $DOCKERDIR/data/compose/traefik-proxy.yml
 {% endif %}
-  #- $DOCKERDIR/data/compose/watchtower.yml
 
 networks:
   default:

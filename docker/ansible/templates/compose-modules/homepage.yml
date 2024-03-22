@@ -1,7 +1,8 @@
 services:
   homepage:
     container_name: homepage
-    image: ghcr.io/gethomepage/homepage:v0.8.9@sha256:869c8002a95c8ecef7b0359a36b13693cd2bf401c70482202c702f93bc264a04
+    # @sha256:869c8002a95c8ecef7b0359a36b13693cd2bf401c70482202c702f93bc264a04
+    image: ghcr.io/gethomepage/homepage:v0.8.9
     depends_on:
       - traefik
       - homepage-docker-proxy
@@ -31,7 +32,7 @@ services:
       - "traefik.http.services.homepage.loadbalancer.server.port=3000"
 
   homepage-docker-proxy:
-    image: ghcr.io/tecnativa/docker-socket-proxy:latest@sha256:da4addb776070a9d2ae2bb91d8f57225c1028779c161ca0d137e36901ba1751b
+    image: ghcr.io/tecnativa/docker-socket-proxy:latest
     container_name: homepage-docker-proxy
     restart: always
     networks:

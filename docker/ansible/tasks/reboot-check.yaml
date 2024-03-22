@@ -6,10 +6,8 @@
 
 - name: Pause for reboot confirmation
   pause:
-    prompt: "A reboot is required to apply updates to {{ inventory_hostname }}. Press 'Enter' to continue or 'Ctrl+C' to cancel."
-    seconds: -1
+    prompt: "A reboot is required to apply updates to {{ inventory_hostname }}. Press 'Enter' to continue or 'Ctrl+C' and then 'a' to abort."
   when: reboot_required_file.stat.exists == true
-  register: reboot_confirmation
 
 - name: Reboot the box if kernel updated and approved
   reboot:
@@ -21,4 +19,3 @@
     test_command: uptime
   when:
     - reboot_required_file.stat.exists == true
-    - reboot_confirmation.user_input | lower == 'yes'
