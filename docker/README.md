@@ -20,3 +20,13 @@
 - [ ] Run the `new-docker-server` playbook
 - [ ] Update DNS records in `a-records.conf.j2` for the new host and new apps
 - [ ] Now you can run the regular playbook `update-docker`
+
+### Checklist - new Windows Server host
+
+- [ ] Create the host via ISO in Proxmox. Make sure to follow the [official guide](https://pve.proxmox.com/wiki/Windows_2022_guest_best_practices) to also install the needed drivers
+- [ ] Set fixed IP in Excel sheet and Unifi portal
+  - [ ] NOTE: for some reason, VLAN tagging doesn't seem to work for Windows Server 2022 with a `VirtIO (paravirtualized)` adapter.
+- [ ] If needed, set the VLAN tag on the VM
+- [ ] Remove the ISO on the VM in Proxmox
+- [ ] Change the hostname
+- [ ] Enable Remote Desktop
