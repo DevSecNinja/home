@@ -1,6 +1,6 @@
 services:
   prometheus:
-    image: prom/prometheus:v2.50.1@sha256:e7f5a279d674f110beef9b9d473c86f5c0c4e003ba73d8a83a72321d8229260b
+    image: prom/prometheus:v2.51.0@sha256:5ccad477d0057e62a7cd1981ffcc43785ac10c5a35522dc207466ff7e7ec845f
     container_name: prometheus
     volumes:
       - prometheus_data:/prometheus
