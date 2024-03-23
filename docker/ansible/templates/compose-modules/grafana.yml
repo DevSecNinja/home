@@ -54,7 +54,7 @@ services:
       - "traefik.http.services.grafana.loadbalancer.server.port=3000"
 
   loki:
-    image: grafana/loki:2.9.5@sha256:03d4bb6874898cc503a6a121b832556dd7747b20b5efe8cbc9ae175caf43811b
+    image: grafana/loki:2.9.6@sha256:3ee11ec1bd4eae4586d34f3e8e4bb3f36a2f6e5473aab398c9b43fc89ef5d0b9
     container_name: loki
     volumes:
       - $DOCKERDIR/data/loki/loki.yml:/etc/loki/loki.yml
