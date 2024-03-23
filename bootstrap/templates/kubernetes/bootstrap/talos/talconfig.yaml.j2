@@ -1,11 +1,11 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/budimanjojo/talhelper/master/pkg/config/schemas/talconfig.json
 ---
 # renovate: datasource=docker depName=ghcr.io/siderolabs/installer
-talosVersion: v1.6.6
+talosVersion: v1.6.7
 # renovate: datasource=docker depName=ghcr.io/siderolabs/kubelet
-kubernetesVersion: v1.29.2
+kubernetesVersion: v1.29.3
 
-clusterName: &cluster home-kubernetes
+clusterName: &cluster #{ bootstrap_cluster_name|default('home-kubernetes', true) }#
 endpoint: https://#{ bootstrap_controllers_vip }#:6443
 clusterPodNets:
   - "#{ bootstrap_pod_network.split(',')[0] }#"
@@ -40,7 +40,8 @@ nodes:
     #% endif %#
     controlPlane: #{ (item.controller) | string | lower }#
     networkInterfaces:
-      - interface: eth0
+      - deviceSelector:
+          hardwareAddr: "#{ item.talos_nic }#"
         dhcp: false
         #% if bootstrap_talos.vlan %#
         vlans:
@@ -118,12 +119,9 @@ patches:
     machine:
       kubelet:
         extraArgs:
-          image-gc-low-threshold: 50
-          image-gc-high-threshold: 55
           rotate-server-certificates: true
         nodeIP:
-          validSubnets:
-            - "#{ bootstrap_node_network }#"
+          validSubnets: ["#{ bootstrap_node_network }#"]
 
   # Force nameserver
   - |-
@@ -139,8 +137,7 @@ patches:
     machine:
       time:
         disabled: false
-        servers:
-          - time.cloudflare.com
+        servers: ["time.cloudflare.com"]
 
   # Custom sysctl settings
   - |-
@@ -158,17 +155,7 @@ patches:
           - destination: /var/openebs/local
             type: bind
             source: /var/openebs/local
-            options:
-              - bind
-              - rshared
-              - rw
-
-  # Disable predictable NIC naming
-  - |-
-    machine:
-      install:
-        extraKernelArgs:
-          - net.ifnames=0
+            options: ["bind", "rshared", "rw"]
 
   #% if bootstrap_talos.secureboot.enabled and bootstrap_talos.secureboot.encrypt_disk_with_tpm %#
   # Encrypt system disk with TPM
@@ -186,6 +173,7 @@ patches:
             - slot: 0
               tpm: {}
   #% endif %#
+
   #% if bootstrap_talos.user_patches %#
   # User specified global patches
   - "@./patches/global.yaml"
@@ -196,7 +184,7 @@ controlPlane:
     # Cluster configuration
     - |-
       cluster:
-        allowSchedulingOnMasters: true
+        allowSchedulingOnControlPlanes: true
         controllerManager:
           extraArgs:
             bind-address: 0.0.0.0
@@ -226,10 +214,8 @@ controlPlane:
         features:
           kubernetesTalosAPIAccess:
             enabled: true
-            allowedRoles:
-              - os:admin
-            allowedKubernetesNamespaces:
-              - system-upgrade
+            allowedRoles: ["os:admin"]
+            allowedKubernetesNamespaces: ["system-upgrade"]
 
     #% if bootstrap_talos.user_patches %#
     # User specified controlPlane patches
