@@ -1,6 +1,6 @@
 services:
   promtail:
-    image: grafana/promtail:2.9.5@sha256:7762f1d481301b4f3035c2b06934df5a02d0eca8e3ce5ec7550fc54c0e56772a
+    image: grafana/promtail:2.9.6@sha256:692129aed40d6364ddab72dc7fee408bf1dfa19cf6f4fca8691109a4a3944d13
     container_name: promtail
     depends_on:
       - loki
