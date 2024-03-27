@@ -142,6 +142,44 @@ services:
         ]
       timeout: 30s
 
+  photoprism-db-backup:
+    container_name: photoprism-db-backup
+    image: tiredofit/db-backup:4.0.35@sha256:794ffd160cf01057d0f64ef7baf5da3cd8925a48f1f65653e016f58c7d69b13c
+    depends_on:
+      - photoprism-db
+    volumes:
+      - $DOCKERDIR/data/backup:/backup
+    networks:
+      - photoprism-backend
+    mem_limit: 1024m
+    environment:
+      - TIMEZONE=${TZ}
+      - USER_DBBACKUP=${PUID}
+      - GROUP_DBBACKUP=${PGID}
+      - CONTAINER_NAME=photoprism-db-backup
+      - CONTAINER_ENABLE_MONITORING=FALSE # Disables Zabbix backup statistics
+
+      - ENABLE_NOTIFICATIONS=FALSE   # TODO: [db-backup] Use notifications (SMTP auth not supported)
+
+      - DEFAULT_CHECKSUM=SHA1        # Set standard checksum to SHA1
+      - DEFAULT_COMPRESSION=ZSTD     # Compress all with ZSTD
+      - DEFAULT_BACKUP_INTERVAL=1440 # Backup every 1440 minutes = 24 hours
+      - DEFAULT_BACKUP_BEGIN=0000    # Start backing up at midnight
+      - DEFAULT_CLEANUP_TIME=2880    # Cleanup backups after two days
+
+      - DEFAULT_ENCRYPT=TRUE                            # Encrypt backup files with GPG
+      - DEFAULT_ENCRYPT_PASSPHRASE=${DB_ENC_PASSPHRASE} # Set encryption password
+
+      - DB01_TYPE=mysql
+      - DB01_HOST=photoprism-db
+      - DB01_NAME=photoprism
+      - DB01_USER=photoprism
+      - DB01_PORT=3306
+      - DB01_PASS=${PHOTOPRISM_MYSQL_PASSWORD}
+    restart: always
+    security_opt:
+      - no-new-privileges:true
+
 volumes:
   photoprism_data:
   photoprism_cache_data:
