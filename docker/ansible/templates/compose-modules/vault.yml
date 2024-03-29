@@ -1,0 +1,82 @@
+services:
+  vault:
+    container_name: vault
+    image: hashicorp/vault:1.16@sha256:2e1b2d939a8a5362ebb28622aafc9d1e4c78e7ff5e66437e594bae9ddd0a6789
+    depends_on:
+      - traefik
+    command: server # Run in PRD
+    networks:
+      - t2_proxy
+    restart: always
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - vault_data:/vault/file
+      - vault_data:/vault/logs
+    mem_limit: 1024m
+    cap_add:
+      - IPC_LOCK
+    environment:
+      TZ: ${TZ}
+      VAULT_ADDR: "http://0.0.0.0:8200"
+      VAULT_API_ADDR: "http://0.0.0.0:8200"
+      # TODO: [vault] Understand why IPC_LOCK cap is added and I still get the
+      # "Error initializing core: Failed to lock memory: cannot allocate memory" error.
+      # Workaround:
+      # SKIP_SETCAP and "disable_mlock" - don't do this in production
+      SKIP_SETCAP: true
+      VAULT_LOCAL_CONFIG: >-
+        {
+            "ui": true,
+            "backend": {
+                "file": {
+                    "path": "/vault/file"
+                }
+            },
+            "default_lease_ttl": "168h",
+            "listener": {
+                "tcp": {
+                    "address": "0.0.0.0:8200",
+                    "tls_disable": "1"
+                }
+            },
+            "disable_mlock": true,
+            "max_lease_ttl": "720h"
+        }
+    labels:
+      # Homepage
+      - homepage.group=Infrastructure
+      - homepage.name=Vault
+      - homepage.icon=vault.svg
+      - homepage.href=https://vault.$DOMAINNAME
+      - homepage.description=Certificate Authority
+      # Group
+      - org.label-schema.group=infrastructure
+      # Traefik
+      - "traefik.enable=true"
+      ## Middlewares
+      - "traefik.http.routers.vault-rtr.middlewares=chain-auth@file"
+      - "traefik.http.routers.vault-ca-rtr.middlewares=chain-no-auth@file"
+      - "traefik.http.routers.vault-api-rtr.middlewares=chain-no-auth@file"
+      ## HTTP Routers
+      #- "traefik.http.routers.vault-rtr.rule=Host(`vault.$DOMAINNAME`)"
+      - "traefik.http.routers.vault-rtr.priority=10"
+      #- "traefik.http.routers.vault-rtr.tls=true"
+      ### Expose API without Entra ID Authentication
+      - "traefik.http.routers.vault-api-rtr.rule=Host(`vault.$DOMAINNAME`) && PathPrefix(`/v1`)"
+      - "traefik.http.routers.vault-api-rtr.priority=50"
+      #- "traefik.http.routers.vault-api-rtr.tls=true"
+      ### Expose CRL & CA Endpoints without authentication
+      - "traefik.http.routers.vault-ca-rtr.entrypoints=http"
+      - "traefik.http.routers.vault-ca-rtr.rule=Host(`vault.$DOMAINNAME`) && PathPrefix(`/v1/pki`)"
+      - "traefik.http.routers.vault-ca-rtr.priority=100"
+      - "traefik.http.routers.vault-ca-rtr.tls=false"
+      ## HTTP Services
+      - "traefik.http.routers.vault-rtr.service=vault"
+      - "traefik.http.routers.vault-ca-rtr.service=vault"
+      - "traefik.http.routers.vault-api-rtr.service=vault"
+      ### Enable the server port
+      - "traefik.http.services.vault.loadbalancer.server.port=8200"
+
+volumes:
+  vault_data:
