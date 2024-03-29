@@ -13,6 +13,7 @@ services:
     volumes:
       - vault_data:/vault/file
       - vault_data:/vault/logs
+      - $DOCKERDIR/data/vault:/config
     mem_limit: 1024m
     cap_add:
       - IPC_LOCK
@@ -43,6 +44,18 @@ services:
             "disable_mlock": true,
             "max_lease_ttl": "720h"
         }
+      #### Used for Vault setup
+      VAULT_ADDR_HTTP: "http://0.0.0.0:8200"
+      # TODO: [vault] Add env vars
+      # ROOT_CA_COMMON_NAME: $ROOT_CA_COMMON_NAME
+      # INT_CA_COMMON_NAME: $INT_CA_COMMON_NAME
+      # AZURE_AD_CLIENT_ID: $VAULT_AZURE_AD_CLIENT_ID
+      # AZURE_AD_DISCOVERY_URL: $AZURE_ISSUER_URL
+      # AZURE_AD_DEFAULT_ROLE: $VAULT_AZURE_AD_DEFAULT_ROLE
+      # AZURE_AD_CLIENT_SECRET: $VAULT_AZURE_AD_CLIENT_SECRET
+      # VAULT_AZURE_AD_ROLE_NAME: $VAULT_AZURE_AD_ROLE_NAME
+      DOMAINNAME: $DOMAINNAME
+      ORGANIZATION: $ORGANIZATION_NAME
     labels:
       # Homepage
       - homepage.group=Infrastructure

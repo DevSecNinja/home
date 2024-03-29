@@ -1,0 +1,16 @@
+{
+    "allow_user_certificates": true,
+    "algorithm_signer": "rsa-sha2-256",
+    "allowed_users": "*",
+    "allowed_extensions": "permit-pty,permit-port-forwarding",
+    "default_extensions": [
+      {
+        "permit-pty": "",
+        "permit-port-forwarding": ""
+      }
+    ],
+    "key_type": "ca",
+    "default_user": "{{ generic__user_username }}",
+    "ttl": "43800h",
+    "max_ttl": "43800h"
+}
