@@ -198,6 +198,39 @@ vault write pki_int/roles/code-signing \
         organization="$ORGANIZATION" \
         ttl="17531h"
 
+echo "Create the Docker server and client roles"
+vault write pki_int/roles/docker-server \
+        max_ttl=8760h \
+        ttl=8760h  \
+        allowed_domains=$DOMAINNAME \
+        allow_localhost=false \
+        allow_ip_sans=false \
+        allow_bare_domains=false \
+        allow_subdomains=true \
+        server_flag=true \
+        client_flag=false \
+        key_type=rsa \
+        key_bits=4096 \
+        key_usage=DigitalSignature,KeyEncipherment \
+        ou="Docker Server"
+
+vault write pki_int/roles/docker-client \
+        max_ttl=8760h \
+        ttl=720h  \
+        allowed_domains=$DOMAINNAME \
+        allow_localhost=false \
+        allow_ip_sans=false \
+        allow_bare_domains=false \
+        allow_subdomains=true \
+        allow_any_name=false \
+        enforce_hostnames=false \
+        server_flag=false \
+        client_flag=true \
+        key_type=rsa \
+        key_bits=4096 \
+        key_usage=DigitalSignature \
+        ou="Docker Client"
+
 echo "Generate a test certificate"
 cert_details=$(vault write -format=json pki_int/issue/$VAULT_ENTRA_ID_ROLE_NAME common_name="test.$DOMAINNAME" ttl="1h")
 
