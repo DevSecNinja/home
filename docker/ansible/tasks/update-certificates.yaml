@@ -21,7 +21,7 @@
 
 - name: Ensure TLS config dir
   ansible.builtin.file:
-    path: "/etc/ssl/{{ generic__organization_name | lower }}"
+    path: "/etc/ssl/{{ apps__vault_entra_id_role_name }}"
     state: directory
     mode: 0700
     owner: root
@@ -29,7 +29,7 @@
 
 - name: Stat cert files
   ansible.builtin.stat:
-    path: "/etc/ssl/{{ generic__organization_name | lower }}/{{ item }}.pem"
+    path: "/etc/ssl/{{ apps__vault_entra_id_role_name }}/{{ item }}.pem"
   register: stat
   loop:
     - certificate
@@ -46,7 +46,7 @@
   block:
     - name: Get cert facts
       community.crypto.x509_certificate_info:
-        path: /etc/ssl/{{ generic__organization_name | lower }}/certificate.pem
+        path: /etc/ssl/{{ apps__vault_entra_id_role_name }}/certificate.pem
       register: cert_info
     - name: Set expired fact
       ansible.builtin.set_fact:
@@ -54,7 +54,7 @@
   rescue:
     - name: Remove expired cert
       ansible.builtin.file:
-        path: "/etc/ssl/{{ generic__organization_name | lower }}/{{ item }}.pem"
+        path: "/etc/ssl/{{ apps__vault_entra_id_role_name }}/{{ item }}.pem"
         state: absent
       loop:
         - certificate
@@ -83,7 +83,7 @@
     # sudo openssl verify -CAfile /etc/ssl/<org>/root-ca.pem -untrusted /etc/ssl/<org>/ca-chain.pem /etc/ssl/<org>/certificate.pem
     - name: Deliver certs
       ansible.builtin.copy:
-        dest: "/etc/ssl/{{ generic__organization_name | lower }}/{{ item }}.pem"
+        dest: "/etc/ssl/{{ apps__vault_entra_id_role_name }}/{{ item }}.pem"
         content: "{{ cert_data.data.data[item] }}"
         mode: 0644
         owner: root
