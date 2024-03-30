@@ -25,6 +25,22 @@ echo "Authenticating to vault..."
 vault login
 
 #
+# Username & Password Auth
+#
+
+vault auth enable userpass
+
+echo -n "Insert Ansible account password that will be created: "
+read -s password_ansible
+
+vault write auth/userpass/users/ansible \
+    password=$password_ansible \
+    policies=ansible
+
+echo "Creating ansible policy"
+vault policy write ansible /config/ansible-policy.hcl
+
+#
 # Entra ID Authentication
 #
 

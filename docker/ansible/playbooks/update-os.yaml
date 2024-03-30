@@ -6,6 +6,7 @@
   vars:
   tasks:
     - include_tasks: ../tasks/new-server.yaml
+    - include_tasks: ../tasks/update-certificates.yaml
     - include_tasks: ../tasks/update-os.yaml
     - include_tasks: ../tasks/update-brew.yaml
     - include_tasks: ../tasks/reboot-check.yaml

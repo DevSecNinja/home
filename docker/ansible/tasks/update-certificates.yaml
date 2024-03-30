@@ -1,0 +1,92 @@
+---
+- name: Install pip Python package
+  apt:
+    name: python3-pip
+    update_cache: yes
+    state: present
+
+- name: Install required Python package for the playbook
+  apt:
+    name: python3-hvac, python3-cryptography
+    update_cache: yes
+    state: present
+
+- name: Login and use the resulting token
+  community.hashi_vault.vault_login:
+    url: https://vault.{{ generic__domain_name }}
+    auth_method: userpass
+    username: "{{ apps__vault_ansible_username }}"
+    password: "{{ apps__vault_ansible_password }}"
+  register: login_data
+
+- name: Ensure TLS config dir
+  ansible.builtin.file:
+    path: "/etc/ssl/{{ generic__organization_name | lower }}"
+    state: directory
+    mode: 0700
+    owner: root
+    group: root
+
+- name: Stat cert files
+  ansible.builtin.stat:
+    path: "/etc/ssl/{{ generic__organization_name | lower }}/{{ item }}.pem"
+  register: stat
+  loop:
+    - certificate
+    - private_key
+    - issuing_ca
+
+- name: Set issue_cert
+  delegate_to: localhost
+  ansible.builtin.set_fact:
+    issue_cert: "{{ false in (stat.results | community.general.json_query('[*].stat.exists')) }}"
+
+- name: Check certs
+  when: false not in (stat.results | community.general.json_query('[*].stat.exists'))
+  block:
+    - name: Get cert facts
+      community.crypto.x509_certificate_info:
+        path: /etc/ssl/{{ generic__organization_name | lower }}/certificate.pem
+      register: cert_info
+    - name: Set expired fact
+      ansible.builtin.set_fact:
+        issue_cert: cert_info.expired
+  rescue:
+    - name: Remove expired cert
+      ansible.builtin.file:
+        path: "/etc/ssl/{{ generic__organization_name | lower }}/{{ item }}.pem"
+        state: absent
+      loop:
+        - certificate
+        - private_key
+        - issuing_ca
+    - name: Set issue_cert fact
+      ansible.builtin.set_fact:
+        issue_cert: true
+
+- name: Issue certificate to host
+  when: (issue_cert | bool)
+  block:
+    - name: Issue cert from Vault
+      become: false
+      community.hashi_vault.vault_pki_generate_certificate: # noqa syntax-check
+        role_name: "{{ apps__vault_entra_id_role_name }}"
+        common_name: "{{ inventory_hostname_short }}.{{ generic__domain_name }}"
+        ttl: 365d
+        engine_mount_point: "pki_int"
+        url: https://vault.{{ generic__domain_name }}
+        auth_method: token
+        token: "{{ login_data.login.auth.client_token }}"
+      register: cert_data
+
+    - name: Deliver certs
+      ansible.builtin.copy:
+        dest: "/etc/ssl/{{ generic__organization_name | lower }}/{{ item }}.pem"
+        content: "{{ cert_data.data.data[item] }}"
+        mode: 0644
+        owner: root
+        group: root
+      loop:
+        - certificate
+        - issuing_ca
+        - private_key
