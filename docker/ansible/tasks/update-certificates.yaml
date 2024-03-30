@@ -79,6 +79,8 @@
         token: "{{ login_data.login.auth.client_token }}"
       register: cert_data
 
+    # Note: to verify the certs, download the root CA and run:
+    # sudo openssl verify -CAfile /etc/ssl/<org>/root-ca.pem -untrusted /etc/ssl/<org>/ca-chain.pem /etc/ssl/<org>/certificate.pem
     - name: Deliver certs
       ansible.builtin.copy:
         dest: "/etc/ssl/{{ generic__organization_name | lower }}/{{ item }}.pem"
