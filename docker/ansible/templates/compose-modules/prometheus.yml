@@ -39,7 +39,7 @@ services:
       - "traefik.http.services.prometheus.loadbalancer.server.port=9090"
 
   pushgateway:
-    image: prom/pushgateway:v1.7.0@sha256:ea184974db6c847ba06e0abcc8c4c5112d26e49b92af1738428ffba344751db8
+    image: prom/pushgateway:v1.7.0@sha256:a742e7b3c9d7ddf0cc6a3117e35d28d4eafbaa51b7587f18a3e6585c45a89129
     container_name: pushgateway
     mem_limit: 1024m
     environment:
