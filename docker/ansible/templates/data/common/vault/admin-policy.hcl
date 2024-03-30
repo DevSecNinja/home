@@ -57,3 +57,29 @@ path "sys/mounts"
 {
   capabilities = ["read"]
 }
+
+# Enable secrets engine
+
+# Create, read, update, delete and list pki secrets
+path "pki/*"
+{
+  capabilities = [ "create", "read", "update", "delete", "list" ]
+}
+
+# Create, read, update, delete and list pki_int secrets
+path "pki_int/*"
+{
+  capabilities = [ "create", "read", "update", "delete", "list" ]
+}
+
+# Create, read, update, delete and list ssh-host-signer secrets
+path "ssh-host-signer/*"
+{
+  capabilities = [ "create", "read", "update", "delete", "list" ]
+}
+
+# Create, read, update, delete and list ssh-client-signer secrets
+path "ssh-client-signer/*"
+{
+  capabilities = [ "create", "read", "update", "delete", "list" ]
+}
