@@ -1,9 +1,18 @@
 #!/bin/bash
 
+# Prereqs
+# We use jq in a few commands. Making sure it's installed
+wget https://github.com/jqlang/jq/releases/download/jq-1.7.1/jq-linux-amd64
+chmod +x jq-linux-amd64
+mv ./jq-linux-amd64 /usr/local/bin/jq
+
 # Changing directory to the /config directory where the volume is mounted
 cd /config
+mkdir -p certs
+mkdir -p client_pub_keys
+mkdir -p host_pub_keys
 
-read -p "Go to $VAULT_ADDR/ui/ for the setup. Press enter to continue"
+read -p "Go to $VAULT_URL/ui/ for the setup. Press enter to continue"
 
 VAULT_RETRIES=5
 echo "Vault is starting..."
@@ -18,9 +27,9 @@ vault login
 echo "Enabling Entra ID Authentication"
 vault auth enable oidc
 vault write auth/oidc/config \
-        oidc_discovery_url="$AZURE_AD_DISCOVERY_URL" \
-        oidc_client_id="$AZURE_AD_CLIENT_ID" \
-        oidc_client_secret="$AZURE_AD_CLIENT_SECRET" \
+        oidc_discovery_url="$ENTRA_ID_DISCOVERY_URL" \
+        oidc_client_id="$ENTRA_ID_CLIENT_ID" \
+        oidc_client_secret="$ENTRA_ID_CLIENT_SECRET" \
         default_role="reader"
 
 vault write auth/oidc/role/reader \
@@ -30,7 +39,7 @@ vault write auth/oidc/role/reader \
         ttl=1h \
         allowed_redirect_uris="http://localhost:8250/oidc/callback" \
         allowed_redirect_uris="https://localhost:8250/oidc/callback" \
-        allowed_redirect_uris="$VAULT_ADDR/ui/vault/auth/oidc/oidc/callback"
+        allowed_redirect_uris="$VAULT_URL/ui/vault/auth/oidc/oidc/callback"
         # groups_claim="groups" # Should be commented because I'm in too many groups
 
 vault write auth/oidc/role/admin \
@@ -40,11 +49,11 @@ vault write auth/oidc/role/admin \
         ttl=1h \
         allowed_redirect_uris="http://localhost:8250/oidc/callback" \
         allowed_redirect_uris="https://localhost:8250/oidc/callback" \
-        allowed_redirect_uris="$VAULT_ADDR/ui/vault/auth/oidc/oidc/callback"
+        allowed_redirect_uris="$VAULT_URL/ui/vault/auth/oidc/oidc/callback"
         # groups_claim="groups" # Should be commented because I'm in too many groups
 
 echo "Set admin policy"
-vault policy write admin /admin-policy.hcl
+vault policy write admin /config/admin-policy.hcl
 
 echo "Initializing certificate services"
 vault secrets enable pki
@@ -57,34 +66,34 @@ echo "Generating the Root CA"
 vault write -field=certificate pki/root/generate/internal \
         common_name="$ROOT_CA_COMMON_NAME" \
         key_bits=4096 \
-        ttl=87600h > Root_CA.crt
+        ttl=87600h > certs/Root_CA.crt
 
 echo "Configuring the Root CA URLs"
 vault write pki/config/urls \
-        issuing_certificates="$VAULT_ADDR_HTTP/v1/pki/ca" \
-        crl_distribution_points="$VAULT_ADDR_HTTP/v1/pki/crl"
+        issuing_certificates="$VAULT_URL/v1/pki/ca" \
+        crl_distribution_points="$VAULT_URL/v1/pki/crl"
 
 echo "Generating the Intermediate CA CSR"
 vault write -format=json pki_int/intermediate/generate/internal \
         common_name="$INT_CA_COMMON_NAME" \
         key_bits=4096 \
-        | jq -r '.data.csr' > Int_CA.csr
+        | jq -r '.data.csr' > certs/Int_CA.csr
 
 echo "Configuring the Intermediate CA URLs"
 vault write pki_int/config/urls \
-        issuing_certificates="$VAULT_ADDR_HTTP/v1/pki_int/ca" \
-        crl_distribution_points="$VAULT_ADDR_HTTP/v1/pki_int/crl"
+        issuing_certificates="$VAULT_URL/v1/pki_int/ca" \
+        crl_distribution_points="$VAULT_URL/v1/pki_int/crl"
 
 echo "Sign the Intermediate CA certificate"
-vault write -format=json pki/root/sign-intermediate csr=@Int_CA.csr \
+vault write -format=json pki/root/sign-intermediate csr=@certs/Int_CA.csr \
         format=pem_bundle ttl="43800h" \
-        | jq -r '.data.certificate' > Int_CA.pem
+        | jq -r '.data.certificate' > certs/Int_CA.pem
 
 echo "Import the Intermediate CA back into the vault"
-vault write pki_int/intermediate/set-signed certificate=@Int_CA.pem
+vault write pki_int/intermediate/set-signed certificate=@certs/Int_CA.pem
 
 echo "Create the server certificate role for $DOMAINNAME"
-vault write pki_int/roles/$VAULT_AZURE_AD_ROLE_NAME \
+vault write pki_int/roles/$VAULT_ENTRA_ID_ROLE_NAME \
         allowed_domains="$DOMAINNAME" \
         allow_localhost=false \
         allow_subdomains=true \
@@ -93,7 +102,7 @@ vault write pki_int/roles/$VAULT_AZURE_AD_ROLE_NAME \
         max_ttl="17531h"
 
 echo "Create the legacy server certificate role for $DOMAINNAME"
-vault write pki_int/roles/$VAULT_AZURE_AD_ROLE_NAME-2048 \
+vault write pki_int/roles/$VAULT_ENTRA_ID_ROLE_NAME-2048 \
         allowed_domains="$DOMAINNAME" \
         allow_localhost=false \
         allow_subdomains=true \
@@ -137,14 +146,15 @@ vault write pki_int/roles/code-signing \
         ttl="17531h"
 
 echo "Generate a test certificate"
-cert_details=$(vault write -format=json pki_int/issue/$VAULT_AZURE_AD_ROLE_NAME common_name="test.$DOMAINNAME" ttl="1h")
+cert_details=$(vault write -format=json pki_int/issue/$VAULT_ENTRA_ID_ROLE_NAME common_name="test.$DOMAINNAME" ttl="1h")
 
-echo $cert_details | jq -r '.data.certificate' > Test.crt
-echo $cert_details | jq -r '.data.private_key' > Test.key
+echo $cert_details | jq -r '.data.certificate' > certs/Test.crt
+echo $cert_details | jq -r '.data.private_key' > certs/Test.key
 
-echo "OpenSSL information on the certificate:"
-openssl_cert_details=$(openssl x509 -in Test.crt -text -noout)
-echo $openssl_cert_details
+# Only run this if you have a machine with openssl installed
+# echo "OpenSSL information on the certificate:"
+# openssl_cert_details=$(openssl x509 -in certs/Test.crt -text -noout)
+# echo $openssl_cert_details
 
 echo "Revoke the test certificate"
 vault write pki_int/revoke \
@@ -157,12 +167,12 @@ echo "Client - Configure Vault with a CA for signing client keys using the /conf
 vault write ssh-client-signer/config/ca generate_signing_key=true
 
 echo "Client - Configure the SSH Signing role"
-vault write ssh-client-signer/roles/clientrole @/signer-clientrole.json
+vault write ssh-client-signer/roles/clientrole @signer-clientrole.json
 
 echo "Client - Sign the public keys"
-for filename in /data/client_pub_keys/*.pub; do
-        echo "Signing public key '$filename'"
-        cat $filename | vault write -format=json ssh-client-signer/sign/clientrole public_key=- | jq -r '.data.signed_key' > "$filename-cert.pub"
+for filename in client_pub_keys/*.pub; do
+    echo "Signing public key '$filename'"
+    cat $filename | vault write -format=json ssh-client-signer/sign/clientrole public_key=- | jq -r '.data.signed_key' > "certs/$filename-cert.pub"
 done
 
 echo "Server - Enabling SSH Signed Certificates"
@@ -184,12 +194,15 @@ vault write ssh-host-signer/roles/hostrole \
     allow_subdomains=true
 
 echo "Server - Sign the public keys"
-for filename in /data/host_pub_keys/*.pub; do
-        echo "Signing public key '$filename'"
-        cat $filename | vault write -format=json ssh-host-signer/sign/hostrole \
-                cert_type=host \
-                public_key=- \
-                | jq -r '.data.signed_key' > "$filename-cert.pub"
+for filename in host_pub_keys/*.pub; do
+    echo "Signing public key '$filename'"
+    cat $filename | vault write -format=json ssh-host-signer/sign/hostrole \
+        cert_type=host \
+        public_key=- \
+        | jq -r '.data.signed_key' > "certs/$filename-cert.pub"
 done
 
 echo "Finished..."
+
+echo "Make sure to restart the container since vault logoff command isn't available"
+echo "Upon the next container update, the prereqs will be gone as well"

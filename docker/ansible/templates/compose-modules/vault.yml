@@ -20,7 +20,9 @@ services:
     environment:
       TZ: ${TZ}
       VAULT_ADDR: "http://0.0.0.0:8200"
+      VAULT_ADDR_HTTP: "http://0.0.0.0:8200"
       VAULT_API_ADDR: "http://0.0.0.0:8200"
+      VAULT_URL: "https://vault.$DOMAINNAME"
       # TODO: [vault] Understand why IPC_LOCK cap is added and I still get the
       # "Error initializing core: Failed to lock memory: cannot allocate memory" error.
       # Workaround:
@@ -45,15 +47,13 @@ services:
             "max_lease_ttl": "720h"
         }
       #### Used for Vault setup
-      VAULT_ADDR_HTTP: "http://0.0.0.0:8200"
-      # TODO: [vault] Add env vars
-      # ROOT_CA_COMMON_NAME: $ROOT_CA_COMMON_NAME
-      # INT_CA_COMMON_NAME: $INT_CA_COMMON_NAME
-      # AZURE_AD_CLIENT_ID: $VAULT_AZURE_AD_CLIENT_ID
-      # AZURE_AD_DISCOVERY_URL: $AZURE_ISSUER_URL
-      # AZURE_AD_DEFAULT_ROLE: $VAULT_AZURE_AD_DEFAULT_ROLE
-      # AZURE_AD_CLIENT_SECRET: $VAULT_AZURE_AD_CLIENT_SECRET
-      # VAULT_AZURE_AD_ROLE_NAME: $VAULT_AZURE_AD_ROLE_NAME
+      ROOT_CA_COMMON_NAME: $VAULT_ROOT_CA_COMMON_NAME
+      INT_CA_COMMON_NAME: $VAULT_INT_CA_COMMON_NAME
+      ENTRA_ID_CLIENT_ID: $VAULT_ENTRA_ID_CLIENT_ID
+      ENTRA_ID_CLIENT_SECRET: $VAULT_ENTRA_ID_CLIENT_SECRET
+      ENTRA_ID_DISCOVERY_URL: $GENERIC_ENTRA_ID_ISSUER_URL
+      ENTRA_ID_DEFAULT_ROLE: $VAULT_ENTRA_ID_DEFAULT_ROLE
+      VAULT_ENTRA_ID_ROLE_NAME: $VAULT_ENTRA_ID_ROLE_NAME
       DOMAINNAME: $DOMAINNAME
       ORGANIZATION: $ORGANIZATION_NAME
     labels:
