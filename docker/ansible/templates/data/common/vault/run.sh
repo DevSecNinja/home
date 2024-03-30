@@ -24,36 +24,60 @@ done
 echo "Authenticating to vault..."
 vault login
 
+#
+# Entra ID Authentication
+#
+
 echo "Enabling Entra ID Authentication"
 vault auth enable oidc
+
 vault write auth/oidc/config \
         oidc_discovery_url="$ENTRA_ID_DISCOVERY_URL" \
         oidc_client_id="$ENTRA_ID_CLIENT_ID" \
         oidc_client_secret="$ENTRA_ID_CLIENT_SECRET" \
-        default_role="reader"
+        default_role="entraid"
 
-vault write auth/oidc/role/reader \
+vault write auth/oidc/role/entraid \
         user_claim="sub" \
-        oidc_scopes="https://graph.microsoft.com/.default" \
+        oidc_scopes="https://graph.microsoft.com/.default profile" \
         policies=default \
         ttl=1h \
         allowed_redirect_uris="http://localhost:8250/oidc/callback" \
         allowed_redirect_uris="https://localhost:8250/oidc/callback" \
-        allowed_redirect_uris="$VAULT_URL/ui/vault/auth/oidc/oidc/callback"
+        allowed_redirect_uris="$VAULT_URL/ui/vault/auth/oidc/oidc/callback" \
+        groups_claim="roles"
         # groups_claim="groups" # Should be commented because I'm in too many groups
 
-vault write auth/oidc/role/admin \
-        user_claim="sub" \
-        oidc_scopes="https://graph.microsoft.com/.default" \
-        policies=admin \
-        ttl=1h \
-        allowed_redirect_uris="http://localhost:8250/oidc/callback" \
-        allowed_redirect_uris="https://localhost:8250/oidc/callback" \
-        allowed_redirect_uris="$VAULT_URL/ui/vault/auth/oidc/oidc/callback"
-        # groups_claim="groups" # Should be commented because I'm in too many groups
-
-echo "Set admin policy"
+echo "Creating admin policy"
 vault policy write admin /config/admin-policy.hcl
+
+echo "Adding external groups"
+
+vault write -format=json identity/group name="admin" \
+        policies="admin" \
+        type="external"
+
+vault write -format=json identity/group name="user" \
+        policies="user" \
+        type="external"
+
+echo "Adding aliases"
+
+vault_admin_id=$(vault read identity/group/name/admin --format=json | jq -r ".data.id")
+vault_user_id=$(vault read identity/group/name/user --format=json | jq -r ".data.id")
+entra_id_accessor=$(vault auth list -format=json | jq -r '.["oidc/"].accessor')
+
+vault write identity/group-alias name="admin" \
+     mount_accessor=$entra_id_accessor \
+     canonical_id=$vault_admin_id
+
+vault write identity/group-alias name="user" \
+     mount_accessor=$entra_id_accessor \
+     canonical_id=$vault_user_id
+
+#
+# Certificate Services
+#
 
 echo "Initializing certificate services"
 vault secrets enable pki

@@ -28,6 +28,7 @@ services:
       # Workaround:
       # SKIP_SETCAP and "disable_mlock" - don't do this in production
       SKIP_SETCAP: true
+      VAULT_LOG_LEVEL: info # Default is info, use "debug" for debug messages
       VAULT_LOCAL_CONFIG: >-
         {
             "ui": true,
