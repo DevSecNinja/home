@@ -87,6 +87,7 @@
         owner: root
         group: root
       loop:
+        - ca_chain
         - certificate
         - issuing_ca
         - private_key
