@@ -48,6 +48,19 @@ vault write auth/oidc/role/entraid \
         groups_claim="roles"
         # groups_claim="groups" # Should be commented because I'm in too many groups
 
+echo "Restricting claims to only approved roles"
+
+vault write auth/oidc/role/entraid -<<EOF
+{
+  "bound_claims": {
+        "roles": [
+            "admin",
+            "user"
+        ]
+    }
+}
+EOF
+
 echo "Creating admin policy"
 vault policy write admin /config/admin-policy.hcl
 
