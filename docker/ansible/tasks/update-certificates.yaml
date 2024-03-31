@@ -188,8 +188,8 @@
     path: "/etc/ssl/docker-client"
     state: directory
     mode: 0700
-    owner: root
-    group: root
+    owner: "{{ansible_user}}"
+    group: "docker"
 
 - name: Stat cert files
   ansible.builtin.stat:
@@ -250,8 +250,8 @@
         dest: "/etc/ssl/docker-client/{{ item }}.pem"
         content: "{{ cert_data.data.data[item] }}"
         mode: 0644
-        owner: root
-        group: root
+        owner: "{{ansible_user}}"
+        group: "docker"
       loop:
         - ca_chain
         - certificate

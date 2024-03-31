@@ -21,6 +21,7 @@ services:
     mem_limit: 200m
     volumes:
       - $DOCKERDIR/data/homepage:/app/config
+      - /etc/ssl/docker-client:/app/config/certs/docker-client:ro
     labels:
       # Traefik
       - "traefik.enable=true"

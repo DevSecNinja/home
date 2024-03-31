@@ -1,0 +1,12 @@
+{
+  "log-driver": "journald",
+  "features": {
+    "buildkit": true
+  },
+  "hosts": ["unix:///var/run/docker.sock", "tcp://0.0.0.0:2376"],
+  "tls": true,
+  "tlscacert": "/etc/ssl/docker-server/issuing_ca.pem",
+  "tlscert": "/etc/ssl/docker-server/certificate.pem",
+  "tlskey": "/etc/ssl/docker-server/private_key.pem",
+  "tlsverify": true
+}

@@ -25,3 +25,12 @@
 
 - name: Docker Prune
   command: docker image prune --force
+
+- name: Restart Docker
+  ansible.builtin.systemd:
+    name: "docker"
+    state: "restarted"
+
+- name: Reload systemd daemon
+  ansible.builtin.systemd:
+    daemon_reload: true

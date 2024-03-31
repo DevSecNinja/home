@@ -12,20 +12,26 @@
     - { direction: 'outgoing', policy: 'allow' }
 
 - name: Configure ufw rules - all
-  ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }}
+  ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }} comment={{ item.comment }}
   with_items:
     - { rule: 'limit', port: '{{ ssh_port | default("22") }}', proto: 'tcp', comment: 'SSH' }
 
 - name: Configure ufw rules - webservers
-  ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }}
+  ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }} comment={{ item.comment }}
   with_items:
     - { rule: 'allow', port: '80', proto: 'tcp', comment: 'Traefik' }
     - { rule: 'allow', port: '443', proto: 'tcp', comment: 'Traefik'  }
     # - { rule: 'allow', port: '8085', proto: 'tcp', comment: 'Traefik'  }
   when: "'webservers' in group_names"
 
+- name: Configure ufw rules - management server connections
+  ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }} comment={{ item.comment }} from={{ item.from }}
+  with_items:
+    - { rule: 'allow', port: '2376', proto: 'tcp', comment: 'Docker Daemon', from: '192.168.1.11' }
+  when: "'docker' in group_names"
+
 - name: Configure ufw rules - management
-  ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }}
+  ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }} comment={{ item.comment }}
   with_items:
     - { rule: 'allow', port: '3478', proto: 'udp', comment: 'Unifi' }
     - { rule: 'allow', port: '8843', proto: 'tcp', comment: 'Unifi' }
@@ -36,7 +42,7 @@
   when: "'management' in group_names"
 
 - name: Configure ufw rules - dnsservers
-  ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }}
+  ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }} comment={{ item.comment }}
   with_items:
     - { rule: 'allow', port: '53', proto: 'tcp', comment: 'AdGuard' }
     - { rule: 'allow', port: '53', proto: 'udp', comment: 'AdGuard' }
@@ -44,7 +50,7 @@
   when: "'dnsservers' in group_names"
 
 - name: Configure ufw rules - production
-  ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }}
+  ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }} comment={{ item.comment }}
   with_items:
     - { rule: 'allow', port: '445', proto: 'tcp', comment: 'Samba' }
   when: "'production' in group_names"
