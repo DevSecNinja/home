@@ -155,6 +155,8 @@
       community.hashi_vault.vault_pki_generate_certificate: # noqa syntax-check
         role_name: "docker-server"
         common_name: "{{ inventory_hostname_short }}.{{ generic__domain_name }}"
+        alt_names: "localhost" # Needed for Docker daemon
+        ip_sans: ["127.0.0.1", "{{ ansible_default_ipv4.address|default(ansible_all_ipv4_addresses[0]) }}"]
         ttl: 365d
         engine_mount_point: "pki_int"
         url: https://vault.{{ generic__domain_name }}

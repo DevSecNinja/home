@@ -1,0 +1,9 @@
+---
+- name: Debug playbook
+  hosts: all
+  become: yes
+  gather_facts: yes
+  tasks:
+  - name: Show host IP
+    debug:
+      msg: "{{ ansible_default_ipv4.address|default(ansible_all_ipv4_addresses[0]) }}"

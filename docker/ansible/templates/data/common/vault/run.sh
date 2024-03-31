@@ -203,8 +203,8 @@ vault write pki_int/roles/docker-server \
         max_ttl=8760h \
         ttl=8760h  \
         allowed_domains=$DOMAINNAME \
-        allow_localhost=false \
-        allow_ip_sans=false \
+        allow_localhost=true \
+        allow_ip_sans=true \
         allow_bare_domains=false \
         allow_subdomains=true \
         server_flag=true \
