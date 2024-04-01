@@ -5,16 +5,13 @@
     - include_tasks: ../tasks/update-os.yaml
     - include_tasks: ../tasks/new-server.yaml
 
-    - name: Install dependencies
-      apt:
-        name: "{{ packages }}"
+    - name: Install Docker dependencies
+      retries: 20
+      delay: 15
+      ansible.builtin.apt:
+        name: "{{ docker__package_dependencies + docker__pip_dependencies }}"
         state: present
         update_cache: yes
-      vars:
-        packages:
-        - ca-certificates
-        - curl
-        - gnupg
 
     # To use the sops_encrypt module on a remote host, you need to install sops on it:
     - name: Install sops on remote hosts
@@ -146,6 +143,8 @@
         - "Remove STUB"
       # ansible_architecture == "x86_64" because the service doesn't seem to exist on my RPI with Debian ARM
       when: inventory_hostname in groups['dnsservers'] and ansible_architecture == "x86_64"
+
+    - include_tasks: ../tasks/configure-docker.yaml
 
   handlers:
     - import_tasks: ../handlers/main.yml
