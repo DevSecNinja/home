@@ -13,7 +13,7 @@ services:
       - t2_proxy
       - wallabag-backend
     security_opt:
-      - no-new-privileges:true
+      - no-new-privileges=true
     mem_limit: 200m
     environment:
       - TZ=${TZ}
@@ -68,7 +68,7 @@ services:
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
     restart: always
     security_opt:
-      - no-new-privileges:true
+      - no-new-privileges=true
     networks:
       - wallabag-backend
     volumes:
@@ -139,7 +139,7 @@ services:
       - DB01_PASS=${WALLABAG_MYSQL_PASSWORD}
     restart: always
     security_opt:
-      - no-new-privileges:true
+      - no-new-privileges=true
 
   wallabag-redis:
     image: redis:alpine3.19@sha256:c1ac6782927e574394225a790b6eb476154d1a16681b1374c62625d9bc324b18
@@ -153,7 +153,7 @@ services:
       interval: 20s
       timeout: 3s
     security_opt:
-      - no-new-privileges:true
+      - no-new-privileges=true
     mem_limit: 1024m
     environment:
       - PUID=${PUID}

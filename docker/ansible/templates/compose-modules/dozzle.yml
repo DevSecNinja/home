@@ -11,7 +11,7 @@ services:
       - dozzle-backend
     restart: always
     security_opt:
-      - no-new-privileges:true
+      - no-new-privileges=true
     mem_limit: 1024m
     environment:
       - TZ=${TZ}
@@ -44,7 +44,7 @@ services:
       - EVENTS=1 # Enabled by default
       - POST=0 # Disallow any POST operations (effectively read-only)
     security_opt:
-      - no-new-privileges:true
+      - no-new-privileges=true
     mem_limit: 50m
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro

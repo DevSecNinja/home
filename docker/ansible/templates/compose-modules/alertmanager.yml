@@ -14,7 +14,7 @@ services:
     networks:
       - t2_proxy
     security_opt:
-      - no-new-privileges:true
+      - no-new-privileges=true
     labels:
       # Homepage
       - homepage.group=Infrastructure

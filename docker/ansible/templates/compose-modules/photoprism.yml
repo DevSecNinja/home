@@ -11,7 +11,7 @@ services:
       - photoprism-backend
     stop_grace_period: 10s
     security_opt:
-      #- no-new-privileges:true
+      #- no-new-privileges=true
       - seccomp:unconfined
       - apparmor:unconfined
     ## Before you start the service, please check the following config options (and change them as needed):
@@ -109,7 +109,7 @@ services:
     restart: always
     stop_grace_period: 5s
     security_opt: # see https://github.com/MariaDB/mariadb-docker/issues/434#issuecomment-1136151239
-      # - no-new-privileges:true
+      # - no-new-privileges=true
       - seccomp:unconfined
       - apparmor:unconfined
     networks:
@@ -178,7 +178,7 @@ services:
       - DB01_PASS=${PHOTOPRISM_MYSQL_PASSWORD}
     restart: always
     security_opt:
-      - no-new-privileges:true
+      - no-new-privileges=true
 
 volumes:
   photoprism_data:

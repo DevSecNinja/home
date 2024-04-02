@@ -18,7 +18,7 @@ services:
       - promtail-backend
     mem_limit: 1024m
     security_opt:
-      - no-new-privileges:true
+      - no-new-privileges=true
     labels:
       # Homepage
       - homepage.group=Infrastructure
@@ -50,7 +50,7 @@ services:
       - SERVICES=1
       - TASKS=1
     security_opt:
-      - no-new-privileges:true
+      - no-new-privileges=true
     mem_limit: 50m
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro

@@ -9,7 +9,7 @@ services:
       - t2_proxy
     restart: always
     security_opt:
-      - no-new-privileges:true
+      - no-new-privileges=true
     volumes:
       - vault_data:/vault/file
       - vault_data:/vault/logs

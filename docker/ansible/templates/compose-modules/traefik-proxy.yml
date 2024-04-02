@@ -10,7 +10,7 @@ services:
         ipv4_address: 192.168.101.200
       traefik-backend:
     security_opt:
-      - no-new-privileges:true
+      - no-new-privileges=true
     ports:
       - target: 80
         published: 80
@@ -69,7 +69,7 @@ services:
       - TZ=${TZ}
       - CONTAINERS=1 # Allow access to viewing containers
     security_opt:
-      - no-new-privileges:true
+      - no-new-privileges=true
     mem_limit: 50m
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -83,7 +83,7 @@ services:
     environment:
       - TZ=${TZ}
     security_opt:
-      - no-new-privileges:true
+      - no-new-privileges=true
     mem_limit: 50m
     entrypoint: sh -c '
       apk add jq

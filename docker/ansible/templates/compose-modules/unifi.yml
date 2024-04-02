@@ -9,7 +9,7 @@ services:
     container_name: unifi-db
     mem_limit: 1024m
     security_opt:
-      - no-new-privileges:true
+      - no-new-privileges=true
     networks:
       - unifi-backend
     volumes:
@@ -53,7 +53,7 @@ services:
       - DB01_PASS=${UNIFI_MONGO_PASS}
     restart: always
     security_opt:
-      - no-new-privileges:true
+      - no-new-privileges=true
 
   unifi:
     container_name: unifi
@@ -96,7 +96,7 @@ services:
       - 2221:22/tcp # used for SSH
     restart: always
     security_opt:
-      - no-new-privileges:true
+      - no-new-privileges=true
     labels:
       # Homepage
       - homepage.group=Infrastructure

@@ -16,7 +16,7 @@ services:
         ipv4_address: 192.168.101.202
     restart: always
     security_opt:
-      - no-new-privileges:true
+      - no-new-privileges=true
     volumes:
       - $DOCKERDIR/data/authelia/config:/config:ro
       - authelia_data:/data
@@ -70,7 +70,7 @@ services:
       - DB01_HOST=/data/db.sqlite3
     restart: always
     security_opt:
-      - no-new-privileges:true
+      - no-new-privileges=true
 
 volumes:
   authelia_data:

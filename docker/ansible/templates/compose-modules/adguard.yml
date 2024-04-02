@@ -11,7 +11,7 @@ services:
     environment:
       - TZ=${TZ}
     security_opt:
-      - no-new-privileges:true
+      - no-new-privileges=true
     volumes:
       - $DOCKERDIR/data/unbound/a-records.conf:/opt/unbound/etc/unbound/a-records.conf:ro
       - $DOCKERDIR/data/unbound/forward-records.conf:/opt/unbound/etc/unbound/forward-records.conf:ro
@@ -37,7 +37,7 @@ services:
       - TZ=${TZ}
     restart: always
     security_opt:
-      - no-new-privileges:true
+      - no-new-privileges=true
     labels:
       # Backup
       - docker-volume-backup.stop-during-backup=false # true - otherwise backup can't work with socketproxy

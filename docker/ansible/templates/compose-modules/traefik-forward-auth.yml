@@ -10,7 +10,7 @@ services:
       - t2_proxy
     restart: always
     security_opt:
-      - no-new-privileges:true
+      - no-new-privileges=true
     mem_limit: 200m
     environment:
       - TZ=${TZ}

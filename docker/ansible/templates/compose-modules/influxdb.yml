@@ -23,7 +23,7 @@ services:
       - t2_proxy
       - influxdb
     security_opt:
-      - no-new-privileges:true
+      - no-new-privileges=true
     labels:
       # Homepage
       - homepage.group=Infrastructure
@@ -83,7 +83,7 @@ services:
       - DB01_INFLUX_VERSION=2
     restart: always
     security_opt:
-      - no-new-privileges:true
+      - no-new-privileges=true
 
 volumes:
   influxdb_data:

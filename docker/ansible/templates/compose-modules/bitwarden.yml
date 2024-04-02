@@ -10,7 +10,7 @@ services:
       - t2_proxy
       - bitwarden-backend
     security_opt:
-      - no-new-privileges:true
+      - no-new-privileges=true
     mem_limit: 200m
     environment:
       - PUID=${PUID}
@@ -52,7 +52,7 @@ services:
     command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
     restart: always
     security_opt:
-      - no-new-privileges:true
+      - no-new-privileges=true
     networks:
       - bitwarden-backend
     volumes:
@@ -123,7 +123,7 @@ services:
       - DB01_PASS=${BITWARDEN_MYSQL_PASSWORD}
     restart: always
     security_opt:
-      - no-new-privileges:true
+      - no-new-privileges=true
 
 volumes:
   bitwarden_data:

@@ -25,4 +25,4 @@ services:
       - DOMAIN1_PROXIED=FALSE
     restart: always
     security_opt:
-      - no-new-privileges:true
+      - no-new-privileges=true

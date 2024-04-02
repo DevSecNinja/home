@@ -17,7 +17,7 @@ services:
       # - PGID=${PGID}
       - TZ=${TZ}
     security_opt:
-      - no-new-privileges:true
+      - no-new-privileges=true
     mem_limit: 200m
     volumes:
       - $DOCKERDIR/data/homepage:/app/config
@@ -45,7 +45,7 @@ services:
       #- TASKS=1 # Allow access to viewing tasks (necessary when using Docker Swarm)
       - POST=0 # Disallow any POST operations (effectively read-only)
     security_opt:
-      - no-new-privileges:true
+      - no-new-privileges=true
     mem_limit: 50m
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro

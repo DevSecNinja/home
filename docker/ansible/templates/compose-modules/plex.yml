@@ -18,7 +18,7 @@ services:
       nofile: 60000
       core: 0
     security_opt:
-      - no-new-privileges:true
+      - no-new-privileges=true
     mem_limit: 2048m
     environment:
       - PUID=${PUID}

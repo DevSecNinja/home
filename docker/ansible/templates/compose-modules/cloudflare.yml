@@ -10,7 +10,7 @@ services:
       - all
     read_only: true
     security_opt:
-      - no-new-privileges:true
+      - no-new-privileges=true
     mem_limit: 1024m
     environment:
       - PUID=${PUID}
