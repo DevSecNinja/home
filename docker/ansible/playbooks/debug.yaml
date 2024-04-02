@@ -7,3 +7,19 @@
   - name: Show host IP
     debug:
       msg: "{{ ansible_default_ipv4.address|default(ansible_all_ipv4_addresses[0]) }}"
+
+  - name: Initialize empty list for devices
+    set_fact:
+      storage_devices: []
+    no_log: true
+
+  - name: Get SCSI devices
+    set_fact:
+      storage_devices: "{{ storage_devices + [item.key] }}"
+    no_log: true
+    with_dict: "{{ ansible_devices }}"
+    when: "item.value.host.startswith('SCSI storage controller: Red Hat, Inc. Virtio SCSI')"
+
+  - name: Show values for SCSI devices
+    debug: msg="{{ ansible_devices[item] }}"
+    loop: "{{ storage_devices }}"

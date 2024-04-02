@@ -7,10 +7,19 @@
     partition_number: 1
     volume_fstype: "ext4"
   tasks:
+    - name: Load encrypted credentials
+      community.sops.load_vars:
+        file: ../inventory/group_vars/all/secrets.sops.yml
+        age_keyfile: $HOME/git/home/age.key
+        config_path: $HOME/git/home/.sops.yaml
+        expressions: ignore  # explicitly do not evaluate expressions
+                             # on load (this is the default)
+
     - name: Run the storage role for the data disk
       include_role:
         name: robertdebock.storage
       vars:
+        # Get label after creating a disk: sudo fdisk -l
         disk_name: "/dev/sdb"
         mount_path: "/mnt/data"
 
@@ -63,7 +72,12 @@
         mode: "0755"
       loop:
         - "/mnt/data"
+        - "/mnt/data/backup"
+        - "/mnt/data/media/"
         - "/mnt/data/media/study"
-
         - "/mnt/archive"
         - "/mnt/archive/backup"
+        - "/mnt/archive/backup/HomeAssistant"
+        - "/mnt/archive/backup/{{ generic__hostnames_desktop }}"
+        - "/mnt/archive/media"
+        - "/mnt/archive/media/study"
