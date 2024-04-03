@@ -150,5 +150,15 @@
         chdir: /srv/docker
       when: inventory_hostname in groups['dnsservers']
 
+    - name: "[Test] Perform DNS lookup on primary DNS"
+      command: "host github.com adguard-mgmt.{{ generic__domain_name }}"
+      register: host_output
+      failed_when: "'has address' not in host_output.stdout"
+
+    - name: "[Test] Perform DNS lookup on fallback DNS"
+      command: "host github.com adguard-fall.{{ generic__domain_name }}"
+      register: host_output
+      failed_when: "'has address' not in host_output.stdout"
+
   handlers:
     - import_tasks: ../handlers/main.yml

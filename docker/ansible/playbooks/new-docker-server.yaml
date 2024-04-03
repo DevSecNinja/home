@@ -59,17 +59,12 @@
         expires: -1
 
     - name: Install Docker
-      apt:
-        name: "{{ packages }}"
+      retries: 20
+      delay: 15
+      ansible.builtin.apt:
+        name: "{{ docker__packages }}"
         state: present
         update_cache: yes
-      vars:
-        packages:
-        - docker-ce
-        - docker-ce-cli
-        - containerd.io
-        - docker-buildx-plugin
-        - docker-compose-plugin
 
     - name: Create Docker configuration directories
       ansible.builtin.file:

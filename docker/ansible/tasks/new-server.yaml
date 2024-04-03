@@ -1,7 +1,19 @@
 ---
+- name: Install minimal required packages
+  ansible.builtin.apt:
+    name: "{{ packages__base }}"
+
 - name: Set timezone to "{{ tz }}"
   community.general.timezone:
     name: "{{ tz }}"
+
+- name: Ensure NTP is started & enabled
+  service: name=ntp state=started enabled=yes
+
+- name: Check if system clock was recently synced with NTP
+  command: timedatectl status
+  register: timedatectl_output
+  failed_when: "'System clock synchronized: yes' not in timedatectl_output.stdout"
 
 - name: Ensure the locale "{{ locale }}"" exists
   locale_gen:

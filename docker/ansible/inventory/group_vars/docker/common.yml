@@ -49,6 +49,13 @@ docker__package_dependencies:
   #- "gnupg2" # Not sure if needed
   #- "software-properties-common" # Not sure if needed
 
+docker__packages:
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+  - docker-buildx-plugin
+  - docker-compose-plugin
+
 docker__architecture_map:
   "x86_64": "amd64"
   "aarch64": "arm64"
