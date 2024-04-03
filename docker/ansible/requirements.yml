@@ -1,2 +1,7 @@
 ---
-- robertdebock.storage
+collections:
+  - name: vladgh.samba
+    version: "=3.3.0"
+roles:
+  - name: robertdebock.storage
+    version: master # TODO: [ansible] Fix versioning

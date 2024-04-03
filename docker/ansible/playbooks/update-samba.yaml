@@ -1,0 +1,8 @@
+---
+- name: Samba Server
+  hosts: svlprod.PRODUCTION
+  become: true
+  tasks:
+    - name: Include Samba Server role
+      ansible.builtin.include_role:
+        name: vladgh.samba.server

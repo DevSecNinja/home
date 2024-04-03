@@ -1,8 +1,15 @@
+#
+#### DEPRECATION NOTICE
+## This compose module is no longer in use
+## Replaced by: Samba on VM with Ansible role vladgh.samba
+## Reason: docker image hasn't been updated in a while and worked unstable (files disappeared sometimes)
+## Last used version: amd64@sha256:e1d2a7366690749a7be06f72bdbf6a5a7d15726fc84e4e4f41e967214516edfd
+#
+
 services:
   samba:
     container_name: samba
-    # TODO: [samba] Replace old Samba container
-    image: dperson/samba:amd64@sha256:e1d2a7366690749a7be06f72bdbf6a5a7d15726fc84e4e4f41e967214516edfd
+    image: dperson/samba
     restart: always
     networks:
       - samba
