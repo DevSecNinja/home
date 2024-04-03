@@ -21,6 +21,10 @@
     "terminal.integrated.defaultProfile.linux": "zsh",
     "yaml.schemas": {
         "ansible": "./ansible/*.yaml",
+        "https://taskfile.dev/schema.json": [
+          "**/Taskfile.yml",
+          "./path/to/any/other/taskfile.yml"
+        ],
         "Kubernetes": "./kubernetes/*.yaml"
     },
     "vs-kubernetes": {
