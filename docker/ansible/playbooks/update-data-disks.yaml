@@ -72,12 +72,4 @@
         mode: "0755"
       loop:
         - "/mnt/data"
-        - "/mnt/data/backup"
-        - "/mnt/data/media/"
-        - "/mnt/data/media/study"
         - "/mnt/archive"
-        - "/mnt/archive/backup"
-        - "/mnt/archive/backup/HomeAssistant"
-        - "/mnt/archive/backup/{{ generic__hostnames_desktop }}"
-        - "/mnt/archive/media"
-        - "/mnt/archive/media/study"
