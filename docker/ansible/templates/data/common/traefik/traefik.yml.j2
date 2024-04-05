@@ -15,6 +15,8 @@ entryPoints:
 {% if 'management' in group_names %}
   unifi-guest:
     address: ":8843"
+    http:
+      tls: {}
 {% endif %}
 
 metrics:
@@ -30,7 +32,9 @@ http:
   routers:
     # HTTP-to-HTTPS Redirect
     http-catchall:
-      entrypoints: "http"
+      entrypoints:
+        - "http"
+        - "unifi-guest"
       rule: "HostRegexp(`{host:.+}`)"
       middlewares: "middlewares-redirect-to-https"
 
