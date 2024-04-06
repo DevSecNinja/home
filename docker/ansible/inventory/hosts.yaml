@@ -45,6 +45,8 @@ docker:
           ansible_user: "jean-paul"
         svlfall.MANAGEMENT:
           ansible_user: "jean-paul"
+        svlext.ravensberg.org:
+          ansible_user: "jean-paul"
 
     vpnservers:
       hosts:
