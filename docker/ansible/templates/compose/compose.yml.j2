@@ -47,6 +47,9 @@ include:
   - $DOCKERDIR/data/compose/excalidraw.yml
   - $DOCKERDIR/data/compose/jupyter.yml
 {% endif %}
+{% if 'vpnservers' in group_names %}
+  - $DOCKERDIR/data/compose/wireguard.yml
+{% endif %}
 
 networks:
   default:

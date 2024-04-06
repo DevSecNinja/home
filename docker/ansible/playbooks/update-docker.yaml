@@ -3,6 +3,8 @@
   become: yes
   vars:
     # Directories
+    compose_dest_path: "/srv/docker/data/compose"
+    compose_src_path: "../templates/compose-modules"
     templates_src_path: "../templates/data/{{inventory_hostname_short}}"
     templates_common_src_path: "../templates/data/common"
     templates_dest_path: "/srv/docker/data"
@@ -67,11 +69,11 @@
       with_items: "{{ lookup('pipe', 'find '+ templates_common_src_path +'/ -type d').split('\n') }}"
 
     - name: "[Common] Copy all data files recursively"
-      copy: src={{ item }} dest={{templates_dest_path}}/{{ item|replace(templates_common_src_path+'/', '') }}  owner={{ansible_user}} group=docker mode=0755
+      copy: src={{ item }} dest={{templates_dest_path}}/{{ item|replace(templates_common_src_path+'/', '') }} owner={{ansible_user}} group=docker mode=0755
       with_items: "{{ lookup('pipe', 'find '+ templates_common_src_path +'/ -type f -not -name *.j2 ').split('\n') }}"
 
     - name: "[Common] Copy data templates files recursively"
-      template: src={{ item }} dest={{templates_dest_path}}/{{ item|replace(templates_common_src_path+'/', '')|replace('.j2', '') }}  owner={{ansible_user}} group=docker mode=0755
+      template: src={{ item }} dest={{templates_dest_path}}/{{ item|replace(templates_common_src_path+'/', '')|replace('.j2', '') }} owner={{ansible_user}} group=docker mode=0755
       with_items: "{{ lookup('pipe', 'find '+ templates_common_src_path +'/ -type f -name *.j2').split('\n') }}"
 
     # Server specific
@@ -101,7 +103,7 @@
       when: check_server_folder_exists.stat.exists == true
 
     - name: "[Server] Copy all data files recursively"
-      copy: src={{ item }} dest={{templates_dest_path}}/{{ item|replace(templates_src_path+'/', '') }}  owner={{ansible_user}} group=docker mode=0755
+      copy: src={{ item }} dest={{templates_dest_path}}/{{ item|replace(templates_src_path+'/', '') }} owner={{ansible_user}} group=docker mode=0755
       with_items: "{{ data_files.stdout_lines }}"
       when:
         - check_server_folder_exists.stat.exists == true
@@ -114,19 +116,20 @@
       when: check_server_folder_exists.stat.exists == true
 
     - name: "[Server] Copy data templates files recursively"
-      template: src={{ item }} dest={{templates_dest_path}}/{{ item|replace(templates_src_path+'/', '')|replace('.j2', '') }}  owner={{ansible_user}} group=docker mode=0755
+      template: src={{ item }} dest={{templates_dest_path}}/{{ item|replace(templates_src_path+'/', '')|replace('.j2', '') }} owner={{ansible_user}} group=docker mode=0755
       with_items: "{{ data_templates.stdout_lines }}"
       when:
         - check_server_folder_exists.stat.exists == true
         - item != ""
 
-    - name: Copy compose-modules folder
-      copy:
-        src: "../templates/compose-modules/"
-        dest: "/srv/docker/data/compose"
-        owner: "{{ansible_user}}"
-        group: "docker"
-        mode: "0755"
+    # Compose
+    - name: "[Compose] Copy all data files recursively"
+      copy: src={{ item }} dest={{compose_dest_path}}/{{ item|replace(compose_src_path+'/', '') }} owner={{ansible_user}} group=docker mode=0755
+      with_items: "{{ lookup('pipe', 'find '+ compose_src_path +'/ -type f -not -name *.j2 ').split('\n') }}"
+
+    - name: "[Compose] Copy data templates files recursively"
+      template: src={{ item }} dest={{compose_dest_path}}/{{ item|replace(compose_src_path+'/', '')|replace('.j2', '') }} owner={{ansible_user}} group=docker mode=0755
+      with_items: "{{ lookup('pipe', 'find '+ compose_src_path +'/ -type f -name *.j2').split('\n') }}"
 
     - name: Pull images
       shell:

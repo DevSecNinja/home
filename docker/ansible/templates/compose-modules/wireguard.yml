@@ -1,0 +1,44 @@
+services:
+  wireguard:
+    container_name: wireguard
+    image: lscr.io/linuxserver/wireguard:1.0.20210914@sha256:8732e65c37993715fe884686c4c609c7a6702d577447b7ad39e83c57f51b6a28
+    depends_on:
+      - traefik
+    networks:
+      - t2_proxy
+    restart: always
+    cap_add:
+      - NET_ADMIN
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
+    security_opt:
+      - no-new-privileges=true
+    mem_limit: 1024m
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      # Wireguard
+      - PEERS=Desktop,Laptop,Phone,Tablet
+      - SERVERURL=vpn.$DOMAINNAME
+      #- PEERDNS=adguard
+    volumes:
+      - wireguard_data:/config
+    labels:
+      # # Homepage
+      # - homepage.group=Infrastructure
+      # - homepage.name=Wireguard
+      # - homepage.icon=wireguard.svg
+      # - homepage.href=https://vpn.$DOMAINNAME
+      # - homepage.description=Virtual Private Network
+      # Traefik
+      - "traefik.enable=true"
+      ## Middlewares
+      - "traefik.http.routers.wireguard-rtr.middlewares=chain-no-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.wireguard-rtr.rule=Host(`vpn.$DOMAINNAME`)"
+      - "traefik.http.routers.wireguard-rtr.service=wireguard-svc"
+      - "traefik.http.services.wireguard-svc.loadbalancer.server.port=51820"
+
+volumes:
+  wireguard_data:

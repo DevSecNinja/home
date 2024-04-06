@@ -20,11 +20,20 @@ services:
         published: 443
         protocol: tcp
         mode: host
+{% if 'management' in group_names %}
       # Unifi Guest portal can only be reached on 8843
       - target: 8843
         published: 8843
         protocol: tcp
         mode: host
+{% endif %}
+{% if 'vpnservers' in group_names %}
+      # Wireguard VPN
+      - target: 51820
+        published: 51820
+        protocol: udp
+        mode: host
+{% endif %}
     volumes:
       - $DOCKERDIR/data/traefik/acme/acme.json:/acme.json
       - $DOCKERDIR/data/traefik/certchain:/certchain

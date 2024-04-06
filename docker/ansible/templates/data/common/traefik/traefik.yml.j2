@@ -18,6 +18,10 @@ entryPoints:
     http:
       tls: {}
 {% endif %}
+{% if 'vpnservers' in group_names %}
+  wireguard:
+    address: ":51820/udp"
+{% endif %}
 
 metrics:
   prometheus:
