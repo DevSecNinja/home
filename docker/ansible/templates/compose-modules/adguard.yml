@@ -24,8 +24,9 @@ services:
       - unbound
     mem_limit: 1024m
     networks:
-      - t2_proxy
-      - adguard-backend
+      t2_proxy:
+        ipv4_address: 192.168.101.220
+      adguard-backend:
     ports:
       - '53:53/tcp'
       - '53:53/udp'

@@ -21,7 +21,7 @@ services:
       # Wireguard
       - PEERS=Desktop,Laptop,Phone,Tablet
       - SERVERURL=vpn.$DOMAINNAME
-      #- PEERDNS=adguard
+      - PEERDNS=192.168.101.220
     volumes:
       - wireguard_data:/config
     labels:
