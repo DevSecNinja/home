@@ -34,11 +34,12 @@ services:
       # Traefik
       - "traefik.enable=true"
       ## Middlewares
-      - "traefik.http.routers.wireguard-rtr.middlewares=chain-no-auth@file"
-      ## HTTP Services
-      - "traefik.http.routers.wireguard-rtr.rule=Host(`vpn.$DOMAINNAME`)"
-      - "traefik.http.routers.wireguard-rtr.service=wireguard-svc"
-      - "traefik.http.services.wireguard-svc.loadbalancer.server.port=51820"
+      - "traefik.udp.routers.wireguard-rtr.middlewares=chain-no-auth@file"
+      - "traefik.udp.routers.wireguard-rtr.entrypoints=wireguard"
+      ## UDP Services
+      - "traefik.udp.routers.wireguard-rtr.rule=Host(`vpn.$DOMAINNAME`)"
+      - "traefik.udp.routers.wireguard-rtr.service=wireguard-svc"
+      - "traefik.udp.services.wireguard-svc.loadbalancer.server.port=51820"
 
 volumes:
   wireguard_data:
