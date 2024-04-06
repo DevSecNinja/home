@@ -6,7 +6,7 @@
 
 - name: Bring up Docker containers
   shell:
-    cmd: "docker compose up -d --remove-orphans"
+    cmd: "docker compose up -d --remove-orphans --wait 2>&1"
     chdir: /srv/docker
 
 - name: Prune unused images

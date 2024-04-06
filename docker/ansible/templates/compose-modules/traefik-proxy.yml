@@ -60,7 +60,7 @@ services:
   traefik-docker-proxy:
     # TODO: [docker] Restore version pinning for ghcr.io hosted images since they have a distinct digest per arch
     # @sha256:da4addb776070a9d2ae2bb91d8f57225c1028779c161ca0d137e36901ba1751b
-    image: ghcr.io/tecnativa/docker-socket-proxy:latest
+    image: ghcr.io/tecnativa/docker-socket-proxy:0.1.2@sha256:dc8ec925b1360c54e6bf350602d6faac4e33c5d8d809118e4c000c0b14a4529a
     container_name: traefik-docker-proxy
     restart: always
     networks:
