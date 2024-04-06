@@ -49,6 +49,12 @@
     - { rule: 'allow', port: '853', proto: 'tcp', comment: 'AdGuard' }
   when: "'dnsservers' in group_names"
 
+- name: Configure ufw rules - vpnservers
+  ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }} comment={{ item.comment }}
+  with_items:
+    - { rule: 'allow', port: '51820', proto: 'udp', comment: 'Wireguard' }
+  when: "'vpnservers' in group_names"
+
 - name: Configure ufw rules - production
   ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }} comment={{ item.comment }}
   with_items:
