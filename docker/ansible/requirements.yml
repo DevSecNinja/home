@@ -5,4 +5,4 @@ collections:
 roles:
   - name: robertdebock.storage
     src: https://github.com/robertdebock/ansible-role-storage
-    version: 6.0.3
+    version: 6.0.4
