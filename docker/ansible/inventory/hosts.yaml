@@ -23,6 +23,10 @@ docker:
               hosts:
                 svlprod.PRODUCTION:
                   ansible_user: "jean-paul"
+            external:
+              hosts:
+                svlext.ravensberg.org:
+                  ansible_user: "jean-paul"
 
         linux_arm64_v8:
           children:

@@ -1,5 +1,9 @@
 ---
 
+# Note:
+# "Handlers are executed in the order they are defined in the handlers section,
+# not in the order listed in the notify statement."
+
 - name: restart nginx
   service: name=nginx state=restarted
 
@@ -26,11 +30,11 @@
 - name: Docker Prune
   command: docker image prune --force
 
+- name: Reload systemd daemon
+  ansible.builtin.systemd:
+    daemon_reload: true
+
 - name: Restart Docker
   ansible.builtin.systemd:
     name: "docker"
     state: "restarted"
-
-- name: Reload systemd daemon
-  ansible.builtin.systemd:
-    daemon_reload: true
