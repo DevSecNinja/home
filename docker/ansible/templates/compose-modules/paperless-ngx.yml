@@ -41,7 +41,7 @@ services:
       - paperless-backend
 
   paperless-web:
-    image: ghcr.io/paperless-ngx/paperless-ngx:2.6.3@sha256:101f3cbfd1e15f9dc3303f2eeb64dd4a9489f121accb31612c9ff8be93ba8094
+    image: ghcr.io/paperless-ngx/paperless-ngx:2.7.0@sha256:93ed7056a2695fd3feb5408dfd8b2630d7ad6cb53446db5b212d3d7992c0761c
     container_name: paperless-web
     restart: always
     security_opt:
