@@ -21,9 +21,6 @@ include:
 {% if 'production' in group_names %}
   - $DOCKERDIR/data/compose/change-detection.yml
   - $DOCKERDIR/data/compose/code-server.yml
-  - $DOCKERDIR/data/compose/drawio.yml
-  - $DOCKERDIR/data/compose/excalidraw.yml
-  - $DOCKERDIR/data/compose/jupyter.yml
   - $DOCKERDIR/data/compose/linkding.yml
   - $DOCKERDIR/data/compose/nextcloud.yml
   - $DOCKERDIR/data/compose/openspeedtest.yml
@@ -34,14 +31,21 @@ include:
   - $DOCKERDIR/data/compose/wallabag.yml
 {% endif %}
 {% if 'webservers' in group_names %}
-  - $DOCKERDIR/data/compose/cadvisor.yml
   - $DOCKERDIR/data/compose/dozzle.yml
   - $DOCKERDIR/data/compose/echo-server.yml
   - $DOCKERDIR/data/compose/homepage.yml
-  - $DOCKERDIR/data/compose/mailrise.yml
   - $DOCKERDIR/data/compose/portainer.yml
   - $DOCKERDIR/data/compose/traefik-forward-auth.yml
   - $DOCKERDIR/data/compose/traefik-proxy.yml
+{% endif %}
+{% if 'webservers' in group_names and 'internal' in group_names %}
+  - $DOCKERDIR/data/compose/cadvisor.yml
+  - $DOCKERDIR/data/compose/mailrise.yml
+{% endif %}
+{% if 'webservers' in group_names and 'external' in group_names %}
+  - $DOCKERDIR/data/compose/drawio.yml
+  - $DOCKERDIR/data/compose/excalidraw.yml
+  - $DOCKERDIR/data/compose/jupyter.yml
 {% endif %}
 
 networks:

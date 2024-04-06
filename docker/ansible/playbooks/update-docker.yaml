@@ -154,11 +154,13 @@
       command: "host github.com adguard-mgmt.{{ generic__domain_name }}"
       register: host_output
       failed_when: "'has address' not in host_output.stdout"
+      when: inventory_hostname in groups['internal']
 
     - name: "[Test] Perform DNS lookup on fallback DNS"
       command: "host github.com adguard-fall.{{ generic__domain_name }}"
       register: host_output
       failed_when: "'has address' not in host_output.stdout"
+      when: inventory_hostname in groups['internal']
 
   handlers:
     - import_tasks: ../handlers/main.yml

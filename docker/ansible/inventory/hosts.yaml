@@ -15,14 +15,16 @@ docker:
       children:
         linux_amd64:
           children:
-            management:
-              hosts:
-                svlmgmt.MANAGEMENT:
-                  ansible_user: "jean-paul"
-            production:
-              hosts:
-                svlprod.PRODUCTION:
-                  ansible_user: "jean-paul"
+            internal:
+              children:
+                management:
+                  hosts:
+                    svlmgmt.MANAGEMENT:
+                      ansible_user: "jean-paul"
+                production:
+                  hosts:
+                    svlprod.PRODUCTION:
+                      ansible_user: "jean-paul"
             external:
               hosts:
                 svlext.ravensberg.org:
@@ -30,14 +32,21 @@ docker:
 
         linux_arm64_v8:
           children:
-            fallback:
-              hosts:
-                svlfall.MANAGEMENT:
-                  ansible_user: "jean-paul"
+            internal:
+              children:
+                fallback:
+                  hosts:
+                    svlfall.MANAGEMENT:
+                      ansible_user: "jean-paul"
 
     dnsservers:
       hosts:
         svlmgmt.MANAGEMENT:
           ansible_user: "jean-paul"
         svlfall.MANAGEMENT:
+          ansible_user: "jean-paul"
+
+    vpnservers:
+      hosts:
+        svlext.ravensberg.org:
           ansible_user: "jean-paul"
