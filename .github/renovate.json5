@@ -3,11 +3,10 @@
   "extends": [
     "config:recommended",
     "docker:enableMajor",
-    ":automergeBranch",
-    ":combinePatchMinorReleases",
-    ":dependencyDashboard",
     ":disableRateLimiting",
-    ":semanticCommits"
+    ":dependencyDashboard",
+    ":semanticCommits",
+    ":automergeBranch"
   ],
   "dependencyDashboard": true,
   "dependencyDashboardTitle": "Renovate Dashboard 🤖",
