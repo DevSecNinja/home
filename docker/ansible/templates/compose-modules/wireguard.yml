@@ -19,9 +19,10 @@ services:
       - PGID=${PGID}
       - TZ=${TZ}
       # Wireguard
-      - PEERS=Desktop,Laptop,Phone,Tablet
+      - PEERS=${WIREGUARD_PEERS}
       - SERVERURL=vpn.$DOMAINNAME
       - PEERDNS=192.168.101.220
+      - LOG_CONFS=false
     volumes:
       - wireguard_data:/config
     labels:
