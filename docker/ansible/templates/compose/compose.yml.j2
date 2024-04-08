@@ -10,7 +10,6 @@ include:
   - $DOCKERDIR/data/compose/cloudflare.yml
   - $DOCKERDIR/data/compose/grafana.yml
   - $DOCKERDIR/data/compose/influxdb.yml
-  - $DOCKERDIR/data/compose/nodeexporter.yml
   - $DOCKERDIR/data/compose/phpmyadmin.yml
   - $DOCKERDIR/data/compose/prometheus.yml
   - $DOCKERDIR/data/compose/promtail.yml
@@ -23,9 +22,9 @@ include:
   - $DOCKERDIR/data/compose/code-server.yml
   - $DOCKERDIR/data/compose/linkding.yml
   - $DOCKERDIR/data/compose/nextcloud.yml
-  - $DOCKERDIR/data/compose/nodeexporter.yml
   - $DOCKERDIR/data/compose/openspeedtest.yml
   - $DOCKERDIR/data/compose/paperless-ngx.yml
+  - $DOCKERDIR/data/compose/papermerge.yml
   - $DOCKERDIR/data/compose/photoprism.yml
   - $DOCKERDIR/data/compose/plex.yml
   - $DOCKERDIR/data/compose/vikunja.yml
@@ -41,6 +40,7 @@ include:
 {% endif %}
 {% if 'webservers' in group_names and 'internal' in group_names %}
   - $DOCKERDIR/data/compose/cadvisor.yml
+  - $DOCKERDIR/data/compose/nodeexporter.yml
   - $DOCKERDIR/data/compose/mailrise.yml
 {% endif %}
 {% if 'webservers' in group_names and 'external' in group_names %}

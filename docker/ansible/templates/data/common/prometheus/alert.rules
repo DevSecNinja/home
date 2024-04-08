@@ -19,7 +19,7 @@ groups:
       severity: warning
     annotations:
       summary: "Server under high load"
-      description: "Docker host is under high load, the avg load 1m is at {{ $value}}. Reported by instance {{ $labels.instance }} of job {{ $labels.job }}."
+      description: "Docker host is under high load, the avg load 1m is at {{ $value }}. Reported by instance {{ $labels.instance }} of job {{ $labels.job }}."
 
   - alert: high_memory_load
     expr: (sum(node_memory_MemTotal_bytes) - sum(node_memory_MemFree_bytes + node_memory_Buffers_bytes + node_memory_Cached_bytes) ) / sum(node_memory_MemTotal_bytes) * 100 > 85
@@ -28,7 +28,7 @@ groups:
       severity: warning
     annotations:
       summary: "Server memory is almost full"
-      description: "Docker host memory usage is {{ humanize $value}} %. Reported by instance {{ $labels.instance }} of job {{ $labels.job }}."
+      description: "Docker host memory usage is {{ humanize $value }} %. Reported by instance {{ $labels.instance }} of job {{ $labels.job }}."
 
   - alert: high_storage_load
     expr: 100 - ((node_filesystem_avail_bytes{mountpoint="/",fstype!="rootfs"} * 100) / node_filesystem_size_bytes{mountpoint="/",fstype!="rootfs"}) > 85
@@ -37,7 +37,25 @@ groups:
       severity: warning
     annotations:
       summary: "Server storage is almost full"
-      description: "Docker host storage usage is {{ humanize $value}} %. Reported by instance {{ $labels.instance }} of job {{ $labels.job }}."
+      description: "Docker host storage usage is {{ humanize $value }} %. Reported by instance {{ $labels.instance }} of job {{ $labels.job }}."
+
+  - alert: high_data_storage_load
+    expr: 100 - ((node_filesystem_avail_bytes{mountpoint="/mnt/data",fstype!="rootfs"} * 100) / node_filesystem_size_bytes{mountpoint="/mnt/data",fstype!="rootfs"}) > 85
+    for: 30s
+    labels:
+      severity: warning
+    annotations:
+      summary: "Server data storage is almost full"
+      description: "Docker host data storage usage is {{ humanize $value }} %. Reported by instance {{ $labels.instance }} of job {{ $labels.job }}."
+
+  - alert: high_archive_storage_load
+    expr: 100 - ((node_filesystem_avail_bytes{mountpoint="/mnt/archive",fstype!="rootfs"} * 100) / node_filesystem_size_bytes{mountpoint="/mnt/archive",fstype!="rootfs"}) > 85
+    for: 30s
+    labels:
+      severity: warning
+    annotations:
+      summary: "Server archive storage is almost full"
+      description: "Docker host archive storage usage is {{ humanize $value }} %. Reported by instance {{ $labels.instance }} of job {{ $labels.job }}."
 
 - name: ContainerHealthAlerts
   rules:

@@ -1,6 +1,6 @@
 services:
   nodeexporter:
-    image: prom/node-exporter:v1.7.0@sha256:52a6f10ff10238979c365c06dbed8ad5cd1645c41780dc08ff813adacfb2341e
+    image: prom/node-exporter:v1.7.0@sha256:4cb2b9019f1757be8482419002cb7afe028fdba35d47958829e4cfeaf6246d80
     container_name: nodeexporter
     volumes:
       - /proc:/host/proc:ro
@@ -24,7 +24,7 @@ services:
       - homepage.group=Infrastructure
       - homepage.name=Node Exporter
       - homepage.icon=prometheus.svg
-      - homepage.href=https://nodeexporter.$DOMAINNAME
+      - homepage.href=https://nodeexporter-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
       - homepage.description=Host Monitoring
       # Group
       - org.label-schema.group=infrastructure
@@ -32,7 +32,11 @@ services:
       - "traefik.enable=true"
       ## Middlewares
       - "traefik.http.routers.nodeexporter-rtr.middlewares=chain-auth@file"
+      ## Extra no-auth endpoint. No need to create a new service
+      - "traefik.http.routers.nodeexporter-noauth-rtr.rule=Host(`nodeexporter-noauth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
+      - "traefik.http.routers.nodeexporter-noauth-rtr.middlewares=chain-no-auth-mgmt-whitelist@file"
       ## HTTP Services
+      - "traefik.http.routers.nodeexporter-rtr.rule=Host(`nodeexporter-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
       - "traefik.http.routers.nodeexporter-rtr.service=nodeexporter"
       ### Enable the server port
       - "traefik.http.services.nodeexporter.loadbalancer.server.port=9100"

@@ -47,7 +47,7 @@ services:
       - "traefik.enable=true"
       ## Middlewares
       ## Using no-auth chain since Nextcloud App doesn't support auth proxy
-      - "traefik.http.routers.nextcloud-rtr.middlewares=chain-no-auth@file"
+      - "traefik.http.routers.nextcloud-rtr.middlewares=chain-auth@file"
       ## HTTP Services
       - "traefik.http.routers.nextcloud-rtr.rule=Host(`cloud.$DOMAINNAME`)"
       - "traefik.http.routers.nextcloud-rtr.service=nextcloud"
