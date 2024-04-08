@@ -1,7 +1,7 @@
 services:
   plex:
     container_name: plex
-    image: ghcr.io/linuxserver/plex:1.40.1@sha256:e7274807e5366c06992e57ae55cc06916360c4817550fe8d22a0671711334cdb
+    image: ghcr.io/linuxserver/plex:1.40.1@sha256:0f499f254a9709cf10644f974b560664e1cbc5031707dff5cf51086f871e813c
     restart: always
     depends_on:
       - traefik
