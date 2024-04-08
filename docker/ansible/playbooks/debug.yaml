@@ -23,3 +23,10 @@
   - name: Show values for SCSI devices
     debug: msg="{{ ansible_devices[item] }}"
     loop: "{{ storage_devices }}"
+
+  - name: Get variable
+    shell: "cat /srv/docker/.env | grep OAUTH2_PROXY_AZURE_CLIENT_ID"
+    register: variable
+
+  - name: Show variable
+    debug: msg="{{ variable.stdout_lines }}"
