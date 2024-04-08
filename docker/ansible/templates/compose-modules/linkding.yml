@@ -11,7 +11,7 @@ services:
       - linkding-backend
     security_opt:
       - no-new-privileges=true
-    mem_limit: 200m
+    mem_limit: 500m
     environment:
       - TZ=${TZ}
       # Database
