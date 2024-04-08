@@ -100,6 +100,18 @@
 
     - name: Configure DNS settings
       block:
+        - name: Get the current hostname
+          command: hostname
+          register: current_hostname
+
+        - name: Set the hostname in /etc/hosts
+          lineinfile:
+            path: /etc/hosts
+            regexp: '.*{{ current_hostname.stdout }}.*'
+            line: '127.0.0.1       {{ current_hostname.stdout | lower }} {{ current_hostname.stdout | upper }} # ansible_managed'
+            state: present
+            backup: yes
+
         - name: Set DNS Server
           ini_file:
             path: /etc/systemd/resolved.conf

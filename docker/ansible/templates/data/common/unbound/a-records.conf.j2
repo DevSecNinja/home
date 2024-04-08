@@ -10,6 +10,8 @@ local-data: "SVLFALL.{{ generic__domain_name }} A 192.168.1.13"
 local-data: "SVLPROD.{{ generic__domain_name }} A 192.168.60.2"
 ## SVLHOST01
 local-data: "SVLHOST01.{{ generic__domain_name }} A 192.168.1.30"
+## SVLEXT
+local-data: "SVLEXT.{{ generic__domain_name }} A {{ generic__ips_svlext }}"
 
 ## Home
 local-data: "home.{{ generic__domain_name }} A 192.168.50.2"
@@ -17,7 +19,20 @@ local-data: "proxy.{{ generic__domain_name }} A 192.168.50.2"
 local-data: "receiver.{{ generic__domain_name }} A 192.168.50.2"
 
 # TODO: [unbound] Dynamically generate list of records to create
-# To remove:
+## Apps
+### External
+local-data: "adguard-ext.{{ generic__domain_name }} A {{ generic__ips_svlext }}"
+local-data: "auth-ext.{{ generic__domain_name }} A {{ generic__ips_svlext }}"
+local-data: "dozzle-ext.{{ generic__domain_name }} A {{ generic__ips_svlext }}"
+local-data: "draw.{{ generic__domain_name }} A {{ generic__ips_svlext }}"
+local-data: "echo-ext.{{ generic__domain_name }} A {{ generic__ips_svlext }}"
+local-data: "excalidraw.{{ generic__domain_name }} A {{ generic__ips_svlext }}"
+local-data: "homepage-ext.{{ generic__domain_name }} A {{ generic__ips_svlext }}"
+local-data: "jupyter.{{ generic__domain_name }} A {{ generic__ips_svlext }}"
+local-data: "portainer-ext.{{ generic__domain_name }} A {{ generic__ips_svlext }}"
+local-data: "traefik-ext.{{ generic__domain_name }} A {{ generic__ips_svlext }}"
+
+### Internal
 local-data: "adguard-mgmt.{{ generic__domain_name }} A 192.168.1.11"
 local-data: "adguard-fall.{{ generic__domain_name }} A 192.168.1.13"
 local-data: "alertmanager.{{ generic__domain_name }} A 192.168.1.11"
@@ -80,4 +95,22 @@ local-data: "uptime.{{ generic__domain_name }} A 192.168.1.11"
 local-data: "vault.{{ generic__domain_name }} A 192.168.1.11"
 local-data: "vikunja.{{ generic__domain_name }} A 192.168.60.2"
 local-data: "wallabag.{{ generic__domain_name }} A 192.168.60.2"
+{% endif %}
+
+{% if 'external' in group_names %}
+# A Record
+## SVLMGMT
+local-data: "SVLEXT.{{ generic__domain_name }} A 10.0.0.4"
+
+## Apps
+local-data: "adguard-ext.{{ generic__domain_name }} A 10.0.0.4"
+local-data: "auth-ext.{{ generic__domain_name }} A 10.0.0.4"
+local-data: "dozzle-ext.{{ generic__domain_name }} A 10.0.0.4"
+local-data: "draw.{{ generic__domain_name }} A 10.0.0.4"
+local-data: "echo-ext.{{ generic__domain_name }} A 10.0.0.4"
+local-data: "excalidraw.{{ generic__domain_name }} A 10.0.0.4"
+local-data: "homepage-ext.{{ generic__domain_name }} A 10.0.0.4"
+local-data: "jupyter.{{ generic__domain_name }} A 10.0.0.4"
+local-data: "portainer-ext.{{ generic__domain_name }} A 10.0.0.4"
+local-data: "traefik-ext.{{ generic__domain_name }} A 10.0.0.4"
 {% endif %}
