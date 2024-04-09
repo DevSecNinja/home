@@ -14,7 +14,7 @@
 
 - name: Check if folder exists
   stat:
-    path: ~/.dotfiles
+    path: "/home/{{ ansible_user }}/.dotfiles"
   register: folder_stat
   when: inventory_hostname not in groups['hypervisor']
 
@@ -22,25 +22,29 @@
   become: true
   git:
     repo: https://github.com/DevSecNinja/dotfiles
-    dest: ~/.dotfiles
+    dest: "/home/{{ ansible_user }}/.dotfiles"
     single_branch: yes
     version: main
   when: inventory_hostname not in groups['hypervisor'] and not folder_stat.stat.exists
 
 - name: Pull latest changes to dotfiles
   become: true
-  shell: git pull
+  shell: git -c "url.https://github.com/.insteadOf=git@github.com:" pull
   args:
-    chdir: ~/.dotfiles
+    chdir: "/home/{{ ansible_user }}/.dotfiles"
     executable: /bin/bash
   register: pull_result
   changed_when: pull_result.stdout_lines[0] != "Already up to date."
   when: inventory_hostname not in groups['hypervisor'] and folder_stat.stat.exists
 
+- name: Show git pull results
+  debug: msg="{{ pull_result.stdout_lines }}"
+  when: inventory_hostname not in groups['hypervisor']
+
 - name: Run bootstrap script
   shell: script/bootstrap
   args:
-    chdir: ~/.dotfiles
+    chdir: "/home/{{ ansible_user }}/.dotfiles"
     executable: /bin/bash
   register: bootstrap_result
   when: inventory_hostname not in groups['hypervisor'] and folder_stat.stat.exists

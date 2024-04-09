@@ -6,6 +6,7 @@
   vars:
   tasks:
     - include_tasks: ../tasks/new-server.yaml
+    - include_tasks: ../tasks/update-dotfiles.yaml
 
     #
     # Load encrypted credentials for the update-certificates task
