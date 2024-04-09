@@ -1,0 +1,32 @@
+#
+#### DEPRECATION NOTICE
+## This compose module is no longer in use
+## Replaced by: none. Not needed anymore and was causing an extremely high CPU & I/O usage on Raspberry Pi (bug?)
+## Last used version: v2.8.3@sha256:f634c0dac3c67894d0d2f1cfe27ba060c081075290cbf68af3254b574e04efd3
+#
+
+services:
+  traefik-certs-dumper:
+    image: ldez/traefik-certs-dumper
+    depends_on:
+      - traefik
+    container_name: traefik-certs-dumper
+    restart: always
+    environment:
+      - TZ=${TZ}
+    security_opt:
+      - no-new-privileges=true
+    mem_limit: 50m
+    entrypoint: sh -c '
+      apk add jq
+      ; mkdir -p /data/certchain
+      ; wget -qO- https://letsencrypt.org/certs/isrgrootx1.pem >> /data/certchain/RootCA.pem
+      ; wget -qO- https://letsencrypt.org/certs/lets-encrypt-r3.pem >> /data/certchain/IntermediateCA.pem
+      ; while ! [ -e /data/acme/acme.json ]
+      || ! [ `jq ".[] | .Certificates | length" /data/acme/acme.json` != 0 ]; do
+      sleep 1
+      ; done
+      && traefik-certs-dumper file --version v2 --watch
+      --source /data/acme/acme.json --dest /data/certs'
+    volumes:
+      - $DOCKERDIR/data/traefik:/data
