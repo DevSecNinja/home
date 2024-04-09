@@ -2,6 +2,7 @@
 - name: Install dotfiles dependencies
   retries: 20
   delay: 15
+  become: true
   ansible.builtin.apt:
     name:
       - git
@@ -18,6 +19,7 @@
   when: inventory_hostname not in groups['hypervisor']
 
 - name: Clone repo if folder doesn't exist
+  become: true
   git:
     repo: https://github.com/DevSecNinja/dotfiles
     dest: ~/.dotfiles
@@ -26,6 +28,7 @@
   when: inventory_hostname not in groups['hypervisor'] and not folder_stat.stat.exists
 
 - name: Pull latest changes to dotfiles
+  become: true
   shell: git pull
   args:
     chdir: ~/.dotfiles
