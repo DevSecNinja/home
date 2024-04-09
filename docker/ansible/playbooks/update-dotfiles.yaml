@@ -1,0 +1,6 @@
+---
+- name: Update dotfiles
+  hosts: all
+  become: yes
+  tasks:
+  - include_tasks: ../tasks/update-dotfiles.yaml
