@@ -1,0 +1,22 @@
+---
+
+- name: Check if oh-my-zsh is installed
+  stat:
+    path: "/home/{{ ansible_user }}/.oh-my-zsh"
+  register: oh_my_zsh_installed
+  become: false
+
+- name: Pull latest changes to oh-my-zsh
+  become: true
+  shell: git -c "url.https://github.com/.insteadOf=git@github.com:" pull
+  args:
+    chdir: "/home/{{ ansible_user }}/.oh-my-zsh"
+    executable: /bin/bash
+  register: pull_result
+  changed_when: pull_result.stdout_lines[0] != "Already up to date."
+  when: oh_my_zsh_installed.stat.isdir is defined and oh_my_zsh_installed.stat.isdir
+
+- name: Show git pull results
+  debug: msg="{{ pull_result.stdout_lines }}"
+  when: pull_result.stdout_lines is defined
+  changed_when: pull_result.stdout_lines[0] != "Already up to date."
