@@ -18,8 +18,6 @@ include:
   - $DOCKERDIR/data/compose/vault.yml
 {% endif %}
 {% if 'production' in group_names %}
-  - $DOCKERDIR/data/compose/change-detection.yml
-  - $DOCKERDIR/data/compose/code-server.yml
   - $DOCKERDIR/data/compose/linkding.yml
   - $DOCKERDIR/data/compose/nextcloud.yml
   - $DOCKERDIR/data/compose/openspeedtest.yml
@@ -44,6 +42,8 @@ include:
   - $DOCKERDIR/data/compose/mailrise.yml
 {% endif %}
 {% if 'webservers' in group_names and 'external' in group_names %}
+  - $DOCKERDIR/data/compose/change-detection.yml
+  - $DOCKERDIR/data/compose/code-server.yml
   - $DOCKERDIR/data/compose/drawio.yml
   - $DOCKERDIR/data/compose/excalidraw.yml
   - $DOCKERDIR/data/compose/jupyter.yml

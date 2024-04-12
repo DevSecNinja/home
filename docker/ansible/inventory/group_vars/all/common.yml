@@ -17,7 +17,16 @@ generic__hostname_os_type: "{{ inventory_hostname_short[2] }}"
 packages__base:
   - "cron"
   - "dnsutils"
+  - "lsb-release"
   - "ntp"
+
+msft__apt_repository_url: "https://packages.microsoft.com"  # yamllint disable-line rule:line-length
+msft__apt_key_checksum: "sha256:812c0606c9f9dcb8cd03c24232d0c3970efecbc257b079fd9cfce54739db2d10"  # yamllint disable-line rule:line-length
+msft__apt_channel: prod
+msft__apt_repository: >
+  deb [arch=arm64,armhf,amd64]
+  {{ msft__apt_repository_url }}/{{ ansible_os_family | lower }}/{{ ansible_distribution_major_version }}/{{ msft__apt_channel }}
+  {{ ansible_distribution_release | lower }} main
 
 #
 # Sops

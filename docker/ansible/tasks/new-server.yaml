@@ -34,9 +34,39 @@
     exclusive: true
     key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/authorized_keys') }}"
 
-# TODO: Fix MSFT apt source
-# https://code.visualstudio.com/docs/setup/linux#:%7E:text=sudo%20apt%2Dget%20install%20wget,rm%20%2Df%20packages.microsoft.gpg
 - name: Remove non working Microsoft apt source
   file:
     path: /etc/apt/sources.list.d/microsoft-prod.list
     state: absent
+
+- name: Remove non working apt source
+  file:
+    path: /etc/apt/trusted.gpg
+    state: absent
+
+- name: Add Microsoft APT key
+  apt_key:
+    url: "{{ msft__apt_repository_url }}/keys/microsoft.asc"
+    keyring: /etc/apt/trusted.gpg.d/microsoft.gpg
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Get sha256 sum of downloaded apt key
+  stat:
+    path: /etc/apt/trusted.gpg.d/microsoft.gpg
+    checksum_algorithm: sha256
+    get_checksum: yes
+  register: apt_key_stat
+
+- name: Verify sha256sum of downloaded apt key
+  fail:
+    msg: "Failure, SHA256 hash of downloaded apt key is not correct."
+  when: apt_key_stat.stat.checksum != "{{ msft__apt_key_checksum }}"
+
+- name: Add Microsoft apt repository
+  apt_repository:
+    repo: "{{ msft__apt_repository }}"
+    update_cache: yes
+    state: present
+    filename: "microsoft-{{ msft__apt_channel }}"
+  when: ansible_os_family == "Debian"
