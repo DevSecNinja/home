@@ -21,3 +21,4 @@
       when: inventory_hostname in groups['docker']
 
     - include_tasks: ../tasks/update-certificates.yaml
+      when: inventory_hostname in groups['docker'] and inventory_hostname in groups['internal']
