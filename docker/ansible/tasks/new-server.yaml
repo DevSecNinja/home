@@ -33,3 +33,10 @@
     state: present
     exclusive: true
     key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/authorized_keys') }}"
+
+# TODO: Fix MSFT apt source
+# https://code.visualstudio.com/docs/setup/linux#:%7E:text=sudo%20apt%2Dget%20install%20wget,rm%20%2Df%20packages.microsoft.gpg
+- name: Remove non working Microsoft apt source
+  file:
+    path: /etc/apt/sources.list.d/microsoft-prod.list
+    state: absent
