@@ -1,6 +1,6 @@
 services:
   alertmanager:
-    image: prom/alertmanager:v0.27.0@sha256:45c3a586d4332d710bef92b06e90380c0b1f588968c00100d4b5e4e44c40ca5f
+    image: prom/alertmanager:v0.27.0@sha256:e13b6ed5cb929eeaee733479dce55e10eb3bc2e9c4586c705a4e8da41e5eacf5
     container_name: alertmanager
     volumes:
       - $DOCKERDIR/data/alertmanager:/etc/alertmanager
