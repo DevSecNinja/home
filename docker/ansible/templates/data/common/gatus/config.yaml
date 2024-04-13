@@ -1,0 +1,130 @@
+storage:
+  type: ${DB_ENGINE}
+  path: "${DB_ENGINE}://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE}?sslmode=disable"
+
+# Enable Prometheus metrics
+metrics: true
+
+alerting:
+  teams:
+    webhook-url: ${GATUS_MSTEAMS_WEBHOOK_URL}
+    default-alert:
+      description: "Health check failed"
+      send-on-resolved: true
+      failure-threshold: 5
+      success-threshold: 5
+
+endpoint-defaults: &defaults
+  group: Internal
+  interval: 30s
+  client:
+    timeout: 10s
+  conditions:
+    - "[STATUS] == 200"
+    - "[CERTIFICATE_EXPIRATION] > 48h"
+  alerts:
+    - type: teams
+      description: "Health check failed"
+      send-on-resolved: true
+
+# Pause endpoint executions if internet is down
+connectivity:
+  checker:
+    target: 1.1.1.1:53
+    interval: 60s
+
+endpoints:
+  #
+  # External HTTP
+  #
+
+  - name: DevSecNinja - HTTP
+    <<: *defaults
+    url: "https://devsecninja.com/"
+    group: External
+
+  - name: Bing - HTTP
+    <<: *defaults
+    url: "https://bing.com/"
+    group: External
+
+  #
+  # Internal HTTP
+  #
+
+  - name: AdGuard Primary - HTTP
+    <<: *defaults
+    url: "https://adguard-mgmt.${DOMAINNAME}"
+
+  - name: AdGuard Fallback - HTTP
+    <<: *defaults
+    url: "https://adguard-fall.${DOMAINNAME}"
+
+  - name: Influx - HTTP
+    <<: *defaults
+    url: "https://influxdb.${DOMAINNAME}"
+
+  - name: Paperless - HTTP
+    <<: *defaults
+    url: "https://paperless.${DOMAINNAME}"
+
+  - name: Unifi - HTTP
+    <<: *defaults
+    url: "https://unifi.${DOMAINNAME}"
+
+  - name: Unifi Guest - HTTP
+    <<: *defaults
+    url: "https://unifi-guest.${DOMAINNAME}:8843/guest/s/default/"
+
+  - name: Vault CA - HTTP
+    <<: *defaults
+    url: "https://vault.${DOMAINNAME}/v1/pki_int/ca"
+
+  - name: Vault CRL - HTTP
+    <<: *defaults
+    url: "https://vault.${DOMAINNAME}/v1/pki_int/crl"
+
+  #
+  # DNS
+  #
+
+  # Can't DNS query your own server?
+  #
+  # - name: AdGuard Primary - DNS
+  #   url: "192.168.1.11" # Address of the DNS server to use
+  #   group: Internal
+  #   dns:
+  #     query-name: "SVLMGMT.${DOMAINNAME}"
+  #     query-type: "A"
+  #   conditions:
+  #     - "[BODY] == 192.168.1.11"
+  #     - "[DNS_RCODE] == NOERROR"
+
+  - name: AdGuard Fallback - DNS
+    url: "192.168.1.13" # Address of the DNS server to use
+    group: Internal
+    dns:
+      query-name: "SVLMGMT.${DOMAINNAME}"
+      query-type: "A"
+    conditions:
+      - "[BODY] == 192.168.1.11"
+      - "[DNS_RCODE] == NOERROR"
+
+  - name: AdGuard Router - DNS
+    url: "192.168.1.1" # Address of the DNS server to use
+    group: Internal
+    dns:
+      query-name: "SVLMGMT.${DOMAINNAME}"
+      query-type: "A"
+    conditions:
+      - "[BODY] == 192.168.1.11"
+      - "[DNS_RCODE] == NOERROR"
+
+  - name: Google.com - DNS
+    url: "192.168.1.1" # Address of the DNS server to use
+    group: External
+    dns:
+      query-name: "google.com"
+      query-type: "A"
+    conditions:
+      - "[DNS_RCODE] == NOERROR"
