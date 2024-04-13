@@ -1,6 +1,6 @@
 services:
   linkding:
-    image: sissbruecker/linkding:1.27.0-alpine@sha256:7dfae66f23c83f4ef63d665acea885a54fd53ccd92a3203d364d37ec9a8004e9
+    image: sissbruecker/linkding:1.28.0-alpine@sha256:27cf900deb942f2e347f0513f628d0c362e16837e9b00fce3138309816fca5e1
     container_name: linkding
     depends_on:
       - traefik
