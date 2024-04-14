@@ -166,6 +166,9 @@ You have two different options for setting up your local workstation.
 1. Install the most recent version of [task](https://taskfile.dev/), see the [installation docs](https://taskfile.dev/installation/) for other supported platforms.
 
     ```sh
+    # Install dependencies for vault & flux
+    apt update
+    apt install build-essential
     # Homebrew
     brew install go-task
     # or, Arch
