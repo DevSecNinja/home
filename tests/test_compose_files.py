@@ -6,10 +6,12 @@ import yaml
 class TestDockerComposeFiles(unittest.TestCase):
 
     important_properties = {
-        'security_opt': ['no-new-privileges=true'],
+        'container_name': [r'^.+'],
         'environment': [r'(?:- )?(TZ|TIMEZONE)[:=]\s*\${TZ}'],
+        # 'image': '',
+        'mem_limit': [r'^\d+[bBkKmMgG]?$'],
         'restart': 'always',
-        'mem_limit': [r'^\d+[bBkKmMgG]?$']
+        'security_opt': ['no-new-privileges=true']
     }
 
     def get_compose_files(self):
