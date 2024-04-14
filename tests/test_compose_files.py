@@ -8,7 +8,7 @@ class TestDockerComposeFiles(unittest.TestCase):
 
     important_properties = {
         'security_opt': ['no-new-privileges=true'],
-        'environment': [r'(TZ|TIMEZONE)=\${TZ}']
+        'environment': [r'(?:- )?(TZ|TIMEZONE)[:=]\s*\${TZ}']
     }
 
     def get_compose_files(self):
@@ -46,6 +46,11 @@ class TestDockerComposeFiles(unittest.TestCase):
                     for prop, required_patterns in self.important_properties.items():
                         if prop in config:
                             actual_values = config[prop]
+
+                            # Convert dictionary to list of strings
+                            if isinstance(actual_values, dict):
+                                actual_values = [f"{key}: {value}" for key, value in actual_values.items()]
+
                             for pattern in required_patterns:
                                 matched = False
                                 for value in actual_values:
@@ -55,7 +60,6 @@ class TestDockerComposeFiles(unittest.TestCase):
                                 self.assertTrue(matched, f"{file_name} service {service} is missing required value '{pattern}' for {prop}")
                         else:
                             self.fail(f"{file_name} service {service} is missing important property {prop}")
-
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
