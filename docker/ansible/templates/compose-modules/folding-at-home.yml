@@ -1,3 +1,5 @@
+# TODO: Decide services naming convention: foldingathome or folding-at-home
+
 services:
   foldingathome:
     container_name: foldingathome
