@@ -1,6 +1,5 @@
 import os
 import re
-import subprocess
 import unittest
 import yaml
 
