@@ -18,6 +18,7 @@ include:
   - $DOCKERDIR/data/compose/vault.yml
 {% endif %}
 {% if 'production' in group_names %}
+  - $DOCKERDIR/data/compose/folding-at-home.yml
   - $DOCKERDIR/data/compose/linkding.yml
   - $DOCKERDIR/data/compose/nextcloud.yml
   - $DOCKERDIR/data/compose/openspeedtest.yml
