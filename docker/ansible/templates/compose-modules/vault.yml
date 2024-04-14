@@ -91,6 +91,8 @@ services:
       - "traefik.http.routers.vault-api-rtr.service=vault"
       ### Enable the server port
       - "traefik.http.services.vault.loadbalancer.server.port=8200"
+    tmpfs:
+      - /run/secrets # Put secrets in a temporary directory
 
 volumes:
   vault_data:
