@@ -1,4 +1,5 @@
 import os
+import re
 import subprocess
 import unittest
 import yaml
@@ -6,7 +7,8 @@ import yaml
 class TestDockerComposeFiles(unittest.TestCase):
 
     important_properties = {
-        'security_opt': ['no-new-privileges=true']
+        'security_opt': ['no-new-privileges=true'],
+        'environment': [r'(TZ|TIMEZONE)=\${TZ}']
     }
 
     def get_compose_files(self):
@@ -41,11 +43,16 @@ class TestDockerComposeFiles(unittest.TestCase):
                 services = compose_dict['services']
 
                 for service, config in services.items():
-                    for prop, required_values in self.important_properties.items():
+                    for prop, required_patterns in self.important_properties.items():
                         if prop in config:
                             actual_values = config[prop]
-                            for value in required_values:
-                                self.assertIn(value, actual_values, f"{file_name} service {service} is missing required value '{value}' for {prop}")
+                            for pattern in required_patterns:
+                                matched = False
+                                for value in actual_values:
+                                    if re.match(pattern, value):
+                                        matched = True
+                                        break
+                                self.assertTrue(matched, f"{file_name} service {service} is missing required value '{pattern}' for {prop}")
                         else:
                             self.fail(f"{file_name} service {service} is missing important property {prop}")
 

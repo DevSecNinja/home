@@ -23,6 +23,7 @@ services:
       - no-new-privileges=true
     mem_limit: 1024m
     environment:
+      - TZ=${TZ}
       - OAUTH2_PROXY_HTTP_ADDRESS=http://0.0.0.0:4180
 
       - OAUTH2_PROXY_COOKIE_NAME=$OAUTH2_PROXY_COOKIE_NAME
