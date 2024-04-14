@@ -1,0 +1,18 @@
+---
+- name: Execute SSH command
+  hosts: all
+  become: yes
+  gather_facts: no
+  vars_prompt:
+    - name: ssh_command
+      prompt: "Please enter the SSH command to execute on ALL hosts with sudo"
+      private: no
+
+  tasks:
+    - name: Run the SSH command
+      ansible.builtin.command: "{{ ssh_command }}"
+      register: command_output
+
+    - name: Display the command output
+      ansible.builtin.debug:
+        var: command_output.stdout_lines
