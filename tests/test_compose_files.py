@@ -62,5 +62,16 @@ class TestDockerComposeFiles(unittest.TestCase):
                         else:
                             self.fail(f"{file_name} service {service} is missing important property {prop}")
 
+    def test_db_backup_services(self):
+        for folder, file_name, function_content in self.get_compose_files():
+            with self.subTest(file_name=file_name, folder_name=folder):
+                compose_dict = self.parse_compose_content(function_content)
+                services = compose_dict['services']
+
+                for service in services.keys():
+                    if service.endswith('-db'):
+                        backup_service = f"{service}-backup"
+                        self.assertIn(backup_service, services, f"{file_name} is missing the {backup_service} service for {service}")
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
