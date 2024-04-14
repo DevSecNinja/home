@@ -12,6 +12,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # Note: more secure to use Docker socket proxy here
     mem_limit: 1024m
+    restart: always
     security_opt:
       - no-new-privileges=true
     environment:

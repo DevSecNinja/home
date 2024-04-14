@@ -17,7 +17,7 @@ services:
     volumes:
       - unifi_db_data:/data/db
       - $DOCKERDIR/data/mongodb/init-mongo-unifi-db.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
-    restart: unless-stopped
+    restart: always
 
   unifi-db-backup:
     container_name: unifi-db-backup

@@ -8,7 +8,8 @@ class TestDockerComposeFiles(unittest.TestCase):
 
     important_properties = {
         'security_opt': ['no-new-privileges=true'],
-        'environment': [r'(?:- )?(TZ|TIMEZONE)[:=]\s*\${TZ}']
+        'environment': [r'(?:- )?(TZ|TIMEZONE)[:=]\s*\${TZ}'],
+        'restart': 'always'
     }
 
     def get_compose_files(self):
