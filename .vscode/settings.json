@@ -17,6 +17,12 @@
         "./kubernetes/**/*.sops.toml": "plaintext",
         "alert.rules": "yaml",
     },
+    "files.watcherExclude": {
+      "**/.git/objects/**": true,
+      "**/.git/subtree-cache/**": true,
+      "**/node_modules/*/**": true,
+      "**/.venv/*/**": true
+    },
     "sops.defaults.ageKeyFile": "age.key",
     "terminal.integrated.defaultProfile.linux": "zsh",
     "yaml.schemas": {
