@@ -8,7 +8,8 @@ class TestDockerComposeFiles(unittest.TestCase):
     important_properties = {
         'container_name': [r'^.+'],
         'environment': [r'(?:- )?(TZ|TIMEZONE)[:=]\s*\${TZ}'],
-        # 'image': '',
+        # TODO: [tests] Add image property check with sha256 checksum requirement
+        'image': [r'^.+'],
         'mem_limit': [r'^\d+[bBkKmMgG]?$'],
         'restart': 'always',
         'security_opt': ['no-new-privileges=true']
