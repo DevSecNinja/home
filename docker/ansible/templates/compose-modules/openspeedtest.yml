@@ -1,7 +1,7 @@
 services:
   openspeedtest:
     container_name: openspeedtest
-    image: openspeedtest/latest:v2.0.5@sha256:12cb104a9c10ee2b3a9ffcc1992dfb72236e8c2e3a08aa700f19b705fe3f2f04
+    image: openspeedtest/latest:v2.0.5@sha256:bbddd8eda80cc4deb2a5702efd0acd826137650ba0bfcc6720f896c74bca02ee
     depends_on:
       - traefik
     networks:
