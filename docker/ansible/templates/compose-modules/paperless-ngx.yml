@@ -22,7 +22,7 @@ services:
       - paperless-backend
 
   paperless-db:
-    image: docker.io/library/postgres:16.2-alpine@sha256:b89a4e92591810eac1fbce6107485d7c6b9449df51c1ccfcfed514a7fdd69955
+    image: docker.io/library/postgres:16.2-alpine@sha256:951bfda460300925caa3949eaa092ba022e9aec191bbea9056a39e2382260b27
     container_name: paperless-db
     restart: always
     security_opt:
