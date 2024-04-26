@@ -9,14 +9,6 @@
     - python3-hvac
     - python3-cryptography
 
-- name: Login and use the resulting token
-  community.hashi_vault.vault_login:
-    url: https://vault.{{ generic__domain_name }}
-    auth_method: userpass
-    username: "{{ apps__vault_ansible_username }}"
-    password: "{{ apps__vault_ansible_password }}"
-  register: login_data
-
 # TODO: [ansible] Convert duplicate code to an Ansible Role
 
 #
@@ -71,6 +63,15 @@
 - name: Issue certificate to host
   when: (issue_cert | bool)
   block:
+    - name: Login and use the resulting token
+      when: login_data is undefined
+      community.hashi_vault.vault_login:
+        url: https://vault.{{ generic__domain_name }}
+        auth_method: userpass
+        username: "{{ apps__vault_ansible_username }}"
+        password: "{{ apps__vault_ansible_password }}"
+      register: login_data
+
     - name: Issue cert from Vault
       become: false
       community.hashi_vault.vault_pki_generate_certificate: # noqa syntax-check
@@ -150,6 +151,15 @@
 - name: Issue certificate to host
   when: (issue_cert | bool)
   block:
+    - name: Login and use the resulting token
+      when: login_data is undefined
+      community.hashi_vault.vault_login:
+        url: https://vault.{{ generic__domain_name }}
+        auth_method: userpass
+        username: "{{ apps__vault_ansible_username }}"
+        password: "{{ apps__vault_ansible_password }}"
+      register: login_data
+
     - name: Issue cert from Vault
       become: false
       community.hashi_vault.vault_pki_generate_certificate: # noqa syntax-check
@@ -231,6 +241,15 @@
 - name: Issue certificate to host
   when: (issue_cert | bool)
   block:
+    - name: Login and use the resulting token
+      when: login_data is undefined
+      community.hashi_vault.vault_login:
+        url: https://vault.{{ generic__domain_name }}
+        auth_method: userpass
+        username: "{{ apps__vault_ansible_username }}"
+        password: "{{ apps__vault_ansible_password }}"
+      register: login_data
+
     - name: Issue cert from Vault
       become: false
       community.hashi_vault.vault_pki_generate_certificate: # noqa syntax-check
