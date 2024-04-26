@@ -63,7 +63,7 @@ services:
       - "traefik.http.services.wallabag.loadbalancer.server.port=80"
 
   wallabag-db:
-    image: mariadb:11.3.2@sha256:851f05fe1e4cb290442c1b12b7108436a33fd8f6a733d4989950322d06d45c65
+    image: mariadb:11.3.2@sha256:416016f57f522c215d2908866e56e13e6474f071cd65112c216ba19e68f219ca
     container_name: wallabag-db
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
     restart: always
