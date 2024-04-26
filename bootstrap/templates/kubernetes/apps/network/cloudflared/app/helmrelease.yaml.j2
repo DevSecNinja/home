@@ -31,7 +31,7 @@ spec:
           app:
             image:
               repository: docker.io/cloudflare/cloudflared
-              tag: 2024.3.0
+              tag: 2024.4.1
             env:
               NO_AUTOUPDATE: true
               TUNNEL_CRED_FILE: /etc/cloudflared/creds/credentials.json
@@ -44,11 +44,6 @@ spec:
                   secretKeyRef:
                     name: cloudflared-secret
                     key: TUNNEL_ID
-              TUNNEL_TOKEN:
-                valueFrom:
-                  secretKeyRef:
-                    name: cloudflared-secret
-                    key: TUNNEL_TOKEN
             args:
               - tunnel
               - --config
@@ -72,18 +67,17 @@ spec:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
               capabilities: { drop: ["ALL"] }
-              seccompProfile:
-                type: RuntimeDefault
             resources:
               requests:
                 cpu: 10m
               limits:
                 memory: 256Mi
-        pod:
-          securityContext:
-            runAsUser: 65534
-            runAsGroup: 65534
-            runAsNonRoot: true
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65534
+        runAsGroup: 65534
+        seccompProfile: { type: RuntimeDefault }
     service:
       app:
         controller: cloudflared

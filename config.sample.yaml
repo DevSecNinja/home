@@ -99,7 +99,7 @@ bootstrap_tls_sans: []
 # (Required) Age Public Key (e.g. age1...)
 # 1. Generate a new key with the following command:
 #    > task sops:age-keygen
-# 2. Copy the public key and paste it below
+# 2. Copy the PUBLIC key and paste it below
 bootstrap_sops_age_pubkey: ""
 
 # (Optional) Use cilium BGP control plane when L2 announcements won't traverse VLAN network segments.
@@ -111,7 +111,7 @@ bootstrap_bgp:
   #   Default is .1 derrived from host_network: ['x.x.x.1']
   peers: []
   # (Required) Set the BGP Autonomous System Number for the router(s) and nodes.
-  #  If these match, iBGP will be used. If not, eBGP will be used.
+  #   If these match, iBGP will be used. If not, eBGP will be used.
   peer_asn: ""  # Router(s) AS
   local_asn: "" # Node(s) AS
   # (Required) The advertised CIDR for the cluster, this must NOT overlap with any
@@ -123,7 +123,10 @@ bootstrap_bgp:
 # 2. (Required) Flux details - Flux is used to manage the cluster configuration.
 #
 
-# (Required) GitHub repository URL (for private repos use the ssh:// URL)
+# (Required) GitHub repository URL
+#   For a public repo use the 'https://' URL (e.g. "https://github.com/onedr0p/cluster-template.git")
+#   For a private repo use the 'ssh://' URL (e.g. "ssh://git@github.com/onedr0p/cluster-template.git")
+#     If using a private repo make sure to following the instructions with the 'bootstrap_github_private_key' option below.
 bootstrap_github_address: ""
 
 # (Required) GitHub repository branch
@@ -139,7 +142,7 @@ bootstrap_github_webhook_token: ""
 #   1. Generate a new key with the following command:
 #      > ssh-keygen -t ecdsa -b 521 -C "github-deploy-key" -f github-deploy.key -q -P ""
 #   2. Make sure to paste public key from "github-deploy.key.pub" into
-#      the deploy keys section of your repository settings.
+#      the deploy keys section of your GitHub repository settings.
 #   3. Uncomment and paste the private key below
 #   4. Optionally set your repository on GitHub to private
 # bootstrap_github_private_key: |
@@ -189,25 +192,20 @@ bootstrap_cloudflare:
   gateway_vip: ""
   # (Required) Options for Cloudflare Tunnel
   # There's two methods to create a tunnel, via the CLI or the Cloudflare dashboard.
-  #   CLI:
-  #     1. Authenticate cloudflared to your domain
-  #        > cloudflared tunnel login
-  #     2. Create the tunnel
-  #        > cloudflared tunnel create k8s
-  #     3. Copy the AccountTag, TunnelID, and TunnelSecret from the tunnel configuration file and paste them below
-  #   Dashboard:
-  #     1. Goto https://one.dash.cloudflare.com/ and create a new tunnel
-  #     2. Paste the tunnel id and token below (ignore account_id and secret)
+  #   1. Authenticate cloudflared to your domain with the following command:
+  #     > cloudflared tunnel login
+  #   2. Create the tunnel with the following command:
+  #     > cloudflared tunnel create k8s
   tunnel:
-    # (Required) Cloudflared Tunnel ID
-    # If the tunnel was created by the CLI: (cat ~/.cloudflared/*.json | jq -r .TunnelID)
+    # (Required) Get the Cloudflared Tunnel ID with the following command:
+    #   > jq -r .TunnelID ~/.cloudflared/*.json
     id: ""
-    # (Required: CLI) Cloudflare Account ID: (cat ~/.cloudflared/*.json | jq -r .AccountTag)
+    # (Required) Get the Cloudflare Account ID with the following command:
+    #   > jq -r .AccountTag ~/.cloudflared/*.json
     account_id: ""
-    # (Required: CLI) Cloudflared Tunnel Secret: (cat ~/.cloudflared/*.json | jq -r .TunnelSecret)
+    # (Required) Get the Cloudflared Tunnel Secret with the following command:
+    #   > jq -r .TunnelSecret ~/.cloudflared/*.json
     secret: ""
-    # (Required: Dashboard) Cloudflared Tunnel Token
-    token: ""
     # (Required) Provide WAN access to the cluster ingresses for external ingress classes
     # The Load balancer IP for external ingress, choose an available IP
     #   in your nodes host network that is NOT being used. This is announced over L2.

@@ -184,9 +184,20 @@ You have two different options for setting up your local workstation.
     pacman -S --noconfirm direnv
     ```
 
-    📍 _After `direnv` is installed be sure to **[hook it into your preferred shell](https://direnv.net/docs/hook.html)** and then run `task workstation:direnv`_
+3. [Hook `direnv` into your preferred shell](https://direnv.net/docs/hook.html), then run:
 
-3. Install the additional **required** CLI tools
+    ```sh
+    task workstation:direnv
+    ```
+
+    📍 _**Verify** that `direnv` is setup properly by opening a new terminal and `cd`ing into your repository. You should see something like:_
+    ```sh
+    cd /path/to/repo
+    direnv: loading /path/to/repo/.envrc
+    direnv: export +ANSIBLE_COLLECTIONS_PATH ...  +VIRTUAL_ENV ~PATH
+    ```
+
+6. Install the additional **required** CLI tools
 
    📍 _**Not using Homebrew or ArchLinux?** Try using the generic Linux task below, if that fails check out the [Brewfile](.taskfiles/Workstation/Brewfile)/[Archfile](.taskfiles/Workstation/Archfile) for what CLI tools needed and install them._
 
@@ -199,7 +210,7 @@ You have two different options for setting up your local workstation.
     task workstation:generic-linux
     ```
 
-4. Setup a Python virual environment by running the following task command.
+7. Setup a Python virual environment by running the following task command.
 
     📍 _This commands requires Python 3.11+ to be installed._
 
@@ -207,7 +218,7 @@ You have two different options for setting up your local workstation.
     task workstation:venv
     ```
 
-5. Continue on to 🔧 [**Stage 3**](#-stage-3-bootstrap-configuration)
+8. Continue on to 🔧 [**Stage 3**](#-stage-3-bootstrap-configuration)
 
 ### 🔧 Stage 3: Bootstrap configuration
 
@@ -282,6 +293,8 @@ You have two different options for setting up your local workstation.
     task talos:bootstrap
     ```
 
+2. ⚠️ It might take a while for the cluster to be setup (10+ minutes is normal), during which time you will see a variety of error messages like: "couldn't get current server API group list," "error: no matching resources found", etc. This is a normal. If this step gets interrupted, e.g. by pressing <kbd>Ctrl</kbd> + <kbd>C</kbd>, you likely will need to [nuke the cluster](#-Nuke) before trying again.
+
 #### k3s
 
 1. Install Kubernetes depending on the distribution you chose
@@ -296,7 +309,7 @@ You have two different options for setting up your local workstation.
 
 2. Verify the nodes are online
 
-    📍 _If this command **fails** you likely haven't configured `direnv` as mentioned previously in the guide._
+    📍 _If this command **fails** you likely haven't configured `direnv` as [mentioned previously](#non-devcontainer-method) in the guide._
 
     ```sh
     kubectl get nodes -o wide
