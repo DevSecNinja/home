@@ -1,8 +1,7 @@
 services:
   homepage:
     container_name: homepage
-    # @sha256:869c8002a95c8ecef7b0359a36b13693cd2bf401c70482202c702f93bc264a04
-    image: ghcr.io/gethomepage/homepage:v0.8.10
+    image: ghcr.io/gethomepage/homepage:v0.8.12@sha256:ad5a8edea1c25b50c6d180d35f72c1623986335113457c4ba38e1ddf16816a4b
     depends_on:
       - traefik
       - homepage-docker-proxy

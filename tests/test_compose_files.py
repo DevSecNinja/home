@@ -8,10 +8,9 @@ class TestDockerComposeFiles(unittest.TestCase):
     important_properties = {
         'container_name': [r'^.+'],
         'environment': [r'(?:- )?(TZ|TIMEZONE)[:=]\s*\${TZ}'],
-        # TODO: [tests] Add image property check with sha256 checksum requirement
-        'image': [r'^.+'],
+        'image': [r'.+:[\w\.-]+@sha256:[0-9a-fA-F]{64}$'],
         'mem_limit': [r'^\d+[bBkKmMgG]?$'],
-        'restart': 'always',
+        'restart': ['always'],
         'security_opt': ['no-new-privileges=true']
     }
 
@@ -23,6 +22,8 @@ class TestDockerComposeFiles(unittest.TestCase):
                 if filename.endswith('.yml') or filename.endswith('.yaml'):
                     with open(os.path.join(folder_dir, filename), 'r') as f:
                         function_content = f.read()
+                    if "DEPRECATION NOTICE" in function_content:
+                        continue
                     yield folder, filename, function_content
 
     def parse_compose_content(self, content):
@@ -54,11 +55,13 @@ class TestDockerComposeFiles(unittest.TestCase):
                             # Convert dictionary to list of strings
                             if isinstance(actual_values, dict):
                                 actual_values = [f"{key}: {value}" for key, value in actual_values.items()]
+                            elif isinstance(actual_values, str):
+                                actual_values = [actual_values]
 
                             for pattern in required_patterns:
                                 matched = False
                                 for value in actual_values:
-                                    if re.match(pattern, value):
+                                    if re.match(pattern, str(value)): # Added str() to handle non-string values
                                         matched = True
                                         break
                                 self.assertTrue(matched, f"{file_name} service {service} is missing required value '{pattern}' for {prop}")
