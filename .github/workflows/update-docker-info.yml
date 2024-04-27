@@ -42,3 +42,5 @@ jobs:
 
       # Commit all changed files back to the repository
       - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Update Docker containers overview doc

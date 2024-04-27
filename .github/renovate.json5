@@ -256,5 +256,19 @@
       ],
       "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}"
     }
+  ],
+  // regex managers
+  "regexManagers": [
+    {
+      "fileMatch": [
+        "^\\.github/workflows/.*\\.(yml|yaml)$"
+      ],
+      "matchStrings": [
+        "python-version:\\s*\"(?<currentValue>\\d+\\.\\d+)\""
+      ],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "actions/python",
+      "versioningTemplate": "semver"
+    }
   ]
 }
