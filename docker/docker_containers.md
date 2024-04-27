@@ -98,7 +98,7 @@
 
 **container_name:** code-server
 
-**image:** lscr.io/linuxserver/code-server:4.23.0@sha256:83f9360098a7b72592969807d5003df64fcf2ba07bb09b8fd19be68aac101636
+**image:** lscr.io/linuxserver/code-server:4.23.1@sha256:0e3073b7fb5715165aee03ceed1c184c512729a1f3c63c5c6bc334e0277787b6
 
 ## docker/ansible/templates/compose-modules/dozzle.yml
 
@@ -106,7 +106,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v6.5.1@sha256:bf8e7d302d2967c28e923f178b0926a747c5060d5014f38bc7676bf0cf0c226b
+**image:** amir20/dozzle:v6.5.2@sha256:3669c8ffe32b1436db0a879ef32750ba83c8b9134062835d1b7b54c1f6c0ba6f
 
 ### Service: dozzle-docker-proxy
 
@@ -120,7 +120,7 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:24.2.2@sha256:ab82dbb4bf75e355b047d55ecd749d9d51271159979e8ee0fc120bffbc31cb2c
+**image:** jgraph/drawio:24.3.1@sha256:c6e4f6e1165922195e38f262bb59300257c92667d864de0649382464ffe108b7
 
 ## docker/ansible/templates/compose-modules/echo-server.yml
 
@@ -172,7 +172,7 @@
 
 **container_name:** grafana
 
-**image:** grafana/grafana:10.4.1@sha256:753bbb971071480d6630d3aa0d55345188c02f39456664f67c1ea443593638d0
+**image:** grafana/grafana:10.4.2@sha256:7d5faae481a4c6f436c99e98af11534f7fd5e8d3e35213552dd1dd02bc393d2e
 
 ### Service: loki
 
@@ -250,13 +250,13 @@
 
 **container_name:** nextcloud
 
-**image:** nextcloud:28.0.4-apache@sha256:ee6e559f740416b8f34bd1dc8fc9a0f1c90d00800fdfba3b1d493e86ebecd5ae
+**image:** nextcloud:29.0.0-apache@sha256:213f65aca230810ed0a6fc9af0bb3f1db0b5851a36a4488b9a60f7c9ac181c39
 
 ### Service: nextcloud-cron
 
 **container_name:** nextcloud-cron
 
-**image:** nextcloud:28.0.4-apache@sha256:ee6e559f740416b8f34bd1dc8fc9a0f1c90d00800fdfba3b1d493e86ebecd5ae
+**image:** nextcloud:29.0.0-apache@sha256:213f65aca230810ed0a6fc9af0bb3f1db0b5851a36a4488b9a60f7c9ac181c39
 
 ### Service: nextcloud-db
 
@@ -282,7 +282,7 @@
 
 **container_name:** nodeexporter
 
-**image:** prom/node-exporter:v1.7.0@sha256:4cb2b9019f1757be8482419002cb7afe028fdba35d47958829e4cfeaf6246d80
+**image:** prom/node-exporter:v1.8.0@sha256:8a57af80a4c77ffb97749b44895248563616fcfd405b5370d5db35fe6c15e4ec
 
 ## docker/ansible/templates/compose-modules/oauth2-proxy.yml
 
@@ -300,7 +300,7 @@
 
 **container_name:** oauth2-proxy-redis
 
-**image:** redis:7.2.4-alpine@sha256:1b503bb77079ba644371969e06e1a6a1670bb34c2251107c0fc3a21ef9fdaeca
+**image:** redis:alpine3.19@sha256:c1ac6782927e574394225a790b6eb476154d1a16681b1374c62625d9bc324b18
 
 ## docker/ansible/templates/compose-modules/openspeedtest.yml
 
@@ -328,7 +328,7 @@
 
 **container_name:** paperless-gotenberg
 
-**image:** docker.io/gotenberg/gotenberg:8.4.0@sha256:97a566eb0c9d8c103e90dc21970f6e0d05c3e41fb96f2ac2b28cd92f956df398
+**image:** docker.io/gotenberg/gotenberg:8.5.0@sha256:d1737c98b2a39e656cceac67126a4a82ff3c0e572beb3aa8a17d04a41d9eed17
 
 ### Service: paperless-redis
 
@@ -346,7 +346,7 @@
 
 **container_name:** paperless-web
 
-**image:** ghcr.io/paperless-ngx/paperless-ngx:2.7.0@sha256:93ed7056a2695fd3feb5408dfd8b2630d7ad6cb53446db5b212d3d7992c0761c
+**image:** ghcr.io/paperless-ngx/paperless-ngx:2.7.2@sha256:703c990a790dfd4d25fb56df3afec27b13cb0926a3818bf265edac9c71311647
 
 ## docker/ansible/templates/compose-modules/papermerge.yml
 
@@ -390,7 +390,7 @@
 
 **container_name:** plex
 
-**image:** ghcr.io/linuxserver/plex:1.40.1@sha256:e7274807e5366c06992e57ae55cc06916360c4817550fe8d22a0671711334cdb
+**image:** ghcr.io/linuxserver/plex:1.40.2@sha256:f5bb97726e2e34205ee995593561efe47de42bd4aca35ac7daa2c4b4fc2dabb4
 
 ## docker/ansible/templates/compose-modules/portainer.yml
 
@@ -412,7 +412,7 @@
 
 **container_name:** prometheus
 
-**image:** prom/prometheus:v2.51.1@sha256:dec2018ae55885fed717f25c289b8c9cff0bf5fbb9e619fb49b6161ac493c016
+**image:** prom/prometheus:v2.51.2@sha256:4f6c47e39a9064028766e8c95890ed15690c30f00c4ba14e7ce6ae1ded0295b1
 
 ### Service: pushgateway
 
