@@ -13,6 +13,8 @@
   "suppressNotifications": ["prEditedNotification", "prIgnoreNotification"],
   "rebaseWhen": "conflicted",
   "schedule": ["on saturday"],
+  "automergeSchedule": ["on saturday"],
+  "timezone": "Europe/Amsterdam",
   "flux": {
     "fileMatch": [
       "(^|/)ansible/.+\\.ya?ml(?:\\.j2)?$",
@@ -65,6 +67,14 @@
       "automergeType": "branch",
       "ignoreTests": true,
       "matchUpdateTypes": ["minor", "patch"]
+    },
+    {
+      "description": ["Auto merge Docker images"],
+      "matchManagers": ["dockerfile", "docker-compose"],
+      "automerge": true,
+      "automergeType": "branch",
+      "ignoreTests": true,
+      "matchUpdateTypes": ["digest"]
     },
     // groups
     {
