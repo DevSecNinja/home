@@ -98,7 +98,7 @@
 
 **container_name:** code-server
 
-**image:** lscr.io/linuxserver/code-server:4.23.0@sha256:83f9360098a7b72592969807d5003df64fcf2ba07bb09b8fd19be68aac101636
+**image:** lscr.io/linuxserver/code-server:4.23.1@sha256:0e3073b7fb5715165aee03ceed1c184c512729a1f3c63c5c6bc334e0277787b6
 
 ## docker/ansible/templates/compose-modules/dozzle.yml
 
@@ -412,7 +412,7 @@
 
 **container_name:** prometheus
 
-**image:** prom/prometheus:v2.51.1@sha256:dec2018ae55885fed717f25c289b8c9cff0bf5fbb9e619fb49b6161ac493c016
+**image:** prom/prometheus:v2.51.2@sha256:4f6c47e39a9064028766e8c95890ed15690c30f00c4ba14e7ce6ae1ded0295b1
 
 ### Service: pushgateway
 
