@@ -1,7 +1,7 @@
 services:
   vault:
     container_name: vault
-    image: hashicorp/vault:1.16@sha256:2e1b2d939a8a5362ebb28622aafc9d1e4c78e7ff5e66437e594bae9ddd0a6789
+    image: hashicorp/vault:1.16@sha256:e139ff28c23e1f22a6e325696318141259b177097d8e238a3a4c5b84862fadd8
     depends_on:
       - traefik
     command: server # Run in PRD
