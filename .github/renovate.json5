@@ -243,7 +243,7 @@
         "(^|/).taskfiles/.+\\.ya?ml$",
         "(^|/)ansible/.+\\.ya?ml(?:\\.j2)?$",
         "(^|/)kubernetes/.+\\.ya?ml(?:\\.j2)?$",
-        "^\\.github/workflows/.*\\.(yml|yaml)$"
+        "(^|/).github/workflows/.+\\.(yml|yaml)$"
       ],
       "matchStrings": [
         // # renovate: datasource=github-releases depName=k3s-io/k3s
@@ -254,7 +254,7 @@
         // # renovate: datasource=github-releases depName=rancher/system-upgrade-controller
         // https://github.com/rancher/system-upgrade-controller/releases/download/v0.13.2/crd.yaml
         "datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\n.+/(?<currentValue>(v|\\d)[^/]+)",
-        "python-version:\\s*\"(?<currentValue>\\d+\\.\\d+)\""
+        "python-version:\\s*(\"|)?(?<currentValue>\\d+\\.\\d+\\.\\d+)(\"|)?"
       ],
       "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}"
     }
