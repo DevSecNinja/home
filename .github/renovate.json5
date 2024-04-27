@@ -242,7 +242,8 @@
       "fileMatch": [
         "(^|/).taskfiles/.+\\.ya?ml$",
         "(^|/)ansible/.+\\.ya?ml(?:\\.j2)?$",
-        "(^|/)kubernetes/.+\\.ya?ml(?:\\.j2)?$"
+        "(^|/)kubernetes/.+\\.ya?ml(?:\\.j2)?$",
+        "^\\.github/workflows/.*\\.(yml|yaml)$"
       ],
       "matchStrings": [
         // # renovate: datasource=github-releases depName=k3s-io/k3s
@@ -252,23 +253,10 @@
         "datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( repository=(?<registryUrl>\\S+))?\\n.+: (&\\S+\\s)?(?<currentValue>\\S+)",
         // # renovate: datasource=github-releases depName=rancher/system-upgrade-controller
         // https://github.com/rancher/system-upgrade-controller/releases/download/v0.13.2/crd.yaml
-        "datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\n.+/(?<currentValue>(v|\\d)[^/]+)"
-      ],
-      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}"
-    }
-  ],
-  // regex managers
-  "regexManagers": [
-    {
-      "fileMatch": [
-        "^\\.github/workflows/.*\\.(yml|yaml)$"
-      ],
-      "matchStrings": [
+        "datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\n.+/(?<currentValue>(v|\\d)[^/]+)",
         "python-version:\\s*\"(?<currentValue>\\d+\\.\\d+)\""
       ],
-      "datasourceTemplate": "github-releases",
-      "depNameTemplate": "actions/python",
-      "versioningTemplate": "semver"
+      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}"
     }
   ]
 }
