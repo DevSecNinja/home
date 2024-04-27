@@ -17,6 +17,8 @@ jobs:
   update:
     runs-on: ubuntu-latest
 
+    if: ${{ github.actor != 'renovate[bot]' && github.event.issue.pull_request }} # We shouldn't mess with the Renovate[bot] commits in PRs
+
     permissions:
       contents: write
 
