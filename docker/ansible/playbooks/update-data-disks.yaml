@@ -20,6 +20,7 @@
         name: robertdebock.storage
       vars:
         # Get label after creating a disk: sudo fdisk -l
+        # TODO: [ansible] Instead of label, use the UUID since Proxmox might swap labels
         disk_name: "/dev/sdb"
         mount_path: "/mnt/data"
 
