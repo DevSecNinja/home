@@ -120,7 +120,7 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:24.2.2@sha256:ab82dbb4bf75e355b047d55ecd749d9d51271159979e8ee0fc120bffbc31cb2c
+**image:** jgraph/drawio:24.3.1@sha256:c6e4f6e1165922195e38f262bb59300257c92667d864de0649382464ffe108b7
 
 ## docker/ansible/templates/compose-modules/echo-server.yml
 
@@ -250,13 +250,13 @@
 
 **container_name:** nextcloud
 
-**image:** nextcloud:28.0.4-apache@sha256:ee6e559f740416b8f34bd1dc8fc9a0f1c90d00800fdfba3b1d493e86ebecd5ae
+**image:** nextcloud:29.0.0-apache@sha256:213f65aca230810ed0a6fc9af0bb3f1db0b5851a36a4488b9a60f7c9ac181c39
 
 ### Service: nextcloud-cron
 
 **container_name:** nextcloud-cron
 
-**image:** nextcloud:28.0.4-apache@sha256:ee6e559f740416b8f34bd1dc8fc9a0f1c90d00800fdfba3b1d493e86ebecd5ae
+**image:** nextcloud:29.0.0-apache@sha256:213f65aca230810ed0a6fc9af0bb3f1db0b5851a36a4488b9a60f7c9ac181c39
 
 ### Service: nextcloud-db
 
@@ -328,7 +328,7 @@
 
 **container_name:** paperless-gotenberg
 
-**image:** docker.io/gotenberg/gotenberg:8.4.0@sha256:97a566eb0c9d8c103e90dc21970f6e0d05c3e41fb96f2ac2b28cd92f956df398
+**image:** docker.io/gotenberg/gotenberg:8.5.0@sha256:d1737c98b2a39e656cceac67126a4a82ff3c0e572beb3aa8a17d04a41d9eed17
 
 ### Service: paperless-redis
 
