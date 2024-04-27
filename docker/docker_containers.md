@@ -300,7 +300,7 @@
 
 **container_name:** oauth2-proxy-redis
 
-**image:** redis:7.2.4-alpine@sha256:1b503bb77079ba644371969e06e1a6a1670bb34c2251107c0fc3a21ef9fdaeca
+**image:** redis:alpine3.19@sha256:c1ac6782927e574394225a790b6eb476154d1a16681b1374c62625d9bc324b18
 
 ## docker/ansible/templates/compose-modules/openspeedtest.yml
 
