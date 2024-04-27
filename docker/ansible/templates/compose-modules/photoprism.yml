@@ -1,6 +1,6 @@
 services:
   photoprism:
-    image: photoprism/photoprism:preview@sha256:aa844a49c04e44e975a786bf2f7ce8d43ab71852f2b0d7375d7e27431aba909f
+    image: photoprism/photoprism:preview@sha256:42ccaf8d16a06cecca04120d169735ef29eec86971eba5470f23c4b0b353d344
     container_name: photoprism
     depends_on:
       - traefik
@@ -103,7 +103,7 @@ services:
   ## Database Server (recommended)
   ## see https://docs.photoprism.app/getting-started/faq/#should-i-use-sqlite-mariadb-or-mysql
   photoprism-db:
-    image: mariadb:11.3.2@sha256:851f05fe1e4cb290442c1b12b7108436a33fd8f6a733d4989950322d06d45c65
+    image: mariadb:11.3.2@sha256:416016f57f522c215d2908866e56e13e6474f071cd65112c216ba19e68f219ca
     container_name: photoprism-db
     command: --innodb-buffer-pool-size=512M --transaction-isolation=READ-COMMITTED --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --max-connections=512 --innodb-rollback-on-timeout=OFF --innodb-lock-wait-timeout=120 --log-bin=binlog --binlog-format=ROW
     restart: always

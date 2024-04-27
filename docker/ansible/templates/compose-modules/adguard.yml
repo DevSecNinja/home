@@ -3,7 +3,7 @@ services:
     container_name: unbound
     # image: mvance/unbound:1.19.3@sha256:2b19bdb4db8d6f9ebd39d060e1a0ea66f198e5c7272c8b711fd7835594014385
     # [unbound] Fix unbound using different image for arm vs amd
-    image: pedantic/unbound:latest@sha256:4396fa6330d19e4ed56d7ac14b40cec0d767bb0c47fa0ed37d30d973db01a5ae
+    image: pedantic/unbound:latest@sha256:78e52f968b1000c66eb4da7df74ec4b86951a91c1c341f10843cf774d89a1e35
     restart: always
     networks:
       - adguard-backend

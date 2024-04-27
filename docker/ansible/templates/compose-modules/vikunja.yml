@@ -1,6 +1,6 @@
 services:
   vikunja:
-    image: vikunja/vikunja:0.23.0@sha256:8756e990c4cd842c981f586ab26f543ecdfc5c925b1b3469118156d418c79550
+    image: vikunja/vikunja:0.23.0@sha256:c824f99b0b09b7f03a1d77ad6691fbce38edf8d737e73e3242d8b87dd96d21e0
     container_name: vikunja
     depends_on:
       - traefik
@@ -47,7 +47,7 @@ services:
       - "traefik.http.services.vikunja.loadbalancer.server.port=3456"
 
   vikunja-db:
-    image: mariadb:11.3.2@sha256:851f05fe1e4cb290442c1b12b7108436a33fd8f6a733d4989950322d06d45c65
+    image: mariadb:11.3.2@sha256:416016f57f522c215d2908866e56e13e6474f071cd65112c216ba19e68f219ca
     container_name: vikunja-db
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
     restart: always

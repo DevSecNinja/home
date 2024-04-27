@@ -1,6 +1,6 @@
 services:
   paperless-redis:
-    image: redis:alpine3.19@sha256:c1ac6782927e574394225a790b6eb476154d1a16681b1374c62625d9bc324b18
+    image: redis:alpine3.19@sha256:3487aa5cf06dceb38202b06bba45b6e6d8a92288848698a6518eee5f63a293a3
     container_name: paperless-redis
     # Requirepass is needed as environment variable isn't picked up
     command: >
@@ -22,7 +22,7 @@ services:
       - paperless-backend
 
   paperless-db:
-    image: docker.io/library/postgres:16.2-alpine@sha256:b89a4e92591810eac1fbce6107485d7c6b9449df51c1ccfcfed514a7fdd69955
+    image: docker.io/library/postgres:16.2-alpine@sha256:951bfda460300925caa3949eaa092ba022e9aec191bbea9056a39e2382260b27
     container_name: paperless-db
     restart: always
     security_opt:
@@ -125,7 +125,7 @@ services:
       - paperless-backend
 
   paperless-tika:
-    image: ghcr.io/paperless-ngx/tika:2.9.1-minimal@sha256:8765f135f5c9d58d8a8fe56fdacc589aebaa812301d184c53e1aeb6e5a054145
+    image: ghcr.io/paperless-ngx/tika:2.9.1-minimal@sha256:8124eeb5d1c3aeff0577634ac1be8b7f6121c1f9bdfc0bfec84843f7325929f4
     container_name: paperless-tika
     restart: always
     security_opt:
