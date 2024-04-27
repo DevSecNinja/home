@@ -1,6 +1,6 @@
 services:
   change-detection:
-    image: ghcr.io/dgtlmoon/changedetection.io:dev@sha256:a74f2a5c42f65a02a9acf4dee57c9da5fbdd57236efb75cfcb77f6fb42e821a1
+    image: ghcr.io/dgtlmoon/changedetection.io:0.45.21@sha256:6e80b83184b07fa8ac1d2ab42c5fca1620cedf7000fbb6db2c2de6d8babf203c
     container_name: change-detection
     depends_on:
       - traefik
