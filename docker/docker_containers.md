@@ -555,3 +555,12 @@
 **container_name:** watchtower
 
 **image:** containrrr/watchtower
+
+## docker/ansible/templates/compose-modules/wireguard.yml
+
+### Service: wireguard
+
+**container_name:** wireguard
+
+**image:** lscr.io/linuxserver/wireguard:1.0.20210914@sha256:8732e65c37993715fe884686c4c609c7a6702d577447b7ad39e83c57f51b6a28
+
