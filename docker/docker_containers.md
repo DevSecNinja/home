@@ -402,7 +402,7 @@
 
 **container_name:** paperless-tika
 
-**image:** ghcr.io/paperless-ngx/tika:2.9.1-minimal@sha256:8124eeb5d1c3aeff0577634ac1be8b7f6121c1f9bdfc0bfec84843f7325929f4
+**image:** ghcr.io/paperless-ngx/tika:2.9.1-minimal@sha256:20db3df89eaeb1b271dd840888fe909b88b12f4b86ef641ec07a1d45d4c5168f
 
 ### Service: paperless-web
 
@@ -460,7 +460,7 @@
 
 **container_name:** plex
 
-**image:** ghcr.io/linuxserver/plex:1.40.2@sha256:f5bb97726e2e34205ee995593561efe47de42bd4aca35ac7daa2c4b4fc2dabb4
+**image:** ghcr.io/linuxserver/plex:1.40.2@sha256:7f598ca1cce530b4ba190d0b80d79fa768e84e06c5b0770fef992cac7f92d232
 
 **url:** plex-noauth.$DOMAINNAME
 
