@@ -6,6 +6,12 @@
   serial: 1 # Run all tasks on one host before going to the next
   vars:
   tasks:
+    - name: Stop Folding at Home
+      shell:
+        cmd: "docker compose down foldingathome 2>&1"
+        chdir: /srv/docker
+      when: inventory_hostname in groups['external']
+
     - include_tasks: ../tasks/new-server.yaml
     - include_tasks: ../tasks/update-dotfiles.yaml
     - include_tasks: ../tasks/update-omz.yaml
@@ -36,6 +42,12 @@
     - include_tasks: ../tasks/update-os.yaml
     - include_tasks: ../tasks/update-brew.yaml
     - include_tasks: ../tasks/reboot-check.yaml
+
+    - name: Start Folding at Home
+      shell:
+        cmd: "docker compose up -d foldingathome --wait 2>&1"
+        chdir: /srv/docker
+      when: inventory_hostname in groups['external']
 
   handlers:
     - import_tasks: ../handlers/main.yml
