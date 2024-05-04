@@ -58,7 +58,7 @@
 
 **container_name:** bitwarden-db
 
-**image:** mariadb:11.3.2@sha256:416016f57f522c215d2908866e56e13e6474f071cd65112c216ba19e68f219ca
+**image:** mariadb:11.3.2@sha256:baca4137adc50f75a3d5ce91d8ef00e61d89159acdd152c4b81060a35fd66161
 
 ### Service: bitwarden-db-backup
 
@@ -320,7 +320,7 @@
 
 **container_name:** nextcloud-db
 
-**image:** mariadb:11.3.2@sha256:416016f57f522c215d2908866e56e13e6474f071cd65112c216ba19e68f219ca
+**image:** mariadb:11.3.2@sha256:baca4137adc50f75a3d5ce91d8ef00e61d89159acdd152c4b81060a35fd66161
 
 ### Service: nextcloud-db-backup
 
@@ -436,7 +436,7 @@
 
 **container_name:** photoprism-db
 
-**image:** mariadb:11.3.2@sha256:416016f57f522c215d2908866e56e13e6474f071cd65112c216ba19e68f219ca
+**image:** mariadb:11.3.2@sha256:baca4137adc50f75a3d5ce91d8ef00e61d89159acdd152c4b81060a35fd66161
 
 ### Service: photoprism-db-backup
 
@@ -450,7 +450,7 @@
 
 **container_name:** phpmyadmin
 
-**image:** phpmyadmin:5.2.1-apache@sha256:1935c8f30d6c68e2e9388cc24a317cedd6701ca8a4c8a956117f393eb00b8273
+**image:** phpmyadmin:5.2.1-apache@sha256:57de6b3d028cb77bca69523ab2f65a61b23d40db5f4c1c1163b7b16dc29e6a3d
 
 **url:** phpmyadmin.$DOMAINNAME
 
@@ -470,7 +470,7 @@
 
 **container_name:** portainer
 
-**image:** portainer/portainer-ce:2.20.1-alpine@sha256:78c026175e15203b8012518141291ad484f1c46d8cb94c67b389555169f27c19
+**image:** portainer/portainer-ce:2.20.2-alpine@sha256:d35be15c11e1491bf1f3c8b4a634769c5864c3ddef75287e98692a37afc6a093
 
 **url:** portainer-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -600,7 +600,7 @@
 
 **container_name:** vikunja-db
 
-**image:** mariadb:11.3.2@sha256:416016f57f522c215d2908866e56e13e6474f071cd65112c216ba19e68f219ca
+**image:** mariadb:11.3.2@sha256:baca4137adc50f75a3d5ce91d8ef00e61d89159acdd152c4b81060a35fd66161
 
 ### Service: vikunja-db-backup
 
@@ -622,7 +622,7 @@
 
 **container_name:** wallabag-db
 
-**image:** mariadb:11.3.2@sha256:416016f57f522c215d2908866e56e13e6474f071cd65112c216ba19e68f219ca
+**image:** mariadb:11.3.2@sha256:baca4137adc50f75a3d5ce91d8ef00e61d89159acdd152c4b81060a35fd66161
 
 ### Service: wallabag-db-backup
 
@@ -652,6 +652,6 @@
 
 **container_name:** wireguard
 
-**image:** lscr.io/linuxserver/wireguard:1.0.20210914@sha256:c417568c79a051a8a73ffc2ad28ef58f58ba76bdb4c420389819c001aa55a03e
+**image:** lscr.io/linuxserver/wireguard:1.0.20210914@sha256:b0e317bc390e2d12339648920d2148f17fd28f7544fe77ebe864fdb0dc857474
 
 **url:** wireguard.$DOMAINNAME
