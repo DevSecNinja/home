@@ -108,7 +108,7 @@
 
 **container_name:** code-server
 
-**image:** lscr.io/linuxserver/code-server:4.23.1@sha256:0e3073b7fb5715165aee03ceed1c184c512729a1f3c63c5c6bc334e0277787b6
+**image:** lscr.io/linuxserver/code-server:4.23.1@sha256:6a14c048d7cd29508b47b60c7231c2a9df5eae8529ab6052bdc5208856663164
 
 **url:** code.$DOMAINNAME
 
@@ -174,7 +174,7 @@
 
 **container_name:** foldingathome
 
-**image:** lscr.io/linuxserver/foldingathome:7.6.21@sha256:58cc184fc61a72cf355cd78e28cb4da4120dca7962f1810454faf95c5cb1386d
+**image:** lscr.io/linuxserver/foldingathome:7.6.21@sha256:7317a02f5b804da5b11deb03146fc5072437661f956b5ff32021b5608067848d
 
 **url:** folding-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -214,7 +214,7 @@
 
 **container_name:** loki
 
-**image:** grafana/loki:3.0.0@sha256:451563d761403fd66fdf7abef934f8712e864d47ef88f7b64e8ca52852fdaf28
+**image:** grafana/loki:3.0.0@sha256:757b5fadf816a1396f1fea598152947421fa49cb8b2db1ddd2a6e30fae003253
 
 **url:** loki.$DOMAINNAME
 
@@ -504,7 +504,7 @@
 
 **container_name:** promtail
 
-**image:** grafana/promtail:3.0.0@sha256:43c497a102e333c30b7c0f9a45d9107151f6424bd40c424d96791e65b6f2aeb0
+**image:** grafana/promtail:3.0.0@sha256:d3de3da9431cfbe74a6a94555050df5257f357e827be8e63f8998d509c37af8b
 
 **url:** promtail.$DOMAINNAME
 
@@ -550,7 +550,7 @@
 
 **container_name:** unifi
 
-**image:** linuxserver/unifi-network-application:8.1.113@sha256:63f0b48b11403dc055dcf79f04f3b3a4dfc58fea0d12e53401aa5c2b00096316
+**image:** linuxserver/unifi-network-application:8.1.127@sha256:a4ba259eda8516674b5f10046edea5233003d6c2ad11f14a33b7020dc310c995
 
 **url:** unifi.$DOMAINNAME
 
@@ -558,7 +558,7 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:7.0.8@sha256:0907ce5de8b9aee1935e43fb6e20f80297a08c90de71c0c2b44f9b3ecc9d4906
+**image:** mongo:7.0.9@sha256:84f177b8f7cddedc08f25e7400950a2d9b90d9a96f1b0083d712a2ddbce4dca1
 
 ### Service: unifi-db-backup
 
