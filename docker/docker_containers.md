@@ -8,6 +8,8 @@
 
 **image:** adguard/adguardhome:v0.107.48@sha256:d0fcf8c8691df20fe1a280d0a4cbc8493b04c7bd8cf8ca56264279510f030e49
 
+**url:** adguard-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
+
 ### Service: unbound
 
 **container_name:** unbound
@@ -21,6 +23,8 @@
 **container_name:** alertmanager
 
 **image:** prom/alertmanager:v0.27.0@sha256:e13b6ed5cb929eeaee733479dce55e10eb3bc2e9c4586c705a4e8da41e5eacf5
+
+**url:** alertmanager.$DOMAINNAME
 
 ## docker/ansible/templates/compose-modules/authelia.yml
 
@@ -48,6 +52,8 @@
 
 **image:** bitwarden/self-host:2024.4.1-beta@sha256:df07fd1315f077412cb1844d31ac9b89152102b8bcb0b7345de82bcb3406795f
 
+**url:** bitwarden.$DOMAINNAME
+
 ### Service: bitwarden-db
 
 **container_name:** bitwarden-db
@@ -68,6 +74,8 @@
 
 **image:** gcr.io/cadvisor/cadvisor:v0.49.1@sha256:3cde6faf0791ebf7b41d6f8ae7145466fed712ea6f252c935294d2608b1af388
 
+**url:** cadvisor-noauth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
+
 ## docker/ansible/templates/compose-modules/change-detection.yml
 
 ### Service: change-detection
@@ -75,6 +83,8 @@
 **container_name:** change-detection
 
 **image:** ghcr.io/dgtlmoon/changedetection.io:0.45.21@sha256:6e80b83184b07fa8ac1d2ab42c5fca1620cedf7000fbb6db2c2de6d8babf203c
+
+**url:** change-detection.$DOMAINNAME
 
 ## docker/ansible/templates/compose-modules/cloudflare-companion.yml
 
@@ -100,6 +110,8 @@
 
 **image:** lscr.io/linuxserver/code-server:4.23.1@sha256:0e3073b7fb5715165aee03ceed1c184c512729a1f3c63c5c6bc334e0277787b6
 
+**url:** code.$DOMAINNAME
+
 ## docker/ansible/templates/compose-modules/cyberchef.yml
 
 ### Service: cyberchef
@@ -108,6 +120,8 @@
 
 **image:** ghcr.io/gchq/cyberchef:10.18.3@sha256:248f5276c1917980e725a48770fc50d4ea8d208383cb61e4da019020a11ce361
 
+**url:** cyberchef.$DOMAINNAME
+
 ## docker/ansible/templates/compose-modules/dozzle.yml
 
 ### Service: dozzle
@@ -115,6 +129,8 @@
 **container_name:** dozzle
 
 **image:** amir20/dozzle:v6.5.2@sha256:3669c8ffe32b1436db0a879ef32750ba83c8b9134062835d1b7b54c1f6c0ba6f
+
+**url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
 ### Service: dozzle-docker-proxy
 
@@ -130,6 +146,8 @@
 
 **image:** jgraph/drawio:24.3.1@sha256:c6e4f6e1165922195e38f262bb59300257c92667d864de0649382464ffe108b7
 
+**url:** draw.$DOMAINNAME
+
 ## docker/ansible/templates/compose-modules/echo-server.yml
 
 ### Service: echo-server
@@ -137,6 +155,8 @@
 **container_name:** echo-server
 
 **image:** mendhak/http-https-echo:33@sha256:17f45542b4442474f4b68bf6e97f9a321b2c0fe95c5126c429fe49d911b07eb3
+
+**url:** echo-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
 ## docker/ansible/templates/compose-modules/excalidraw.yml
 
@@ -146,6 +166,8 @@
 
 **image:** excalidraw/excalidraw:latest@sha256:648edf36c55793fdeed475e09a86fb6c16a68783dc442d37d5070adfc0362a8f
 
+**url:** excalidraw.$DOMAINNAME
+
 ## docker/ansible/templates/compose-modules/folding-at-home.yml
 
 ### Service: foldingathome
@@ -154,6 +176,8 @@
 
 **image:** lscr.io/linuxserver/foldingathome:7.6.21@sha256:58cc184fc61a72cf355cd78e28cb4da4120dca7962f1810454faf95c5cb1386d
 
+**url:** folding-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
+
 ## docker/ansible/templates/compose-modules/gatus.yml
 
 ### Service: gatus
@@ -161,6 +185,8 @@
 **container_name:** gatus
 
 **image:** twinproduction/gatus:v5.10.0@sha256:881131a4c74bc8a83c09dc4eb83ef659885d5caf84baabdfcc94fcc13f9e39f6
+
+**url:** uptime.$DOMAINNAME
 
 ### Service: gatus-db
 
@@ -182,11 +208,15 @@
 
 **image:** grafana/grafana:10.4.2@sha256:7d5faae481a4c6f436c99e98af11534f7fd5e8d3e35213552dd1dd02bc393d2e
 
+**url:** grafana.$DOMAINNAME
+
 ### Service: loki
 
 **container_name:** loki
 
 **image:** grafana/loki:3.0.0@sha256:451563d761403fd66fdf7abef934f8712e864d47ef88f7b64e8ca52852fdaf28
+
+**url:** loki.$DOMAINNAME
 
 ## docker/ansible/templates/compose-modules/homepage.yml
 
@@ -195,6 +225,8 @@
 **container_name:** homepage
 
 **image:** ghcr.io/gethomepage/homepage:v0.8.12@sha256:ad5a8edea1c25b50c6d180d35f72c1623986335113457c4ba38e1ddf16816a4b
+
+**url:** homepage-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
 ### Service: homepage-docker-proxy
 
@@ -210,6 +242,8 @@
 
 **image:** influxdb:2.7.5-alpine@sha256:fffdcab19393a354155d33f2eec1fca1e35c70989f6a804ecc9fa66e4919cfe6
 
+**url:** influxdb-noauth.$DOMAINNAME
+
 ### Service: influxdb-backup
 
 **container_name:** influxdb-backup
@@ -224,6 +258,8 @@
 
 **image:** ghcr.io/corentinth/it-tools:2023.12.21-5ed3693@sha256:4aaf67eab769afc9dac5614a15614537446e11150d53eab3be34ac9775a27e3a
 
+**url:** tools.$DOMAINNAME
+
 ## docker/ansible/templates/compose-modules/jupyter.yml
 
 ### Service: jupyter
@@ -232,6 +268,8 @@
 
 **image:** quay.io/jupyter/scipy-notebook:2024-03-14@sha256:1a6638b2861bae9bf8ec2fc9df30f3c1a5b3ee60a52ff0bffb637e0898effb55
 
+**url:** jupyter.$DOMAINNAME
+
 ## docker/ansible/templates/compose-modules/linkding.yml
 
 ### Service: linkding
@@ -239,6 +277,8 @@
 **container_name:** linkding
 
 **image:** sissbruecker/linkding:1.30.0-alpine@sha256:ad14934dc4c638a9564122678d2298e128065e4b8e5ae113785aa1edbddb4248
+
+**url:** linkding.$DOMAINNAME
 
 ### Service: linkding-db
 
@@ -267,6 +307,8 @@
 **container_name:** nextcloud
 
 **image:** nextcloud:29.0.0-apache@sha256:213f65aca230810ed0a6fc9af0bb3f1db0b5851a36a4488b9a60f7c9ac181c39
+
+**url:** cloud.$DOMAINNAME
 
 ### Service: nextcloud-cron
 
@@ -300,6 +342,8 @@
 
 **image:** prom/node-exporter:v1.8.0@sha256:8a57af80a4c77ffb97749b44895248563616fcfd405b5370d5db35fe6c15e4ec
 
+**url:** nodeexporter-noauth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
+
 ## docker/ansible/templates/compose-modules/oauth2-proxy.yml
 
 ### Service: oauth2_proxy
@@ -325,6 +369,8 @@
 **container_name:** openspeedtest
 
 **image:** openspeedtest/latest:v2.0.5@sha256:bbddd8eda80cc4deb2a5702efd0acd826137650ba0bfcc6720f896c74bca02ee
+
+**url:** speedtest.$DOMAINNAME
 
 ## docker/ansible/templates/compose-modules/paperless-ngx.yml
 
@@ -364,6 +410,8 @@
 
 **image:** ghcr.io/paperless-ngx/paperless-ngx:2.7.2@sha256:703c990a790dfd4d25fb56df3afec27b13cb0926a3818bf265edac9c71311647
 
+**url:** paperless.$DOMAINNAME
+
 ## docker/ansible/templates/compose-modules/papermerge.yml
 
 ### Service: papermerge
@@ -372,6 +420,8 @@
 
 **image:** papermerge/papermerge:3.2.0@sha256:11bd6e47622b295ee40f1e719c63235544121839a30e5083d959208931007b62
 
+**url:** papermerge.$DOMAINNAME
+
 ## docker/ansible/templates/compose-modules/photoprism.yml
 
 ### Service: photoprism
@@ -379,6 +429,8 @@
 **container_name:** photoprism
 
 **image:** photoprism/photoprism:preview@sha256:42ccaf8d16a06cecca04120d169735ef29eec86971eba5470f23c4b0b353d344
+
+**url:** photos.$DOMAINNAME
 
 ### Service: photoprism-db
 
@@ -400,6 +452,8 @@
 
 **image:** phpmyadmin:5.2.1-apache@sha256:1935c8f30d6c68e2e9388cc24a317cedd6701ca8a4c8a956117f393eb00b8273
 
+**url:** phpmyadmin.$DOMAINNAME
+
 ## docker/ansible/templates/compose-modules/plex.yml
 
 ### Service: plex
@@ -408,6 +462,8 @@
 
 **image:** ghcr.io/linuxserver/plex:1.40.2@sha256:f5bb97726e2e34205ee995593561efe47de42bd4aca35ac7daa2c4b4fc2dabb4
 
+**url:** plex-noauth.$DOMAINNAME
+
 ## docker/ansible/templates/compose-modules/portainer.yml
 
 ### Service: portainer
@@ -415,6 +471,8 @@
 **container_name:** portainer
 
 **image:** portainer/portainer-ce:2.20.1-alpine@sha256:78c026175e15203b8012518141291ad484f1c46d8cb94c67b389555169f27c19
+
+**url:** portainer-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
 ### Service: portainer-docker-proxy
 
@@ -430,11 +488,15 @@
 
 **image:** prom/prometheus:v2.51.2@sha256:4f6c47e39a9064028766e8c95890ed15690c30f00c4ba14e7ce6ae1ded0295b1
 
+**url:** prometheus.$DOMAINNAME
+
 ### Service: pushgateway
 
 **container_name:** pushgateway
 
 **image:** prom/pushgateway:v1.8.0@sha256:c159e946abf44e0cf4ae53aa03d99326497a35acca526739c7f8b01a0183bb50
+
+**url:** pushgateway.$DOMAINNAME
 
 ## docker/ansible/templates/compose-modules/promtail.yml
 
@@ -443,6 +505,8 @@
 **container_name:** promtail
 
 **image:** grafana/promtail:3.0.0@sha256:43c497a102e333c30b7c0f9a45d9107151f6424bd40c424d96791e65b6f2aeb0
+
+**url:** promtail.$DOMAINNAME
 
 ### Service: promtail-docker-proxy
 
@@ -478,6 +542,8 @@
 
 **image:** ghcr.io/jordemort/traefik-forward-auth:latest@sha256:394f86bff5cc839fac1392f65dd3d4471e827bc29321a4460e7d92042e026599
 
+**url:** auth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
+
 ## docker/ansible/templates/compose-modules/unifi.yml
 
 ### Service: unifi
@@ -485,6 +551,8 @@
 **container_name:** unifi
 
 **image:** linuxserver/unifi-network-application:8.1.113@sha256:63f0b48b11403dc055dcf79f04f3b3a4dfc58fea0d12e53401aa5c2b00096316
+
+**url:** unifi.$DOMAINNAME
 
 ### Service: unifi-db
 
@@ -516,6 +584,8 @@
 
 **image:** hashicorp/vault:1.16@sha256:e139ff28c23e1f22a6e325696318141259b177097d8e238a3a4c5b84862fadd8
 
+**url:** vault.$DOMAINNAME`) && PathPrefix(`/v1
+
 ## docker/ansible/templates/compose-modules/vikunja.yml
 
 ### Service: vikunja
@@ -523,6 +593,8 @@
 **container_name:** vikunja
 
 **image:** vikunja/vikunja:0.23.0@sha256:c824f99b0b09b7f03a1d77ad6691fbce38edf8d737e73e3242d8b87dd96d21e0
+
+**url:** vikunja.$DOMAINNAME
 
 ### Service: vikunja-db
 
@@ -543,6 +615,8 @@
 **container_name:** wallabag
 
 **image:** wallabag/wallabag:2.6.9@sha256:d482b139bab164afef0e8bbfbeb7c55cd3e10e848b95d7d167e4ffcbc847f4b9
+
+**url:** wallabag.$DOMAINNAME
 
 ### Service: wallabag-db
 
@@ -580,3 +654,4 @@
 
 **image:** lscr.io/linuxserver/wireguard:1.0.20210914@sha256:c417568c79a051a8a73ffc2ad28ef58f58ba76bdb4c420389819c001aa55a03e
 
+**url:** wireguard.$DOMAINNAME

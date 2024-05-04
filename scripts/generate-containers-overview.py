@@ -5,7 +5,8 @@ from collections import defaultdict
 
 important_properties = {
     'container_name',
-    'image'
+    'image',
+    'labels'
 }
 
 def get_compose_files():
@@ -25,7 +26,8 @@ def parse_compose_content(content):
     return yaml.safe_load(content)
 
 def get_important_properties():
-    important_properties_dict = defaultdict(lambda: defaultdict(lambda: defaultdict(dict)))
+    important_properties_dict = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
+
     for folder, file_name, function_content, deprecation_notice in get_compose_files():
         compose_dict = parse_compose_content(function_content)
         services = compose_dict['services']
@@ -34,6 +36,17 @@ def get_important_properties():
             for prop in important_properties:
                 if prop in config:
                     actual_values = config[prop]
+
+                    # Check for Traefik labels
+                    if prop == 'labels' and 'traefik.enable=true' in actual_values:
+                        host_label = next((label for label in actual_values if 'rule=Host' in label), None)
+                        if host_label:
+                            traefik_url = re.findall(r'Host\(`(.*)\`', host_label)
+                            if traefik_url:
+                                important_properties_dict[(folder, file_name)][service]["url"] = traefik_url
+                        else:
+                            important_properties_dict[(folder, file_name)][service]["url"] = [f'{config["container_name"]}.$DOMAINNAME']
+                        continue
 
                     # Convert dictionary to list of strings
                     if isinstance(actual_values, dict):
@@ -48,16 +61,20 @@ def get_important_properties():
 
 def write_markdown_file(important_properties_dict):
     with open('docker/docker_containers.md', 'w') as f:
-        f.write("# Docker Information\n\n")
+        f.write("# Docker Information")
         for (folder, file_name), services in sorted(important_properties_dict.items()):
-            f.write(f"## {folder}/{file_name}\n\n")
+            f.write(f"\n\n## {folder}/{file_name}")
             for service, props in sorted(services.items()):
-                f.write(f"### Service: {service}\n\n")
+                f.write(f"\n\n### Service: {service}")
                 for prop, values in sorted(props.items()):
                     if prop == "Deprecation Notice":
-                        f.write(f"> :warning: **{prop}:** {', '.join(values)}\n\n")
+                        f.write(f"\n\n> :warning: **{prop}:** {', '.join(values)}")
                     else:
-                        f.write(f"**{prop}:** {', '.join(values)}\n\n")
+                        if prop == "url" and "Deprecation Notice" not in props:
+                            f.write(f"\n\n**{prop}:** {', '.join(values)}")
+                        elif prop != "url":
+                            f.write(f"\n\n**{prop}:** {', '.join(values)}")
+        f.write("\n")
 
 if __name__ == "__main__":
     important_property_values = get_important_properties()
