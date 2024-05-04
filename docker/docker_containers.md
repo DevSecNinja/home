@@ -82,7 +82,7 @@
 
 **container_name:** change-detection
 
-**image:** ghcr.io/dgtlmoon/changedetection.io:0.45.21@sha256:6e80b83184b07fa8ac1d2ab42c5fca1620cedf7000fbb6db2c2de6d8babf203c
+**image:** ghcr.io/dgtlmoon/changedetection.io:0.45.22@sha256:3669b2c8464f5914ed05d76290d6401b4946c2cfbaa7621dda9d02b0f5b63c3a
 
 **url:** change-detection.$DOMAINNAME
 
