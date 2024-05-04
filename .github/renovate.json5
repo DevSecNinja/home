@@ -70,7 +70,7 @@
     },
     {
       "description": ["Auto merge Docker images"],
-      "matchManagers": ["docker", "dockerfile", "docker-compose"],
+      "matchDatasources": ["docker"],
       "automerge": true,
       "automergeType": "pr",
       "ignoreTests": false,
