@@ -64,9 +64,33 @@ endpoints:
     <<: *defaults
     url: "https://alertmanager.${DOMAINNAME}"
 
+  - name: Auth MGMT - HTTP
+    <<: *defaults
+    url: "https://auth-mgmt.${DOMAINNAME}"
+
+  - name: Auth PROD - HTTP
+    <<: *defaults
+    url: "https://auth-prod.${DOMAINNAME}"
+
+  - name: Auth FALL - HTTP
+    <<: *defaults
+    url: "https://auth-fall.${DOMAINNAME}"
+
   # - name: Bitwarden - HTTP
   #   <<: *defaults
   #   url: "https://bitwarden.${DOMAINNAME}"
+
+  - name: CAdvisor MGMT - HTTP
+    <<: *defaults
+    url: "https://cadvisor-mgmt.${DOMAINNAME}"
+
+  - name: CAdvisor PROD - HTTP
+    <<: *defaults
+    url: "https://cadvisor-mgmt.${DOMAINNAME}"
+
+  - name: CAdvisor FALL - HTTP
+    <<: *defaults
+    url: "https://cadvisor-fall.${DOMAINNAME}"
 
   - name: Change-Detection - HTTP
     <<: *defaults
@@ -84,17 +108,57 @@ endpoints:
     <<: *defaults
     url: "https://cyberchef.${DOMAINNAME}"
 
+  - name: Dozzle MGMT - HTTP
+    <<: *defaults
+    url: "https://dozzle-mgmt.${DOMAINNAME}"
+
+  - name: Dozzle PROD - HTTP
+    <<: *defaults
+    url: "https://dozzle-prod.${DOMAINNAME}"
+
+  - name: Dozzle FALL - HTTP
+    <<: *defaults
+    url: "https://dozzle-fall.${DOMAINNAME}"
+
   - name: Draw - HTTP
     <<: *defaults
     url: "https://draw.${DOMAINNAME}"
+
+  - name: Echo MGMT - HTTP
+    <<: *defaults
+    url: "https://echo-mgmt.${DOMAINNAME}"
+
+  - name: Echo PROD - HTTP
+    <<: *defaults
+    url: "https://echo-prod.${DOMAINNAME}"
+
+  - name: Echo FALL - HTTP
+    <<: *defaults
+    url: "https://echo-fall.${DOMAINNAME}"
 
   - name: Excalidraw - HTTP
     <<: *defaults
     url: "https://excalidraw.${DOMAINNAME}"
 
+  - name: Folding EXT - HTTP
+    <<: *defaults
+    url: "https://folding-ext.${DOMAINNAME}"
+
   - name: Grafana - HTTP
     <<: *defaults
     url: "https://grafana.${DOMAINNAME}"
+
+  - name: Homepage MGMT - HTTP
+    <<: *defaults
+    url: "https://homepage-mgmt.${DOMAINNAME}"
+
+  - name: Homepage PROD - HTTP
+    <<: *defaults
+    url: "https://homepage-prod.${DOMAINNAME}"
+
+  - name: Homepage FALL - HTTP
+    <<: *defaults
+    url: "https://homepage-fall.${DOMAINNAME}"
 
   - name: Influx - HTTP
     <<: *defaults
@@ -119,6 +183,18 @@ endpoints:
       - "[STATUS] == 403" # Due to firewall restrictions
       - "[CERTIFICATE_EXPIRATION] > 48h"
 
+  - name: Node Exporter MGMT - HTTP
+    <<: *defaults
+    url: "https://nodeexporter-mgmt.${DOMAINNAME}"
+
+  - name: Node Exporter PROD - HTTP
+    <<: *defaults
+    url: "https://nodeexporter-prod.${DOMAINNAME}"
+
+  - name: Node Exporter FALL - HTTP
+    <<: *defaults
+    url: "https://nodeexporter-fall.${DOMAINNAME}"
+
   - name: Paperless - HTTP
     <<: *defaults
     url: "https://paperless.${DOMAINNAME}"
@@ -141,6 +217,18 @@ endpoints:
     conditions:
       - "[STATUS] == 401" # Plex will redirect
       - "[CERTIFICATE_EXPIRATION] > 48h"
+
+  - name: Portainer MGMT - HTTP
+    <<: *defaults
+    url: "https://portainer-mgmt.${DOMAINNAME}"
+
+  - name: Portainer PROD - HTTP
+    <<: *defaults
+    url: "https://portainer-prod.${DOMAINNAME}"
+
+  - name: Portainer FALL - HTTP
+    <<: *defaults
+    url: "https://portainer-fall.${DOMAINNAME}"
 
   - name: Prometheus - HTTP
     <<: *defaults
