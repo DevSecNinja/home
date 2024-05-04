@@ -1,5 +1,6 @@
 ---
 - hosts: docker
+  name: "Update Docker configs"
   become: yes
   vars:
     # Directories
@@ -111,6 +112,48 @@
         cmd: "docker compose pull 2>&1"
         chdir: /srv/docker
 
+  handlers:
+    - import_tasks: ../handlers/main.yml
+
+- hosts: dnsservers
+  gather_facts: no
+  name: "Update DNS containers"
+  become: yes
+  serial: 1
+  tasks:
+    - include_tasks: ../tasks/load-credentials.yaml
+
+    - name: Run DNS containers
+      register: docker_container_run_result
+      shell:
+        cmd: "docker compose up -d adguard unbound --remove-orphans --wait 2>&1"
+        chdir: /srv/docker
+
+    - name: Restart Unbound DNS container to enforce changes
+      shell:
+        cmd: "docker restart unbound 2>&1"
+        chdir: /srv/docker
+      when: inventory_hostname in groups['dnsservers']
+
+    - name: Show Output
+      debug: msg="{{ docker_container_run_result.stdout_lines }}"
+      when: docker_container_run_result.changed
+
+    - name: "[Test] Perform external DNS lookup"
+      command: "host github.com adguard-{{ generic__hostname_suffix }}.{{ generic__domain_name }}"
+      register: host_output_ext
+      failed_when: "'has address' not in host_output_ext.stdout"
+
+    - name: "[Test] Perform internal DNS lookup"
+      command: "host draw.{{ generic__domain_name }} adguard-{{ generic__hostname_suffix }}.{{ generic__domain_name }}"
+      register: host_output_int
+      failed_when: "'has address' not in host_output_int.stdout"
+
+- hosts: docker
+  gather_facts: no
+  name: "Update all containers"
+  become: yes
+  tasks:
     - name: Run containers
       register: docker_container_run_result
       shell:
@@ -120,25 +163,3 @@
     - name: Show Output
       debug: msg="{{ docker_container_run_result.stdout_lines }}"
       when: docker_container_run_result.changed
-
-    # TODO: [ansible] Restart containers if content in config folder has changed
-    - name: Restart Unbound DNS container
-      shell:
-        cmd: "docker restart unbound 2>&1"
-        chdir: /srv/docker
-      when: inventory_hostname in groups['dnsservers']
-
-    - name: "[Test] Perform DNS lookup on primary DNS"
-      command: "host github.com adguard-mgmt.{{ generic__domain_name }}"
-      register: host_output
-      failed_when: "'has address' not in host_output.stdout"
-      when: inventory_hostname in groups['internal']
-
-    - name: "[Test] Perform DNS lookup on fallback DNS"
-      command: "host github.com adguard-fall.{{ generic__domain_name }}"
-      register: host_output
-      failed_when: "'has address' not in host_output.stdout"
-      when: inventory_hostname in groups['internal']
-
-  handlers:
-    - import_tasks: ../handlers/main.yml
