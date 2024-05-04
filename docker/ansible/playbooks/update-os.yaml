@@ -1,9 +1,8 @@
 ---
 - hosts: all
+  name: "Update the basics"
   become: yes
   gather_facts: true
-  order: sorted # Runs alphabetically
-  serial: 1 # Run all tasks on one host before going to the next
   vars:
   tasks:
     - name: Stop Folding at Home
@@ -39,6 +38,18 @@
 
     - include_tasks: ../tasks/update-certificates.yaml
       when: inventory_hostname in groups['docker'] and inventory_hostname in groups['internal']
+
+  handlers:
+    - import_tasks: ../handlers/main.yml
+
+- hosts: all
+  name: "Update risky components (OS, packages, etc.)"
+  become: yes
+  gather_facts: true
+  order: sorted # Runs alphabetically
+  serial: 1 # Run all tasks on one host before going to the next
+  vars:
+  tasks:
     - include_tasks: ../tasks/update-os.yaml
     - include_tasks: ../tasks/update-brew.yaml
     - include_tasks: ../tasks/reboot-check.yaml
