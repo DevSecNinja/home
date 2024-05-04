@@ -72,8 +72,8 @@
       "description": ["Auto merge Docker images"],
       "matchManagers": ["dockerfile", "docker-compose"],
       "automerge": true,
-      "automergeType": "branch",
-      "ignoreTests": true,
+      "automergeType": "pr",
+      "ignoreTests": false,
       "matchUpdateTypes": ["digest"]
     },
     // groups
