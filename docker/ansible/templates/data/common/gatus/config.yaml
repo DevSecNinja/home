@@ -168,13 +168,17 @@ endpoints:
     <<: *defaults
     url: "https://influxdb-noauth.${DOMAINNAME}"
 
-  - name: Jupyter - HTTP
-    <<: *defaults
-    url: "https://jupyter.${DOMAINNAME}"
+  # - name: Jupyter - HTTP
+  #   <<: *defaults
+  #   url: "https://jupyter.${DOMAINNAME}"
 
   - name: Linkding - HTTP
     <<: *defaults
     url: "https://linkding.${DOMAINNAME}"
+
+  - name: Lobe Chat - HTTP
+    <<: *defaults
+    url: "https://chat.${DOMAINNAME}"
 
   - name: Loki - HTTP
     <<: *defaults

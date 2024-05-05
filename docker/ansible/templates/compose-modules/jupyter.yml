@@ -1,7 +1,15 @@
+#
+#### DEPRECATION NOTICE
+## This compose module is no longer in use
+## Replaced by: nothing
+## Reason: Currently unused and healthcheck was failing often
+## Last used version: 2024-03-14@sha256:1a6638b2861bae9bf8ec2fc9df30f3c1a5b3ee60a52ff0bffb637e0898effb55
+#
+
 services:
   jupyter:
     container_name: jupyter
-    image: quay.io/jupyter/scipy-notebook:2024-03-14@sha256:1a6638b2861bae9bf8ec2fc9df30f3c1a5b3ee60a52ff0bffb637e0898effb55
+    image: quay.io/jupyter/scipy-notebook
     depends_on:
       - traefik
     networks:
