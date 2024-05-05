@@ -264,11 +264,11 @@
 
 ### Service: jupyter
 
+> :warning: **Deprecation Notice:** Replaced by: nothing
+
 **container_name:** jupyter
 
-**image:** quay.io/jupyter/scipy-notebook:2024-03-14@sha256:1a6638b2861bae9bf8ec2fc9df30f3c1a5b3ee60a52ff0bffb637e0898effb55
-
-**url:** jupyter.$DOMAINNAME
+**image:** quay.io/jupyter/scipy-notebook
 
 ## docker/ansible/templates/compose-modules/linkding.yml
 
@@ -291,6 +291,16 @@
 **container_name:** linkding-db-backup
 
 **image:** tiredofit/db-backup:4.0.35@sha256:794ffd160cf01057d0f64ef7baf5da3cd8925a48f1f65653e016f58c7d69b13c
+
+## docker/ansible/templates/compose-modules/lobe-chat.yml
+
+### Service: lobe-chat
+
+**container_name:** lobe-chat
+
+**image:** lobehub/lobe-chat:v0.153.1@sha256:e6e198779e7dec03aec5c9d846a0c284e99f5e51bf21c69ba5baa19d3eaf2015
+
+**url:** chat.$DOMAINNAME
 
 ## docker/ansible/templates/compose-modules/mailrise.yml
 
