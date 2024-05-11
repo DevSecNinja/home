@@ -58,7 +58,7 @@
 
 **container_name:** bitwarden-db
 
-**image:** mariadb:11.3.2@sha256:baca4137adc50f75a3d5ce91d8ef00e61d89159acdd152c4b81060a35fd66161
+**image:** mariadb:11.3.2@sha256:f0a6faee9d0e55492f238d1d11ff13d77616ea12d8c38bedf090da2ee05532be
 
 ### Service: bitwarden-db-backup
 
@@ -108,7 +108,7 @@
 
 **container_name:** code-server
 
-**image:** lscr.io/linuxserver/code-server:4.23.1@sha256:6a14c048d7cd29508b47b60c7231c2a9df5eae8529ab6052bdc5208856663164
+**image:** lscr.io/linuxserver/code-server:4.23.1@sha256:6852d23614cdc2cf4f03d22445cd5eb134f2a7137b9bedc20f60bc4b83c687d5
 
 **url:** code.$DOMAINNAME
 
@@ -136,7 +136,7 @@
 
 **container_name:** dozzle-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:1.24.0@sha256:26abff1ae2a6882ecfcfed9e4911303269e11ace7a56eb9eab07affad1e4e2c9
+**image:** lscr.io/linuxserver/socket-proxy:1.24.0@sha256:b17c7ab910add1ffdb18a700dceb19b8d23edf99c7bbe5fef32a5a593b610ae5
 
 ## docker/ansible/templates/compose-modules/drawio.yml
 
@@ -164,7 +164,7 @@
 
 **container_name:** excalidraw
 
-**image:** excalidraw/excalidraw:latest@sha256:648edf36c55793fdeed475e09a86fb6c16a68783dc442d37d5070adfc0362a8f
+**image:** excalidraw/excalidraw:latest@sha256:bbb83fa30f5f8528126d37bf9c054318733579836aa30874ac28e3c0ec62550b
 
 **url:** excalidraw.$DOMAINNAME
 
@@ -174,7 +174,7 @@
 
 **container_name:** foldingathome
 
-**image:** lscr.io/linuxserver/foldingathome:7.6.21@sha256:7317a02f5b804da5b11deb03146fc5072437661f956b5ff32021b5608067848d
+**image:** lscr.io/linuxserver/foldingathome:7.6.21@sha256:6008d7c213c19ea98cb5c3af26ab11b924b3a280e332571d8853c289c45dde14
 
 **url:** folding-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -232,7 +232,7 @@
 
 **container_name:** homepage-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:1.24.0@sha256:26abff1ae2a6882ecfcfed9e4911303269e11ace7a56eb9eab07affad1e4e2c9
+**image:** lscr.io/linuxserver/socket-proxy:1.24.0@sha256:b17c7ab910add1ffdb18a700dceb19b8d23edf99c7bbe5fef32a5a593b610ae5
 
 ## docker/ansible/templates/compose-modules/influxdb.yml
 
@@ -316,7 +316,7 @@
 
 **container_name:** nextcloud
 
-**image:** nextcloud:29.0.0-apache@sha256:213f65aca230810ed0a6fc9af0bb3f1db0b5851a36a4488b9a60f7c9ac181c39
+**image:** nextcloud:29.0.0-apache@sha256:a03b4456626f6c3c8e928961f4681bb42fcc6e4ce30dc5de7d3bf78af678d76b
 
 **url:** cloud.$DOMAINNAME
 
@@ -324,13 +324,13 @@
 
 **container_name:** nextcloud-cron
 
-**image:** nextcloud:29.0.0-apache@sha256:213f65aca230810ed0a6fc9af0bb3f1db0b5851a36a4488b9a60f7c9ac181c39
+**image:** nextcloud:29.0.0-apache@sha256:a03b4456626f6c3c8e928961f4681bb42fcc6e4ce30dc5de7d3bf78af678d76b
 
 ### Service: nextcloud-db
 
 **container_name:** nextcloud-db
 
-**image:** mariadb:11.3.2@sha256:baca4137adc50f75a3d5ce91d8ef00e61d89159acdd152c4b81060a35fd66161
+**image:** mariadb:11.3.2@sha256:f0a6faee9d0e55492f238d1d11ff13d77616ea12d8c38bedf090da2ee05532be
 
 ### Service: nextcloud-db-backup
 
@@ -438,7 +438,7 @@
 
 **container_name:** photoprism
 
-**image:** photoprism/photoprism:preview@sha256:42ccaf8d16a06cecca04120d169735ef29eec86971eba5470f23c4b0b353d344
+**image:** photoprism/photoprism:preview@sha256:b914356c3d138f2a687a84e06f729bc7b2c0756a1ca1b7c7b418e397a0f863ee
 
 **url:** photos.$DOMAINNAME
 
@@ -446,7 +446,7 @@
 
 **container_name:** photoprism-db
 
-**image:** mariadb:11.3.2@sha256:baca4137adc50f75a3d5ce91d8ef00e61d89159acdd152c4b81060a35fd66161
+**image:** mariadb:11.3.2@sha256:f0a6faee9d0e55492f238d1d11ff13d77616ea12d8c38bedf090da2ee05532be
 
 ### Service: photoprism-db-backup
 
@@ -470,7 +470,7 @@
 
 **container_name:** plex
 
-**image:** ghcr.io/linuxserver/plex:1.40.2@sha256:7f598ca1cce530b4ba190d0b80d79fa768e84e06c5b0770fef992cac7f92d232
+**image:** ghcr.io/linuxserver/plex:1.40.2@sha256:efcde01a7f245a419797cc77e343a8b36af1377cf5d397fead81de8099bdeb7b
 
 **url:** plex-noauth.$DOMAINNAME
 
@@ -488,7 +488,7 @@
 
 **container_name:** portainer-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:1.24.0@sha256:26abff1ae2a6882ecfcfed9e4911303269e11ace7a56eb9eab07affad1e4e2c9
+**image:** lscr.io/linuxserver/socket-proxy:1.24.0@sha256:b17c7ab910add1ffdb18a700dceb19b8d23edf99c7bbe5fef32a5a593b610ae5
 
 ## docker/ansible/templates/compose-modules/prometheus.yml
 
@@ -522,7 +522,7 @@
 
 **container_name:** promtail-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:1.24.0@sha256:26abff1ae2a6882ecfcfed9e4911303269e11ace7a56eb9eab07affad1e4e2c9
+**image:** lscr.io/linuxserver/socket-proxy:1.24.0@sha256:b17c7ab910add1ffdb18a700dceb19b8d23edf99c7bbe5fef32a5a593b610ae5
 
 ## docker/ansible/templates/compose-modules/samba.yml
 
@@ -560,7 +560,7 @@
 
 **container_name:** unifi
 
-**image:** linuxserver/unifi-network-application:8.1.127@sha256:a4ba259eda8516674b5f10046edea5233003d6c2ad11f14a33b7020dc310c995
+**image:** linuxserver/unifi-network-application:8.1.127@sha256:90b58e91776b44d82f0bea3d8c0c824abdfedc8358822c15c0de2dcfe317cb5e
 
 **url:** unifi.$DOMAINNAME
 
@@ -568,7 +568,7 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:7.0.9@sha256:84f177b8f7cddedc08f25e7400950a2d9b90d9a96f1b0083d712a2ddbce4dca1
+**image:** mongo:7.0.9@sha256:c578cda6630625bee0f7c522120fd89a8ffc2b9d88fa77a6ceb3447cedbd412a
 
 ### Service: unifi-db-backup
 
@@ -610,7 +610,7 @@
 
 **container_name:** vikunja-db
 
-**image:** mariadb:11.3.2@sha256:baca4137adc50f75a3d5ce91d8ef00e61d89159acdd152c4b81060a35fd66161
+**image:** mariadb:11.3.2@sha256:f0a6faee9d0e55492f238d1d11ff13d77616ea12d8c38bedf090da2ee05532be
 
 ### Service: vikunja-db-backup
 
@@ -632,7 +632,7 @@
 
 **container_name:** wallabag-db
 
-**image:** mariadb:11.3.2@sha256:baca4137adc50f75a3d5ce91d8ef00e61d89159acdd152c4b81060a35fd66161
+**image:** mariadb:11.3.2@sha256:f0a6faee9d0e55492f238d1d11ff13d77616ea12d8c38bedf090da2ee05532be
 
 ### Service: wallabag-db-backup
 
@@ -662,6 +662,6 @@
 
 **container_name:** wireguard
 
-**image:** lscr.io/linuxserver/wireguard:1.0.20210914@sha256:b0e317bc390e2d12339648920d2148f17fd28f7544fe77ebe864fdb0dc857474
+**image:** lscr.io/linuxserver/wireguard:1.0.20210914@sha256:a0e39a201018b0e990e82445ab7b2098cd25b1b7601ddcb8c50f2bb517da39d5
 
 **url:** wireguard.$DOMAINNAME
