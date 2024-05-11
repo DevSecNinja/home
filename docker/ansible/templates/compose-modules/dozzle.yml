@@ -33,7 +33,7 @@ services:
       - "traefik.http.services.dozzle-svc.loadbalancer.server.port=8080"
 
   dozzle-docker-proxy:
-    image: lscr.io/linuxserver/socket-proxy:1.24.0@sha256:26abff1ae2a6882ecfcfed9e4911303269e11ace7a56eb9eab07affad1e4e2c9
+    image: lscr.io/linuxserver/socket-proxy:1.24.0@sha256:b17c7ab910add1ffdb18a700dceb19b8d23edf99c7bbe5fef32a5a593b610ae5
     container_name: dozzle-docker-proxy
     restart: always
     networks:
