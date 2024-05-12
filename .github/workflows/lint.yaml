@@ -23,10 +23,10 @@ on: # yamllint disable-line rule:truthy
           - "INFO"
           - "NOTICE"
           - "WARN"
-  # push:
-  #   branches-ignore: [master, main, renovate/*]
-  # pull_request:
-  #   branches: [master, main]
+  push:
+    branches-ignore: [master, main, renovate/*]
+  pull_request:
+    branches: [master, main, renovate/*]
 
 permissions: {}
 
