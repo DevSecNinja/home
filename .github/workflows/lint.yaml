@@ -14,7 +14,7 @@ on: # yamllint disable-line rule:truthy
           - "true"
       log_level:
         type: choice
-        description: 'Log level for GitHub Super linter'
+        description: 'Log level for GitHub Super Linter'
         required: true
         default: 'ERROR'
         options:
