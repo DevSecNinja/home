@@ -8,6 +8,9 @@ on: # yamllint disable-line rule:truthy
         description: "Validate all codebase?"
         required: false
         default: "false"
+        options:
+          - "false"
+          - "true"
   # push:
   #   branches-ignore: [master, main, renovate/*]
   # pull_request:
