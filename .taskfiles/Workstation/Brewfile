@@ -1,7 +1,7 @@
 tap "fluxcd/tap"
 tap "go-task/tap"
 tap "hashicorp/tap"
-tap "siderolabs/talos"
+tap "siderolabs/tap"
 brew "gcc" # Needed for vault & flux
 brew "age"
 brew "cloudflared"
