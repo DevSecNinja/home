@@ -7,11 +7,22 @@ on: # yamllint disable-line rule:truthy
       validate_all:
         type: choice
         description: "Validate all codebase?"
-        required: false
+        required: true
         default: "false"
         options:
           - "false"
           - "true"
+      log_level:
+        type: choice
+        description: 'Log level for GitHub Super linter'
+        required: true
+        default: 'ERROR'
+        options:
+          - "DEBUG"
+          - "ERROR"
+          - "INFO"
+          - "NOTICE"
+          - "WARN"
   # push:
   #   branches-ignore: [master, main, renovate/*]
   # pull_request:
@@ -43,7 +54,9 @@ jobs:
 
       - name: Set VALIDATE_ALL_CODEBASE variable
         if: ${{ github.event_name == 'workflow_dispatch' }}
-        run: echo "VALIDATE_ALL_CODEBASE=${{ github.event.inputs.validate_all }}" >> "$GITHUB_ENV"
+        run: |
+          echo "VALIDATE_ALL_CODEBASE=${{ github.event.inputs.validate_all }}" >> "$GITHUB_ENV"
+          echo "LOG_LEVEL=${{ github.event.inputs.log_level }}" >> "$GITHUB_ENV"
 
       - name: Super-linter
         uses: super-linter/super-linter@v6.4.1 # x-release-please-version
