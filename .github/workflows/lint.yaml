@@ -42,6 +42,7 @@ jobs:
         run: cat .github/super-linter.env >> "$GITHUB_ENV"
 
       - name: Set VALIDATE_ALL_CODEBASE variable
+        if: ${{ github.event_name == 'workflow_dispatch' }}
         run: echo "VALIDATE_ALL_CODEBASE=${{ github.event.inputs.validate_all }}" >> "$GITHUB_ENV"
 
       - name: Super-linter
