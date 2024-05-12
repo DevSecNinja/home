@@ -42,6 +42,7 @@
   when: inventory_hostname not in groups['hypervisor']
 
 - name: Run bootstrap script
+  become: false
   shell: script/bootstrap
   args:
     chdir: "/home/{{ ansible_user }}/.dotfiles"
@@ -50,5 +51,6 @@
   when: inventory_hostname not in groups['hypervisor'] and folder_stat.stat.exists
 
 - name: Show bootstrap results
+  become: false
   debug: msg="{{ bootstrap_result.stdout_lines }}"
   when: inventory_hostname not in groups['hypervisor']
