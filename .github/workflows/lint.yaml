@@ -1,14 +1,19 @@
 ---
 name: Lint
 
-on:  # yamllint disable-line rule:truthy
+on: # yamllint disable-line rule:truthy
   workflow_dispatch:
+    inputs:
+      validate_all:
+        description: "Validate all codebase?"
+        required: false
+        default: "false"
   # push:
   #   branches-ignore: [master, main, renovate/*]
   # pull_request:
   #   branches: [master, main]
 
-permissions: { }
+permissions: {}
 
 jobs:
   build:
@@ -32,8 +37,11 @@ jobs:
       - name: Load environment variables from super-linter config
         run: cat .github/super-linter.env >> "$GITHUB_ENV"
 
+      - name: Set VALIDATE_ALL_CODEBASE variable
+        run: echo "VALIDATE_ALL_CODEBASE=${{ github.event.inputs.validate_all }}" >> "$GITHUB_ENV"
+
       - name: Super-linter
-        uses: super-linter/super-linter@v6.4.1  # x-release-please-version
+        uses: super-linter/super-linter@v6.4.1 # x-release-please-version
         env:
           # To report GitHub Actions status checks
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
