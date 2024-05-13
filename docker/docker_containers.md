@@ -460,7 +460,7 @@
 
 **container_name:** phpmyadmin
 
-**image:** phpmyadmin:5.2.1-apache@sha256:57de6b3d028cb77bca69523ab2f65a61b23d40db5f4c1c1163b7b16dc29e6a3d
+**image:** phpmyadmin:5.2.1-apache@sha256:47c53e6d31e452c7e488079bafac156588f912f0c0aeb85fb62897eadd26d097
 
 **url:** phpmyadmin.$DOMAINNAME
 
