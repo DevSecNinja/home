@@ -105,6 +105,10 @@
       "versioning": "regex:^v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)(?<compatibility>\\+k.s)\\.?(?<build>\\d+)$",
       "matchPackagePatterns": ["k3s"]
     },
+    {
+      "packagePatterns": ["^lscr.io\\/linuxserver\\/"],
+      "versionScheme": "regex:^(?<compatibility>.*?)-(?<major>v?\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)[\\.-]*r?(?<build>\\d+)*-*r?(?<release>\\w+)*"
+    },
     // commit message topics
     {
       "matchDatasources": ["helm"],
