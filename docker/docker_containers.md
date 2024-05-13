@@ -108,7 +108,7 @@
 
 **container_name:** code-server
 
-**image:** lscr.io/linuxserver/code-server:4.89.0@sha256:678e01467fecf0d1d32b938f3f5324a69f74f9187d37fadddb8f926024524b8b
+**image:** lscr.io/linuxserver/code-server:version-4.89.0@sha256:678e01467fecf0d1d32b938f3f5324a69f74f9187d37fadddb8f926024524b8b
 
 **url:** code.$DOMAINNAME
 
@@ -136,7 +136,7 @@
 
 **container_name:** dozzle-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:1.24.0@sha256:b17c7ab910add1ffdb18a700dceb19b8d23edf99c7bbe5fef32a5a593b610ae5
+**image:** lscr.io/linuxserver/socket-proxy:version-1.24.0@sha256:b17c7ab910add1ffdb18a700dceb19b8d23edf99c7bbe5fef32a5a593b610ae5
 
 ## docker/ansible/templates/compose-modules/drawio.yml
 
@@ -174,7 +174,7 @@
 
 **container_name:** foldingathome
 
-**image:** lscr.io/linuxserver/foldingathome:7.6.21@sha256:6008d7c213c19ea98cb5c3af26ab11b924b3a280e332571d8853c289c45dde14
+**image:** lscr.io/linuxserver/foldingathome:version-7.6.21@sha256:6008d7c213c19ea98cb5c3af26ab11b924b3a280e332571d8853c289c45dde14
 
 **url:** folding-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -232,7 +232,7 @@
 
 **container_name:** homepage-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:1.24.0@sha256:b17c7ab910add1ffdb18a700dceb19b8d23edf99c7bbe5fef32a5a593b610ae5
+**image:** lscr.io/linuxserver/socket-proxy:version-1.24.0@sha256:b17c7ab910add1ffdb18a700dceb19b8d23edf99c7bbe5fef32a5a593b610ae5
 
 ## docker/ansible/templates/compose-modules/influxdb.yml
 
@@ -470,7 +470,7 @@
 
 **container_name:** plex
 
-**image:** ghcr.io/linuxserver/plex:1.40.2@sha256:efcde01a7f245a419797cc77e343a8b36af1377cf5d397fead81de8099bdeb7b
+**image:** lscr.io/linuxserver/plex:version-1.40.2@sha256:efcde01a7f245a419797cc77e343a8b36af1377cf5d397fead81de8099bdeb7b
 
 **url:** plex-noauth.$DOMAINNAME
 
@@ -488,7 +488,7 @@
 
 **container_name:** portainer-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:1.24.0@sha256:b17c7ab910add1ffdb18a700dceb19b8d23edf99c7bbe5fef32a5a593b610ae5
+**image:** lscr.io/linuxserver/socket-proxy:version-1.24.0@sha256:b17c7ab910add1ffdb18a700dceb19b8d23edf99c7bbe5fef32a5a593b610ae5
 
 ## docker/ansible/templates/compose-modules/prometheus.yml
 
@@ -522,7 +522,7 @@
 
 **container_name:** promtail-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:1.24.0@sha256:b17c7ab910add1ffdb18a700dceb19b8d23edf99c7bbe5fef32a5a593b610ae5
+**image:** lscr.io/linuxserver/socket-proxy:version-1.24.0@sha256:b17c7ab910add1ffdb18a700dceb19b8d23edf99c7bbe5fef32a5a593b610ae5
 
 ## docker/ansible/templates/compose-modules/samba.yml
 
@@ -560,7 +560,7 @@
 
 **container_name:** unifi
 
-**image:** linuxserver/unifi-network-application:8.1.127@sha256:90b58e91776b44d82f0bea3d8c0c824abdfedc8358822c15c0de2dcfe317cb5e
+**image:** lscr.io/linuxserver/unifi-network-application:version-8.1.127@sha256:90b58e91776b44d82f0bea3d8c0c824abdfedc8358822c15c0de2dcfe317cb5e
 
 **url:** unifi.$DOMAINNAME
 
@@ -662,6 +662,6 @@
 
 **container_name:** wireguard
 
-**image:** lscr.io/linuxserver/wireguard:1.0.20210914@sha256:a0e39a201018b0e990e82445ab7b2098cd25b1b7601ddcb8c50f2bb517da39d5
+**image:** lscr.io/linuxserver/wireguard:version-1.0.20210914@sha256:a0e39a201018b0e990e82445ab7b2098cd25b1b7601ddcb8c50f2bb517da39d5
 
 **url:** wireguard.$DOMAINNAME
