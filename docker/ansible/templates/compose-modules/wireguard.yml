@@ -1,7 +1,7 @@
 services:
   wireguard:
     container_name: wireguard
-    image: lscr.io/linuxserver/wireguard:version-1.0.20210914@sha256:a0e39a201018b0e990e82445ab7b2098cd25b1b7601ddcb8c50f2bb517da39d5
+    image: lscr.io/linuxserver/wireguard:version-v1.0.20210914@sha256:a0e39a201018b0e990e82445ab7b2098cd25b1b7601ddcb8c50f2bb517da39d5
     depends_on:
       - traefik
     networks:
