@@ -192,7 +192,7 @@
 
 **container_name:** gatus-db
 
-**image:** docker.io/library/postgres:16.2-alpine@sha256:951bfda460300925caa3949eaa092ba022e9aec191bbea9056a39e2382260b27
+**image:** docker.io/library/postgres:16.3-alpine@sha256:7f7832dfb7770c7256fe3f8c4cb57617caee45e2494cc0a736594135237ed9bf
 
 ### Service: gatus-db-backup
 
@@ -284,7 +284,7 @@
 
 **container_name:** linkding-db
 
-**image:** docker.io/library/postgres:16.2-alpine@sha256:951bfda460300925caa3949eaa092ba022e9aec191bbea9056a39e2382260b27
+**image:** docker.io/library/postgres:16.3-alpine@sha256:7f7832dfb7770c7256fe3f8c4cb57617caee45e2494cc0a736594135237ed9bf
 
 ### Service: linkding-db-backup
 
@@ -388,7 +388,7 @@
 
 **container_name:** paperless-db
 
-**image:** docker.io/library/postgres:16.2-alpine@sha256:951bfda460300925caa3949eaa092ba022e9aec191bbea9056a39e2382260b27
+**image:** docker.io/library/postgres:16.3-alpine@sha256:7f7832dfb7770c7256fe3f8c4cb57617caee45e2494cc0a736594135237ed9bf
 
 ### Service: paperless-db-backup
 
