@@ -26,7 +26,7 @@ on: # yamllint disable-line rule:truthy
   push:
     branches-ignore: [master, main, renovate/*]
   pull_request:
-    branches: [master, main, renovate/*]
+    branches: [master, main]
 
 permissions: {}
 
