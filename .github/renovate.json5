@@ -106,6 +106,7 @@
       "matchPackagePatterns": ["k3s"]
     },
     {
+      "description": ["Use custom versioning for linuxserver images"],
       "packagePatterns": ["^lscr.io\\/linuxserver\\/"],
       "versionScheme": "regex:^(version)(?<compatibility>.*?)-(?<major>v?\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)[\\.-]*r?(?<build>\\d+)*-*r?(?<release>\\w+)|^latest*"
     },
