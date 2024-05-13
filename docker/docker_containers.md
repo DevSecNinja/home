@@ -136,7 +136,7 @@
 
 **container_name:** dozzle-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.24.0@sha256:b17c7ab910add1ffdb18a700dceb19b8d23edf99c7bbe5fef32a5a593b610ae5
+**image:** lscr.io/linuxserver/socket-proxy:version-1.24.0-r16@sha256:b17c7ab910add1ffdb18a700dceb19b8d23edf99c7bbe5fef32a5a593b610ae5
 
 ## docker/ansible/templates/compose-modules/drawio.yml
 
@@ -232,7 +232,7 @@
 
 **container_name:** homepage-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.24.0@sha256:b17c7ab910add1ffdb18a700dceb19b8d23edf99c7bbe5fef32a5a593b610ae5
+**image:** lscr.io/linuxserver/socket-proxy:version-1.24.0-r16@sha256:b17c7ab910add1ffdb18a700dceb19b8d23edf99c7bbe5fef32a5a593b610ae5
 
 ## docker/ansible/templates/compose-modules/influxdb.yml
 
@@ -470,7 +470,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.40.2@sha256:efcde01a7f245a419797cc77e343a8b36af1377cf5d397fead81de8099bdeb7b
+**image:** lscr.io/linuxserver/plex:version-1.40.2.8395-c67dce28e@sha256:114bc1566b442144552843fe43c45ca1a4fb023b46ce2c75485d611792e45519
 
 **url:** plex-noauth.$DOMAINNAME
 
@@ -488,7 +488,7 @@
 
 **container_name:** portainer-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.24.0@sha256:b17c7ab910add1ffdb18a700dceb19b8d23edf99c7bbe5fef32a5a593b610ae5
+**image:** lscr.io/linuxserver/socket-proxy:version-1.24.0-r16@sha256:b17c7ab910add1ffdb18a700dceb19b8d23edf99c7bbe5fef32a5a593b610ae5
 
 ## docker/ansible/templates/compose-modules/prometheus.yml
 
@@ -522,7 +522,7 @@
 
 **container_name:** promtail-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.24.0@sha256:b17c7ab910add1ffdb18a700dceb19b8d23edf99c7bbe5fef32a5a593b610ae5
+**image:** lscr.io/linuxserver/socket-proxy:version-1.24.0-r16@sha256:b17c7ab910add1ffdb18a700dceb19b8d23edf99c7bbe5fef32a5a593b610ae5
 
 ## docker/ansible/templates/compose-modules/samba.yml
 
@@ -662,6 +662,6 @@
 
 **container_name:** wireguard
 
-**image:** lscr.io/linuxserver/wireguard:version-1.0.20210914@sha256:a0e39a201018b0e990e82445ab7b2098cd25b1b7601ddcb8c50f2bb517da39d5
+**image:** lscr.io/linuxserver/wireguard:version-v1.0.20210914@sha256:a0e39a201018b0e990e82445ab7b2098cd25b1b7601ddcb8c50f2bb517da39d5
 
 **url:** wireguard.$DOMAINNAME
