@@ -50,7 +50,7 @@
 
 **container_name:** bitwarden
 
-**image:** bitwarden/self-host:2024.4.1-beta@sha256:df07fd1315f077412cb1844d31ac9b89152102b8bcb0b7345de82bcb3406795f
+**image:** bitwarden/self-host:2024.4.2-beta@sha256:dc8d6f6f8911356fc0cdbcd46c6bbb395ae595c4792f49e2c6a7eef64534f8ba
 
 **url:** bitwarden.$DOMAINNAME
 
@@ -108,7 +108,7 @@
 
 **container_name:** code-server
 
-**image:** lscr.io/linuxserver/code-server:4.23.1@sha256:6852d23614cdc2cf4f03d22445cd5eb134f2a7137b9bedc20f60bc4b83c687d5
+**image:** lscr.io/linuxserver/code-server:4.89.0@sha256:678e01467fecf0d1d32b938f3f5324a69f74f9187d37fadddb8f926024524b8b
 
 **url:** code.$DOMAINNAME
 
@@ -128,7 +128,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v6.5.2@sha256:3669c8ffe32b1436db0a879ef32750ba83c8b9134062835d1b7b54c1f6c0ba6f
+**image:** amir20/dozzle:v6.6.0@sha256:db4f6f2c69f04a6c50b0144f1fed19c4f20a72178faa497541e2fbd4bbf624e9
 
 **url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -144,7 +144,7 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:24.3.1@sha256:c6e4f6e1165922195e38f262bb59300257c92667d864de0649382464ffe108b7
+**image:** jgraph/drawio:24.4.0@sha256:bf449132c9f833987a7ab5f1d34943e2d7c033061a83608fd3b223f0fac3b348
 
 **url:** draw.$DOMAINNAME
 
@@ -192,7 +192,7 @@
 
 **container_name:** gatus-db
 
-**image:** docker.io/library/postgres:16.2-alpine@sha256:951bfda460300925caa3949eaa092ba022e9aec191bbea9056a39e2382260b27
+**image:** docker.io/library/postgres:16.3-alpine@sha256:7f7832dfb7770c7256fe3f8c4cb57617caee45e2494cc0a736594135237ed9bf
 
 ### Service: gatus-db-backup
 
@@ -224,7 +224,7 @@
 
 **container_name:** homepage
 
-**image:** ghcr.io/gethomepage/homepage:v0.8.12@sha256:ad5a8edea1c25b50c6d180d35f72c1623986335113457c4ba38e1ddf16816a4b
+**image:** ghcr.io/gethomepage/homepage:v0.8.13@sha256:43a3ee88abe3b37c64bc52ea93da01c3dcb4a332a953bcd7f438c8d7328d3947
 
 **url:** homepage-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -284,7 +284,7 @@
 
 **container_name:** linkding-db
 
-**image:** docker.io/library/postgres:16.2-alpine@sha256:951bfda460300925caa3949eaa092ba022e9aec191bbea9056a39e2382260b27
+**image:** docker.io/library/postgres:16.3-alpine@sha256:7f7832dfb7770c7256fe3f8c4cb57617caee45e2494cc0a736594135237ed9bf
 
 ### Service: linkding-db-backup
 
@@ -298,7 +298,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:v0.153.1@sha256:e6e198779e7dec03aec5c9d846a0c284e99f5e51bf21c69ba5baa19d3eaf2015
+**image:** lobehub/lobe-chat:v0.157.2@sha256:dd354d8f489fd5f6fc5b18629faf6e1ad1ab3de8f84b0f90be3de54058d7963f
 
 **url:** chat.$DOMAINNAME
 
@@ -388,7 +388,7 @@
 
 **container_name:** paperless-db
 
-**image:** docker.io/library/postgres:16.2-alpine@sha256:951bfda460300925caa3949eaa092ba022e9aec191bbea9056a39e2382260b27
+**image:** docker.io/library/postgres:16.3-alpine@sha256:7f7832dfb7770c7256fe3f8c4cb57617caee45e2494cc0a736594135237ed9bf
 
 ### Service: paperless-db-backup
 
@@ -418,7 +418,7 @@
 
 **container_name:** paperless-web
 
-**image:** ghcr.io/paperless-ngx/paperless-ngx:2.7.2@sha256:703c990a790dfd4d25fb56df3afec27b13cb0926a3818bf265edac9c71311647
+**image:** ghcr.io/paperless-ngx/paperless-ngx:2.8.3@sha256:a93abe7d41a3011cbdf687eccc1ca4b7c6dbc199449fb9651a3bcd7e7f0ff9ee
 
 **url:** paperless.$DOMAINNAME
 
@@ -496,7 +496,7 @@
 
 **container_name:** prometheus
 
-**image:** prom/prometheus:v2.51.2@sha256:4f6c47e39a9064028766e8c95890ed15690c30f00c4ba14e7ce6ae1ded0295b1
+**image:** prom/prometheus:v2.52.0@sha256:5c435642ca4d8427ca26f4901c11114023004709037880cd7860d5b7176aa731
 
 **url:** prometheus.$DOMAINNAME
 

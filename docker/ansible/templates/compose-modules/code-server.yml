@@ -1,6 +1,6 @@
 services:
   code-server:
-    image: lscr.io/linuxserver/code-server:version-4.23.1@sha256:6852d23614cdc2cf4f03d22445cd5eb134f2a7137b9bedc20f60bc4b83c687d5
+    image: lscr.io/linuxserver/code-server:version-4.89.0@sha256:678e01467fecf0d1d32b938f3f5324a69f74f9187d37fadddb8f926024524b8b
     container_name: code-server
     depends_on:
       - traefik

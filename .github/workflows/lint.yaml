@@ -26,13 +26,14 @@ on: # yamllint disable-line rule:truthy
   push:
     branches-ignore: [master, main, renovate/*]
   pull_request:
-    branches: [master, main, renovate/*]
+    branches: [master, main]
 
 permissions: {}
 
 jobs:
   build:
     name: Lint
+    if: ${{ github.actor != 'renovate[bot]' && !github.event.issue.pull_request }} # We shouldn't mess with the Renovate[bot] commits in PRs
     runs-on: ubuntu-latest
 
     permissions:
