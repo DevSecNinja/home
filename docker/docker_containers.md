@@ -240,7 +240,7 @@
 
 **container_name:** influxdb
 
-**image:** influxdb:2.7.5-alpine@sha256:fffdcab19393a354155d33f2eec1fca1e35c70989f6a804ecc9fa66e4919cfe6
+**image:** influxdb:2.7-alpine@sha256:e8227ea5a0d439fbadfdc4313127de265db828aeb98a5010192f4ad6ddb0f153
 
 **url:** influxdb-noauth.$DOMAINNAME
 
