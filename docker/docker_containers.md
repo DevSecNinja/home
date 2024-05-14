@@ -656,6 +656,16 @@
 
 **image:** containrrr/watchtower
 
+## docker/ansible/templates/compose-modules/whoogle.yml
+
+### Service: whoogle
+
+**container_name:** whoogle
+
+**image:** benbusby/whoogle-search:latest@sha256:04e1aea20c6be99f0331671cb6dc3b09843fd3cc28b2bb4688603a4d8e4ec1d4
+
+**url:** search.$DOMAINNAME
+
 ## docker/ansible/templates/compose-modules/wireguard.yml
 
 ### Service: wireguard
