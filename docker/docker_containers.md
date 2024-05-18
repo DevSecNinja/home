@@ -164,7 +164,7 @@
 
 **container_name:** excalidraw
 
-**image:** excalidraw/excalidraw:latest@sha256:bbb83fa30f5f8528126d37bf9c054318733579836aa30874ac28e3c0ec62550b
+**image:** excalidraw/excalidraw:latest@sha256:5cfbf2770e6d7530193be8cca5bdb4b8e4ba6eb000fc64b4b50d079221c51eda
 
 **url:** excalidraw.$DOMAINNAME
 
@@ -316,7 +316,7 @@
 
 **container_name:** nextcloud
 
-**image:** nextcloud:29.0.0-apache@sha256:a03b4456626f6c3c8e928961f4681bb42fcc6e4ce30dc5de7d3bf78af678d76b
+**image:** nextcloud:29.0.0-apache@sha256:8e3c798444f02a85b0322db4e52f0eaacabb2a0652e9d09dbdeea8d8cd218690
 
 **url:** cloud.$DOMAINNAME
 
@@ -324,7 +324,7 @@
 
 **container_name:** nextcloud-cron
 
-**image:** nextcloud:29.0.0-apache@sha256:a03b4456626f6c3c8e928961f4681bb42fcc6e4ce30dc5de7d3bf78af678d76b
+**image:** nextcloud:29.0.0-apache@sha256:8e3c798444f02a85b0322db4e52f0eaacabb2a0652e9d09dbdeea8d8cd218690
 
 ### Service: nextcloud-db
 
@@ -438,7 +438,7 @@
 
 **container_name:** photoprism
 
-**image:** photoprism/photoprism:preview@sha256:e4a726e5bc5ec81d274785ada9f0b7606989da6fe389c85d12be289c6d0f92b2
+**image:** photoprism/photoprism:preview@sha256:d3c1afa7224e87de96a8b2782e3f0b7cd24799fb93878fbc21db13613ec1d40e
 
 **url:** photos.$DOMAINNAME
 
