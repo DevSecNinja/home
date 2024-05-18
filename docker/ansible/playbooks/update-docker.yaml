@@ -140,12 +140,12 @@
       when: docker_container_run_result.changed
 
     - name: "[Test] Perform external DNS lookup"
-      command: "host github.com adguard-{{ generic__hostname_suffix }}.{{ generic__domain_name }}"
+      command: "host github.com localhost"
       register: host_output_ext
       failed_when: "'has address' not in host_output_ext.stdout"
 
     - name: "[Test] Perform internal DNS lookup"
-      command: "host draw.{{ generic__domain_name }} adguard-{{ generic__hostname_suffix }}.{{ generic__domain_name }}"
+      command: "host draw.{{ generic__domain_name }} localhost"
       register: host_output_int
       failed_when: "'has address' not in host_output_int.stdout"
 
