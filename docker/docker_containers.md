@@ -342,7 +342,7 @@
 
 **container_name:** nextcloud-redis
 
-**image:** redis:alpine3.19@sha256:3487aa5cf06dceb38202b06bba45b6e6d8a92288848698a6518eee5f63a293a3
+**image:** redis:alpine3.19@sha256:d16417b0a64f3a5d2acc1d5e1657e1bc8faec68d5f8c45b82fa87e81da6bbe9f
 
 ## docker/ansible/templates/compose-modules/nodeexporter.yml
 
@@ -370,7 +370,7 @@
 
 **container_name:** oauth2-proxy-redis
 
-**image:** redis:alpine3.19@sha256:3487aa5cf06dceb38202b06bba45b6e6d8a92288848698a6518eee5f63a293a3
+**image:** redis:alpine3.19@sha256:d16417b0a64f3a5d2acc1d5e1657e1bc8faec68d5f8c45b82fa87e81da6bbe9f
 
 ## docker/ansible/templates/compose-modules/openspeedtest.yml
 
@@ -406,7 +406,7 @@
 
 **container_name:** paperless-redis
 
-**image:** redis:alpine3.19@sha256:3487aa5cf06dceb38202b06bba45b6e6d8a92288848698a6518eee5f63a293a3
+**image:** redis:alpine3.19@sha256:d16417b0a64f3a5d2acc1d5e1657e1bc8faec68d5f8c45b82fa87e81da6bbe9f
 
 ### Service: paperless-tika
 
@@ -460,7 +460,7 @@
 
 **container_name:** phpmyadmin
 
-**image:** phpmyadmin:5.2.1-apache@sha256:47c53e6d31e452c7e488079bafac156588f912f0c0aeb85fb62897eadd26d097
+**image:** phpmyadmin:5.2.1-apache@sha256:07fd21913ecb7cc08e9b731a2a623e421fee5210de1f24fe2a58b77e8cc32427
 
 **url:** phpmyadmin.$DOMAINNAME
 
@@ -470,7 +470,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.40.2.8395-c67dce28e@sha256:114bc1566b442144552843fe43c45ca1a4fb023b46ce2c75485d611792e45519
+**image:** lscr.io/linuxserver/plex:version-1.40.2.8395-c67dce28e@sha256:55c6c1bbc40936f527dc684946c2c32fdc2f0669467c1f359a70ea911593ea6e
 
 **url:** plex-noauth.$DOMAINNAME
 
@@ -560,7 +560,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-8.1.127@sha256:90b58e91776b44d82f0bea3d8c0c824abdfedc8358822c15c0de2dcfe317cb5e
+**image:** lscr.io/linuxserver/unifi-network-application:version-8.1.127@sha256:71d499639bed82e2b4c55176d674138a8af43868630cd589dfa4bb6059afd802
 
 **url:** unifi.$DOMAINNAME
 
@@ -568,7 +568,7 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:7.0.9@sha256:c578cda6630625bee0f7c522120fd89a8ffc2b9d88fa77a6ceb3447cedbd412a
+**image:** mongo:7.0.9@sha256:97aac78a80553735b3d9b9b7212803468781b4859645f892a3d04e6b621a7b77
 
 ### Service: unifi-db-backup
 
@@ -644,7 +644,7 @@
 
 **container_name:** wallabag-redis
 
-**image:** redis:alpine3.19@sha256:3487aa5cf06dceb38202b06bba45b6e6d8a92288848698a6518eee5f63a293a3
+**image:** redis:alpine3.19@sha256:d16417b0a64f3a5d2acc1d5e1657e1bc8faec68d5f8c45b82fa87e81da6bbe9f
 
 ## docker/ansible/templates/compose-modules/watchtower.yml
 
@@ -672,6 +672,6 @@
 
 **container_name:** wireguard
 
-**image:** lscr.io/linuxserver/wireguard:version-v1.0.20210914@sha256:a0e39a201018b0e990e82445ab7b2098cd25b1b7601ddcb8c50f2bb517da39d5
+**image:** lscr.io/linuxserver/wireguard:version-v1.0.20210914@sha256:8b2b9924a8254b9d0c90e489e270e2675513ce115d93db7960b25e4eeff7dd12
 
 **url:** wireguard.$DOMAINNAME
