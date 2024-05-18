@@ -30,7 +30,7 @@ services:
       # Homepage
       - homepage.group=Productivity
       - homepage.name=Whoogle
-      - homepage.icon=whoogle.svg
+      - homepage.icon=google.svg
       - homepage.href=https://search.$DOMAINNAME
       - homepage.description=Search Engine
       # Traefik
