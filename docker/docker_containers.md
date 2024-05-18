@@ -118,7 +118,7 @@
 
 **container_name:** cyberchef
 
-**image:** ghcr.io/gchq/cyberchef:10.18.3@sha256:248f5276c1917980e725a48770fc50d4ea8d208383cb61e4da019020a11ce361
+**image:** ghcr.io/gchq/cyberchef:10.18.6@sha256:4de4eff8227b43506953085732531471ee87247ac487537e3e72de9614eb3dda
 
 **url:** cyberchef.$DOMAINNAME
 
@@ -128,7 +128,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v6.6.0@sha256:db4f6f2c69f04a6c50b0144f1fed19c4f20a72178faa497541e2fbd4bbf624e9
+**image:** amir20/dozzle:v6.6.2@sha256:b8b2e919d3650df9042e6a42c52f3bab383b334aecb6d0eea9f4858cedf7adb4
 
 **url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -144,7 +144,7 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:24.4.0@sha256:bf449132c9f833987a7ab5f1d34943e2d7c033061a83608fd3b223f0fac3b348
+**image:** jgraph/drawio:24.4.4@sha256:bf394b00e9906ee9845639a84a3a4e3c3ea3d5c3a5a205b32739d3dc5950e9e3
 
 **url:** draw.$DOMAINNAME
 
@@ -418,7 +418,7 @@
 
 **container_name:** paperless-web
 
-**image:** ghcr.io/paperless-ngx/paperless-ngx:2.8.3@sha256:a93abe7d41a3011cbdf687eccc1ca4b7c6dbc199449fb9651a3bcd7e7f0ff9ee
+**image:** ghcr.io/paperless-ngx/paperless-ngx:2.8.6@sha256:2744572313cf3026520243f00e064d8fa82d838173a160d63b7e481575a86fdc
 
 **url:** paperless.$DOMAINNAME
 
