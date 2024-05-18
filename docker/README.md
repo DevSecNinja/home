@@ -13,6 +13,7 @@ For more information about the Docker services and containers I deploy, see the 
 - [ ] Add any passwords to the secret variables and the .env.j2 file
 - [ ] Add the docker compose module to the `compose.yml.j2` file
 - [ ] Add the DNS records to the `a-records.conf.j2` file in the unbound folder
+- [ ] Add an HTTP status check to Gatus `config.yaml` file in the gatus folder
 
 ## Installing a new host
 
