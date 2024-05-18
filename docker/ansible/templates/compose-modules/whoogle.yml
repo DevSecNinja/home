@@ -8,8 +8,8 @@ services:
     security_opt:
       - no-new-privileges=true
     pids_limit: 50
-    mem_limit: 256mb
-    memswap_limit: 256mb
+    mem_limit: 256m
+    memswap_limit: 256m
     # user debian-tor from tor package
     cap_drop:
       - ALL
