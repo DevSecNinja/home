@@ -249,6 +249,10 @@ endpoints:
       - "[STATUS] == 403" # Due to firewall restrictions
       - "[CERTIFICATE_EXPIRATION] > 48h"
 
+  - name: Search - HTTP
+    <<: *defaults
+    url: "https://search.${DOMAINNAME}"
+
   - name: Speedtest - HTTP
     <<: *defaults
     url: "https://speedtest.${DOMAINNAME}"
