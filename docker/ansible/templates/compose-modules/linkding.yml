@@ -60,6 +60,11 @@ services:
       - POSTGRES_DB=linkding
       - POSTGRES_USER=linkding
       - POSTGRES_PASSWORD=${LINKDING_DB_PASSWORD}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     networks:
       - linkding-backend
 
