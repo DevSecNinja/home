@@ -281,9 +281,9 @@ endpoints:
     <<: *defaults
     url: "https://vault.${DOMAINNAME}/v1/pki_int/crl"
 
-  - name: Vikunja - HTTP
-    <<: *defaults
-    url: "https://vikunja.${DOMAINNAME}"
+  # - name: Vikunja - HTTP
+  #   <<: *defaults
+  #   url: "https://vikunja.${DOMAINNAME}"
 
   - name: Wallabag - HTTP
     <<: *defaults

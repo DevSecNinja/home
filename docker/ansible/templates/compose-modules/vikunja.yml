@@ -1,6 +1,14 @@
+#
+#### DEPRECATION NOTICE
+## This compose module is no longer in use
+## Replaced by: nothing
+## Reason: Currently unused
+## Last used version: 0.23.0@sha256:c824f99b0b09b7f03a1d77ad6691fbce38edf8d737e73e3242d8b87dd96d21e0
+#
+
 services:
   vikunja:
-    image: vikunja/vikunja:0.23.0@sha256:c824f99b0b09b7f03a1d77ad6691fbce38edf8d737e73e3242d8b87dd96d21e0
+    image: vikunja/vikunja
     container_name: vikunja
     depends_on:
       - traefik
@@ -47,7 +55,8 @@ services:
       - "traefik.http.services.vikunja.loadbalancer.server.port=3456"
 
   vikunja-db:
-    image: mariadb:11.3.2@sha256:f0a6faee9d0e55492f238d1d11ff13d77616ea12d8c38bedf090da2ee05532be
+    # 11.3.2@sha256:f0a6faee9d0e55492f238d1d11ff13d77616ea12d8c38bedf090da2ee05532be
+    image: mariadb
     container_name: vikunja-db
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
     restart: always
@@ -82,8 +91,9 @@ services:
       timeout: 30s
 
   vikunja-db-backup:
+    # 4.0.35@sha256:794ffd160cf01057d0f64ef7baf5da3cd8925a48f1f65653e016f58c7d69b13c
     container_name: vikunja-db-backup
-    image: tiredofit/db-backup:4.0.35@sha256:794ffd160cf01057d0f64ef7baf5da3cd8925a48f1f65653e016f58c7d69b13c
+    image: tiredofit/db-backup
     depends_on:
       - vikunja-db
     volumes:
