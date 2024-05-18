@@ -438,7 +438,7 @@
 
 **container_name:** photoprism
 
-**image:** photoprism/photoprism:preview@sha256:d3c1afa7224e87de96a8b2782e3f0b7cd24799fb93878fbc21db13613ec1d40e
+**image:** photoprism/photoprism:preview@sha256:9910aeec0c16d5514275f6bdcc4e82b8ff48a20e66e753e67151fa9ce4ec1689
 
 **url:** photos.$DOMAINNAME
 
@@ -560,7 +560,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-8.1.127@sha256:71d499639bed82e2b4c55176d674138a8af43868630cd589dfa4bb6059afd802
+**image:** lscr.io/linuxserver/unifi-network-application:version-8.1.127@sha256:df9e7bb36bb7a6784c6147d0d413b0a0299a34bc2ce0134bdc7df73d8a3fd4ac
 
 **url:** unifi.$DOMAINNAME
 
@@ -600,23 +600,27 @@
 
 ### Service: vikunja
 
+> :warning: **Deprecation Notice:** Replaced by: nothing
+
 **container_name:** vikunja
 
-**image:** vikunja/vikunja:0.23.0@sha256:c824f99b0b09b7f03a1d77ad6691fbce38edf8d737e73e3242d8b87dd96d21e0
-
-**url:** vikunja.$DOMAINNAME
+**image:** vikunja/vikunja
 
 ### Service: vikunja-db
 
+> :warning: **Deprecation Notice:** Replaced by: nothing
+
 **container_name:** vikunja-db
 
-**image:** mariadb:11.3.2@sha256:f0a6faee9d0e55492f238d1d11ff13d77616ea12d8c38bedf090da2ee05532be
+**image:** mariadb
 
 ### Service: vikunja-db-backup
 
+> :warning: **Deprecation Notice:** Replaced by: nothing
+
 **container_name:** vikunja-db-backup
 
-**image:** tiredofit/db-backup:4.0.35@sha256:794ffd160cf01057d0f64ef7baf5da3cd8925a48f1f65653e016f58c7d69b13c
+**image:** tiredofit/db-backup
 
 ## docker/ansible/templates/compose-modules/wallabag.yml
 
