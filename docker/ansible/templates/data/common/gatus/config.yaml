@@ -161,6 +161,10 @@ endpoints:
     <<: *defaults
     url: "https://homepage-fall.${DOMAINNAME}"
 
+  # - name: Hoppscotch - HTTP
+  #   <<: *defaults
+  #   url: "https://api-tester.${DOMAINNAME}"
+
   - name: Influx - HTTP
     <<: *defaults
     url: "https://influxdb.${DOMAINNAME}"
