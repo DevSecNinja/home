@@ -298,7 +298,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:v0.159.12@sha256:653cc60da2791cdc65489b22029e557b854a50b10be508bd91d20c1b56073cd4
+**image:** lobehub/lobe-chat:v0.160.1@sha256:327b3b17fd97ee46c25e430586857658641abbf6054fb91fbb81d22206ab4c72
 
 **url:** chat.$DOMAINNAME
 
@@ -676,6 +676,6 @@
 
 **container_name:** wireguard
 
-**image:** lscr.io/linuxserver/wireguard:version-v1.0.20210914@sha256:8b2b9924a8254b9d0c90e489e270e2675513ce115d93db7960b25e4eeff7dd12
+**image:** lscr.io/linuxserver/wireguard:version-v1.0.20210914@sha256:4c5f9a187bc681246ddc4a1aa055508eb001258bbde9fc5e96ef35061cf76c39
 
 **url:** wireguard.$DOMAINNAME
