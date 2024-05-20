@@ -25,6 +25,7 @@ services:
       - GATUS_MSTEAMS_WEBHOOK_URL=${GATUS_MSTEAMS_WEBHOOK_URL}
       # Other
       - DOMAINNAME=${DOMAINNAME}
+      - IP_SVLEXT=${GENERIC_IPS_SVLEXT}
     volumes:
       - $DOCKERDIR/data/gatus/config.yaml:/config/config.yaml
     labels:
