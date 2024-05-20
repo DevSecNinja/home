@@ -21,29 +21,29 @@ services:
       - ACCESS_TOKEN_VALIDITY=86400000
       - SESSION_SECRET=${HOPPSCOTCH_SESSION_SECRET}
       # Hoppscotch App Domain Config
-      - REDIRECT_URL=http://localhost:3000
-      - WHITELISTED_ORIGINS=http://localhost:3170,http://localhost:3000,http://localhost:3100,https://api-tester-graphql.$DOMAINNAME
-      - VITE_ALLOWED_AUTH_PROVIDERS=GITHUB
+      - REDIRECT_URL=https://api-tester.$DOMAINNAME
+      - WHITELISTED_ORIGINS=https://api-tester.$DOMAINNAME,https://api-tester-api.$DOMAINNAME,https://api-tester-admin.$DOMAINNAME
+      - VITE_ALLOWED_AUTH_PROVIDERS=GOOGLE,GITHUB,MICROSOFT,EMAIL # TODO: [hoppscotch] Check why allowed auth provider doesn't work
       # Github Auth Config
       - GITHUB_CLIENT_ID=${HOPPSCOTCH_GITHUB_CLIENT_ID}
       - GITHUB_CLIENT_SECRET=${HOPPSCOTCH_GITHUB_CLIENT_SECRET}
-      - GITHUB_CALLBACK_URL=https://api-tester-graphql.$DOMAINNAME/v1/auth/github/callback
+      - GITHUB_CALLBACK_URL=https://api-tester-api.$DOMAINNAME/v1/auth/github/callback
       - GITHUB_SCOPE=user:email
       # Mailer config
-      - MAILER_SMTP_URL=smtp://user@domain.com:pass@smtp.domain.com:587
-      - MAILER_ADDRESS_FROM=from@example.com
+      - MAILER_SMTP_URL=smtp://$NOTIFICATIONS_EMAIL_USER:$NOTIFICATIONS_EMAIL_PASSWORD@$NOTIFICATIONS_EMAIL_HOST:$NOTIFICATIONS_EMAIL_PORT
+      - MAILER_ADDRESS_FROM=$NOTIFICATIONS_EMAIL_FROM
       # Rate Limit Config
       - RATE_LIMIT_TTL=60
       - RATE_LIMIT_MAX=100
       #-----------------------Frontend Config------------------------------#
       # Base URLs
-      - VITE_BASE_URL=http://localhost:3000
-      - VITE_SHORTCODE_BASE_URL=http://localhost:3000
-      - VITE_ADMIN_URL=http://localhost:3100
+      - VITE_BASE_URL=https://api-tester.$DOMAINNAME
+      - VITE_SHORTCODE_BASE_URL=https://api-tester.$DOMAINNAME
+      - VITE_ADMIN_URL=https://api-tester-admin.$DOMAINNAME
       # Backend URLs
-      - VITE_BACKEND_GQL_URL=https://api-tester-graphql.$DOMAINNAME/graphql
-      - VITE_BACKEND_WS_URL=wss://localhost:3170/graphql
-      - VITE_BACKEND_API_URL=https://api-tester-graphql.$DOMAINNAME/v1
+      - VITE_BACKEND_GQL_URL=https://api-tester-api.$DOMAINNAME/graphql
+      - VITE_BACKEND_WS_URL=wss://api-tester-api.$DOMAINNAME/graphql
+      - VITE_BACKEND_API_URL=https://api-tester-api.$DOMAINNAME/v1
       # Custom
       - ENABLE_SUBPATH_BASED_ACCESS=false # Setting this to true caused connection issues and needed config changes are unclear
     networks:
@@ -59,19 +59,19 @@ services:
       # Traefik
       - "traefik.enable=true"
       ## Middlewares
-      - "traefik.http.routers.hoppscotch-rtr.middlewares=chain-auth@file"
+      - "traefik.http.routers.hoppscotch-rtr.middlewares=chain-auth-cors@file"
       - "traefik.http.routers.hoppscotch-rtr.rule=Host(`api-tester.$DOMAINNAME`)"
       ## HTTP Services
       - "traefik.http.routers.hoppscotch-rtr.service=hoppscotch-svc"
       - "traefik.http.services.hoppscotch-svc.loadbalancer.server.port=3000"
       ## Extra admin endpoint
-      - "traefik.http.routers.hoppscotch-admin-rtr.middlewares=chain-auth@file"
+      - "traefik.http.routers.hoppscotch-admin-rtr.middlewares=chain-no-auth-cors@file"
       - "traefik.http.routers.hoppscotch-admin-rtr.rule=Host(`api-tester-admin.$DOMAINNAME`)"
       - "traefik.http.routers.hoppscotch-admin-rtr.service=hoppscotch-admin-svc"
       - "traefik.http.services.hoppscotch-admin-svc.loadbalancer.server.port=3100"
       ## Extra graphql endpoint
-      - "traefik.http.routers.hoppscotch-graphql-rtr.middlewares=chain-no-auth@file"
-      - "traefik.http.routers.hoppscotch-graphql-rtr.rule=Host(`api-tester-graphql.$DOMAINNAME`)"
+      - "traefik.http.routers.hoppscotch-graphql-rtr.middlewares=chain-no-auth-cors@file"
+      - "traefik.http.routers.hoppscotch-graphql-rtr.rule=Host(`api-tester-api.$DOMAINNAME`)"
       - "traefik.http.routers.hoppscotch-graphql-rtr.service=hoppscotch-graphql-svc"
       - "traefik.http.services.hoppscotch-graphql-svc.loadbalancer.server.port=3170"
 

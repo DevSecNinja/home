@@ -62,3 +62,20 @@ http:
           subject:
             commonName: true
             serialNumber: true
+    middlewares-cors:
+      headers:
+        accessControlAllowMethods:
+          - "GET"
+          - "OPTIONS"
+          - "POST"
+          - "PUT"
+        accessControlAllowHeaders:
+          - "Content-Type"
+          - "Authorization"
+          - "X-Requested-With"
+        accessControlAllowCredentials: true
+        accessControlAllowOriginList:
+          - "https://api-tester.{{ generic__domain_name }}"
+          - "https://api-tester-admin.{{ generic__domain_name }}"
+        accessControlMaxAge: 100
+        addVaryHeader: true
