@@ -1,4 +1,3 @@
-{% if 'internal' in group_names %}
 # A Record
 ## SVLMGMT
 local-data: "SVLMGMT.{{ generic__domain_name }} A 192.168.1.11"
@@ -101,30 +100,3 @@ local-data: "unifi-noauth.{{ generic__domain_name }} A 192.168.1.11"
 local-data: "vault.{{ generic__domain_name }} A 192.168.1.11"
 # local-data: "vikunja.{{ generic__domain_name }} A 192.168.60.2"
 local-data: "wallabag.{{ generic__domain_name }} A 192.168.60.2"
-{% endif %}
-
-{% if 'external' in group_names %}
-# A Record
-## SVLMGMT
-local-data: "SVLEXT.{{ generic__domain_name }} A 10.0.0.4"
-
-## Apps
-local-data: "adguard-ext.{{ generic__domain_name }} A 10.0.0.4"
-local-data: "api-tester.{{ generic__domain_name }} A 10.0.0.4"
-local-data: "auth-ext.{{ generic__domain_name }} A 10.0.0.4"
-local-data: "change-detection.{{ generic__domain_name }} A 10.0.0.4"
-local-data: "chat.{{ generic__domain_name }} A 10.0.0.4"
-local-data: "code.{{ generic__domain_name }} A 10.0.0.4"
-local-data: "cyberchef.{{ generic__domain_name }} A 10.0.0.4"
-local-data: "dozzle-ext.{{ generic__domain_name }} A 10.0.0.4"
-local-data: "draw.{{ generic__domain_name }} A 10.0.0.4"
-local-data: "echo-ext.{{ generic__domain_name }} A 10.0.0.4"
-local-data: "folding-ext.{{ generic__domain_name }} A 10.0.0.4"
-local-data: "excalidraw.{{ generic__domain_name }} A 10.0.0.4"
-local-data: "homepage-ext.{{ generic__domain_name }} A 10.0.0.4"
-local-data: "jupyter.{{ generic__domain_name }} A 10.0.0.4"
-local-data: "portainer-ext.{{ generic__domain_name }} A 10.0.0.4"
-local-data: "search.{{ generic__domain_name }} A 10.0.0.4"
-local-data: "tools.{{ generic__domain_name }} A 10.0.0.4"
-local-data: "traefik-ext.{{ generic__domain_name }} A 10.0.0.4"
-{% endif %}
