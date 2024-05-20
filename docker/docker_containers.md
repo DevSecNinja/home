@@ -234,6 +234,28 @@
 
 **image:** lscr.io/linuxserver/socket-proxy:version-1.24.0-r16@sha256:b17c7ab910add1ffdb18a700dceb19b8d23edf99c7bbe5fef32a5a593b610ae5
 
+## docker/ansible/templates/compose-modules/hoppscotch.yml
+
+### Service: hoppscotch
+
+**container_name:** hoppscotch
+
+**image:** hoppscotch/hoppscotch:2024.3.3@sha256:e3cb8ae1edbf5d48a8e6126ab4b997c26f2559f930544fdb01a0b3b8c08c7a5d
+
+**url:** api-tester.$DOMAINNAME
+
+### Service: hoppscotch-db
+
+**container_name:** hoppscotch-db
+
+**image:** docker.io/library/postgres:16.3-alpine@sha256:7f7832dfb7770c7256fe3f8c4cb57617caee45e2494cc0a736594135237ed9bf
+
+### Service: hoppscotch-db-backup
+
+**container_name:** hoppscotch-db-backup
+
+**image:** tiredofit/db-backup:4.0.35@sha256:794ffd160cf01057d0f64ef7baf5da3cd8925a48f1f65653e016f58c7d69b13c
+
 ## docker/ansible/templates/compose-modules/influxdb.yml
 
 ### Service: influxdb
