@@ -35,16 +35,16 @@ docker:
             internal:
               children:
                 fallback:
-                  hosts:
-                    svlfall.MANAGEMENT:
-                      ansible_user: "jean-paul"
+                  # hosts:
+                  #   svlfall.MANAGEMENT:
+                  #     ansible_user: "jean-paul"
 
     dnsservers:
       hosts:
         svlmgmt.MANAGEMENT:
           ansible_user: "jean-paul"
-        svlfall.MANAGEMENT:
-          ansible_user: "jean-paul"
+        # svlfall.MANAGEMENT:
+        #   ansible_user: "jean-paul"
         svlext.ravensberg.org:
           ansible_user: "jean-paul"
 

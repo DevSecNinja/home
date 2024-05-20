@@ -53,9 +53,9 @@ endpoints:
   # Internal HTTP
   #
 
-  - name: AdGuard Fallback - HTTP
-    <<: *defaults
-    url: "https://adguard-fall.${DOMAINNAME}"
+  # - name: AdGuard Fallback - HTTP
+  #   <<: *defaults
+  #   url: "https://adguard-fall.${DOMAINNAME}"
 
   - name: AdGuard Primary - HTTP
     <<: *defaults
@@ -73,9 +73,9 @@ endpoints:
     <<: *defaults
     url: "https://auth-prod.${DOMAINNAME}"
 
-  - name: Auth FALL - HTTP
-    <<: *defaults
-    url: "https://auth-fall.${DOMAINNAME}"
+  # - name: Auth FALL - HTTP
+  #   <<: *defaults
+  #   url: "https://auth-fall.${DOMAINNAME}"
 
   # - name: Bitwarden - HTTP
   #   <<: *defaults
@@ -89,9 +89,9 @@ endpoints:
     <<: *defaults
     url: "https://cadvisor-mgmt.${DOMAINNAME}"
 
-  - name: CAdvisor FALL - HTTP
-    <<: *defaults
-    url: "https://cadvisor-fall.${DOMAINNAME}"
+  # - name: CAdvisor FALL - HTTP
+  #   <<: *defaults
+  #   url: "https://cadvisor-fall.${DOMAINNAME}"
 
   - name: Change-Detection - HTTP
     <<: *defaults
@@ -117,9 +117,9 @@ endpoints:
     <<: *defaults
     url: "https://dozzle-prod.${DOMAINNAME}"
 
-  - name: Dozzle FALL - HTTP
-    <<: *defaults
-    url: "https://dozzle-fall.${DOMAINNAME}"
+  # - name: Dozzle FALL - HTTP
+  #   <<: *defaults
+  #   url: "https://dozzle-fall.${DOMAINNAME}"
 
   - name: Draw - HTTP
     <<: *defaults
@@ -133,9 +133,9 @@ endpoints:
     <<: *defaults
     url: "https://echo-prod.${DOMAINNAME}"
 
-  - name: Echo FALL - HTTP
-    <<: *defaults
-    url: "https://echo-fall.${DOMAINNAME}"
+  # - name: Echo FALL - HTTP
+  #   <<: *defaults
+  #   url: "https://echo-fall.${DOMAINNAME}"
 
   - name: Excalidraw - HTTP
     <<: *defaults
@@ -157,9 +157,9 @@ endpoints:
     <<: *defaults
     url: "https://homepage-prod.${DOMAINNAME}"
 
-  - name: Homepage FALL - HTTP
-    <<: *defaults
-    url: "https://homepage-fall.${DOMAINNAME}"
+  # - name: Homepage FALL - HTTP
+  #   <<: *defaults
+  #   url: "https://homepage-fall.${DOMAINNAME}"
 
   # - name: Hoppscotch - HTTP
   #   <<: *defaults
@@ -201,9 +201,9 @@ endpoints:
     <<: *defaults
     url: "https://nodeexporter-prod.${DOMAINNAME}"
 
-  - name: Node Exporter FALL - HTTP
-    <<: *defaults
-    url: "https://nodeexporter-fall.${DOMAINNAME}"
+  # - name: Node Exporter FALL - HTTP
+  #   <<: *defaults
+  #   url: "https://nodeexporter-fall.${DOMAINNAME}"
 
   - name: Paperless - HTTP
     <<: *defaults
@@ -237,9 +237,9 @@ endpoints:
     <<: *defaults
     url: "https://portainer-prod.${DOMAINNAME}"
 
-  - name: Portainer FALL - HTTP
-    <<: *defaults
-    url: "https://portainer-fall.${DOMAINNAME}"
+  # - name: Portainer FALL - HTTP
+  #   <<: *defaults
+  #   url: "https://portainer-fall.${DOMAINNAME}"
 
   - name: Prometheus - HTTP
     <<: *defaults
@@ -313,9 +313,9 @@ endpoints:
   #     - "[BODY] == 192.168.1.11"
   #     - "[DNS_RCODE] == NOERROR"
 
-  - name: AdGuard Fallback - DNS
-    url: "192.168.1.13" # Address of the DNS server to use
-    group: Internal
+  - name: AdGuard External - DNS
+    url: "svlext.${DOMAINNAME}" # Address of the DNS server to use
+    group: External
     dns:
       query-name: "SVLMGMT.${DOMAINNAME}"
       query-type: "A"
