@@ -22,3 +22,14 @@ tasks:
       vars: ["playbook"]
     preconditions:
       - { msg: "Missing Ansible inventory file", sh: "test -f {{.ANSIBLE_INVENTORY_FILE}}" }
+
+  restart:
+    desc: Restart a Docker container on all Docker hosts
+    summary: |
+      Args:
+        container: Docker container to restart (required)
+    cmd: "{{.VIRTUAL_ENV}}/bin/ansible docker --inventory {{.ANSIBLE_INVENTORY_FILE}} -a 'chdir=/srv/docker docker compose restart {{.container}}'"
+    requires:
+      vars: ["container"]
+    preconditions:
+      - { msg: "Missing Ansible inventory file", sh: "test -f {{.ANSIBLE_INVENTORY_FILE}}" }
