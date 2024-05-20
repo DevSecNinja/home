@@ -69,11 +69,11 @@ services:
       - "traefik.http.routers.hoppscotch-admin-rtr.rule=Host(`api-tester-admin.$DOMAINNAME`)"
       - "traefik.http.routers.hoppscotch-admin-rtr.service=hoppscotch-admin-svc"
       - "traefik.http.services.hoppscotch-admin-svc.loadbalancer.server.port=3100"
-      ## Extra graphql endpoint
-      - "traefik.http.routers.hoppscotch-graphql-rtr.middlewares=chain-no-auth-cors@file"
-      - "traefik.http.routers.hoppscotch-graphql-rtr.rule=Host(`api-tester-api.$DOMAINNAME`)"
-      - "traefik.http.routers.hoppscotch-graphql-rtr.service=hoppscotch-graphql-svc"
-      - "traefik.http.services.hoppscotch-graphql-svc.loadbalancer.server.port=3170"
+      ## Extra API endpoint
+      - "traefik.http.routers.hoppscotch-api-rtr.middlewares=chain-no-auth-cors@file"
+      - "traefik.http.routers.hoppscotch-api-rtr.rule=Host(`api-tester-api.$DOMAINNAME`)"
+      - "traefik.http.routers.hoppscotch-api-rtr.service=hoppscotch-api-svc"
+      - "traefik.http.services.hoppscotch-api-svc.loadbalancer.server.port=3170"
 
   hoppscotch-db:
     image: docker.io/library/postgres:16.3-alpine@sha256:7f7832dfb7770c7256fe3f8c4cb57617caee45e2494cc0a736594135237ed9bf
