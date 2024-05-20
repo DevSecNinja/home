@@ -137,9 +137,9 @@ endpoints:
     <<: *defaults
     url: "https://homepage-prod.${DOMAINNAME}"
 
-  # - name: Hoppscotch - HTTP
-  #   <<: *defaults
-  #   url: "https://api-tester.${DOMAINNAME}"
+  - name: Hoppscotch - HTTP
+    <<: *defaults
+    url: "https://api-tester.${DOMAINNAME}"
 
   - name: Influx - HTTP
     <<: *defaults
