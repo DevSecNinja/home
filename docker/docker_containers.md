@@ -186,7 +186,7 @@
 
 **image:** twinproduction/gatus:v5.10.0@sha256:881131a4c74bc8a83c09dc4eb83ef659885d5caf84baabdfcc94fcc13f9e39f6
 
-**url:** uptime.$DOMAINNAME
+**url:** status.$DOMAINNAME
 
 ### Service: gatus-db
 
