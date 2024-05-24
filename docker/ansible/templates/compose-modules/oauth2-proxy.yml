@@ -80,7 +80,7 @@ services:
 
   oauth2_proxy_redis:
     container_name: oauth2-proxy-redis
-    image: redis:alpine3.19@sha256:d16417b0a64f3a5d2acc1d5e1657e1bc8faec68d5f8c45b82fa87e81da6bbe9f
+    image: redis:alpine3.19@sha256:892b41c092a599f76c30b48e9dcfb185ce8cea3560970b1c4f2745c89bb34344
     mem_limit: 1024m
     restart: always
     environment:
