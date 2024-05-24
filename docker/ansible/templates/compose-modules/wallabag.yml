@@ -142,7 +142,7 @@ services:
       - no-new-privileges=true
 
   wallabag-redis:
-    image: redis:alpine3.19@sha256:d16417b0a64f3a5d2acc1d5e1657e1bc8faec68d5f8c45b82fa87e81da6bbe9f
+    image: redis:alpine3.19@sha256:892b41c092a599f76c30b48e9dcfb185ce8cea3560970b1c4f2745c89bb34344
     container_name: wallabag-redis
     # Requirepass is needed as environment variable isn't picked up
     command: >
