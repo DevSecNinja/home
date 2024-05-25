@@ -82,7 +82,7 @@
 
 **container_name:** change-detection
 
-**image:** ghcr.io/dgtlmoon/changedetection.io:0.45.22@sha256:3669b2c8464f5914ed05d76290d6401b4946c2cfbaa7621dda9d02b0f5b63c3a
+**image:** ghcr.io/dgtlmoon/changedetection.io:0.45.23@sha256:b1175272d6afdbbfc1e2b3317bf34c29978a7461d49b29d452e3e8f41036a7ec
 
 **url:** change-detection.$DOMAINNAME
 
@@ -128,7 +128,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v6.6.2@sha256:b8b2e919d3650df9042e6a42c52f3bab383b334aecb6d0eea9f4858cedf7adb4
+**image:** amir20/dozzle:v6.6.3@sha256:98d8de0a4d10593afe189bd498a92c5e2ca6d4b652b63616fb9a64543ddc9591
 
 **url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -144,7 +144,7 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:24.4.4@sha256:bf394b00e9906ee9845639a84a3a4e3c3ea3d5c3a5a205b32739d3dc5950e9e3
+**image:** jgraph/drawio:24.4.8@sha256:34fdba80097dd0a5e879d816823e80f98df22e3495936c9012a01ecb9a4b35eb
 
 **url:** draw.$DOMAINNAME
 
@@ -320,7 +320,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:v0.160.1@sha256:327b3b17fd97ee46c25e430586857658641abbf6054fb91fbb81d22206ab4c72
+**image:** lobehub/lobe-chat:v0.161.19@sha256:48570eb998ba3727ec5a5e2d372f6ed58ce4f862612fbea8802285e9310640b4
 
 **url:** chat.$DOMAINNAME
 
@@ -372,7 +372,7 @@
 
 **container_name:** nodeexporter
 
-**image:** prom/node-exporter:v1.8.0@sha256:8a57af80a4c77ffb97749b44895248563616fcfd405b5370d5db35fe6c15e4ec
+**image:** prom/node-exporter:v1.8.1@sha256:fa7fa12a57eff607176d5c363d8bb08dfbf636b36ac3cb5613a202f3c61a6631
 
 **url:** nodeexporter-noauth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -422,7 +422,7 @@
 
 **container_name:** paperless-gotenberg
 
-**image:** docker.io/gotenberg/gotenberg:8.5.0@sha256:d1737c98b2a39e656cceac67126a4a82ff3c0e572beb3aa8a17d04a41d9eed17
+**image:** docker.io/gotenberg/gotenberg:8.5.1@sha256:c229bd7a6c16800e9feabd102aacc445bd7c434d3a72e8df3cca6661314a0a3c
 
 ### Service: paperless-redis
 
@@ -502,7 +502,7 @@
 
 **container_name:** portainer
 
-**image:** portainer/portainer-ce:2.20.2-alpine@sha256:d35be15c11e1491bf1f3c8b4a634769c5864c3ddef75287e98692a37afc6a093
+**image:** portainer/portainer-ce:2.20.3-alpine@sha256:a6f635877e0daa4aa39c1cbf4e73a31b35d342284588fa72fd8a91efb3c6a091
 
 **url:** portainer-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
