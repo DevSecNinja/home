@@ -136,7 +136,7 @@
 
 **container_name:** dozzle-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.24.0-r16@sha256:dd54cab0197074dc6e7cd12e1e6682b138287cb70199bbc045e9773787126517
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.0-r1@sha256:0d04c1b7c69ca38e2ccc9bbe82030245bbc8d455dab96328cb5ccbbe3a6fcbdb
 
 ## docker/ansible/templates/compose-modules/drawio.yml
 
@@ -184,7 +184,7 @@
 
 **container_name:** gatus
 
-**image:** twinproduction/gatus:v5.10.0@sha256:881131a4c74bc8a83c09dc4eb83ef659885d5caf84baabdfcc94fcc13f9e39f6
+**image:** twinproduction/gatus:v5.11.0@sha256:05cf8bcbd7296b2e47d9e69d5974d428dde32188722d2aa954367eb728dd056c
 
 **url:** status.$DOMAINNAME
 
@@ -232,7 +232,7 @@
 
 **container_name:** homepage-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.24.0-r16@sha256:dd54cab0197074dc6e7cd12e1e6682b138287cb70199bbc045e9773787126517
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.0-r1@sha256:0d04c1b7c69ca38e2ccc9bbe82030245bbc8d455dab96328cb5ccbbe3a6fcbdb
 
 ## docker/ansible/templates/compose-modules/hoppscotch.yml
 
@@ -510,7 +510,7 @@
 
 **container_name:** portainer-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.24.0-r16@sha256:dd54cab0197074dc6e7cd12e1e6682b138287cb70199bbc045e9773787126517
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.0-r1@sha256:0d04c1b7c69ca38e2ccc9bbe82030245bbc8d455dab96328cb5ccbbe3a6fcbdb
 
 ## docker/ansible/templates/compose-modules/prometheus.yml
 
@@ -544,7 +544,7 @@
 
 **container_name:** promtail-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.24.0-r16@sha256:dd54cab0197074dc6e7cd12e1e6682b138287cb70199bbc045e9773787126517
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.0-r1@sha256:0d04c1b7c69ca38e2ccc9bbe82030245bbc8d455dab96328cb5ccbbe3a6fcbdb
 
 ## docker/ansible/templates/compose-modules/samba.yml
 
