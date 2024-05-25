@@ -14,7 +14,7 @@
 
 **container_name:** unbound
 
-**image:** pedantic/unbound:latest@sha256:78e52f968b1000c66eb4da7df74ec4b86951a91c1c341f10843cf774d89a1e35
+**image:** pedantic/unbound:latest@sha256:68a5eeae418f50d90593b5ef93fded1fb282c0d9a84bb091ec0bb679e6454602
 
 ## docker/ansible/templates/compose-modules/alertmanager.yml
 
@@ -58,7 +58,7 @@
 
 **container_name:** bitwarden-db
 
-**image:** mariadb:11.3.2@sha256:f0a6faee9d0e55492f238d1d11ff13d77616ea12d8c38bedf090da2ee05532be
+**image:** mariadb:11.3.2@sha256:3c43c6f4bc2931825c1207328429f422f30ce2cb029567da1df9a8cdcf2b8552
 
 ### Service: bitwarden-db-backup
 
@@ -136,7 +136,7 @@
 
 **container_name:** dozzle-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.24.0-r16@sha256:b17c7ab910add1ffdb18a700dceb19b8d23edf99c7bbe5fef32a5a593b610ae5
+**image:** lscr.io/linuxserver/socket-proxy:version-1.24.0-r16@sha256:dd54cab0197074dc6e7cd12e1e6682b138287cb70199bbc045e9773787126517
 
 ## docker/ansible/templates/compose-modules/drawio.yml
 
@@ -164,7 +164,7 @@
 
 **container_name:** excalidraw
 
-**image:** excalidraw/excalidraw:latest@sha256:5cfbf2770e6d7530193be8cca5bdb4b8e4ba6eb000fc64b4b50d079221c51eda
+**image:** excalidraw/excalidraw:latest@sha256:9d60b918cd3a5cadc66a132b2df3878b526157c6cc1e127a2803fd0275eebb44
 
 **url:** excalidraw.$DOMAINNAME
 
@@ -174,7 +174,7 @@
 
 **container_name:** foldingathome
 
-**image:** lscr.io/linuxserver/foldingathome:version-7.6.21@sha256:6008d7c213c19ea98cb5c3af26ab11b924b3a280e332571d8853c289c45dde14
+**image:** lscr.io/linuxserver/foldingathome:version-7.6.21@sha256:5cdc3051fbc216cff8029385fc19bf7753abf3d61498c775d128479b6dc7ad1c
 
 **url:** folding-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -192,7 +192,7 @@
 
 **container_name:** gatus-db
 
-**image:** docker.io/library/postgres:16.3-alpine@sha256:7f7832dfb7770c7256fe3f8c4cb57617caee45e2494cc0a736594135237ed9bf
+**image:** docker.io/library/postgres:16.3-alpine@sha256:e89da2c083a5405943408b6807cd1fd25dc9010c1294e30611b841778bedc653
 
 ### Service: gatus-db-backup
 
@@ -232,7 +232,7 @@
 
 **container_name:** homepage-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.24.0-r16@sha256:b17c7ab910add1ffdb18a700dceb19b8d23edf99c7bbe5fef32a5a593b610ae5
+**image:** lscr.io/linuxserver/socket-proxy:version-1.24.0-r16@sha256:dd54cab0197074dc6e7cd12e1e6682b138287cb70199bbc045e9773787126517
 
 ## docker/ansible/templates/compose-modules/hoppscotch.yml
 
@@ -248,7 +248,7 @@
 
 **container_name:** hoppscotch-db
 
-**image:** docker.io/library/postgres:16.3-alpine@sha256:7f7832dfb7770c7256fe3f8c4cb57617caee45e2494cc0a736594135237ed9bf
+**image:** docker.io/library/postgres:16.3-alpine@sha256:e89da2c083a5405943408b6807cd1fd25dc9010c1294e30611b841778bedc653
 
 ### Service: hoppscotch-db-backup
 
@@ -306,7 +306,7 @@
 
 **container_name:** linkding-db
 
-**image:** docker.io/library/postgres:16.3-alpine@sha256:7f7832dfb7770c7256fe3f8c4cb57617caee45e2494cc0a736594135237ed9bf
+**image:** docker.io/library/postgres:16.3-alpine@sha256:e89da2c083a5405943408b6807cd1fd25dc9010c1294e30611b841778bedc653
 
 ### Service: linkding-db-backup
 
@@ -352,7 +352,7 @@
 
 **container_name:** nextcloud-db
 
-**image:** mariadb:11.3.2@sha256:f0a6faee9d0e55492f238d1d11ff13d77616ea12d8c38bedf090da2ee05532be
+**image:** mariadb:11.3.2@sha256:3c43c6f4bc2931825c1207328429f422f30ce2cb029567da1df9a8cdcf2b8552
 
 ### Service: nextcloud-db-backup
 
@@ -364,7 +364,7 @@
 
 **container_name:** nextcloud-redis
 
-**image:** redis:alpine3.19@sha256:d16417b0a64f3a5d2acc1d5e1657e1bc8faec68d5f8c45b82fa87e81da6bbe9f
+**image:** redis:alpine3.19@sha256:892b41c092a599f76c30b48e9dcfb185ce8cea3560970b1c4f2745c89bb34344
 
 ## docker/ansible/templates/compose-modules/nodeexporter.yml
 
@@ -392,7 +392,7 @@
 
 **container_name:** oauth2-proxy-redis
 
-**image:** redis:alpine3.19@sha256:d16417b0a64f3a5d2acc1d5e1657e1bc8faec68d5f8c45b82fa87e81da6bbe9f
+**image:** redis:alpine3.19@sha256:892b41c092a599f76c30b48e9dcfb185ce8cea3560970b1c4f2745c89bb34344
 
 ## docker/ansible/templates/compose-modules/openspeedtest.yml
 
@@ -410,7 +410,7 @@
 
 **container_name:** paperless-db
 
-**image:** docker.io/library/postgres:16.3-alpine@sha256:7f7832dfb7770c7256fe3f8c4cb57617caee45e2494cc0a736594135237ed9bf
+**image:** docker.io/library/postgres:16.3-alpine@sha256:e89da2c083a5405943408b6807cd1fd25dc9010c1294e30611b841778bedc653
 
 ### Service: paperless-db-backup
 
@@ -428,7 +428,7 @@
 
 **container_name:** paperless-redis
 
-**image:** redis:alpine3.19@sha256:d16417b0a64f3a5d2acc1d5e1657e1bc8faec68d5f8c45b82fa87e81da6bbe9f
+**image:** redis:alpine3.19@sha256:892b41c092a599f76c30b48e9dcfb185ce8cea3560970b1c4f2745c89bb34344
 
 ### Service: paperless-tika
 
@@ -460,7 +460,7 @@
 
 **container_name:** photoprism
 
-**image:** photoprism/photoprism:preview@sha256:9910aeec0c16d5514275f6bdcc4e82b8ff48a20e66e753e67151fa9ce4ec1689
+**image:** photoprism/photoprism:preview@sha256:43e708a9e6c257003e4ed797603d47762854991420e2f4cb7e1d9e68b6629311
 
 **url:** photos.$DOMAINNAME
 
@@ -468,7 +468,7 @@
 
 **container_name:** photoprism-db
 
-**image:** mariadb:11.3.2@sha256:f0a6faee9d0e55492f238d1d11ff13d77616ea12d8c38bedf090da2ee05532be
+**image:** mariadb:11.3.2@sha256:3c43c6f4bc2931825c1207328429f422f30ce2cb029567da1df9a8cdcf2b8552
 
 ### Service: photoprism-db-backup
 
@@ -510,7 +510,7 @@
 
 **container_name:** portainer-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.24.0-r16@sha256:b17c7ab910add1ffdb18a700dceb19b8d23edf99c7bbe5fef32a5a593b610ae5
+**image:** lscr.io/linuxserver/socket-proxy:version-1.24.0-r16@sha256:dd54cab0197074dc6e7cd12e1e6682b138287cb70199bbc045e9773787126517
 
 ## docker/ansible/templates/compose-modules/prometheus.yml
 
@@ -544,7 +544,7 @@
 
 **container_name:** promtail-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.24.0-r16@sha256:b17c7ab910add1ffdb18a700dceb19b8d23edf99c7bbe5fef32a5a593b610ae5
+**image:** lscr.io/linuxserver/socket-proxy:version-1.24.0-r16@sha256:dd54cab0197074dc6e7cd12e1e6682b138287cb70199bbc045e9773787126517
 
 ## docker/ansible/templates/compose-modules/samba.yml
 
@@ -582,7 +582,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-8.1.127@sha256:df9e7bb36bb7a6784c6147d0d413b0a0299a34bc2ce0134bdc7df73d8a3fd4ac
+**image:** lscr.io/linuxserver/unifi-network-application:version-8.1.127@sha256:90fcca5fa29eb6a5b2c984b3294e331957b5381f09cb5db99aa03086293f2b62
 
 **url:** unifi.$DOMAINNAME
 
@@ -658,7 +658,7 @@
 
 **container_name:** wallabag-db
 
-**image:** mariadb:11.3.2@sha256:f0a6faee9d0e55492f238d1d11ff13d77616ea12d8c38bedf090da2ee05532be
+**image:** mariadb:11.3.2@sha256:3c43c6f4bc2931825c1207328429f422f30ce2cb029567da1df9a8cdcf2b8552
 
 ### Service: wallabag-db-backup
 
@@ -670,7 +670,7 @@
 
 **container_name:** wallabag-redis
 
-**image:** redis:alpine3.19@sha256:d16417b0a64f3a5d2acc1d5e1657e1bc8faec68d5f8c45b82fa87e81da6bbe9f
+**image:** redis:alpine3.19@sha256:892b41c092a599f76c30b48e9dcfb185ce8cea3560970b1c4f2745c89bb34344
 
 ## docker/ansible/templates/compose-modules/watchtower.yml
 
@@ -698,6 +698,6 @@
 
 **container_name:** wireguard
 
-**image:** lscr.io/linuxserver/wireguard:version-v1.0.20210914@sha256:4c5f9a187bc681246ddc4a1aa055508eb001258bbde9fc5e96ef35061cf76c39
+**image:** lscr.io/linuxserver/wireguard:version-v1.0.20210914@sha256:c3c7a910e46c9bd25daf22e38bb48cbc10d32727c5ee1fe5ede32ee4c34f6a36
 
 **url:** wireguard.$DOMAINNAME
