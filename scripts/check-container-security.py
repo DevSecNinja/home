@@ -6,7 +6,7 @@ from shutil import which
 # If trivy is not installed, install it
 if not which('trivy'):
     print("Trivy is not installed. Installing now...")
-    subprocess.run(['brew', 'install', 'trivy'], capture_output=True, text=True)
+    subprocess.run(['brew', 'install', 'trivy'])
 
 # Load Docker images from YAML file
 with open('docker/docker_containers.yaml', 'r') as file:
