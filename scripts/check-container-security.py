@@ -1,0 +1,25 @@
+import yaml
+import subprocess
+import os
+from shutil import which
+
+# If trivy is not installed, install it
+if not which('trivy'):
+    print("Trivy is not installed. Installing now...")
+    subprocess.run(['brew', 'install', 'trivy'], capture_output=True, text=True)
+
+# Load Docker images from YAML file
+with open('docker/docker_containers.yaml', 'r') as file:
+    docker_containers = yaml.safe_load(file)
+
+# Check each Docker image for security vulnerabilities
+unique_images = set()
+for container in docker_containers:
+    image = container['image']
+    container_name = container['container_name']
+    output_file = 'docker/security-reports/' + container_name + ".txt"
+
+    if image not in unique_images:
+        unique_images.add(image)
+        print(f"Checking {image} for security vulnerabilities...")
+        subprocess.run(['trivy', 'image', '--scanners', 'vuln', '--severity', 'HIGH,CRITICAL', '--format', 'table', '--output', output_file, image])
