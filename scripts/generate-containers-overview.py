@@ -76,6 +76,23 @@ def write_markdown_file(important_properties_dict):
                             f.write(f"\n\n**{prop}:** {', '.join(values)}")
         f.write("\n")
 
+def write_yaml(important_properties_dict):
+    yaml_data = []
+    for (folder, file_name), services in sorted(important_properties_dict.items()):
+        for service, props in sorted(services.items()):
+            container_name = props.get('container_name')
+            image = props.get('image')
+            deprecation_notice = props.get('Deprecation Notice')
+            url = props.get('url')
+            if container_name and image and not deprecation_notice:
+                if url:
+                    yaml_data.append({'container_name': container_name[0], 'image': image[0], 'url': url[0]})
+                else:
+                    yaml_data.append({'container_name': container_name[0], 'image': image[0]})
+    with open('docker/docker_containers.yaml', 'w') as f:
+        yaml.dump(yaml_data, f)
+
 if __name__ == "__main__":
     important_property_values = get_important_properties()
     write_markdown_file(important_property_values)
+    write_yaml(important_property_values)
