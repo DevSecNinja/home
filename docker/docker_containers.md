@@ -128,7 +128,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v6.6.3@sha256:98d8de0a4d10593afe189bd498a92c5e2ca6d4b652b63616fb9a64543ddc9591
+**image:** amir20/dozzle:v7.0.0@sha256:87a6ddeb08b1f24d99f3a238d8467ed43f73b42c7fe3360b98fcd581b63002f0
 
 **url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
