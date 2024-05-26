@@ -13,8 +13,8 @@ permissions:
   contents: read
 
 jobs:
-  build:
-    name: Security Scan
+  scan_repo:
+    name: Security Scan - Repo
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout code
@@ -29,6 +29,18 @@ jobs:
           output: "trivy-results-repo.sarif"
           severity: "CRITICAL"
 
+      - name: Upload Trivy repo scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: "trivy-results-repo.sarif"
+
+  scan_iac:
+    name: Security Scan - IAC
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
       - name: Run Trivy vulnerability scanner in IaC mode
         uses: aquasecurity/trivy-action@0.21.0
         with:
@@ -38,11 +50,6 @@ jobs:
           output: 'trivy-results-iac.sarif'
           ignore-unfixed: true
           severity: 'CRITICAL,HIGH'
-
-      - name: Upload Trivy repo scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: "trivy-results-repo.sarif"
 
       - name: Upload Trivy IaC scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
