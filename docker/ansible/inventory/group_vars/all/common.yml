@@ -20,6 +20,9 @@ packages__base:
   - "lsb-release"
   - "ntp"
 
+packages__additional:
+  - "fastfetch"
+
 msft__apt_repository_url: "https://packages.microsoft.com"  # yamllint disable-line rule:line-length
 msft__apt_key_checksum: "812c0606c9f9dcb8cd03c24232d0c3970efecbc257b079fd9cfce54739db2d10"  # yamllint disable-line rule:line-length
 msft__apt_channel: prod

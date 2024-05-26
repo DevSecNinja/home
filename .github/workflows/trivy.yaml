@@ -1,9 +1,17 @@
 name: Trivy
+
 on:
   push:
     branches:
       - main
   pull_request:
+  schedule:
+    - cron: '0 0 * * 0'
+
+permissions:
+  security-events: write
+  contents: read
+
 jobs:
   build:
     name: Security Scan
@@ -18,10 +26,26 @@ jobs:
           scan-type: "fs"
           ignore-unfixed: true
           format: "sarif"
-          output: "trivy-results.sarif"
+          output: "trivy-results-repo.sarif"
           severity: "CRITICAL"
 
-      - name: Upload Trivy scan results to GitHub Security tab
+      - name: Run Trivy vulnerability scanner in IaC mode
+        uses: aquasecurity/trivy-action@0.21.0
+        with:
+          scan-type: 'config'
+          hide-progress: true
+          format: 'sarif'
+          output: 'trivy-results-iac.sarif'
+          exit-code: '1'
+          ignore-unfixed: true
+          severity: 'CRITICAL,HIGH'
+
+      - name: Upload Trivy repo scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
         with:
-          sarif_file: "trivy-results.sarif"
+          sarif_file: "trivy-results-repo.sarif"
+
+      - name: Upload Trivy IaC scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: "trivy-results-iac.sarif"

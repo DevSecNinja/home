@@ -70,3 +70,22 @@
     state: present
     filename: "microsoft-{{ msft__apt_channel }}"
   when: ansible_os_family == "Debian"
+
+- name: Install other repositories
+  ansible.builtin.shell: |
+    # FastFetch
+    curl -S "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xEB65EE19D802F3EB1A13CFE47E2E5CB4D4865F21" \
+      | gpg --batch --yes --dearmor --output "/etc/apt/trusted.gpg.d/zhangsongcui3371-ubuntu-fastfetch.gpg"
+
+    if ! test -f /etc/apt/sources.list.d/zhangsongcui3371-ubuntu-fastfetch-jammy.list; then
+      echo "deb https://ppa.launchpadcontent.net/zhangsongcui3371/fastfetch/ubuntu/ jammy main" \
+        | tee /etc/apt/sources.list.d/zhangsongcui3371-ubuntu-fastfetch-jammy.list
+    fi
+
+    exit 0
+  args:
+    executable: /bin/bash
+
+- name: Install additional packages
+  ansible.builtin.apt:
+    name: "{{ packages__additional }}"
