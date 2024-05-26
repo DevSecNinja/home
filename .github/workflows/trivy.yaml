@@ -13,26 +13,26 @@ permissions:
   contents: read
 
 jobs:
-  scan_repo:
-    name: Security Scan - Repo
+  scan_fs:
+    name: Security Scan - Filesystem
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Run Trivy vulnerability scanner in repo mode
+      - name: Run Trivy vulnerability scanner in filesystem mode
         uses: aquasecurity/trivy-action@0.21.0
         with:
           scan-type: "fs"
           ignore-unfixed: true
           format: "sarif"
-          output: "trivy-results-repo.sarif"
+          output: "trivy-results-fs.sarif"
           severity: "CRITICAL"
 
-      - name: Upload Trivy repo scan results to GitHub Security tab
+      - name: Upload Trivy filesystem scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
         with:
-          sarif_file: "trivy-results-repo.sarif"
+          sarif_file: "trivy-results-fs.sarif"
 
   scan_iac:
     name: Security Scan - IAC
