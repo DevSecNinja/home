@@ -1,5 +1,7 @@
 name: Trivy
 
+# TODO: [trivy] Scan for images that I use for my Docker containers
+
 on:
   push:
     branches:
