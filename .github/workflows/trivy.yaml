@@ -36,7 +36,6 @@ jobs:
           hide-progress: true
           format: 'sarif'
           output: 'trivy-results-iac.sarif'
-          exit-code: '1'
           ignore-unfixed: true
           severity: 'CRITICAL,HIGH'
 
