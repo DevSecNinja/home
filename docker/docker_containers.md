@@ -58,7 +58,7 @@
 
 **container_name:** bitwarden-db
 
-**image:** mariadb:11.3.2@sha256:3c43c6f4bc2931825c1207328429f422f30ce2cb029567da1df9a8cdcf2b8552
+**image:** mariadb:11.3.2@sha256:e101f9db31916a5d4d7d594dd0dd092fb23ab4f499f1d7a7425d1afd4162c4bc
 
 ### Service: bitwarden-db-backup
 
@@ -164,7 +164,7 @@
 
 **container_name:** excalidraw
 
-**image:** excalidraw/excalidraw:latest@sha256:9d60b918cd3a5cadc66a132b2df3878b526157c6cc1e127a2803fd0275eebb44
+**image:** excalidraw/excalidraw:latest@sha256:d074f693cd8c417719c0370b637e1b7351814f9050e7b2ac62727c8071e3bf25
 
 **url:** excalidraw.$DOMAINNAME
 
@@ -174,7 +174,7 @@
 
 **container_name:** foldingathome
 
-**image:** lscr.io/linuxserver/foldingathome:version-7.6.21@sha256:5cdc3051fbc216cff8029385fc19bf7753abf3d61498c775d128479b6dc7ad1c
+**image:** lscr.io/linuxserver/foldingathome:version-7.6.21@sha256:67bd2ec9c964f611ac3914575146d687bb320b6b1e2931f62e84e0d83676239e
 
 **url:** folding-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -206,7 +206,7 @@
 
 **container_name:** grafana
 
-**image:** grafana/grafana:11.0.0@sha256:eaa2c06d93f77a77e2c8676b71192b9f2bbd7ea62bbaeeb709825934e92c0173
+**image:** grafana/grafana:11.0.0@sha256:99ed02202d5166b6d25b821fa34ed184fab9ed0c18996ab0b6ce0fd35a3b67fd
 
 **url:** grafana.$DOMAINNAME
 
@@ -352,7 +352,7 @@
 
 **container_name:** nextcloud-db
 
-**image:** mariadb:11.3.2@sha256:3c43c6f4bc2931825c1207328429f422f30ce2cb029567da1df9a8cdcf2b8552
+**image:** mariadb:11.3.2@sha256:e101f9db31916a5d4d7d594dd0dd092fb23ab4f499f1d7a7425d1afd4162c4bc
 
 ### Service: nextcloud-db-backup
 
@@ -460,7 +460,7 @@
 
 **container_name:** photoprism
 
-**image:** photoprism/photoprism:preview@sha256:43e708a9e6c257003e4ed797603d47762854991420e2f4cb7e1d9e68b6629311
+**image:** photoprism/photoprism:preview@sha256:e789255932f051d9cc5bb293239a01b8b4aaaa53f8c91ec64a8ed5312c96e238
 
 **url:** photos.$DOMAINNAME
 
@@ -468,7 +468,7 @@
 
 **container_name:** photoprism-db
 
-**image:** mariadb:11.3.2@sha256:3c43c6f4bc2931825c1207328429f422f30ce2cb029567da1df9a8cdcf2b8552
+**image:** mariadb:11.3.2@sha256:e101f9db31916a5d4d7d594dd0dd092fb23ab4f499f1d7a7425d1afd4162c4bc
 
 ### Service: photoprism-db-backup
 
@@ -492,7 +492,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.40.2.8395-c67dce28e@sha256:55c6c1bbc40936f527dc684946c2c32fdc2f0669467c1f359a70ea911593ea6e
+**image:** lscr.io/linuxserver/plex:version-1.40.2.8395-c67dce28e@sha256:addec5e26fb63af661992e0c50e0bd6f7a271433cd2a058f130e0ec1bae415e4
 
 **url:** plex-noauth.$DOMAINNAME
 
@@ -614,7 +614,7 @@
 
 **container_name:** vault
 
-**image:** hashicorp/vault:1.16@sha256:e139ff28c23e1f22a6e325696318141259b177097d8e238a3a4c5b84862fadd8
+**image:** hashicorp/vault:1.16@sha256:c5e04689611cb864b8b6247a6a845e0bdc059998f39b5c8a659562287379525c
 
 **url:** vault.$DOMAINNAME`) && PathPrefix(`/v1
 
@@ -658,7 +658,7 @@
 
 **container_name:** wallabag-db
 
-**image:** mariadb:11.3.2@sha256:3c43c6f4bc2931825c1207328429f422f30ce2cb029567da1df9a8cdcf2b8552
+**image:** mariadb:11.3.2@sha256:e101f9db31916a5d4d7d594dd0dd092fb23ab4f499f1d7a7425d1afd4162c4bc
 
 ### Service: wallabag-db-backup
 
