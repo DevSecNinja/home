@@ -62,10 +62,12 @@ jobs:
         run: |
           IMAGE_ID=${{ steps.getimage.outputs.imageid }}
           if [[ -n "$IMAGE_ID" ]]; then
-            SCAN=$(trivy image $IMAGE_ID)
-            ARCHITECTURE=$(echo "$SCAN" | grep 'Metadata/ImageConfig/architecture' | cut -d'=' -f2 | tr -d ' ')
+            SCAN=$(trivy image $IMAGE_ID --format json)
+            ARCHITECTURE=$(echo $SCAN | jq -r '.Metadata.ImageConfig.architecture')
             if [[ "$ARCHITECTURE" != "amd64" ]]; then
-              echo "Image architecture is not amd64!"
+              echo "Image architecture is not amd64! It is $ARCHITECTURE [$IMAGE_ID]"
               exit 1
+            else
+              echo "Architecture is amd64 [$IMAGE_ID]"
             fi
           fi
