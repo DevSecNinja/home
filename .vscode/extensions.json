@@ -8,7 +8,6 @@
         "mikestead.dotenv",
         "mitchdenny.ecdc",
         "PKief.material-icon-theme",
-        "redhat.ansible",
         "signageos.signageos-vscode-sops",
         "task.vscode-task",
         "will-stone.in-any-case"
