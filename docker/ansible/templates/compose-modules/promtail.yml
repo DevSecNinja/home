@@ -38,7 +38,7 @@ services:
       - "traefik.http.services.promtail.loadbalancer.server.port=9080"
 
   promtail-docker-proxy:
-    image: lscr.io/linuxserver/socket-proxy:version-1.26.0-r1@sha256:0d04c1b7c69ca38e2ccc9bbe82030245bbc8d455dab96328cb5ccbbe3a6fcbdb
+    image: lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:01ba6ca73581748f07f3916b7f1ebb28a3e079645f880f628ff5572a0e52d167
     container_name: promtail-docker-proxy
     restart: always
     networks:
