@@ -1,6 +1,7 @@
 services:
   grafana:
-    # Note: you have to select the correct OS/Arch for the image hash
+    # Note: seems that RenovateBot sometimes mixes up and selects
+    # the ARM image for AMD64 instead of taking the multi-arch image
     image: grafana/grafana:11.0.0@sha256:0dc5a246ab16bb2c38a349fb588174e832b4c6c2db0981d0c3e6cd774ba66a54
     container_name: grafana
     depends_on:
