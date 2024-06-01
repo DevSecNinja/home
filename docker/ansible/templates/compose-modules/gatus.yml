@@ -73,7 +73,7 @@ services:
 
   gatus-db-backup:
     container_name: gatus-db-backup
-    image: tiredofit/db-backup:4.0.35@sha256:794ffd160cf01057d0f64ef7baf5da3cd8925a48f1f65653e016f58c7d69b13c
+    image: tiredofit/db-backup:4.1.0@sha256:39b45db5f4cfe5d5ed4764f8d8ce6c21e8e1bd9c05d27a733c34b78b765eef99
     depends_on:
       - gatus-db
     volumes:
