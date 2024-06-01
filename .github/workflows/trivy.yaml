@@ -17,7 +17,7 @@ permissions:
 jobs:
   scan_fs:
     name: Security Scan - Filesystem
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -38,7 +38,7 @@ jobs:
 
   scan_iac:
     name: Security Scan - IAC
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
