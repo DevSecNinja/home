@@ -1,6 +1,6 @@
 services:
   drawio:
-    image: jgraph/drawio:24.4.8@sha256:34fdba80097dd0a5e879d816823e80f98df22e3495936c9012a01ecb9a4b35eb
+    image: jgraph/drawio:24.4.13@sha256:6191b236aaef99d3a2c2eff995f04d51c6ecbadaf5c8096856b7036db5c2d36c
     container_name: drawio
     depends_on:
       - traefik
