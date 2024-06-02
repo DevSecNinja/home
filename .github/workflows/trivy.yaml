@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   scan_fs:
-    name: Security Scan - Filesystem
+    name: Security Scan - GitHub Action Runner Filesystem
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
@@ -35,7 +35,7 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: "trivy-results-fs.sarif"
-          category: "filesystem"
+          category: "gh-action-runner-filesystem"
 
   scan_iac:
     name: Security Scan - IAC
