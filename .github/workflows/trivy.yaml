@@ -106,6 +106,7 @@ jobs:
         run: |
           IMAGE_ID=$(cat ${{ matrix.files }} | grep 'image:' | sed 's/image:\s*//g' | tr -d '[:blank:]' | head -n 1)
           echo "::set-output name=imageid::$IMAGE_ID"
+          echo "Image ID: $IMAGE_ID"
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@841fb371db7b5cd339e5b2d55c92f5dbd730ac9f
