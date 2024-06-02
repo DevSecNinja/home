@@ -89,18 +89,15 @@ jobs:
             fi
           fi
 
-      - name: Comment PR - Failure
-        uses: thollander/actions-comment-pull-request@v2
+      - name: Failure - Close Pull Request
+        run: gh pr close "$NUMBER" --comment "$COMMENT"
         if: failure() && steps.archcheck.outputs.image_arch
-        with:
-          message: |
-            ❌ Image architecture is not AMD64! It's ${{ steps.archcheck.outputs.image_arch }}.
-
-      - name: Close Pull Request
-        if: failure() && steps.archcheck.outputs.image_arch
-        run: gh pr close --comment "Image architecture is not AMD64! It's ${{ steps.archcheck.outputs.image_arch }}" --delete-branch "1"
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          NUMBER: ${{ github.event.number }}
+          COMMENT: >
+            ❌ Image architecture is not AMD64! It's ${{ steps.archcheck.outputs.image_arch }}.
 
       - name: Comment PR - Success
         uses: thollander/actions-comment-pull-request@v2
