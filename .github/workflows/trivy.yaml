@@ -18,6 +18,7 @@ jobs:
   scan_fs:
     name: Security Scan - GitHub Action Runner Filesystem
     runs-on: ubuntu-22.04
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
