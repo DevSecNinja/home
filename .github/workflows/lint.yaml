@@ -33,7 +33,7 @@ permissions: {}
 jobs:
   build:
     name: Lint
-    if: ${{ github.actor != 'renovate[bot]' && !startsWith(env.GITHUB_PR_BRANCH, 'renovate/') }} # We shouldn't mess with the Renovate[bot] commits in PRs
+    if: github.actor != 'renovate[bot]' && !github.event.issue.pull_request # We shouldn't mess with the Renovate[bot] commits in PRs
     runs-on: ubuntu-latest
 
     permissions:
