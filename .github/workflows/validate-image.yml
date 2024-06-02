@@ -49,9 +49,10 @@ jobs:
 
       - name: Get image ID
         id: getimage
-        # TODO: [validate-image] Make pipeline compatible with multiple images
+        # TODO: [validate-image] Make pipeline compatible with multiple images from the same file
+        # TODO: [validate-image] Use Python to get the image ID properly
         run: |
-          IMAGE_ID=$(cat ${{ matrix.files }} | grep 'image' | sed 's/image:\s*//g' | tr -d '[:blank:]' | head -n 1
+          IMAGE_ID=$(cat ${{ matrix.files }} | grep 'image:' | sed 's/image:\s*//g' | tr -d '[:blank:]' | head -n 1)
           echo "::set-output name=imageid::$IMAGE_ID"
 
       - name: Run Trivy vulnerability scanner
