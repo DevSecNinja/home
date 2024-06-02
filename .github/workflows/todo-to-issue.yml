@@ -13,7 +13,7 @@ permissions:
 jobs:
   run:
     name: "Run Todo to Issue"
-    runs-on: "ubuntu-latest"
+    runs-on: "ubuntu-22.04"
     steps:
       - uses: "actions/checkout@v4"
       - name: "TODO to Issue"

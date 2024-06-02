@@ -57,3 +57,63 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: "trivy-results-iac.sarif"
+
+  changed-files:
+    name: Get changed files
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-22.04
+    outputs:
+      matrix: ${{ steps.changed-files.outputs.all_changed_files }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v44
+        with:
+          matrix: true
+          since: "2020-01-01" # Get all the files
+          files: |
+            docker/ansible/templates/compose-modules/**.yml
+      - name: List all changed files
+        run: echo '${{ steps.changed-files.outputs.all_changed_files }}'
+
+  scan-docker-images:
+    name: Security Scan - Docker Images
+    runs-on: ubuntu-22.04
+    needs: [changed-files]
+    permissions:
+      security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
+      contents: read # for actions/checkout to fetch code
+    if: ${{ needs.changed-files.outputs.matrix != '[]' && needs.changed-files.outputs.matrix != '' }}
+    strategy:
+      matrix:
+        files: ${{ fromJSON(needs.changed-files.outputs.matrix) }}
+      max-parallel: 4
+      fail-fast: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Get image ID
+        id: getimage
+        # TODO: [validate-image] Make pipeline compatible with multiple images from the same file
+        # TODO: [validate-image] Use Python to get the image ID properly
+        run: |
+          IMAGE_ID=$(cat ${{ matrix.files }} | grep 'image:' | sed 's/image:\s*//g' | tr -d '[:blank:]' | head -n 1)
+          echo "::set-output name=imageid::$IMAGE_ID"
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@841fb371db7b5cd339e5b2d55c92f5dbd730ac9f
+        with:
+          image-ref: "${{ steps.getimage.outputs.imageid }}"
+          format: "sarif"
+          severity: "CRITICAL,HIGH"
+          output: "trivy-results.sarif"
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: "trivy-results.sarif"
