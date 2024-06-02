@@ -460,7 +460,7 @@
 
 **container_name:** photoprism
 
-**image:** photoprism/photoprism:preview@sha256:e789255932f051d9cc5bb293239a01b8b4aaaa53f8c91ec64a8ed5312c96e238
+**image:** photoprism/photoprism:preview@sha256:64eb0e95afea23ad955dcd8e37e66d6d4cb58afeaab269d515ac2ac854f49555
 
 **url:** photos.$DOMAINNAME
 

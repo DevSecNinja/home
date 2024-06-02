@@ -125,7 +125,7 @@
   image: papermerge/papermerge:3.2.0@sha256:11bd6e47622b295ee40f1e719c63235544121839a30e5083d959208931007b62
   url: papermerge.$DOMAINNAME
 - container_name: photoprism
-  image: photoprism/photoprism:preview@sha256:e789255932f051d9cc5bb293239a01b8b4aaaa53f8c91ec64a8ed5312c96e238
+  image: photoprism/photoprism:preview@sha256:64eb0e95afea23ad955dcd8e37e66d6d4cb58afeaab269d515ac2ac854f49555
   url: photos.$DOMAINNAME
 - container_name: photoprism-db
   image: mariadb:11.4.2@sha256:a891b59da43875e5fa2e260da7901b10c5e01e63e26cc33981ffdd9ab2c50d3b
