@@ -1,16 +1,13 @@
 name: Validate Docker image
 
 on:
-  workflow_dispatch:
-  push:
-    branches:
-      - 'renovate/**'
-    paths:
-      - 'docker/ansible/templates/compose-modules/**'
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
 
 permissions:
   security-events: write
   contents: read
+  pull-requests: write
 
 jobs:
   changed-files:
@@ -29,7 +26,7 @@ jobs:
         with:
           matrix: true
           files: |
-             docker/ansible/templates/compose-modules/**.yml
+            docker/ansible/templates/compose-modules/**.yml
       - name: List all changed files
         run: echo '${{ steps.changed-files.outputs.all_changed_files }}'
 
@@ -58,33 +55,50 @@ jobs:
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@0.21.0
         with:
-          image-ref: '${{ steps.getimage.outputs.imageid }}' # Fix: Use the IMAGE_ID output from the getimage step
-          format: 'sarif'
-          severity: 'CRITICAL,HIGH'
-          output: 'trivy-results.sarif'
+          image-ref: "${{ steps.getimage.outputs.imageid }}"
+          format: "sarif"
+          severity: "CRITICAL,HIGH"
+          output: "trivy-results.sarif"
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@0.21.0
         with:
-          image-ref: '${{ steps.getimage.outputs.imageid }}'
-          format: 'json'
-          severity: 'CRITICAL,HIGH'
-          output: 'trivy-results.json'
+          image-ref: "${{ steps.getimage.outputs.imageid }}"
+          format: "json"
+          severity: "CRITICAL,HIGH"
+          output: "trivy-results.json"
 
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: 'trivy-results.sarif'
+          sarif_file: "trivy-results.sarif"
 
       - name: Run Trivy on the image
+        id: archcheck
         run: |
           RESULTS_FILE="trivy-results.json"
           if [[ -s "$RESULTS_FILE" ]]; then
             ARCHITECTURE=$(cat $RESULTS_FILE | jq -r '.Metadata.ImageConfig.architecture')
             if [[ "$ARCHITECTURE" != "amd64" ]]; then
               echo "Image architecture is not amd64! It is $ARCHITECTURE"
+              echo "::set-output name=image_arch::$ARCHITECTURE"
               exit 1
             else
               echo "Architecture is amd64"
+              echo "::set-output name=image_arch::$ARCHITECTURE"
             fi
           fi
+
+      - name: Comment PR - Failure
+        uses: thollander/actions-comment-pull-request@v2
+        if: failure() && steps.archcheck.outputs.image_arch
+        with:
+          message: |
+            ❌ Image architecture is not AMD64! It's ${{ steps.archcheck.outputs.image_arch }}.
+
+      - name: Comment PR - Success
+        uses: thollander/actions-comment-pull-request@v2
+        if: success() && steps.archcheck.outputs.image_arch
+        with:
+          message: |
+            ✅ Image architecture is ${{ steps.archcheck.outputs.image_arch }}.
