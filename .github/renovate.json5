@@ -64,9 +64,9 @@
       "description": ["Auto merge Github Actions"],
       "matchManagers": ["github-actions"],
       "automerge": true,
-      "automergeType": "branch",
-      "ignoreTests": true,
-      "matchUpdateTypes": ["minor", "patch"]
+      "automergeType": "pr",
+      "ignoreTests": false,
+      "matchUpdateTypes": ["digest", "minor", "patch"]
     },
     {
       "description": ["Auto merge Docker images"],
