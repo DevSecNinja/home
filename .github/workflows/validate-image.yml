@@ -9,7 +9,8 @@ on:
       - 'docker/ansible/templates/compose-modules/**'
 
 permissions:
-   contents: read
+  security-events: write
+  contents: read
 
 jobs:
   changed-files:
@@ -45,29 +46,45 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Test
-        run: |
-          echo ${{ matrix.files }}
-      - name: Setup Docker
-        uses: docker/setup-buildx-action@v3
-      - name: Setup Trivy
-        uses: aquasecurity/trivy-action@master
+
       - name: Get image ID
         id: getimage
         # TODO: [validate-image] Make pipeline compatible with multiple images
         run: |
           IMAGE_ID=$(cat ${{ matrix.files }} | grep 'image' | sed 's/image:\s*//g' | tr -d '[:blank:]' | head -n 1
           echo "::set-output name=imageid::$IMAGE_ID"
-      - name: Run Trivy on the image
-        run: |
-          IMAGE_ID=${{ steps.getimage.outputs.imageid }}
-          if [[ -n "$IMAGE_ID" ]]; then
-            SCAN=$(trivy image $IMAGE_ID --format json)
-            ARCHITECTURE=$(echo $SCAN | jq -r '.Metadata.ImageConfig.architecture')
-            if [[ "$ARCHITECTURE" != "amd64" ]]; then
-              echo "Image architecture is not amd64! It is $ARCHITECTURE [$IMAGE_ID]"
-              exit 1
-            else
-              echo "Architecture is amd64 [$IMAGE_ID]"
-            fi
-          fi
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@0.21.0
+        with:
+          image-ref: '${{ IMAGE_ID }}'
+          format: 'sarif'
+          severity: 'CRITICAL,HIGH'
+          output: 'trivy-results.sarif'
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@0.21.0
+        with:
+          image-ref: '${{ IMAGE_ID }}'
+          format: 'json'
+          severity: 'CRITICAL,HIGH'
+          output: 'trivy-results.json'
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+      # - name: Run Trivy on the image
+      #   run: |
+      #     IMAGE_ID=${{ steps.getimage.outputs.imageid }}
+      #     if [[ -n "$IMAGE_ID" ]]; then
+      #       SCAN=$(trivy image $IMAGE_ID --format json)
+      #       ARCHITECTURE=$(echo $SCAN | jq -r '.Metadata.ImageConfig.architecture')
+      #       if [[ "$ARCHITECTURE" != "amd64" ]]; then
+      #         echo "Image architecture is not amd64! It is $ARCHITECTURE [$IMAGE_ID]"
+      #         exit 1
+      #       else
+      #         echo "Architecture is amd64 [$IMAGE_ID]"
+      #       fi
+      #     fi
