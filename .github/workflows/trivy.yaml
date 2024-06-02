@@ -1,12 +1,12 @@
 name: Trivy
 
-# TODO: [trivy] Scan for images that I use for my Docker containers
-
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
+  # Note: we just run Trivy weekly so that we can run the full scan
+  # and code scanning alerts don't get confused
+  # push:
+  #   branches:
+  #     - main
   schedule:
     - cron: '0 0 * * 0'
 
@@ -102,8 +102,8 @@ jobs:
 
       - name: Get image ID
         id: getimage
-        # TODO: [validate-image] Make pipeline compatible with multiple images from the same file
-        # TODO: [validate-image] Use Python to get the image ID properly
+        # TODO: [trivy] Make pipeline compatible with multiple images from the same file
+        # TODO: [trivy] Use Python to get the image ID properly and skip deprecated images
         run: |
           IMAGE_ID=$(cat ${{ matrix.files }} | grep 'image:' | sed 's/image:\s*//g' | tr -d '[:blank:]' | head -n 1)
           echo "::set-output name=imageid::$IMAGE_ID"
