@@ -55,7 +55,7 @@ jobs:
           echo "::set-output name=imageid::$IMAGE_ID"
 
       - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@7b7aa264d83dc58691451798b4d117d53d21edfe
+        uses: aquasecurity/trivy-action@841fb371db7b5cd339e5b2d55c92f5dbd730ac9f
         with:
           image-ref: "${{ steps.getimage.outputs.imageid }}"
           format: "sarif"
@@ -63,7 +63,7 @@ jobs:
           output: "trivy-results.sarif"
 
       - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@7b7aa264d83dc58691451798b4d117d53d21edfe
+        uses: aquasecurity/trivy-action@841fb371db7b5cd339e5b2d55c92f5dbd730ac9f
         with:
           image-ref: "${{ steps.getimage.outputs.imageid }}"
           format: "json"
