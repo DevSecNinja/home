@@ -122,6 +122,3 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: "trivy-results.sarif"
-          # TODO: [trivy] Remove standard category once we have support for multiple images per file
-          # Otherwise we have to remove all the individual configurations again
-          category: "docker-images"
