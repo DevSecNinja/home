@@ -35,7 +35,7 @@
 - container_name: dozzle-docker-proxy
   image: lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:817fbd545647e8e78fa87c5eb004bd83f8b5fd5dc558b654f89d85e9639993f1
 - container_name: drawio
-  image: jgraph/drawio:24.4.13@sha256:6191b236aaef99d3a2c2eff995f04d51c6ecbadaf5c8096856b7036db5c2d36c
+  image: jgraph/drawio:24.5.2@sha256:cb2f5d7257cd6de2070cc09f3a7ba48c6d4bda174ac5e2234d4b4e57395f82af
   url: draw.$DOMAINNAME
 - container_name: echo-server
   image: mendhak/http-https-echo:33@sha256:17f45542b4442474f4b68bf6e97f9a321b2c0fe95c5126c429fe49d911b07eb3
@@ -87,15 +87,15 @@
 - container_name: linkding-db-backup
   image: tiredofit/db-backup:4.1.0@sha256:39b45db5f4cfe5d5ed4764f8d8ce6c21e8e1bd9c05d27a733c34b78b765eef99
 - container_name: lobe-chat
-  image: lobehub/lobe-chat:v0.161.19@sha256:48570eb998ba3727ec5a5e2d372f6ed58ce4f862612fbea8802285e9310640b4
+  image: lobehub/lobe-chat:v0.162.19@sha256:f6ca1bce48f027d8a5d8d07e5ca7db78f10f698b44d07bb9a19809013ae33e05
   url: chat.$DOMAINNAME
 - container_name: mailrise
   image: yoryan/mailrise:1.4.0@sha256:66082168090b9a83f01cc71a9d7b1994840adbbbffbe4d2cf644272fbbc23a1a
 - container_name: nextcloud
-  image: nextcloud:29.0.1-apache@sha256:5fee0332a1e1276a3dba2ca863c530b75db6598f3f899e728e11f7cc140a7d85
+  image: nextcloud:29.0.1-apache@sha256:4d966a5f80f044a47b6862825fce3d7822b2ad761e49b9269a70e56a0fd7a17c
   url: cloud.$DOMAINNAME
 - container_name: nextcloud-cron
-  image: nextcloud:29.0.1-apache@sha256:5fee0332a1e1276a3dba2ca863c530b75db6598f3f899e728e11f7cc140a7d85
+  image: nextcloud:29.0.1-apache@sha256:4d966a5f80f044a47b6862825fce3d7822b2ad761e49b9269a70e56a0fd7a17c
 - container_name: nextcloud-db
   image: mariadb:11.4.2@sha256:934277de8883c061e32a21d01c64973b28272b441a3f797faf189c045a7c0a51
 - container_name: nextcloud-db-backup
@@ -119,13 +119,13 @@
 - container_name: paperless-tika
   image: ghcr.io/paperless-ngx/tika:2.9.1-minimal@sha256:20db3df89eaeb1b271dd840888fe909b88b12f4b86ef641ec07a1d45d4c5168f
 - container_name: paperless-web
-  image: ghcr.io/paperless-ngx/paperless-ngx:2.8.6@sha256:2744572313cf3026520243f00e064d8fa82d838173a160d63b7e481575a86fdc
+  image: ghcr.io/paperless-ngx/paperless-ngx:2.9.0@sha256:948dc7297df8259bffac23e564a7ca688bfc8f04fed9113e7fb14f6030da63dd
   url: paperless.$DOMAINNAME
 - container_name: papermerge
   image: papermerge/papermerge:3.2.0@sha256:11bd6e47622b295ee40f1e719c63235544121839a30e5083d959208931007b62
   url: papermerge.$DOMAINNAME
 - container_name: photoprism
-  image: photoprism/photoprism:preview@sha256:64eb0e95afea23ad955dcd8e37e66d6d4cb58afeaab269d515ac2ac854f49555
+  image: photoprism/photoprism:preview@sha256:67c1da51c1f1e3e4bbc50a370016cb04901f5f4ae25585f2eb007e1763f32126
   url: photos.$DOMAINNAME
 - container_name: photoprism-db
   image: mariadb:11.4.2@sha256:934277de8883c061e32a21d01c64973b28272b441a3f797faf189c045a7c0a51

@@ -144,7 +144,7 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:24.4.13@sha256:6191b236aaef99d3a2c2eff995f04d51c6ecbadaf5c8096856b7036db5c2d36c
+**image:** jgraph/drawio:24.5.2@sha256:cb2f5d7257cd6de2070cc09f3a7ba48c6d4bda174ac5e2234d4b4e57395f82af
 
 **url:** draw.$DOMAINNAME
 
@@ -320,7 +320,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:v0.161.19@sha256:48570eb998ba3727ec5a5e2d372f6ed58ce4f862612fbea8802285e9310640b4
+**image:** lobehub/lobe-chat:v0.162.19@sha256:f6ca1bce48f027d8a5d8d07e5ca7db78f10f698b44d07bb9a19809013ae33e05
 
 **url:** chat.$DOMAINNAME
 
@@ -338,7 +338,7 @@
 
 **container_name:** nextcloud
 
-**image:** nextcloud:29.0.1-apache@sha256:5fee0332a1e1276a3dba2ca863c530b75db6598f3f899e728e11f7cc140a7d85
+**image:** nextcloud:29.0.1-apache@sha256:4d966a5f80f044a47b6862825fce3d7822b2ad761e49b9269a70e56a0fd7a17c
 
 **url:** cloud.$DOMAINNAME
 
@@ -346,7 +346,7 @@
 
 **container_name:** nextcloud-cron
 
-**image:** nextcloud:29.0.1-apache@sha256:5fee0332a1e1276a3dba2ca863c530b75db6598f3f899e728e11f7cc140a7d85
+**image:** nextcloud:29.0.1-apache@sha256:4d966a5f80f044a47b6862825fce3d7822b2ad761e49b9269a70e56a0fd7a17c
 
 ### Service: nextcloud-db
 
@@ -440,7 +440,7 @@
 
 **container_name:** paperless-web
 
-**image:** ghcr.io/paperless-ngx/paperless-ngx:2.8.6@sha256:2744572313cf3026520243f00e064d8fa82d838173a160d63b7e481575a86fdc
+**image:** ghcr.io/paperless-ngx/paperless-ngx:2.9.0@sha256:948dc7297df8259bffac23e564a7ca688bfc8f04fed9113e7fb14f6030da63dd
 
 **url:** paperless.$DOMAINNAME
 
@@ -460,7 +460,7 @@
 
 **container_name:** photoprism
 
-**image:** photoprism/photoprism:preview@sha256:64eb0e95afea23ad955dcd8e37e66d6d4cb58afeaab269d515ac2ac854f49555
+**image:** photoprism/photoprism:preview@sha256:67c1da51c1f1e3e4bbc50a370016cb04901f5f4ae25585f2eb007e1763f32126
 
 **url:** photos.$DOMAINNAME
 
