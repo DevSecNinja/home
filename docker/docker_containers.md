@@ -58,7 +58,7 @@
 
 **container_name:** bitwarden-db
 
-**image:** mariadb:11.4.2@sha256:a891b59da43875e5fa2e260da7901b10c5e01e63e26cc33981ffdd9ab2c50d3b
+**image:** mariadb:11.4.2@sha256:934277de8883c061e32a21d01c64973b28272b441a3f797faf189c045a7c0a51
 
 ### Service: bitwarden-db-backup
 
@@ -192,7 +192,7 @@
 
 **container_name:** gatus-db
 
-**image:** docker.io/library/postgres:16.3-alpine@sha256:e89da2c083a5405943408b6807cd1fd25dc9010c1294e30611b841778bedc653
+**image:** docker.io/library/postgres:16.3-alpine@sha256:d037653693c4168efbb95cdc1db705d31278a4a8d608d133eca1f07af9793960
 
 ### Service: gatus-db-backup
 
@@ -248,7 +248,7 @@
 
 **container_name:** hoppscotch-db
 
-**image:** docker.io/library/postgres:16.3-alpine@sha256:e89da2c083a5405943408b6807cd1fd25dc9010c1294e30611b841778bedc653
+**image:** docker.io/library/postgres:16.3-alpine@sha256:d037653693c4168efbb95cdc1db705d31278a4a8d608d133eca1f07af9793960
 
 ### Service: hoppscotch-db-backup
 
@@ -262,7 +262,7 @@
 
 **container_name:** influxdb
 
-**image:** influxdb:2.7-alpine@sha256:e8227ea5a0d439fbadfdc4313127de265db828aeb98a5010192f4ad6ddb0f153
+**image:** influxdb:2.7-alpine@sha256:8d8eae9bc4eb5db7c4ef41fb1ae3fa03ff8e9bb52d73f36f4c738758a50d54aa
 
 **url:** influxdb-noauth.$DOMAINNAME
 
@@ -306,7 +306,7 @@
 
 **container_name:** linkding-db
 
-**image:** docker.io/library/postgres:16.3-alpine@sha256:e89da2c083a5405943408b6807cd1fd25dc9010c1294e30611b841778bedc653
+**image:** docker.io/library/postgres:16.3-alpine@sha256:d037653693c4168efbb95cdc1db705d31278a4a8d608d133eca1f07af9793960
 
 ### Service: linkding-db-backup
 
@@ -352,7 +352,7 @@
 
 **container_name:** nextcloud-db
 
-**image:** mariadb:11.4.2@sha256:a891b59da43875e5fa2e260da7901b10c5e01e63e26cc33981ffdd9ab2c50d3b
+**image:** mariadb:11.4.2@sha256:934277de8883c061e32a21d01c64973b28272b441a3f797faf189c045a7c0a51
 
 ### Service: nextcloud-db-backup
 
@@ -410,7 +410,7 @@
 
 **container_name:** paperless-db
 
-**image:** docker.io/library/postgres:16.3-alpine@sha256:e89da2c083a5405943408b6807cd1fd25dc9010c1294e30611b841778bedc653
+**image:** docker.io/library/postgres:16.3-alpine@sha256:d037653693c4168efbb95cdc1db705d31278a4a8d608d133eca1f07af9793960
 
 ### Service: paperless-db-backup
 
@@ -468,7 +468,7 @@
 
 **container_name:** photoprism-db
 
-**image:** mariadb:11.4.2@sha256:a891b59da43875e5fa2e260da7901b10c5e01e63e26cc33981ffdd9ab2c50d3b
+**image:** mariadb:11.4.2@sha256:934277de8883c061e32a21d01c64973b28272b441a3f797faf189c045a7c0a51
 
 ### Service: photoprism-db-backup
 
@@ -582,7 +582,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-8.1.127@sha256:90fcca5fa29eb6a5b2c984b3294e331957b5381f09cb5db99aa03086293f2b62
+**image:** lscr.io/linuxserver/unifi-network-application:version-8.2.93@sha256:d081c86593464a7c6f7acb9250377a46305b0c7d6b96dd8fd52e64d636a39250
 
 **url:** unifi.$DOMAINNAME
 
@@ -590,7 +590,7 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:7.0.11@sha256:8f9f843d383e358d9be2f172ba9d2455e8736f3c59b00330da1f1b44273ce267
+**image:** mongo:7.0.11@sha256:bc16accb1a8ff9bbe44608ff82ac3a3a478c3a486f8b6f664281bbc489157f27
 
 ### Service: unifi-db-backup
 
@@ -658,7 +658,7 @@
 
 **container_name:** wallabag-db
 
-**image:** mariadb:11.4.2@sha256:a891b59da43875e5fa2e260da7901b10c5e01e63e26cc33981ffdd9ab2c50d3b
+**image:** mariadb:11.4.2@sha256:934277de8883c061e32a21d01c64973b28272b441a3f797faf189c045a7c0a51
 
 ### Service: wallabag-db-backup
 
