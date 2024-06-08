@@ -113,7 +113,7 @@
 - container_name: paperless-db-backup
   image: tiredofit/db-backup:4.1.0@sha256:39b45db5f4cfe5d5ed4764f8d8ce6c21e8e1bd9c05d27a733c34b78b765eef99
 - container_name: paperless-gotenberg
-  image: docker.io/gotenberg/gotenberg:8.5.1@sha256:c229bd7a6c16800e9feabd102aacc445bd7c434d3a72e8df3cca6661314a0a3c
+  image: docker.io/gotenberg/gotenberg:8.6.0@sha256:1ff29e1eba118f0f0c914a866fad8835ae54655871bf6e9e5d22e4a5685ae7b4
 - container_name: paperless-redis
   image: redis:alpine3.19@sha256:892b41c092a599f76c30b48e9dcfb185ce8cea3560970b1c4f2745c89bb34344
 - container_name: paperless-tika
