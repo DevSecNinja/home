@@ -2,7 +2,7 @@
   image: adguard/adguardhome:v0.107.51@sha256:3a143e6c071cd72b1aa5aa46ba0205a86f085d54daca94b7fc7ab6759e3fb6fa
   url: adguard-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: unbound
-  image: mvance/unbound:1.19.3@sha256:2b19bdb4db8d6f9ebd39d060e1a0ea66f198e5c7272c8b711fd7835594014385
+  image: mvance/unbound:1.20.0@sha256:4bf67b567f392956455bd4f8a4cdd48010e234f1a07c0a99c2cff2ddbb3e8a7a
 - container_name: alertmanager
   image: prom/alertmanager:v0.27.0@sha256:e13b6ed5cb929eeaee733479dce55e10eb3bc2e9c4586c705a4e8da41e5eacf5
   url: alertmanager.$DOMAINNAME

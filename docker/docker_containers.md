@@ -14,7 +14,7 @@
 
 **container_name:** unbound
 
-**image:** mvance/unbound:1.19.3@sha256:2b19bdb4db8d6f9ebd39d060e1a0ea66f198e5c7272c8b711fd7835594014385
+**image:** mvance/unbound:1.20.0@sha256:4bf67b567f392956455bd4f8a4cdd48010e234f1a07c0a99c2cff2ddbb3e8a7a
 
 ## docker/ansible/templates/compose-modules/alertmanager.yml
 
