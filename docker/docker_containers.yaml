@@ -146,7 +146,7 @@
   image: prom/prometheus:v2.52.0@sha256:5c435642ca4d8427ca26f4901c11114023004709037880cd7860d5b7176aa731
   url: prometheus.$DOMAINNAME
 - container_name: pushgateway
-  image: prom/pushgateway:v1.8.0@sha256:c159e946abf44e0cf4ae53aa03d99326497a35acca526739c7f8b01a0183bb50
+  image: prom/pushgateway:v1.9.0@sha256:98a458415f8f5afcfd45622d289a0aa67063563bec0f90d598ebc76783571936
   url: pushgateway.$DOMAINNAME
 - container_name: promtail
   image: grafana/promtail:3.0.0@sha256:d3de3da9431cfbe74a6a94555050df5257f357e827be8e63f8998d509c37af8b

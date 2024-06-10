@@ -526,7 +526,7 @@
 
 **container_name:** pushgateway
 
-**image:** prom/pushgateway:v1.8.0@sha256:c159e946abf44e0cf4ae53aa03d99326497a35acca526739c7f8b01a0183bb50
+**image:** prom/pushgateway:v1.9.0@sha256:98a458415f8f5afcfd45622d289a0aa67063563bec0f90d598ebc76783571936
 
 **url:** pushgateway.$DOMAINNAME
 
