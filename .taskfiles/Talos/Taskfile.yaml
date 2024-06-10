@@ -16,6 +16,7 @@ tasks:
 
   bootstrap:
     desc: Bootstrap the Talos cluster
+    dir: "{{.KUBERNETES_DIR}}/bootstrap/talos"
     cmds:
       - |
         if [ ! -f "{{.TALHELPER_SECRET_FILE}}" ]; then
@@ -38,6 +39,7 @@ tasks:
 
   fetch-kubeconfig:
     desc: Fetch kubeconfig
+    dir: "{{.KUBERNETES_DIR}}/bootstrap/talos"
     cmd: until talhelper gencommand kubeconfig --config-file {{.TALHELPER_CONFIG_FILE}} --out-dir {{.TALHELPER_CLUSTER_DIR}} --extra-flags="{{.ROOT_DIR}} --force" | bash; do sleep 10; done
     preconditions:
       - msg: Missing talhelper config file
@@ -45,6 +47,7 @@ tasks:
 
   install-helm-apps:
     desc: Bootstrap core apps needed for Talos
+    dir: "{{.KUBERNETES_DIR}}/bootstrap/talos"
     cmds:
       - until kubectl --kubeconfig {{.KUBECONFIG_FILE}} wait --for=condition=Ready=False nodes --all --timeout=600s; do sleep 10; done
       - helmfile --kubeconfig {{.KUBECONFIG_FILE}} --file {{.HELMFILE_FILE}} apply --skip-diff-on-install --suppress-diff
@@ -57,6 +60,7 @@ tasks:
 
   upgrade:
     desc: Upgrade Talos on a node
+    dir: "{{.KUBERNETES_DIR}}/bootstrap/talos"
     cmds:
       - talosctl --nodes {{.node}} upgrade --image {{.image}} --wait=true --timeout=10m --preserve=true --reboot-mode={{.mode}}
       - talosctl --nodes {{.node}} health --wait-timeout=10m --server=false
@@ -74,6 +78,7 @@ tasks:
 
   upgrade-k8s:
     desc: Upgrade Kubernetes across the cluster
+    dir: "{{.KUBERNETES_DIR}}/bootstrap/talos"
     cmd: talosctl --nodes {{.controller}} upgrade-k8s --to {{.to}}
     requires:
       vars: ["controller", "to"]
@@ -87,6 +92,7 @@ tasks:
 
   nuke:
     desc: Resets nodes back to maintenance mode
+    dir: "{{.KUBERNETES_DIR}}/bootstrap/talos"
     prompt: This will destroy your cluster and reset the nodes back to maintenance mode... continue?
     cmd: talhelper gencommand reset --config-file {{.TALHELPER_CONFIG_FILE}} --out-dir {{.TALHELPER_CLUSTER_DIR}} --extra-flags="--reboot {{- if eq .CLI_FORCE false }} --system-labels-to-wipe STATE --system-labels-to-wipe EPHEMERAL{{ end }} --graceful=false --wait=false" | bash
 
