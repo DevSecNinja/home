@@ -3,7 +3,7 @@
 services:
   foldingathome:
     container_name: foldingathome
-    image: lscr.io/linuxserver/foldingathome:version-7.6.21@sha256:67bd2ec9c964f611ac3914575146d687bb320b6b1e2931f62e84e0d83676239e
+    image: lscr.io/linuxserver/foldingathome:version-7.6.21@sha256:c6b65c3ec7a242801bc61c432d1ec5599ce18b4bf9bf73df3b7362778e258e5f
     depends_on:
       - traefik
     networks:
