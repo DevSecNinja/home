@@ -58,7 +58,7 @@
 
 **container_name:** bitwarden-db
 
-**image:** mariadb:11.4.2@sha256:934277de8883c061e32a21d01c64973b28272b441a3f797faf189c045a7c0a51
+**image:** mariadb:11.4.2@sha256:396146c0a2e703ddebcf51f26abb28bf5590991d1d830c35c1d802034d140352
 
 ### Service: bitwarden-db-backup
 
@@ -164,7 +164,7 @@
 
 **container_name:** excalidraw
 
-**image:** excalidraw/excalidraw:latest@sha256:d074f693cd8c417719c0370b637e1b7351814f9050e7b2ac62727c8071e3bf25
+**image:** excalidraw/excalidraw:latest@sha256:dd998e7dc83ca0a14327a71cdbb9dd86c1ed2ceef715cae349e084e0ae6aebb4
 
 **url:** excalidraw.$DOMAINNAME
 
@@ -174,7 +174,7 @@
 
 **container_name:** foldingathome
 
-**image:** lscr.io/linuxserver/foldingathome:version-7.6.21@sha256:67bd2ec9c964f611ac3914575146d687bb320b6b1e2931f62e84e0d83676239e
+**image:** lscr.io/linuxserver/foldingathome:version-7.6.21@sha256:9a997426d71e320f8d84429af148a4749e81def1cdf8f286d5135223d41f3bdd
 
 **url:** folding-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -338,7 +338,7 @@
 
 **container_name:** nextcloud
 
-**image:** nextcloud:29.0.1-apache@sha256:4d966a5f80f044a47b6862825fce3d7822b2ad761e49b9269a70e56a0fd7a17c
+**image:** nextcloud:29.0.1-apache@sha256:5e48add91754ef6148cfcd0f9b4ade5a4e22ec0b940f9bb83c99204e45187a53
 
 **url:** cloud.$DOMAINNAME
 
@@ -346,13 +346,13 @@
 
 **container_name:** nextcloud-cron
 
-**image:** nextcloud:29.0.1-apache@sha256:4d966a5f80f044a47b6862825fce3d7822b2ad761e49b9269a70e56a0fd7a17c
+**image:** nextcloud:29.0.1-apache@sha256:5e48add91754ef6148cfcd0f9b4ade5a4e22ec0b940f9bb83c99204e45187a53
 
 ### Service: nextcloud-db
 
 **container_name:** nextcloud-db
 
-**image:** mariadb:11.4.2@sha256:934277de8883c061e32a21d01c64973b28272b441a3f797faf189c045a7c0a51
+**image:** mariadb:11.4.2@sha256:396146c0a2e703ddebcf51f26abb28bf5590991d1d830c35c1d802034d140352
 
 ### Service: nextcloud-db-backup
 
@@ -468,7 +468,7 @@
 
 **container_name:** photoprism-db
 
-**image:** mariadb:11.4.2@sha256:934277de8883c061e32a21d01c64973b28272b441a3f797faf189c045a7c0a51
+**image:** mariadb:11.4.2@sha256:396146c0a2e703ddebcf51f26abb28bf5590991d1d830c35c1d802034d140352
 
 ### Service: photoprism-db-backup
 
@@ -482,7 +482,7 @@
 
 **container_name:** phpmyadmin
 
-**image:** phpmyadmin:5.2.1-apache@sha256:512a596a35a2b2865e3d710e5349f930165d40dac97e0e7a5129a6807c599ab2
+**image:** phpmyadmin:5.2.1-apache@sha256:3197db06cdb9186ba2fe42211d70cbb32299c6888a86c7761076bbfe47e989f1
 
 **url:** phpmyadmin.$DOMAINNAME
 
@@ -492,7 +492,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.40.2.8395-c67dce28e@sha256:addec5e26fb63af661992e0c50e0bd6f7a271433cd2a058f130e0ec1bae415e4
+**image:** lscr.io/linuxserver/plex:version-1.40.2.8395-c67dce28e@sha256:dce27d66d8212cedf73376eb2865650dd9a0265651dbc11acfc4b2c85e47fee1
 
 **url:** plex-noauth.$DOMAINNAME
 
@@ -582,7 +582,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-8.2.93@sha256:d081c86593464a7c6f7acb9250377a46305b0c7d6b96dd8fd52e64d636a39250
+**image:** lscr.io/linuxserver/unifi-network-application:version-8.2.93@sha256:11a476608d43eedbc5047e4c1bb6d55fde6184762c858ed4622a1a091283c1b5
 
 **url:** unifi.$DOMAINNAME
 
@@ -590,7 +590,7 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:7.0.11@sha256:bc16accb1a8ff9bbe44608ff82ac3a3a478c3a486f8b6f664281bbc489157f27
+**image:** mongo:7.0.11@sha256:7b225d4ae2df7cf98812f27f5d0d98054efaf9bfd4cc79c7e3e0bed1c1d3bf45
 
 ### Service: unifi-db-backup
 
@@ -658,7 +658,7 @@
 
 **container_name:** wallabag-db
 
-**image:** mariadb:11.4.2@sha256:934277de8883c061e32a21d01c64973b28272b441a3f797faf189c045a7c0a51
+**image:** mariadb:11.4.2@sha256:396146c0a2e703ddebcf51f26abb28bf5590991d1d830c35c1d802034d140352
 
 ### Service: wallabag-db-backup
 

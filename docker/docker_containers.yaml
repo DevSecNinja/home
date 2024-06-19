@@ -10,7 +10,7 @@
   image: bitwarden/self-host:2024.5.0-beta@sha256:82dd3318e3483492364c09a27819f6c14753e9bb721a4d81cf9c624b99057407
   url: bitwarden.$DOMAINNAME
 - container_name: bitwarden-db
-  image: mariadb:11.4.2@sha256:934277de8883c061e32a21d01c64973b28272b441a3f797faf189c045a7c0a51
+  image: mariadb:11.4.2@sha256:396146c0a2e703ddebcf51f26abb28bf5590991d1d830c35c1d802034d140352
 - container_name: bitwarden-db-backup
   image: tiredofit/db-backup:4.1.0@sha256:39b45db5f4cfe5d5ed4764f8d8ce6c21e8e1bd9c05d27a733c34b78b765eef99
 - container_name: cadvisor
@@ -41,10 +41,10 @@
   image: mendhak/http-https-echo:33@sha256:17f45542b4442474f4b68bf6e97f9a321b2c0fe95c5126c429fe49d911b07eb3
   url: echo-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: excalidraw
-  image: excalidraw/excalidraw:latest@sha256:d074f693cd8c417719c0370b637e1b7351814f9050e7b2ac62727c8071e3bf25
+  image: excalidraw/excalidraw:latest@sha256:dd998e7dc83ca0a14327a71cdbb9dd86c1ed2ceef715cae349e084e0ae6aebb4
   url: excalidraw.$DOMAINNAME
 - container_name: foldingathome
-  image: lscr.io/linuxserver/foldingathome:version-7.6.21@sha256:67bd2ec9c964f611ac3914575146d687bb320b6b1e2931f62e84e0d83676239e
+  image: lscr.io/linuxserver/foldingathome:version-7.6.21@sha256:9a997426d71e320f8d84429af148a4749e81def1cdf8f286d5135223d41f3bdd
   url: folding-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: gatus
   image: twinproduction/gatus:v5.11.0@sha256:05cf8bcbd7296b2e47d9e69d5974d428dde32188722d2aa954367eb728dd056c
@@ -92,12 +92,12 @@
 - container_name: mailrise
   image: yoryan/mailrise:1.4.0@sha256:66082168090b9a83f01cc71a9d7b1994840adbbbffbe4d2cf644272fbbc23a1a
 - container_name: nextcloud
-  image: nextcloud:29.0.1-apache@sha256:4d966a5f80f044a47b6862825fce3d7822b2ad761e49b9269a70e56a0fd7a17c
+  image: nextcloud:29.0.1-apache@sha256:5e48add91754ef6148cfcd0f9b4ade5a4e22ec0b940f9bb83c99204e45187a53
   url: cloud.$DOMAINNAME
 - container_name: nextcloud-cron
-  image: nextcloud:29.0.1-apache@sha256:4d966a5f80f044a47b6862825fce3d7822b2ad761e49b9269a70e56a0fd7a17c
+  image: nextcloud:29.0.1-apache@sha256:5e48add91754ef6148cfcd0f9b4ade5a4e22ec0b940f9bb83c99204e45187a53
 - container_name: nextcloud-db
-  image: mariadb:11.4.2@sha256:934277de8883c061e32a21d01c64973b28272b441a3f797faf189c045a7c0a51
+  image: mariadb:11.4.2@sha256:396146c0a2e703ddebcf51f26abb28bf5590991d1d830c35c1d802034d140352
 - container_name: nextcloud-db-backup
   image: tiredofit/db-backup:4.1.0@sha256:39b45db5f4cfe5d5ed4764f8d8ce6c21e8e1bd9c05d27a733c34b78b765eef99
 - container_name: nextcloud-redis
@@ -128,14 +128,14 @@
   image: photoprism/photoprism:preview@sha256:67c1da51c1f1e3e4bbc50a370016cb04901f5f4ae25585f2eb007e1763f32126
   url: photos.$DOMAINNAME
 - container_name: photoprism-db
-  image: mariadb:11.4.2@sha256:934277de8883c061e32a21d01c64973b28272b441a3f797faf189c045a7c0a51
+  image: mariadb:11.4.2@sha256:396146c0a2e703ddebcf51f26abb28bf5590991d1d830c35c1d802034d140352
 - container_name: photoprism-db-backup
   image: tiredofit/db-backup:4.1.0@sha256:39b45db5f4cfe5d5ed4764f8d8ce6c21e8e1bd9c05d27a733c34b78b765eef99
 - container_name: phpmyadmin
-  image: phpmyadmin:5.2.1-apache@sha256:512a596a35a2b2865e3d710e5349f930165d40dac97e0e7a5129a6807c599ab2
+  image: phpmyadmin:5.2.1-apache@sha256:3197db06cdb9186ba2fe42211d70cbb32299c6888a86c7761076bbfe47e989f1
   url: phpmyadmin.$DOMAINNAME
 - container_name: plex
-  image: lscr.io/linuxserver/plex:version-1.40.2.8395-c67dce28e@sha256:addec5e26fb63af661992e0c50e0bd6f7a271433cd2a058f130e0ec1bae415e4
+  image: lscr.io/linuxserver/plex:version-1.40.2.8395-c67dce28e@sha256:dce27d66d8212cedf73376eb2865650dd9a0265651dbc11acfc4b2c85e47fee1
   url: plex-noauth.$DOMAINNAME
 - container_name: portainer
   image: portainer/portainer-ce:2.20.3-alpine@sha256:a6f635877e0daa4aa39c1cbf4e73a31b35d342284588fa72fd8a91efb3c6a091
@@ -157,10 +157,10 @@
   image: ghcr.io/jordemort/traefik-forward-auth:latest@sha256:394f86bff5cc839fac1392f65dd3d4471e827bc29321a4460e7d92042e026599
   url: auth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: unifi
-  image: lscr.io/linuxserver/unifi-network-application:version-8.2.93@sha256:d081c86593464a7c6f7acb9250377a46305b0c7d6b96dd8fd52e64d636a39250
+  image: lscr.io/linuxserver/unifi-network-application:version-8.2.93@sha256:11a476608d43eedbc5047e4c1bb6d55fde6184762c858ed4622a1a091283c1b5
   url: unifi.$DOMAINNAME
 - container_name: unifi-db
-  image: mongo:7.0.11@sha256:bc16accb1a8ff9bbe44608ff82ac3a3a478c3a486f8b6f664281bbc489157f27
+  image: mongo:7.0.11@sha256:7b225d4ae2df7cf98812f27f5d0d98054efaf9bfd4cc79c7e3e0bed1c1d3bf45
 - container_name: unifi-db-backup
   image: tiredofit/db-backup:4.1.0@sha256:39b45db5f4cfe5d5ed4764f8d8ce6c21e8e1bd9c05d27a733c34b78b765eef99
 - container_name: vault
@@ -170,7 +170,7 @@
   image: wallabag/wallabag:2.6.9@sha256:d482b139bab164afef0e8bbfbeb7c55cd3e10e848b95d7d167e4ffcbc847f4b9
   url: wallabag.$DOMAINNAME
 - container_name: wallabag-db
-  image: mariadb:11.4.2@sha256:934277de8883c061e32a21d01c64973b28272b441a3f797faf189c045a7c0a51
+  image: mariadb:11.4.2@sha256:396146c0a2e703ddebcf51f26abb28bf5590991d1d830c35c1d802034d140352
 - container_name: wallabag-db-backup
   image: tiredofit/db-backup:4.1.0@sha256:39b45db5f4cfe5d5ed4764f8d8ce6c21e8e1bd9c05d27a733c34b78b765eef99
 - container_name: wallabag-redis
