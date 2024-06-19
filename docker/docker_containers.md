@@ -50,7 +50,7 @@
 
 **container_name:** bitwarden
 
-**image:** bitwarden/self-host:2024.5.0-beta@sha256:82dd3318e3483492364c09a27819f6c14753e9bb721a4d81cf9c624b99057407
+**image:** bitwarden/self-host:2024.6.1-beta@sha256:3aec1bb03bd24e03cefba9f3902a33f88d4b56d268e9d515d43ef5f222daa318
 
 **url:** bitwarden.$DOMAINNAME
 
@@ -298,7 +298,7 @@
 
 **container_name:** linkding
 
-**image:** sissbruecker/linkding:1.30.0-alpine@sha256:ad14934dc4c638a9564122678d2298e128065e4b8e5ae113785aa1edbddb4248
+**image:** sissbruecker/linkding:1.31.0-alpine@sha256:1fa14d3082148e8e6ac6c00e617bcb47c3a3f6cfc86e636a9c4a5a5c05dd493d
 
 **url:** linkding.$DOMAINNAME
 
@@ -422,7 +422,7 @@
 
 **container_name:** paperless-gotenberg
 
-**image:** docker.io/gotenberg/gotenberg:8.6.0@sha256:1ff29e1eba118f0f0c914a866fad8835ae54655871bf6e9e5d22e4a5685ae7b4
+**image:** docker.io/gotenberg/gotenberg:8.7.0@sha256:437b9cd3c35113774818b30767ae267cb08f04d88125410c135cdd5952c0571e
 
 ### Service: paperless-redis
 
@@ -614,7 +614,7 @@
 
 **container_name:** vault
 
-**image:** hashicorp/vault:1.16@sha256:c5e04689611cb864b8b6247a6a845e0bdc059998f39b5c8a659562287379525c
+**image:** hashicorp/vault:1.17@sha256:51e5f9b108e49aed025a27cbb66848911cb2bccee072057ba965b835a5427bce
 
 **url:** vault.$DOMAINNAME`) && PathPrefix(`/v1
 

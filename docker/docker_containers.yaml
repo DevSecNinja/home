@@ -7,7 +7,7 @@
   image: prom/alertmanager:v0.27.0@sha256:e13b6ed5cb929eeaee733479dce55e10eb3bc2e9c4586c705a4e8da41e5eacf5
   url: alertmanager.$DOMAINNAME
 - container_name: bitwarden
-  image: bitwarden/self-host:2024.5.0-beta@sha256:82dd3318e3483492364c09a27819f6c14753e9bb721a4d81cf9c624b99057407
+  image: bitwarden/self-host:2024.6.1-beta@sha256:3aec1bb03bd24e03cefba9f3902a33f88d4b56d268e9d515d43ef5f222daa318
   url: bitwarden.$DOMAINNAME
 - container_name: bitwarden-db
   image: mariadb:11.4.2@sha256:396146c0a2e703ddebcf51f26abb28bf5590991d1d830c35c1d802034d140352
@@ -80,7 +80,7 @@
   image: ghcr.io/corentinth/it-tools:2023.12.21-5ed3693@sha256:4aaf67eab769afc9dac5614a15614537446e11150d53eab3be34ac9775a27e3a
   url: tools.$DOMAINNAME
 - container_name: linkding
-  image: sissbruecker/linkding:1.30.0-alpine@sha256:ad14934dc4c638a9564122678d2298e128065e4b8e5ae113785aa1edbddb4248
+  image: sissbruecker/linkding:1.31.0-alpine@sha256:1fa14d3082148e8e6ac6c00e617bcb47c3a3f6cfc86e636a9c4a5a5c05dd493d
   url: linkding.$DOMAINNAME
 - container_name: linkding-db
   image: docker.io/library/postgres:16.3-alpine@sha256:d037653693c4168efbb95cdc1db705d31278a4a8d608d133eca1f07af9793960
@@ -113,7 +113,7 @@
 - container_name: paperless-db-backup
   image: tiredofit/db-backup:4.1.0@sha256:39b45db5f4cfe5d5ed4764f8d8ce6c21e8e1bd9c05d27a733c34b78b765eef99
 - container_name: paperless-gotenberg
-  image: docker.io/gotenberg/gotenberg:8.6.0@sha256:1ff29e1eba118f0f0c914a866fad8835ae54655871bf6e9e5d22e4a5685ae7b4
+  image: docker.io/gotenberg/gotenberg:8.7.0@sha256:437b9cd3c35113774818b30767ae267cb08f04d88125410c135cdd5952c0571e
 - container_name: paperless-redis
   image: redis:alpine3.19@sha256:892b41c092a599f76c30b48e9dcfb185ce8cea3560970b1c4f2745c89bb34344
 - container_name: paperless-tika
@@ -164,7 +164,7 @@
 - container_name: unifi-db-backup
   image: tiredofit/db-backup:4.1.0@sha256:39b45db5f4cfe5d5ed4764f8d8ce6c21e8e1bd9c05d27a733c34b78b765eef99
 - container_name: vault
-  image: hashicorp/vault:1.16@sha256:c5e04689611cb864b8b6247a6a845e0bdc059998f39b5c8a659562287379525c
+  image: hashicorp/vault:1.17@sha256:51e5f9b108e49aed025a27cbb66848911cb2bccee072057ba965b835a5427bce
   url: vault.$DOMAINNAME`) && PathPrefix(`/v1
 - container_name: wallabag
   image: wallabag/wallabag:2.6.9@sha256:d482b139bab164afef0e8bbfbeb7c55cd3e10e848b95d7d167e4ffcbc847f4b9
