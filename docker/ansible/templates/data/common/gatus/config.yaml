@@ -297,3 +297,20 @@ endpoints:
       query-type: "A"
     conditions:
       - "[DNS_RCODE] == NOERROR"
+
+  #
+  # ICMP
+  #
+
+  - name: Google - ICMP
+    url: "icmp://8.8.8.8"
+    group: External
+    conditions:
+      - "[CONNECTED] == true"
+
+  - name: Quad9 - ICMP
+    url: "icmp://9.9.9.9"
+    group: External
+    conditions:
+      - "[CONNECTED] == true"
+
