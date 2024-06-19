@@ -50,7 +50,7 @@
 
 **container_name:** bitwarden
 
-**image:** bitwarden/self-host:2024.5.0-beta@sha256:82dd3318e3483492364c09a27819f6c14753e9bb721a4d81cf9c624b99057407
+**image:** bitwarden/self-host:2024.6.1-beta@sha256:3aec1bb03bd24e03cefba9f3902a33f88d4b56d268e9d515d43ef5f222daa318
 
 **url:** bitwarden.$DOMAINNAME
 
@@ -58,7 +58,7 @@
 
 **container_name:** bitwarden-db
 
-**image:** mariadb:11.4.2@sha256:934277de8883c061e32a21d01c64973b28272b441a3f797faf189c045a7c0a51
+**image:** mariadb:11.4.2@sha256:396146c0a2e703ddebcf51f26abb28bf5590991d1d830c35c1d802034d140352
 
 ### Service: bitwarden-db-backup
 
@@ -118,7 +118,7 @@
 
 **container_name:** cyberchef
 
-**image:** ghcr.io/gchq/cyberchef:10.18.6@sha256:4de4eff8227b43506953085732531471ee87247ac487537e3e72de9614eb3dda
+**image:** ghcr.io/gchq/cyberchef:10.18.8@sha256:e9679bdefa43c68ce266125ad07569ef7cc941ad5268028e0e63193421518611
 
 **url:** cyberchef.$DOMAINNAME
 
@@ -164,7 +164,7 @@
 
 **container_name:** excalidraw
 
-**image:** excalidraw/excalidraw:latest@sha256:d074f693cd8c417719c0370b637e1b7351814f9050e7b2ac62727c8071e3bf25
+**image:** excalidraw/excalidraw:latest@sha256:dd998e7dc83ca0a14327a71cdbb9dd86c1ed2ceef715cae349e084e0ae6aebb4
 
 **url:** excalidraw.$DOMAINNAME
 
@@ -174,7 +174,7 @@
 
 **container_name:** foldingathome
 
-**image:** lscr.io/linuxserver/foldingathome:version-7.6.21@sha256:67bd2ec9c964f611ac3914575146d687bb320b6b1e2931f62e84e0d83676239e
+**image:** lscr.io/linuxserver/foldingathome:version-7.6.21@sha256:9a997426d71e320f8d84429af148a4749e81def1cdf8f286d5135223d41f3bdd
 
 **url:** folding-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -298,7 +298,7 @@
 
 **container_name:** linkding
 
-**image:** sissbruecker/linkding:1.30.0-alpine@sha256:ad14934dc4c638a9564122678d2298e128065e4b8e5ae113785aa1edbddb4248
+**image:** sissbruecker/linkding:1.31.0-alpine@sha256:1fa14d3082148e8e6ac6c00e617bcb47c3a3f6cfc86e636a9c4a5a5c05dd493d
 
 **url:** linkding.$DOMAINNAME
 
@@ -320,7 +320,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:v0.162.21@sha256:1dbc15197d825de83e03c48606c32b5525d3bbc00fb4ce4930b6670a7d5c7039
+**image:** lobehub/lobe-chat:v0.162.25@sha256:9258da16f0d35fc1254e2fa5741ce478636f62784e1ab7722dcaf4d675334203
 
 **url:** chat.$DOMAINNAME
 
@@ -338,7 +338,7 @@
 
 **container_name:** nextcloud
 
-**image:** nextcloud:29.0.1-apache@sha256:4d966a5f80f044a47b6862825fce3d7822b2ad761e49b9269a70e56a0fd7a17c
+**image:** nextcloud:29.0.1-apache@sha256:5e48add91754ef6148cfcd0f9b4ade5a4e22ec0b940f9bb83c99204e45187a53
 
 **url:** cloud.$DOMAINNAME
 
@@ -346,13 +346,13 @@
 
 **container_name:** nextcloud-cron
 
-**image:** nextcloud:29.0.1-apache@sha256:4d966a5f80f044a47b6862825fce3d7822b2ad761e49b9269a70e56a0fd7a17c
+**image:** nextcloud:29.0.1-apache@sha256:5e48add91754ef6148cfcd0f9b4ade5a4e22ec0b940f9bb83c99204e45187a53
 
 ### Service: nextcloud-db
 
 **container_name:** nextcloud-db
 
-**image:** mariadb:11.4.2@sha256:934277de8883c061e32a21d01c64973b28272b441a3f797faf189c045a7c0a51
+**image:** mariadb:11.4.2@sha256:396146c0a2e703ddebcf51f26abb28bf5590991d1d830c35c1d802034d140352
 
 ### Service: nextcloud-db-backup
 
@@ -422,7 +422,7 @@
 
 **container_name:** paperless-gotenberg
 
-**image:** docker.io/gotenberg/gotenberg:8.6.0@sha256:1ff29e1eba118f0f0c914a866fad8835ae54655871bf6e9e5d22e4a5685ae7b4
+**image:** docker.io/gotenberg/gotenberg:8.7.0@sha256:437b9cd3c35113774818b30767ae267cb08f04d88125410c135cdd5952c0571e
 
 ### Service: paperless-redis
 
@@ -468,7 +468,7 @@
 
 **container_name:** photoprism-db
 
-**image:** mariadb:11.4.2@sha256:934277de8883c061e32a21d01c64973b28272b441a3f797faf189c045a7c0a51
+**image:** mariadb:11.4.2@sha256:396146c0a2e703ddebcf51f26abb28bf5590991d1d830c35c1d802034d140352
 
 ### Service: photoprism-db-backup
 
@@ -482,7 +482,7 @@
 
 **container_name:** phpmyadmin
 
-**image:** phpmyadmin:5.2.1-apache@sha256:512a596a35a2b2865e3d710e5349f930165d40dac97e0e7a5129a6807c599ab2
+**image:** phpmyadmin:5.2.1-apache@sha256:3197db06cdb9186ba2fe42211d70cbb32299c6888a86c7761076bbfe47e989f1
 
 **url:** phpmyadmin.$DOMAINNAME
 
@@ -492,7 +492,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.40.2.8395-c67dce28e@sha256:addec5e26fb63af661992e0c50e0bd6f7a271433cd2a058f130e0ec1bae415e4
+**image:** lscr.io/linuxserver/plex:version-1.40.3.8555-fef15d30c@sha256:36f7953fb618f99bfb456c80e7ec94432d8af3c1bfcc034e46a018cc64b534b7
 
 **url:** plex-noauth.$DOMAINNAME
 
@@ -582,7 +582,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-8.2.93@sha256:d081c86593464a7c6f7acb9250377a46305b0c7d6b96dd8fd52e64d636a39250
+**image:** lscr.io/linuxserver/unifi-network-application:version-8.2.93@sha256:11a476608d43eedbc5047e4c1bb6d55fde6184762c858ed4622a1a091283c1b5
 
 **url:** unifi.$DOMAINNAME
 
@@ -590,7 +590,7 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:7.0.11@sha256:bc16accb1a8ff9bbe44608ff82ac3a3a478c3a486f8b6f664281bbc489157f27
+**image:** mongo:7.0.11@sha256:7b225d4ae2df7cf98812f27f5d0d98054efaf9bfd4cc79c7e3e0bed1c1d3bf45
 
 ### Service: unifi-db-backup
 
@@ -614,7 +614,7 @@
 
 **container_name:** vault
 
-**image:** hashicorp/vault:1.16@sha256:c5e04689611cb864b8b6247a6a845e0bdc059998f39b5c8a659562287379525c
+**image:** hashicorp/vault:1.17@sha256:51e5f9b108e49aed025a27cbb66848911cb2bccee072057ba965b835a5427bce
 
 **url:** vault.$DOMAINNAME`) && PathPrefix(`/v1
 
@@ -658,7 +658,7 @@
 
 **container_name:** wallabag-db
 
-**image:** mariadb:11.4.2@sha256:934277de8883c061e32a21d01c64973b28272b441a3f797faf189c045a7c0a51
+**image:** mariadb:11.4.2@sha256:396146c0a2e703ddebcf51f26abb28bf5590991d1d830c35c1d802034d140352
 
 ### Service: wallabag-db-backup
 
