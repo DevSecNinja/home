@@ -74,7 +74,7 @@
       "automerge": true,
       "automergeType": "pr",
       "ignoreTests": false,
-      "matchUpdateTypes": ["digest"]
+      "matchUpdateTypes": ["digest", "patch"]
     },
     // groups
     {
