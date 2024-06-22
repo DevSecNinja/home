@@ -27,7 +27,7 @@
   image: lscr.io/linuxserver/code-server:version-4.89.0@sha256:678e01467fecf0d1d32b938f3f5324a69f74f9187d37fadddb8f926024524b8b
   url: code.$DOMAINNAME
 - container_name: cyberchef
-  image: ghcr.io/gchq/cyberchef:10.18.8@sha256:e9679bdefa43c68ce266125ad07569ef7cc941ad5268028e0e63193421518611
+  image: ghcr.io/gchq/cyberchef:10.19.0@sha256:03edba99b2115e1ea6ca9aa6b58c84249c52d1369e5287335a167922617958da
   url: cyberchef.$DOMAINNAME
 - container_name: dozzle
   image: amir20/dozzle:v7.0.7@sha256:6432c85d1bfa118ff3b0cd2e22675caae76de8c02d90835bda1f0e16440ea862
@@ -65,7 +65,7 @@
 - container_name: homepage-docker-proxy
   image: lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:817fbd545647e8e78fa87c5eb004bd83f8b5fd5dc558b654f89d85e9639993f1
 - container_name: hoppscotch
-  image: hoppscotch/hoppscotch:2024.3.3@sha256:e3cb8ae1edbf5d48a8e6126ab4b997c26f2559f930544fdb01a0b3b8c08c7a5d
+  image: hoppscotch/hoppscotch:2024.3.4@sha256:7976b01bdf8e1f7eb18b7efabbdeb15d858644e8af7c3e913ca1f3b90202a752
   url: api-tester.$DOMAINNAME
 - container_name: hoppscotch-db
   image: docker.io/library/postgres:16.3-alpine@sha256:de3d7b6e4b5b3fe899e997579d6dfe95a99539d154abe03f0b6839133ed05065
@@ -119,7 +119,7 @@
 - container_name: paperless-tika
   image: ghcr.io/paperless-ngx/tika:2.9.1-minimal@sha256:20db3df89eaeb1b271dd840888fe909b88b12f4b86ef641ec07a1d45d4c5168f
 - container_name: paperless-web
-  image: ghcr.io/paperless-ngx/paperless-ngx:2.9.0@sha256:948dc7297df8259bffac23e564a7ca688bfc8f04fed9113e7fb14f6030da63dd
+  image: ghcr.io/paperless-ngx/paperless-ngx:2.10.1@sha256:a132c2ac7c572fd34d8af32048a2ef2b99f25c32fce6bbfbf5bef5b770b19a46
   url: paperless.$DOMAINNAME
 - container_name: papermerge
   image: papermerge/papermerge:3.2.0@sha256:11bd6e47622b295ee40f1e719c63235544121839a30e5083d959208931007b62

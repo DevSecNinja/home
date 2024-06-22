@@ -118,7 +118,7 @@
 
 **container_name:** cyberchef
 
-**image:** ghcr.io/gchq/cyberchef:10.18.8@sha256:e9679bdefa43c68ce266125ad07569ef7cc941ad5268028e0e63193421518611
+**image:** ghcr.io/gchq/cyberchef:10.19.0@sha256:03edba99b2115e1ea6ca9aa6b58c84249c52d1369e5287335a167922617958da
 
 **url:** cyberchef.$DOMAINNAME
 
@@ -240,7 +240,7 @@
 
 **container_name:** hoppscotch
 
-**image:** hoppscotch/hoppscotch:2024.3.3@sha256:e3cb8ae1edbf5d48a8e6126ab4b997c26f2559f930544fdb01a0b3b8c08c7a5d
+**image:** hoppscotch/hoppscotch:2024.3.4@sha256:7976b01bdf8e1f7eb18b7efabbdeb15d858644e8af7c3e913ca1f3b90202a752
 
 **url:** api-tester.$DOMAINNAME
 
@@ -440,7 +440,7 @@
 
 **container_name:** paperless-web
 
-**image:** ghcr.io/paperless-ngx/paperless-ngx:2.9.0@sha256:948dc7297df8259bffac23e564a7ca688bfc8f04fed9113e7fb14f6030da63dd
+**image:** ghcr.io/paperless-ngx/paperless-ngx:2.10.1@sha256:a132c2ac7c572fd34d8af32048a2ef2b99f25c32fce6bbfbf5bef5b770b19a46
 
 **url:** paperless.$DOMAINNAME
 
