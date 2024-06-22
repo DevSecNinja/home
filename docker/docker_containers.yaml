@@ -12,7 +12,7 @@
 - container_name: bitwarden-db
   image: mariadb:11.4.2@sha256:e59ba8783bf7bc02a4779f103bb0d8751ac0e10f9471089709608377eded7aa8
 - container_name: bitwarden-db-backup
-  image: tiredofit/db-backup:4.1.0@sha256:39b45db5f4cfe5d5ed4764f8d8ce6c21e8e1bd9c05d27a733c34b78b765eef99
+  image: tiredofit/db-backup:4.1.1@sha256:e6624a79b9e53be45c566db3d5a838bd637dfc1cb10f138bdd9dda1d0ee293bf
 - container_name: cadvisor
   image: gcr.io/cadvisor/cadvisor:v0.49.1@sha256:3cde6faf0791ebf7b41d6f8ae7145466fed712ea6f252c935294d2608b1af388
   url: cadvisor-noauth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
@@ -52,7 +52,7 @@
 - container_name: gatus-db
   image: docker.io/library/postgres:16.3-alpine@sha256:de3d7b6e4b5b3fe899e997579d6dfe95a99539d154abe03f0b6839133ed05065
 - container_name: gatus-db-backup
-  image: tiredofit/db-backup:4.1.0@sha256:39b45db5f4cfe5d5ed4764f8d8ce6c21e8e1bd9c05d27a733c34b78b765eef99
+  image: tiredofit/db-backup:4.1.1@sha256:e6624a79b9e53be45c566db3d5a838bd637dfc1cb10f138bdd9dda1d0ee293bf
 - container_name: grafana
   image: grafana/grafana:11.0.0@sha256:0dc5a246ab16bb2c38a349fb588174e832b4c6c2db0981d0c3e6cd774ba66a54
   url: grafana.$DOMAINNAME
@@ -70,12 +70,12 @@
 - container_name: hoppscotch-db
   image: docker.io/library/postgres:16.3-alpine@sha256:de3d7b6e4b5b3fe899e997579d6dfe95a99539d154abe03f0b6839133ed05065
 - container_name: hoppscotch-db-backup
-  image: tiredofit/db-backup:4.1.0@sha256:39b45db5f4cfe5d5ed4764f8d8ce6c21e8e1bd9c05d27a733c34b78b765eef99
+  image: tiredofit/db-backup:4.1.1@sha256:e6624a79b9e53be45c566db3d5a838bd637dfc1cb10f138bdd9dda1d0ee293bf
 - container_name: influxdb
   image: influxdb:2.7-alpine@sha256:8190c63f7892b7377e8f9ecf6057a766f242614ef8603d4b6a84ba2844f4b35e
   url: influxdb-noauth.$DOMAINNAME
 - container_name: influxdb-backup
-  image: tiredofit/db-backup:4.1.0@sha256:39b45db5f4cfe5d5ed4764f8d8ce6c21e8e1bd9c05d27a733c34b78b765eef99
+  image: tiredofit/db-backup:4.1.1@sha256:e6624a79b9e53be45c566db3d5a838bd637dfc1cb10f138bdd9dda1d0ee293bf
 - container_name: it-tools
   image: ghcr.io/corentinth/it-tools:2023.12.21-5ed3693@sha256:4aaf67eab769afc9dac5614a15614537446e11150d53eab3be34ac9775a27e3a
   url: tools.$DOMAINNAME
@@ -85,21 +85,21 @@
 - container_name: linkding-db
   image: docker.io/library/postgres:16.3-alpine@sha256:de3d7b6e4b5b3fe899e997579d6dfe95a99539d154abe03f0b6839133ed05065
 - container_name: linkding-db-backup
-  image: tiredofit/db-backup:4.1.0@sha256:39b45db5f4cfe5d5ed4764f8d8ce6c21e8e1bd9c05d27a733c34b78b765eef99
+  image: tiredofit/db-backup:4.1.1@sha256:e6624a79b9e53be45c566db3d5a838bd637dfc1cb10f138bdd9dda1d0ee293bf
 - container_name: lobe-chat
   image: lobehub/lobe-chat:v1.1.3@sha256:8e6b957eb6da07be3ae5f9955a2df369716aca5b3f0a76f462ba084190e49135
   url: chat.$DOMAINNAME
 - container_name: mailrise
   image: yoryan/mailrise:1.4.0@sha256:66082168090b9a83f01cc71a9d7b1994840adbbbffbe4d2cf644272fbbc23a1a
 - container_name: nextcloud
-  image: nextcloud:29.0.1-apache@sha256:5e48add91754ef6148cfcd0f9b4ade5a4e22ec0b940f9bb83c99204e45187a53
+  image: nextcloud:29.0.2-apache@sha256:566987f84c04a50e96685205eeab3e1b1f53e0fdc8dc22a834898e0617faddf3
   url: cloud.$DOMAINNAME
 - container_name: nextcloud-cron
-  image: nextcloud:29.0.1-apache@sha256:5e48add91754ef6148cfcd0f9b4ade5a4e22ec0b940f9bb83c99204e45187a53
+  image: nextcloud:29.0.2-apache@sha256:566987f84c04a50e96685205eeab3e1b1f53e0fdc8dc22a834898e0617faddf3
 - container_name: nextcloud-db
   image: mariadb:11.4.2@sha256:e59ba8783bf7bc02a4779f103bb0d8751ac0e10f9471089709608377eded7aa8
 - container_name: nextcloud-db-backup
-  image: tiredofit/db-backup:4.1.0@sha256:39b45db5f4cfe5d5ed4764f8d8ce6c21e8e1bd9c05d27a733c34b78b765eef99
+  image: tiredofit/db-backup:4.1.1@sha256:e6624a79b9e53be45c566db3d5a838bd637dfc1cb10f138bdd9dda1d0ee293bf
 - container_name: nextcloud-redis
   image: redis:alpine3.19@sha256:892b41c092a599f76c30b48e9dcfb185ce8cea3560970b1c4f2745c89bb34344
 - container_name: nodeexporter
@@ -111,7 +111,7 @@
 - container_name: paperless-db
   image: docker.io/library/postgres:16.3-alpine@sha256:de3d7b6e4b5b3fe899e997579d6dfe95a99539d154abe03f0b6839133ed05065
 - container_name: paperless-db-backup
-  image: tiredofit/db-backup:4.1.0@sha256:39b45db5f4cfe5d5ed4764f8d8ce6c21e8e1bd9c05d27a733c34b78b765eef99
+  image: tiredofit/db-backup:4.1.1@sha256:e6624a79b9e53be45c566db3d5a838bd637dfc1cb10f138bdd9dda1d0ee293bf
 - container_name: paperless-gotenberg
   image: docker.io/gotenberg/gotenberg:8.7.0@sha256:437b9cd3c35113774818b30767ae267cb08f04d88125410c135cdd5952c0571e
 - container_name: paperless-redis
@@ -130,7 +130,7 @@
 - container_name: photoprism-db
   image: mariadb:11.4.2@sha256:e59ba8783bf7bc02a4779f103bb0d8751ac0e10f9471089709608377eded7aa8
 - container_name: photoprism-db-backup
-  image: tiredofit/db-backup:4.1.0@sha256:39b45db5f4cfe5d5ed4764f8d8ce6c21e8e1bd9c05d27a733c34b78b765eef99
+  image: tiredofit/db-backup:4.1.1@sha256:e6624a79b9e53be45c566db3d5a838bd637dfc1cb10f138bdd9dda1d0ee293bf
 - container_name: phpmyadmin
   image: phpmyadmin:5.2.1-apache@sha256:3197db06cdb9186ba2fe42211d70cbb32299c6888a86c7761076bbfe47e989f1
   url: phpmyadmin.$DOMAINNAME
@@ -162,7 +162,7 @@
 - container_name: unifi-db
   image: mongo:7.0.11@sha256:bd38dc3d2895c7434b9b75c86525642efe3d65e4c6aadfe397486d7cc89406f0
 - container_name: unifi-db-backup
-  image: tiredofit/db-backup:4.1.0@sha256:39b45db5f4cfe5d5ed4764f8d8ce6c21e8e1bd9c05d27a733c34b78b765eef99
+  image: tiredofit/db-backup:4.1.1@sha256:e6624a79b9e53be45c566db3d5a838bd637dfc1cb10f138bdd9dda1d0ee293bf
 - container_name: vault
   image: hashicorp/vault:1.17@sha256:51e5f9b108e49aed025a27cbb66848911cb2bccee072057ba965b835a5427bce
   url: vault.$DOMAINNAME`) && PathPrefix(`/v1
@@ -172,7 +172,7 @@
 - container_name: wallabag-db
   image: mariadb:11.4.2@sha256:e59ba8783bf7bc02a4779f103bb0d8751ac0e10f9471089709608377eded7aa8
 - container_name: wallabag-db-backup
-  image: tiredofit/db-backup:4.1.0@sha256:39b45db5f4cfe5d5ed4764f8d8ce6c21e8e1bd9c05d27a733c34b78b765eef99
+  image: tiredofit/db-backup:4.1.1@sha256:e6624a79b9e53be45c566db3d5a838bd637dfc1cb10f138bdd9dda1d0ee293bf
 - container_name: wallabag-redis
   image: redis:alpine3.19@sha256:892b41c092a599f76c30b48e9dcfb185ce8cea3560970b1c4f2745c89bb34344
 - container_name: whoogle
