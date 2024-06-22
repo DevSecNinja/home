@@ -144,7 +144,7 @@ services:
 
   photoprism-db-backup:
     container_name: photoprism-db-backup
-    image: tiredofit/db-backup:4.1.0@sha256:39b45db5f4cfe5d5ed4764f8d8ce6c21e8e1bd9c05d27a733c34b78b765eef99
+    image: tiredofit/db-backup:4.1.1@sha256:e6624a79b9e53be45c566db3d5a838bd637dfc1cb10f138bdd9dda1d0ee293bf
     depends_on:
       - photoprism-db
     volumes:
