@@ -35,6 +35,9 @@ services:
       - homepage.icon=gatus.svg
       - homepage.href=https://status.$DOMAINNAME
       - homepage.description=Uptime Monitoring
+      ## Widget
+      - homepage.widget.type=gatus
+      - homepage.widget.url=http://gatus:8080
       # Group
       - org.label-schema.group=productivity
       # Traefik
