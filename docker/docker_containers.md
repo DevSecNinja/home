@@ -144,7 +144,7 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:24.6.1@sha256:1173cbc0bd0b428d2f911ebdb8213f2e4ad0d4c5dd6af156d44d7a5bdb521459
+**image:** jgraph/drawio:24.6.2@sha256:535f762e49551b2f32d540d8376be1e9422fc9d71eaeebf6012f60f88ae136f6
 
 **url:** draw.$DOMAINNAME
 
@@ -320,7 +320,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:v1.1.3@sha256:8e6b957eb6da07be3ae5f9955a2df369716aca5b3f0a76f462ba084190e49135
+**image:** lobehub/lobe-chat:v1.1.6@sha256:f53405e2d9cdf32661e58af33a702e10f7062351d2fb3e61581eafb67c5a6196
 
 **url:** chat.$DOMAINNAME
 
@@ -460,7 +460,7 @@
 
 **container_name:** photoprism
 
-**image:** photoprism/photoprism:preview@sha256:3d7bd7f4418d15cd3488c3a40f469435eb0c9a48c78b6391d6069ab3b65cad5f
+**image:** photoprism/photoprism:preview@sha256:b8412cb7090b7ee3c9632e46a66dc3c8c605aba2ba8aa974a18ff6b35eca6821
 
 **url:** photos.$DOMAINNAME
 
@@ -582,7 +582,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-8.2.93@sha256:11a476608d43eedbc5047e4c1bb6d55fde6184762c858ed4622a1a091283c1b5
+**image:** lscr.io/linuxserver/unifi-network-application:version-8.2.93@sha256:0fed34825cb2c0df53b10079d57aa4ca6518b4ab36fc276e0559ad14c515334c
 
 **url:** unifi.$DOMAINNAME
 
