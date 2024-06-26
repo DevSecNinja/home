@@ -51,6 +51,9 @@ services:
       - homepage.icon=traefik.svg
       - homepage.href=https://traefik-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
       - homepage.description=Application Proxy
+      ## Widget
+      - homepage.widget.type=traefik
+      - homepage.widget.url=http://traefik:8080
       # Traefik
       - "traefik.enable=true"
       ## Middlewares
