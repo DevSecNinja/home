@@ -35,7 +35,7 @@
 - container_name: dozzle-docker-proxy
   image: lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:817fbd545647e8e78fa87c5eb004bd83f8b5fd5dc558b654f89d85e9639993f1
 - container_name: drawio
-  image: jgraph/drawio:24.6.1@sha256:1173cbc0bd0b428d2f911ebdb8213f2e4ad0d4c5dd6af156d44d7a5bdb521459
+  image: jgraph/drawio:24.6.2@sha256:535f762e49551b2f32d540d8376be1e9422fc9d71eaeebf6012f60f88ae136f6
   url: draw.$DOMAINNAME
 - container_name: echo-server
   image: mendhak/http-https-echo:33@sha256:17f45542b4442474f4b68bf6e97f9a321b2c0fe95c5126c429fe49d911b07eb3
@@ -87,7 +87,7 @@
 - container_name: linkding-db-backup
   image: tiredofit/db-backup:4.1.1@sha256:e6624a79b9e53be45c566db3d5a838bd637dfc1cb10f138bdd9dda1d0ee293bf
 - container_name: lobe-chat
-  image: lobehub/lobe-chat:v1.1.3@sha256:8e6b957eb6da07be3ae5f9955a2df369716aca5b3f0a76f462ba084190e49135
+  image: lobehub/lobe-chat:v1.1.6@sha256:f53405e2d9cdf32661e58af33a702e10f7062351d2fb3e61581eafb67c5a6196
   url: chat.$DOMAINNAME
 - container_name: mailrise
   image: yoryan/mailrise:1.4.0@sha256:66082168090b9a83f01cc71a9d7b1994840adbbbffbe4d2cf644272fbbc23a1a
@@ -125,7 +125,7 @@
   image: papermerge/papermerge:3.2.0@sha256:11bd6e47622b295ee40f1e719c63235544121839a30e5083d959208931007b62
   url: papermerge.$DOMAINNAME
 - container_name: photoprism
-  image: photoprism/photoprism:preview@sha256:3d7bd7f4418d15cd3488c3a40f469435eb0c9a48c78b6391d6069ab3b65cad5f
+  image: photoprism/photoprism:preview@sha256:b8412cb7090b7ee3c9632e46a66dc3c8c605aba2ba8aa974a18ff6b35eca6821
   url: photos.$DOMAINNAME
 - container_name: photoprism-db
   image: mariadb:11.4.2@sha256:e59ba8783bf7bc02a4779f103bb0d8751ac0e10f9471089709608377eded7aa8
@@ -157,7 +157,7 @@
   image: ghcr.io/jordemort/traefik-forward-auth:latest@sha256:394f86bff5cc839fac1392f65dd3d4471e827bc29321a4460e7d92042e026599
   url: auth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: unifi
-  image: lscr.io/linuxserver/unifi-network-application:version-8.2.93@sha256:11a476608d43eedbc5047e4c1bb6d55fde6184762c858ed4622a1a091283c1b5
+  image: lscr.io/linuxserver/unifi-network-application:version-8.2.93@sha256:0fed34825cb2c0df53b10079d57aa4ca6518b4ab36fc276e0559ad14c515334c
   url: unifi.$DOMAINNAME
 - container_name: unifi-db
   image: mongo:7.0.11@sha256:bd38dc3d2895c7434b9b75c86525642efe3d65e4c6aadfe397486d7cc89406f0
