@@ -1,6 +1,6 @@
 services:
   excalidraw:
-    image: excalidraw/excalidraw:latest@sha256:dd998e7dc83ca0a14327a71cdbb9dd86c1ed2ceef715cae349e084e0ae6aebb4
+    image: excalidraw/excalidraw:latest@sha256:36cd9a135e25b17e7e0b1b1d64df5fc1dad651eac72b6f2aa9c1d5401eddc68f
     container_name: excalidraw
     depends_on:
       - traefik
