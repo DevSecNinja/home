@@ -143,7 +143,7 @@
 - container_name: portainer-docker-proxy
   image: lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:3e8f84c028509f5bc48e4bd4de80cf96c0415200e25d7ccc952d9af587ed169d
 - container_name: prometheus
-  image: prom/prometheus:v2.52.0@sha256:5c435642ca4d8427ca26f4901c11114023004709037880cd7860d5b7176aa731
+  image: prom/prometheus:v2.53.0@sha256:075b1ba2c4ebb04bc3a6ab86c06ec8d8099f8fda1c96ef6d104d9bb1def1d8bc
   url: prometheus.$DOMAINNAME
 - container_name: pushgateway
   image: prom/pushgateway:v1.9.0@sha256:98a458415f8f5afcfd45622d289a0aa67063563bec0f90d598ebc76783571936
