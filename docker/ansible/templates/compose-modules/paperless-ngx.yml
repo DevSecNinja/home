@@ -145,7 +145,7 @@ services:
 
   paperless-db-backup:
     container_name: paperless-db-backup
-    image: tiredofit/db-backup:4.1.1@sha256:e6624a79b9e53be45c566db3d5a838bd637dfc1cb10f138bdd9dda1d0ee293bf
+    image: tiredofit/db-backup:4.1.3@sha256:79697ba2f5ab61e644e8a20e860003af2c12ed40335d80eca33d831c1b829ea4
     depends_on:
       - paperless-db
     volumes:
