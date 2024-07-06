@@ -320,7 +320,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:v1.1.16@sha256:551b8774cbf6f227788c0ab9a1140701245ff789f01695f54004ba697c6e4be3
+**image:** lobehub/lobe-chat:v1.2.10@sha256:eb381a84f3fa62e9409d08a3037a9674c3164f58cd379e0cb161fe9fe603d355
 
 **url:** chat.$DOMAINNAME
 
@@ -338,7 +338,7 @@
 
 **container_name:** nextcloud
 
-**image:** nextcloud:29.0.3-apache@sha256:2ab0c5de2afd33c55721e69e87bd1667cad6c4550ba0fd0303cfeb7abb260750
+**image:** nextcloud:29.0.3-apache@sha256:3ad47054206bdf4ad03cc33bd2a3691d9df277e21d1b081cd7c8bdb60dc5219f
 
 **url:** cloud.$DOMAINNAME
 
@@ -346,7 +346,7 @@
 
 **container_name:** nextcloud-cron
 
-**image:** nextcloud:29.0.3-apache@sha256:2ab0c5de2afd33c55721e69e87bd1667cad6c4550ba0fd0303cfeb7abb260750
+**image:** nextcloud:29.0.3-apache@sha256:3ad47054206bdf4ad03cc33bd2a3691d9df277e21d1b081cd7c8bdb60dc5219f
 
 ### Service: nextcloud-db
 
@@ -460,7 +460,7 @@
 
 **container_name:** photoprism
 
-**image:** photoprism/photoprism:preview@sha256:2157922a3f1b1a253dd508e01611def9236ace6a289d261f90fe0c13539cc794
+**image:** photoprism/photoprism:preview@sha256:e0bc7c39f2528a528a14b9cef7dddb4c1e8bcac7251e484449e46fd56d8f4e70
 
 **url:** photos.$DOMAINNAME
 

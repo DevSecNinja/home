@@ -87,15 +87,15 @@
 - container_name: linkding-db-backup
   image: tiredofit/db-backup:4.1.1@sha256:e6624a79b9e53be45c566db3d5a838bd637dfc1cb10f138bdd9dda1d0ee293bf
 - container_name: lobe-chat
-  image: lobehub/lobe-chat:v1.1.16@sha256:551b8774cbf6f227788c0ab9a1140701245ff789f01695f54004ba697c6e4be3
+  image: lobehub/lobe-chat:v1.2.10@sha256:eb381a84f3fa62e9409d08a3037a9674c3164f58cd379e0cb161fe9fe603d355
   url: chat.$DOMAINNAME
 - container_name: mailrise
   image: yoryan/mailrise:1.4.0@sha256:66082168090b9a83f01cc71a9d7b1994840adbbbffbe4d2cf644272fbbc23a1a
 - container_name: nextcloud
-  image: nextcloud:29.0.3-apache@sha256:2ab0c5de2afd33c55721e69e87bd1667cad6c4550ba0fd0303cfeb7abb260750
+  image: nextcloud:29.0.3-apache@sha256:3ad47054206bdf4ad03cc33bd2a3691d9df277e21d1b081cd7c8bdb60dc5219f
   url: cloud.$DOMAINNAME
 - container_name: nextcloud-cron
-  image: nextcloud:29.0.3-apache@sha256:2ab0c5de2afd33c55721e69e87bd1667cad6c4550ba0fd0303cfeb7abb260750
+  image: nextcloud:29.0.3-apache@sha256:3ad47054206bdf4ad03cc33bd2a3691d9df277e21d1b081cd7c8bdb60dc5219f
 - container_name: nextcloud-db
   image: mariadb:11.4.2@sha256:e59ba8783bf7bc02a4779f103bb0d8751ac0e10f9471089709608377eded7aa8
 - container_name: nextcloud-db-backup
@@ -125,7 +125,7 @@
   image: papermerge/papermerge:3.2.0@sha256:11bd6e47622b295ee40f1e719c63235544121839a30e5083d959208931007b62
   url: papermerge.$DOMAINNAME
 - container_name: photoprism
-  image: photoprism/photoprism:preview@sha256:2157922a3f1b1a253dd508e01611def9236ace6a289d261f90fe0c13539cc794
+  image: photoprism/photoprism:preview@sha256:e0bc7c39f2528a528a14b9cef7dddb4c1e8bcac7251e484449e46fd56d8f4e70
   url: photos.$DOMAINNAME
 - container_name: photoprism-db
   image: mariadb:11.4.2@sha256:e59ba8783bf7bc02a4779f103bb0d8751ac0e10f9471089709608377eded7aa8
