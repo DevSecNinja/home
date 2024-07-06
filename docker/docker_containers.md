@@ -42,7 +42,7 @@
 
 **container_name:** authelia-db-backup
 
-**image:** tiredofit/db-backup:4.1.1@sha256:e6624a79b9e53be45c566db3d5a838bd637dfc1cb10f138bdd9dda1d0ee293bf
+**image:** tiredofit/db-backup:4.1.3@sha256:79697ba2f5ab61e644e8a20e860003af2c12ed40335d80eca33d831c1b829ea4
 
 ## docker/ansible/templates/compose-modules/bitwarden.yml
 
@@ -64,7 +64,7 @@
 
 **container_name:** bitwarden-db-backup
 
-**image:** tiredofit/db-backup:4.1.1@sha256:e6624a79b9e53be45c566db3d5a838bd637dfc1cb10f138bdd9dda1d0ee293bf
+**image:** tiredofit/db-backup:4.1.3@sha256:79697ba2f5ab61e644e8a20e860003af2c12ed40335d80eca33d831c1b829ea4
 
 ## docker/ansible/templates/compose-modules/cadvisor.yml
 
@@ -128,7 +128,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v7.0.7@sha256:6432c85d1bfa118ff3b0cd2e22675caae76de8c02d90835bda1f0e16440ea862
+**image:** amir20/dozzle:v8.0.1@sha256:42a9609e6130216de9b94639c7274483342f15268f9a156db42f6457204dd73d
 
 **url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -198,7 +198,7 @@
 
 **container_name:** gatus-db-backup
 
-**image:** tiredofit/db-backup:4.1.1@sha256:e6624a79b9e53be45c566db3d5a838bd637dfc1cb10f138bdd9dda1d0ee293bf
+**image:** tiredofit/db-backup:4.1.3@sha256:79697ba2f5ab61e644e8a20e860003af2c12ed40335d80eca33d831c1b829ea4
 
 ## docker/ansible/templates/compose-modules/grafana.yml
 
@@ -214,7 +214,7 @@
 
 **container_name:** loki
 
-**image:** grafana/loki:3.0.0@sha256:757b5fadf816a1396f1fea598152947421fa49cb8b2db1ddd2a6e30fae003253
+**image:** grafana/loki:3.1.0@sha256:d947e68a84d9e44915dfa08c3bec27e2124efd5ba6c83443eb53578101ec69e3
 
 **url:** loki.$DOMAINNAME
 
@@ -254,7 +254,7 @@
 
 **container_name:** hoppscotch-db-backup
 
-**image:** tiredofit/db-backup:4.1.1@sha256:e6624a79b9e53be45c566db3d5a838bd637dfc1cb10f138bdd9dda1d0ee293bf
+**image:** tiredofit/db-backup:4.1.3@sha256:79697ba2f5ab61e644e8a20e860003af2c12ed40335d80eca33d831c1b829ea4
 
 ## docker/ansible/templates/compose-modules/influxdb.yml
 
@@ -270,7 +270,7 @@
 
 **container_name:** influxdb-backup
 
-**image:** tiredofit/db-backup:4.1.1@sha256:e6624a79b9e53be45c566db3d5a838bd637dfc1cb10f138bdd9dda1d0ee293bf
+**image:** tiredofit/db-backup:4.1.3@sha256:79697ba2f5ab61e644e8a20e860003af2c12ed40335d80eca33d831c1b829ea4
 
 ## docker/ansible/templates/compose-modules/it-tools.yml
 
@@ -312,7 +312,7 @@
 
 **container_name:** linkding-db-backup
 
-**image:** tiredofit/db-backup:4.1.1@sha256:e6624a79b9e53be45c566db3d5a838bd637dfc1cb10f138bdd9dda1d0ee293bf
+**image:** tiredofit/db-backup:4.1.3@sha256:79697ba2f5ab61e644e8a20e860003af2c12ed40335d80eca33d831c1b829ea4
 
 ## docker/ansible/templates/compose-modules/lobe-chat.yml
 
@@ -358,7 +358,7 @@
 
 **container_name:** nextcloud-db-backup
 
-**image:** tiredofit/db-backup:4.1.1@sha256:e6624a79b9e53be45c566db3d5a838bd637dfc1cb10f138bdd9dda1d0ee293bf
+**image:** tiredofit/db-backup:4.1.3@sha256:79697ba2f5ab61e644e8a20e860003af2c12ed40335d80eca33d831c1b829ea4
 
 ### Service: nextcloud-redis
 
@@ -416,13 +416,13 @@
 
 **container_name:** paperless-db-backup
 
-**image:** tiredofit/db-backup:4.1.1@sha256:e6624a79b9e53be45c566db3d5a838bd637dfc1cb10f138bdd9dda1d0ee293bf
+**image:** tiredofit/db-backup:4.1.3@sha256:79697ba2f5ab61e644e8a20e860003af2c12ed40335d80eca33d831c1b829ea4
 
 ### Service: paperless-gotenberg
 
 **container_name:** paperless-gotenberg
 
-**image:** docker.io/gotenberg/gotenberg:8.7.0@sha256:437b9cd3c35113774818b30767ae267cb08f04d88125410c135cdd5952c0571e
+**image:** docker.io/gotenberg/gotenberg:8.8.0@sha256:aa3e3448565e163ead65ce5eca6f46beb555121ad1079e55ad242165e801c73b
 
 ### Service: paperless-redis
 
@@ -474,7 +474,7 @@
 
 **container_name:** photoprism-db-backup
 
-**image:** tiredofit/db-backup:4.1.1@sha256:e6624a79b9e53be45c566db3d5a838bd637dfc1cb10f138bdd9dda1d0ee293bf
+**image:** tiredofit/db-backup:4.1.3@sha256:79697ba2f5ab61e644e8a20e860003af2c12ed40335d80eca33d831c1b829ea4
 
 ## docker/ansible/templates/compose-modules/phpmyadmin.yml
 
@@ -482,7 +482,7 @@
 
 **container_name:** phpmyadmin
 
-**image:** phpmyadmin:5.2.1-apache@sha256:3197db06cdb9186ba2fe42211d70cbb32299c6888a86c7761076bbfe47e989f1
+**image:** phpmyadmin:5.2.1-apache@sha256:5b8054e629cd39f6b2abeb6a88f257b817de4e4d5e4d8be3ce1bc0e33e109899
 
 **url:** phpmyadmin.$DOMAINNAME
 
@@ -536,7 +536,7 @@
 
 **container_name:** promtail
 
-**image:** grafana/promtail:3.0.0@sha256:d3de3da9431cfbe74a6a94555050df5257f357e827be8e63f8998d509c37af8b
+**image:** grafana/promtail:3.1.0@sha256:b3db8e7b1cba0e8c45ce2ae72ebddfd88ebdcae86383f1680edf0074e9010ff6
 
 **url:** promtail.$DOMAINNAME
 
@@ -596,7 +596,7 @@
 
 **container_name:** unifi-db-backup
 
-**image:** tiredofit/db-backup:4.1.1@sha256:e6624a79b9e53be45c566db3d5a838bd637dfc1cb10f138bdd9dda1d0ee293bf
+**image:** tiredofit/db-backup:4.1.3@sha256:79697ba2f5ab61e644e8a20e860003af2c12ed40335d80eca33d831c1b829ea4
 
 ## docker/ansible/templates/compose-modules/uptime-kuma.yml
 
@@ -664,7 +664,7 @@
 
 **container_name:** wallabag-db-backup
 
-**image:** tiredofit/db-backup:4.1.1@sha256:e6624a79b9e53be45c566db3d5a838bd637dfc1cb10f138bdd9dda1d0ee293bf
+**image:** tiredofit/db-backup:4.1.3@sha256:79697ba2f5ab61e644e8a20e860003af2c12ed40335d80eca33d831c1b829ea4
 
 ### Service: wallabag-redis
 
