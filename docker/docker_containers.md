@@ -6,7 +6,7 @@
 
 **container_name:** adguard
 
-**image:** adguard/adguardhome:v0.107.51@sha256:3a143e6c071cd72b1aa5aa46ba0205a86f085d54daca94b7fc7ab6759e3fb6fa
+**image:** adguard/adguardhome:v0.107.52@sha256:d16cc7517ab96f843e7f8bf8826402dba98f5e6b175858920296243332391589
 
 **url:** adguard-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -50,7 +50,7 @@
 
 **container_name:** bitwarden
 
-**image:** bitwarden/self-host:2024.6.1-beta@sha256:3aec1bb03bd24e03cefba9f3902a33f88d4b56d268e9d515d43ef5f222daa318
+**image:** bitwarden/self-host:2024.6.2-beta@sha256:7ff2af1463b665e990d1cc12aa3e8f85fda9a7d9a69f38de0d9718e91d0c649e
 
 **url:** bitwarden.$DOMAINNAME
 
@@ -82,7 +82,7 @@
 
 **container_name:** change-detection
 
-**image:** ghcr.io/dgtlmoon/changedetection.io:0.45.24@sha256:bee11cb2955ee5a1ac3876c8cf3c4bb2eb2fee879570b323b4cb4ed53fbf27cb
+**image:** ghcr.io/dgtlmoon/changedetection.io:0.45.25@sha256:7317728dde70162abc21e9278d7698aeccb4e2008f645560e7c721bbf782d377
 
 **url:** change-detection.$DOMAINNAME
 
@@ -136,7 +136,7 @@
 
 **container_name:** dozzle-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:3e8f84c028509f5bc48e4bd4de80cf96c0415200e25d7ccc952d9af587ed169d
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:c16d168849d0711d83b192a550dd9910a32b6709ba592012e6d603791c156395
 
 ## docker/ansible/templates/compose-modules/drawio.yml
 
@@ -232,7 +232,7 @@
 
 **container_name:** homepage-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:3e8f84c028509f5bc48e4bd4de80cf96c0415200e25d7ccc952d9af587ed169d
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:c16d168849d0711d83b192a550dd9910a32b6709ba592012e6d603791c156395
 
 ## docker/ansible/templates/compose-modules/hoppscotch.yml
 
@@ -460,7 +460,7 @@
 
 **container_name:** photoprism
 
-**image:** photoprism/photoprism:preview@sha256:4e61173e1288a1bf27c613b57edf066b73c00149d92e05a66d47fffd439e21dc
+**image:** photoprism/photoprism:preview@sha256:2157922a3f1b1a253dd508e01611def9236ace6a289d261f90fe0c13539cc794
 
 **url:** photos.$DOMAINNAME
 
@@ -492,7 +492,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.40.3.8555-fef15d30c@sha256:36f7953fb618f99bfb456c80e7ec94432d8af3c1bfcc034e46a018cc64b534b7
+**image:** lscr.io/linuxserver/plex:version-1.40.3.8555-fef15d30c@sha256:c0d40a44980f33169fb341a6aa7cb45dc294e2817537b81d0677a15288b05c99
 
 **url:** plex-noauth.$DOMAINNAME
 
@@ -510,7 +510,7 @@
 
 **container_name:** portainer-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:3e8f84c028509f5bc48e4bd4de80cf96c0415200e25d7ccc952d9af587ed169d
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:c16d168849d0711d83b192a550dd9910a32b6709ba592012e6d603791c156395
 
 ## docker/ansible/templates/compose-modules/prometheus.yml
 
@@ -544,7 +544,7 @@
 
 **container_name:** promtail-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:3e8f84c028509f5bc48e4bd4de80cf96c0415200e25d7ccc952d9af587ed169d
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:c16d168849d0711d83b192a550dd9910a32b6709ba592012e6d603791c156395
 
 ## docker/ansible/templates/compose-modules/samba.yml
 
@@ -582,7 +582,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-8.2.93@sha256:2f10f77c95799f33469bdfe7d586f5f10b5f0790ae43e3724a200d352b9f3d60
+**image:** lscr.io/linuxserver/unifi-network-application:version-8.2.93@sha256:0f163c406c57eca39b22c1362bdc97e9b3f586dd7ee7e8af766ca5c46bbfc218
 
 **url:** unifi.$DOMAINNAME
 
@@ -590,7 +590,7 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:7.0.12@sha256:0cf7c3db50892da41c886e541693d6181ef77047414a8f7e15ae63e842ce65f5
+**image:** mongo:7.0.12@sha256:1cd3951000020c1cb1757868e6cfd82667f57d80bb31fed8b585e26a8a1d960f
 
 ### Service: unifi-db-backup
 

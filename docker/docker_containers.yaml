@@ -1,5 +1,5 @@
 - container_name: adguard
-  image: adguard/adguardhome:v0.107.51@sha256:3a143e6c071cd72b1aa5aa46ba0205a86f085d54daca94b7fc7ab6759e3fb6fa
+  image: adguard/adguardhome:v0.107.52@sha256:d16cc7517ab96f843e7f8bf8826402dba98f5e6b175858920296243332391589
   url: adguard-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: unbound
   image: mvance/unbound:1.20.0@sha256:4bf67b567f392956455bd4f8a4cdd48010e234f1a07c0a99c2cff2ddbb3e8a7a
@@ -7,7 +7,7 @@
   image: prom/alertmanager:v0.27.0@sha256:e13b6ed5cb929eeaee733479dce55e10eb3bc2e9c4586c705a4e8da41e5eacf5
   url: alertmanager.$DOMAINNAME
 - container_name: bitwarden
-  image: bitwarden/self-host:2024.6.1-beta@sha256:3aec1bb03bd24e03cefba9f3902a33f88d4b56d268e9d515d43ef5f222daa318
+  image: bitwarden/self-host:2024.6.2-beta@sha256:7ff2af1463b665e990d1cc12aa3e8f85fda9a7d9a69f38de0d9718e91d0c649e
   url: bitwarden.$DOMAINNAME
 - container_name: bitwarden-db
   image: mariadb:11.4.2@sha256:e59ba8783bf7bc02a4779f103bb0d8751ac0e10f9471089709608377eded7aa8
@@ -17,7 +17,7 @@
   image: gcr.io/cadvisor/cadvisor:v0.49.1@sha256:3cde6faf0791ebf7b41d6f8ae7145466fed712ea6f252c935294d2608b1af388
   url: cadvisor-noauth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: change-detection
-  image: ghcr.io/dgtlmoon/changedetection.io:0.45.24@sha256:bee11cb2955ee5a1ac3876c8cf3c4bb2eb2fee879570b323b4cb4ed53fbf27cb
+  image: ghcr.io/dgtlmoon/changedetection.io:0.45.25@sha256:7317728dde70162abc21e9278d7698aeccb4e2008f645560e7c721bbf782d377
   url: change-detection.$DOMAINNAME
 - container_name: cloudflare-companion
   image: tiredofit/traefik-cloudflare-companion:7.3.1@sha256:c3aec9ff4f5ef5214678b6b72d299176a21c295664ff3297ac8b50fdd5788d76
@@ -33,7 +33,7 @@
   image: amir20/dozzle:v7.0.7@sha256:6432c85d1bfa118ff3b0cd2e22675caae76de8c02d90835bda1f0e16440ea862
   url: dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: dozzle-docker-proxy
-  image: lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:3e8f84c028509f5bc48e4bd4de80cf96c0415200e25d7ccc952d9af587ed169d
+  image: lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:c16d168849d0711d83b192a550dd9910a32b6709ba592012e6d603791c156395
 - container_name: drawio
   image: jgraph/drawio:24.6.4@sha256:cbf7708fe5c908736c8fb3aca558e3ebdda0d77234de4c354427502247c0fd87
   url: draw.$DOMAINNAME
@@ -63,7 +63,7 @@
   image: ghcr.io/gethomepage/homepage:v0.9.2@sha256:5356c97b51e3cc817bed93612b4e57b39d28048ab9e4e3b346e827160cf0923e
   url: homepage-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: homepage-docker-proxy
-  image: lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:3e8f84c028509f5bc48e4bd4de80cf96c0415200e25d7ccc952d9af587ed169d
+  image: lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:c16d168849d0711d83b192a550dd9910a32b6709ba592012e6d603791c156395
 - container_name: hoppscotch
   image: hoppscotch/hoppscotch:2024.6.0@sha256:e3a4c0e6fa1a92389308a853f2960cc9c2bc8d57817e9ad8261ac2721f07fb70
   url: api-tester.$DOMAINNAME
@@ -125,7 +125,7 @@
   image: papermerge/papermerge:3.2.0@sha256:11bd6e47622b295ee40f1e719c63235544121839a30e5083d959208931007b62
   url: papermerge.$DOMAINNAME
 - container_name: photoprism
-  image: photoprism/photoprism:preview@sha256:4e61173e1288a1bf27c613b57edf066b73c00149d92e05a66d47fffd439e21dc
+  image: photoprism/photoprism:preview@sha256:2157922a3f1b1a253dd508e01611def9236ace6a289d261f90fe0c13539cc794
   url: photos.$DOMAINNAME
 - container_name: photoprism-db
   image: mariadb:11.4.2@sha256:e59ba8783bf7bc02a4779f103bb0d8751ac0e10f9471089709608377eded7aa8
@@ -135,13 +135,13 @@
   image: phpmyadmin:5.2.1-apache@sha256:3197db06cdb9186ba2fe42211d70cbb32299c6888a86c7761076bbfe47e989f1
   url: phpmyadmin.$DOMAINNAME
 - container_name: plex
-  image: lscr.io/linuxserver/plex:version-1.40.3.8555-fef15d30c@sha256:36f7953fb618f99bfb456c80e7ec94432d8af3c1bfcc034e46a018cc64b534b7
+  image: lscr.io/linuxserver/plex:version-1.40.3.8555-fef15d30c@sha256:c0d40a44980f33169fb341a6aa7cb45dc294e2817537b81d0677a15288b05c99
   url: plex-noauth.$DOMAINNAME
 - container_name: portainer
   image: portainer/portainer-ce:2.20.3-alpine@sha256:a6f635877e0daa4aa39c1cbf4e73a31b35d342284588fa72fd8a91efb3c6a091
   url: portainer-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: portainer-docker-proxy
-  image: lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:3e8f84c028509f5bc48e4bd4de80cf96c0415200e25d7ccc952d9af587ed169d
+  image: lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:c16d168849d0711d83b192a550dd9910a32b6709ba592012e6d603791c156395
 - container_name: prometheus
   image: prom/prometheus:v2.53.0@sha256:075b1ba2c4ebb04bc3a6ab86c06ec8d8099f8fda1c96ef6d104d9bb1def1d8bc
   url: prometheus.$DOMAINNAME
@@ -152,15 +152,15 @@
   image: grafana/promtail:3.0.0@sha256:d3de3da9431cfbe74a6a94555050df5257f357e827be8e63f8998d509c37af8b
   url: promtail.$DOMAINNAME
 - container_name: promtail-docker-proxy
-  image: lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:3e8f84c028509f5bc48e4bd4de80cf96c0415200e25d7ccc952d9af587ed169d
+  image: lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:c16d168849d0711d83b192a550dd9910a32b6709ba592012e6d603791c156395
 - container_name: traefik-forward-auth
   image: ghcr.io/jordemort/traefik-forward-auth:latest@sha256:394f86bff5cc839fac1392f65dd3d4471e827bc29321a4460e7d92042e026599
   url: auth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: unifi
-  image: lscr.io/linuxserver/unifi-network-application:version-8.2.93@sha256:2f10f77c95799f33469bdfe7d586f5f10b5f0790ae43e3724a200d352b9f3d60
+  image: lscr.io/linuxserver/unifi-network-application:version-8.2.93@sha256:0f163c406c57eca39b22c1362bdc97e9b3f586dd7ee7e8af766ca5c46bbfc218
   url: unifi.$DOMAINNAME
 - container_name: unifi-db
-  image: mongo:7.0.12@sha256:0cf7c3db50892da41c886e541693d6181ef77047414a8f7e15ae63e842ce65f5
+  image: mongo:7.0.12@sha256:1cd3951000020c1cb1757868e6cfd82667f57d80bb31fed8b585e26a8a1d960f
 - container_name: unifi-db-backup
   image: tiredofit/db-backup:4.1.1@sha256:e6624a79b9e53be45c566db3d5a838bd637dfc1cb10f138bdd9dda1d0ee293bf
 - container_name: vault
