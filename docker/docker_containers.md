@@ -82,7 +82,7 @@
 
 **container_name:** change-detection
 
-**image:** ghcr.io/dgtlmoon/changedetection.io:0.45.25@sha256:7317728dde70162abc21e9278d7698aeccb4e2008f645560e7c721bbf782d377
+**image:** ghcr.io/dgtlmoon/changedetection.io:0.45.26@sha256:85371f9997473f2bd3f5bec7a7344c1e2af73330bd4143902bed4d33e1c91a07
 
 **url:** change-detection.$DOMAINNAME
 
@@ -224,7 +224,7 @@
 
 **container_name:** homepage
 
-**image:** ghcr.io/gethomepage/homepage:v0.9.2@sha256:5356c97b51e3cc817bed93612b4e57b39d28048ab9e4e3b346e827160cf0923e
+**image:** ghcr.io/gethomepage/homepage:v0.9.3@sha256:cbc5b49533f9afd0be57f6d5168eef48be2d713709259d6697f0d33b4ecb2f28
 
 **url:** homepage-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -440,7 +440,7 @@
 
 **container_name:** paperless-web
 
-**image:** ghcr.io/paperless-ngx/paperless-ngx:2.10.2@sha256:f6038522ba8029e765dfbd9366ed41d65c3f0f5be5aacabbae501eb7e3ff3944
+**image:** ghcr.io/paperless-ngx/paperless-ngx:2.11.0@sha256:da0476cea301df8bc8d20739f0e76de1e77d91ad2c9170b45c803468dde19208
 
 **url:** paperless.$DOMAINNAME
 
@@ -492,7 +492,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.40.3.8555-fef15d30c@sha256:3a449d946fdaabc2e05591cfcafc03dbc42ecd5fa4538da6956860f1e6368cad
+**image:** lscr.io/linuxserver/plex:version-1.40.4.8679-424562606@sha256:1d314f16fca8fbb3f337dfe7ec3abcaf902eb78790faa9ebb91dc0cda793fc73
 
 **url:** plex-noauth.$DOMAINNAME
 
@@ -518,7 +518,7 @@
 
 **container_name:** prometheus
 
-**image:** prom/prometheus:v2.53.0@sha256:075b1ba2c4ebb04bc3a6ab86c06ec8d8099f8fda1c96ef6d104d9bb1def1d8bc
+**image:** prom/prometheus:v2.53.1@sha256:f20d3127bf2876f4a1df76246fca576b41ddf1125ed1c546fbd8b16ea55117e6
 
 **url:** prometheus.$DOMAINNAME
 
