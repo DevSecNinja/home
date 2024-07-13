@@ -13,7 +13,6 @@
   "suppressNotifications": ["prEditedNotification", "prIgnoreNotification"],
   "rebaseWhen": "conflicted",
   "schedule": ["every weekend"],
-  "prHourlyLimit": 4,
   "ignorePaths": ["**/*.sops.*"],
   "timezone": "Europe/Amsterdam",
   "flux": {
