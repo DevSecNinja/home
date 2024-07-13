@@ -128,7 +128,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v8.0.1@sha256:42a9609e6130216de9b94639c7274483342f15268f9a156db42f6457204dd73d
+**image:** amir20/dozzle:v8.0.5@sha256:df6eda9fbfa8944b757aa8ba8c77bc70c8f9f9458a9a6bfb83a771e38f25aa68
 
 **url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -164,7 +164,7 @@
 
 **container_name:** excalidraw
 
-**image:** excalidraw/excalidraw:latest@sha256:36cd9a135e25b17e7e0b1b1d64df5fc1dad651eac72b6f2aa9c1d5401eddc68f
+**image:** excalidraw/excalidraw:latest@sha256:ad64c71819a7908fe9ec3686b630d8c443df69b7029a1faa8c667df4168acd64
 
 **url:** excalidraw.$DOMAINNAME
 
@@ -262,7 +262,7 @@
 
 **container_name:** influxdb
 
-**image:** influxdb:2.7-alpine@sha256:8190c63f7892b7377e8f9ecf6057a766f242614ef8603d4b6a84ba2844f4b35e
+**image:** influxdb:2.7-alpine@sha256:b4ad0aa1e732e35d57cc4340c73e6c61d3f6cfc32b3c0163ca51d74f68acde4b
 
 **url:** influxdb-noauth.$DOMAINNAME
 
@@ -320,7 +320,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:v1.2.10@sha256:eb381a84f3fa62e9409d08a3037a9674c3164f58cd379e0cb161fe9fe603d355
+**image:** lobehub/lobe-chat:v1.2.13@sha256:3f76bd96eaaab1ae029529b91917fdcae5d826394e45a58779bd764834a8e031
 
 **url:** chat.$DOMAINNAME
 
@@ -460,7 +460,7 @@
 
 **container_name:** photoprism
 
-**image:** photoprism/photoprism:preview@sha256:e0bc7c39f2528a528a14b9cef7dddb4c1e8bcac7251e484449e46fd56d8f4e70
+**image:** photoprism/photoprism:preview@sha256:b83b2a076863c7e60b3a635657f07a26760cbf8bbd85e9e20ee52bc8d2a0c04f
 
 **url:** photos.$DOMAINNAME
 
@@ -492,7 +492,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.40.3.8555-fef15d30c@sha256:c0d40a44980f33169fb341a6aa7cb45dc294e2817537b81d0677a15288b05c99
+**image:** lscr.io/linuxserver/plex:version-1.40.3.8555-fef15d30c@sha256:3a449d946fdaabc2e05591cfcafc03dbc42ecd5fa4538da6956860f1e6368cad
 
 **url:** plex-noauth.$DOMAINNAME
 
@@ -582,7 +582,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-8.2.93@sha256:0f163c406c57eca39b22c1362bdc97e9b3f586dd7ee7e8af766ca5c46bbfc218
+**image:** lscr.io/linuxserver/unifi-network-application:version-8.2.93@sha256:e80587f97c8d7090cc72f4d8f95b75c345ef020841d7f96259f09b72e968ad6f
 
 **url:** unifi.$DOMAINNAME
 
@@ -590,7 +590,7 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:7.0.12@sha256:1cd3951000020c1cb1757868e6cfd82667f57d80bb31fed8b585e26a8a1d960f
+**image:** mongo:7.0.12@sha256:54996a559c724c726a31fb8131e1c9088a05f7e531760e2897212389bbf20fed
 
 ### Service: unifi-db-backup
 
