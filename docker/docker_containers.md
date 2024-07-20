@@ -136,7 +136,7 @@
 
 **container_name:** dozzle-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:c16d168849d0711d83b192a550dd9910a32b6709ba592012e6d603791c156395
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:f66d1d802ad387f523ec89b7ae872c12396e4b996c0e21a1930e6a1d0b9205b4
 
 ## docker/ansible/templates/compose-modules/drawio.yml
 
@@ -232,7 +232,7 @@
 
 **container_name:** homepage-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:c16d168849d0711d83b192a550dd9910a32b6709ba592012e6d603791c156395
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:f66d1d802ad387f523ec89b7ae872c12396e4b996c0e21a1930e6a1d0b9205b4
 
 ## docker/ansible/templates/compose-modules/hoppscotch.yml
 
@@ -320,7 +320,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:v1.4.0@sha256:27a524c9c849706f81bf9cad3897d567e00b1cc98238055672fa82bdcc84d7d8
+**image:** lobehub/lobe-chat:v1.6.1@sha256:edc50cb8a8c7d593d1a69cad7e4b423b8f54af01d4dec3ae7fbbdf84f9f3c0a7
 
 **url:** chat.$DOMAINNAME
 
@@ -372,7 +372,7 @@
 
 **container_name:** nodeexporter
 
-**image:** prom/node-exporter:v1.8.1@sha256:fa7fa12a57eff607176d5c363d8bb08dfbf636b36ac3cb5613a202f3c61a6631
+**image:** prom/node-exporter:v1.8.2@sha256:4032c6d5bfd752342c3e631c2f1de93ba6b86c41db6b167b9a35372c139e7706
 
 **url:** nodeexporter-noauth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -460,7 +460,7 @@
 
 **container_name:** photoprism
 
-**image:** photoprism/photoprism:preview@sha256:b83b2a076863c7e60b3a635657f07a26760cbf8bbd85e9e20ee52bc8d2a0c04f
+**image:** photoprism/photoprism:preview@sha256:af1b25641d169c0bde7406ff8ca088a297d9a5e67672b63f6668c5742159d6e8
 
 **url:** photos.$DOMAINNAME
 
@@ -492,7 +492,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.40.4.8679-424562606@sha256:1d314f16fca8fbb3f337dfe7ec3abcaf902eb78790faa9ebb91dc0cda793fc73
+**image:** lscr.io/linuxserver/plex:version-1.40.4.8679-424562606@sha256:e06a8af0b30250f4efd8392b55a3d56578919f94fa2ac9eaee14998f9d22af56
 
 **url:** plex-noauth.$DOMAINNAME
 
@@ -510,7 +510,7 @@
 
 **container_name:** portainer-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:c16d168849d0711d83b192a550dd9910a32b6709ba592012e6d603791c156395
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:f66d1d802ad387f523ec89b7ae872c12396e4b996c0e21a1930e6a1d0b9205b4
 
 ## docker/ansible/templates/compose-modules/prometheus.yml
 
@@ -544,7 +544,7 @@
 
 **container_name:** promtail-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:c16d168849d0711d83b192a550dd9910a32b6709ba592012e6d603791c156395
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:f66d1d802ad387f523ec89b7ae872c12396e4b996c0e21a1930e6a1d0b9205b4
 
 ## docker/ansible/templates/compose-modules/samba.yml
 
@@ -582,7 +582,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-8.2.93@sha256:e80587f97c8d7090cc72f4d8f95b75c345ef020841d7f96259f09b72e968ad6f
+**image:** lscr.io/linuxserver/unifi-network-application:version-8.2.93@sha256:a78ea6ffe3d8d2a4f1a6b7233848c5bf563a345d0cdb10f88e4536ca79e028da
 
 **url:** unifi.$DOMAINNAME
 
