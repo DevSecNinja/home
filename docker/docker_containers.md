@@ -100,7 +100,7 @@
 
 **container_name:** cloudflare-ddns
 
-**image:** favonia/cloudflare-ddns:1.12.0@sha256:436391bfe5584e366d901c18594bd033a4511bea5c98d0f8c0c460ad1eb7b4d2
+**image:** favonia/cloudflare-ddns:1.13.1@sha256:04ecf598596860f029aa7c87ba6d1dcad19494074e43ceb848cf2251eba5e379
 
 ## docker/ansible/templates/compose-modules/code-server.yml
 
