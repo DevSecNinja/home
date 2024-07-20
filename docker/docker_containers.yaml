@@ -60,7 +60,7 @@
   image: grafana/loki:3.1.0@sha256:d947e68a84d9e44915dfa08c3bec27e2124efd5ba6c83443eb53578101ec69e3
   url: loki.$DOMAINNAME
 - container_name: homepage
-  image: ghcr.io/gethomepage/homepage:v0.9.3@sha256:cbc5b49533f9afd0be57f6d5168eef48be2d713709259d6697f0d33b4ecb2f28
+  image: ghcr.io/gethomepage/homepage:v0.9.5@sha256:e23fcd332ecf927fe5c0149142040236b17686916004566c149eef06eb6f8d75
   url: homepage-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: homepage-docker-proxy
   image: lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:f66d1d802ad387f523ec89b7ae872c12396e4b996c0e21a1930e6a1d0b9205b4
