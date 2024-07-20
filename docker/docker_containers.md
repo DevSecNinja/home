@@ -82,7 +82,7 @@
 
 **container_name:** change-detection
 
-**image:** ghcr.io/dgtlmoon/changedetection.io:0.45.26@sha256:85371f9997473f2bd3f5bec7a7344c1e2af73330bd4143902bed4d33e1c91a07
+**image:** ghcr.io/dgtlmoon/changedetection.io:0.46.01@sha256:1de9d653f9292ee5fb2b624b393cb9b40931b9624f54e9f75394b66ba850425b
 
 **url:** change-detection.$DOMAINNAME
 
@@ -422,7 +422,7 @@
 
 **container_name:** paperless-gotenberg
 
-**image:** docker.io/gotenberg/gotenberg:8.8.0@sha256:aa3e3448565e163ead65ce5eca6f46beb555121ad1079e55ad242165e801c73b
+**image:** docker.io/gotenberg/gotenberg:8.8.1@sha256:b1854afefad44a4004bdad5a69a10b39a4567a3234746e7095d06d44f4f3fab7
 
 ### Service: paperless-redis
 
