@@ -176,8 +176,6 @@
 
 **image:** lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:7a370d126eb66a75468898c8b4bd76c728f2a32fbffea5775411783327249cac
 
-**url:** folding-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
-
 ## docker/ansible/templates/compose-modules/gatus.yml
 
 ### Service: gatus
