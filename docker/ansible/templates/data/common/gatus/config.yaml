@@ -121,10 +121,6 @@ endpoints:
     <<: *defaults
     url: "https://excalidraw.${DOMAINNAME}"
 
-  - name: Folding EXT - HTTP
-    <<: *defaults
-    url: "https://folding-ext.${DOMAINNAME}"
-
   - name: Grafana - HTTP
     <<: *defaults
     url: "https://grafana.${DOMAINNAME}"
