@@ -45,7 +45,6 @@
   url: excalidraw.$DOMAINNAME
 - container_name: foldingathome
   image: lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:7a370d126eb66a75468898c8b4bd76c728f2a32fbffea5775411783327249cac
-  url: folding-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: gatus
   image: twinproduction/gatus:v5.11.0@sha256:05cf8bcbd7296b2e47d9e69d5974d428dde32188722d2aa954367eb728dd056c
   url: status.$DOMAINNAME
