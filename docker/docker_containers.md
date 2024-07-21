@@ -174,7 +174,7 @@
 
 **container_name:** foldingathome
 
-**image:** lscr.io/linuxserver/foldingathome:version-7.6.21@sha256:9a997426d71e320f8d84429af148a4749e81def1cdf8f286d5135223d41f3bdd
+**image:** lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:7a370d126eb66a75468898c8b4bd76c728f2a32fbffea5775411783327249cac
 
 **url:** folding-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -320,7 +320,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:v1.6.1@sha256:edc50cb8a8c7d593d1a69cad7e4b423b8f54af01d4dec3ae7fbbdf84f9f3c0a7
+**image:** lobehub/lobe-chat:v1.6.2@sha256:e2413a9309acc65e969911534aa350f6a26908f8ba61b3996ee6f07db1af2308
 
 **url:** chat.$DOMAINNAME
 
