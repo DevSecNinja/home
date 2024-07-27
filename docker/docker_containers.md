@@ -336,7 +336,7 @@
 
 **container_name:** nextcloud
 
-**image:** nextcloud:29.0.3-apache@sha256:3ad47054206bdf4ad03cc33bd2a3691d9df277e21d1b081cd7c8bdb60dc5219f
+**image:** nextcloud:29.0.4-apache@sha256:12c7bb0da1d41a08583971d5ba9771c4f37592ddd0aae5f5ce6a306961caa674
 
 **url:** cloud.$DOMAINNAME
 
@@ -344,7 +344,7 @@
 
 **container_name:** nextcloud-cron
 
-**image:** nextcloud:29.0.3-apache@sha256:3ad47054206bdf4ad03cc33bd2a3691d9df277e21d1b081cd7c8bdb60dc5219f
+**image:** nextcloud:29.0.4-apache@sha256:12c7bb0da1d41a08583971d5ba9771c4f37592ddd0aae5f5ce6a306961caa674
 
 ### Service: nextcloud-db
 
