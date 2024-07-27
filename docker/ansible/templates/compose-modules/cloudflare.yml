@@ -1,11 +1,9 @@
 services:
   cloudflare-ddns:
     container_name: cloudflare-ddns
-    image: favonia/cloudflare-ddns:1.13.1@sha256:04ecf598596860f029aa7c87ba6d1dcad19494074e43ceb848cf2251eba5e379
+    image: favonia/cloudflare-ddns:1.13.2@sha256:03133f7889a9945d58beb1cfe82e1a9e17ba3e2e5ce4fdd3a81e0fdd213e3f11
     restart: always
-    cap_add:
-      - SETUID
-      - SETGID
+    user: "${PUID}:${PGID}"
     cap_drop:
       - all
     read_only: true
@@ -13,8 +11,6 @@ services:
       - no-new-privileges=true
     mem_limit: 1024m
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
       - TZ=${TZ}
       - IP6_PROVIDER=none # Disable IPv6
       - CF_API_TOKEN=$CLOUDFLARE_API_TOKEN

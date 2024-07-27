@@ -2,7 +2,7 @@ services:
   grafana:
     # Note: seems that RenovateBot sometimes mixes up and selects
     # the ARM image for AMD64 instead of taking the multi-arch image
-    image: grafana/grafana:11.1.0@sha256:079600c9517b678c10cda6006b4487d3174512fd4c6cface37df7822756ed7a5
+    image: grafana/grafana:11.1.1@sha256:cea3d0c8e54b9e63f82b7baf607107e3c8842d7d3afafd728adca0303f4c2648
     container_name: grafana
     depends_on:
       - traefik

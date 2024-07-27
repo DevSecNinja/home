@@ -22,7 +22,7 @@ services:
       - paperless-backend
 
   paperless-db:
-    image: docker.io/library/postgres:16.3-alpine@sha256:de3d7b6e4b5b3fe899e997579d6dfe95a99539d154abe03f0b6839133ed05065
+    image: docker.io/library/postgres:16.3-alpine@sha256:36ed71227ae36305d26382657c0b96cbaf298427b3f1eaeb10d77a6dea3eec41
     container_name: paperless-db
     restart: always
     security_opt:
@@ -46,7 +46,7 @@ services:
       - paperless-backend
 
   paperless-web:
-    image: ghcr.io/paperless-ngx/paperless-ngx:2.11.0@sha256:da0476cea301df8bc8d20739f0e76de1e77d91ad2c9170b45c803468dde19208
+    image: ghcr.io/paperless-ngx/paperless-ngx:2.11.1@sha256:840534349ee4e7bc2f0b9caa90fbdf6d1e9c00463a95b35a863edca0ed5f3049
     container_name: paperless-web
     restart: always
     security_opt:
