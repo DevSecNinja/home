@@ -30,7 +30,7 @@
   image: ghcr.io/gchq/cyberchef:10.19.0@sha256:03edba99b2115e1ea6ca9aa6b58c84249c52d1369e5287335a167922617958da
   url: cyberchef.$DOMAINNAME
 - container_name: dozzle
-  image: amir20/dozzle:v8.0.6@sha256:ff10ff9ec941e1c41f9f19de790b47f8feaf1e0228282c62b9d6d7aa44395a71
+  image: amir20/dozzle:v8.1.0@sha256:9a2ce76666ac4a4bd256a0365f7ed8471edd0e9fb0cfd9aff9a689913ed1eae2
   url: dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: dozzle-docker-proxy
   image: lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:f66d1d802ad387f523ec89b7ae872c12396e4b996c0e21a1930e6a1d0b9205b4
@@ -71,7 +71,7 @@
 - container_name: hoppscotch-db-backup
   image: tiredofit/db-backup:4.1.3@sha256:79697ba2f5ab61e644e8a20e860003af2c12ed40335d80eca33d831c1b829ea4
 - container_name: influxdb
-  image: influxdb:2.7-alpine@sha256:b4ad0aa1e732e35d57cc4340c73e6c61d3f6cfc32b3c0163ca51d74f68acde4b
+  image: influxdb:2.7-alpine@sha256:aa7c7967db6299829f225c931edbe2e53cb74bc32d8a8689eb10a71ec0cc4f9a
   url: influxdb-noauth.$DOMAINNAME
 - container_name: influxdb-backup
   image: tiredofit/db-backup:4.1.3@sha256:79697ba2f5ab61e644e8a20e860003af2c12ed40335d80eca33d831c1b829ea4

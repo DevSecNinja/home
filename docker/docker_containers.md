@@ -128,7 +128,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v8.0.6@sha256:ff10ff9ec941e1c41f9f19de790b47f8feaf1e0228282c62b9d6d7aa44395a71
+**image:** amir20/dozzle:v8.1.0@sha256:9a2ce76666ac4a4bd256a0365f7ed8471edd0e9fb0cfd9aff9a689913ed1eae2
 
 **url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -260,7 +260,7 @@
 
 **container_name:** influxdb
 
-**image:** influxdb:2.7-alpine@sha256:b4ad0aa1e732e35d57cc4340c73e6c61d3f6cfc32b3c0163ca51d74f68acde4b
+**image:** influxdb:2.7-alpine@sha256:aa7c7967db6299829f225c931edbe2e53cb74bc32d8a8689eb10a71ec0cc4f9a
 
 **url:** influxdb-noauth.$DOMAINNAME
 
