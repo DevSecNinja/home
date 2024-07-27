@@ -22,7 +22,7 @@
 - container_name: cloudflare-companion
   image: tiredofit/traefik-cloudflare-companion:7.3.1@sha256:c3aec9ff4f5ef5214678b6b72d299176a21c295664ff3297ac8b50fdd5788d76
 - container_name: cloudflare-ddns
-  image: favonia/cloudflare-ddns:1.13.1@sha256:04ecf598596860f029aa7c87ba6d1dcad19494074e43ceb848cf2251eba5e379
+  image: favonia/cloudflare-ddns:1.13.2@sha256:03133f7889a9945d58beb1cfe82e1a9e17ba3e2e5ce4fdd3a81e0fdd213e3f11
 - container_name: code-server
   image: lscr.io/linuxserver/code-server:version-4.89.0@sha256:678e01467fecf0d1d32b938f3f5324a69f74f9187d37fadddb8f926024524b8b
   url: code.$DOMAINNAME
@@ -33,7 +33,7 @@
   image: amir20/dozzle:v8.1.0@sha256:9a2ce76666ac4a4bd256a0365f7ed8471edd0e9fb0cfd9aff9a689913ed1eae2
   url: dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: dozzle-docker-proxy
-  image: lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:f66d1d802ad387f523ec89b7ae872c12396e4b996c0e21a1930e6a1d0b9205b4
+  image: lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:3adbb89d9efa4d2f31906908f0fa95db82834701f26a5dfd2bdfbf59edc18315
 - container_name: drawio
   image: jgraph/drawio:24.7.1@sha256:b6f5be78df6d0d62f475e355149b2c07ec06302f3a7699b5af173c2dbdc89c19
   url: draw.$DOMAINNAME
@@ -44,7 +44,7 @@
   image: excalidraw/excalidraw:latest@sha256:af23b64328ad484ca04ef0d05ba0517faa19d90ce7c578527b831a6d50458fe2
   url: excalidraw.$DOMAINNAME
 - container_name: foldingathome
-  image: lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:7a370d126eb66a75468898c8b4bd76c728f2a32fbffea5775411783327249cac
+  image: lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:450a8c5d64d4cd1dc4cef4dc7f3ac033ca73fedfbdfa0a8c635bbdd90aa491cd
 - container_name: gatus
   image: twinproduction/gatus:v5.11.0@sha256:05cf8bcbd7296b2e47d9e69d5974d428dde32188722d2aa954367eb728dd056c
   url: status.$DOMAINNAME
@@ -62,7 +62,7 @@
   image: ghcr.io/gethomepage/homepage:v0.9.5@sha256:e23fcd332ecf927fe5c0149142040236b17686916004566c149eef06eb6f8d75
   url: homepage-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: homepage-docker-proxy
-  image: lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:f66d1d802ad387f523ec89b7ae872c12396e4b996c0e21a1930e6a1d0b9205b4
+  image: lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:3adbb89d9efa4d2f31906908f0fa95db82834701f26a5dfd2bdfbf59edc18315
 - container_name: hoppscotch
   image: hoppscotch/hoppscotch:2024.6.0@sha256:e3a4c0e6fa1a92389308a853f2960cc9c2bc8d57817e9ad8261ac2721f07fb70
   url: api-tester.$DOMAINNAME
@@ -124,23 +124,23 @@
   image: papermerge/papermerge:3.2.0@sha256:11bd6e47622b295ee40f1e719c63235544121839a30e5083d959208931007b62
   url: papermerge.$DOMAINNAME
 - container_name: photoprism
-  image: photoprism/photoprism:preview@sha256:af1b25641d169c0bde7406ff8ca088a297d9a5e67672b63f6668c5742159d6e8
+  image: photoprism/photoprism:preview@sha256:18a8a95cac93fea45744aa2531eac1e429b423c25a068b318351cee24cc79c4f
   url: photos.$DOMAINNAME
 - container_name: photoprism-db
   image: mariadb:11.4.2@sha256:e59ba8783bf7bc02a4779f103bb0d8751ac0e10f9471089709608377eded7aa8
 - container_name: photoprism-db-backup
   image: tiredofit/db-backup:4.1.3@sha256:79697ba2f5ab61e644e8a20e860003af2c12ed40335d80eca33d831c1b829ea4
 - container_name: phpmyadmin
-  image: phpmyadmin:5.2.1-apache@sha256:5b8054e629cd39f6b2abeb6a88f257b817de4e4d5e4d8be3ce1bc0e33e109899
+  image: phpmyadmin:5.2.1-apache@sha256:bf2cbf6719ab672f4c0721296dcd3e598e677919fab0c7e6cd195af505a88cbf
   url: phpmyadmin.$DOMAINNAME
 - container_name: plex
-  image: lscr.io/linuxserver/plex:version-1.40.4.8679-424562606@sha256:e06a8af0b30250f4efd8392b55a3d56578919f94fa2ac9eaee14998f9d22af56
+  image: lscr.io/linuxserver/plex:version-1.40.4.8679-424562606@sha256:97d5d64e10850c67a2a694374b536a02f0e62bfae3b292ccfb8c07d6b1f0a79f
   url: plex-noauth.$DOMAINNAME
 - container_name: portainer
   image: portainer/portainer-ce:2.20.3-alpine@sha256:a6f635877e0daa4aa39c1cbf4e73a31b35d342284588fa72fd8a91efb3c6a091
   url: portainer-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: portainer-docker-proxy
-  image: lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:f66d1d802ad387f523ec89b7ae872c12396e4b996c0e21a1930e6a1d0b9205b4
+  image: lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:3adbb89d9efa4d2f31906908f0fa95db82834701f26a5dfd2bdfbf59edc18315
 - container_name: prometheus
   image: prom/prometheus:v2.53.1@sha256:f20d3127bf2876f4a1df76246fca576b41ddf1125ed1c546fbd8b16ea55117e6
   url: prometheus.$DOMAINNAME
@@ -151,12 +151,12 @@
   image: grafana/promtail:3.1.0@sha256:b3db8e7b1cba0e8c45ce2ae72ebddfd88ebdcae86383f1680edf0074e9010ff6
   url: promtail.$DOMAINNAME
 - container_name: promtail-docker-proxy
-  image: lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:f66d1d802ad387f523ec89b7ae872c12396e4b996c0e21a1930e6a1d0b9205b4
+  image: lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:3adbb89d9efa4d2f31906908f0fa95db82834701f26a5dfd2bdfbf59edc18315
 - container_name: traefik-forward-auth
   image: ghcr.io/jordemort/traefik-forward-auth:latest@sha256:394f86bff5cc839fac1392f65dd3d4471e827bc29321a4460e7d92042e026599
   url: auth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: unifi
-  image: lscr.io/linuxserver/unifi-network-application:version-8.3.32@sha256:1928e1d311c26b0cd67c78924b283d95b1d8756b57633799ed1d54804ca8bb90
+  image: lscr.io/linuxserver/unifi-network-application:version-8.3.32@sha256:d4b50e615682037c32361b7ec348b1670e44b9cb0c5b52e80253b186e0db6c94
   url: unifi.$DOMAINNAME
 - container_name: unifi-db
   image: mongo:7.0.12@sha256:54996a559c724c726a31fb8131e1c9088a05f7e531760e2897212389bbf20fed

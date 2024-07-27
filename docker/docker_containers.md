@@ -100,7 +100,7 @@
 
 **container_name:** cloudflare-ddns
 
-**image:** favonia/cloudflare-ddns:1.13.1@sha256:04ecf598596860f029aa7c87ba6d1dcad19494074e43ceb848cf2251eba5e379
+**image:** favonia/cloudflare-ddns:1.13.2@sha256:03133f7889a9945d58beb1cfe82e1a9e17ba3e2e5ce4fdd3a81e0fdd213e3f11
 
 ## docker/ansible/templates/compose-modules/code-server.yml
 
@@ -136,7 +136,7 @@
 
 **container_name:** dozzle-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:f66d1d802ad387f523ec89b7ae872c12396e4b996c0e21a1930e6a1d0b9205b4
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:3adbb89d9efa4d2f31906908f0fa95db82834701f26a5dfd2bdfbf59edc18315
 
 ## docker/ansible/templates/compose-modules/drawio.yml
 
@@ -174,7 +174,7 @@
 
 **container_name:** foldingathome
 
-**image:** lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:7a370d126eb66a75468898c8b4bd76c728f2a32fbffea5775411783327249cac
+**image:** lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:450a8c5d64d4cd1dc4cef4dc7f3ac033ca73fedfbdfa0a8c635bbdd90aa491cd
 
 ## docker/ansible/templates/compose-modules/gatus.yml
 
@@ -230,7 +230,7 @@
 
 **container_name:** homepage-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:f66d1d802ad387f523ec89b7ae872c12396e4b996c0e21a1930e6a1d0b9205b4
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:3adbb89d9efa4d2f31906908f0fa95db82834701f26a5dfd2bdfbf59edc18315
 
 ## docker/ansible/templates/compose-modules/hoppscotch.yml
 
@@ -458,7 +458,7 @@
 
 **container_name:** photoprism
 
-**image:** photoprism/photoprism:preview@sha256:af1b25641d169c0bde7406ff8ca088a297d9a5e67672b63f6668c5742159d6e8
+**image:** photoprism/photoprism:preview@sha256:18a8a95cac93fea45744aa2531eac1e429b423c25a068b318351cee24cc79c4f
 
 **url:** photos.$DOMAINNAME
 
@@ -480,7 +480,7 @@
 
 **container_name:** phpmyadmin
 
-**image:** phpmyadmin:5.2.1-apache@sha256:5b8054e629cd39f6b2abeb6a88f257b817de4e4d5e4d8be3ce1bc0e33e109899
+**image:** phpmyadmin:5.2.1-apache@sha256:bf2cbf6719ab672f4c0721296dcd3e598e677919fab0c7e6cd195af505a88cbf
 
 **url:** phpmyadmin.$DOMAINNAME
 
@@ -490,7 +490,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.40.4.8679-424562606@sha256:e06a8af0b30250f4efd8392b55a3d56578919f94fa2ac9eaee14998f9d22af56
+**image:** lscr.io/linuxserver/plex:version-1.40.4.8679-424562606@sha256:97d5d64e10850c67a2a694374b536a02f0e62bfae3b292ccfb8c07d6b1f0a79f
 
 **url:** plex-noauth.$DOMAINNAME
 
@@ -508,7 +508,7 @@
 
 **container_name:** portainer-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:f66d1d802ad387f523ec89b7ae872c12396e4b996c0e21a1930e6a1d0b9205b4
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:3adbb89d9efa4d2f31906908f0fa95db82834701f26a5dfd2bdfbf59edc18315
 
 ## docker/ansible/templates/compose-modules/prometheus.yml
 
@@ -542,7 +542,7 @@
 
 **container_name:** promtail-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:f66d1d802ad387f523ec89b7ae872c12396e4b996c0e21a1930e6a1d0b9205b4
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:3adbb89d9efa4d2f31906908f0fa95db82834701f26a5dfd2bdfbf59edc18315
 
 ## docker/ansible/templates/compose-modules/samba.yml
 
@@ -580,7 +580,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-8.3.32@sha256:1928e1d311c26b0cd67c78924b283d95b1d8756b57633799ed1d54804ca8bb90
+**image:** lscr.io/linuxserver/unifi-network-application:version-8.3.32@sha256:d4b50e615682037c32361b7ec348b1670e44b9cb0c5b52e80253b186e0db6c94
 
 **url:** unifi.$DOMAINNAME
 
