@@ -128,7 +128,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v8.0.5@sha256:df6eda9fbfa8944b757aa8ba8c77bc70c8f9f9458a9a6bfb83a771e38f25aa68
+**image:** amir20/dozzle:v8.0.6@sha256:ff10ff9ec941e1c41f9f19de790b47f8feaf1e0228282c62b9d6d7aa44395a71
 
 **url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -164,7 +164,7 @@
 
 **container_name:** excalidraw
 
-**image:** excalidraw/excalidraw:latest@sha256:ad64c71819a7908fe9ec3686b630d8c443df69b7029a1faa8c667df4168acd64
+**image:** excalidraw/excalidraw:latest@sha256:af23b64328ad484ca04ef0d05ba0517faa19d90ce7c578527b831a6d50458fe2
 
 **url:** excalidraw.$DOMAINNAME
 
@@ -190,7 +190,7 @@
 
 **container_name:** gatus-db
 
-**image:** docker.io/library/postgres:16.3-alpine@sha256:de3d7b6e4b5b3fe899e997579d6dfe95a99539d154abe03f0b6839133ed05065
+**image:** docker.io/library/postgres:16.3-alpine@sha256:36ed71227ae36305d26382657c0b96cbaf298427b3f1eaeb10d77a6dea3eec41
 
 ### Service: gatus-db-backup
 
@@ -246,7 +246,7 @@
 
 **container_name:** hoppscotch-db
 
-**image:** docker.io/library/postgres:16.3-alpine@sha256:de3d7b6e4b5b3fe899e997579d6dfe95a99539d154abe03f0b6839133ed05065
+**image:** docker.io/library/postgres:16.3-alpine@sha256:36ed71227ae36305d26382657c0b96cbaf298427b3f1eaeb10d77a6dea3eec41
 
 ### Service: hoppscotch-db-backup
 
@@ -304,7 +304,7 @@
 
 **container_name:** linkding-db
 
-**image:** docker.io/library/postgres:16.3-alpine@sha256:de3d7b6e4b5b3fe899e997579d6dfe95a99539d154abe03f0b6839133ed05065
+**image:** docker.io/library/postgres:16.3-alpine@sha256:36ed71227ae36305d26382657c0b96cbaf298427b3f1eaeb10d77a6dea3eec41
 
 ### Service: linkding-db-backup
 
@@ -318,7 +318,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:v1.6.2@sha256:e2413a9309acc65e969911534aa350f6a26908f8ba61b3996ee6f07db1af2308
+**image:** lobehub/lobe-chat:v1.7.2@sha256:26ccdbdf8bbb6bbbeb96bec578ae3f192c3e6f01ea009c1b9a2dfedbf47133d6
 
 **url:** chat.$DOMAINNAME
 
@@ -408,7 +408,7 @@
 
 **container_name:** paperless-db
 
-**image:** docker.io/library/postgres:16.3-alpine@sha256:de3d7b6e4b5b3fe899e997579d6dfe95a99539d154abe03f0b6839133ed05065
+**image:** docker.io/library/postgres:16.3-alpine@sha256:36ed71227ae36305d26382657c0b96cbaf298427b3f1eaeb10d77a6dea3eec41
 
 ### Service: paperless-db-backup
 

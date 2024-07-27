@@ -30,7 +30,7 @@
   image: ghcr.io/gchq/cyberchef:10.19.0@sha256:03edba99b2115e1ea6ca9aa6b58c84249c52d1369e5287335a167922617958da
   url: cyberchef.$DOMAINNAME
 - container_name: dozzle
-  image: amir20/dozzle:v8.0.5@sha256:df6eda9fbfa8944b757aa8ba8c77bc70c8f9f9458a9a6bfb83a771e38f25aa68
+  image: amir20/dozzle:v8.0.6@sha256:ff10ff9ec941e1c41f9f19de790b47f8feaf1e0228282c62b9d6d7aa44395a71
   url: dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: dozzle-docker-proxy
   image: lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:f66d1d802ad387f523ec89b7ae872c12396e4b996c0e21a1930e6a1d0b9205b4
@@ -41,7 +41,7 @@
   image: mendhak/http-https-echo:33@sha256:17f45542b4442474f4b68bf6e97f9a321b2c0fe95c5126c429fe49d911b07eb3
   url: echo-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: excalidraw
-  image: excalidraw/excalidraw:latest@sha256:ad64c71819a7908fe9ec3686b630d8c443df69b7029a1faa8c667df4168acd64
+  image: excalidraw/excalidraw:latest@sha256:af23b64328ad484ca04ef0d05ba0517faa19d90ce7c578527b831a6d50458fe2
   url: excalidraw.$DOMAINNAME
 - container_name: foldingathome
   image: lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:7a370d126eb66a75468898c8b4bd76c728f2a32fbffea5775411783327249cac
@@ -49,7 +49,7 @@
   image: twinproduction/gatus:v5.11.0@sha256:05cf8bcbd7296b2e47d9e69d5974d428dde32188722d2aa954367eb728dd056c
   url: status.$DOMAINNAME
 - container_name: gatus-db
-  image: docker.io/library/postgres:16.3-alpine@sha256:de3d7b6e4b5b3fe899e997579d6dfe95a99539d154abe03f0b6839133ed05065
+  image: docker.io/library/postgres:16.3-alpine@sha256:36ed71227ae36305d26382657c0b96cbaf298427b3f1eaeb10d77a6dea3eec41
 - container_name: gatus-db-backup
   image: tiredofit/db-backup:4.1.3@sha256:79697ba2f5ab61e644e8a20e860003af2c12ed40335d80eca33d831c1b829ea4
 - container_name: grafana
@@ -67,7 +67,7 @@
   image: hoppscotch/hoppscotch:2024.6.0@sha256:e3a4c0e6fa1a92389308a853f2960cc9c2bc8d57817e9ad8261ac2721f07fb70
   url: api-tester.$DOMAINNAME
 - container_name: hoppscotch-db
-  image: docker.io/library/postgres:16.3-alpine@sha256:de3d7b6e4b5b3fe899e997579d6dfe95a99539d154abe03f0b6839133ed05065
+  image: docker.io/library/postgres:16.3-alpine@sha256:36ed71227ae36305d26382657c0b96cbaf298427b3f1eaeb10d77a6dea3eec41
 - container_name: hoppscotch-db-backup
   image: tiredofit/db-backup:4.1.3@sha256:79697ba2f5ab61e644e8a20e860003af2c12ed40335d80eca33d831c1b829ea4
 - container_name: influxdb
@@ -82,11 +82,11 @@
   image: sissbruecker/linkding:1.31.0-alpine@sha256:1fa14d3082148e8e6ac6c00e617bcb47c3a3f6cfc86e636a9c4a5a5c05dd493d
   url: linkding.$DOMAINNAME
 - container_name: linkding-db
-  image: docker.io/library/postgres:16.3-alpine@sha256:de3d7b6e4b5b3fe899e997579d6dfe95a99539d154abe03f0b6839133ed05065
+  image: docker.io/library/postgres:16.3-alpine@sha256:36ed71227ae36305d26382657c0b96cbaf298427b3f1eaeb10d77a6dea3eec41
 - container_name: linkding-db-backup
   image: tiredofit/db-backup:4.1.3@sha256:79697ba2f5ab61e644e8a20e860003af2c12ed40335d80eca33d831c1b829ea4
 - container_name: lobe-chat
-  image: lobehub/lobe-chat:v1.6.2@sha256:e2413a9309acc65e969911534aa350f6a26908f8ba61b3996ee6f07db1af2308
+  image: lobehub/lobe-chat:v1.7.2@sha256:26ccdbdf8bbb6bbbeb96bec578ae3f192c3e6f01ea009c1b9a2dfedbf47133d6
   url: chat.$DOMAINNAME
 - container_name: mailrise
   image: yoryan/mailrise:1.4.0@sha256:66082168090b9a83f01cc71a9d7b1994840adbbbffbe4d2cf644272fbbc23a1a
@@ -108,7 +108,7 @@
   image: openspeedtest/latest:v2.0.5@sha256:bbddd8eda80cc4deb2a5702efd0acd826137650ba0bfcc6720f896c74bca02ee
   url: speedtest.$DOMAINNAME
 - container_name: paperless-db
-  image: docker.io/library/postgres:16.3-alpine@sha256:de3d7b6e4b5b3fe899e997579d6dfe95a99539d154abe03f0b6839133ed05065
+  image: docker.io/library/postgres:16.3-alpine@sha256:36ed71227ae36305d26382657c0b96cbaf298427b3f1eaeb10d77a6dea3eec41
 - container_name: paperless-db-backup
   image: tiredofit/db-backup:4.1.3@sha256:79697ba2f5ab61e644e8a20e860003af2c12ed40335d80eca33d831c1b829ea4
 - container_name: paperless-gotenberg
