@@ -144,7 +144,7 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:24.7.1@sha256:b6f5be78df6d0d62f475e355149b2c07ec06302f3a7699b5af173c2dbdc89c19
+**image:** jgraph/drawio:24.7.5@sha256:116d8b5164bdc5dd068b8371e46de4eedac4df67f3b6998ae4eab6aee21d942e
 
 **url:** draw.$DOMAINNAME
 
@@ -204,7 +204,7 @@
 
 **container_name:** grafana
 
-**image:** grafana/grafana:11.1.0@sha256:079600c9517b678c10cda6006b4487d3174512fd4c6cface37df7822756ed7a5
+**image:** grafana/grafana:11.1.1@sha256:cea3d0c8e54b9e63f82b7baf607107e3c8842d7d3afafd728adca0303f4c2648
 
 **url:** grafana.$DOMAINNAME
 
@@ -238,7 +238,7 @@
 
 **container_name:** hoppscotch
 
-**image:** hoppscotch/hoppscotch:2024.6.0@sha256:e3a4c0e6fa1a92389308a853f2960cc9c2bc8d57817e9ad8261ac2721f07fb70
+**image:** hoppscotch/hoppscotch:2024.6.1@sha256:e25bab330062d28cc688c78a449c56c9800df5d84a75ed5362eacb0850b589dd
 
 **url:** api-tester.$DOMAINNAME
 
@@ -438,7 +438,7 @@
 
 **container_name:** paperless-web
 
-**image:** ghcr.io/paperless-ngx/paperless-ngx:2.11.0@sha256:da0476cea301df8bc8d20739f0e76de1e77d91ad2c9170b45c803468dde19208
+**image:** ghcr.io/paperless-ngx/paperless-ngx:2.11.1@sha256:840534349ee4e7bc2f0b9caa90fbdf6d1e9c00463a95b35a863edca0ed5f3049
 
 **url:** paperless.$DOMAINNAME
 

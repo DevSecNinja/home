@@ -35,7 +35,7 @@
 - container_name: dozzle-docker-proxy
   image: lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:3adbb89d9efa4d2f31906908f0fa95db82834701f26a5dfd2bdfbf59edc18315
 - container_name: drawio
-  image: jgraph/drawio:24.7.1@sha256:b6f5be78df6d0d62f475e355149b2c07ec06302f3a7699b5af173c2dbdc89c19
+  image: jgraph/drawio:24.7.5@sha256:116d8b5164bdc5dd068b8371e46de4eedac4df67f3b6998ae4eab6aee21d942e
   url: draw.$DOMAINNAME
 - container_name: echo-server
   image: mendhak/http-https-echo:33@sha256:17f45542b4442474f4b68bf6e97f9a321b2c0fe95c5126c429fe49d911b07eb3
@@ -53,7 +53,7 @@
 - container_name: gatus-db-backup
   image: tiredofit/db-backup:4.1.3@sha256:79697ba2f5ab61e644e8a20e860003af2c12ed40335d80eca33d831c1b829ea4
 - container_name: grafana
-  image: grafana/grafana:11.1.0@sha256:079600c9517b678c10cda6006b4487d3174512fd4c6cface37df7822756ed7a5
+  image: grafana/grafana:11.1.1@sha256:cea3d0c8e54b9e63f82b7baf607107e3c8842d7d3afafd728adca0303f4c2648
   url: grafana.$DOMAINNAME
 - container_name: loki
   image: grafana/loki:3.1.0@sha256:d947e68a84d9e44915dfa08c3bec27e2124efd5ba6c83443eb53578101ec69e3
@@ -64,7 +64,7 @@
 - container_name: homepage-docker-proxy
   image: lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:3adbb89d9efa4d2f31906908f0fa95db82834701f26a5dfd2bdfbf59edc18315
 - container_name: hoppscotch
-  image: hoppscotch/hoppscotch:2024.6.0@sha256:e3a4c0e6fa1a92389308a853f2960cc9c2bc8d57817e9ad8261ac2721f07fb70
+  image: hoppscotch/hoppscotch:2024.6.1@sha256:e25bab330062d28cc688c78a449c56c9800df5d84a75ed5362eacb0850b589dd
   url: api-tester.$DOMAINNAME
 - container_name: hoppscotch-db
   image: docker.io/library/postgres:16.3-alpine@sha256:36ed71227ae36305d26382657c0b96cbaf298427b3f1eaeb10d77a6dea3eec41
@@ -118,7 +118,7 @@
 - container_name: paperless-tika
   image: ghcr.io/paperless-ngx/tika:2.9.1-minimal@sha256:20db3df89eaeb1b271dd840888fe909b88b12f4b86ef641ec07a1d45d4c5168f
 - container_name: paperless-web
-  image: ghcr.io/paperless-ngx/paperless-ngx:2.11.0@sha256:da0476cea301df8bc8d20739f0e76de1e77d91ad2c9170b45c803468dde19208
+  image: ghcr.io/paperless-ngx/paperless-ngx:2.11.1@sha256:840534349ee4e7bc2f0b9caa90fbdf6d1e9c00463a95b35a863edca0ed5f3049
   url: paperless.$DOMAINNAME
 - container_name: papermerge
   image: papermerge/papermerge:3.2.0@sha256:11bd6e47622b295ee40f1e719c63235544121839a30e5083d959208931007b62
