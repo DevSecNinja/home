@@ -7,7 +7,7 @@
   image: prom/alertmanager:v0.27.0@sha256:e13b6ed5cb929eeaee733479dce55e10eb3bc2e9c4586c705a4e8da41e5eacf5
   url: alertmanager.$DOMAINNAME
 - container_name: bitwarden
-  image: bitwarden/self-host:2024.6.2-beta@sha256:7ff2af1463b665e990d1cc12aa3e8f85fda9a7d9a69f38de0d9718e91d0c649e
+  image: bitwarden/self-host:2024.7.1-beta@sha256:25404681d876e0066e8aa1941c999bf5fe8e66cebd6275131d568f8ec8736798
   url: bitwarden.$DOMAINNAME
 - container_name: bitwarden-db
   image: mariadb:11.4.2@sha256:e59ba8783bf7bc02a4779f103bb0d8751ac0e10f9471089709608377eded7aa8

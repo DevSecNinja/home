@@ -50,7 +50,7 @@
 
 **container_name:** bitwarden
 
-**image:** bitwarden/self-host:2024.6.2-beta@sha256:7ff2af1463b665e990d1cc12aa3e8f85fda9a7d9a69f38de0d9718e91d0c649e
+**image:** bitwarden/self-host:2024.7.1-beta@sha256:25404681d876e0066e8aa1941c999bf5fe8e66cebd6275131d568f8ec8736798
 
 **url:** bitwarden.$DOMAINNAME
 
