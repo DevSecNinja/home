@@ -1,6 +1,6 @@
 services:
   phpmyadmin:
-    image: phpmyadmin:5.2.1-apache@sha256:5b8054e629cd39f6b2abeb6a88f257b817de4e4d5e4d8be3ce1bc0e33e109899
+    image: phpmyadmin:5.2.1-apache@sha256:bf2cbf6719ab672f4c0721296dcd3e598e677919fab0c7e6cd195af505a88cbf
     container_name: phpmyadmin
     depends_on:
       - traefik
