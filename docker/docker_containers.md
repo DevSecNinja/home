@@ -82,7 +82,7 @@
 
 **container_name:** change-detection
 
-**image:** ghcr.io/dgtlmoon/changedetection.io:0.46.01@sha256:1de9d653f9292ee5fb2b624b393cb9b40931b9624f54e9f75394b66ba850425b
+**image:** ghcr.io/dgtlmoon/changedetection.io:0.46.02@sha256:1a7e703c07acfa2eb642be24b3ef7b8a1edb341119f1811b4e1f5afbf883f103
 
 **url:** change-detection.$DOMAINNAME
 
@@ -128,7 +128,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v8.1.0@sha256:9a2ce76666ac4a4bd256a0365f7ed8471edd0e9fb0cfd9aff9a689913ed1eae2
+**image:** amir20/dozzle:v8.1.1@sha256:3981a43372ab81b61a08395655500f31c6d2589b91734d2f6d1adb1c025d62cd
 
 **url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -318,7 +318,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:v1.7.2@sha256:26ccdbdf8bbb6bbbeb96bec578ae3f192c3e6f01ea009c1b9a2dfedbf47133d6
+**image:** lobehub/lobe-chat:v1.7.3@sha256:f7b029fa17daf4550297965389482f15cf5281a3903bdb0be05dc69b5e533b83
 
 **url:** chat.$DOMAINNAME
 
