@@ -136,7 +136,7 @@
 
 **container_name:** dozzle-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:3adbb89d9efa4d2f31906908f0fa95db82834701f26a5dfd2bdfbf59edc18315
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:1d937f388ca7b951036616ec82d22f2a52b0d9522103f19534fb7e95704a603f
 
 ## docker/ansible/templates/compose-modules/drawio.yml
 
@@ -204,7 +204,7 @@
 
 **container_name:** grafana
 
-**image:** grafana/grafana:11.1.1@sha256:cea3d0c8e54b9e63f82b7baf607107e3c8842d7d3afafd728adca0303f4c2648
+**image:** grafana/grafana:11.1.1@sha256:27804c29449ab61a2ad4060c2faaf6583a95841e88d6492146a9961f66912ef2
 
 **url:** grafana.$DOMAINNAME
 
@@ -230,7 +230,7 @@
 
 **container_name:** homepage-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:3adbb89d9efa4d2f31906908f0fa95db82834701f26a5dfd2bdfbf59edc18315
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:1d937f388ca7b951036616ec82d22f2a52b0d9522103f19534fb7e95704a603f
 
 ## docker/ansible/templates/compose-modules/hoppscotch.yml
 
@@ -336,7 +336,7 @@
 
 **container_name:** nextcloud
 
-**image:** nextcloud:29.0.4-apache@sha256:12c7bb0da1d41a08583971d5ba9771c4f37592ddd0aae5f5ce6a306961caa674
+**image:** nextcloud:29.0.4-apache@sha256:819cd3e05526e13871fa24a07c0c3d305dadabb08664096fc0bf75d184649311
 
 **url:** cloud.$DOMAINNAME
 
@@ -344,7 +344,7 @@
 
 **container_name:** nextcloud-cron
 
-**image:** nextcloud:29.0.4-apache@sha256:12c7bb0da1d41a08583971d5ba9771c4f37592ddd0aae5f5ce6a306961caa674
+**image:** nextcloud:29.0.4-apache@sha256:819cd3e05526e13871fa24a07c0c3d305dadabb08664096fc0bf75d184649311
 
 ### Service: nextcloud-db
 
@@ -458,7 +458,7 @@
 
 **container_name:** photoprism
 
-**image:** photoprism/photoprism:preview@sha256:18a8a95cac93fea45744aa2531eac1e429b423c25a068b318351cee24cc79c4f
+**image:** photoprism/photoprism:preview@sha256:839788aa842956b24c8ff6a4e21e80f0d3fd488f59a9f4f97f525538f11c3ad8
 
 **url:** photos.$DOMAINNAME
 
@@ -480,7 +480,7 @@
 
 **container_name:** phpmyadmin
 
-**image:** phpmyadmin:5.2.1-apache@sha256:bf2cbf6719ab672f4c0721296dcd3e598e677919fab0c7e6cd195af505a88cbf
+**image:** phpmyadmin:5.2.1-apache@sha256:3864ad0490bdc7b0eb87a4ff6cd0eb62fb9b4e73f7704309b963c16a1044b56f
 
 **url:** phpmyadmin.$DOMAINNAME
 
@@ -508,7 +508,7 @@
 
 **container_name:** portainer-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:3adbb89d9efa4d2f31906908f0fa95db82834701f26a5dfd2bdfbf59edc18315
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:1d937f388ca7b951036616ec82d22f2a52b0d9522103f19534fb7e95704a603f
 
 ## docker/ansible/templates/compose-modules/prometheus.yml
 
@@ -542,7 +542,7 @@
 
 **container_name:** promtail-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:3adbb89d9efa4d2f31906908f0fa95db82834701f26a5dfd2bdfbf59edc18315
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:1d937f388ca7b951036616ec82d22f2a52b0d9522103f19534fb7e95704a603f
 
 ## docker/ansible/templates/compose-modules/samba.yml
 
