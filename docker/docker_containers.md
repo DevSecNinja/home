@@ -128,7 +128,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v8.1.1@sha256:3981a43372ab81b61a08395655500f31c6d2589b91734d2f6d1adb1c025d62cd
+**image:** amir20/dozzle:v8.1.3@sha256:6bed0dfc82484bda7a0a7347cfe7060c537d383c5263bbc8353a5c28de2e9bc0
 
 **url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -238,7 +238,7 @@
 
 **container_name:** hoppscotch
 
-**image:** hoppscotch/hoppscotch:2024.6.1@sha256:e25bab330062d28cc688c78a449c56c9800df5d84a75ed5362eacb0850b589dd
+**image:** hoppscotch/hoppscotch:2024.7.0@sha256:97632701d213a4e84508309b6fab0a33ed00a5bf12824785138120f16f85af30
 
 **url:** api-tester.$DOMAINNAME
 
@@ -318,7 +318,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:v1.7.3@sha256:f7b029fa17daf4550297965389482f15cf5281a3903bdb0be05dc69b5e533b83
+**image:** lobehub/lobe-chat:v1.8.0@sha256:dd5b9d1f68dfdbadf667de7dfa082b08135f6f012318cac974c6a8779de2d884
 
 **url:** chat.$DOMAINNAME
 
@@ -420,7 +420,7 @@
 
 **container_name:** paperless-gotenberg
 
-**image:** docker.io/gotenberg/gotenberg:8.8.1@sha256:b1854afefad44a4004bdad5a69a10b39a4567a3234746e7095d06d44f4f3fab7
+**image:** docker.io/gotenberg/gotenberg:8.9.0@sha256:06d369426a3dcecd15f71b8ac9a81dc26819c5825fc72559c16c4c45c8aea8fc
 
 ### Service: paperless-redis
 
