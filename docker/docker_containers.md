@@ -204,7 +204,7 @@
 
 **container_name:** grafana
 
-**image:** grafana/grafana:11.1.1@sha256:27804c29449ab61a2ad4060c2faaf6583a95841e88d6492146a9961f66912ef2
+**image:** grafana/grafana:11.1.3@sha256:b23b588cf7cba025ec95efba82e0d8d2e5d549a8b2cb5d50332d4175693c54e0
 
 **url:** grafana.$DOMAINNAME
 
@@ -318,7 +318,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:v1.8.0@sha256:dd5b9d1f68dfdbadf667de7dfa082b08135f6f012318cac974c6a8779de2d884
+**image:** lobehub/lobe-chat:v1.8.2@sha256:4fa0008a22f8330ff4d4e8d8f0fdf9de96ffb8052ee688b970bfb32948edd4ac
 
 **url:** chat.$DOMAINNAME
 
@@ -438,7 +438,7 @@
 
 **container_name:** paperless-web
 
-**image:** ghcr.io/paperless-ngx/paperless-ngx:2.11.1@sha256:840534349ee4e7bc2f0b9caa90fbdf6d1e9c00463a95b35a863edca0ed5f3049
+**image:** ghcr.io/paperless-ngx/paperless-ngx:2.11.2@sha256:4935f39b40abb0b2e326af7f7292c215e873b99f998ed987d256d5aa4b9c0f60
 
 **url:** paperless.$DOMAINNAME
 
@@ -458,7 +458,7 @@
 
 **container_name:** photoprism
 
-**image:** photoprism/photoprism:preview@sha256:839788aa842956b24c8ff6a4e21e80f0d3fd488f59a9f4f97f525538f11c3ad8
+**image:** photoprism/photoprism:preview@sha256:086e37927003d1019f1e4480b3ea49b798bb2547e0733a6878c628e559757130
 
 **url:** photos.$DOMAINNAME
 

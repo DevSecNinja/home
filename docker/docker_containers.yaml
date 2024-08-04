@@ -53,7 +53,7 @@
 - container_name: gatus-db-backup
   image: tiredofit/db-backup:4.1.3@sha256:79697ba2f5ab61e644e8a20e860003af2c12ed40335d80eca33d831c1b829ea4
 - container_name: grafana
-  image: grafana/grafana:11.1.1@sha256:27804c29449ab61a2ad4060c2faaf6583a95841e88d6492146a9961f66912ef2
+  image: grafana/grafana:11.1.3@sha256:b23b588cf7cba025ec95efba82e0d8d2e5d549a8b2cb5d50332d4175693c54e0
   url: grafana.$DOMAINNAME
 - container_name: loki
   image: grafana/loki:3.1.0@sha256:d947e68a84d9e44915dfa08c3bec27e2124efd5ba6c83443eb53578101ec69e3
@@ -86,7 +86,7 @@
 - container_name: linkding-db-backup
   image: tiredofit/db-backup:4.1.3@sha256:79697ba2f5ab61e644e8a20e860003af2c12ed40335d80eca33d831c1b829ea4
 - container_name: lobe-chat
-  image: lobehub/lobe-chat:v1.8.0@sha256:dd5b9d1f68dfdbadf667de7dfa082b08135f6f012318cac974c6a8779de2d884
+  image: lobehub/lobe-chat:v1.8.2@sha256:4fa0008a22f8330ff4d4e8d8f0fdf9de96ffb8052ee688b970bfb32948edd4ac
   url: chat.$DOMAINNAME
 - container_name: mailrise
   image: yoryan/mailrise:1.4.0@sha256:66082168090b9a83f01cc71a9d7b1994840adbbbffbe4d2cf644272fbbc23a1a
@@ -118,13 +118,13 @@
 - container_name: paperless-tika
   image: ghcr.io/paperless-ngx/tika:2.9.1-minimal@sha256:20db3df89eaeb1b271dd840888fe909b88b12f4b86ef641ec07a1d45d4c5168f
 - container_name: paperless-web
-  image: ghcr.io/paperless-ngx/paperless-ngx:2.11.1@sha256:840534349ee4e7bc2f0b9caa90fbdf6d1e9c00463a95b35a863edca0ed5f3049
+  image: ghcr.io/paperless-ngx/paperless-ngx:2.11.2@sha256:4935f39b40abb0b2e326af7f7292c215e873b99f998ed987d256d5aa4b9c0f60
   url: paperless.$DOMAINNAME
 - container_name: papermerge
   image: papermerge/papermerge:3.2.0@sha256:11bd6e47622b295ee40f1e719c63235544121839a30e5083d959208931007b62
   url: papermerge.$DOMAINNAME
 - container_name: photoprism
-  image: photoprism/photoprism:preview@sha256:839788aa842956b24c8ff6a4e21e80f0d3fd488f59a9f4f97f525538f11c3ad8
+  image: photoprism/photoprism:preview@sha256:086e37927003d1019f1e4480b3ea49b798bb2547e0733a6878c628e559757130
   url: photos.$DOMAINNAME
 - container_name: photoprism-db
   image: mariadb:11.4.2@sha256:e59ba8783bf7bc02a4779f103bb0d8751ac0e10f9471089709608377eded7aa8
