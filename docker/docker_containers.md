@@ -330,6 +330,28 @@
 
 **image:** yoryan/mailrise:1.4.0@sha256:66082168090b9a83f01cc71a9d7b1994840adbbbffbe4d2cf644272fbbc23a1a
 
+## docker/ansible/templates/compose-modules/n8n.yml
+
+### Service: n8n
+
+**container_name:** n8n
+
+**image:** n8nio/n8n:1.54.0@sha256:efdbf2c1ac09dcde8d45f56bb4a7626cc709aa7171c634e441efd66d5bb8fb36
+
+**url:** n8n.$DOMAINNAME
+
+### Service: n8n-db
+
+**container_name:** n8n-db
+
+**image:** docker.io/library/postgres:16.3-alpine@sha256:36ed71227ae36305d26382657c0b96cbaf298427b3f1eaeb10d77a6dea3eec41
+
+### Service: n8n-db-backup
+
+**container_name:** n8n-db-backup
+
+**image:** tiredofit/db-backup:4.1.3@sha256:79697ba2f5ab61e644e8a20e860003af2c12ed40335d80eca33d831c1b829ea4
+
 ## docker/ansible/templates/compose-modules/nextcloud.yml
 
 ### Service: nextcloud
