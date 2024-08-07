@@ -19,6 +19,7 @@ include:
 {% endif %}
 {% if 'production' in group_names %}
   - $DOCKERDIR/data/compose/linkding.yml
+  - $DOCKERDIR/data/compose/n8n.yml
   - $DOCKERDIR/data/compose/nextcloud.yml
   - $DOCKERDIR/data/compose/openspeedtest.yml
   - $DOCKERDIR/data/compose/paperless-ngx.yml
