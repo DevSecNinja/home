@@ -128,7 +128,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v8.1.3@sha256:6bed0dfc82484bda7a0a7347cfe7060c537d383c5263bbc8353a5c28de2e9bc0
+**image:** amir20/dozzle:v8.1.4@sha256:61db44897f8a194b6a61e598d5775ea920d8c0c20ad19ae34133d416dd0c535f
 
 **url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -164,7 +164,7 @@
 
 **container_name:** excalidraw
 
-**image:** excalidraw/excalidraw:latest@sha256:af23b64328ad484ca04ef0d05ba0517faa19d90ce7c578527b831a6d50458fe2
+**image:** excalidraw/excalidraw:latest@sha256:959d3771b054285c90dd65f1634c7d7e1482dcfa871a1db3576590a7f89932a6
 
 **url:** excalidraw.$DOMAINNAME
 
@@ -238,7 +238,7 @@
 
 **container_name:** hoppscotch
 
-**image:** hoppscotch/hoppscotch:2024.7.0@sha256:97632701d213a4e84508309b6fab0a33ed00a5bf12824785138120f16f85af30
+**image:** hoppscotch/hoppscotch:2024.7.1@sha256:626aea0d1c7a7e2009ac6dcf8b4d30c0a0b8de5e35e4f1b465d6141fb38ac156
 
 **url:** api-tester.$DOMAINNAME
 
@@ -260,7 +260,7 @@
 
 **container_name:** influxdb
 
-**image:** influxdb:2.7-alpine@sha256:aa7c7967db6299829f225c931edbe2e53cb74bc32d8a8689eb10a71ec0cc4f9a
+**image:** influxdb:2.7-alpine@sha256:82ad20cfcb42ef800a31977d2e38debe6cdbf97160a6ea2155f7b56e0e3a431b
 
 **url:** influxdb-noauth.$DOMAINNAME
 
@@ -358,7 +358,7 @@
 
 **container_name:** nextcloud
 
-**image:** nextcloud:29.0.4-apache@sha256:819cd3e05526e13871fa24a07c0c3d305dadabb08664096fc0bf75d184649311
+**image:** nextcloud:29.0.4-apache@sha256:12d50dc1a4f513848f0e84cff7e82ca23a1d732ab98d51d221c06f4c26fe0c18
 
 **url:** cloud.$DOMAINNAME
 
@@ -366,7 +366,7 @@
 
 **container_name:** nextcloud-cron
 
-**image:** nextcloud:29.0.4-apache@sha256:819cd3e05526e13871fa24a07c0c3d305dadabb08664096fc0bf75d184649311
+**image:** nextcloud:29.0.4-apache@sha256:12d50dc1a4f513848f0e84cff7e82ca23a1d732ab98d51d221c06f4c26fe0c18
 
 ### Service: nextcloud-db
 
@@ -460,7 +460,7 @@
 
 **container_name:** paperless-web
 
-**image:** ghcr.io/paperless-ngx/paperless-ngx:2.11.2@sha256:4935f39b40abb0b2e326af7f7292c215e873b99f998ed987d256d5aa4b9c0f60
+**image:** ghcr.io/paperless-ngx/paperless-ngx:2.11.3@sha256:25d4f7e1a660c3cc11c06353b004965c62cfa96de0baaca1d10acaa70184e926
 
 **url:** paperless.$DOMAINNAME
 
@@ -502,7 +502,7 @@
 
 **container_name:** phpmyadmin
 
-**image:** phpmyadmin:5.2.1-apache@sha256:3864ad0490bdc7b0eb87a4ff6cd0eb62fb9b4e73f7704309b963c16a1044b56f
+**image:** phpmyadmin:5.2.1-apache@sha256:324f41f0d188ff54b35da977b7a1d769a7203f2a07bc892adc306595f2e5bd9a
 
 **url:** phpmyadmin.$DOMAINNAME
 
@@ -512,7 +512,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.40.4.8679-424562606@sha256:97d5d64e10850c67a2a694374b536a02f0e62bfae3b292ccfb8c07d6b1f0a79f
+**image:** lscr.io/linuxserver/plex:version-1.40.4.8679-424562606@sha256:f15541bfa94eae032cb3c8392f800aba6b6068cb663b5bd1d12f559b5308f9eb
 
 **url:** plex-noauth.$DOMAINNAME
 
@@ -602,7 +602,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-8.3.32@sha256:d4b50e615682037c32361b7ec348b1670e44b9cb0c5b52e80253b186e0db6c94
+**image:** lscr.io/linuxserver/unifi-network-application:version-8.3.32@sha256:fb219c24c81acbf9b0d56af308fe9fe5fd93411823a26bf5bfdfe8adcefc36e9
 
 **url:** unifi.$DOMAINNAME
 
