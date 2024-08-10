@@ -45,7 +45,7 @@ services:
       - "traefik.http.services.linkding.loadbalancer.server.port=9090"
 
   linkding-db:
-    image: docker.io/library/postgres:16.3-alpine@sha256:36ed71227ae36305d26382657c0b96cbaf298427b3f1eaeb10d77a6dea3eec41
+    image: docker.io/library/postgres:16.4-alpine@sha256:492898505cb45f9835acc327e98711eaa9298ed804e0bb36f29e08394229550d
     container_name: linkding-db
     restart: always
     security_opt:
