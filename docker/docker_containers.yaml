@@ -49,7 +49,7 @@
   image: twinproduction/gatus:v5.11.0@sha256:05cf8bcbd7296b2e47d9e69d5974d428dde32188722d2aa954367eb728dd056c
   url: status.$DOMAINNAME
 - container_name: gatus-db
-  image: docker.io/library/postgres:16.3-alpine@sha256:36ed71227ae36305d26382657c0b96cbaf298427b3f1eaeb10d77a6dea3eec41
+  image: docker.io/library/postgres:16.4-alpine@sha256:492898505cb45f9835acc327e98711eaa9298ed804e0bb36f29e08394229550d
 - container_name: gatus-db-backup
   image: tiredofit/db-backup:4.1.3@sha256:79697ba2f5ab61e644e8a20e860003af2c12ed40335d80eca33d831c1b829ea4
 - container_name: grafana
@@ -67,7 +67,7 @@
   image: hoppscotch/hoppscotch:2024.7.1@sha256:626aea0d1c7a7e2009ac6dcf8b4d30c0a0b8de5e35e4f1b465d6141fb38ac156
   url: api-tester.$DOMAINNAME
 - container_name: hoppscotch-db
-  image: docker.io/library/postgres:16.3-alpine@sha256:36ed71227ae36305d26382657c0b96cbaf298427b3f1eaeb10d77a6dea3eec41
+  image: docker.io/library/postgres:16.4-alpine@sha256:492898505cb45f9835acc327e98711eaa9298ed804e0bb36f29e08394229550d
 - container_name: hoppscotch-db-backup
   image: tiredofit/db-backup:4.1.3@sha256:79697ba2f5ab61e644e8a20e860003af2c12ed40335d80eca33d831c1b829ea4
 - container_name: influxdb
@@ -82,7 +82,7 @@
   image: sissbruecker/linkding:1.31.0-alpine@sha256:1fa14d3082148e8e6ac6c00e617bcb47c3a3f6cfc86e636a9c4a5a5c05dd493d
   url: linkding.$DOMAINNAME
 - container_name: linkding-db
-  image: docker.io/library/postgres:16.3-alpine@sha256:36ed71227ae36305d26382657c0b96cbaf298427b3f1eaeb10d77a6dea3eec41
+  image: docker.io/library/postgres:16.4-alpine@sha256:492898505cb45f9835acc327e98711eaa9298ed804e0bb36f29e08394229550d
 - container_name: linkding-db-backup
   image: tiredofit/db-backup:4.1.3@sha256:79697ba2f5ab61e644e8a20e860003af2c12ed40335d80eca33d831c1b829ea4
 - container_name: lobe-chat
@@ -94,7 +94,7 @@
   image: n8nio/n8n:1.54.0@sha256:efdbf2c1ac09dcde8d45f56bb4a7626cc709aa7171c634e441efd66d5bb8fb36
   url: n8n.$DOMAINNAME
 - container_name: n8n-db
-  image: docker.io/library/postgres:16.3-alpine@sha256:36ed71227ae36305d26382657c0b96cbaf298427b3f1eaeb10d77a6dea3eec41
+  image: docker.io/library/postgres:16.4-alpine@sha256:492898505cb45f9835acc327e98711eaa9298ed804e0bb36f29e08394229550d
 - container_name: n8n-db-backup
   image: tiredofit/db-backup:4.1.3@sha256:79697ba2f5ab61e644e8a20e860003af2c12ed40335d80eca33d831c1b829ea4
 - container_name: nextcloud
@@ -115,7 +115,7 @@
   image: openspeedtest/latest:v2.0.5@sha256:bbddd8eda80cc4deb2a5702efd0acd826137650ba0bfcc6720f896c74bca02ee
   url: speedtest.$DOMAINNAME
 - container_name: paperless-db
-  image: docker.io/library/postgres:16.3-alpine@sha256:36ed71227ae36305d26382657c0b96cbaf298427b3f1eaeb10d77a6dea3eec41
+  image: docker.io/library/postgres:16.4-alpine@sha256:492898505cb45f9835acc327e98711eaa9298ed804e0bb36f29e08394229550d
 - container_name: paperless-db-backup
   image: tiredofit/db-backup:4.1.3@sha256:79697ba2f5ab61e644e8a20e860003af2c12ed40335d80eca33d831c1b829ea4
 - container_name: paperless-gotenberg

@@ -190,7 +190,7 @@
 
 **container_name:** gatus-db
 
-**image:** docker.io/library/postgres:16.3-alpine@sha256:36ed71227ae36305d26382657c0b96cbaf298427b3f1eaeb10d77a6dea3eec41
+**image:** docker.io/library/postgres:16.4-alpine@sha256:492898505cb45f9835acc327e98711eaa9298ed804e0bb36f29e08394229550d
 
 ### Service: gatus-db-backup
 
@@ -246,7 +246,7 @@
 
 **container_name:** hoppscotch-db
 
-**image:** docker.io/library/postgres:16.3-alpine@sha256:36ed71227ae36305d26382657c0b96cbaf298427b3f1eaeb10d77a6dea3eec41
+**image:** docker.io/library/postgres:16.4-alpine@sha256:492898505cb45f9835acc327e98711eaa9298ed804e0bb36f29e08394229550d
 
 ### Service: hoppscotch-db-backup
 
@@ -304,7 +304,7 @@
 
 **container_name:** linkding-db
 
-**image:** docker.io/library/postgres:16.3-alpine@sha256:36ed71227ae36305d26382657c0b96cbaf298427b3f1eaeb10d77a6dea3eec41
+**image:** docker.io/library/postgres:16.4-alpine@sha256:492898505cb45f9835acc327e98711eaa9298ed804e0bb36f29e08394229550d
 
 ### Service: linkding-db-backup
 
@@ -344,7 +344,7 @@
 
 **container_name:** n8n-db
 
-**image:** docker.io/library/postgres:16.3-alpine@sha256:36ed71227ae36305d26382657c0b96cbaf298427b3f1eaeb10d77a6dea3eec41
+**image:** docker.io/library/postgres:16.4-alpine@sha256:492898505cb45f9835acc327e98711eaa9298ed804e0bb36f29e08394229550d
 
 ### Service: n8n-db-backup
 
@@ -430,7 +430,7 @@
 
 **container_name:** paperless-db
 
-**image:** docker.io/library/postgres:16.3-alpine@sha256:36ed71227ae36305d26382657c0b96cbaf298427b3f1eaeb10d77a6dea3eec41
+**image:** docker.io/library/postgres:16.4-alpine@sha256:492898505cb45f9835acc327e98711eaa9298ed804e0bb36f29e08394229550d
 
 ### Service: paperless-db-backup
 
