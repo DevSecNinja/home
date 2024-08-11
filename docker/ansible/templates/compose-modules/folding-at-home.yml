@@ -3,7 +3,7 @@
 services:
   foldingathome:
     container_name: foldingathome
-    image: lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:450a8c5d64d4cd1dc4cef4dc7f3ac033ca73fedfbdfa0a8c635bbdd90aa491cd
+    image: lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:7297d24f8421c40074d7d9b083a7f1b4624773b0b07ca656abce6cf04c17a04a
     # TODO: How to handle containers that don't need networks? (e.g. Folding@Home)
     restart: always
     security_opt:
