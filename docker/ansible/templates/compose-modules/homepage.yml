@@ -32,7 +32,7 @@ services:
       - "traefik.http.services.homepage.loadbalancer.server.port=3000"
 
   homepage-docker-proxy:
-    image: lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:1d937f388ca7b951036616ec82d22f2a52b0d9522103f19534fb7e95704a603f
+    image: lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:fab7963b26cbccca7c4907d9732a2ca1b00738e07aa35242c07b90c240effd6f
     container_name: homepage-docker-proxy
     restart: always
     networks:
