@@ -1,7 +1,7 @@
 services:
   cyberchef:
     container_name: cyberchef
-    image: ghcr.io/gchq/cyberchef:10.19.0@sha256:03edba99b2115e1ea6ca9aa6b58c84249c52d1369e5287335a167922617958da
+    image: ghcr.io/gchq/cyberchef:10.19.2@sha256:04a2be6fb9db9a65b6dc148f3c52be499f40ecb281b69135783bbd76186b1513
     depends_on:
       - traefik
     networks:
