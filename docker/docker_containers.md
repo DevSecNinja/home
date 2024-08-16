@@ -174,7 +174,7 @@
 
 **container_name:** foldingathome
 
-**image:** lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:450a8c5d64d4cd1dc4cef4dc7f3ac033ca73fedfbdfa0a8c635bbdd90aa491cd
+**image:** lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:7297d24f8421c40074d7d9b083a7f1b4624773b0b07ca656abce6cf04c17a04a
 
 ## docker/ansible/templates/compose-modules/gatus.yml
 
@@ -222,7 +222,7 @@
 
 **container_name:** homepage
 
-**image:** ghcr.io/gethomepage/homepage:v0.9.5@sha256:e23fcd332ecf927fe5c0149142040236b17686916004566c149eef06eb6f8d75
+**image:** ghcr.io/gethomepage/homepage:v0.9.6@sha256:e5b2616d17db8961a53c0b7d389d812d31c265d35696d475732f53278c9276f7
 
 **url:** homepage-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -442,7 +442,7 @@
 
 **container_name:** paperless-gotenberg
 
-**image:** docker.io/gotenberg/gotenberg:8.9.0@sha256:06d369426a3dcecd15f71b8ac9a81dc26819c5825fc72559c16c4c45c8aea8fc
+**image:** docker.io/gotenberg/gotenberg:8.9.1@sha256:d3a1592fbefce5b5004299a420b0afc86b9fa6351009fe6805a8a3739a5c8cd2
 
 ### Service: paperless-redis
 
@@ -460,7 +460,7 @@
 
 **container_name:** paperless-web
 
-**image:** ghcr.io/paperless-ngx/paperless-ngx:2.11.3@sha256:25d4f7e1a660c3cc11c06353b004965c62cfa96de0baaca1d10acaa70184e926
+**image:** ghcr.io/paperless-ngx/paperless-ngx:2.11.4@sha256:f3f2021c2771de4c18fb16938dbc7b2e0bc73a32168c16ef3c6914e4a5875d66
 
 **url:** paperless.$DOMAINNAME
 
@@ -480,7 +480,7 @@
 
 **container_name:** photoprism
 
-**image:** photoprism/photoprism:preview@sha256:086e37927003d1019f1e4480b3ea49b798bb2547e0733a6878c628e559757130
+**image:** photoprism/photoprism:preview@sha256:9bf3718a699c91e541927747c925c73e1ba2b6b87838852155a2566aa45dd69f
 
 **url:** photos.$DOMAINNAME
 
@@ -512,7 +512,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.40.4.8679-424562606@sha256:f15541bfa94eae032cb3c8392f800aba6b6068cb663b5bd1d12f559b5308f9eb
+**image:** lscr.io/linuxserver/plex:version-1.40.4.8679-424562606@sha256:7dfc133dcd0e5f30a795f2fa68545f504400eeb5e57852235d2ae8d01e6e63d8
 
 **url:** plex-noauth.$DOMAINNAME
 
@@ -602,7 +602,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-8.3.32@sha256:fb219c24c81acbf9b0d56af308fe9fe5fd93411823a26bf5bfdfe8adcefc36e9
+**image:** lscr.io/linuxserver/unifi-network-application:version-8.3.32@sha256:e5c12f5e82f458b4e1163145e46c917380265e6db5bbcb508dcb2ce319f9483e
 
 **url:** unifi.$DOMAINNAME
 

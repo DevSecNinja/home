@@ -44,7 +44,7 @@
   image: excalidraw/excalidraw:latest@sha256:959d3771b054285c90dd65f1634c7d7e1482dcfa871a1db3576590a7f89932a6
   url: excalidraw.$DOMAINNAME
 - container_name: foldingathome
-  image: lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:450a8c5d64d4cd1dc4cef4dc7f3ac033ca73fedfbdfa0a8c635bbdd90aa491cd
+  image: lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:7297d24f8421c40074d7d9b083a7f1b4624773b0b07ca656abce6cf04c17a04a
 - container_name: gatus
   image: twinproduction/gatus:v5.11.0@sha256:05cf8bcbd7296b2e47d9e69d5974d428dde32188722d2aa954367eb728dd056c
   url: status.$DOMAINNAME
@@ -59,7 +59,7 @@
   image: grafana/loki:3.1.1@sha256:e689cc634841c937de4d7ea6157f17e29cf257d6a320f1c293ab18d46cfea986
   url: loki.$DOMAINNAME
 - container_name: homepage
-  image: ghcr.io/gethomepage/homepage:v0.9.5@sha256:e23fcd332ecf927fe5c0149142040236b17686916004566c149eef06eb6f8d75
+  image: ghcr.io/gethomepage/homepage:v0.9.6@sha256:e5b2616d17db8961a53c0b7d389d812d31c265d35696d475732f53278c9276f7
   url: homepage-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: homepage-docker-proxy
   image: lscr.io/linuxserver/socket-proxy:version-1.26.1-r0@sha256:1d937f388ca7b951036616ec82d22f2a52b0d9522103f19534fb7e95704a603f
@@ -119,19 +119,19 @@
 - container_name: paperless-db-backup
   image: tiredofit/db-backup:4.1.3@sha256:79697ba2f5ab61e644e8a20e860003af2c12ed40335d80eca33d831c1b829ea4
 - container_name: paperless-gotenberg
-  image: docker.io/gotenberg/gotenberg:8.9.0@sha256:06d369426a3dcecd15f71b8ac9a81dc26819c5825fc72559c16c4c45c8aea8fc
+  image: docker.io/gotenberg/gotenberg:8.9.1@sha256:d3a1592fbefce5b5004299a420b0afc86b9fa6351009fe6805a8a3739a5c8cd2
 - container_name: paperless-redis
   image: redis:alpine3.19@sha256:892b41c092a599f76c30b48e9dcfb185ce8cea3560970b1c4f2745c89bb34344
 - container_name: paperless-tika
   image: ghcr.io/paperless-ngx/tika:2.9.1-minimal@sha256:20db3df89eaeb1b271dd840888fe909b88b12f4b86ef641ec07a1d45d4c5168f
 - container_name: paperless-web
-  image: ghcr.io/paperless-ngx/paperless-ngx:2.11.3@sha256:25d4f7e1a660c3cc11c06353b004965c62cfa96de0baaca1d10acaa70184e926
+  image: ghcr.io/paperless-ngx/paperless-ngx:2.11.4@sha256:f3f2021c2771de4c18fb16938dbc7b2e0bc73a32168c16ef3c6914e4a5875d66
   url: paperless.$DOMAINNAME
 - container_name: papermerge
   image: papermerge/papermerge:3.2.0@sha256:11bd6e47622b295ee40f1e719c63235544121839a30e5083d959208931007b62
   url: papermerge.$DOMAINNAME
 - container_name: photoprism
-  image: photoprism/photoprism:preview@sha256:086e37927003d1019f1e4480b3ea49b798bb2547e0733a6878c628e559757130
+  image: photoprism/photoprism:preview@sha256:9bf3718a699c91e541927747c925c73e1ba2b6b87838852155a2566aa45dd69f
   url: photos.$DOMAINNAME
 - container_name: photoprism-db
   image: mariadb:11.4.2@sha256:e59ba8783bf7bc02a4779f103bb0d8751ac0e10f9471089709608377eded7aa8
@@ -141,7 +141,7 @@
   image: phpmyadmin:5.2.1-apache@sha256:324f41f0d188ff54b35da977b7a1d769a7203f2a07bc892adc306595f2e5bd9a
   url: phpmyadmin.$DOMAINNAME
 - container_name: plex
-  image: lscr.io/linuxserver/plex:version-1.40.4.8679-424562606@sha256:f15541bfa94eae032cb3c8392f800aba6b6068cb663b5bd1d12f559b5308f9eb
+  image: lscr.io/linuxserver/plex:version-1.40.4.8679-424562606@sha256:7dfc133dcd0e5f30a795f2fa68545f504400eeb5e57852235d2ae8d01e6e63d8
   url: plex-noauth.$DOMAINNAME
 - container_name: portainer
   image: portainer/portainer-ce:2.20.3-alpine@sha256:a6f635877e0daa4aa39c1cbf4e73a31b35d342284588fa72fd8a91efb3c6a091
@@ -163,7 +163,7 @@
   image: ghcr.io/jordemort/traefik-forward-auth:latest@sha256:394f86bff5cc839fac1392f65dd3d4471e827bc29321a4460e7d92042e026599
   url: auth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: unifi
-  image: lscr.io/linuxserver/unifi-network-application:version-8.3.32@sha256:fb219c24c81acbf9b0d56af308fe9fe5fd93411823a26bf5bfdfe8adcefc36e9
+  image: lscr.io/linuxserver/unifi-network-application:version-8.3.32@sha256:e5c12f5e82f458b4e1163145e46c917380265e6db5bbcb508dcb2ce319f9483e
   url: unifi.$DOMAINNAME
 - container_name: unifi-db
   image: mongo:7.0.12@sha256:54996a559c724c726a31fb8131e1c9088a05f7e531760e2897212389bbf20fed
