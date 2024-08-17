@@ -86,7 +86,7 @@
 - container_name: linkding-db-backup
   image: tiredofit/db-backup:4.1.4@sha256:6df3a87b288d00d2f00f87f3dd2314eba793d3a34b500d3fcef3a1b598946e3d
 - container_name: lobe-chat
-  image: lobehub/lobe-chat:v1.9.6@sha256:ae23ea46ac752d9921ae15de7e0124f4092ec5fadb14f1723a395585106f74f4
+  image: lobehub/lobe-chat:v1.11.1@sha256:a3755b58f26cde0137a6cf3beff824b6059256b4749e50b890411d895778f060
   url: chat.$DOMAINNAME
 - container_name: mailrise
   image: yoryan/mailrise:1.4.0@sha256:66082168090b9a83f01cc71a9d7b1994840adbbbffbe4d2cf644272fbbc23a1a
