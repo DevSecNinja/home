@@ -103,7 +103,7 @@ services:
   ## Database Server (recommended)
   ## see https://docs.photoprism.app/getting-started/faq/#should-i-use-sqlite-mariadb-or-mysql
   photoprism-db:
-    image: mariadb:11.5.2@sha256:018e5ae1207e80a5c65e24d78d836ac4f82de5d7bf9a035c44fa06d9cb75c2f4
+    image: mariadb:11.5.2@sha256:4b812bbd9a025569fbe5a7a70e4a3cd3af53aa36621fecb1c2e108af2113450a
     container_name: photoprism-db
     command: --innodb-buffer-pool-size=512M --transaction-isolation=READ-COMMITTED --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --max-connections=512 --innodb-rollback-on-timeout=OFF --innodb-lock-wait-timeout=120 --log-bin=binlog --binlog-format=ROW
     restart: always
