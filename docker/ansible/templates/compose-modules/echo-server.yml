@@ -1,6 +1,6 @@
 services:
   echo-server:
-    image: mendhak/http-https-echo:33@sha256:17f45542b4442474f4b68bf6e97f9a321b2c0fe95c5126c429fe49d911b07eb3
+    image: mendhak/http-https-echo:34@sha256:b9b45336763a8ee7f34b78fc77f3b1ecbaae41bb9ab72949d06e7c3cf6928532
     container_name: echo-server
     depends_on:
       - traefik
