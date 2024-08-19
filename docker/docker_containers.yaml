@@ -10,7 +10,7 @@
   image: bitwarden/self-host:2024.7.2-beta@sha256:73ceeee265e9e9f897e52ee9771d9a47ca8d0234082093c6d2601a3639629f83
   url: bitwarden.$DOMAINNAME
 - container_name: bitwarden-db
-  image: mariadb:11.5.2@sha256:018e5ae1207e80a5c65e24d78d836ac4f82de5d7bf9a035c44fa06d9cb75c2f4
+  image: mariadb:11.5.2@sha256:4b812bbd9a025569fbe5a7a70e4a3cd3af53aa36621fecb1c2e108af2113450a
 - container_name: bitwarden-db-backup
   image: tiredofit/db-backup:4.1.4@sha256:6df3a87b288d00d2f00f87f3dd2314eba793d3a34b500d3fcef3a1b598946e3d
 - container_name: cadvisor
@@ -38,7 +38,7 @@
   image: jgraph/drawio:24.7.5@sha256:116d8b5164bdc5dd068b8371e46de4eedac4df67f3b6998ae4eab6aee21d942e
   url: draw.$DOMAINNAME
 - container_name: echo-server
-  image: mendhak/http-https-echo:33@sha256:17f45542b4442474f4b68bf6e97f9a321b2c0fe95c5126c429fe49d911b07eb3
+  image: mendhak/http-https-echo:34@sha256:b9b45336763a8ee7f34b78fc77f3b1ecbaae41bb9ab72949d06e7c3cf6928532
   url: echo-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: excalidraw
   image: excalidraw/excalidraw:latest@sha256:30fa9cab7e3a4726f9782bc752d661909b68b39d45960a363de6492b740cf7d5
@@ -86,12 +86,12 @@
 - container_name: linkding-db-backup
   image: tiredofit/db-backup:4.1.4@sha256:6df3a87b288d00d2f00f87f3dd2314eba793d3a34b500d3fcef3a1b598946e3d
 - container_name: lobe-chat
-  image: lobehub/lobe-chat:v1.11.1@sha256:a3755b58f26cde0137a6cf3beff824b6059256b4749e50b890411d895778f060
+  image: lobehub/lobe-chat:v1.11.7@sha256:a76dc78a5d12f512374a503cd17ed54656a8f4ad0ec86d46cc743caf8eff0aee
   url: chat.$DOMAINNAME
 - container_name: mailrise
   image: yoryan/mailrise:1.4.0@sha256:66082168090b9a83f01cc71a9d7b1994840adbbbffbe4d2cf644272fbbc23a1a
 - container_name: n8n
-  image: n8nio/n8n:1.55.1@sha256:f283a6d2743718e6f8730fb158426e83fe4268bb1ca9c87e861f321c3a7911b2
+  image: n8nio/n8n:1.55.3@sha256:e99ffa516dbb6af0ed771872c538bbb2eecc94a76e1860e14f41a3d790e7ef54
   url: n8n.$DOMAINNAME
 - container_name: n8n-db
   image: docker.io/library/postgres:16.4-alpine@sha256:492898505cb45f9835acc327e98711eaa9298ed804e0bb36f29e08394229550d
@@ -103,7 +103,7 @@
 - container_name: nextcloud-cron
   image: nextcloud:29.0.4-apache@sha256:da4a63ad13e912e17d05ff996b09d84aeab0253f1e7bc200aa0ccfa63909a15d
 - container_name: nextcloud-db
-  image: mariadb:11.5.2@sha256:018e5ae1207e80a5c65e24d78d836ac4f82de5d7bf9a035c44fa06d9cb75c2f4
+  image: mariadb:11.5.2@sha256:4b812bbd9a025569fbe5a7a70e4a3cd3af53aa36621fecb1c2e108af2113450a
 - container_name: nextcloud-db-backup
   image: tiredofit/db-backup:4.1.4@sha256:6df3a87b288d00d2f00f87f3dd2314eba793d3a34b500d3fcef3a1b598946e3d
 - container_name: nextcloud-redis
@@ -134,7 +134,7 @@
   image: photoprism/photoprism:preview@sha256:9bf3718a699c91e541927747c925c73e1ba2b6b87838852155a2566aa45dd69f
   url: photos.$DOMAINNAME
 - container_name: photoprism-db
-  image: mariadb:11.5.2@sha256:018e5ae1207e80a5c65e24d78d836ac4f82de5d7bf9a035c44fa06d9cb75c2f4
+  image: mariadb:11.5.2@sha256:4b812bbd9a025569fbe5a7a70e4a3cd3af53aa36621fecb1c2e108af2113450a
 - container_name: photoprism-db-backup
   image: tiredofit/db-backup:4.1.4@sha256:6df3a87b288d00d2f00f87f3dd2314eba793d3a34b500d3fcef3a1b598946e3d
 - container_name: phpmyadmin
@@ -176,7 +176,7 @@
   image: wallabag/wallabag:2.6.9@sha256:d482b139bab164afef0e8bbfbeb7c55cd3e10e848b95d7d167e4ffcbc847f4b9
   url: wallabag.$DOMAINNAME
 - container_name: wallabag-db
-  image: mariadb:11.5.2@sha256:018e5ae1207e80a5c65e24d78d836ac4f82de5d7bf9a035c44fa06d9cb75c2f4
+  image: mariadb:11.5.2@sha256:4b812bbd9a025569fbe5a7a70e4a3cd3af53aa36621fecb1c2e108af2113450a
 - container_name: wallabag-db-backup
   image: tiredofit/db-backup:4.1.4@sha256:6df3a87b288d00d2f00f87f3dd2314eba793d3a34b500d3fcef3a1b598946e3d
 - container_name: wallabag-redis

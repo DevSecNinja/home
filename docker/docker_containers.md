@@ -58,7 +58,7 @@
 
 **container_name:** bitwarden-db
 
-**image:** mariadb:11.5.2@sha256:018e5ae1207e80a5c65e24d78d836ac4f82de5d7bf9a035c44fa06d9cb75c2f4
+**image:** mariadb:11.5.2@sha256:4b812bbd9a025569fbe5a7a70e4a3cd3af53aa36621fecb1c2e108af2113450a
 
 ### Service: bitwarden-db-backup
 
@@ -154,7 +154,7 @@
 
 **container_name:** echo-server
 
-**image:** mendhak/http-https-echo:33@sha256:17f45542b4442474f4b68bf6e97f9a321b2c0fe95c5126c429fe49d911b07eb3
+**image:** mendhak/http-https-echo:34@sha256:b9b45336763a8ee7f34b78fc77f3b1ecbaae41bb9ab72949d06e7c3cf6928532
 
 **url:** echo-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -318,7 +318,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:v1.11.1@sha256:a3755b58f26cde0137a6cf3beff824b6059256b4749e50b890411d895778f060
+**image:** lobehub/lobe-chat:v1.11.7@sha256:a76dc78a5d12f512374a503cd17ed54656a8f4ad0ec86d46cc743caf8eff0aee
 
 **url:** chat.$DOMAINNAME
 
@@ -336,7 +336,7 @@
 
 **container_name:** n8n
 
-**image:** n8nio/n8n:1.55.1@sha256:f283a6d2743718e6f8730fb158426e83fe4268bb1ca9c87e861f321c3a7911b2
+**image:** n8nio/n8n:1.55.3@sha256:e99ffa516dbb6af0ed771872c538bbb2eecc94a76e1860e14f41a3d790e7ef54
 
 **url:** n8n.$DOMAINNAME
 
@@ -372,7 +372,7 @@
 
 **container_name:** nextcloud-db
 
-**image:** mariadb:11.5.2@sha256:018e5ae1207e80a5c65e24d78d836ac4f82de5d7bf9a035c44fa06d9cb75c2f4
+**image:** mariadb:11.5.2@sha256:4b812bbd9a025569fbe5a7a70e4a3cd3af53aa36621fecb1c2e108af2113450a
 
 ### Service: nextcloud-db-backup
 
@@ -488,7 +488,7 @@
 
 **container_name:** photoprism-db
 
-**image:** mariadb:11.5.2@sha256:018e5ae1207e80a5c65e24d78d836ac4f82de5d7bf9a035c44fa06d9cb75c2f4
+**image:** mariadb:11.5.2@sha256:4b812bbd9a025569fbe5a7a70e4a3cd3af53aa36621fecb1c2e108af2113450a
 
 ### Service: photoprism-db-backup
 
@@ -678,7 +678,7 @@
 
 **container_name:** wallabag-db
 
-**image:** mariadb:11.5.2@sha256:018e5ae1207e80a5c65e24d78d836ac4f82de5d7bf9a035c44fa06d9cb75c2f4
+**image:** mariadb:11.5.2@sha256:4b812bbd9a025569fbe5a7a70e4a3cd3af53aa36621fecb1c2e108af2113450a
 
 ### Service: wallabag-db-backup
 
