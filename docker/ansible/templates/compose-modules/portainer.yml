@@ -34,7 +34,7 @@ services:
       - "traefik.http.services.portainer-svc.loadbalancer.server.port=9000"
 
   portainer-docker-proxy:
-    image: lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:fab7963b26cbccca7c4907d9732a2ca1b00738e07aa35242c07b90c240effd6f
+    image: lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:b8be7939d917ea5da704d9b7630ba23466da70a2097a42183a9800828140e19a
     container_name: portainer-docker-proxy
     restart: always
     networks:
