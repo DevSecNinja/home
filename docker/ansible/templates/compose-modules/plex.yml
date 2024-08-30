@@ -1,7 +1,7 @@
 services:
   plex:
     container_name: plex
-    image: lscr.io/linuxserver/plex:version-1.40.5.8897-e5987a19d@sha256:1b7e8833b689c70daaa76d1b75a80df6415d58635d905f1018d4f21a7ea580b3
+    image: lscr.io/linuxserver/plex:version-1.40.5.8897-e5987a19d@sha256:4bc88efb49059e0d98254c4fcf680de996873b2c5d732604ebbccc4ac952fec9
     restart: always
     depends_on:
       - traefik
