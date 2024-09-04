@@ -163,7 +163,7 @@
   image: ghcr.io/jordemort/traefik-forward-auth:latest@sha256:394f86bff5cc839fac1392f65dd3d4471e827bc29321a4460e7d92042e026599
   url: auth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: unifi
-  image: lscr.io/linuxserver/unifi-network-application:version-8.3.32@sha256:36fc5d3a8a1ee79983b92e2c7742eee1a05b754d338e313c394c7f9c47fa07ce
+  image: lscr.io/linuxserver/unifi-network-application:version-8.4.59@sha256:ed5f33c2f1468c8aa03d1918cd83acdaef615e3ba5ff6cab25a776fd75b70981
   url: unifi.$DOMAINNAME
 - container_name: unifi-db
   image: mongo:7.0.14@sha256:1a7b344b3ee8b07190fa15555726333e38f5db0a3bfb38b2ce9a1d3973b060be
