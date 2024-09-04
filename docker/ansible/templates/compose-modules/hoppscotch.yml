@@ -20,6 +20,7 @@ services:
       - REFRESH_TOKEN_VALIDITY=604800000
       - ACCESS_TOKEN_VALIDITY=86400000
       - SESSION_SECRET=${HOPPSCOTCH_SESSION_SECRET}
+      - DATA_ENCRYPTION_KEY=${HOPPSCOTCH_DB_DATA_ENCRYPTION_KEY}
       # Hoppscotch App Domain Config
       - REDIRECT_URL=https://api-tester.$DOMAINNAME
       - WHITELISTED_ORIGINS=https://api-tester.$DOMAINNAME,https://api-tester-api.$DOMAINNAME,https://api-tester-admin.$DOMAINNAME
