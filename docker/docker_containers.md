@@ -82,7 +82,7 @@
 
 **container_name:** change-detection
 
-**image:** ghcr.io/dgtlmoon/changedetection.io:0.46.02@sha256:1a7e703c07acfa2eb642be24b3ef7b8a1edb341119f1811b4e1f5afbf883f103
+**image:** ghcr.io/dgtlmoon/changedetection.io:0.46.03@sha256:5a9f049754164288ce889a09b84177adaff7b47b1e6df6c9f369ac87c0178b30
 
 **url:** change-detection.$DOMAINNAME
 
@@ -136,7 +136,7 @@
 
 **container_name:** dozzle-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:fab7963b26cbccca7c4907d9732a2ca1b00738e07aa35242c07b90c240effd6f
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:e143221c149a2e461644b58ead3f157a19023ced822f69faf3c1cd171458c27a
 
 ## docker/ansible/templates/compose-modules/drawio.yml
 
@@ -144,7 +144,7 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:24.7.5@sha256:116d8b5164bdc5dd068b8371e46de4eedac4df67f3b6998ae4eab6aee21d942e
+**image:** jgraph/drawio:24.7.8@sha256:582f9acb754066bc83435d20b0fd9aae6d43c36a065b9add9c0d2a27014575a3
 
 **url:** draw.$DOMAINNAME
 
@@ -164,7 +164,7 @@
 
 **container_name:** excalidraw
 
-**image:** excalidraw/excalidraw:latest@sha256:30fa9cab7e3a4726f9782bc752d661909b68b39d45960a363de6492b740cf7d5
+**image:** excalidraw/excalidraw:latest@sha256:2e35b321d9672cdebb80653056cf94676167afd978e6c4db58e692841f520598
 
 **url:** excalidraw.$DOMAINNAME
 
@@ -174,7 +174,7 @@
 
 **container_name:** foldingathome
 
-**image:** lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:7297d24f8421c40074d7d9b083a7f1b4624773b0b07ca656abce6cf04c17a04a
+**image:** lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:dd0ef78377246284e3d2e2a323023ac9dd52f70913e5c964cd2d78e4429422ad
 
 ## docker/ansible/templates/compose-modules/gatus.yml
 
@@ -230,7 +230,7 @@
 
 **container_name:** homepage-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:fab7963b26cbccca7c4907d9732a2ca1b00738e07aa35242c07b90c240effd6f
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:e143221c149a2e461644b58ead3f157a19023ced822f69faf3c1cd171458c27a
 
 ## docker/ansible/templates/compose-modules/hoppscotch.yml
 
@@ -238,7 +238,7 @@
 
 **container_name:** hoppscotch
 
-**image:** hoppscotch/hoppscotch:2024.7.1@sha256:626aea0d1c7a7e2009ac6dcf8b4d30c0a0b8de5e35e4f1b465d6141fb38ac156
+**image:** hoppscotch/hoppscotch:2024.7.2@sha256:c986bd39116fc4a212d88a05a34ffcb12719f9b18a59164f3c8ccc234cf89ad4
 
 **url:** api-tester.$DOMAINNAME
 
@@ -296,7 +296,7 @@
 
 **container_name:** linkding
 
-**image:** sissbruecker/linkding:1.31.0-alpine@sha256:1fa14d3082148e8e6ac6c00e617bcb47c3a3f6cfc86e636a9c4a5a5c05dd493d
+**image:** sissbruecker/linkding:1.31.1-alpine@sha256:2229b2c0ef8c62481cec39ef1cf73942b2d8c98801acd95f18aaf05c913a8710
 
 **url:** linkding.$DOMAINNAME
 
@@ -358,7 +358,7 @@
 
 **container_name:** nextcloud
 
-**image:** nextcloud:29.0.4-apache@sha256:da4a63ad13e912e17d05ff996b09d84aeab0253f1e7bc200aa0ccfa63909a15d
+**image:** nextcloud:29.0.5-apache@sha256:3a62c849b9ed64f8085d76c12f26376b0e9fc4fbcef8a20059e1e26b027469e5
 
 **url:** cloud.$DOMAINNAME
 
@@ -366,7 +366,7 @@
 
 **container_name:** nextcloud-cron
 
-**image:** nextcloud:29.0.4-apache@sha256:da4a63ad13e912e17d05ff996b09d84aeab0253f1e7bc200aa0ccfa63909a15d
+**image:** nextcloud:29.0.5-apache@sha256:3a62c849b9ed64f8085d76c12f26376b0e9fc4fbcef8a20059e1e26b027469e5
 
 ### Service: nextcloud-db
 
@@ -460,7 +460,7 @@
 
 **container_name:** paperless-web
 
-**image:** ghcr.io/paperless-ngx/paperless-ngx:2.11.4@sha256:f3f2021c2771de4c18fb16938dbc7b2e0bc73a32168c16ef3c6914e4a5875d66
+**image:** ghcr.io/paperless-ngx/paperless-ngx:2.11.6@sha256:fca12ddea5509819dd0702cf128944aa23d01dd850a2536a96c2b46fb982b9bb
 
 **url:** paperless.$DOMAINNAME
 
@@ -480,7 +480,7 @@
 
 **container_name:** photoprism
 
-**image:** photoprism/photoprism:preview@sha256:9bf3718a699c91e541927747c925c73e1ba2b6b87838852155a2566aa45dd69f
+**image:** photoprism/photoprism:preview@sha256:085e952b3421d275caae901eed75d83e6b72cd38d8e61ae44b8f5f9015890c6e
 
 **url:** photos.$DOMAINNAME
 
@@ -502,7 +502,7 @@
 
 **container_name:** phpmyadmin
 
-**image:** phpmyadmin:5.2.1-apache@sha256:36fafbcd3f147493547fc1861e18d0816e3f0b96083b4846b013319387155634
+**image:** phpmyadmin:5.2.1-apache@sha256:368061c87a81d86ec1bc8fd29b2fcb6d5c6f8ca5e5e182081e6d0cd56c3d36fe
 
 **url:** phpmyadmin.$DOMAINNAME
 
@@ -512,7 +512,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.40.5.8854-f36c552fd@sha256:525c1ec7cef5d9e7b94ad80c521a13fd0656eb2e3326709e6675ae1739eac546
+**image:** lscr.io/linuxserver/plex:version-1.40.5.8921-836b34c27@sha256:968263aa295c92bbc4ad6a1cc848d0275a5154cecc1d88e5f2f3fed3123be523
 
 **url:** plex-noauth.$DOMAINNAME
 
@@ -530,7 +530,7 @@
 
 **container_name:** portainer-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:fab7963b26cbccca7c4907d9732a2ca1b00738e07aa35242c07b90c240effd6f
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:e143221c149a2e461644b58ead3f157a19023ced822f69faf3c1cd171458c27a
 
 ## docker/ansible/templates/compose-modules/prometheus.yml
 
@@ -538,7 +538,7 @@
 
 **container_name:** prometheus
 
-**image:** prom/prometheus:v2.54.0@sha256:497fe921f22fea8535fa2bcb1c193dacc6ce98c08274257b3d18a4eaae0f9647
+**image:** prom/prometheus:v2.54.1@sha256:f6639335d34a77d9d9db382b92eeb7fc00934be8eae81dbc03b31cfe90411a94
 
 **url:** prometheus.$DOMAINNAME
 
@@ -564,7 +564,7 @@
 
 **container_name:** promtail-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:fab7963b26cbccca7c4907d9732a2ca1b00738e07aa35242c07b90c240effd6f
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:e143221c149a2e461644b58ead3f157a19023ced822f69faf3c1cd171458c27a
 
 ## docker/ansible/templates/compose-modules/samba.yml
 
@@ -602,7 +602,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-8.3.32@sha256:6d26828a170a2f8c7cf200432808c58d8565849845c343f1159f4146c2244783
+**image:** lscr.io/linuxserver/unifi-network-application:version-8.3.32@sha256:36fc5d3a8a1ee79983b92e2c7742eee1a05b754d338e313c394c7f9c47fa07ce
 
 **url:** unifi.$DOMAINNAME
 
@@ -610,7 +610,7 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:7.0.12@sha256:ae1cf99fa7bfb007db8416ad4f3980c46054d949fa55d28e6d301a813fee6c06
+**image:** mongo:7.0.14@sha256:1a7b344b3ee8b07190fa15555726333e38f5db0a3bfb38b2ce9a1d3973b060be
 
 ### Service: unifi-db-backup
 
@@ -634,7 +634,7 @@
 
 **container_name:** vault
 
-**image:** hashicorp/vault:1.17@sha256:0ba7c9c2922b5645c07fb363a7862fd79eee235004b8bcf7ecba26ccfbc48526
+**image:** hashicorp/vault:1.17@sha256:dabbf3fd2ef0858795848a61c6b6865305eec16b144e03dfc6a550a13b0211e6
 
 **url:** vault.$DOMAINNAME`) && PathPrefix(`/v1
 
