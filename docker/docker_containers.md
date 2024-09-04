@@ -100,7 +100,7 @@
 
 **container_name:** cloudflare-ddns
 
-**image:** favonia/cloudflare-ddns:1.13.2@sha256:03133f7889a9945d58beb1cfe82e1a9e17ba3e2e5ce4fdd3a81e0fdd213e3f11
+**image:** favonia/cloudflare-ddns:1.14.0@sha256:ac14692ddc0b72061b0922192f0f46831f27a2da70156a42eb50b2c1658f7860
 
 ## docker/ansible/templates/compose-modules/code-server.yml
 
@@ -128,7 +128,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v8.2.1@sha256:83aab3fa5d8b863e5b0083e5a5f1d147af87d60c697f918d3c07e9179895558b
+**image:** amir20/dozzle:v8.4.1@sha256:92b8fdbbfcec2f87df0cc5c24fa60ffb68d3e764af18babb8a83c2b3fa64c2b9
 
 **url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 

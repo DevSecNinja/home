@@ -22,7 +22,7 @@
 - container_name: cloudflare-companion
   image: tiredofit/traefik-cloudflare-companion:7.3.1@sha256:c3aec9ff4f5ef5214678b6b72d299176a21c295664ff3297ac8b50fdd5788d76
 - container_name: cloudflare-ddns
-  image: favonia/cloudflare-ddns:1.13.2@sha256:03133f7889a9945d58beb1cfe82e1a9e17ba3e2e5ce4fdd3a81e0fdd213e3f11
+  image: favonia/cloudflare-ddns:1.14.0@sha256:ac14692ddc0b72061b0922192f0f46831f27a2da70156a42eb50b2c1658f7860
 - container_name: code-server
   image: lscr.io/linuxserver/code-server:version-4.89.0@sha256:678e01467fecf0d1d32b938f3f5324a69f74f9187d37fadddb8f926024524b8b
   url: code.$DOMAINNAME
@@ -30,7 +30,7 @@
   image: ghcr.io/gchq/cyberchef:10.19.2@sha256:04a2be6fb9db9a65b6dc148f3c52be499f40ecb281b69135783bbd76186b1513
   url: cyberchef.$DOMAINNAME
 - container_name: dozzle
-  image: amir20/dozzle:v8.2.1@sha256:83aab3fa5d8b863e5b0083e5a5f1d147af87d60c697f918d3c07e9179895558b
+  image: amir20/dozzle:v8.4.1@sha256:92b8fdbbfcec2f87df0cc5c24fa60ffb68d3e764af18babb8a83c2b3fa64c2b9
   url: dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: dozzle-docker-proxy
   image: lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:e143221c149a2e461644b58ead3f157a19023ced822f69faf3c1cd171458c27a
