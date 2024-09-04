@@ -238,7 +238,7 @@
 
 **container_name:** hoppscotch
 
-**image:** hoppscotch/hoppscotch:2024.7.2@sha256:c986bd39116fc4a212d88a05a34ffcb12719f9b18a59164f3c8ccc234cf89ad4
+**image:** hoppscotch/hoppscotch:2024.8.1@sha256:963459c0d665cb12927243f0ed9e704e7856ad2940feb1f656f40450e8e8b9cd
 
 **url:** api-tester.$DOMAINNAME
 
