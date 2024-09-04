@@ -23,7 +23,7 @@ services:
       - DATA_ENCRYPTION_KEY=${HOPPSCOTCH_DB_DATA_ENCRYPTION_KEY}
       # Hoppscotch App Domain Config
       - REDIRECT_URL=https://api-tester.$DOMAINNAME
-      - WHITELISTED_ORIGINS=https://api-tester.$DOMAINNAME,https://api-tester-api.$DOMAINNAME,https://api-tester-admin.$DOMAINNAME
+      - WHITELISTED_ORIGINS=https://api-tester.$DOMAINNAME,https://api-tester-api.$DOMAINNAME,https://api-tester-admin.$DOMAINNAME,http://localhost:3170,http://localhost:3000,http://localhost:3100
       - VITE_ALLOWED_AUTH_PROVIDERS=GITHUB,EMAIL # TODO: [hoppscotch] Check why allowed auth provider doesn't work
       # Github Auth Config
       - GITHUB_CLIENT_ID=${HOPPSCOTCH_GITHUB_CLIENT_ID}
