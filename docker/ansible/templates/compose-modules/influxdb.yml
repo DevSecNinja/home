@@ -1,6 +1,6 @@
 services:
   influxdb:
-    image: influxdb:2.7-alpine@sha256:84934b1007a518d779df42b1e58e6185f1f09a81a6593c6cd0c242fb9fb5c2f0
+    image: influxdb:2.7-alpine@sha256:fd949a222bb546c6f73e8b871af0de03fe915d094f3889e202ce62ea80b6f2d3
     container_name: influxdb
     depends_on:
       - traefik
