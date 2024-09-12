@@ -1,7 +1,7 @@
 services:
   portainer:
     container_name: portainer
-    image: portainer/portainer-ce:2.21.0-alpine@sha256:a3dd960478f95352fa2e3a52d64787bd0fa656a66fff4eb87bbdf89e27fae7d2
+    image: portainer/portainer-ce:2.21.1-alpine@sha256:e771a2944650ceaacf24412fa00a912009e2af5acf72cbf475b8ffa93df7103e
     depends_on:
       - portainer-docker-proxy
       - traefik
