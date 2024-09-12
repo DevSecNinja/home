@@ -59,7 +59,7 @@ services:
 
   unifi:
     container_name: unifi
-    image: lscr.io/linuxserver/unifi-network-application:version-8.4.59@sha256:ed5f33c2f1468c8aa03d1918cd83acdaef615e3ba5ff6cab25a776fd75b70981
+    image: lscr.io/linuxserver/unifi-network-application:version-8.4.59@sha256:cc8001b61c6a268ac14254b4a5f74648dcb5cb6df90fff54bc8d2bed5d669047
     depends_on:
       - traefik
       - unifi-db
