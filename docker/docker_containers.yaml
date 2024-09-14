@@ -91,7 +91,7 @@
 - container_name: mailrise
   image: yoryan/mailrise:1.4.0@sha256:66082168090b9a83f01cc71a9d7b1994840adbbbffbe4d2cf644272fbbc23a1a
 - container_name: n8n
-  image: n8nio/n8n:1.57.0@sha256:1aca01738deb8864a71e0b780162b3fa817aa630933e7943ee788e6e55319385
+  image: n8nio/n8n:1.59.0@sha256:e6174c61cb82119700581b256649d6d276d1e5bdc8c03fadfc7930ca2f2b56ad
   url: n8n.$DOMAINNAME
 - container_name: n8n-db
   image: docker.io/library/postgres:16.4-alpine@sha256:d898b0b78a2627cb4ee63464a14efc9d296884f1b28c841b0ab7d7c42f1fffdf
