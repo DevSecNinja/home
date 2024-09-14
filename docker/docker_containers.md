@@ -50,7 +50,7 @@
 
 **container_name:** bitwarden
 
-**image:** bitwarden/self-host:2024.8.2-beta@sha256:073c5147d40932e5cfdefc92f04cd70b073bad2cab6432c86ff226583074f228
+**image:** bitwarden/self-host:2024.8.3-beta@sha256:898ea3ac9831e02f71740d39056c374a02706355e9a170d1da613c18d29c8f3e
 
 **url:** bitwarden.$DOMAINNAME
 
@@ -100,7 +100,7 @@
 
 **container_name:** cloudflare-ddns
 
-**image:** favonia/cloudflare-ddns:1.14.0@sha256:ac14692ddc0b72061b0922192f0f46831f27a2da70156a42eb50b2c1658f7860
+**image:** favonia/cloudflare-ddns:1.14.2@sha256:9e410575e7c093b8ff3236dba72f0af032f95f26c50a92fbcad8f29f0e19ff87
 
 ## docker/ansible/templates/compose-modules/code-server.yml
 
@@ -128,7 +128,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v8.4.1@sha256:92b8fdbbfcec2f87df0cc5c24fa60ffb68d3e764af18babb8a83c2b3fa64c2b9
+**image:** amir20/dozzle:v8.4.3@sha256:3f190215f174ef406e620af38a60f05a5e53651135aa91362df8ca8f816866e1
 
 **url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -136,7 +136,7 @@
 
 **container_name:** dozzle-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:5d11cafc36aaed04a67c0fdec9e74c85dcb8ea5e1b478384c688e5c28f689a69
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:70f3e17ab08a0519ddbd108745644efb532df560fec88e441a98166d88b98869
 
 ## docker/ansible/templates/compose-modules/drawio.yml
 
@@ -164,7 +164,7 @@
 
 **container_name:** excalidraw
 
-**image:** excalidraw/excalidraw:latest@sha256:2e35b321d9672cdebb80653056cf94676167afd978e6c4db58e692841f520598
+**image:** excalidraw/excalidraw:latest@sha256:fae667864717a415e7474b5f757ffb50e63a81cfc1a2fbcf905ecbd137d0dbba
 
 **url:** excalidraw.$DOMAINNAME
 
@@ -174,7 +174,7 @@
 
 **container_name:** foldingathome
 
-**image:** lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:2cf66e9b5753af07486282acc5252fea97b65fbbe178ded475e66133eeb6e73a
+**image:** lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:f676fa2f58ebc9ba0ee65202f156bebecaba3f8bb8a0ca9cd677fbed8e1e478d
 
 ## docker/ansible/templates/compose-modules/gatus.yml
 
@@ -190,7 +190,7 @@
 
 **container_name:** gatus-db
 
-**image:** docker.io/library/postgres:16.4-alpine@sha256:492898505cb45f9835acc327e98711eaa9298ed804e0bb36f29e08394229550d
+**image:** docker.io/library/postgres:16.4-alpine@sha256:d898b0b78a2627cb4ee63464a14efc9d296884f1b28c841b0ab7d7c42f1fffdf
 
 ### Service: gatus-db-backup
 
@@ -222,7 +222,7 @@
 
 **container_name:** homepage
 
-**image:** ghcr.io/gethomepage/homepage:v0.9.6@sha256:e5b2616d17db8961a53c0b7d389d812d31c265d35696d475732f53278c9276f7
+**image:** ghcr.io/gethomepage/homepage:v0.9.9@sha256:5c264918d2d18a753da8657fee7e0579c8b11581b19275d9a93fde76a8267f3c
 
 **url:** homepage-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -230,7 +230,7 @@
 
 **container_name:** homepage-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:5d11cafc36aaed04a67c0fdec9e74c85dcb8ea5e1b478384c688e5c28f689a69
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:70f3e17ab08a0519ddbd108745644efb532df560fec88e441a98166d88b98869
 
 ## docker/ansible/templates/compose-modules/hoppscotch.yml
 
@@ -238,7 +238,7 @@
 
 **container_name:** hoppscotch
 
-**image:** hoppscotch/hoppscotch:2024.8.1@sha256:963459c0d665cb12927243f0ed9e704e7856ad2940feb1f656f40450e8e8b9cd
+**image:** hoppscotch/hoppscotch:2024.8.2@sha256:f1da831950b7fd07b9f83f0fb0bdf0645e151e498b6bb42865597401b8ad61b6
 
 **url:** api-tester.$DOMAINNAME
 
@@ -246,7 +246,7 @@
 
 **container_name:** hoppscotch-db
 
-**image:** docker.io/library/postgres:16.4-alpine@sha256:492898505cb45f9835acc327e98711eaa9298ed804e0bb36f29e08394229550d
+**image:** docker.io/library/postgres:16.4-alpine@sha256:d898b0b78a2627cb4ee63464a14efc9d296884f1b28c841b0ab7d7c42f1fffdf
 
 ### Service: hoppscotch-db-backup
 
@@ -260,7 +260,7 @@
 
 **container_name:** influxdb
 
-**image:** influxdb:2.7-alpine@sha256:84934b1007a518d779df42b1e58e6185f1f09a81a6593c6cd0c242fb9fb5c2f0
+**image:** influxdb:2.7-alpine@sha256:327be0243a329b1da350a37c1468d756f4258330d50d10a2a993e5bb9a6e3d2e
 
 **url:** influxdb-noauth.$DOMAINNAME
 
@@ -304,7 +304,7 @@
 
 **container_name:** linkding-db
 
-**image:** docker.io/library/postgres:16.4-alpine@sha256:492898505cb45f9835acc327e98711eaa9298ed804e0bb36f29e08394229550d
+**image:** docker.io/library/postgres:16.4-alpine@sha256:d898b0b78a2627cb4ee63464a14efc9d296884f1b28c841b0ab7d7c42f1fffdf
 
 ### Service: linkding-db-backup
 
@@ -318,7 +318,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:v1.15.11@sha256:c62c48a4b161fa14d0623f4e79c75d85a275f8d9943494bf0e630bc0860ded35
+**image:** lobehub/lobe-chat:v1.15.23@sha256:d3de6fef7a27629f7a6ba2865f5ed6bcc9ba97c5c062c23f22549952a7b491e4
 
 **url:** chat.$DOMAINNAME
 
@@ -344,7 +344,7 @@
 
 **container_name:** n8n-db
 
-**image:** docker.io/library/postgres:16.4-alpine@sha256:492898505cb45f9835acc327e98711eaa9298ed804e0bb36f29e08394229550d
+**image:** docker.io/library/postgres:16.4-alpine@sha256:d898b0b78a2627cb4ee63464a14efc9d296884f1b28c841b0ab7d7c42f1fffdf
 
 ### Service: n8n-db-backup
 
@@ -358,7 +358,7 @@
 
 **container_name:** nextcloud
 
-**image:** nextcloud:29.0.6-apache@sha256:67d186bbcaf53c8fdf51e2899301dc2d447e307eb84afb2f34c1bf1bc796c59a
+**image:** nextcloud:29.0.6-apache@sha256:c437d628c117e0508e45c6d1d89f5fba236c092ade7d0cc28d629d581bea161c
 
 **url:** cloud.$DOMAINNAME
 
@@ -366,7 +366,7 @@
 
 **container_name:** nextcloud-cron
 
-**image:** nextcloud:29.0.6-apache@sha256:67d186bbcaf53c8fdf51e2899301dc2d447e307eb84afb2f34c1bf1bc796c59a
+**image:** nextcloud:29.0.6-apache@sha256:c437d628c117e0508e45c6d1d89f5fba236c092ade7d0cc28d629d581bea161c
 
 ### Service: nextcloud-db
 
@@ -430,7 +430,7 @@
 
 **container_name:** paperless-db
 
-**image:** docker.io/library/postgres:16.4-alpine@sha256:492898505cb45f9835acc327e98711eaa9298ed804e0bb36f29e08394229550d
+**image:** docker.io/library/postgres:16.4-alpine@sha256:d898b0b78a2627cb4ee63464a14efc9d296884f1b28c841b0ab7d7c42f1fffdf
 
 ### Service: paperless-db-backup
 
@@ -480,7 +480,7 @@
 
 **container_name:** photoprism
 
-**image:** photoprism/photoprism:preview@sha256:085e952b3421d275caae901eed75d83e6b72cd38d8e61ae44b8f5f9015890c6e
+**image:** photoprism/photoprism:preview@sha256:27e3ad71232c9822534dcbdc2340f5efde8a9c589b059ca64472a3deab7f9599
 
 **url:** photos.$DOMAINNAME
 
@@ -502,7 +502,7 @@
 
 **container_name:** phpmyadmin
 
-**image:** phpmyadmin:5.2.1-apache@sha256:368061c87a81d86ec1bc8fd29b2fcb6d5c6f8ca5e5e182081e6d0cd56c3d36fe
+**image:** phpmyadmin:5.2.1-apache@sha256:8979d7219511e94fa8fc88afdb45c62392c6e09ae9b28bce97a4bb7a078bebb5
 
 **url:** phpmyadmin.$DOMAINNAME
 
@@ -512,7 +512,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.40.5.8921-836b34c27@sha256:a37d8cd2a77dc82cd575d4ee94471c20e6a5e050a29a3f7f8a3ed8fee169b8b2
+**image:** lscr.io/linuxserver/plex:version-1.40.5.8921-836b34c27@sha256:5604745534016668a7a7debf2ad06eb95d06e0e27c99e8a10daf05c0a26f9559
 
 **url:** plex-noauth.$DOMAINNAME
 
@@ -522,7 +522,7 @@
 
 **container_name:** portainer
 
-**image:** portainer/portainer-ce:2.21.0-alpine@sha256:a3dd960478f95352fa2e3a52d64787bd0fa656a66fff4eb87bbdf89e27fae7d2
+**image:** portainer/portainer-ce:2.21.1-alpine@sha256:e771a2944650ceaacf24412fa00a912009e2af5acf72cbf475b8ffa93df7103e
 
 **url:** portainer-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -530,7 +530,7 @@
 
 **container_name:** portainer-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:5d11cafc36aaed04a67c0fdec9e74c85dcb8ea5e1b478384c688e5c28f689a69
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:70f3e17ab08a0519ddbd108745644efb532df560fec88e441a98166d88b98869
 
 ## docker/ansible/templates/compose-modules/prometheus.yml
 
@@ -564,7 +564,7 @@
 
 **container_name:** promtail-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:5d11cafc36aaed04a67c0fdec9e74c85dcb8ea5e1b478384c688e5c28f689a69
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:70f3e17ab08a0519ddbd108745644efb532df560fec88e441a98166d88b98869
 
 ## docker/ansible/templates/compose-modules/samba.yml
 
@@ -602,7 +602,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-8.4.59@sha256:ed5f33c2f1468c8aa03d1918cd83acdaef615e3ba5ff6cab25a776fd75b70981
+**image:** lscr.io/linuxserver/unifi-network-application:version-8.4.62@sha256:5349adad88b656b908b9e3e0d19c6e490152fd839b2267882822a97aa906d707
 
 **url:** unifi.$DOMAINNAME
 
@@ -610,7 +610,7 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:7.0.14@sha256:1a7b344b3ee8b07190fa15555726333e38f5db0a3bfb38b2ce9a1d3973b060be
+**image:** mongo:7.0.14@sha256:1ade6afda762cb6a68ba65e83ef305660ef0517d6d4140627211970e85f4588a
 
 ### Service: unifi-db-backup
 
