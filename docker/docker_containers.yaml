@@ -141,7 +141,7 @@
   image: phpmyadmin:5.2.1-apache@sha256:8979d7219511e94fa8fc88afdb45c62392c6e09ae9b28bce97a4bb7a078bebb5
   url: phpmyadmin.$DOMAINNAME
 - container_name: plex
-  image: lscr.io/linuxserver/plex:version-1.40.5.8921-836b34c27@sha256:5604745534016668a7a7debf2ad06eb95d06e0e27c99e8a10daf05c0a26f9559
+  image: lscr.io/linuxserver/plex:version-1.41.0.8992-8463ad060@sha256:0c4e1981b23c3bdf2892cb9b85c299137af55390044dd5cfdd33bdbc4e32ee1f
   url: plex-noauth.$DOMAINNAME
 - container_name: portainer
   image: portainer/portainer-ce:2.21.1-alpine@sha256:e771a2944650ceaacf24412fa00a912009e2af5acf72cbf475b8ffa93df7103e
