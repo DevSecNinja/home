@@ -58,7 +58,7 @@
 
 **container_name:** bitwarden-db
 
-**image:** mariadb:11.5.2@sha256:346f3a6792bf88014a9d9290927c12c13522a50e0e7e6d40aaa9add73df0bcc6
+**image:** mariadb:11.5.2@sha256:4066f2d4805fef72a83cf4a62689a0aadb6e83a8c8a82b64431edd4b94f684f8
 
 ### Service: bitwarden-db-backup
 
@@ -136,7 +136,7 @@
 
 **container_name:** dozzle-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:70f3e17ab08a0519ddbd108745644efb532df560fec88e441a98166d88b98869
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:313e8b7a2d0a2c9c19385f580d0ebe0498d5d0f49533827020df9aaf27a133a0
 
 ## docker/ansible/templates/compose-modules/drawio.yml
 
@@ -174,7 +174,7 @@
 
 **container_name:** foldingathome
 
-**image:** lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:f676fa2f58ebc9ba0ee65202f156bebecaba3f8bb8a0ca9cd677fbed8e1e478d
+**image:** lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:b142b05e56325e509e17947b4e270e0948ab55aea88ad53cf43bc82b9398227d
 
 ## docker/ansible/templates/compose-modules/gatus.yml
 
@@ -230,7 +230,7 @@
 
 **container_name:** homepage-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:70f3e17ab08a0519ddbd108745644efb532df560fec88e441a98166d88b98869
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:313e8b7a2d0a2c9c19385f580d0ebe0498d5d0f49533827020df9aaf27a133a0
 
 ## docker/ansible/templates/compose-modules/hoppscotch.yml
 
@@ -318,7 +318,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:v1.17.3@sha256:5f85a4783de248f8aeb7ed62a0651920a1b423eb1a5f3d3d8725d2e1e3ba45f7
+**image:** lobehub/lobe-chat:v1.17.6@sha256:6db2de6f66b401934947e42344d5cd82218c728b73a9abd6930e7bab2933932a
 
 **url:** chat.$DOMAINNAME
 
@@ -358,7 +358,7 @@
 
 **container_name:** nextcloud
 
-**image:** nextcloud:29.0.6-apache@sha256:c437d628c117e0508e45c6d1d89f5fba236c092ade7d0cc28d629d581bea161c
+**image:** nextcloud:30.0.0-apache@sha256:6613a36792a7e392fc532d5b75e3b018ea5fcea034002083e1c7a182d07eae99
 
 **url:** cloud.$DOMAINNAME
 
@@ -366,13 +366,13 @@
 
 **container_name:** nextcloud-cron
 
-**image:** nextcloud:29.0.6-apache@sha256:c437d628c117e0508e45c6d1d89f5fba236c092ade7d0cc28d629d581bea161c
+**image:** nextcloud:30.0.0-apache@sha256:6613a36792a7e392fc532d5b75e3b018ea5fcea034002083e1c7a182d07eae99
 
 ### Service: nextcloud-db
 
 **container_name:** nextcloud-db
 
-**image:** mariadb:11.5.2@sha256:346f3a6792bf88014a9d9290927c12c13522a50e0e7e6d40aaa9add73df0bcc6
+**image:** mariadb:11.5.2@sha256:4066f2d4805fef72a83cf4a62689a0aadb6e83a8c8a82b64431edd4b94f684f8
 
 ### Service: nextcloud-db-backup
 
@@ -460,7 +460,7 @@
 
 **container_name:** paperless-web
 
-**image:** ghcr.io/paperless-ngx/paperless-ngx:2.12.0@sha256:7a1d34bfaba5243aa4398d3b8abadc7234b6aa844837b329d598bed5ca17a0a9
+**image:** ghcr.io/paperless-ngx/paperless-ngx:2.12.1@sha256:217cec76128c2545872cf356694f2ffd4524cb84892d0333e654795dec255633
 
 **url:** paperless.$DOMAINNAME
 
@@ -480,7 +480,7 @@
 
 **container_name:** photoprism
 
-**image:** photoprism/photoprism:preview@sha256:27e3ad71232c9822534dcbdc2340f5efde8a9c589b059ca64472a3deab7f9599
+**image:** photoprism/photoprism:preview@sha256:22f2258f64dbe3aca5bafee6eeaaf80c8b1cd6fe4e9d16561743d08e08cea6fa
 
 **url:** photos.$DOMAINNAME
 
@@ -488,7 +488,7 @@
 
 **container_name:** photoprism-db
 
-**image:** mariadb:11.5.2@sha256:346f3a6792bf88014a9d9290927c12c13522a50e0e7e6d40aaa9add73df0bcc6
+**image:** mariadb:11.5.2@sha256:4066f2d4805fef72a83cf4a62689a0aadb6e83a8c8a82b64431edd4b94f684f8
 
 ### Service: photoprism-db-backup
 
@@ -530,7 +530,7 @@
 
 **container_name:** portainer-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:70f3e17ab08a0519ddbd108745644efb532df560fec88e441a98166d88b98869
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:313e8b7a2d0a2c9c19385f580d0ebe0498d5d0f49533827020df9aaf27a133a0
 
 ## docker/ansible/templates/compose-modules/prometheus.yml
 
@@ -564,7 +564,7 @@
 
 **container_name:** promtail-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:70f3e17ab08a0519ddbd108745644efb532df560fec88e441a98166d88b98869
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:313e8b7a2d0a2c9c19385f580d0ebe0498d5d0f49533827020df9aaf27a133a0
 
 ## docker/ansible/templates/compose-modules/samba.yml
 
@@ -610,7 +610,7 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:7.0.14@sha256:1ade6afda762cb6a68ba65e83ef305660ef0517d6d4140627211970e85f4588a
+**image:** mongo:7.0.14@sha256:244afb1488edfc42aaa8ffa6153393bbc075d63516ab0305daa2eaa35241eb52
 
 ### Service: unifi-db-backup
 
@@ -678,7 +678,7 @@
 
 **container_name:** wallabag-db
 
-**image:** mariadb:11.5.2@sha256:346f3a6792bf88014a9d9290927c12c13522a50e0e7e6d40aaa9add73df0bcc6
+**image:** mariadb:11.5.2@sha256:4066f2d4805fef72a83cf4a62689a0aadb6e83a8c8a82b64431edd4b94f684f8
 
 ### Service: wallabag-db-backup
 
