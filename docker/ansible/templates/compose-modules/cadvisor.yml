@@ -9,7 +9,8 @@ services:
       - /:/rootfs:ro
       - /var/run:/var/run:ro
       - /sys:/sys:ro
-      - /var/lib/docker:/var/lib/docker:ro
+      # TODO: [cadvisor] Check what the implications are of not mounting outside of Docker folder which is a security issue
+      #- /var/lib/docker:/var/lib/docker:ro
     restart: always
     networks:
       - t2_proxy
