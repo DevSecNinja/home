@@ -50,7 +50,7 @@
 
 **container_name:** bitwarden
 
-**image:** bitwarden/self-host:2024.8.3-beta@sha256:898ea3ac9831e02f71740d39056c374a02706355e9a170d1da613c18d29c8f3e
+**image:** bitwarden/self-host:2024.9.1-beta@sha256:17430d1f97eb78fc4482e62075ca365f16b1b3667064a70ca73a41c62a62cd08
 
 **url:** bitwarden.$DOMAINNAME
 
@@ -128,7 +128,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v8.4.3@sha256:3f190215f174ef406e620af38a60f05a5e53651135aa91362df8ca8f816866e1
+**image:** amir20/dozzle:v8.5.0@sha256:fb73aa408bb5b8a359dac2254b1f6de948b3a8a28612079e52c2b0345a2cb028
 
 **url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 

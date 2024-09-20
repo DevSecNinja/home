@@ -7,7 +7,7 @@
   image: prom/alertmanager:v0.27.0@sha256:e13b6ed5cb929eeaee733479dce55e10eb3bc2e9c4586c705a4e8da41e5eacf5
   url: alertmanager.$DOMAINNAME
 - container_name: bitwarden
-  image: bitwarden/self-host:2024.8.3-beta@sha256:898ea3ac9831e02f71740d39056c374a02706355e9a170d1da613c18d29c8f3e
+  image: bitwarden/self-host:2024.9.1-beta@sha256:17430d1f97eb78fc4482e62075ca365f16b1b3667064a70ca73a41c62a62cd08
   url: bitwarden.$DOMAINNAME
 - container_name: bitwarden-db
   image: mariadb:11.5.2@sha256:4066f2d4805fef72a83cf4a62689a0aadb6e83a8c8a82b64431edd4b94f684f8
@@ -30,7 +30,7 @@
   image: ghcr.io/gchq/cyberchef:10.19.2@sha256:04a2be6fb9db9a65b6dc148f3c52be499f40ecb281b69135783bbd76186b1513
   url: cyberchef.$DOMAINNAME
 - container_name: dozzle
-  image: amir20/dozzle:v8.4.3@sha256:3f190215f174ef406e620af38a60f05a5e53651135aa91362df8ca8f816866e1
+  image: amir20/dozzle:v8.5.0@sha256:fb73aa408bb5b8a359dac2254b1f6de948b3a8a28612079e52c2b0345a2cb028
   url: dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: dozzle-docker-proxy
   image: lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:313e8b7a2d0a2c9c19385f580d0ebe0498d5d0f49533827020df9aaf27a133a0
