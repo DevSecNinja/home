@@ -7,7 +7,8 @@ services:
       - promtail-docker-proxy
     volumes:
       - $DOCKERDIR/data/promtail/promtail.yml:/etc/promtail/promtail.yml
-      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      # TODO: [promtail] Check what the implications are of not mounting outside of Docker folder which is a security issue
+      #- /var/lib/docker/containers:/var/lib/docker/containers:ro
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       - TZ=${TZ}
