@@ -6,7 +6,8 @@ services:
     devices:
       - /dev/kmsg:/dev/kmsg
     volumes:
-      - /:/rootfs:ro
+      # TODO: [cadvisor] Check what the implications are of not mounting root which is a security issue
+      #- /:/rootfs:ro
       - /var/run:/var/run:ro
       - /sys:/sys:ro
       # TODO: [cadvisor] Check what the implications are of not mounting outside of Docker folder which is a security issue
