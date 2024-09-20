@@ -296,7 +296,7 @@
 
 **container_name:** linkding
 
-**image:** sissbruecker/linkding:1.32.0-alpine@sha256:e5e4d1b37be7f5dc23474344bbad7eabbf9b579681ce6b2f2faaeef82b502276
+**image:** sissbruecker/linkding:1.34.0-alpine@sha256:bedf8ab2d407b701c24efbc4fe50b5d9cf9a096769414c70e7c5a0ce3eeb4c29
 
 **url:** linkding.$DOMAINNAME
 
