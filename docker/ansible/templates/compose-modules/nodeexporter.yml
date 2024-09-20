@@ -5,7 +5,8 @@ services:
     volumes:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
-      - /:/rootfs:ro
+      # TODO: [nodeexporter] Check what the implications are of not mounting root which is a security issue
+      #- /:/rootfs:ro
     command:
       - '--path.procfs=/host/proc'
       - '--path.rootfs=/rootfs'
