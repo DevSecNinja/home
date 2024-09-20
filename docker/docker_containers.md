@@ -212,7 +212,7 @@
 
 **container_name:** loki
 
-**image:** grafana/loki:3.1.1@sha256:e689cc634841c937de4d7ea6157f17e29cf257d6a320f1c293ab18d46cfea986
+**image:** grafana/loki:3.2.0@sha256:882e30c20683a48a8b7ca123e6c19988980b4bd13d2ff221dfcbef0fdc631694
 
 **url:** loki.$DOMAINNAME
 
@@ -556,7 +556,7 @@
 
 **container_name:** promtail
 
-**image:** grafana/promtail:3.1.1@sha256:48fba41d9f08c6a56a85b078529dc8550a1809d3e7a9674982e9e9bfbdc854c1
+**image:** grafana/promtail:3.2.0@sha256:a77ce6cc7d6f1a05611adeaef863935f66d68640d9d0ef2feb190c8f0edac19e
 
 **url:** promtail.$DOMAINNAME
 

@@ -56,7 +56,7 @@
   image: grafana/grafana:11.2.0@sha256:408afb9726de5122b00a2576763a8a57a3c86d5b0eff5305bc994ceb3eb96c3f
   url: grafana.$DOMAINNAME
 - container_name: loki
-  image: grafana/loki:3.1.1@sha256:e689cc634841c937de4d7ea6157f17e29cf257d6a320f1c293ab18d46cfea986
+  image: grafana/loki:3.2.0@sha256:882e30c20683a48a8b7ca123e6c19988980b4bd13d2ff221dfcbef0fdc631694
   url: loki.$DOMAINNAME
 - container_name: homepage
   image: ghcr.io/gethomepage/homepage:v0.9.9@sha256:5c264918d2d18a753da8657fee7e0579c8b11581b19275d9a93fde76a8267f3c
@@ -155,7 +155,7 @@
   image: prom/pushgateway:v1.10.0@sha256:7a4d0696a24ef4e8bad62bee5656855a0aff2f26416d8cb32009dc28d6263604
   url: pushgateway.$DOMAINNAME
 - container_name: promtail
-  image: grafana/promtail:3.1.1@sha256:48fba41d9f08c6a56a85b078529dc8550a1809d3e7a9674982e9e9bfbdc854c1
+  image: grafana/promtail:3.2.0@sha256:a77ce6cc7d6f1a05611adeaef863935f66d68640d9d0ef2feb190c8f0edac19e
   url: promtail.$DOMAINNAME
 - container_name: promtail-docker-proxy
   image: lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:313e8b7a2d0a2c9c19385f580d0ebe0498d5d0f49533827020df9aaf27a133a0
