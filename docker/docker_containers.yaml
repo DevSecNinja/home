@@ -30,7 +30,7 @@
   image: ghcr.io/gchq/cyberchef:10.19.2@sha256:04a2be6fb9db9a65b6dc148f3c52be499f40ecb281b69135783bbd76186b1513
   url: cyberchef.$DOMAINNAME
 - container_name: dozzle
-  image: amir20/dozzle:v8.5.0@sha256:fb73aa408bb5b8a359dac2254b1f6de948b3a8a28612079e52c2b0345a2cb028
+  image: amir20/dozzle:v8.5.1@sha256:05c28478314123f3d4b791bc64231896629ef61eed45ad2c7ac56916ec78fbf6
   url: dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: dozzle-docker-proxy
   image: lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:313e8b7a2d0a2c9c19385f580d0ebe0498d5d0f49533827020df9aaf27a133a0
