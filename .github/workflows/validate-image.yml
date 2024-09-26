@@ -10,7 +10,7 @@ permissions:
 jobs:
   changed-files:
     name: Get changed files
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     outputs:
       matrix: ${{ steps.changed-files.outputs.all_changed_files }}
     steps:
@@ -30,7 +30,7 @@ jobs:
 
   scan-docker-images:
     name: Scan Docker images
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: [changed-files]
     permissions:
       security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
