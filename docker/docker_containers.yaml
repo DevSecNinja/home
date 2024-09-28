@@ -58,6 +58,9 @@
 - container_name: loki
   image: grafana/loki:3.2.0@sha256:882e30c20683a48a8b7ca123e6c19988980b4bd13d2ff221dfcbef0fdc631694
   url: loki.$DOMAINNAME
+- container_name: home-assistant
+  image: ghcr.io/home-assistant/home-assistant:beta@sha256:7a312cc7686fe2a83f3c52cd136e4c765ff4cfce5bb4e6c70c6ba06f8738a5c0
+  url: home-assistant.$DOMAINNAME
 - container_name: homepage
   image: ghcr.io/gethomepage/homepage:v0.9.10@sha256:671c2ed1a61b5dfbb9a1998c8738c3aeb1acf11adbc12563f81fcf4fd9802198
   url: homepage-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME

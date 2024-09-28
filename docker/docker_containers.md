@@ -216,6 +216,16 @@
 
 **url:** loki.$DOMAINNAME
 
+## docker/ansible/templates/compose-modules/home-assistant.yml
+
+### Service: home-assistant
+
+**container_name:** home-assistant
+
+**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:7a312cc7686fe2a83f3c52cd136e4c765ff4cfce5bb4e6c70c6ba06f8738a5c0
+
+**url:** home-assistant.$DOMAINNAME
+
 ## docker/ansible/templates/compose-modules/homepage.yml
 
 ### Service: homepage
