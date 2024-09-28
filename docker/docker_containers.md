@@ -128,7 +128,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v8.5.1@sha256:05c28478314123f3d4b791bc64231896629ef61eed45ad2c7ac56916ec78fbf6
+**image:** amir20/dozzle:v8.5.3@sha256:17d2cea75c33777c6ec72a1fe48fc152599993506aa8c90341ce4a3c8e4e29ed
 
 **url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -174,7 +174,7 @@
 
 **container_name:** foldingathome
 
-**image:** lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:b142b05e56325e509e17947b4e270e0948ab55aea88ad53cf43bc82b9398227d
+**image:** lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:e564b21b624dfabaa2118145377977b90977dd3523d46d765099a9da0ed78d39
 
 ## docker/ansible/templates/compose-modules/gatus.yml
 
@@ -204,7 +204,7 @@
 
 **container_name:** grafana
 
-**image:** grafana/grafana:11.2.0@sha256:408afb9726de5122b00a2576763a8a57a3c86d5b0eff5305bc994ceb3eb96c3f
+**image:** grafana/grafana:11.2.1@sha256:999ac5b9b357e31be729d990e76dc3749285ca0ebd1ce1294a5b69cf6435d869
 
 **url:** grafana.$DOMAINNAME
 
@@ -222,7 +222,7 @@
 
 **container_name:** homepage
 
-**image:** ghcr.io/gethomepage/homepage:v0.9.9@sha256:5c264918d2d18a753da8657fee7e0579c8b11581b19275d9a93fde76a8267f3c
+**image:** ghcr.io/gethomepage/homepage:v0.9.10@sha256:671c2ed1a61b5dfbb9a1998c8738c3aeb1acf11adbc12563f81fcf4fd9802198
 
 **url:** homepage-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -318,7 +318,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:v1.17.6@sha256:6db2de6f66b401934947e42344d5cd82218c728b73a9abd6930e7bab2933932a
+**image:** lobehub/lobe-chat:v1.20.2@sha256:4f944f626bc03ca03cbdc21aa98cef71050a2e6a0a5842560e9057b6b63dc6cc
 
 **url:** chat.$DOMAINNAME
 
@@ -358,7 +358,7 @@
 
 **container_name:** nextcloud
 
-**image:** nextcloud:30.0.0-apache@sha256:6613a36792a7e392fc532d5b75e3b018ea5fcea034002083e1c7a182d07eae99
+**image:** nextcloud:30.0.0-apache@sha256:6b89c15912462b5849b2ee73c2effc73afdd2a826366222b7d021d94f9bb1df5
 
 **url:** cloud.$DOMAINNAME
 
@@ -366,7 +366,7 @@
 
 **container_name:** nextcloud-cron
 
-**image:** nextcloud:30.0.0-apache@sha256:6613a36792a7e392fc532d5b75e3b018ea5fcea034002083e1c7a182d07eae99
+**image:** nextcloud:30.0.0-apache@sha256:6b89c15912462b5849b2ee73c2effc73afdd2a826366222b7d021d94f9bb1df5
 
 ### Service: nextcloud-db
 
@@ -502,7 +502,7 @@
 
 **container_name:** phpmyadmin
 
-**image:** phpmyadmin:5.2.1-apache@sha256:8979d7219511e94fa8fc88afdb45c62392c6e09ae9b28bce97a4bb7a078bebb5
+**image:** phpmyadmin:5.2.1-apache@sha256:0e1c550eda821813ab958a50dd0d44d17e129c87beb1d4c5f14ca34b3949e92d
 
 **url:** phpmyadmin.$DOMAINNAME
 
@@ -512,7 +512,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.41.0.8992-8463ad060@sha256:0c4e1981b23c3bdf2892cb9b85c299137af55390044dd5cfdd33bdbc4e32ee1f
+**image:** lscr.io/linuxserver/plex:version-1.41.0.8992-8463ad060@sha256:6facc481ef321946066db33d90c4e950c9910e5ec14d61b3f5b467745bf2cc81
 
 **url:** plex-noauth.$DOMAINNAME
 
@@ -522,7 +522,7 @@
 
 **container_name:** portainer
 
-**image:** portainer/portainer-ce:2.21.1-alpine@sha256:e771a2944650ceaacf24412fa00a912009e2af5acf72cbf475b8ffa93df7103e
+**image:** portainer/portainer-ce:2.21.2-alpine@sha256:7f93a7f68e95e2a6c989487e213817f2e9fa1010a7aaf6ac6304397b40e81b92
 
 **url:** portainer-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -602,7 +602,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-8.4.62@sha256:5349adad88b656b908b9e3e0d19c6e490152fd839b2267882822a97aa906d707
+**image:** lscr.io/linuxserver/unifi-network-application:version-8.4.62@sha256:11d7260d405243efd9cddb2a999f187d518142d4da95c4ac105621940b1de559
 
 **url:** unifi.$DOMAINNAME
 

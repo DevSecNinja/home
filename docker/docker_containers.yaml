@@ -30,7 +30,7 @@
   image: ghcr.io/gchq/cyberchef:10.19.2@sha256:04a2be6fb9db9a65b6dc148f3c52be499f40ecb281b69135783bbd76186b1513
   url: cyberchef.$DOMAINNAME
 - container_name: dozzle
-  image: amir20/dozzle:v8.5.1@sha256:05c28478314123f3d4b791bc64231896629ef61eed45ad2c7ac56916ec78fbf6
+  image: amir20/dozzle:v8.5.3@sha256:17d2cea75c33777c6ec72a1fe48fc152599993506aa8c90341ce4a3c8e4e29ed
   url: dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: dozzle-docker-proxy
   image: lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:313e8b7a2d0a2c9c19385f580d0ebe0498d5d0f49533827020df9aaf27a133a0
@@ -44,7 +44,7 @@
   image: excalidraw/excalidraw:latest@sha256:fae667864717a415e7474b5f757ffb50e63a81cfc1a2fbcf905ecbd137d0dbba
   url: excalidraw.$DOMAINNAME
 - container_name: foldingathome
-  image: lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:b142b05e56325e509e17947b4e270e0948ab55aea88ad53cf43bc82b9398227d
+  image: lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:e564b21b624dfabaa2118145377977b90977dd3523d46d765099a9da0ed78d39
 - container_name: gatus
   image: twinproduction/gatus:v5.12.1@sha256:e808d45f327450a42d8f670160bf4a596950dfd2824aea3825f03b49c2d7e61c
   url: status.$DOMAINNAME
@@ -53,13 +53,13 @@
 - container_name: gatus-db-backup
   image: tiredofit/db-backup:4.1.4@sha256:6df3a87b288d00d2f00f87f3dd2314eba793d3a34b500d3fcef3a1b598946e3d
 - container_name: grafana
-  image: grafana/grafana:11.2.0@sha256:408afb9726de5122b00a2576763a8a57a3c86d5b0eff5305bc994ceb3eb96c3f
+  image: grafana/grafana:11.2.1@sha256:999ac5b9b357e31be729d990e76dc3749285ca0ebd1ce1294a5b69cf6435d869
   url: grafana.$DOMAINNAME
 - container_name: loki
   image: grafana/loki:3.2.0@sha256:882e30c20683a48a8b7ca123e6c19988980b4bd13d2ff221dfcbef0fdc631694
   url: loki.$DOMAINNAME
 - container_name: homepage
-  image: ghcr.io/gethomepage/homepage:v0.9.9@sha256:5c264918d2d18a753da8657fee7e0579c8b11581b19275d9a93fde76a8267f3c
+  image: ghcr.io/gethomepage/homepage:v0.9.10@sha256:671c2ed1a61b5dfbb9a1998c8738c3aeb1acf11adbc12563f81fcf4fd9802198
   url: homepage-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: homepage-docker-proxy
   image: lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:313e8b7a2d0a2c9c19385f580d0ebe0498d5d0f49533827020df9aaf27a133a0
@@ -86,7 +86,7 @@
 - container_name: linkding-db-backup
   image: tiredofit/db-backup:4.1.4@sha256:6df3a87b288d00d2f00f87f3dd2314eba793d3a34b500d3fcef3a1b598946e3d
 - container_name: lobe-chat
-  image: lobehub/lobe-chat:v1.17.6@sha256:6db2de6f66b401934947e42344d5cd82218c728b73a9abd6930e7bab2933932a
+  image: lobehub/lobe-chat:v1.20.2@sha256:4f944f626bc03ca03cbdc21aa98cef71050a2e6a0a5842560e9057b6b63dc6cc
   url: chat.$DOMAINNAME
 - container_name: mailrise
   image: yoryan/mailrise:1.4.0@sha256:66082168090b9a83f01cc71a9d7b1994840adbbbffbe4d2cf644272fbbc23a1a
@@ -98,10 +98,10 @@
 - container_name: n8n-db-backup
   image: tiredofit/db-backup:4.1.4@sha256:6df3a87b288d00d2f00f87f3dd2314eba793d3a34b500d3fcef3a1b598946e3d
 - container_name: nextcloud
-  image: nextcloud:30.0.0-apache@sha256:6613a36792a7e392fc532d5b75e3b018ea5fcea034002083e1c7a182d07eae99
+  image: nextcloud:30.0.0-apache@sha256:6b89c15912462b5849b2ee73c2effc73afdd2a826366222b7d021d94f9bb1df5
   url: cloud.$DOMAINNAME
 - container_name: nextcloud-cron
-  image: nextcloud:30.0.0-apache@sha256:6613a36792a7e392fc532d5b75e3b018ea5fcea034002083e1c7a182d07eae99
+  image: nextcloud:30.0.0-apache@sha256:6b89c15912462b5849b2ee73c2effc73afdd2a826366222b7d021d94f9bb1df5
 - container_name: nextcloud-db
   image: mariadb:11.5.2@sha256:4066f2d4805fef72a83cf4a62689a0aadb6e83a8c8a82b64431edd4b94f684f8
 - container_name: nextcloud-db-backup
@@ -138,13 +138,13 @@
 - container_name: photoprism-db-backup
   image: tiredofit/db-backup:4.1.4@sha256:6df3a87b288d00d2f00f87f3dd2314eba793d3a34b500d3fcef3a1b598946e3d
 - container_name: phpmyadmin
-  image: phpmyadmin:5.2.1-apache@sha256:8979d7219511e94fa8fc88afdb45c62392c6e09ae9b28bce97a4bb7a078bebb5
+  image: phpmyadmin:5.2.1-apache@sha256:0e1c550eda821813ab958a50dd0d44d17e129c87beb1d4c5f14ca34b3949e92d
   url: phpmyadmin.$DOMAINNAME
 - container_name: plex
-  image: lscr.io/linuxserver/plex:version-1.41.0.8992-8463ad060@sha256:0c4e1981b23c3bdf2892cb9b85c299137af55390044dd5cfdd33bdbc4e32ee1f
+  image: lscr.io/linuxserver/plex:version-1.41.0.8992-8463ad060@sha256:6facc481ef321946066db33d90c4e950c9910e5ec14d61b3f5b467745bf2cc81
   url: plex-noauth.$DOMAINNAME
 - container_name: portainer
-  image: portainer/portainer-ce:2.21.1-alpine@sha256:e771a2944650ceaacf24412fa00a912009e2af5acf72cbf475b8ffa93df7103e
+  image: portainer/portainer-ce:2.21.2-alpine@sha256:7f93a7f68e95e2a6c989487e213817f2e9fa1010a7aaf6ac6304397b40e81b92
   url: portainer-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: portainer-docker-proxy
   image: lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:313e8b7a2d0a2c9c19385f580d0ebe0498d5d0f49533827020df9aaf27a133a0
@@ -163,7 +163,7 @@
   image: ghcr.io/jordemort/traefik-forward-auth:latest@sha256:394f86bff5cc839fac1392f65dd3d4471e827bc29321a4460e7d92042e026599
   url: auth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: unifi
-  image: lscr.io/linuxserver/unifi-network-application:version-8.4.62@sha256:5349adad88b656b908b9e3e0d19c6e490152fd839b2267882822a97aa906d707
+  image: lscr.io/linuxserver/unifi-network-application:version-8.4.62@sha256:11d7260d405243efd9cddb2a999f187d518142d4da95c4ac105621940b1de559
   url: unifi.$DOMAINNAME
 - container_name: unifi-db
   image: mongo:7.0.14@sha256:244afb1488edfc42aaa8ffa6153393bbc075d63516ab0305daa2eaa35241eb52
