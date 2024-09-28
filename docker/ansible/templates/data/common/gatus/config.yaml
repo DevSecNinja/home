@@ -125,6 +125,10 @@ endpoints:
     <<: *defaults
     url: "https://grafana.${DOMAINNAME}"
 
+  - name: Home Assistant - HTTP
+    <<: *defaults
+    url: "https://home-assistant.${DOMAINNAME}"
+
   - name: Homepage MGMT - HTTP
     <<: *defaults
     url: "https://homepage-mgmt.${DOMAINNAME}"

@@ -18,6 +18,7 @@ include:
   - $DOCKERDIR/data/compose/vault.yml
 {% endif %}
 {% if 'production' in group_names %}
+  - $DOCKERDIR/data/compose/home-assistant.yml
   - $DOCKERDIR/data/compose/linkding.yml
   - $DOCKERDIR/data/compose/n8n.yml
   - $DOCKERDIR/data/compose/nextcloud.yml
