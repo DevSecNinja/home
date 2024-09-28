@@ -296,7 +296,7 @@
 
 **container_name:** linkding
 
-**image:** sissbruecker/linkding:1.34.0-alpine@sha256:bedf8ab2d407b701c24efbc4fe50b5d9cf9a096769414c70e7c5a0ce3eeb4c29
+**image:** sissbruecker/linkding:1.35.0-alpine@sha256:5c830acf9ce284b7eb9ca51c50125de5e85dd0a35bba1920c83420550ee34c17
 
 **url:** linkding.$DOMAINNAME
 
@@ -336,7 +336,7 @@
 
 **container_name:** n8n
 
-**image:** n8nio/n8n:1.60.1@sha256:a030f51ebbe374a53cf100a17f28e9c69124c7042418851f31e15c8cdb79cfe3
+**image:** n8nio/n8n:1.61.0@sha256:f3b32e42765bc0aebc747d06df0ea3b8a0931343b49108ab3bf1dfd579ee6e65
 
 **url:** n8n.$DOMAINNAME
 
