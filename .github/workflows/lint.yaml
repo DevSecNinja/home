@@ -34,7 +34,7 @@ jobs:
   build:
     name: Lint
     if: github.actor != 'renovate[bot]' && !github.event.issue.pull_request # We shouldn't mess with the Renovate[bot] commits in PRs
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     permissions:
       contents: read

@@ -21,7 +21,7 @@ jobs:
   devcontainer:
     if: ${{ github.repository == 'onedr0p/cluster-template' }}
     name: publish
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       packages: write
