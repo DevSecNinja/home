@@ -128,7 +128,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v8.5.3@sha256:17d2cea75c33777c6ec72a1fe48fc152599993506aa8c90341ce4a3c8e4e29ed
+**image:** amir20/dozzle:v8.5.4@sha256:6a4835d0708e9424beb073732a38fe1f90c14fb8aa37bc841a9a36fa5b1d9872
 
 **url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -328,7 +328,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:v1.20.2@sha256:4f944f626bc03ca03cbdc21aa98cef71050a2e6a0a5842560e9057b6b63dc6cc
+**image:** lobehub/lobe-chat:v1.20.5@sha256:3fe2569ac14ae4fc03719121a53b9487df9484333fc9dca78a777e7b766e0771
 
 **url:** chat.$DOMAINNAME
 
