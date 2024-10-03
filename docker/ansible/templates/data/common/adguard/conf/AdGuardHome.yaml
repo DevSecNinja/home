@@ -196,7 +196,11 @@ filtering:
   blocking_mode: default
   parental_block_host: family-block.dns.adguard.com
   safebrowsing_block_host: standard-block.dns.adguard.com
-  rewrites: []
+  rewrites:
+    - domain: www.bing.com
+      answer: nochat.bing.com
+    - domain: copilot.microsoft.com
+      answer: cdp.copilot.microsoft.com
   safebrowsing_cache_size: 1048576
   safesearch_cache_size: 1048576
   parental_cache_size: 1048576
