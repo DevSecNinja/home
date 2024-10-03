@@ -67,7 +67,7 @@
 - container_name: homepage-docker-proxy
   image: lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:313e8b7a2d0a2c9c19385f580d0ebe0498d5d0f49533827020df9aaf27a133a0
 - container_name: hoppscotch
-  image: hoppscotch/hoppscotch:2024.8.2@sha256:f1da831950b7fd07b9f83f0fb0bdf0645e151e498b6bb42865597401b8ad61b6
+  image: hoppscotch/hoppscotch:2024.8.3@sha256:15358d5bb827b1be68f7b592d33ab37ddc6b91c51a5d9de3ceefa57bb6f28187
   url: api-tester.$DOMAINNAME
 - container_name: hoppscotch-db
   image: docker.io/library/postgres:16.4-alpine@sha256:d898b0b78a2627cb4ee63464a14efc9d296884f1b28c841b0ab7d7c42f1fffdf
