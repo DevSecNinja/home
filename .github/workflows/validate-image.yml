@@ -63,7 +63,7 @@ jobs:
       #     output: "trivy-results.sarif"
 
       - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@97646fedde05bcd0961217c60b50e23f721e7ec7
+        uses: aquasecurity/trivy-action@89b14e517dd8699cba3d787e53d4355cad28605c
         with:
           image-ref: "${{ steps.getimage.outputs.imageid }}"
           format: "json"
