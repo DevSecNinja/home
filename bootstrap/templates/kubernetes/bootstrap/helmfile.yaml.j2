@@ -18,7 +18,7 @@ releases:
   - name: prometheus-operator-crds
     namespace: observability
     chart: oci://ghcr.io/prometheus-community/charts/prometheus-operator-crds
-    version: 14.0.0
+    version: 15.0.0
   - name: cilium
     namespace: kube-system
     chart: cilium/cilium
@@ -30,7 +30,7 @@ releases:
   - name: coredns
     namespace: kube-system
     chart: coredns/coredns
-    version: 1.33.0
+    version: 1.34.0
     values:
       - ../apps/kube-system/coredns/app/helm-values.yaml
     needs:
