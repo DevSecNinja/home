@@ -22,7 +22,7 @@
 - container_name: cloudflare-companion
   image: tiredofit/traefik-cloudflare-companion:7.3.2@sha256:716a265a69f5f75ddbb089c19fe8e4b52cfd891f1dd426fe0e525a3ddf941ac8
 - container_name: cloudflare-ddns
-  image: favonia/cloudflare-ddns:1.14.2@sha256:9e410575e7c093b8ff3236dba72f0af032f95f26c50a92fbcad8f29f0e19ff87
+  image: favonia/cloudflare-ddns:1.15.0@sha256:d5649aee7c9e8f7e14a6efd5f2aa0db78ff5eee597da4dc78d950cbf6131bef8
 - container_name: code-server
   image: lscr.io/linuxserver/code-server:version-4.89.0@sha256:678e01467fecf0d1d32b938f3f5324a69f74f9187d37fadddb8f926024524b8b
   url: code.$DOMAINNAME
@@ -144,7 +144,7 @@
   image: phpmyadmin:5.2.1-apache@sha256:0e1c550eda821813ab958a50dd0d44d17e129c87beb1d4c5f14ca34b3949e92d
   url: phpmyadmin.$DOMAINNAME
 - container_name: plex
-  image: lscr.io/linuxserver/plex:version-1.41.0.8992-8463ad060@sha256:6facc481ef321946066db33d90c4e950c9910e5ec14d61b3f5b467745bf2cc81
+  image: lscr.io/linuxserver/plex:version-1.41.0.8994-f2c27da23@sha256:519cb67f04c8b114d19a3ebe4e31711eed5debae95b996c9c87d69202c44e6d9
   url: plex-noauth.$DOMAINNAME
 - container_name: portainer
   image: portainer/portainer-ce:2.22.0-alpine@sha256:2549b42bd302cf68a11e8958edf52381866ab516b8ea2fa65d0fb86db1a20d7d
@@ -173,7 +173,7 @@
 - container_name: unifi-db-backup
   image: tiredofit/db-backup:4.1.4@sha256:6df3a87b288d00d2f00f87f3dd2314eba793d3a34b500d3fcef3a1b598946e3d
 - container_name: vault
-  image: hashicorp/vault:1.17@sha256:dabbf3fd2ef0858795848a61c6b6865305eec16b144e03dfc6a550a13b0211e6
+  image: hashicorp/vault:1.17@sha256:74a4ab138ab5d64725e89cd9a9c73f7040c7fe49e98b71697b275ca9a69919df
   url: vault.$DOMAINNAME`) && PathPrefix(`/v1
 - container_name: wallabag
   image: wallabag/wallabag:2.6.9@sha256:d482b139bab164afef0e8bbfbeb7c55cd3e10e848b95d7d167e4ffcbc847f4b9

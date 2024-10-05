@@ -100,7 +100,7 @@
 
 **container_name:** cloudflare-ddns
 
-**image:** favonia/cloudflare-ddns:1.14.2@sha256:9e410575e7c093b8ff3236dba72f0af032f95f26c50a92fbcad8f29f0e19ff87
+**image:** favonia/cloudflare-ddns:1.15.0@sha256:d5649aee7c9e8f7e14a6efd5f2aa0db78ff5eee597da4dc78d950cbf6131bef8
 
 ## docker/ansible/templates/compose-modules/code-server.yml
 
@@ -522,7 +522,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.41.0.8992-8463ad060@sha256:6facc481ef321946066db33d90c4e950c9910e5ec14d61b3f5b467745bf2cc81
+**image:** lscr.io/linuxserver/plex:version-1.41.0.8994-f2c27da23@sha256:519cb67f04c8b114d19a3ebe4e31711eed5debae95b996c9c87d69202c44e6d9
 
 **url:** plex-noauth.$DOMAINNAME
 
@@ -644,7 +644,7 @@
 
 **container_name:** vault
 
-**image:** hashicorp/vault:1.17@sha256:dabbf3fd2ef0858795848a61c6b6865305eec16b144e03dfc6a550a13b0211e6
+**image:** hashicorp/vault:1.17@sha256:74a4ab138ab5d64725e89cd9a9c73f7040c7fe49e98b71697b275ca9a69919df
 
 **url:** vault.$DOMAINNAME`) && PathPrefix(`/v1
 
