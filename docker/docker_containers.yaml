@@ -82,7 +82,7 @@
   image: ghcr.io/corentinth/it-tools:2023.12.21-5ed3693@sha256:4aaf67eab769afc9dac5614a15614537446e11150d53eab3be34ac9775a27e3a
   url: tools.$DOMAINNAME
 - container_name: linkding
-  image: sissbruecker/linkding:1.35.0-alpine@sha256:5c830acf9ce284b7eb9ca51c50125de5e85dd0a35bba1920c83420550ee34c17
+  image: sissbruecker/linkding:1.36.0-alpine@sha256:137dd201797c186419c92c32f0c42c61bdb85f60653932c96985a0e6995a4286
   url: linkding.$DOMAINNAME
 - container_name: linkding-db
   image: docker.io/library/postgres:16.4-alpine@sha256:d898b0b78a2627cb4ee63464a14efc9d296884f1b28c841b0ab7d7c42f1fffdf
