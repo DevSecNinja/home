@@ -346,7 +346,7 @@
 
 **container_name:** n8n
 
-**image:** n8nio/n8n:1.61.0@sha256:f3b32e42765bc0aebc747d06df0ea3b8a0931343b49108ab3bf1dfd579ee6e65
+**image:** n8nio/n8n:1.62.1@sha256:49082daed743802dcdbb01c9a70b87d42acee1ecbca75867739dc858dacdbc2c
 
 **url:** n8n.$DOMAINNAME
 
@@ -532,7 +532,7 @@
 
 **container_name:** portainer
 
-**image:** portainer/portainer-ce:2.21.2-alpine@sha256:7f93a7f68e95e2a6c989487e213817f2e9fa1010a7aaf6ac6304397b40e81b92
+**image:** portainer/portainer-ce:2.22.0-alpine@sha256:2549b42bd302cf68a11e8958edf52381866ab516b8ea2fa65d0fb86db1a20d7d
 
 **url:** portainer-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
