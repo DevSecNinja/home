@@ -6,7 +6,7 @@
 
 **container_name:** adguard
 
-**image:** adguard/adguardhome:v0.107.52@sha256:d16cc7517ab96f843e7f8bf8826402dba98f5e6b175858920296243332391589
+**image:** adguard/adguardhome:v0.107.53@sha256:d9c512051141e6a617d773f16cdf6782c178464c6e766acf9fe63482a171f95c
 
 **url:** adguard-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -50,7 +50,7 @@
 
 **container_name:** bitwarden
 
-**image:** bitwarden/self-host:2024.9.1-beta@sha256:17430d1f97eb78fc4482e62075ca365f16b1b3667064a70ca73a41c62a62cd08
+**image:** bitwarden/self-host:2024.9.2-beta@sha256:8d90075358899c5d35e6210ef41a18428533f81d44edb17e860b04d4294f3d37
 
 **url:** bitwarden.$DOMAINNAME
 
@@ -58,7 +58,7 @@
 
 **container_name:** bitwarden-db
 
-**image:** mariadb:11.5.2@sha256:4066f2d4805fef72a83cf4a62689a0aadb6e83a8c8a82b64431edd4b94f684f8
+**image:** mariadb:11.5.2@sha256:9e7695800ab8fa72d75053fe536b090d0c9373465b32a073c73bc7940a2e8dbe
 
 ### Service: bitwarden-db-backup
 
@@ -92,7 +92,7 @@
 
 **container_name:** cloudflare-companion
 
-**image:** tiredofit/traefik-cloudflare-companion:7.3.1@sha256:c3aec9ff4f5ef5214678b6b72d299176a21c295664ff3297ac8b50fdd5788d76
+**image:** tiredofit/traefik-cloudflare-companion:7.3.2@sha256:716a265a69f5f75ddbb089c19fe8e4b52cfd891f1dd426fe0e525a3ddf941ac8
 
 ## docker/ansible/templates/compose-modules/cloudflare.yml
 
@@ -128,7 +128,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v8.5.4@sha256:6a4835d0708e9424beb073732a38fe1f90c14fb8aa37bc841a9a36fa5b1d9872
+**image:** amir20/dozzle:v8.5.5@sha256:aa9ea440a33c45fb25d59e06cb6850e6655404fad4bebac6345d8535b9d8a9ee
 
 **url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -136,7 +136,7 @@
 
 **container_name:** dozzle-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:313e8b7a2d0a2c9c19385f580d0ebe0498d5d0f49533827020df9aaf27a133a0
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:792bdde50356861db095884bb914f2e7004a851d92301a0c7150ea174be26864
 
 ## docker/ansible/templates/compose-modules/drawio.yml
 
@@ -144,7 +144,7 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:24.7.8@sha256:582f9acb754066bc83435d20b0fd9aae6d43c36a065b9add9c0d2a27014575a3
+**image:** jgraph/drawio:24.7.17@sha256:3e14dbd7818bb2222ef93d920809771dbbdc1bf8e1d8794c99314ad9a922eeb6
 
 **url:** draw.$DOMAINNAME
 
@@ -164,7 +164,7 @@
 
 **container_name:** excalidraw
 
-**image:** excalidraw/excalidraw:latest@sha256:fae667864717a415e7474b5f757ffb50e63a81cfc1a2fbcf905ecbd137d0dbba
+**image:** excalidraw/excalidraw:latest@sha256:df3ddf00d7977d7007ea33b5397239ff20955eeeeafd38735cb1604be799564a
 
 **url:** excalidraw.$DOMAINNAME
 
@@ -174,7 +174,7 @@
 
 **container_name:** foldingathome
 
-**image:** lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:e564b21b624dfabaa2118145377977b90977dd3523d46d765099a9da0ed78d39
+**image:** lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:97c7346a05a2993ff70defa3b33660c1d694b04e97691b2765838fd3e14361ae
 
 ## docker/ansible/templates/compose-modules/gatus.yml
 
@@ -204,7 +204,7 @@
 
 **container_name:** grafana
 
-**image:** grafana/grafana:11.2.1@sha256:999ac5b9b357e31be729d990e76dc3749285ca0ebd1ce1294a5b69cf6435d869
+**image:** grafana/grafana:11.2.2@sha256:d5133220d770aba5cb655147b619fa8770b90f41d8489a821d33b1cd34d16f89
 
 **url:** grafana.$DOMAINNAME
 
@@ -222,7 +222,7 @@
 
 **container_name:** home-assistant
 
-**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:7a312cc7686fe2a83f3c52cd136e4c765ff4cfce5bb4e6c70c6ba06f8738a5c0
+**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:4576a54b0771dd1438a08d9af7fdc2ff7bc054abd5dc76d35236c963b9694f7c
 
 **url:** home-assistant.$DOMAINNAME
 
@@ -240,7 +240,7 @@
 
 **container_name:** homepage-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:313e8b7a2d0a2c9c19385f580d0ebe0498d5d0f49533827020df9aaf27a133a0
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:792bdde50356861db095884bb914f2e7004a851d92301a0c7150ea174be26864
 
 ## docker/ansible/templates/compose-modules/hoppscotch.yml
 
@@ -248,7 +248,7 @@
 
 **container_name:** hoppscotch
 
-**image:** hoppscotch/hoppscotch:2024.8.3@sha256:15358d5bb827b1be68f7b592d33ab37ddc6b91c51a5d9de3ceefa57bb6f28187
+**image:** hoppscotch/hoppscotch:2024.9.0@sha256:ae01b6e3abe4d4529dd9e7cab604ebfea2f318202899c8611600f7388d753b39
 
 **url:** api-tester.$DOMAINNAME
 
@@ -382,7 +382,7 @@
 
 **container_name:** nextcloud-db
 
-**image:** mariadb:11.5.2@sha256:4066f2d4805fef72a83cf4a62689a0aadb6e83a8c8a82b64431edd4b94f684f8
+**image:** mariadb:11.5.2@sha256:9e7695800ab8fa72d75053fe536b090d0c9373465b32a073c73bc7940a2e8dbe
 
 ### Service: nextcloud-db-backup
 
@@ -498,7 +498,7 @@
 
 **container_name:** photoprism-db
 
-**image:** mariadb:11.5.2@sha256:4066f2d4805fef72a83cf4a62689a0aadb6e83a8c8a82b64431edd4b94f684f8
+**image:** mariadb:11.5.2@sha256:9e7695800ab8fa72d75053fe536b090d0c9373465b32a073c73bc7940a2e8dbe
 
 ### Service: photoprism-db-backup
 
@@ -540,7 +540,7 @@
 
 **container_name:** portainer-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:313e8b7a2d0a2c9c19385f580d0ebe0498d5d0f49533827020df9aaf27a133a0
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:792bdde50356861db095884bb914f2e7004a851d92301a0c7150ea174be26864
 
 ## docker/ansible/templates/compose-modules/prometheus.yml
 
@@ -574,7 +574,7 @@
 
 **container_name:** promtail-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:313e8b7a2d0a2c9c19385f580d0ebe0498d5d0f49533827020df9aaf27a133a0
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:792bdde50356861db095884bb914f2e7004a851d92301a0c7150ea174be26864
 
 ## docker/ansible/templates/compose-modules/samba.yml
 
@@ -612,7 +612,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-8.4.62@sha256:11d7260d405243efd9cddb2a999f187d518142d4da95c4ac105621940b1de559
+**image:** lscr.io/linuxserver/unifi-network-application:version-8.4.62@sha256:b97f24e2ebfb8b096dadde3a77f2354c037244f24adb1517240173ede0eb28b8
 
 **url:** unifi.$DOMAINNAME
 
@@ -688,7 +688,7 @@
 
 **container_name:** wallabag-db
 
-**image:** mariadb:11.5.2@sha256:4066f2d4805fef72a83cf4a62689a0aadb6e83a8c8a82b64431edd4b94f684f8
+**image:** mariadb:11.5.2@sha256:9e7695800ab8fa72d75053fe536b090d0c9373465b32a073c73bc7940a2e8dbe
 
 ### Service: wallabag-db-backup
 
@@ -718,7 +718,7 @@
 
 **container_name:** whoogle
 
-**image:** benbusby/whoogle-search:latest@sha256:04e1aea20c6be99f0331671cb6dc3b09843fd3cc28b2bb4688603a4d8e4ec1d4
+**image:** benbusby/whoogle-search:latest@sha256:9f9cd9229b32487c77aa9bd50bf2c54ca5053e78d2881e6cbee70dac7cb0dd64
 
 **url:** search.$DOMAINNAME
 
