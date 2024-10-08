@@ -41,3 +41,5 @@ services:
 
 volumes:
   code_server_data:
+  ## Add additional volumes
+  home_assistant_data:
