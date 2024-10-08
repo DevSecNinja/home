@@ -248,7 +248,7 @@
 
 **container_name:** hoppscotch
 
-**image:** hoppscotch/hoppscotch:2024.9.0@sha256:ae01b6e3abe4d4529dd9e7cab604ebfea2f318202899c8611600f7388d753b39
+**image:** hoppscotch/hoppscotch:2024.9.1@sha256:d075792928eea84f1b187a09b40be8b09064e331f19944f9c0d6a7c9960bb23d
 
 **url:** api-tester.$DOMAINNAME
 
@@ -328,7 +328,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:v1.21.4@sha256:023e8cb7f4b26d3495153f352782e00b9307ddc941fe1e037fcc9acb6ca2a190
+**image:** lobehub/lobe-chat:v1.21.6@sha256:9e05a286f2e6519430c3aac2bddf7f5887a3b98824dcdaad3bb7be53a591d222
 
 **url:** chat.$DOMAINNAME
 
@@ -452,7 +452,7 @@
 
 **container_name:** paperless-gotenberg
 
-**image:** docker.io/gotenberg/gotenberg:8.11.0@sha256:e60da3ecc52050303c3886630aa7ed82f9486660b82a1ce6e5bf253c3b0764d4
+**image:** docker.io/gotenberg/gotenberg:8.11.1@sha256:40519c7c72439261273dd78b518a19f495081ce92fec6b728074418ee0403f1e
 
 ### Service: paperless-redis
 
