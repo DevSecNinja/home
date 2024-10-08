@@ -21,7 +21,7 @@ services:
     networks:
       - t2_proxy
     volumes:
-      - code_server_data:/config
+      - $DOCKERDIR/data/code-server/config:/config
     labels:
       # Homepage
       - homepage.group=Productivity
@@ -40,6 +40,5 @@ services:
       - "traefik.http.services.code-server.loadbalancer.server.port=8443"
 
 volumes:
-  code_server_data:
   ## Add additional volumes
   home_assistant_data:
