@@ -1,6 +1,6 @@
 services:
   lobe-chat:
-    image: lobehub/lobe-chat:v1.21.6@sha256:9e05a286f2e6519430c3aac2bddf7f5887a3b98824dcdaad3bb7be53a591d222
+    image: lobehub/lobe-chat:v1.21.9@sha256:4c1dfe2a9dd828ae2f5e0a0136dae246fa25b1b890cfb0973d7ebaf6dce6913d
     container_name: lobe-chat
     depends_on:
       - traefik
