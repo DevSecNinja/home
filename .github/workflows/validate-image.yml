@@ -102,7 +102,7 @@ jobs:
             ❌ Image architecture is not AMD64! It's ${{ steps.archcheck.outputs.image_arch }}.
 
       - name: Comment PR - Success
-        uses: thollander/actions-comment-pull-request@v2
+        uses: thollander/actions-comment-pull-request@v3
         if: success() && steps.archcheck.outputs.image_arch
         with:
           message: |
