@@ -1,6 +1,6 @@
 services:
   photoprism:
-    image: photoprism/photoprism:preview@sha256:22f2258f64dbe3aca5bafee6eeaaf80c8b1cd6fe4e9d16561743d08e08cea6fa
+    image: photoprism/photoprism:preview@sha256:94f5b7443ea7aed729d034ad30143552b86d443b9f6bbf346baee403fa1de8ab
     container_name: photoprism
     depends_on:
       - traefik
