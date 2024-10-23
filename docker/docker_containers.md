@@ -58,7 +58,7 @@
 
 **container_name:** bitwarden-db
 
-**image:** mariadb:11.5.2@sha256:9e7695800ab8fa72d75053fe536b090d0c9373465b32a073c73bc7940a2e8dbe
+**image:** mariadb:11.5.2@sha256:4a1de8fa2a929944373d7421105500ff6f889ce90dcb883fbb2fdb070e4d427e
 
 ### Service: bitwarden-db-backup
 
@@ -222,7 +222,7 @@
 
 **container_name:** home-assistant
 
-**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:4576a54b0771dd1438a08d9af7fdc2ff7bc054abd5dc76d35236c963b9694f7c
+**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:9fbe69be41444b7aed42bbbcf3b44d8ffde24546db47f7d8c9237fc11423cf2b
 
 **url:** home-assistant.$DOMAINNAME
 
@@ -248,7 +248,7 @@
 
 **container_name:** hoppscotch
 
-**image:** hoppscotch/hoppscotch:2024.9.1@sha256:d075792928eea84f1b187a09b40be8b09064e331f19944f9c0d6a7c9960bb23d
+**image:** hoppscotch/hoppscotch:2024.9.3@sha256:e1d4604410e4edc83ad86159ed4f2f5f479d58842608de1193bb8fb048704395
 
 **url:** api-tester.$DOMAINNAME
 
@@ -328,7 +328,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:v1.21.6@sha256:9e05a286f2e6519430c3aac2bddf7f5887a3b98824dcdaad3bb7be53a591d222
+**image:** lobehub/lobe-chat:v1.21.9@sha256:4c1dfe2a9dd828ae2f5e0a0136dae246fa25b1b890cfb0973d7ebaf6dce6913d
 
 **url:** chat.$DOMAINNAME
 
@@ -368,7 +368,7 @@
 
 **container_name:** nextcloud
 
-**image:** nextcloud:30.0.0-apache@sha256:6b89c15912462b5849b2ee73c2effc73afdd2a826366222b7d021d94f9bb1df5
+**image:** nextcloud:30.0.1-apache@sha256:e86cd675f6c26dd3abb9644da24eb211c433bd1fec9f90dd242a2f54c5041df1
 
 **url:** cloud.$DOMAINNAME
 
@@ -376,13 +376,13 @@
 
 **container_name:** nextcloud-cron
 
-**image:** nextcloud:30.0.0-apache@sha256:6b89c15912462b5849b2ee73c2effc73afdd2a826366222b7d021d94f9bb1df5
+**image:** nextcloud:30.0.1-apache@sha256:e86cd675f6c26dd3abb9644da24eb211c433bd1fec9f90dd242a2f54c5041df1
 
 ### Service: nextcloud-db
 
 **container_name:** nextcloud-db
 
-**image:** mariadb:11.5.2@sha256:9e7695800ab8fa72d75053fe536b090d0c9373465b32a073c73bc7940a2e8dbe
+**image:** mariadb:11.5.2@sha256:4a1de8fa2a929944373d7421105500ff6f889ce90dcb883fbb2fdb070e4d427e
 
 ### Service: nextcloud-db-backup
 
@@ -490,7 +490,7 @@
 
 **container_name:** photoprism
 
-**image:** photoprism/photoprism:preview@sha256:22f2258f64dbe3aca5bafee6eeaaf80c8b1cd6fe4e9d16561743d08e08cea6fa
+**image:** photoprism/photoprism:preview@sha256:790a89ec01d7d2cb0f5c210feb91bb291fb982088014138377c96c990f69ffca
 
 **url:** photos.$DOMAINNAME
 
@@ -498,7 +498,7 @@
 
 **container_name:** photoprism-db
 
-**image:** mariadb:11.5.2@sha256:9e7695800ab8fa72d75053fe536b090d0c9373465b32a073c73bc7940a2e8dbe
+**image:** mariadb:11.5.2@sha256:4a1de8fa2a929944373d7421105500ff6f889ce90dcb883fbb2fdb070e4d427e
 
 ### Service: photoprism-db-backup
 
@@ -512,7 +512,7 @@
 
 **container_name:** phpmyadmin
 
-**image:** phpmyadmin:5.2.1-apache@sha256:0e1c550eda821813ab958a50dd0d44d17e129c87beb1d4c5f14ca34b3949e92d
+**image:** phpmyadmin:5.2.1-apache@sha256:142c7a6ab8d25ea4924194bccbd5b83d2e2060ecd95e7806a88296a996929ed3
 
 **url:** phpmyadmin.$DOMAINNAME
 
@@ -566,7 +566,7 @@
 
 **container_name:** promtail
 
-**image:** grafana/promtail:3.2.0@sha256:a77ce6cc7d6f1a05611adeaef863935f66d68640d9d0ef2feb190c8f0edac19e
+**image:** grafana/promtail:3.2.1@sha256:bf617e9d67e80247a59f717f9c1ad388d7d32dc0a1d29abd5799516d15e0a9b5
 
 **url:** promtail.$DOMAINNAME
 
@@ -612,7 +612,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-8.4.62@sha256:b97f24e2ebfb8b096dadde3a77f2354c037244f24adb1517240173ede0eb28b8
+**image:** lscr.io/linuxserver/unifi-network-application:version-8.4.62@sha256:694bd1e3b06b3f180ccc5cc052f8893ff450484a16e32cef7569565656235f59
 
 **url:** unifi.$DOMAINNAME
 
@@ -620,7 +620,7 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:7.0.14@sha256:244afb1488edfc42aaa8ffa6153393bbc075d63516ab0305daa2eaa35241eb52
+**image:** mongo:7.0.14@sha256:0032d2ca20db5fa34926f196c8a43b74e34ed239a7f2453ff1505b6f12ba8ea6
 
 ### Service: unifi-db-backup
 
@@ -688,7 +688,7 @@
 
 **container_name:** wallabag-db
 
-**image:** mariadb:11.5.2@sha256:9e7695800ab8fa72d75053fe536b090d0c9373465b32a073c73bc7940a2e8dbe
+**image:** mariadb:11.5.2@sha256:4a1de8fa2a929944373d7421105500ff6f889ce90dcb883fbb2fdb070e4d427e
 
 ### Service: wallabag-db-backup
 
