@@ -88,7 +88,18 @@
   "esphome.validator": "local",
   "telemetry.enableTelemetry": false,
   "terminal.integrated.copyOnSelection": true,
-  "terminal.integrated.shell.linux": "/usr/bin/zsh",
+  "terminal.integrated.profiles.linux": {
+    "zsh": {
+        "path": "/usr/bin/zsh",
+        "args": [
+            "--login"
+        ],
+        "env": {
+            "TMUX": "false"
+        }
+    }
+  },
+  "terminal.integrated.defaultProfile.linux": "zsh",
   "update.mode": "none",
   "vsicons.dontShowNewVersionMessage": true,
   "vsicons.projectDetection.disableDetect": true,

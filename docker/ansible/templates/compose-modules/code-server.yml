@@ -13,15 +13,17 @@ services:
       - PGID=${PGID}
       - TZ=${TZ}
       - PROXY_DOMAIN=code.$DOMAINNAME
+      - DEFAULT_WORKSPACE=/config/workspace
       # - PASSWORD=password #optional
       # - HASHED_PASSWORD= #optional
       # - SUDO_PASSWORD=password #optional
       # - SUDO_PASSWORD_HASH= #optional
-      # - DEFAULT_WORKSPACE=/config/workspace #optional
     networks:
       - t2_proxy
     volumes:
       - $DOCKERDIR/data/code-server/config:/config
+      - $DOCKERDIR/data/code-server/custom-cont-init.d:/custom-cont-init.d:ro
+      - home_assistant_data:/ha_data
     labels:
       # Homepage
       - homepage.group=Productivity
