@@ -177,6 +177,10 @@ endpoints:
     <<: *defaults
     url: "https://nodeexporter-prod.${DOMAINNAME}"
 
+  - name: Outline
+    <<: *defaults
+    url: "https://docs.${DOMAINNAME}"
+
   - name: Paperless - HTTP
     <<: *defaults
     url: "https://paperless.${DOMAINNAME}"
