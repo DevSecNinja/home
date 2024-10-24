@@ -434,6 +434,34 @@
 
 **url:** speedtest.$DOMAINNAME
 
+## docker/ansible/templates/compose-modules/outline.yml
+
+### Service: outline
+
+**container_name:** outline
+
+**image:** docker.getoutline.com/outlinewiki/outline:0.80.3-0@sha256:35dc012bdc674b2857abb1ecff67215893050eee1b7ab0a39eecdb23cab5477d
+
+**url:** docs.$DOMAINNAME
+
+### Service: outline-db
+
+**container_name:** outline-db
+
+**image:** docker.io/library/postgres:16.4-alpine@sha256:d898b0b78a2627cb4ee63464a14efc9d296884f1b28c841b0ab7d7c42f1fffdf
+
+### Service: outline-db-backup
+
+**container_name:** outline-db-backup
+
+**image:** tiredofit/db-backup:4.1.4@sha256:6df3a87b288d00d2f00f87f3dd2314eba793d3a34b500d3fcef3a1b598946e3d
+
+### Service: outline-redis
+
+**container_name:** outline-redis
+
+**image:** redis:alpine3.19@sha256:892b41c092a599f76c30b48e9dcfb185ce8cea3560970b1c4f2745c89bb34344
+
 ## docker/ansible/templates/compose-modules/paperless-ngx.yml
 
 ### Service: paperless-db
@@ -602,7 +630,7 @@
 
 **container_name:** traefik-forward-auth
 
-**image:** ghcr.io/jordemort/traefik-forward-auth:latest@sha256:394f86bff5cc839fac1392f65dd3d4471e827bc29321a4460e7d92042e026599
+**image:** ghcr.io/italypaleale/traefik-forward-auth:3.1.5@sha256:fc717ff42f367f5bc5f0101880cd488d46acd56c7fd3a6094c78a414e58c183d
 
 **url:** auth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
