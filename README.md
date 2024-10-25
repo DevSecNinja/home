@@ -74,28 +74,20 @@ You have two different options for setting up your local workstation.
 
 #### Non-devcontainer method
 
-1. Install the most recent version of [task](https://taskfile.dev/), see the [installation docs](https://taskfile.dev/installation/) for other supported platforms.
+1. Install the most recent version of [task](https://taskfile.dev/) and [direnv](https://direnv.net/)
 
     ```sh
     # Install dependencies for vault & flux
     apt update
     apt install build-essential
     # Homebrew
-    brew install go-task
+    brew install direnv go-task
     # or, Arch
-    pacman -S --noconfirm go-task && ln -sf /usr/bin/go-task /usr/local/bin/task
+    pacman -S --noconfirm direnv go-task \
+      && ln -sf /usr/bin/go-task /usr/local/bin/task
     ```
 
-2. Install the most recent version of [direnv](https://direnv.net/), see the [installation docs](https://direnv.net/docs/installation.html) for other supported platforms.
-
-    ```sh
-    # Homebrew
-    brew install direnv
-    # or, Arch
-    pacman -S --noconfirm direnv
-    ```
-
-3. [Hook `direnv` into your preferred shell](https://direnv.net/docs/hook.html), then run:
+2. [Hook `direnv` into your preferred shell](https://direnv.net/docs/hook.html), then run:
 
     ```sh
     task workstation:direnv
@@ -105,13 +97,13 @@ You have two different options for setting up your local workstation.
 
     ```sh
     cd /path/to/repo
-    direnv: loading /path/to/repo/.envrc
-    direnv: export +ANSIBLE_COLLECTIONS_PATH ...  +VIRTUAL_ENV ~PATH
+    direnv: loading ... .envrc
+    direnv: export +VIRTUAL_ENV ... ~PATH
     ```
 
-4. Install the additional **required** CLI tools
+3. Install the additional **required** CLI tools
 
-   📍 _**Not using Homebrew or ArchLinux?** Try using the generic Linux task below, if that fails check out the [Brewfile](.taskfiles/Workstation/Brewfile)/[Archfile](.taskfiles/Workstation/Archfile) for what CLI tools needed and install them._
+   📍 _**Not using Homebrew or ArchLinux?** Try using the generic Linux task below, if that fails check out the [Brewfile](.taskfiles/workstation/Brewfile)/[Archfile](.taskfiles/workstation/Archfile) for what CLI tools needed and install them._
 
     ```sh
     # Homebrew
@@ -122,7 +114,7 @@ You have two different options for setting up your local workstation.
     task workstation:generic-linux
     ```
 
-5. Setup a Python virual environment by running the following task command.
+4. Setup a Python virual environment by running the following task command.
 
     📍 _This commands requires Python 3.11+ to be installed._
 
@@ -130,7 +122,7 @@ You have two different options for setting up your local workstation.
     task workstation:venv
     ```
 
-6. Continue on to 🔧 [**Stage 3**](#-stage-3-bootstrap-configuration)
+5. Continue on to 🔧 [**Stage 3**](#-stage-3-bootstrap-configuration)
 
 ### 🔧 Stage 3: Bootstrap configuration
 
@@ -166,7 +158,7 @@ You have two different options for setting up your local workstation.
 1. Deploy your cluster and bootstrap it. This generates secrets, generates the config files for your nodes and applies them. It bootstraps the cluster afterwards, fetches the kubeconfig file and installs Cilium and kubelet-csr-approver. It finishes with some health checks.
 
     ```sh
-    task talos:bootstrap
+    task bootstrap:talos
     ```
 
 2. ⚠️ It might take a while for the cluster to be setup (10+ minutes is normal), during which time you will see a variety of error messages like: "couldn't get current server API group list," "error: no matching resources found", etc. This is a normal. If this step gets interrupted, e.g. by pressing <kbd>Ctrl</kbd> + <kbd>C</kbd>, you likely will need to [nuke the cluster](#-Nuke) before trying again.
@@ -202,16 +194,14 @@ You have two different options for setting up your local workstation.
 
 2. Install Flux and sync the cluster to the Git repository
 
-    📍 _Run `task flux:github-deploy-key` first if using a private repository._
-
     ```sh
-    task flux:bootstrap
+    task bootstrap:flux
     # namespace/flux-system configured
     # customresourcedefinition.apiextensions.k8s.io/alerts.notification.toolkit.fluxcd.io created
     # ...
     ```
 
-1. Verify Flux components are running in the cluster
+3. Verify Flux components are running in the cluster
 
     ```sh
     kubectl -n flux-system get pods -o wide
@@ -293,12 +283,12 @@ By default Flux will periodically check your git repository for changes. In orde
 
 3. Navigate to the settings of your repository on Github, under "Settings/Webhooks" press the "Add webhook" button. Fill in the webhook URL and your `bootstrap_github_webhook_token` secret in `config.yaml`, Content type: `application/json`, Events: Choose Just the push event, and save.
 
-## 💥 Nuke
+## 💥 Reset
 
 There might be a situation where you want to destroy your Kubernetes cluster. The following command will reset your nodes back to maintenance mode, append `--force` to completely format your the Talos installation. Either way the nodes should reboot after the command has run.
 
 ```sh
-task talos:nuke
+task talos:reset # --force
 ```
 
 ## 🤖 Renovate
@@ -357,22 +347,24 @@ Resolving problems that you have could take some tweaking of your YAML manifests
 
 ## ⬆️ Upgrading Talos and Kubernetes
 
-### Manual
+📍 _Ensure the `talosVersion` and `kubernetesVersion` in `talhelper.yaml` are up-to-date with the version you wish to upgrade to._
 
 ```sh
-# Upgrade Talos to a newer version
-# NOTE: This needs to be run once on every node
-task talos:upgrade node=? image=?
-# e.g.
-# task talos:upgrade node=192.168.42.10 image=factory.talos.dev/installer/${schematic_id}:v1.7.4
+# Upgrade the whole cluster to a newer Talos version
+task talos:upgrade-cluster
+# e.g. task talos:upgrade-cluster
 ```
 
 ```sh
-# Upgrade Kubernetes to a newer version
-# NOTE: This only needs to be run once against a controller node
-task talos:upgrade-k8s controller=? to=?
-# e.g.
-# task talos:upgrade-k8s controller=192.168.42.10 to=1.30.1
+# Upgrade node to a newer Talos version
+task talos:upgrade-node HOSTNAME=?
+# e.g. task talos:upgrade HOSTNAME=k8s-0
+```
+
+```sh
+# Upgrade cluster to a newer Kubernetes version
+task talos:upgrade-k8s
+# e.g. task talos:upgrade-k8s
 ```
 
 ## 👉 Help
