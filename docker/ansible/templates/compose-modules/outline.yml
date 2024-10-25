@@ -34,7 +34,7 @@ services:
       # Homepage
       - homepage.group=Productivity
       - homepage.name=Outline
-      - homepage.icon=Outline
+      - homepage.icon=si-outline
       - homepage.href=https://docs.$DOMAINNAME
       - homepage.description=Documentation
       # Traefik

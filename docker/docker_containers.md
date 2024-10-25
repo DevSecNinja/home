@@ -212,7 +212,7 @@
 
 **container_name:** loki
 
-**image:** grafana/loki:3.2.0@sha256:882e30c20683a48a8b7ca123e6c19988980b4bd13d2ff221dfcbef0fdc631694
+**image:** grafana/loki:3.2.1@sha256:09a53b4a4ff81ffcd8f13886df19d33fac7a8d3aaf952e3c7e66cbade5b2fc31
 
 **url:** loki.$DOMAINNAME
 
@@ -232,7 +232,7 @@
 
 **container_name:** homepage
 
-**image:** ghcr.io/gethomepage/homepage:v0.9.10@sha256:671c2ed1a61b5dfbb9a1998c8738c3aeb1acf11adbc12563f81fcf4fd9802198
+**image:** ghcr.io/gethomepage/homepage:v0.9.11@sha256:d41dca72f3a68d2c675eb232a448104af200096f05e2610ffbfdb16bc7f71410
 
 **url:** homepage-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -368,7 +368,7 @@
 
 **container_name:** nextcloud
 
-**image:** nextcloud:30.0.1-apache@sha256:e86cd675f6c26dd3abb9644da24eb211c433bd1fec9f90dd242a2f54c5041df1
+**image:** nextcloud:30.0.1-apache@sha256:76869ae83f1e224a06ad52ca5ad9c7d301d7118e7db411f4a55c21a9d69384ac
 
 **url:** cloud.$DOMAINNAME
 
@@ -376,7 +376,7 @@
 
 **container_name:** nextcloud-cron
 
-**image:** nextcloud:30.0.1-apache@sha256:e86cd675f6c26dd3abb9644da24eb211c433bd1fec9f90dd242a2f54c5041df1
+**image:** nextcloud:30.0.1-apache@sha256:76869ae83f1e224a06ad52ca5ad9c7d301d7118e7db411f4a55c21a9d69384ac
 
 ### Service: nextcloud-db
 
@@ -518,7 +518,7 @@
 
 **container_name:** photoprism
 
-**image:** photoprism/photoprism:preview@sha256:790a89ec01d7d2cb0f5c210feb91bb291fb982088014138377c96c990f69ffca
+**image:** photoprism/photoprism:preview@sha256:6fe33ba4eb24af2dabe55488c38d6966599f6e557ccf85177aa889fa8986dc09
 
 **url:** photos.$DOMAINNAME
 
@@ -540,7 +540,7 @@
 
 **container_name:** phpmyadmin
 
-**image:** phpmyadmin:5.2.1-apache@sha256:e52defd519ac12adbfa6ad4fe1f157f80b41b9d374b8f43e3261e8543f7804b7
+**image:** phpmyadmin:5.2.1-apache@sha256:6b7d76fc2b52348e490462c720ed03a21b9352d78529f99b7c8c0124ed976400
 
 **url:** phpmyadmin.$DOMAINNAME
 
