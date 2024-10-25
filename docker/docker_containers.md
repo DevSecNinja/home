@@ -560,7 +560,7 @@
 
 **container_name:** portainer
 
-**image:** portainer/portainer-ce:2.22.0-alpine@sha256:2549b42bd302cf68a11e8958edf52381866ab516b8ea2fa65d0fb86db1a20d7d
+**image:** portainer/portainer-ce:2.23.0-alpine@sha256:97342cf8a821d64d59880bdede8f45ea9c869fea702dd56128a67d552dc632ab
 
 **url:** portainer-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 

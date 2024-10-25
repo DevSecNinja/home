@@ -156,7 +156,7 @@
   image: lscr.io/linuxserver/plex:version-1.41.1.9057-af5eaea7a@sha256:88f1b42fa90799ba491fa0b96046467174f28f18c236c7b39e135c029a30cfcf
   url: plex-noauth.$DOMAINNAME
 - container_name: portainer
-  image: portainer/portainer-ce:2.22.0-alpine@sha256:2549b42bd302cf68a11e8958edf52381866ab516b8ea2fa65d0fb86db1a20d7d
+  image: portainer/portainer-ce:2.23.0-alpine@sha256:97342cf8a821d64d59880bdede8f45ea9c869fea702dd56128a67d552dc632ab
   url: portainer-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: portainer-docker-proxy
   image: lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:792bdde50356861db095884bb914f2e7004a851d92301a0c7150ea174be26864
