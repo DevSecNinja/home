@@ -50,7 +50,7 @@
 
 **container_name:** bitwarden
 
-**image:** bitwarden/self-host:2024.9.2-beta@sha256:8d90075358899c5d35e6210ef41a18428533f81d44edb17e860b04d4294f3d37
+**image:** bitwarden/self-host:2024.10.1-beta@sha256:c930f3558f6a25c8e11f4b1ca49e9eb3f367cb3da54979c4d74a4ea1d712872a
 
 **url:** bitwarden.$DOMAINNAME
 
@@ -82,7 +82,7 @@
 
 **container_name:** change-detection
 
-**image:** ghcr.io/dgtlmoon/changedetection.io:0.46.04@sha256:cfe4379f448e71ed7c0030b00562c678f5349d0b209b8d4985df20826af38e93
+**image:** ghcr.io/dgtlmoon/changedetection.io:0.47.03@sha256:1e8135d8fcf27af1991732b72c72dceaf870012c3b355f7b7c3f3a37c2a232aa
 
 **url:** change-detection.$DOMAINNAME
 
@@ -128,7 +128,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v8.5.5@sha256:aa9ea440a33c45fb25d59e06cb6850e6655404fad4bebac6345d8535b9d8a9ee
+**image:** amir20/dozzle:v8.6.2@sha256:7044962b4e02c6ecc99edf37d730ad71f2c1b0a8fa45e809cecc1178970ab0ad
 
 **url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -204,7 +204,7 @@
 
 **container_name:** grafana
 
-**image:** grafana/grafana:11.2.2@sha256:d5133220d770aba5cb655147b619fa8770b90f41d8489a821d33b1cd34d16f89
+**image:** grafana/grafana:11.3.0@sha256:a0f881232a6fb71a0554a47d0fe2203b6888fe77f4cefb7ea62bed7eb54e13c3
 
 **url:** grafana.$DOMAINNAME
 
@@ -328,7 +328,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:v1.21.9@sha256:4c1dfe2a9dd828ae2f5e0a0136dae246fa25b1b890cfb0973d7ebaf6dce6913d
+**image:** lobehub/lobe-chat:v1.24.0@sha256:c136c7d0cae6c50c9de3e32ad4f00e797a05da2ab523b558fd39971390883484
 
 **url:** chat.$DOMAINNAME
 
@@ -480,7 +480,7 @@
 
 **container_name:** paperless-gotenberg
 
-**image:** docker.io/gotenberg/gotenberg:8.11.1@sha256:40519c7c72439261273dd78b518a19f495081ce92fec6b728074418ee0403f1e
+**image:** docker.io/gotenberg/gotenberg:8.12.0@sha256:b10708db3ccabbee040d0b6d9ec68b6034a066c1d4e27b13fb7a6af4ade012e4
 
 ### Service: paperless-redis
 
@@ -672,7 +672,7 @@
 
 **container_name:** vault
 
-**image:** hashicorp/vault:1.17@sha256:74a4ab138ab5d64725e89cd9a9c73f7040c7fe49e98b71697b275ca9a69919df
+**image:** hashicorp/vault:1.18@sha256:e2da7099950443e234ed699940fabcdc44b5babe33adfb459e189a63b7bb50d7
 
 **url:** vault.$DOMAINNAME`) && PathPrefix(`/v1
 
