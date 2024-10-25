@@ -18,7 +18,7 @@ services:
       # Homepage
       - homepage.group=Productivity
       - homepage.name=Excalidraw
-      - homepage.icon=excalidraw
+      - homepage.icon=sh-excalidraw
       - homepage.href=https://excalidraw.$DOMAINNAME
       - homepage.description=Virtual Whiteboard
       # Traefik
