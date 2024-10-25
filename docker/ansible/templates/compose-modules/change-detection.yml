@@ -23,7 +23,7 @@ services:
       # Homepage
       - homepage.group=Infrastructure
       - homepage.name=Change Detection
-      - homepage.icon=mdi-cloud-sync-#ffffff
+      - homepage.icon=sh-ChangeDetection
       - homepage.href=https://change-detection.$DOMAINNAME
       - homepage.description=Detect Changes on Web Sites
       # Traefik
