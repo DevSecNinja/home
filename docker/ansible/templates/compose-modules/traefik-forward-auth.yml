@@ -22,11 +22,6 @@ services:
       - TFA_AUTHMICROSOFTENTRAID_TENANTID=$OAUTH2_PROXY_AZURE_TENANT_ID
       - TFA_AUTHMICROSOFTENTRAID_CLIENTID=$OAUTH2_PROXY_AZURE_CLIENT_ID
       - TFA_AUTHMICROSOFTENTRAID_CLIENTSECRET=$OAUTH2_PROXY_AZURE_CLIENT_SECRET
-      # Configure authentication via OpenID Connect
-      # - TFA_AUTHPROVIDER=openidconnect
-      # - TFA_AUTHOPENIDCONNECT_TOKENISSUER=https://login.microsoftonline.com/${OAUTH2_PROXY_AZURE_TENANT_ID}/v2.0
-      # - TFA_AUTHOPENIDCONNECT_CLIENTID=$OAUTH2_PROXY_AZURE_CLIENT_ID
-      # - TFA_AUTHOPENIDCONNECT_CLIENTSECRET=$OAUTH2_PROXY_AZURE_CLIENT_SECRET
       # Cooke & Session
       - TFA_COOKIENAME=_forward_auth_$GENERIC_HOSTNAME_SUFFIX
       - TFA_SESSIONLIFETIME=12h
@@ -46,8 +41,6 @@ services:
       - org.label-schema.group=Infrastructure
       # Traefik
       - "traefik.enable=true"
-      ## Middlewares
-      - "traefik.http.routers.treafik-forward-auth-rtr.middlewares=chain-auth@file"
       ## HTTP Services
       - "traefik.http.routers.treafik-forward-auth-rtr.rule=Host(`auth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
       - "traefik.http.routers.treafik-forward-auth-rtr.service=treafik-forward-auth"
