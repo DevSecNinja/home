@@ -16,7 +16,7 @@ services:
       # Homepage
       - homepage.group=Infrastructure
       - homepage.name=Speedtest
-      - homepage.icon=si-speedtest
+      - homepage.icon=sh-OpenSpeedTest
       - homepage.href=https://speedtest.$DOMAINNAME
       - homepage.description=Network Speedtest
       # Traefik
