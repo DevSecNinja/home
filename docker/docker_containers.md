@@ -118,7 +118,7 @@
 
 **container_name:** cyberchef
 
-**image:** ghcr.io/gchq/cyberchef:10.19.2@sha256:04a2be6fb9db9a65b6dc148f3c52be499f40ecb281b69135783bbd76186b1513
+**image:** ghcr.io/gchq/cyberchef:10.19.4@sha256:a2bfe382b2547bdd0a3d0523b9a6b85fab833c56bcec86d600ba6266910b533e
 
 **url:** cyberchef.$DOMAINNAME
 
@@ -164,7 +164,7 @@
 
 **container_name:** excalidraw
 
-**image:** excalidraw/excalidraw:latest@sha256:df3ddf00d7977d7007ea33b5397239ff20955eeeeafd38735cb1604be799564a
+**image:** excalidraw/excalidraw:latest@sha256:687708a6c879b9120c82b61faf9ff242367395be1d5f90c385989405e51b5433
 
 **url:** excalidraw.$DOMAINNAME
 
@@ -270,7 +270,7 @@
 
 **container_name:** influxdb
 
-**image:** influxdb:2.7-alpine@sha256:327be0243a329b1da350a37c1468d756f4258330d50d10a2a993e5bb9a6e3d2e
+**image:** influxdb:2.7-alpine@sha256:407ed49d0b3e32362bbf9ee21740240893e62b9249a02397613a229652f64947
 
 **url:** influxdb-noauth.$DOMAINNAME
 
