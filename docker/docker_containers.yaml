@@ -56,7 +56,7 @@
   image: grafana/grafana:11.2.2@sha256:d5133220d770aba5cb655147b619fa8770b90f41d8489a821d33b1cd34d16f89
   url: grafana.$DOMAINNAME
 - container_name: loki
-  image: grafana/loki:3.2.0@sha256:882e30c20683a48a8b7ca123e6c19988980b4bd13d2ff221dfcbef0fdc631694
+  image: grafana/loki:3.2.1@sha256:09a53b4a4ff81ffcd8f13886df19d33fac7a8d3aaf952e3c7e66cbade5b2fc31
   url: loki.$DOMAINNAME
 - container_name: home-assistant
   image: ghcr.io/home-assistant/home-assistant:beta@sha256:9fbe69be41444b7aed42bbbcf3b44d8ffde24546db47f7d8c9237fc11423cf2b
@@ -143,14 +143,14 @@
   image: papermerge/papermerge:3.2.0@sha256:11bd6e47622b295ee40f1e719c63235544121839a30e5083d959208931007b62
   url: papermerge.$DOMAINNAME
 - container_name: photoprism
-  image: photoprism/photoprism:preview@sha256:790a89ec01d7d2cb0f5c210feb91bb291fb982088014138377c96c990f69ffca
+  image: photoprism/photoprism:preview@sha256:6fe33ba4eb24af2dabe55488c38d6966599f6e557ccf85177aa889fa8986dc09
   url: photos.$DOMAINNAME
 - container_name: photoprism-db
   image: mariadb:11.5.2@sha256:4a1de8fa2a929944373d7421105500ff6f889ce90dcb883fbb2fdb070e4d427e
 - container_name: photoprism-db-backup
   image: tiredofit/db-backup:4.1.4@sha256:6df3a87b288d00d2f00f87f3dd2314eba793d3a34b500d3fcef3a1b598946e3d
 - container_name: phpmyadmin
-  image: phpmyadmin:5.2.1-apache@sha256:e52defd519ac12adbfa6ad4fe1f157f80b41b9d374b8f43e3261e8543f7804b7
+  image: phpmyadmin:5.2.1-apache@sha256:6b7d76fc2b52348e490462c720ed03a21b9352d78529f99b7c8c0124ed976400
   url: phpmyadmin.$DOMAINNAME
 - container_name: plex
   image: lscr.io/linuxserver/plex:version-1.41.1.9057-af5eaea7a@sha256:88f1b42fa90799ba491fa0b96046467174f28f18c236c7b39e135c029a30cfcf
