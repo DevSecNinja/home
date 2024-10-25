@@ -14,7 +14,7 @@
 
 **container_name:** unbound
 
-**image:** mvance/unbound:1.20.0@sha256:4bf67b567f392956455bd4f8a4cdd48010e234f1a07c0a99c2cff2ddbb3e8a7a
+**image:** mvance/unbound:1.22.0@sha256:76906da36d1806f3387338f15dcf8b357c51ce6897fb6450d6ce010460927e90
 
 ## docker/ansible/templates/compose-modules/alertmanager.yml
 
@@ -576,7 +576,7 @@
 
 **container_name:** prometheus
 
-**image:** prom/prometheus:v2.54.1@sha256:f6639335d34a77d9d9db382b92eeb7fc00934be8eae81dbc03b31cfe90411a94
+**image:** prom/prometheus:v2.55.0@sha256:378f4e03703557d1c6419e6caccf922f96e6d88a530f7431d66a4c4f4b1000fe
 
 **url:** prometheus.$DOMAINNAME
 
