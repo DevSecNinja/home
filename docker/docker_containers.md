@@ -440,7 +440,7 @@
 
 **container_name:** outline
 
-**image:** docker.getoutline.com/outlinewiki/outline:0.80.3-0@sha256:35dc012bdc674b2857abb1ecff67215893050eee1b7ab0a39eecdb23cab5477d
+**image:** outlinewiki/outline:0.80.3-0@sha256:35dc012bdc674b2857abb1ecff67215893050eee1b7ab0a39eecdb23cab5477d
 
 **url:** docs.$DOMAINNAME
 
@@ -540,7 +540,7 @@
 
 **container_name:** phpmyadmin
 
-**image:** phpmyadmin:5.2.1-apache@sha256:142c7a6ab8d25ea4924194bccbd5b83d2e2060ecd95e7806a88296a996929ed3
+**image:** phpmyadmin:5.2.1-apache@sha256:e52defd519ac12adbfa6ad4fe1f157f80b41b9d374b8f43e3261e8543f7804b7
 
 **url:** phpmyadmin.$DOMAINNAME
 
@@ -550,7 +550,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.41.0.8994-f2c27da23@sha256:519cb67f04c8b114d19a3ebe4e31711eed5debae95b996c9c87d69202c44e6d9
+**image:** lscr.io/linuxserver/plex:version-1.41.1.9057-af5eaea7a@sha256:88f1b42fa90799ba491fa0b96046467174f28f18c236c7b39e135c029a30cfcf
 
 **url:** plex-noauth.$DOMAINNAME
 

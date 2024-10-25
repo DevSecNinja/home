@@ -118,7 +118,7 @@
   image: openspeedtest/latest:v2.0.5@sha256:bbddd8eda80cc4deb2a5702efd0acd826137650ba0bfcc6720f896c74bca02ee
   url: speedtest.$DOMAINNAME
 - container_name: outline
-  image: docker.getoutline.com/outlinewiki/outline:0.80.3-0@sha256:35dc012bdc674b2857abb1ecff67215893050eee1b7ab0a39eecdb23cab5477d
+  image: outlinewiki/outline:0.80.3-0@sha256:35dc012bdc674b2857abb1ecff67215893050eee1b7ab0a39eecdb23cab5477d
   url: docs.$DOMAINNAME
 - container_name: outline-db
   image: docker.io/library/postgres:16.4-alpine@sha256:d898b0b78a2627cb4ee63464a14efc9d296884f1b28c841b0ab7d7c42f1fffdf
@@ -150,10 +150,10 @@
 - container_name: photoprism-db-backup
   image: tiredofit/db-backup:4.1.4@sha256:6df3a87b288d00d2f00f87f3dd2314eba793d3a34b500d3fcef3a1b598946e3d
 - container_name: phpmyadmin
-  image: phpmyadmin:5.2.1-apache@sha256:142c7a6ab8d25ea4924194bccbd5b83d2e2060ecd95e7806a88296a996929ed3
+  image: phpmyadmin:5.2.1-apache@sha256:e52defd519ac12adbfa6ad4fe1f157f80b41b9d374b8f43e3261e8543f7804b7
   url: phpmyadmin.$DOMAINNAME
 - container_name: plex
-  image: lscr.io/linuxserver/plex:version-1.41.0.8994-f2c27da23@sha256:519cb67f04c8b114d19a3ebe4e31711eed5debae95b996c9c87d69202c44e6d9
+  image: lscr.io/linuxserver/plex:version-1.41.1.9057-af5eaea7a@sha256:88f1b42fa90799ba491fa0b96046467174f28f18c236c7b39e135c029a30cfcf
   url: plex-noauth.$DOMAINNAME
 - container_name: portainer
   image: portainer/portainer-ce:2.22.0-alpine@sha256:2549b42bd302cf68a11e8958edf52381866ab516b8ea2fa65d0fb86db1a20d7d
