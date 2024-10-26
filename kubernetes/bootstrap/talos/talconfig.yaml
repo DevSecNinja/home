@@ -26,10 +26,10 @@ cniConfig:
 nodes:
   - hostname: "svlk8s1"
     ipAddress: "192.168.60.51"
-    installDisk: "/pci0000:00/0000:00:05.0/0000:01:01.0/virtio3/host2/target2:0:0/2:0:0:0"
+    installDisk: "/dev/sda"
     machineSpec:
       secureboot: true
-    talosImageURL: factory.talos.dev/installer-secureboot/
+    talosImageURL: factory.talos.dev/installer-secureboot/dcac6b92c17d1d8947a0cee5e0e6b6904089aa878c70d66196bb1138dbd05d1a
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
