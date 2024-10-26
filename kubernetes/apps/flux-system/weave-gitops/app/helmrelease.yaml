@@ -26,13 +26,13 @@ spec:
     adminUser:
       create: true
       createSecret: false
-      username: jean-paul
+      username: admin
     ingress:
       enabled: true
       className: internal
       annotations:
         gethomepage.dev/enabled: "true"
-        gethomepage.dev/group: Home
+        gethomepage.dev/group: Observability
         gethomepage.dev/name: Weave-gitops
         gethomepage.dev/icon: flux-cd.png
       hosts:
