@@ -182,7 +182,7 @@
 
 **container_name:** gatus
 
-**image:** twinproduction/gatus:v5.12.1@sha256:e808d45f327450a42d8f670160bf4a596950dfd2824aea3825f03b49c2d7e61c
+**image:** twinproduction/gatus:v5.13.0@sha256:7dd5c1a2e8944b6806982890d15db1a30950c2a9cedbd68c021fca1089e04a42
 
 **url:** status.$DOMAINNAME
 
