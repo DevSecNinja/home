@@ -59,7 +59,7 @@
   image: grafana/loki:3.2.1@sha256:09a53b4a4ff81ffcd8f13886df19d33fac7a8d3aaf952e3c7e66cbade5b2fc31
   url: loki.$DOMAINNAME
 - container_name: home-assistant
-  image: ghcr.io/home-assistant/home-assistant:beta@sha256:9fbe69be41444b7aed42bbbcf3b44d8ffde24546db47f7d8c9237fc11423cf2b
+  image: ghcr.io/home-assistant/home-assistant:beta@sha256:103da063b0bbe4d6e9c0f6bb01db91d02b0707d15276b9807835d180478f78b9
   url: home-assistant.$DOMAINNAME
 - container_name: homepage
   image: ghcr.io/gethomepage/homepage:v0.9.11@sha256:d41dca72f3a68d2c675eb232a448104af200096f05e2610ffbfdb16bc7f71410
@@ -89,7 +89,7 @@
 - container_name: linkding-db-backup
   image: tiredofit/db-backup:4.1.4@sha256:6df3a87b288d00d2f00f87f3dd2314eba793d3a34b500d3fcef3a1b598946e3d
 - container_name: lobe-chat
-  image: lobehub/lobe-chat:v1.24.0@sha256:c136c7d0cae6c50c9de3e32ad4f00e797a05da2ab523b558fd39971390883484
+  image: lobehub/lobe-chat:v1.24.1@sha256:eb590703a26973c05d2cb52539dad63b375c39be8520174bfbbce8ffb035be0b
   url: chat.$DOMAINNAME
 - container_name: mailrise
   image: yoryan/mailrise:1.4.0@sha256:66082168090b9a83f01cc71a9d7b1994840adbbbffbe4d2cf644272fbbc23a1a
@@ -143,7 +143,7 @@
   image: papermerge/papermerge:3.2.0@sha256:11bd6e47622b295ee40f1e719c63235544121839a30e5083d959208931007b62
   url: papermerge.$DOMAINNAME
 - container_name: photoprism
-  image: photoprism/photoprism:preview@sha256:6fe33ba4eb24af2dabe55488c38d6966599f6e557ccf85177aa889fa8986dc09
+  image: photoprism/photoprism:preview@sha256:9dbd21b1bcbfc576f579d5d9ee4dc051eb3eeb42c1470e615f98036dabb81f04
   url: photos.$DOMAINNAME
 - container_name: photoprism-db
   image: mariadb:11.5.2@sha256:4a1de8fa2a929944373d7421105500ff6f889ce90dcb883fbb2fdb070e4d427e
@@ -178,7 +178,7 @@
   image: lscr.io/linuxserver/unifi-network-application:version-8.4.62@sha256:694bd1e3b06b3f180ccc5cc052f8893ff450484a16e32cef7569565656235f59
   url: unifi.$DOMAINNAME
 - container_name: unifi-db
-  image: mongo:7.0.14@sha256:0032d2ca20db5fa34926f196c8a43b74e34ed239a7f2453ff1505b6f12ba8ea6
+  image: mongo:7.0.15@sha256:7ba1f8fd37a86f52a99f484b1f3cb5a140472c0752ad0d3c52045f0a6cb88d37
 - container_name: unifi-db-backup
   image: tiredofit/db-backup:4.1.4@sha256:6df3a87b288d00d2f00f87f3dd2314eba793d3a34b500d3fcef3a1b598946e3d
 - container_name: vault

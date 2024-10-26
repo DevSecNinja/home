@@ -222,7 +222,7 @@
 
 **container_name:** home-assistant
 
-**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:9fbe69be41444b7aed42bbbcf3b44d8ffde24546db47f7d8c9237fc11423cf2b
+**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:103da063b0bbe4d6e9c0f6bb01db91d02b0707d15276b9807835d180478f78b9
 
 **url:** home-assistant.$DOMAINNAME
 
@@ -328,7 +328,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:v1.24.0@sha256:c136c7d0cae6c50c9de3e32ad4f00e797a05da2ab523b558fd39971390883484
+**image:** lobehub/lobe-chat:v1.24.1@sha256:eb590703a26973c05d2cb52539dad63b375c39be8520174bfbbce8ffb035be0b
 
 **url:** chat.$DOMAINNAME
 
@@ -518,7 +518,7 @@
 
 **container_name:** photoprism
 
-**image:** photoprism/photoprism:preview@sha256:6fe33ba4eb24af2dabe55488c38d6966599f6e557ccf85177aa889fa8986dc09
+**image:** photoprism/photoprism:preview@sha256:9dbd21b1bcbfc576f579d5d9ee4dc051eb3eeb42c1470e615f98036dabb81f04
 
 **url:** photos.$DOMAINNAME
 
@@ -648,7 +648,7 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:7.0.14@sha256:0032d2ca20db5fa34926f196c8a43b74e34ed239a7f2453ff1505b6f12ba8ea6
+**image:** mongo:7.0.15@sha256:7ba1f8fd37a86f52a99f484b1f3cb5a140472c0752ad0d3c52045f0a6cb88d37
 
 ### Service: unifi-db-backup
 
