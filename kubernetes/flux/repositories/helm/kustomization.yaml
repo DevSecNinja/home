@@ -6,6 +6,7 @@ resources:
   - ./cilium.yaml
   - ./coredns.yaml
   - ./jetstack.yaml
+  - ./kubernetes-dashboard.yaml
   - ./metrics-server.yaml
   - ./openebs.yaml
   - ./postfinance.yaml
