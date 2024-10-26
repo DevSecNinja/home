@@ -1,3 +1,5 @@
+private-domain: "{{ generic__domain_name }}"
+
 forward-zone:
     # Forwarding Kubernetes domain queries to a Kubernetes domain server
     name: "{{ generic__domain_name }}"
