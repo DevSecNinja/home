@@ -1,0 +1,3 @@
+---
+providerRegex: ^(svlk8s1)$
+bypassDnsResolution: true
