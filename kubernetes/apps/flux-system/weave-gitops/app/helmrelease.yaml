@@ -33,7 +33,7 @@ spec:
       annotations:
         gethomepage.dev/enabled: "true"
         gethomepage.dev/group: Observability
-        gethomepage.dev/name: Weave-gitops
+        gethomepage.dev/name: Weave GitOps
         gethomepage.dev/icon: flux-cd.png
       hosts:
         - host: &host "gitops.${SECRET_DOMAIN}"
