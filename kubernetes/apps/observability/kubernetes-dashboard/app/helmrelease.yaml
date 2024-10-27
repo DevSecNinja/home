@@ -39,9 +39,8 @@ spec:
         hosts:
           - &host "kubernetes.${SECRET_DOMAIN}"
         tls:
-          # Ingress-nginx will already terminate TLS. Also removes the selfsigned `kubernetes-dashboard-certs-1` certificate.
+          # TODO: [kubedashboard] Replace generated TLS certificate with letsencrypt.
           enabled: true
-          secretName: null
       extras:
         serviceMonitor:
           # Whether to create a Prometheus Operator service monitor.
