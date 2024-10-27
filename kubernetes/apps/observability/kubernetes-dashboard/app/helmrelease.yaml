@@ -42,3 +42,8 @@ spec:
             - *host
     metricsScraper:
       enabled: true
+    # Disable the following to avoid conflicts with the ingress controller
+    nginx:
+      enabled: false
+    cert-manager:
+      enabled: false
