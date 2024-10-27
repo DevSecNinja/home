@@ -39,6 +39,7 @@ spec:
         hosts:
           - &host "kubernetes.${SECRET_DOMAIN}"
         tls:
+          # Ingress-nginx will already terminate TLS. Also removes the selfsigned `kubernetes-dashboard-certs-1` certificate.
           enabled: false
           secretName: null
       extras:
@@ -47,7 +48,7 @@ spec:
           enabled: true
       metricsScraper:
         enabled: true
-      # Disable the following to avoid conflicts with the ingress controller
+      # Disable the following to avoid conflicts with the ingress controller.
       nginx:
         enabled: false
       cert-manager:
