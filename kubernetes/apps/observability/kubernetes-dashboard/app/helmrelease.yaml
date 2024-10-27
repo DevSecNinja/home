@@ -23,12 +23,14 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    env:
+      TZ: "${TIMEZONE}"
     app:
       image:
         pullPolicy: IfNotPresent
       ingress:
         enabled: true
-        ingressClassName: internal
+        className: internal
         annotations:
           gethomepage.dev/enabled: "true"
           gethomepage.dev/icon: kubernetes-dashboard.png
@@ -36,10 +38,20 @@ spec:
           gethomepage.dev/group: Observability
         hosts:
           - &host "kubernetes.${SECRET_DOMAIN}"
+        tls:
+          - hosts:
+              - *host
+      extras:
+        serviceMonitor:
+          # Whether to create a Prometheus Operator service monitor.
+          enabled: true
       metricsScraper:
         enabled: true
       # Disable the following to avoid conflicts with the ingress controller
       nginx:
         enabled: false
       cert-manager:
+        enabled: false
+        installCRDs: false
+      metrics-server:
         enabled: false
