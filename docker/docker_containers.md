@@ -328,7 +328,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:v1.24.1@sha256:eb590703a26973c05d2cb52539dad63b375c39be8520174bfbbce8ffb035be0b
+**image:** lobehub/lobe-chat:v1.26.0@sha256:108967c3627ca0d7e4d9ea83f8dff21203a7c3f264f74f0da3fec0e7757eb0c3
 
 **url:** chat.$DOMAINNAME
 
@@ -498,7 +498,7 @@
 
 **container_name:** paperless-web
 
-**image:** ghcr.io/paperless-ngx/paperless-ngx:2.12.1@sha256:217cec76128c2545872cf356694f2ffd4524cb84892d0333e654795dec255633
+**image:** ghcr.io/paperless-ngx/paperless-ngx:2.13.0@sha256:92d876788c537b27aa02f13cd649923de19628712430f0447ecb9b153bb91564
 
 **url:** paperless.$DOMAINNAME
 
