@@ -39,8 +39,8 @@ spec:
         hosts:
           - &host "kubernetes.${SECRET_DOMAIN}"
         tls:
-          - hosts:
-              - *host
+          enabled: true
+          secretName: null
       extras:
         serviceMonitor:
           # Whether to create a Prometheus Operator service monitor.
