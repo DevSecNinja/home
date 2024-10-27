@@ -1,0 +1,47 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.ok8.sh/postgresql.cnpg.io/cluster_v1.json
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgres
+  namespace: database
+spec:
+  instances: 1
+  imageName: ghcr.io/cloudnative-pg/postgresql:16.4-46
+  primaryUpdateStrategy: unsupervised
+  storage:
+    size: 20Gi
+    storageClass: openebs-hostpath
+  superuserSecret:
+    name: postgres-superuser
+  enableSuperuserAccess: true
+  postgresql:
+    parameters:
+      max_connections: "600"
+      shared_buffers: 512MB
+  monitoring:
+    enablePodMonitor: true
+  # TODO: [postgres] Enable backup to Azure Blob Storage
+  # backup:
+  #   retentionPolicy: 30d
+  #   barmanObjectStore:
+  #     wal:
+  #       compression: bzip2
+  #       maxParallel: 8
+  #     destinationPath: "<http|https>://<account-name>.<service-name>.core.windows.net/<resource-path>"
+  #     azureCredentials:
+  #       connectionString:
+  #         name: azure-creds
+  #         key: AZURE_CONNECTION_STRING
+  #       storageAccount:
+  #         name: azure-creds
+  #         key: AZURE_STORAGE_ACCOUNT
+  #       storageKey:
+  #         name: azure-creds
+  #         key: AZURE_STORAGE_KEY
+  #       storageSasToken:
+  #         name: azure-creds
+  #         key: AZURE_STORAGE_SAS_TOKEN
+  affinity:
+    nodeSelector:
+      beta.kubernetes.io/arch: amd64

@@ -4,8 +4,12 @@ kind: Kustomization
 resources:
   - ./bjw-s.yaml
   - ./cilium.yaml
+  - ./cloudnative-pg.yaml
   - ./coredns.yaml
+  - ./external-dns.yaml
+  - ./ingress-nginx.yaml
   - ./jetstack.yaml
+  - ./k8s-gateway.yaml
   - ./kubernetes-dashboard.yaml
   - ./metrics-server.yaml
   - ./openebs.yaml
@@ -13,7 +17,4 @@ resources:
   - ./prometheus-community.yaml
   - ./spegel.yaml
   - ./stakater.yaml
-  - ./external-dns.yaml
-  - ./ingress-nginx.yaml
-  - ./k8s-gateway.yaml
   - ./weave-gitops.yaml
