@@ -36,6 +36,16 @@ spec:
               PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION: "False"
               PGADMIN_DISABLE_POSTFIX: "true"
               PGADMIN_LISTEN_PORT: &port 80
+              PGADMIN_DEFAULT_EMAIL:
+                valueFrom:
+                  secretKeyRef:
+                    name: pgadmin-secret
+                    key: PGADMIN_DEFAULT_EMAIL
+              PGADMIN_DEFAULT_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: pgadmin-secret
+                    key: PGADMIN_DEFAULT_PASSWORD
             probes:
               liveness: &probes
                 enabled: true
