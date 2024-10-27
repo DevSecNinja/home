@@ -30,7 +30,7 @@ spec:
         pullPolicy: IfNotPresent
       ingress:
         enabled: true
-        className: internal
+        ingressClassName: internal
         annotations:
           gethomepage.dev/enabled: "true"
           gethomepage.dev/icon: kubernetes-dashboard.png
