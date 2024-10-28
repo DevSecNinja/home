@@ -115,7 +115,7 @@ spec:
         enabled: true
         annotations:
           gethomepage.dev/enabled: "true"
-          gethomepage.dev/description: *description
+          gethomepage.dev/description: "Monitoring & status page for services"
           gethomepage.dev/group: Observability
           gethomepage.dev/icon: gatus
           gethomepage.dev/name: Gatus
