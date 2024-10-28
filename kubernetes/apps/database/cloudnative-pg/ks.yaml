@@ -33,7 +33,6 @@ spec:
       app.kubernetes.io/name: *app
   dependsOn:
     - name: cloudnative-pg
-      namespace: database
   path: ./kubernetes/apps/database/cloudnative-pg/cluster
   prune: true
   sourceRef:
