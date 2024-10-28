@@ -7,5 +7,6 @@ resources:
   - ./cluster.yaml
   - ./gatus.yaml
   - ./prometheus-rule.yaml
+  - ./secret.sops.yaml
   - ./scheduled-backup.yaml
   - ./service.yaml
