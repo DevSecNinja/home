@@ -1,0 +1,157 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &name outline
+  namespace: home
+
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+      interval: 10m
+
+  install:
+    timeout: 10m
+    replace: true
+    crds: CreateReplace
+    createNamespace: true
+    remediation:
+      retries: 3
+
+  upgrade:
+    remediation:
+      remediateLastFailure: true
+      retries: 3
+      strategy: rollback
+    cleanupOnFail: true
+    crds: CreateReplace
+
+  test:
+    enable: true
+
+  rollback:
+    recreate: true
+    force: true
+    cleanupOnFail: true
+
+  uninstall:
+    keepHistory: false
+
+  dependsOn:
+    - name: openebs
+      namespace: openebs-system
+
+  maxHistory: 1
+
+  values:
+
+    controllers:
+      ${APP}:
+        enabled: true
+        type: deployment
+        annotations:
+          reloader.stakater.com/auto: "true"
+        replicas: 1
+
+        pod:
+          securityContext:
+            fsGroup: 1001
+            runAsUser: 1001
+            runAsGroup: 1001
+            fsGroupChangePolicy: "OnRootMismatch"
+
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: 16
+            envFrom: &envFrom
+              - secretRef:
+                  name: outline-secret
+
+        containers:
+          app:
+            nameOverride: *name
+            image:
+              repository: docker.io/outlinewiki/outline
+              tag: 0.80.2@sha256:fde16562c9b8c67bc7855c71d8a1203125d63fcefc7ebb4e649de35a9281e6df
+              pullPolicy: IfNotPresent
+
+            env:
+              TZ: ${TIMEZONE}
+              NODE_ENV: production
+              PGSSLMODE: disable
+              URL: https://${GATUS_SUBDOMAIN}.${SECRET_DOMAIN}
+              PORT: &port 3000
+
+              FILE_STORAGE: local
+              FILE_STORAGE_UPLOAD_MAX_SIZE: 26214400
+              FILE_STORAGE_IMPORT_MAX_SIZE: 26214400
+              DATABASE_CONNECTION_POOL_MAX: 10
+              WEB_CONCURRENCY: 10
+            envFrom: *envFrom
+            command: ["/bin/sh", "-c", "yarn db:migrate --env=production-ssl-disabled && yarn start --env=production-ssl-disabled"]
+
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 750Mi
+
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+              startup:
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 5
+
+    service:
+      app:
+        controller: *name
+        ports:
+          http:
+            port: *port
+
+    ingress:
+      app:
+        enabled: true
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/description: "Documentation and notes"
+          gethomepage.dev/group: Productivity
+          gethomepage.dev/icon: outline.png
+          gethomepage.dev/name: Outline
+        hosts:
+          - host: &host ${GATUS_SUBDOMAIN:-${APP}}.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+
+        tls:
+         - hosts:
+             - *host
+
+    persistence:
+      file-storage:
+        enabled: true
+        type: persistentVolumeClaim
+        storageClass: openebs-hostpath
+        accessMode: ReadWriteOnce
+        size: 5Gi
+        retain: true
+        globalMounts:
+          - path: /var/lib/outline/data
