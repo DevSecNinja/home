@@ -9,13 +9,11 @@ data:
   config.yaml: |
     endpoints:
       - name: "${APP}"
-        group: external
-        url: "https://${GATUS_SUBDOMAIN:-${APP}}.${SECRET_DOMAIN}${GATUS_PATH:-/}"
+        group: internal-backend
+        url: "tcp://${GATUS_SUBDOMAIN:-${APP}}.${GATUS_NAMESPACE}.svc.cluster.local:${GATUS_PORT:-80}"
         interval: 1m
-        client:
-          dns-resolver: tcp://1.1.1.1:53
         conditions:
-          - "[STATUS] == ${GATUS_STATUS:-200}"
+          - "[CONNECTED] == true"
         # alerts:
         #   - type: discord
         #     send-on-resolved: true

@@ -9,13 +9,14 @@ data:
   config.yaml: |
     endpoints:
       - name: "${APP}"
-        group: external
-        url: "https://${GATUS_SUBDOMAIN:-${APP}}.${SECRET_DOMAIN}${GATUS_PATH:-/}"
+        group: internal-backend
+        url: "${GATUS_DNS_IP}"
         interval: 1m
-        client:
-          dns-resolver: tcp://1.1.1.1:53
+        dns:
+          query-name: "google.com"
+          query-type: "A"
         conditions:
-          - "[STATUS] == ${GATUS_STATUS:-200}"
+          - "[DNS_RCODE] == NOERROR"
         # alerts:
         #   - type: discord
         #     send-on-resolved: true
