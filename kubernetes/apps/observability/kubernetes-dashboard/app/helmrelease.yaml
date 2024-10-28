@@ -37,6 +37,7 @@ spec:
           gethomepage.dev/name: Kubernetes Dashboard
           gethomepage.dev/description: "Web-based UI for Kubernetes clusters"
           gethomepage.dev/group: Observability
+          gethomepage.dev/app: kubernetes-dashboard-web # HelmRelease deploys several components
         hosts:
           - &host "kubernetes.${SECRET_DOMAIN}"
         tls:
