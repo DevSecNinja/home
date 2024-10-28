@@ -1,6 +1,13 @@
+#
+#### DEPRECATION NOTICE
+## This compose module is no longer in use
+## Replaced by: Kubernetes deployment
+## Last used version: 0.80.3-0@sha256:35dc012bdc674b2857abb1ecff67215893050eee1b7ab0a39eecdb23cab5477d
+#
+
 services:
   outline:
-    image: outlinewiki/outline:0.80.3-0@sha256:35dc012bdc674b2857abb1ecff67215893050eee1b7ab0a39eecdb23cab5477d
+    image: outlinewiki/outline
     container_name: outline
     depends_on:
       - traefik
