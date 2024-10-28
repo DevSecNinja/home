@@ -438,13 +438,15 @@
 
 ### Service: outline
 
+> :warning: **Deprecation Notice:** Replaced by: Kubernetes deployment
+
 **container_name:** outline
 
-**image:** outlinewiki/outline:0.80.3-0@sha256:35dc012bdc674b2857abb1ecff67215893050eee1b7ab0a39eecdb23cab5477d
-
-**url:** docs.$DOMAINNAME
+**image:** outlinewiki/outline
 
 ### Service: outline-db
+
+> :warning: **Deprecation Notice:** Replaced by: Kubernetes deployment
 
 **container_name:** outline-db
 
@@ -452,11 +454,15 @@
 
 ### Service: outline-db-backup
 
+> :warning: **Deprecation Notice:** Replaced by: Kubernetes deployment
+
 **container_name:** outline-db-backup
 
 **image:** tiredofit/db-backup:4.1.4@sha256:6df3a87b288d00d2f00f87f3dd2314eba793d3a34b500d3fcef3a1b598946e3d
 
 ### Service: outline-redis
+
+> :warning: **Deprecation Notice:** Replaced by: Kubernetes deployment
 
 **container_name:** outline-redis
 
