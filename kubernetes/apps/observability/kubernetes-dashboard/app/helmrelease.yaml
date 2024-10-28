@@ -35,6 +35,7 @@ spec:
           gethomepage.dev/enabled: "true"
           gethomepage.dev/icon: kubernetes-dashboard.png
           gethomepage.dev/name: Kubernetes Dashboard
+          gethomepage.dev/description: "Web-based UI for Kubernetes clusters"
           gethomepage.dev/group: Observability
         hosts:
           - &host "kubernetes.${SECRET_DOMAIN}"

@@ -86,6 +86,7 @@ spec:
           gethomepage.dev/enabled: "true"
           gethomepage.dev/group: Services
           gethomepage.dev/name: pgAdmin
+          gethomepage.dev/description: "Web-based administration for PostgreSQL"
           gethomepage.dev/icon: si-postgresql
         hosts:
           - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"

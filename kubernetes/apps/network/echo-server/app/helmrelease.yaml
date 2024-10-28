@@ -85,6 +85,7 @@ spec:
         #   external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
           gethomepage.dev/enabled: "true"
           gethomepage.dev/group: Network
+          gethomepage.dev/description: "Echo server for testing"
           gethomepage.dev/name: Echo Server
           gethomepage.dev/icon: mdi-video-input-antenna
         hosts:
