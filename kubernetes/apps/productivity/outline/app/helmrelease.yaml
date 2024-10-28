@@ -46,6 +46,8 @@ spec:
     keepHistory: false
 
   dependsOn:
+    - name: cloudnative-pg
+      namespace: database
     - name: openebs
       namespace: openebs-system
 
@@ -91,10 +93,11 @@ spec:
               PGSSLMODE: disable
               URL: https://${GATUS_SUBDOMAIN}.${SECRET_DOMAIN}
               PORT: &port 3000
+              ENABLE_UPDATES: false
 
               FILE_STORAGE: local
-              FILE_STORAGE_UPLOAD_MAX_SIZE: 26214400
-              FILE_STORAGE_IMPORT_MAX_SIZE: 26214400
+              FILE_STORAGE_UPLOAD_MAX_SIZE: "26214400" # Requires string
+              FILE_STORAGE_IMPORT_MAX_SIZE: "26214400" # Requires string
               DATABASE_CONNECTION_POOL_MAX: 10
               WEB_CONCURRENCY: 10
             envFrom: *envFrom
