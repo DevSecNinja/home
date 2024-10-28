@@ -20,21 +20,22 @@ data:
         - Cronjob Schedule Maker:
             - icon: mdi-clock-outline-#e5e7eb
               href: https://crontab.guru/
-        - GitHub Repository:
-            - icon: si-github-#e5e7eb
-              href: https://github.com/DevSecNinja/Home
         - Kubesearch:
             - icon: kubernetes-dashboard.png
               href: https://kubesearch.dev
+        - Speedtest:
+            - href: https://speed.cloudflare.com
+              icon: cloudflare
+    - GitHub:
+        - GitHub Repository:
+            - icon: si-github-#e5e7eb
+              href: https://github.com/DevSecNinja/Home
         - Renovate Dashboard:
             - icon: si-renovatebot
               href: https://github.com/DevSecNinja/home/issues/21
         - Renovate Jobs:
             - icon: si-renovatebot
               href: https://developer.mend.io/github/DevSecNinja/home
-        - Speedtest:
-            - href: https://speed.cloudflare.com
-              icon: cloudflare
     - Productivity:
         - Photopea:
             - icon: si-photopea-#e5e7eb
