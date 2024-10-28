@@ -10,7 +10,7 @@ data:
     endpoints:
       - name: "${APP}"
         group: internal-backend
-        url: "${GATUS_DNS_IP}"
+        url: "192.168.60.59"
         interval: 1m
         dns:
           query-name: "google.com"
