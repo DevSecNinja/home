@@ -13,8 +13,8 @@ data:
         url: "https://${GATUS_SUBDOMAIN:-${APP}}.${GATUS_DOMAIN:-${SECRET_DOMAIN}}"
         interval: 1m
         ui:
-          hide-hostname: true
-          hide-url: true
+          hide-hostname: false
+          hide-url: false
         conditions:
           - "[STATUS] == ${GATUS_STATUS:-200}"
         alerts:

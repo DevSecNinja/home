@@ -16,8 +16,8 @@ data:
           query-name: "${GATUS_SUBDOMAIN:-${APP}}.${GATUS_DOMAIN:-${SECRET_DOMAIN}}"
           query-type: A
         ui:
-          hide-hostname: true
-          hide-url: true
+          hide-hostname: false
+          hide-url: false
         conditions:
           - "len([BODY]) == 0"
         alerts:
