@@ -92,9 +92,10 @@ spec:
               URL: https://${GATUS_SUBDOMAIN}.${SECRET_DOMAIN}
               PORT: &port 3000
 
-              FILE_STORAGE: local
-              FILE_STORAGE_UPLOAD_MAX_SIZE: 26214400
-              FILE_STORAGE_IMPORT_MAX_SIZE: 26214400
+              # Somehow causing "Sorry, this file is too large – the maximum size is 2 Bytes" error
+              # FILE_STORAGE: local
+              # FILE_STORAGE_UPLOAD_MAX_SIZE: 26214400
+              # FILE_STORAGE_IMPORT_MAX_SIZE: 26214400
               DATABASE_CONNECTION_POOL_MAX: 10
               WEB_CONCURRENCY: 10
             envFrom: *envFrom
