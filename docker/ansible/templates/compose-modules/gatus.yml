@@ -33,7 +33,7 @@ services:
       - homepage.group=Infrastructure
       - homepage.name=Gatus
       - homepage.icon=gatus.svg
-      - homepage.href=https://status.$DOMAINNAME
+      - homepage.href=https://status-docker.$DOMAINNAME
       - homepage.description=Uptime Monitoring
       ## Widget
       - homepage.widget.type=gatus
@@ -44,7 +44,7 @@ services:
       - "traefik.enable=true"
       ## Middlewares
       - "traefik.http.routers.gatus-rtr.middlewares=chain-auth@file"
-      - "traefik.http.routers.gatus-rtr.rule=Host(`status.$DOMAINNAME`)"
+      - "traefik.http.routers.gatus-rtr.rule=Host(`status-docker.$DOMAINNAME`)"
       ## HTTP Services
       - "traefik.http.routers.gatus-rtr.service=gatus"
       ### Enable the server port
