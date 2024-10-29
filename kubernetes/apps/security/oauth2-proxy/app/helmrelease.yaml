@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: oauth2-proxy
+  name: &name oauth2-proxy
 spec:
   interval: 30m
   chart:
@@ -23,7 +23,7 @@ spec:
       retries: 3
   values:
     controllers:
-      oauth2-proxy:
+      ${APP}:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
@@ -90,12 +90,13 @@ spec:
             resources:
               requests:
                 cpu: 100m
+                memory: 250M
               limits:
-                memory: 1Gi
+                memory: 1G
 
     service:
       app:
-        controller: oauth2-proxy
+        controller: *name
         ports:
           http:
             port: 4180
@@ -107,7 +108,11 @@ spec:
         hosts:
           - host: &host auth.${SECRET_DOMAIN}
             paths:
-              - path: /oauth2
+              - path: /
+                pathType: Prefix
                 service:
                   identifier: app
                   port: http
+        tls:
+          - hosts:
+              - *host
