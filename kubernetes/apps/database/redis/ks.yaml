@@ -22,3 +22,5 @@ spec:
   postBuild:
     substitute:
       APP: *app
+      GATUS_NAMESPACE: database
+      GATUS_PORT: "26379"
