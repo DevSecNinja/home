@@ -5,7 +5,7 @@ kind: Kustomization
 resources:
   - ./secret.sops.yaml
   - ./helmrelease.yaml
-  # - ../../../../templates/gatus/internal
+  - ../../../../templates/gatus/internal
 configMapGenerator:
   - name: pgadmin-configmap
     files:
