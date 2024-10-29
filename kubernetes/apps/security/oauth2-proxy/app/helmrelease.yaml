@@ -39,8 +39,8 @@ spec:
               OAUTH2_PROXY_SCOPE: "openid profile email"
               OAUTH2_PROXY_PROVIDER: azure
 
-              # TODO: [oauth2-proxy] Implement Redis
-              # OAUTH2_PROXY_SESSION_STORE_TYPE: redis
+              OAUTH2_PROXY_SESSION_STORE_TYPE: redis
+              OAUTH2_PROXY_REDIS_USE_SENTINEL: "true"
 
               OAUTH2_PROXY_PASS_AUTHORIZATION_HEADER: true
               OAUTH2_PROXY_PASS_HOST_HEADER: true
