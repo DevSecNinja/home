@@ -83,6 +83,8 @@ spec:
         className: internal
         annotations:
         #   external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+          nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_DOMAIN}/oauth2/auth/oauth2/start?rd=$scheme://$host$request_uri"
           gethomepage.dev/enabled: "true"
           gethomepage.dev/group: Network
           gethomepage.dev/description: "Echo server for testing"
