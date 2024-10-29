@@ -24,6 +24,11 @@ spec:
   values:
     fullnameOverride: ingress-nginx-internal
     controller:
+      # Support snippet annotations like nginx.ingress.kubernetes.io/auth-snippet
+      allowSnippetAnnotations: true
+      extraEnvs:
+        - name: TZ
+          value: "${TIMEZONE}"
       service:
         annotations:
           lbipam.cilium.io/ips: "192.168.60.57"

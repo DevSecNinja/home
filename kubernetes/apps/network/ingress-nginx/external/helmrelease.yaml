@@ -26,6 +26,11 @@ spec:
   values:
     fullnameOverride: ingress-nginx-external
     controller:
+      # Support snippet annotations like nginx.ingress.kubernetes.io/auth-snippet
+      allowSnippetAnnotations: true
+      extraEnvs:
+        - name: TZ
+          value: "${TIMEZONE}"
       service:
         annotations:
           external-dns.alpha.kubernetes.io/hostname: "external.${SECRET_DOMAIN}"
