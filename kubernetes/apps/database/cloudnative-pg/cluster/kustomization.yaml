@@ -5,8 +5,8 @@ kind: Kustomization
 namespace: database
 resources:
   - ./cluster.yaml
-  - ./gatus.yaml
   - ./prometheus-rule.yaml
   - ./scheduled-backup.yaml
   - ./secret.sops.yaml
   - ./service.yaml
+  - ../../../../templates/gatus/internal-backend
