@@ -54,6 +54,10 @@ spec:
       main:
         enabled: true
         className: internal
+        annotations:
+          # The following two annotations are needed for redirection to the Oauth2 Proxy
+          nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_DOMAIN}/oauth2/auth/oauth2/start?rd=$scheme://$host$request_uri"
         hosts:
           - host: &host apps.${SECRET_DOMAIN}
             paths:
