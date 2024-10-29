@@ -9,4 +9,3 @@ resources:
   - ./scheduled-backup.yaml
   - ./secret.sops.yaml
   - ./service.yaml
-  - ../../../../templates/gatus/internal-backend
