@@ -64,6 +64,7 @@ spec:
           "request_length": $request_length, "duration": $request_time, "method": "$request_method", "http_referrer": "$http_referer",
           "http_user_agent": "$http_user_agent"}
         proxy-body-size: 0
+        # Requires 32k instead of 16k due to oauth2-proxy authorization header
         proxy-buffer-size: 32k
         ssl-protocols: TLSv1.3 TLSv1.2
         ssl-redirect: "true"
