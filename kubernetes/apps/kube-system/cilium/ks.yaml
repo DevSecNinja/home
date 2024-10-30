@@ -22,6 +22,7 @@ spec:
       APP: *app
       GATUS_SUBDOMAIN: hubble
       GATUS_PATH: /healthz
+      GATUS_BODY: ok
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
