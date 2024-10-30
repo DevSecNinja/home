@@ -16,6 +16,7 @@ data:
           dns-resolver: tcp://1.1.1.1:53
         conditions:
           - "[STATUS] == ${GATUS_STATUS:-200}"
+          - "[BODY] == ${GATUS_BODY:-[BODY]}"
         # alerts:
         #   - type: discord
         #     send-on-resolved: true
