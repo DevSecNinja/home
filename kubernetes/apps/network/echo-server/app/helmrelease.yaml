@@ -34,6 +34,7 @@ spec:
               HTTP_PORT: &port 8080
               LOG_WITHOUT_NEWLINE: true
               LOG_IGNORE_PATH: /healthz
+              JWT_HEADER: x-auth-request-access-token
               PROMETHEUS_ENABLED: true
             probes:
               liveness: &probes
