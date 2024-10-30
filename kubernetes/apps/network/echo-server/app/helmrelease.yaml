@@ -89,8 +89,8 @@ spec:
           ##
           # Add response headers for authentication
           nginx.ingress.kubernetes.io/auth-response-headers: >-
-            X-Auth-Request-Email,X-Auth-Request-Preferred-Username,X-Auth-Request-Access-Token,
-            X-Auth-Request-Roles,X-Auth-Request-User,Authorization
+            X-Auth-Request-Email,X-Auth-Request-Access-Token,
+            X-Auth-Request-Preferred-Username,X-Auth-Request-Roles,X-Auth-Request-User,Authorization
           gethomepage.dev/enabled: "true"
           gethomepage.dev/group: Network
           gethomepage.dev/description: "Echo server for testing"
