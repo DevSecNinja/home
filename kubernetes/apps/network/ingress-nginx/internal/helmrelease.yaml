@@ -44,7 +44,6 @@ spec:
               operator: In
               values: ["internal"]
       config:
-        auth-response-headers: "x-auth-request-user, x-auth-request-groups, x-auth-request-email, x-auth-request-access-token"
         block-user-agents: "GPTBot,~*GPTBot*,ChatGPT-User,~*ChatGPT-User*,Google-Extended,~*Google-Extended*,CCBot,~*CCBot*,Omgilibot,~*Omgilibot*,FacebookBot,~*FacebookBot*" # taken from https://github.com/superseriousbusiness/gotosocial/blob/main/internal/web/robots.go
         client-body-buffer-size: 100M
         client-body-timeout: 120
