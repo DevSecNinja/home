@@ -27,6 +27,7 @@ services:
       # Authentication
       - LD_ENABLE_AUTH_PROXY=true
       - LD_AUTH_PROXY_USERNAME_HEADER=HTTP_X_FORWARDED_USER
+      - LD_AUTH_PROXY_LOGOUT_URL=https://homepage-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
     volumes:
       - linkding_data:/etc/linkding/data"
     labels:
