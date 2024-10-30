@@ -24,6 +24,9 @@ services:
       # Linkding
       - LD_SUPERUSER_NAME=${LINKDING_ADMIN_USERNAME}
       - LD_SUPERUSER_PASSWORD=${LINKDING_ADMIN_PASSWORD}
+      # Authentication
+      - LD_ENABLE_AUTH_PROXY=true
+      - LD_AUTH_PROXY_USERNAME_HEADER=HTTP_X_FORWARDED_USER
     volumes:
       - linkding_data:/etc/linkding/data"
     labels:
