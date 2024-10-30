@@ -34,7 +34,7 @@ spec:
               HTTP_PORT: &port 8080
               LOG_WITHOUT_NEWLINE: true
               LOG_IGNORE_PATH: /healthz
-              JWT_HEADER: x-auth-request-access-token
+              JWT_HEADER: X-Auth-Request-Access-Token
               PROMETHEUS_ENABLED: true
             probes:
               liveness: &probes
@@ -89,7 +89,7 @@ spec:
           ##
           # Add response headers for authentication
           nginx.ingress.kubernetes.io/auth-response-headers: >-
-            X-Auth-Request-Email,X-Auth-Request-Preferred-,X-Auth-Request-Access-Token,
+            X-Auth-Request-Email,X-Auth-Request-Preferred-Username,X-Auth-Request-Access-Token,
             X-Auth-Request-Roles,X-Auth-Request-User,Authorization
           gethomepage.dev/enabled: "true"
           gethomepage.dev/group: Network
