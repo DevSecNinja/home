@@ -10,6 +10,8 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
+  dependsOn:
+    - name: redis
   path: ./kubernetes/apps/security/oauth2-proxy/app
   prune: true
   sourceRef:
