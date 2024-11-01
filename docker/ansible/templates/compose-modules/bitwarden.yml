@@ -1,6 +1,6 @@
 services:
   bitwarden:
-    image: bitwarden/self-host:2024.10.1-beta@sha256:c930f3558f6a25c8e11f4b1ca49e9eb3f367cb3da54979c4d74a4ea1d712872a
+    image: bitwarden/self-host:2024.10.2-beta@sha256:f3e31a3f8e4d3998ca6409ec81ebe2dc0bcc44c51d9985fa6e285514aae96cd8
     container_name: bitwarden
     depends_on:
       - traefik
