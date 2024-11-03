@@ -44,7 +44,7 @@ metadata:
 data:
   config.yaml: |
     endpoints:
-      - name: "Unbound - DNS - External"
+      - name: "unbound - DNS - External"
         group: internal-backend
         url: "unbound.${GATUS_NAMESPACE}.svc.cluster.local:53"
         dns:
@@ -57,7 +57,7 @@ data:
         #     send-on-resolved: true
         #     failure-threshold: 2
 
-      - name: "Unbound - DNS - Internal"
+      - name: "unbound - DNS - Internal"
         group: internal-backend
         url: "unbound.${GATUS_NAMESPACE}.svc.cluster.local:53"
         dns:
