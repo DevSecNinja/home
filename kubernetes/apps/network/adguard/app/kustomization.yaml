@@ -9,9 +9,6 @@ resources:
   - ../../../../templates/gatus/internal
 configMapGenerator:
   - name: adguard
-    options:
-      labels:
-        app.kubernetes.io/service: adguard
     files:
       - AdGuardHome.yaml=./resources/AdGuardHome.yaml
 generatorOptions:

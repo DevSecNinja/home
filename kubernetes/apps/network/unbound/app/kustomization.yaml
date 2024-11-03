@@ -8,9 +8,6 @@ resources:
   - ./rbac.yaml
 configMapGenerator:
   - name: unbound
-    options:
-      labels:
-        app.kubernetes.io/service: unbound
     files:
       - a-records.conf=./resources/a-records.conf
       - forward-records.conf=./resources/forward-records.conf
