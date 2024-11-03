@@ -32,13 +32,13 @@ spec:
           dnsConfig:
             options:
               - { name: ndots, value: "1" }
-          # securityContext:
-          #   runAsNonRoot: false # unbound doesn't support running as non-root
-          #   runAsUser: 65534
-          #   runAsGroup: 65534
-          #   fsGroup: 65534
-          #   fsGroupChangePolicy: OnRootMismatch
-          #   seccompProfile: { type: RuntimeDefault }
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 65534
+            runAsGroup: 65534
+            fsGroup: 65534
+            fsGroupChangePolicy: OnRootMismatch
+            seccompProfile: { type: RuntimeDefault }
         initContainers:
           init-config:
             image: &configSyncImage
