@@ -25,7 +25,7 @@ data:
         group: internal-backend
         url: "${GATUS_SUBDOMAIN:-${APP}}.${GATUS_NAMESPACE}.svc.cluster.local"
         dns:
-          query-name: "unbound.${DOMAINNAME}"
+          query-name: "unbound.${SECRET_DOMAIN}"
           query-type: "A"
         conditions:
           - "[DNS_RCODE] == NOERROR"
