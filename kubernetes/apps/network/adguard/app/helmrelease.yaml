@@ -1,0 +1,117 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app adguard
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    controllers:
+      ${APP}:
+        strategy: RollingUpdate
+        containers:
+          app:
+            image:
+              repository: adguard/adguardhome
+              tag: v0.107.53@sha256:d9c512051141e6a617d773f16cdf6782c178464c6e766acf9fe63482a171f95c
+            env:
+              TZ: ${TIMEZONE}
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 64Mi
+            # TODO: [adguard] Add probes & service monitor
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65534
+        runAsGroup: 65534
+        seccompProfile: { type: RuntimeDefault }
+    service:
+      dns-tcp:
+        controller: app
+        enabled: true
+        ports:
+          dns-tcp:
+            enabled: true
+            port: 53
+            protocol: TCP
+            targetPort: 53
+      dns-over-tls-tcp:
+        controller: app
+        enabled: true
+        ports:
+          dns-over-tls-tcp:
+            enabled: true
+            port: 853
+            protocol: TCP
+            targetPort: 853
+      dns-udp:
+        controller: app
+        enabled: true
+        ports:
+          dns-udp:
+            enabled: true
+            port: 53
+            protocol: UDP
+            targetPort: 53
+      app:
+        controller: app
+        ports:
+          http:
+            port: &port 80
+    ingress:
+      app:
+        enabled: true
+        annotations:
+          ## Enable Oauth2 Authentication
+          nginx.ingress.kubernetes.io/auth-url: "http://oauth2-proxy.security.svc.cluster.local:4180/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_DOMAIN}/oauth2/auth/oauth2/start?rd=$scheme://$host$request_uri"
+          ##
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/description: "DNS Ad-Blocking"
+          gethomepage.dev/group: Network
+          gethomepage.dev/icon: ${APP}
+          gethomepage.dev/name: AdGuard
+          gethomepage.dev/widget.type: ${APP}
+          gethomepage.dev/widget.url: http://${APP}.network.svc.cluster.local:80
+          # TODO: [adguard] Fix Adguard widget
+          gethomepage.dev/widget.username: null
+          gethomepage.dev/widget.password: null
+        hosts:
+          - host: &host ${GATUS_SUBDOMAIN:-${APP}}.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+        tls:
+         - hosts:
+             - *host
+
+    persistence:
+      # TODO: [adguard] Check if config init container is needed
+      config:
+        enabled: true
+        type: configMap
+        name: homepage-config
+        globalMounts:
+          - subPath: AdGuardHome.yaml
+            path: /opt/adguardhome/conf/AdGuardHome.yaml
