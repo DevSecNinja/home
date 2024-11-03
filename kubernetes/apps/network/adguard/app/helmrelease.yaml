@@ -105,13 +105,15 @@ spec:
              - *host
 
     persistence:
-      # TODO: [adguard] Check if config init container is needed
       config:
-        enabled: true
-        type: emptyDir
-      config-file:
-        type: configMap
-        name: adguard
+        storageClass: openebs-hostpath
+        accessMode: ReadWriteOnce
+        size: 1Gi
         globalMounts:
-          - subPath: AdGuardHome.yaml
-            path: /opt/adguardhome/conf/AdGuardHome.yaml
+          - path: /opt/adguardhome
+      adguardhome-yaml:
+        type: configMap
+        name: adguard-configmap
+        globalMounts:
+          - path: /opt/adguardhome/conf/AdGuardHome.yaml
+            subPath: AdGuardHome.yaml
