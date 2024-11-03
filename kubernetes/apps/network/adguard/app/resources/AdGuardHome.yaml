@@ -24,11 +24,7 @@ dns:
     - udp://unbound.network.svc.cluster.local:53
   upstream_dns_file: ""
   bootstrap_dns:
-    - 127.0.0.11
-    - 9.9.9.10
-    - 149.112.112.10
-    - 2620:fe::10
-    - 2620:fe::fe:10
+    - 192.168.60.59
   fallback_dns:
     - https://dns10.quad9.net/dns-query
   all_servers: false
