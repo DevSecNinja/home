@@ -1,0 +1,35 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "unbound-dns-gatus-ep"
+  labels:
+    gatus.io/enabled: "true"
+data:
+  config.yaml: |
+    endpoints:
+      - name: "${APP} - DNS - External"
+        group: internal-backend
+        url: "${GATUS_SUBDOMAIN:-${APP}}.${GATUS_NAMESPACE}.svc.cluster.local"
+        dns:
+          query-name: "google.com"
+          query-type: "A"
+        conditions:
+          - "[DNS_RCODE] == NOERROR"
+        # alerts:
+        #   - type: discord
+        #     send-on-resolved: true
+        #     failure-threshold: 2
+
+      - name: "${APP} - DNS - Internal"
+        group: internal-backend
+        url: "${GATUS_SUBDOMAIN:-${APP}}.${GATUS_NAMESPACE}.svc.cluster.local"
+        dns:
+          query-name: "unbound.${DOMAINNAME}"
+          query-type: "A"
+        conditions:
+          - "[DNS_RCODE] == NOERROR"
+        # alerts:
+        #   - type: discord
+        #     send-on-resolved: true
+        #     failure-threshold: 2
