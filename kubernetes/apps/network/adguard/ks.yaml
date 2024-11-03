@@ -9,16 +9,13 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  dependsOn:
-    - name: openebs
   path: ./kubernetes/apps/network/adguard/app
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
-  wait: true
+  wait: false
   interval: 30m
-  retryInterval: 1m
   timeout: 5m
   postBuild:
     substitute:

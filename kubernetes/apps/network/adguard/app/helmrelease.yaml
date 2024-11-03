@@ -21,13 +21,10 @@ spec:
     cleanupOnFail: true
     remediation:
       retries: 3
-  uninstall:
-    keepHistory: false
   values:
     controllers:
       adguard:
-        annotations:
-          reloader.stakater.com/auto: "true"
+        strategy: RollingUpdate
         containers:
           app:
             image:
@@ -35,49 +32,29 @@ spec:
               tag: v0.107.53@sha256:d9c512051141e6a617d773f16cdf6782c178464c6e766acf9fe63482a171f95c
             env:
               TZ: ${TIMEZONE}
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
             resources:
               requests:
                 cpu: 10m
-                memory: 256M
               limits:
                 memory: 64Mi
-            # TODO: [adguard] Add probes & service monitors
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65534
+        runAsGroup: 65534
+        seccompProfile: { type: RuntimeDefault }
     service:
-      # dns-tcp:
-      #   controller: *app
-      #   enabled: true
-      #   ports:
-      #     dns-tcp:
-      #       enabled: true
-      #       port: 53
-      #       protocol: TCP
-      #       targetPort: 53
-      # dns-over-tls-tcp:
-      #   controller: *app
-      #   enabled: true
-      #   ports:
-      #     dns-over-tls-tcp:
-      #       enabled: true
-      #       port: 853
-      #       protocol: TCP
-      #       targetPort: 853
-      # dns-udp:
-      #   controller: *app
-      #   enabled: true
-      #   ports:
-      #     dns-udp:
-      #       enabled: true
-      #       port: 53
-      #       protocol: UDP
-      #       targetPort: 53
       app:
-        controller: *app
+        controller: adguard
         ports:
           http:
-            port: &port 80
+            port: *port
     ingress:
       app:
-        enabled: true
         className: internal
         annotations:
           ## Enable Oauth2 Authentication
@@ -95,24 +72,9 @@ spec:
           gethomepage.dev/widget.username: null
           gethomepage.dev/widget.password: null
         hosts:
-          - host: &host ${GATUS_SUBDOMAIN:-${APP}}.${SECRET_DOMAIN}
+          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
                   identifier: app
                   port: http
-        tls:
-         - hosts:
-             - *host
-
-    persistence:
-      # TODO: [adguard] Check if config init container is needed
-      config:
-        enabled: true
-        type: emptyDir
-      config-file:
-        type: configMap
-        name: adguard
-        globalMounts:
-          - subPath: AdGuardHome.yaml
-            path: /opt/adguardhome/conf/AdGuardHome.yaml
