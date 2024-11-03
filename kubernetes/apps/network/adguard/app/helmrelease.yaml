@@ -123,7 +123,7 @@ spec:
           gethomepage.dev/enabled: "true"
           gethomepage.dev/description: "DNS Ad-Blocking"
           gethomepage.dev/group: Network
-          gethomepage.dev/icon: ${APP}
+          gethomepage.dev/icon: adguard-home.svg
           gethomepage.dev/name: AdGuard
           # gethomepage.dev/widget.type: ${APP}
           # gethomepage.dev/widget.url: http://${APP}.network.svc.cluster.local:80
