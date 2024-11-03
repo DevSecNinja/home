@@ -25,7 +25,7 @@ data:
         group: internal
         url: "${GATUS_SUBDOMAIN:-${APP}}.${SECRET_DOMAIN}${GATUS_PATH:-}"
         dns:
-          query-name: "adguard.${SECRET_DOMAIN}"
+          query-name: "${APP}.${SECRET_DOMAIN}"
           query-type: "A"
         conditions:
           - "[DNS_RCODE] == NOERROR"
@@ -51,7 +51,7 @@ data:
         group: internal-backend
         url: "${GATUS_SUBDOMAIN:-${APP}}.${GATUS_NAMESPACE}.svc.cluster.local"
         dns:
-          query-name: "adguard.${SECRET_DOMAIN}"
+          query-name: "${APP}.${SECRET_DOMAIN}"
           query-type: "A"
         conditions:
           - "[DNS_RCODE] == NOERROR"
