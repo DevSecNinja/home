@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: adguard
+  name: &app adguard
 spec:
   interval: 30m
   chart:
@@ -21,10 +21,13 @@ spec:
     cleanupOnFail: true
     remediation:
       retries: 3
+  uninstall:
+    keepHistory: false
   values:
     controllers:
-      adguard:
-        strategy: RollingUpdate
+      ${APP}:
+        annotations:
+          reloader.stakater.com/auto: "true"
         containers:
           app:
             image:
@@ -32,52 +35,49 @@ spec:
               tag: v0.107.53@sha256:d9c512051141e6a617d773f16cdf6782c178464c6e766acf9fe63482a171f95c
             env:
               TZ: ${TIMEZONE}
-            probes:
-              liveness: &probes
-                enabled: true
-                custom: true
-                spec:
-                  httpGet:
-                    path: /healthz
-                    port: &port 80
-                  initialDelaySeconds: 0
-                  periodSeconds: 10
-                  timeoutSeconds: 1
-                  failureThreshold: 3
-              readiness: *probes
-            securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
             resources:
               requests:
                 cpu: 10m
+                memory: 256M
               limits:
                 memory: 64Mi
-    defaultPodOptions:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 65534
-        runAsGroup: 65534
-        seccompProfile: { type: RuntimeDefault }
+            # TODO: [adguard] Add probes & service monitors
     service:
+      dns-tcp:
+        controller: *app
+        enabled: true
+        ports:
+          dns-tcp:
+            enabled: true
+            port: 53
+            protocol: TCP
+            targetPort: 53
+      dns-over-tls-tcp:
+        controller: *app
+        enabled: true
+        ports:
+          dns-over-tls-tcp:
+            enabled: true
+            port: 853
+            protocol: TCP
+            targetPort: 853
+      dns-udp:
+        controller: *app
+        enabled: true
+        ports:
+          dns-udp:
+            enabled: true
+            port: 53
+            protocol: UDP
+            targetPort: 53
       app:
-        controller: adguard
+        controller: *app
         ports:
           http:
-            port: *port
-    serviceMonitor:
-      app:
-        serviceName: adguard
-        endpoints:
-          - port: http
-            scheme: http
-            path: /metrics
-            interval: 1m
-            scrapeTimeout: 10s
+            port: &port 80
     ingress:
       app:
-        className: internal
+        enabled: true
         annotations:
           ## Enable Oauth2 Authentication
           nginx.ingress.kubernetes.io/auth-url: "http://oauth2-proxy.security.svc.cluster.local:4180/oauth2/auth"
@@ -94,9 +94,24 @@ spec:
           gethomepage.dev/widget.username: null
           gethomepage.dev/widget.password: null
         hosts:
-          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - host: &host ${GATUS_SUBDOMAIN:-${APP}}.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
                   identifier: app
                   port: http
+        tls:
+         - hosts:
+             - *host
+
+    persistence:
+      # TODO: [adguard] Check if config init container is needed
+      config:
+        enabled: true
+        type: emptyDir
+      config-file:
+        type: configMap
+        name: adguard
+        globalMounts:
+          - subPath: AdGuardHome.yaml
+            path: /opt/adguardhome/conf/AdGuardHome.yaml
