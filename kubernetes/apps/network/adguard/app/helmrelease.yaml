@@ -46,7 +46,7 @@ spec:
               tag: 1.28.0@sha256:4166a019eeafd1f0fef4d867dc5f224f18d84ec8681dbb31f3ca258ecf07bcf2
             env:
               FOLDER: /opt/adguardhome/conf
-              LABEL: app.kubernetes.io/name
+              LABEL: app.kubernetes.io/config-owner
               LABEL_VALUE: *app
               UNIQUE_FILENAMES: false
               METHOD: LIST
@@ -74,7 +74,7 @@ spec:
             image: *configSyncImage
             env:
               FOLDER: /opt/adguardhome/conf
-              LABEL: app.kubernetes.io/name
+              LABEL: app.kubernetes.io/config-owner
               LABEL_VALUE: *app
               UNIQUE_FILENAMES: false
               METHOD: WATCH
