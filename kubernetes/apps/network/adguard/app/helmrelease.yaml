@@ -128,9 +128,6 @@ spec:
           gethomepage.dev/name: AdGuard
           gethomepage.dev/widget.type: *app
           gethomepage.dev/widget.url: http://${APP}.network.svc.cluster.local:80
-          # # TODO: [adguard] Fix Adguard widget
-          # gethomepage.dev/widget.username: null
-          # gethomepage.dev/widget.password: null
         hosts:
           - host: &host ${GATUS_SUBDOMAIN:-${APP}}.${SECRET_DOMAIN}
             paths:
@@ -148,24 +145,9 @@ spec:
       name: *app
 
     persistence:
-      config-work:
+      config:
         storageClass: openebs-hostpath
         accessMode: ReadWriteOnce
         size: 1Gi
         globalMounts:
-          - path: /opt/adguardhome/work
-      config-conf:
-        storageClass: openebs-hostpath
-        accessMode: ReadWriteOnce
-        size: 1Gi
-        globalMounts:
-          - path: /opt/adguardhome/conf
-      # This doesn't work with AdGuard unfortunately
-      #  '2024/11/03 12:57:55.544707 [error] parsing configuration file: writing new config:
-      #  rename /opt/adguardhome/conf/.AdGuardHome.yaml8008514007667561438 /opt/adguardhome/conf/AdGuardHome.yaml: device or resource busy'
-      # adguardhome-yaml:
-      #   type: configMap
-      #   name: adguard
-      #   globalMounts:
-      #     - path: /opt/adguardhome/conf/AdGuardHome.yaml
-      #       subPath: AdGuardHome.yaml
+          - path: /opt/adguardhome
