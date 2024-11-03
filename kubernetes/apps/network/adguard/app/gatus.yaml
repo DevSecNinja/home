@@ -10,7 +10,7 @@ data:
     endpoints:
       - name: "${APP} - DNS - External"
         group: internal
-        url: "${GATUS_SUBDOMAIN:-${APP}}.${SECRET_DOMAIN}${GATUS_PATH:-}:53"
+        url: "${GATUS_SUBDOMAIN:-${APP}}.${SECRET_DOMAIN}${GATUS_PATH:-}"
         dns:
           query-name: "google.com"
           query-type: "A"
@@ -23,7 +23,7 @@ data:
 
       - name: "${APP} - DNS - Internal"
         group: internal
-        url: "${GATUS_SUBDOMAIN:-${APP}}.${SECRET_DOMAIN}${GATUS_PATH:-}:53"
+        url: "${GATUS_SUBDOMAIN:-${APP}}.${SECRET_DOMAIN}${GATUS_PATH:-}"
         dns:
           query-name: "adguard.${DOMAINNAME}"
           query-type: "A"
@@ -36,7 +36,7 @@ data:
 
       - name: "${APP} - DNS - External - Backend"
         group: internal-backend
-        url: "${GATUS_SUBDOMAIN:-${APP}}.${GATUS_NAMESPACE}.svc.cluster.local:53"
+        url: "${GATUS_SUBDOMAIN:-${APP}}.${GATUS_NAMESPACE}.svc.cluster.local"
         dns:
           query-name: "google.com"
           query-type: "A"
@@ -49,7 +49,7 @@ data:
 
       - name: "${APP} - DNS - Internal - Backend"
         group: internal-backend
-        url: "${GATUS_SUBDOMAIN:-${APP}}.${GATUS_NAMESPACE}.svc.cluster.local:53"
+        url: "${GATUS_SUBDOMAIN:-${APP}}.${GATUS_NAMESPACE}.svc.cluster.local"
         dns:
           query-name: "adguard.${DOMAINNAME}"
           query-type: "A"
@@ -72,7 +72,7 @@ data:
     endpoints:
       - name: "unbound - DNS - External"
         group: internal-backend
-        url: "unbound.${GATUS_NAMESPACE}.svc.cluster.local:53"
+        url: "unbound.${GATUS_NAMESPACE}.svc.cluster.local"
         dns:
           query-name: "google.com"
           query-type: "A"
@@ -85,7 +85,7 @@ data:
 
       - name: "unbound - DNS - Internal"
         group: internal-backend
-        url: "unbound.${GATUS_NAMESPACE}.svc.cluster.local:53"
+        url: "unbound.${GATUS_NAMESPACE}.svc.cluster.local"
         dns:
           query-name: "adguard.${DOMAINNAME}"
           query-type: "A"
