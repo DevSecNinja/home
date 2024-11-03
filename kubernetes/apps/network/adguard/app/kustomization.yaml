@@ -5,6 +5,7 @@ kind: Kustomization
 resources:
   - ./helmrelease.yaml
   - ./rbac.yaml
+  - ./gatus.yaml
   - ./unbound.yaml
   - ../../../../templates/gatus/internal
 configMapGenerator:
