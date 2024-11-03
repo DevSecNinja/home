@@ -80,19 +80,14 @@ spec:
               METHOD: WATCH
             resources: *configSyncResources
     service:
-      dns-tcp:
+      app:
         controller: *app
-        enabled: true
         ports:
           dns-tcp:
             enabled: true
             port: 53
             protocol: TCP
             targetPort: 53
-      dns-udp:
-        controller: *app
-        enabled: true
-        ports:
           dns-udp:
             enabled: true
             port: 53
