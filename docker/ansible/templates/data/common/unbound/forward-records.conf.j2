@@ -6,6 +6,11 @@ forward-zone:
     forward-addr: 192.168.60.59
 
 forward-zone:
+    # Security: prevent WPAD lookups, ref: DEF CON 32 2024.
+    name: "wpad"
+    forward-addr: 127.0.0.1
+
+forward-zone:
     # Forward all queries (except those in cache and local zone) to
     # upstream recursive servers
     name: "."

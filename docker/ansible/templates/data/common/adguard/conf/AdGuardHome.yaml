@@ -112,8 +112,12 @@ user_rules:
   - '@@||api.ipify.org^$important'
   - '@@||login.windows.net^$important'
   - /(^|\.)xn--/
+  - '# Block Tweakers ads after DPG Media takeover.'
   - '||aa.tweakers.nl^$important'
   - '||ab.tweakers.nl^$important'
+  - '# Security: prevent WPAD lookups, ref: DEF CON 32 2024.'
+  - '||wpad^$important'
+  - '||wpad.*^$important'
 
 dhcp:
   enabled: false
