@@ -105,12 +105,18 @@ spec:
              - *host
 
     persistence:
-      config:
+      config-work:
         storageClass: openebs-hostpath
         accessMode: ReadWriteOnce
         size: 1Gi
         globalMounts:
-          - path: /opt/adguardhome
+          - path: /opt/adguardhome/work
+      config-conf:
+        storageClass: openebs-hostpath
+        accessMode: ReadWriteOnce
+        size: 1Gi
+        globalMounts:
+          - path: /opt/adguardhome/conf
       adguardhome-yaml:
         type: configMap
         name: adguard
