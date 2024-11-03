@@ -328,7 +328,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:v1.26.1@sha256:3fe6b20261f973d25bcc446e7d15fd3f3caaf50185abb55daa1e46af1c01f352
+**image:** lobehub/lobe-chat:v1.26.18@sha256:aa5df172284ca70a7fe23fc99b4ac9eb7d9424b32719802b8c70fa2655ee3c52
 
 **url:** chat.$DOMAINNAME
 
