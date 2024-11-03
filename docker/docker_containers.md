@@ -50,7 +50,7 @@
 
 **container_name:** bitwarden
 
-**image:** bitwarden/self-host:2024.10.1-beta@sha256:c930f3558f6a25c8e11f4b1ca49e9eb3f367cb3da54979c4d74a4ea1d712872a
+**image:** bitwarden/self-host:2024.10.2-beta@sha256:f3e31a3f8e4d3998ca6409ec81ebe2dc0bcc44c51d9985fa6e285514aae96cd8
 
 **url:** bitwarden.$DOMAINNAME
 
@@ -164,7 +164,7 @@
 
 **container_name:** excalidraw
 
-**image:** excalidraw/excalidraw:latest@sha256:687708a6c879b9120c82b61faf9ff242367395be1d5f90c385989405e51b5433
+**image:** excalidraw/excalidraw:latest@sha256:697f4354cbef54492bf3acdf6a487469418ff8db483fae8e601ab89c5f3205a2
 
 **url:** excalidraw.$DOMAINNAME
 
@@ -174,7 +174,7 @@
 
 **container_name:** foldingathome
 
-**image:** lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:97c7346a05a2993ff70defa3b33660c1d694b04e97691b2765838fd3e14361ae
+**image:** lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:6431f7f1009a849b2daae40a99ccd28fec9f4df4cea8a3d02ad925a36df3ebd1
 
 ## docker/ansible/templates/compose-modules/gatus.yml
 
@@ -222,7 +222,7 @@
 
 **container_name:** home-assistant
 
-**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:103da063b0bbe4d6e9c0f6bb01db91d02b0707d15276b9807835d180478f78b9
+**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:7274d1a64bf03d54e87c59c3ea7eb464ee46605817f992fead253ab58f791aeb
 
 **url:** home-assistant.$DOMAINNAME
 
@@ -504,7 +504,7 @@
 
 **container_name:** paperless-web
 
-**image:** ghcr.io/paperless-ngx/paperless-ngx:2.13.0@sha256:92d876788c537b27aa02f13cd649923de19628712430f0447ecb9b153bb91564
+**image:** ghcr.io/paperless-ngx/paperless-ngx:2.13.2@sha256:d440c8682b445fff3dccc538ab88c604e389d3221f9267352f15e7d1e551a98d
 
 **url:** paperless.$DOMAINNAME
 
@@ -524,7 +524,7 @@
 
 **container_name:** photoprism
 
-**image:** photoprism/photoprism:preview@sha256:9dbd21b1bcbfc576f579d5d9ee4dc051eb3eeb42c1470e615f98036dabb81f04
+**image:** photoprism/photoprism:preview@sha256:37cd3a7c0e9ecaf99de1318a4e8b180e3c877f7ff7290639797df6730d5d52f9
 
 **url:** photos.$DOMAINNAME
 
@@ -546,7 +546,7 @@
 
 **container_name:** phpmyadmin
 
-**image:** phpmyadmin:5.2.1-apache@sha256:6b7d76fc2b52348e490462c720ed03a21b9352d78529f99b7c8c0124ed976400
+**image:** phpmyadmin:5.2.1-apache@sha256:2ec46aba67db196e8a6987440dcd6dde7d15aa8f0435d84c8b8442d2b39f15c7
 
 **url:** phpmyadmin.$DOMAINNAME
 
@@ -678,7 +678,7 @@
 
 **container_name:** vault
 
-**image:** hashicorp/vault:1.18@sha256:e2da7099950443e234ed699940fabcdc44b5babe33adfb459e189a63b7bb50d7
+**image:** hashicorp/vault:1.18@sha256:3580fa352195aa7e76449cb8fadeef6d2f90a454c38982d30cf094e9013be786
 
 **url:** vault.$DOMAINNAME`) && PathPrefix(`/v1
 
@@ -752,7 +752,7 @@
 
 **container_name:** whoogle
 
-**image:** benbusby/whoogle-search:latest@sha256:9f9cd9229b32487c77aa9bd50bf2c54ca5053e78d2881e6cbee70dac7cb0dd64
+**image:** benbusby/whoogle-search:latest@sha256:60e071aa7c8b8d486c9bca773e26688744ca22cfdb61f58fa6a7f41fc50cd848
 
 **url:** search.$DOMAINNAME
 
