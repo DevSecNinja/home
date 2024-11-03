@@ -714,7 +714,7 @@
 
 **container_name:** wallabag
 
-**image:** wallabag/wallabag:2.6.9@sha256:d482b139bab164afef0e8bbfbeb7c55cd3e10e848b95d7d167e4ffcbc847f4b9
+**image:** wallabag/wallabag:2.6.10@sha256:8854765d299d8e93f962d4be02ceb5703ed2ee24ec6c884f870bb7a18de41378
 
 **url:** wallabag.$DOMAINNAME
 
