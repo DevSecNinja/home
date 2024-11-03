@@ -80,39 +80,29 @@ spec:
               METHOD: WATCH
             resources: *configSyncResources
     service:
-      dns-tcp:
+      app:
         controller: *app
-        enabled: true
         ports:
+          app:
+            enabled: true
+            port: 80
+            protocol: TCP
+            targetPort: 80        
           dns-tcp:
             enabled: true
             port: 53
             protocol: TCP
             targetPort: 53
-      dns-over-tls-tcp:
-        controller: *app
-        enabled: true
-        ports:
-          dns-over-tls-tcp:
+          dns-tcp-over-tls:
             enabled: true
             port: 853
             protocol: TCP
             targetPort: 853
-      dns-udp:
-        controller: *app
-        enabled: true
-        ports:
           dns-udp:
             enabled: true
             port: 53
             protocol: UDP
             targetPort: 53
-      app:
-        controller: *app
-        nameOverride: *app
-        ports:
-          http:
-            port: &port 80
     ingress:
       app:
         enabled: true
