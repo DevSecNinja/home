@@ -21,14 +21,15 @@ spec:
     cleanupOnFail: true
     remediation:
       retries: 3
+  uninstall:
+    keepHistory: false
   values:
     controllers:
       ${APP}:
-        enabled: true
-        strategy: RollingUpdate
+        annotations:
+          reloader.stakater.com/auto: "true"
         containers:
           app:
-            nameOverride: *name
             image:
               repository: adguard/adguardhome
               tag: v0.107.53@sha256:d9c512051141e6a617d773f16cdf6782c178464c6e766acf9fe63482a171f95c
@@ -37,15 +38,10 @@ spec:
             resources:
               requests:
                 cpu: 10m
+                memory: 256M
               limits:
                 memory: 64Mi
-            # TODO: [adguard] Add probes & service monitor
-    defaultPodOptions:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 65534
-        runAsGroup: 65534
-        seccompProfile: { type: RuntimeDefault }
+            # TODO: [adguard] Add probes & service monitors
     service:
       dns-tcp:
         controller: *name
@@ -112,8 +108,10 @@ spec:
       # TODO: [adguard] Check if config init container is needed
       config:
         enabled: true
+        type: emptyDir
+      config-file:
         type: configMap
-        name: adguard-config
+        name: adguard
         globalMounts:
           - subPath: AdGuardHome.yaml
             path: /opt/adguardhome/conf/AdGuardHome.yaml

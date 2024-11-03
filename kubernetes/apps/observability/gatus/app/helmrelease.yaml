@@ -4,7 +4,6 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: &name gatus
-  namespace: observability
 spec:
   interval: 30m
   chart:
@@ -126,7 +125,7 @@ spec:
           gethomepage.dev/widget.type: ${APP}
           gethomepage.dev/widget.url: http://${APP}.observability.svc.cluster.local:8080
         hosts:
-          - host: &host status.${SECRET_DOMAIN}
+          - host: &host ${GATUS_SUBDOMAIN:-${APP}}.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
