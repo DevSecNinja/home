@@ -28,6 +28,34 @@ spec:
       ${APP}:
         annotations:
           reloader.stakater.com/auto: "true"
+        pod:
+          dnsConfig:
+            options:
+              - { name: ndots, value: "1" }
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 65534
+            runAsGroup: 65534
+            fsGroup: 65534
+            fsGroupChangePolicy: OnRootMismatch
+            seccompProfile: { type: RuntimeDefault }
+        initContainers:
+          init-config:
+            image: &configSyncImage
+              repository: ghcr.io/kiwigrid/k8s-sidecar
+              tag: 1.28.0@sha256:4166a019eeafd1f0fef4d867dc5f224f18d84ec8681dbb31f3ca258ecf07bcf2
+            env:
+              FOLDER: /opt/adguardhome/conf
+              LABEL: app.kubernetes.io/name
+              LABEL_VALUE: *app
+              UNIQUE_FILENAMES: true
+              METHOD: LIST
+            resources: &configSyncResources
+              requests:
+                cpu: 10m
+                memory: 10Mi
+              limits:
+                memory: 128Mi
         containers:
           app:
             image:
@@ -42,6 +70,15 @@ spec:
               limits:
                 memory: 512M
             # TODO: [adguard] Add probes & service monitors
+          config-sync:
+            image: *configSyncImage
+            env:
+              FOLDER: /opt/adguardhome/conf
+              LABEL: app.kubernetes.io/name
+              LABEL_VALUE: *app
+              UNIQUE_FILENAMES: true
+              METHOD: WATCH
+            resources: *configSyncResources
     service:
       dns-tcp:
         controller: *app
@@ -117,9 +154,12 @@ spec:
         size: 1Gi
         globalMounts:
           - path: /opt/adguardhome/conf
-      adguardhome-yaml:
-        type: configMap
-        name: adguard
-        globalMounts:
-          - path: /opt/adguardhome/conf/AdGuardHome.yaml
-            subPath: AdGuardHome.yaml
+      # This doesn't work with AdGuard unfortunately
+      #  '2024/11/03 12:57:55.544707 [error] parsing configuration file: writing new config:
+      #  rename /opt/adguardhome/conf/.AdGuardHome.yaml8008514007667561438 /opt/adguardhome/conf/AdGuardHome.yaml: device or resource busy'
+      # adguardhome-yaml:
+      #   type: configMap
+      #   name: adguard
+      #   globalMounts:
+      #     - path: /opt/adguardhome/conf/AdGuardHome.yaml
+      #       subPath: AdGuardHome.yaml
