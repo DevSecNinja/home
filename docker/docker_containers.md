@@ -504,7 +504,7 @@
 
 **container_name:** paperless-web
 
-**image:** ghcr.io/paperless-ngx/paperless-ngx:2.13.2@sha256:d440c8682b445fff3dccc538ab88c604e389d3221f9267352f15e7d1e551a98d
+**image:** ghcr.io/paperless-ngx/paperless-ngx:2.13.3@sha256:d1f743ddcffc6fad9eacaea0802a7fa7558b2b3e04dc376b3047d6a741573460
 
 **url:** paperless.$DOMAINNAME
 
