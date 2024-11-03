@@ -1,8 +1,20 @@
 ---
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - ./configmap.yaml
   - ./helmrelease.yaml
   - ./unbound.yaml
   - ../../../../templates/gatus/internal
+configMapGenerator:
+  - name: adguard
+    files:
+      - ./resources/AdGuardHome.yaml
+  - name: unbound
+    files:
+      - ./resources/a-records.conf
+      - ./resources/forward-records.conf
+generatorOptions:
+  disableNameSuffixHash: true
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: enabled
