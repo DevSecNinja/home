@@ -9,6 +9,32 @@ data:
   config.yaml: |
     endpoints:
       - name: "${APP} - DNS - External"
+        group: internal
+        url: "${GATUS_SUBDOMAIN:-${APP}}.${SECRET_DOMAIN}${GATUS_PATH:-}:53"
+        dns:
+          query-name: "google.com"
+          query-type: "A"
+        conditions:
+          - "[DNS_RCODE] == NOERROR"
+        # alerts:
+        #   - type: discord
+        #     send-on-resolved: true
+        #     failure-threshold: 2
+
+      - name: "${APP} - DNS - Internal"
+        group: internal
+        url: "${GATUS_SUBDOMAIN:-${APP}}.${SECRET_DOMAIN}${GATUS_PATH:-}:53"
+        dns:
+          query-name: "adguard.${DOMAINNAME}"
+          query-type: "A"
+        conditions:
+          - "[DNS_RCODE] == NOERROR"
+        # alerts:
+        #   - type: discord
+        #     send-on-resolved: true
+        #     failure-threshold: 2
+
+      - name: "${APP} - DNS - External - Backend"
         group: internal-backend
         url: "${GATUS_SUBDOMAIN:-${APP}}.${GATUS_NAMESPACE}.svc.cluster.local:53"
         dns:
@@ -21,7 +47,7 @@ data:
         #     send-on-resolved: true
         #     failure-threshold: 2
 
-      - name: "${APP} - DNS - Internal"
+      - name: "${APP} - DNS - Internal - Backend"
         group: internal-backend
         url: "${GATUS_SUBDOMAIN:-${APP}}.${GATUS_NAMESPACE}.svc.cluster.local:53"
         dns:
