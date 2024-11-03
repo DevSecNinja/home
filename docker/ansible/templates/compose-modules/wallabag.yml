@@ -2,7 +2,7 @@ services:
   # NOTE: Requires the following command on fresh install:
   # docker exec -t wallabag /var/www/wallabag/bin/console wallabag:install --env=prod --no-interaction
   wallabag:
-    image: wallabag/wallabag:2.6.9@sha256:d482b139bab164afef0e8bbfbeb7c55cd3e10e848b95d7d167e4ffcbc847f4b9
+    image: wallabag/wallabag:2.6.10@sha256:8854765d299d8e93f962d4be02ceb5703ed2ee24ec6c884f870bb7a18de41378
     container_name: wallabag
     depends_on:
       - traefik
