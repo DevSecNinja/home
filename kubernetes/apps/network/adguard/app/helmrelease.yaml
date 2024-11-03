@@ -33,7 +33,7 @@ spec:
             options:
               - { name: ndots, value: "1" }
           securityContext:
-            runAsNonRoot: true
+            runAsNonRoot: false # Adguard doesn't support running as non-root
             runAsUser: 65534
             runAsGroup: 65534
             fsGroup: 65534
@@ -48,7 +48,7 @@ spec:
               FOLDER: /opt/adguardhome/conf
               LABEL: app.kubernetes.io/name
               LABEL_VALUE: *app
-              UNIQUE_FILENAMES: true
+              UNIQUE_FILENAMES: false
               METHOD: LIST
             resources: &configSyncResources
               requests:
@@ -76,7 +76,7 @@ spec:
               FOLDER: /opt/adguardhome/conf
               LABEL: app.kubernetes.io/name
               LABEL_VALUE: *app
-              UNIQUE_FILENAMES: true
+              UNIQUE_FILENAMES: false
               METHOD: WATCH
             resources: *configSyncResources
     service:
