@@ -141,6 +141,11 @@ spec:
          - hosts:
              - *host
 
+    # Required for the config sync init container
+    serviceAccount:
+      create: true
+      name: *app
+
     persistence:
       config-work:
         storageClass: openebs-hostpath
