@@ -25,7 +25,7 @@ spec:
     keepHistory: false
   values:
     controllers:
-      ${APP}:
+      adguard:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
@@ -43,33 +43,33 @@ spec:
                 memory: 64Mi
             # TODO: [adguard] Add probes & service monitors
     service:
-      dns-tcp:
-        controller: *app
-        enabled: true
-        ports:
-          dns-tcp:
-            enabled: true
-            port: 53
-            protocol: TCP
-            targetPort: 53
-      dns-over-tls-tcp:
-        controller: *app
-        enabled: true
-        ports:
-          dns-over-tls-tcp:
-            enabled: true
-            port: 853
-            protocol: TCP
-            targetPort: 853
-      dns-udp:
-        controller: *app
-        enabled: true
-        ports:
-          dns-udp:
-            enabled: true
-            port: 53
-            protocol: UDP
-            targetPort: 53
+      # dns-tcp:
+      #   controller: *app
+      #   enabled: true
+      #   ports:
+      #     dns-tcp:
+      #       enabled: true
+      #       port: 53
+      #       protocol: TCP
+      #       targetPort: 53
+      # dns-over-tls-tcp:
+      #   controller: *app
+      #   enabled: true
+      #   ports:
+      #     dns-over-tls-tcp:
+      #       enabled: true
+      #       port: 853
+      #       protocol: TCP
+      #       targetPort: 853
+      # dns-udp:
+      #   controller: *app
+      #   enabled: true
+      #   ports:
+      #     dns-udp:
+      #       enabled: true
+      #       port: 53
+      #       protocol: UDP
+      #       targetPort: 53
       app:
         controller: *app
         ports:
@@ -78,6 +78,7 @@ spec:
     ingress:
       app:
         enabled: true
+        className: internal
         annotations:
           ## Enable Oauth2 Authentication
           nginx.ingress.kubernetes.io/auth-url: "http://oauth2-proxy.security.svc.cluster.local:4180/oauth2/auth"
