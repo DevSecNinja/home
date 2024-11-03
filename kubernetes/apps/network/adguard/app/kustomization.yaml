@@ -5,7 +5,7 @@ kind: Kustomization
 resources:
   - ./helmrelease.yaml
   - ./rbac.yaml
-  # - ./unbound.yaml
+  - ./unbound.yaml
   - ../../../../templates/gatus/internal
 configMapGenerator:
   - name: adguard
