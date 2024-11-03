@@ -46,7 +46,7 @@ spec:
         seccompProfile: { type: RuntimeDefault }
     service:
       dns-tcp:
-        controller: app
+        controller: *name
         enabled: true
         ports:
           dns-tcp:
@@ -55,7 +55,7 @@ spec:
             protocol: TCP
             targetPort: 53
       dns-over-tls-tcp:
-        controller: app
+        controller: *name
         enabled: true
         ports:
           dns-over-tls-tcp:
@@ -64,7 +64,7 @@ spec:
             protocol: TCP
             targetPort: 853
       dns-udp:
-        controller: app
+        controller: *name
         enabled: true
         ports:
           dns-udp:
@@ -73,7 +73,7 @@ spec:
             protocol: UDP
             targetPort: 53
       app:
-        controller: app
+        controller: *name
         ports:
           http:
             port: &port 80
