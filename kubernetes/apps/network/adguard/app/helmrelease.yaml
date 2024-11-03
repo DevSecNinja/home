@@ -109,6 +109,7 @@ spec:
             targetPort: 53
       app:
         controller: *app
+        nameOverride: *app
         ports:
           http:
             port: &port 80
