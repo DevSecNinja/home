@@ -45,12 +45,6 @@ spec:
   uninstall:
     keepHistory: false
 
-  dependsOn:
-    - name: cloudnative-pg
-      namespace: database
-    - name: openebs
-      namespace: openebs-system
-
   maxHistory: 1
 
   values:
