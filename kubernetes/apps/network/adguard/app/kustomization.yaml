@@ -9,9 +9,15 @@ resources:
   - ../../../../templates/gatus/internal
 configMapGenerator:
   - name: adguard
+    options:
+      labels:
+        app.kubernetes.io/service: adguard
     files:
       - AdGuardHome.yaml=./resources/AdGuardHome.yaml
   - name: unbound
+    options:
+      labels:
+        app.kubernetes.io/service: unbound
     files:
       - a-records.conf=./resources/a-records.conf
       - forward-records.conf=./resources/forward-records.conf
