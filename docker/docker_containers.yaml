@@ -176,7 +176,7 @@
   image: hashicorp/vault:1.18@sha256:3580fa352195aa7e76449cb8fadeef6d2f90a454c38982d30cf094e9013be786
   url: vault.$DOMAINNAME`) && PathPrefix(`/v1
 - container_name: wallabag
-  image: wallabag/wallabag:2.6.9@sha256:d482b139bab164afef0e8bbfbeb7c55cd3e10e848b95d7d167e4ffcbc847f4b9
+  image: wallabag/wallabag:2.6.10@sha256:8854765d299d8e93f962d4be02ceb5703ed2ee24ec6c884f870bb7a18de41378
   url: wallabag.$DOMAINNAME
 - container_name: wallabag-db
   image: mariadb:11.5.2@sha256:4a1de8fa2a929944373d7421105500ff6f889ce90dcb883fbb2fdb070e4d427e
