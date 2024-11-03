@@ -125,8 +125,8 @@ spec:
           gethomepage.dev/group: Network
           gethomepage.dev/icon: adguard-home.svg
           gethomepage.dev/name: AdGuard
-          # gethomepage.dev/widget.type: ${APP}
-          # gethomepage.dev/widget.url: http://${APP}.network.svc.cluster.local:80
+          gethomepage.dev/widget.type: *app
+          gethomepage.dev/widget.url: http://${APP}.network.svc.cluster.local:80
           # # TODO: [adguard] Fix Adguard widget
           # gethomepage.dev/widget.username: null
           # gethomepage.dev/widget.password: null
