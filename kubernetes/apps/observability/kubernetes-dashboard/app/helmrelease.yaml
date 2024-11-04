@@ -41,6 +41,12 @@ spec:
           nginx.ingress.kubernetes.io/auth-response-headers: "Authorization"
           ### Fixes the issue with the /me endpoint not getting the Authorization header injected
           nginx.ingress.kubernetes.io/proxy-body-size: "100m"
+          nginx.ingress.kubernetes.io/proxy-buffering: "on"
+          nginx.ingress.kubernetes.io/proxy-buffer-size: "1M"
+          nginx.ingress.kubernetes.io/configuration-snippet: |
+            auth_request_set $token $upstream_http_authorization;
+            proxy_set_header Authorization $token;
+            # debug "Header: $token"; not necessary, could be used to show the token in your browsers developer tools
           ##
           gethomepage.dev/enabled: "true"
           gethomepage.dev/icon: kubernetes-dashboard.png
