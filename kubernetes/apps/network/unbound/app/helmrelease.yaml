@@ -27,7 +27,9 @@ spec:
     controllers:
       ${APP}:
         annotations:
-          reloader.stakater.com/auto: "true"
+          # Since we don't link the config map here but use k8s-sidecar,
+          # we have to tell stakater the config map it needs to monitor
+          configmap.reloader.stakater.com/reload: *app
         pod:
           dnsConfig:
             options:
