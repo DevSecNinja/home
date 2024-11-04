@@ -33,8 +33,8 @@ spec:
         ingressClassName: internal
         annotations:
           ## Enable Oauth2 Authentication
-          nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
-          nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+          nginx.ingress.kubernetes.io/auth-url: "http://oauth2-proxy.security.svc.cluster.local:4180/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_DOMAIN}/oauth2/start?rd=$escaped_request_uri"
           nginx.ingress.kubernetes.io/auth-response-headers: "Authorization"
           ##
           gethomepage.dev/enabled: "true"

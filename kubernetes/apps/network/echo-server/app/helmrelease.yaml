@@ -84,8 +84,8 @@ spec:
         className: internal
         annotations:
           ## Enable Oauth2 Authentication
-          nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
-          nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+          nginx.ingress.kubernetes.io/auth-url: "http://oauth2-proxy.security.svc.cluster.local:4180/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_DOMAIN}/oauth2/start?rd=$escaped_request_uri"
           ##
           # Add response headers for authentication
           ## Only the upper line are returned, the lower line are not showing up in the response headers
