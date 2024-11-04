@@ -25,9 +25,9 @@ spec:
   values:
     env:
       TZ: "${TIMEZONE}"
-    extraArgs:
-      # Required for my oauth2-proxy setup since the redirection occurs over HTTP
-      - --enable-insecure-login
+    # extraArgs:
+    #   # Required for my oauth2-proxy setup since the redirection occurs over HTTP
+    #   - --enable-insecure-login
     app:
       image:
         pullPolicy: IfNotPresent
