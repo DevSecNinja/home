@@ -8,7 +8,7 @@ metadata:
 data:
   config.yaml: |
     endpoints:
-      - name: "${APP} - DNS - External"
+      - name: "${APP} - dns - external"
         group: internal
         url: "${GATUS_SUBDOMAIN:-${APP}}.${SECRET_DOMAIN}${GATUS_PATH:-}"
         dns:
@@ -16,12 +16,8 @@ data:
           query-type: "A"
         conditions:
           - "[DNS_RCODE] == NOERROR"
-        # alerts:
-        #   - type: discord
-        #     send-on-resolved: true
-        #     failure-threshold: 2
 
-      - name: "${APP} - DNS - Internal"
+      - name: "${APP} - dns - internal"
         group: internal
         url: "${GATUS_SUBDOMAIN:-${APP}}.${SECRET_DOMAIN}${GATUS_PATH:-}"
         dns:
@@ -29,12 +25,8 @@ data:
           query-type: "A"
         conditions:
           - "[DNS_RCODE] == NOERROR"
-        # alerts:
-        #   - type: discord
-        #     send-on-resolved: true
-        #     failure-threshold: 2
 
-      - name: "${APP} - DNS - External - Backend"
+      - name: "${APP} - dns - external - backend"
         group: internal-backend
         url: "${GATUS_SUBDOMAIN:-${APP}}.${GATUS_NAMESPACE}.svc.cluster.local"
         dns:
@@ -42,12 +34,8 @@ data:
           query-type: "A"
         conditions:
           - "[DNS_RCODE] == NOERROR"
-        # alerts:
-        #   - type: discord
-        #     send-on-resolved: true
-        #     failure-threshold: 2
 
-      - name: "${APP} - DNS - Internal - Backend"
+      - name: "${APP} - dns - internal - backend"
         group: internal-backend
         url: "${GATUS_SUBDOMAIN:-${APP}}.${GATUS_NAMESPACE}.svc.cluster.local"
         dns:
@@ -55,7 +43,3 @@ data:
           query-type: "A"
         conditions:
           - "[DNS_RCODE] == NOERROR"
-        # alerts:
-        #   - type: discord
-        #     send-on-resolved: true
-        #     failure-threshold: 2
