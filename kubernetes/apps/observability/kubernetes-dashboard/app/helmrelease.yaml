@@ -25,9 +25,11 @@ spec:
   values:
     env:
       TZ: "${TIMEZONE}"
-    # extraArgs:
-    #   # Required for my oauth2-proxy setup since the redirection occurs over HTTP
-    #   - --enable-insecure-login
+    extraArgs:
+      # Required for my oauth2-proxy setup since the redirection occurs over HTTP
+      - --enable-insecure-login
+      - --enable-skip-login
+      - --disable-settings-authorizer
     app:
       image:
         pullPolicy: IfNotPresent
@@ -40,7 +42,7 @@ spec:
           nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_DOMAIN}/oauth2/auth/oauth2/start?rd=$scheme://$host$request_uri"
           nginx.ingress.kubernetes.io/auth-response-headers: "Authorization"
           ### Fixes the issue with the /me endpoint not getting the Authorization header injected
-          nginx.ingress.kubernetes.io/proxy-body-size: "100m"
+          nginx.ingress.kubernetes.io/proxy-body-size: "500m"
           ##
           gethomepage.dev/enabled: "true"
           gethomepage.dev/icon: kubernetes-dashboard.png
