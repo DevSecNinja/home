@@ -104,8 +104,6 @@ spec:
     ingress:
       app:
         enabled: true
-        annotations:
-          external-dns.alpha.kubernetes.io/target: auth.${SECRET_DOMAIN}
         className: internal
         hosts:
           - host: &host auth.${SECRET_DOMAIN}
