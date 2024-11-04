@@ -46,7 +46,6 @@ spec:
           nginx.ingress.kubernetes.io/configuration-snippet: |
             auth_request_set $token $upstream_http_authorization;
             proxy_set_header Authorization $token;
-            debug "Header: $token";
           ##
           gethomepage.dev/enabled: "true"
           gethomepage.dev/icon: kubernetes-dashboard.png
