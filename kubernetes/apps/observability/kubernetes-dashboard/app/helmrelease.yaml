@@ -25,9 +25,9 @@ spec:
   values:
     env:
       TZ: "${TIMEZONE}"
-    # extraArgs:
-    #   # Required for my oauth2-proxy setup since the redirection occurs over HTTP
-    #   - --enable-insecure-login
+    extraArgs:
+      # Required for my oauth2-proxy setup since the redirection occurs over HTTP
+      - --enable-insecure-login
     app:
       image:
         pullPolicy: IfNotPresent
@@ -46,7 +46,7 @@ spec:
           nginx.ingress.kubernetes.io/configuration-snippet: |
             auth_request_set $token $upstream_http_authorization;
             proxy_set_header Authorization $token;
-            # debug "Header: $token"; not necessary, could be used to show the token in your browsers developer tools
+            debug "Header: $token";
           ##
           gethomepage.dev/enabled: "true"
           gethomepage.dev/icon: kubernetes-dashboard.png
