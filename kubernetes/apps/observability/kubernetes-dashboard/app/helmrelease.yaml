@@ -44,7 +44,7 @@ spec:
           nginx.ingress.kubernetes.io/proxy-buffering: "on"
           nginx.ingress.kubernetes.io/proxy-buffer-size: "1M"
           nginx.ingress.kubernetes.io/configuration-snippet: |
-            proxy_set_header Authorization $http_authorization;
+            proxy_set_header Test 123;
           ##
           gethomepage.dev/enabled: "true"
           gethomepage.dev/icon: kubernetes-dashboard.png
