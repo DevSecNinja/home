@@ -8,7 +8,7 @@ metadata:
 data:
   config.yaml: |
     endpoints:
-      - name: "${APP} - dns - external"
+      - name: "${APP} - dns - external1"
         group: internal-backend
         url: "${GATUS_SUBDOMAIN:-${APP}}.${GATUS_NAMESPACE}.svc.cluster.local"
         dns:
@@ -17,7 +17,7 @@ data:
         conditions:
           - "[DNS_RCODE] == NOERROR"
 
-      - name: "${APP} - dns - internal"
+      - name: "${APP} - dns - internal1"
         group: internal-backend
         url: "${GATUS_SUBDOMAIN:-${APP}}.${GATUS_NAMESPACE}.svc.cluster.local"
         dns:
