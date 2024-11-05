@@ -9,24 +9,6 @@ data:
   config.yaml: |
     endpoints:
       - name: "${APP} - dns - external"
-        group: internal
-        url: "${GATUS_SUBDOMAIN:-${APP}}.${SECRET_DOMAIN}${GATUS_PATH:-}"
-        dns:
-          query-name: "google.com"
-          query-type: "A"
-        conditions:
-          - "[DNS_RCODE] == NOERROR"
-
-      - name: "${APP} - dns - internal"
-        group: internal
-        url: "${GATUS_SUBDOMAIN:-${APP}}.${SECRET_DOMAIN}${GATUS_PATH:-}"
-        dns:
-          query-name: "${APP}.${SECRET_DOMAIN}"
-          query-type: "A"
-        conditions:
-          - "[DNS_RCODE] == NOERROR"
-
-      - name: "${APP} - dns - external - backend"
         group: internal-backend
         url: "${GATUS_SUBDOMAIN:-${APP}}.${GATUS_NAMESPACE}.svc.cluster.local"
         dns:
@@ -35,7 +17,7 @@ data:
         conditions:
           - "[DNS_RCODE] == NOERROR"
 
-      - name: "${APP} - dns - internal - backend"
+      - name: "${APP} - dns - internal"
         group: internal-backend
         url: "${GATUS_SUBDOMAIN:-${APP}}.${GATUS_NAMESPACE}.svc.cluster.local"
         dns:
