@@ -28,7 +28,7 @@ data:
 
       - name: "${APP} - dns - load balancer"
         group: internal
-        url: "dns.${SECRET_DOMAIN}${GATUS_PATH:-}"
+        url: "192.168.60.56"
         dns:
           query-name: "${APP}.${SECRET_DOMAIN}"
           query-type: "A"
