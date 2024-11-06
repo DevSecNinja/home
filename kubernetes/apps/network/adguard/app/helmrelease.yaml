@@ -86,10 +86,9 @@ spec:
         controller: *app
         type: LoadBalancer
         externalTrafficPolicy: Local
-        # annotations:
-          # metallb.universe.tf/loadBalancerIPs: "${ADGUARD_ADDR_NS1}"
-          # metallb.universe.tf/ip-allocated-from-pool: default-pool
-          # metallb.universe.tf/allow-shared-ip: adguard-dns
+        annotations:
+          external-dns.alpha.kubernetes.io/hostname: "dns.${SECRET_DOMAIN}"
+          metallb.universe.tf/loadBalancerIPs: "192.168.60.56"
         ports:
           http:
             enabled: true
