@@ -88,7 +88,7 @@ spec:
         externalTrafficPolicy: Local
         annotations:
           external-dns.alpha.kubernetes.io/hostname: "dns.${SECRET_DOMAIN}"
-          metallb.universe.tf/loadBalancerIPs: "192.168.60.56"
+          lbipam.cilium.io/ips: "192.168.60.56"
         ports:
           http:
             enabled: true
