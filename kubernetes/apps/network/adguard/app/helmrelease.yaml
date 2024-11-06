@@ -82,7 +82,7 @@ spec:
               METHOD: WATCH
             resources: *configSyncResources
     service:
-      dns:
+      app:
         controller: *app
         type: LoadBalancer
         externalTrafficPolicy: Local
