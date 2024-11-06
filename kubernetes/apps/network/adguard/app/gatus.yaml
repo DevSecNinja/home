@@ -8,7 +8,7 @@ metadata:
 data:
   config.yaml: |
     endpoints:
-      - name: "${APP} - dns - external"
+      - name: "${APP} - dns - google.com"
         group: internal-backend
         url: "${GATUS_SUBDOMAIN:-${APP}}.${GATUS_NAMESPACE}.svc.cluster.local"
         dns:
@@ -20,6 +20,15 @@ data:
       - name: "${APP} - dns - internal"
         group: internal-backend
         url: "${GATUS_SUBDOMAIN:-${APP}}.${GATUS_NAMESPACE}.svc.cluster.local"
+        dns:
+          query-name: "${APP}.${SECRET_DOMAIN}"
+          query-type: "A"
+        conditions:
+          - "[DNS_RCODE] == NOERROR"
+
+      - name: "${APP} - dns - load balancer"
+        group: internal
+        url: "dns.${SECRET_DOMAIN}${GATUS_PATH:-}"
         dns:
           query-name: "${APP}.${SECRET_DOMAIN}"
           query-type: "A"
