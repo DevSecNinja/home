@@ -82,29 +82,35 @@ spec:
               METHOD: WATCH
             resources: *configSyncResources
     service:
-      app:
+      dns:
         controller: *app
+        type: LoadBalancer
+        externalTrafficPolicy: Local
+        annotations:
+          metallb.universe.tf/loadBalancerIPs: "${ADGUARD_ADDR_NS1}"
+          # metallb.universe.tf/ip-allocated-from-pool: default-pool
+          # metallb.universe.tf/allow-shared-ip: adguard-dns
         ports:
           http:
             enabled: true
             port: 80
             protocol: TCP
-            targetPort: 80        
+            targetPort: 80
           dns-tcp:
             enabled: true
-            port: 53
+            port: &dns-port 53
             protocol: TCP
-            targetPort: 53
-          dns-tcp-over-tls:
-            enabled: true
-            port: 853
-            protocol: TCP
-            targetPort: 853
+            targetPort: *dns-port
           dns-udp:
             enabled: true
-            port: 53
+            port: *dns-port
             protocol: UDP
-            targetPort: 53
+            targetPort: *dns-port
+          dns-tcp-tls:
+            enabled: true
+            port: &dns-tls-port 853
+            protocol: TCP
+            targetPort: *dns-tls-port
     ingress:
       app:
         enabled: true
