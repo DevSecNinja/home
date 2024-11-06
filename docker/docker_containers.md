@@ -248,7 +248,7 @@
 
 **container_name:** hoppscotch
 
-**image:** hoppscotch/hoppscotch:2024.9.3@sha256:e1d4604410e4edc83ad86159ed4f2f5f479d58842608de1193bb8fb048704395
+**image:** hoppscotch/hoppscotch:2024.10.0@sha256:aac39754bbac51f50cae83d792fcb6d57aada67d988d2b8839bb4f1d0313b117
 
 **url:** api-tester.$DOMAINNAME
 
@@ -346,7 +346,7 @@
 
 **container_name:** n8n
 
-**image:** n8nio/n8n:1.65.1@sha256:810c3dc8ef5302d94f094416bf8674eb2c1624f009ce115a0f49f17bbf83f52f
+**image:** n8nio/n8n:1.67.0@sha256:53734eaafdea67a791d57d7fdf3cc3621f24dfdca96ce922e6ec0f806c1d80dd
 
 **url:** n8n.$DOMAINNAME
 
