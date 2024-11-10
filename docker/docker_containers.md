@@ -182,7 +182,7 @@
 
 **container_name:** gatus
 
-**image:** twinproduction/gatus:v5.13.0@sha256:7dd5c1a2e8944b6806982890d15db1a30950c2a9cedbd68c021fca1089e04a42
+**image:** twinproduction/gatus:v5.13.1@sha256:977129a3cad3253906ef9c95d16a0f19a3ab5d3892404da809798b5b34bbd04d
 
 **url:** status-docker.$DOMAINNAME
 
@@ -248,7 +248,7 @@
 
 **container_name:** hoppscotch
 
-**image:** hoppscotch/hoppscotch:2024.10.0@sha256:aac39754bbac51f50cae83d792fcb6d57aada67d988d2b8839bb4f1d0313b117
+**image:** hoppscotch/hoppscotch:2024.10.1@sha256:87197b41262f8c23a57136d3848954d244d7d716a189c05bc4b9738c09bee535
 
 **url:** api-tester.$DOMAINNAME
 
@@ -346,7 +346,7 @@
 
 **container_name:** n8n
 
-**image:** n8nio/n8n:1.67.0@sha256:53734eaafdea67a791d57d7fdf3cc3621f24dfdca96ce922e6ec0f806c1d80dd
+**image:** n8nio/n8n:1.67.1@sha256:ee4ef2c8a4439ca01efe60d7c56cd678facdce2b411a1e338bd446e6deb8e061
 
 **url:** n8n.$DOMAINNAME
 
@@ -486,7 +486,7 @@
 
 **container_name:** paperless-gotenberg
 
-**image:** docker.io/gotenberg/gotenberg:8.12.0@sha256:b10708db3ccabbee040d0b6d9ec68b6034a066c1d4e27b13fb7a6af4ade012e4
+**image:** docker.io/gotenberg/gotenberg:8.13.0@sha256:1917c80269a30d53979f8354bce6aabb8a2a62a38f727362c394edfbceaa7640
 
 ### Service: paperless-redis
 
@@ -582,7 +582,7 @@
 
 **container_name:** prometheus
 
-**image:** prom/prometheus:v2.55.0@sha256:378f4e03703557d1c6419e6caccf922f96e6d88a530f7431d66a4c4f4b1000fe
+**image:** prom/prometheus:v2.55.1@sha256:2659f4c2ebb718e7695cb9b25ffa7d6be64db013daba13e05c875451cf51b0d3
 
 **url:** prometheus.$DOMAINNAME
 
