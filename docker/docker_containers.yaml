@@ -59,7 +59,7 @@
   image: grafana/loki:3.2.1@sha256:09a53b4a4ff81ffcd8f13886df19d33fac7a8d3aaf952e3c7e66cbade5b2fc31
   url: loki.$DOMAINNAME
 - container_name: home-assistant
-  image: ghcr.io/home-assistant/home-assistant:beta@sha256:7274d1a64bf03d54e87c59c3ea7eb464ee46605817f992fead253ab58f791aeb
+  image: ghcr.io/home-assistant/home-assistant:beta@sha256:c7f8797b241c097df89145f9d8beca21c2ddc3bb3945dfb426bff654b11f4bfc
   url: home-assistant.$DOMAINNAME
 - container_name: homepage
   image: ghcr.io/gethomepage/homepage:v0.9.11@sha256:d41dca72f3a68d2c675eb232a448104af200096f05e2610ffbfdb16bc7f71410
@@ -134,7 +134,7 @@
   image: papermerge/papermerge:3.2.0@sha256:11bd6e47622b295ee40f1e719c63235544121839a30e5083d959208931007b62
   url: papermerge.$DOMAINNAME
 - container_name: photoprism
-  image: photoprism/photoprism:preview@sha256:37cd3a7c0e9ecaf99de1318a4e8b180e3c877f7ff7290639797df6730d5d52f9
+  image: photoprism/photoprism:preview@sha256:a81205292ff10b031d9d3df11d456ad2d9c68577b71f75ecdaac7ab146c76b84
   url: photos.$DOMAINNAME
 - container_name: photoprism-db
   image: mariadb:11.5.2@sha256:4a1de8fa2a929944373d7421105500ff6f889ce90dcb883fbb2fdb070e4d427e

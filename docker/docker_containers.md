@@ -222,7 +222,7 @@
 
 **container_name:** home-assistant
 
-**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:7274d1a64bf03d54e87c59c3ea7eb464ee46605817f992fead253ab58f791aeb
+**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:c7f8797b241c097df89145f9d8beca21c2ddc3bb3945dfb426bff654b11f4bfc
 
 **url:** home-assistant.$DOMAINNAME
 
@@ -524,7 +524,7 @@
 
 **container_name:** photoprism
 
-**image:** photoprism/photoprism:preview@sha256:37cd3a7c0e9ecaf99de1318a4e8b180e3c877f7ff7290639797df6730d5d52f9
+**image:** photoprism/photoprism:preview@sha256:a81205292ff10b031d9d3df11d456ad2d9c68577b71f75ecdaac7ab146c76b84
 
 **url:** photos.$DOMAINNAME
 
