@@ -82,7 +82,7 @@
 
 **container_name:** change-detection
 
-**image:** ghcr.io/dgtlmoon/changedetection.io:0.47.05@sha256:e7e886dfa8917962206aa5a80deeb47b5a29b6736a3c862e499a5252d1ebbafc
+**image:** ghcr.io/dgtlmoon/changedetection.io:0.47.06@sha256:6e9dcf4abc1cfb0b1eeba6b6ff52a4b6f790110d6cdc8b7942c6cecf34e56265
 
 **url:** change-detection.$DOMAINNAME
 
@@ -164,7 +164,7 @@
 
 **container_name:** excalidraw
 
-**image:** excalidraw/excalidraw:latest@sha256:697f4354cbef54492bf3acdf6a487469418ff8db483fae8e601ab89c5f3205a2
+**image:** excalidraw/excalidraw:latest@sha256:4d5423c1d80f353458307324b169500df334856eccc2e39fc6fa13808a64e1c2
 
 **url:** excalidraw.$DOMAINNAME
 
@@ -368,7 +368,7 @@
 
 **container_name:** nextcloud
 
-**image:** nextcloud:30.0.1-apache@sha256:76869ae83f1e224a06ad52ca5ad9c7d301d7118e7db411f4a55c21a9d69384ac
+**image:** nextcloud:30.0.2-apache@sha256:9fd332ef6a4ea95b0333b79e2246d8a766acebed828cf431ebe82143bc2e22a3
 
 **url:** cloud.$DOMAINNAME
 
@@ -376,7 +376,7 @@
 
 **container_name:** nextcloud-cron
 
-**image:** nextcloud:30.0.1-apache@sha256:76869ae83f1e224a06ad52ca5ad9c7d301d7118e7db411f4a55c21a9d69384ac
+**image:** nextcloud:30.0.2-apache@sha256:9fd332ef6a4ea95b0333b79e2246d8a766acebed828cf431ebe82143bc2e22a3
 
 ### Service: nextcloud-db
 
@@ -556,7 +556,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.41.1.9057-af5eaea7a@sha256:88f1b42fa90799ba491fa0b96046467174f28f18c236c7b39e135c029a30cfcf
+**image:** lscr.io/linuxserver/plex:version-1.41.1.9057-af5eaea7a@sha256:8e4e0c2348eed53aed2ee7136dc58b733d5edd50dd0e65eeb2dc42eeb978bb0f
 
 **url:** plex-noauth.$DOMAINNAME
 
