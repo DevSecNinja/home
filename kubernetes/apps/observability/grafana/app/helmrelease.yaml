@@ -32,15 +32,6 @@ spec:
     deploymentStrategy:
       type: Recreate
     env:
-      ## Authentication
-      GF_AUTH_PROXY_ENABLED: true
-      GF_AUTH_PROXY_HEADER_NAME: X-Forwarded-User
-      GF_AUTH_PROXY_HEADER_PROPERTY: email
-      GF_AUTH_PROXY_AUTO_SIGN_UP: true
-      GF_AUTH_PROXY_ENABLE_LOGIN_TOKEN: false
-      GF_AUTH_PROXY_HEADERS: "Name:X-Forwarded-User Email:x-auth-request-email"
-      GF_USERS_AUTO_ASSIGN_ORG_ROLE: Admin # Security Warning: authenticated users will be an admin
-
       ## Generic
       GF_USERS_ALLOW_SIGN_UP: false
       GF_ANALYTICS_REPORTING_ENABLED: false
@@ -62,11 +53,20 @@ spec:
         news_feed_enabled: false
       auth:
         oauth_auto_login: false
-        oauth_allow_insecure_email_lookup: true
+        oauth_allow_insecure_email_lookup: false
       auth.basic:
         enabled: false
       auth.anonymous:
         enabled: false
+      auth.jwt:
+        enabled: true
+        header_name: x-auth-request-access-token
+        username_claim: oid
+        email_claim: upn
+        auto_sign_up: true
+        # TODO: [grafana] Add claim & role validation
+        # expect_claims = {"iss": "https://your-token-issuer", "your-custom-claim": "foo"}
+        # role_attribute_path = role
     admin:
       existingSecret: grafana-admin
     dashboardProviders:
@@ -266,7 +266,7 @@ spec:
         # Add response headers for authentication
         ## Only the upper line are returned, the lower line are not showing up in the response headers
         ## TODO: [oauth2-proxy] Troubleshoot why x-forwarded-user is not being set
-        nginx.ingress.kubernetes.io/auth-response-headers: X-Auth-Request-Email,X-Auth-Request-User
+        nginx.ingress.kubernetes.io/auth-response-headers: x-auth-request-access-token
         ## Homepage
         gethomepage.dev/enabled: "true"
         gethomepage.dev/icon: grafana.png
