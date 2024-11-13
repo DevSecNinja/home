@@ -57,10 +57,6 @@ endpoints:
     <<: *defaults
     url: "https://adguard-mgmt.${DOMAINNAME}"
 
-  - name: Alertmanager - HTTP
-    <<: *defaults
-    url: "https://alertmanager.${DOMAINNAME}"
-
   - name: Auth MGMT - HTTP
     <<: *defaults
     url: "https://auth-mgmt.${DOMAINNAME}"
@@ -72,14 +68,6 @@ endpoints:
   # - name: Bitwarden - HTTP
   #   <<: *defaults
   #   url: "https://bitwarden.${DOMAINNAME}"
-
-  - name: CAdvisor MGMT - HTTP
-    <<: *defaults
-    url: "https://cadvisor-mgmt.${DOMAINNAME}"
-
-  - name: CAdvisor PROD - HTTP
-    <<: *defaults
-    url: "https://cadvisor-mgmt.${DOMAINNAME}"
 
   - name: Change-Detection - HTTP
     <<: *defaults
@@ -121,10 +109,6 @@ endpoints:
     <<: *defaults
     url: "https://excalidraw.${DOMAINNAME}"
 
-  - name: Grafana - HTTP
-    <<: *defaults
-    url: "https://grafana.${DOMAINNAME}"
-
   - name: Home Assistant - HTTP
     <<: *defaults
     url: "https://home-assistant.${DOMAINNAME}"
@@ -141,14 +125,6 @@ endpoints:
     <<: *defaults
     url: "https://api-tester.${DOMAINNAME}"
 
-  - name: Influx - HTTP
-    <<: *defaults
-    url: "https://influxdb.${DOMAINNAME}"
-
-  - name: Influxdb-Noauth - HTTP
-    <<: *defaults
-    url: "https://influxdb-noauth.${DOMAINNAME}"
-
   # - name: Jupyter - HTTP
   #   <<: *defaults
   #   url: "https://jupyter.${DOMAINNAME}"
@@ -160,22 +136,6 @@ endpoints:
   - name: Lobe Chat - HTTP
     <<: *defaults
     url: "https://chat.${DOMAINNAME}"
-
-  - name: Loki - HTTP
-    <<: *defaults
-    url: "https://loki.${DOMAINNAME}"
-    conditions:
-      - "[STATUS] == 403" # Due to firewall restrictions
-      - "[CERTIFICATE_EXPIRATION] > 48h"
-      - "[RESPONSE_TIME] < 1000"
-
-  - name: Node Exporter MGMT - HTTP
-    <<: *defaults
-    url: "https://nodeexporter-mgmt.${DOMAINNAME}"
-
-  - name: Node Exporter PROD - HTTP
-    <<: *defaults
-    url: "https://nodeexporter-prod.${DOMAINNAME}"
 
   - name: Outline
     <<: *defaults
@@ -212,22 +172,6 @@ endpoints:
   - name: Portainer PROD - HTTP
     <<: *defaults
     url: "https://portainer-prod.${DOMAINNAME}"
-
-  - name: Prometheus - HTTP
-    <<: *defaults
-    url: "https://prometheus.${DOMAINNAME}"
-
-  - name: Promtail - HTTP
-    <<: *defaults
-    url: "https://promtail.${DOMAINNAME}"
-
-  - name: Pushgateway - HTTP
-    <<: *defaults
-    url: "https://pushgateway.${DOMAINNAME}"
-    conditions:
-      - "[STATUS] == 403" # Due to firewall restrictions
-      - "[CERTIFICATE_EXPIRATION] > 48h"
-      - "[RESPONSE_TIME] < 1000"
 
   - name: Search - HTTP
     <<: *defaults
