@@ -48,6 +48,10 @@ spec:
           gethomepage.dev/app: alertmanager
           gethomepage.dev/description: "Handles alerts sent by client applications"
           gethomepage.dev/icon: alertmanager.svg
+          gethomepage.dev/widget.type: customapi
+          gethomepage.dev/widget.url: http://alertmanager-operated.observability.svc.cluster.local:9093/api/v2/alerts
+          gethomepage.dev/widget.mappings.0.label: Alerts
+          gethomepage.dev/widget.mappings.0.format: size
         hosts: ["alertmanager.${SECRET_DOMAIN}"]
         pathType: Prefix
       alertManagerSpec:
