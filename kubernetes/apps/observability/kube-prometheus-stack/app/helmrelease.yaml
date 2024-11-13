@@ -37,8 +37,16 @@ spec:
         enabled: true
         ingressClassName: internal
         annotations:
-          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
-        hosts: ["alert-manager.${SECRET_DOMAIN}"]
+          ## Enable Oauth2 Authentication
+          nginx.ingress.kubernetes.io/auth-url: "http://oauth2-proxy.security.svc.cluster.local:4180/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_DOMAIN}/oauth2/auth/oauth2/start?rd=$scheme://$host$request_uri"
+          ##
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Observability
+          gethomepage.dev/name: Alertmanager
+          gethomepage.dev/description: "Handles alerts sent by client applications such as the Prometheus server"
+          gethomepage.dev/icon: alertmanager.svg
+        hosts: ["alertmanager.${SECRET_DOMAIN}"]
         pathType: Prefix
       alertManagerSpec:
         # TODO: [kube-pro-stack] Add config secret
@@ -94,6 +102,19 @@ spec:
       ingress:
         enabled: true
         hosts: ["prometheus.${SECRET_DOMAIN}"]
+        annotations:
+          ## Enable Oauth2 Authentication
+          nginx.ingress.kubernetes.io/auth-url: "http://oauth2-proxy.security.svc.cluster.local:4180/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_DOMAIN}/oauth2/auth/oauth2/start?rd=$scheme://$host$request_uri"
+          ##
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Observability
+          gethomepage.dev/name: Prometheus
+          gethomepage.dev/description: "Monitoring scrape service"
+          gethomepage.dev/icon: prometheus.png
+          gethomepage.dev/app: prometheus
+          gethomepage.dev/widget.type: prometheus
+          gethomepage.dev/widget.url: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090
         pathType: Prefix
       prometheusSpec:
         scrapeInterval: 1m # Must match interval in Grafana Helm chart
