@@ -82,7 +82,6 @@ services:
     mem_limit: 1024m
     networks:
       - linkding-backend
-      - mailrise
     environment:
       - TIMEZONE=${TZ}
       - USER_DBBACKUP=${PUID}

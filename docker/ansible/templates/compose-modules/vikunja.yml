@@ -100,7 +100,6 @@ services:
       - $DOCKERDIR/data/backup:/backup
     networks:
       - vikunja-backend
-      - mailrise
     mem_limit: 1024m
     environment:
       - TIMEZONE=${TZ}

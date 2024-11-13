@@ -84,7 +84,6 @@ services:
     mem_limit: 1024m
     networks:
       - gatus-backend
-      - mailrise
     environment:
       - TIMEZONE=${TZ}
       - USER_DBBACKUP=${PUID}

@@ -107,7 +107,6 @@ services:
     mem_limit: 1024m
     networks:
       - wallabag-backend
-      - mailrise
     environment:
       - TIMEZONE=${TZ}
       - USER_DBBACKUP=${PUID}

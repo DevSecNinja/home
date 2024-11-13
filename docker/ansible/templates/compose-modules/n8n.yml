@@ -77,7 +77,6 @@ services:
     mem_limit: 1024m
     networks:
       - n8n-backend
-      - mailrise
     environment:
       - TIMEZONE=${TZ}
       - USER_DBBACKUP=${PUID}
