@@ -46,7 +46,7 @@ spec:
           gethomepage.dev/group: Observability
           gethomepage.dev/name: Alertmanager
           gethomepage.dev/app: alertmanager
-          gethomepage.dev/description: "Handles alerts sent by client applications such as the Prometheus server"
+          gethomepage.dev/description: "Handles alerts sent by client applications"
           gethomepage.dev/icon: alertmanager.svg
         hosts: ["alertmanager.${SECRET_DOMAIN}"]
         pathType: Prefix

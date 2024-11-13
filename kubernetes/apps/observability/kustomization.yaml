@@ -6,4 +6,5 @@ resources:
   - ./gatus/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
   - ./kubernetes-dashboard/ks.yaml
+  - ./loki/ks.yaml
   - ./prometheus-operator-crds/ks.yaml
