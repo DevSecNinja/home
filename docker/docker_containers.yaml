@@ -3,9 +3,6 @@
   url: adguard-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: unbound
   image: mvance/unbound:1.22.0@sha256:76906da36d1806f3387338f15dcf8b357c51ce6897fb6450d6ce010460927e90
-- container_name: alertmanager
-  image: prom/alertmanager:v0.27.0@sha256:e13b6ed5cb929eeaee733479dce55e10eb3bc2e9c4586c705a4e8da41e5eacf5
-  url: alertmanager.$DOMAINNAME
 - container_name: bitwarden
   image: bitwarden/self-host:2024.10.2-beta@sha256:f3e31a3f8e4d3998ca6409ec81ebe2dc0bcc44c51d9985fa6e285514aae96cd8
   url: bitwarden.$DOMAINNAME
@@ -13,9 +10,6 @@
   image: mariadb:11.5.2@sha256:4a1de8fa2a929944373d7421105500ff6f889ce90dcb883fbb2fdb070e4d427e
 - container_name: bitwarden-db-backup
   image: tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
-- container_name: cadvisor
-  image: gcr.io/cadvisor/cadvisor:v0.51.0@sha256:771a65c7877817cd9bb4c2d9eecb9fd1ac56f370287617658c51a35061efa71a
-  url: cadvisor-noauth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: change-detection
   image: ghcr.io/dgtlmoon/changedetection.io:0.47.06@sha256:6e9dcf4abc1cfb0b1eeba6b6ff52a4b6f790110d6cdc8b7942c6cecf34e56265
   url: change-detection.$DOMAINNAME
@@ -52,12 +46,6 @@
   image: docker.io/library/postgres:16.4-alpine@sha256:d898b0b78a2627cb4ee63464a14efc9d296884f1b28c841b0ab7d7c42f1fffdf
 - container_name: gatus-db-backup
   image: tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
-- container_name: grafana
-  image: grafana/grafana:11.3.0@sha256:a0f881232a6fb71a0554a47d0fe2203b6888fe77f4cefb7ea62bed7eb54e13c3
-  url: grafana.$DOMAINNAME
-- container_name: loki
-  image: grafana/loki:3.2.1@sha256:09a53b4a4ff81ffcd8f13886df19d33fac7a8d3aaf952e3c7e66cbade5b2fc31
-  url: loki.$DOMAINNAME
 - container_name: home-assistant
   image: ghcr.io/home-assistant/home-assistant:beta@sha256:c7f8797b241c097df89145f9d8beca21c2ddc3bb3945dfb426bff654b11f4bfc
   url: home-assistant.$DOMAINNAME
@@ -73,11 +61,6 @@
   image: docker.io/library/postgres:16.4-alpine@sha256:d898b0b78a2627cb4ee63464a14efc9d296884f1b28c841b0ab7d7c42f1fffdf
 - container_name: hoppscotch-db-backup
   image: tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
-- container_name: influxdb
-  image: influxdb:2.7-alpine@sha256:407ed49d0b3e32362bbf9ee21740240893e62b9249a02397613a229652f64947
-  url: influxdb-noauth.$DOMAINNAME
-- container_name: influxdb-backup
-  image: tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
 - container_name: it-tools
   image: ghcr.io/corentinth/it-tools:2023.12.21-5ed3693@sha256:4aaf67eab769afc9dac5614a15614537446e11150d53eab3be34ac9775a27e3a
   url: tools.$DOMAINNAME
@@ -91,8 +74,6 @@
 - container_name: lobe-chat
   image: lobehub/lobe-chat:v1.29.6@sha256:afebfaaeb516f502e64b21019531525aca58f28a777c95463c297b2ec1f177b2
   url: chat.$DOMAINNAME
-- container_name: mailrise
-  image: yoryan/mailrise:1.4.0@sha256:66082168090b9a83f01cc71a9d7b1994840adbbbffbe4d2cf644272fbbc23a1a
 - container_name: n8n
   image: n8nio/n8n:1.67.1@sha256:ee4ef2c8a4439ca01efe60d7c56cd678facdce2b411a1e338bd446e6deb8e061
   url: n8n.$DOMAINNAME
@@ -111,9 +92,6 @@
   image: tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
 - container_name: nextcloud-redis
   image: redis:alpine3.19@sha256:892b41c092a599f76c30b48e9dcfb185ce8cea3560970b1c4f2745c89bb34344
-- container_name: nodeexporter
-  image: prom/node-exporter:v1.8.2@sha256:4032c6d5bfd752342c3e631c2f1de93ba6b86c41db6b167b9a35372c139e7706
-  url: nodeexporter-noauth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: openspeedtest
   image: openspeedtest/latest:v2.0.5@sha256:bbddd8eda80cc4deb2a5702efd0acd826137650ba0bfcc6720f896c74bca02ee
   url: speedtest.$DOMAINNAME
@@ -150,17 +128,6 @@
   image: portainer/portainer-ce:2.23.0-alpine@sha256:97342cf8a821d64d59880bdede8f45ea9c869fea702dd56128a67d552dc632ab
   url: portainer-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: portainer-docker-proxy
-  image: lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:792bdde50356861db095884bb914f2e7004a851d92301a0c7150ea174be26864
-- container_name: prometheus
-  image: prom/prometheus:v2.55.1@sha256:2659f4c2ebb718e7695cb9b25ffa7d6be64db013daba13e05c875451cf51b0d3
-  url: prometheus.$DOMAINNAME
-- container_name: pushgateway
-  image: prom/pushgateway:v1.10.0@sha256:7a4d0696a24ef4e8bad62bee5656855a0aff2f26416d8cb32009dc28d6263604
-  url: pushgateway.$DOMAINNAME
-- container_name: promtail
-  image: grafana/promtail:3.2.1@sha256:bf617e9d67e80247a59f717f9c1ad388d7d32dc0a1d29abd5799516d15e0a9b5
-  url: promtail.$DOMAINNAME
-- container_name: promtail-docker-proxy
   image: lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:792bdde50356861db095884bb914f2e7004a851d92301a0c7150ea174be26864
 - container_name: traefik-forward-auth
   image: ghcr.io/italypaleale/traefik-forward-auth:3.1.5@sha256:fc717ff42f367f5bc5f0101880cd488d46acd56c7fd3a6094c78a414e58c183d

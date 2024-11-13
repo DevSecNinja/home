@@ -20,11 +20,11 @@
 
 ### Service: alertmanager
 
+> :warning: **Deprecation Notice:** Replaced by: Kubernetes cluster resource
+
 **container_name:** alertmanager
 
-**image:** prom/alertmanager:v0.27.0@sha256:e13b6ed5cb929eeaee733479dce55e10eb3bc2e9c4586c705a4e8da41e5eacf5
-
-**url:** alertmanager.$DOMAINNAME
+**image:** prom/alertmanager
 
 ## docker/ansible/templates/compose-modules/authelia.yml
 
@@ -70,11 +70,11 @@
 
 ### Service: cadvisor
 
+> :warning: **Deprecation Notice:** Replaced by: Kubernetes cluster resource
+
 **container_name:** cadvisor
 
-**image:** gcr.io/cadvisor/cadvisor:v0.51.0@sha256:771a65c7877817cd9bb4c2d9eecb9fd1ac56f370287617658c51a35061efa71a
-
-**url:** cadvisor-noauth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
+**image:** gcr.io/cadvisor/cadvisor
 
 ## docker/ansible/templates/compose-modules/change-detection.yml
 
@@ -202,19 +202,19 @@
 
 ### Service: grafana
 
+> :warning: **Deprecation Notice:** Replaced by: Kubernetes cluster resource
+
 **container_name:** grafana
 
-**image:** grafana/grafana:11.3.0@sha256:a0f881232a6fb71a0554a47d0fe2203b6888fe77f4cefb7ea62bed7eb54e13c3
-
-**url:** grafana.$DOMAINNAME
+**image:** grafana/grafana
 
 ### Service: loki
 
+> :warning: **Deprecation Notice:** Replaced by: Kubernetes cluster resource
+
 **container_name:** loki
 
-**image:** grafana/loki:3.2.1@sha256:09a53b4a4ff81ffcd8f13886df19d33fac7a8d3aaf952e3c7e66cbade5b2fc31
-
-**url:** loki.$DOMAINNAME
+**image:** grafana/loki
 
 ## docker/ansible/templates/compose-modules/home-assistant.yml
 
@@ -268,13 +268,15 @@
 
 ### Service: influxdb
 
+> :warning: **Deprecation Notice:** Replaced by: Kubernetes cluster resource
+
 **container_name:** influxdb
 
-**image:** influxdb:2.7-alpine@sha256:407ed49d0b3e32362bbf9ee21740240893e62b9249a02397613a229652f64947
-
-**url:** influxdb-noauth.$DOMAINNAME
+**image:** influxdb
 
 ### Service: influxdb-backup
+
+> :warning: **Deprecation Notice:** Replaced by: Kubernetes cluster resource
 
 **container_name:** influxdb-backup
 
@@ -336,9 +338,11 @@
 
 ### Service: mailrise
 
+> :warning: **Deprecation Notice:** Replaced by: Kubernetes cluster resource
+
 **container_name:** mailrise
 
-**image:** yoryan/mailrise:1.4.0@sha256:66082168090b9a83f01cc71a9d7b1994840adbbbffbe4d2cf644272fbbc23a1a
+**image:** yoryan/mailrise
 
 ## docker/ansible/templates/compose-modules/n8n.yml
 
@@ -400,11 +404,11 @@
 
 ### Service: nodeexporter
 
+> :warning: **Deprecation Notice:** Replaced by: Kubernetes cluster resource
+
 **container_name:** nodeexporter
 
-**image:** prom/node-exporter:v1.8.2@sha256:4032c6d5bfd752342c3e631c2f1de93ba6b86c41db6b167b9a35372c139e7706
-
-**url:** nodeexporter-noauth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
+**image:** prom/node-exporter
 
 ## docker/ansible/templates/compose-modules/oauth2-proxy.yml
 
@@ -580,31 +584,33 @@
 
 ### Service: prometheus
 
+> :warning: **Deprecation Notice:** Replaced by: Kubernetes cluster resource
+
 **container_name:** prometheus
 
-**image:** prom/prometheus:v2.55.1@sha256:2659f4c2ebb718e7695cb9b25ffa7d6be64db013daba13e05c875451cf51b0d3
-
-**url:** prometheus.$DOMAINNAME
+**image:** prom/prometheus
 
 ### Service: pushgateway
 
+> :warning: **Deprecation Notice:** Replaced by: Kubernetes cluster resource
+
 **container_name:** pushgateway
 
-**image:** prom/pushgateway:v1.10.0@sha256:7a4d0696a24ef4e8bad62bee5656855a0aff2f26416d8cb32009dc28d6263604
-
-**url:** pushgateway.$DOMAINNAME
+**image:** prom/pushgateway
 
 ## docker/ansible/templates/compose-modules/promtail.yml
 
 ### Service: promtail
 
+> :warning: **Deprecation Notice:** Replaced by: Kubernetes cluster resource
+
 **container_name:** promtail
 
-**image:** grafana/promtail:3.2.1@sha256:bf617e9d67e80247a59f717f9c1ad388d7d32dc0a1d29abd5799516d15e0a9b5
-
-**url:** promtail.$DOMAINNAME
+**image:** grafana/promtail
 
 ### Service: promtail-docker-proxy
+
+> :warning: **Deprecation Notice:** Replaced by: Kubernetes cluster resource
 
 **container_name:** promtail-docker-proxy
 
