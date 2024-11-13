@@ -33,6 +33,7 @@ spec:
       enabled: false
     cleanPrometheusOperatorObjectNames: true
     alertmanager:
+      fullnameOverride: alertmanager
       ingress:
         enabled: true
         ingressClassName: internal
@@ -44,6 +45,7 @@ spec:
           gethomepage.dev/enabled: "true"
           gethomepage.dev/group: Observability
           gethomepage.dev/name: Alertmanager
+          gethomepage.dev/app: alertmanager
           gethomepage.dev/description: "Handles alerts sent by client applications such as the Prometheus server"
           gethomepage.dev/icon: alertmanager.svg
         hosts: ["alertmanager.${SECRET_DOMAIN}"]
@@ -99,6 +101,7 @@ spec:
     kubeProxy:
       enabled: false
     prometheus:
+      fullnameOverride: prometheus
       ingress:
         enabled: true
         hosts: ["prometheus.${SECRET_DOMAIN}"]
