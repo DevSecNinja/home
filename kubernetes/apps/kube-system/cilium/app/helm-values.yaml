@@ -55,3 +55,6 @@ securityContext:
       - NET_ADMIN
       - SYS_ADMIN
       - SYS_RESOURCE
+socketLB:
+  # Fixes #962 and prevents DNS resolution errors when coredns gets restarted
+  hostNamespaceOnly: true
