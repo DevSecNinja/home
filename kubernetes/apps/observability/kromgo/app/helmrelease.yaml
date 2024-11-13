@@ -91,9 +91,9 @@ spec:
           gethomepage.dev/icon: mdi-list-status
           gethomepage.dev/widget.type: customapi
           gethomepage.dev/widget.url: http://${APP}.observability.svc.cluster.local:${PORT}/cluster_uptime_days
-          gethomepage.dev/mappings.field: message
-          gethomepage.dev/mappings.label: Cluster Uptime
-          gethomepage.dev/mappings.format: text
+          gethomepage.dev/widget.mappings.field: message
+          gethomepage.dev/widget.mappings.label: Cluster Uptime
+          gethomepage.dev/widget.mappings.format: text
         hosts:
           - host: kromgo.${SECRET_DOMAIN}
             paths:
