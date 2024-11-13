@@ -79,12 +79,21 @@ spec:
         controller: kromgo
         ports:
           http:
-            port: 8080
+            port: &port 8080
     ingress:
       app:
         className: external
         annotations:
           external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/description: "Safely expose metrics and health checks"
+          gethomepage.dev/group: Observability
+          gethomepage.dev/icon: mdi-list-status
+          gethomepage.dev/widget.type: customapi
+          gethomepage.dev/widget.url: http://${APP}.observability.svc.cluster.local:${PORT}/cluster_uptime_days
+          gethomepage.dev/mappings.field: message
+          gethomepage.dev/mappings.label: Cluster Uptime
+          gethomepage.dev/mappings.format: text
         hosts:
           - host: kromgo.${SECRET_DOMAIN}
             paths:
