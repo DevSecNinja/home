@@ -1,0 +1,101 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app immich-machine-learning
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  dependsOn:
+    - name: immich-server
+  values:
+    controllers:
+      immichml:
+        strategy: Recreate
+        annotations:
+          configmap.reloader.stakater.com/reload: immich-configmap
+          secret.reloader.stakater.com/reload: immich-secret
+        containers:
+          app:
+            image:
+              repository: ghcr.io/immich-app/immich-machine-learning
+              tag: v1.120.0@sha256:a7c897a0b011b031c5f825e1667a6de4793c15adc53300f8ba4170d12a68d913
+            env:
+              IMMICH_PORT: &port 3003
+              IMMICH_MEDIA_LOCATION: &mediaLocation ./upload
+            resources:
+              requests:
+                cpu: 50m
+              limits:
+                memory: 1750M
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /ping
+                    port: *port
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 5
+              readiness: *probes
+              startup:
+                enabled: false
+        pod:
+          # TODO: [k8s] Investigate enableServiceLinks for other services
+          enableServiceLinks: false
+          securityContext:
+            runAsUser: 568
+            runAsGroup: 568
+            fsGroup: 568
+            fsGroupChangePolicy: OnRootMismatch
+            supplementalGroups: [65537]
+          topologySpreadConstraints:
+            - maxSkew: 1
+              topologyKey: kubernetes.io/hostname
+              whenUnsatisfiable: DoNotSchedule
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: *app
+    service:
+      app:
+        controller: immichml
+        ports:
+          http:
+            port: *port
+    persistence:
+      library:
+        existingClaim: immich-library
+        globalMounts:
+          - path: *mediaLocation
+      cache:
+        storageClass: openebs-hostpath
+        accessMode: ReadWriteOnce
+        size: 10Gi
+        globalMounts:
+          - path: /cache
+      # geocoding-dump:
+      #   type: emptyDir
+      #   globalMounts:
+      #     - path: /usr/src/app/.reverse-geocoding-dump
+      # transformers-cache:
+      #   type: emptyDir
+      #   globalMounts:
+      #     - path: /usr/src/app/.transformers_cache
