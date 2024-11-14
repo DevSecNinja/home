@@ -67,6 +67,8 @@ data:
         icon: mdi-home-analytics
       Productivity:
         icon: mdi-briefcase
+      Media:
+        icon: mdi-multimedia
       Network:
         icon: mdi-graph
       Observability:
