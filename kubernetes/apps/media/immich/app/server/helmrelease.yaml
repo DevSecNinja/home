@@ -43,7 +43,7 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
           configmap.reloader.stakater.com/reload: &configMap immich-configmap
-          secret.reloader.stakater.com/reload: &secret immich-secret
+          secret.reloader.stakater.com/reload: &secret immich
         initContainers:
           init-db:
             image:
