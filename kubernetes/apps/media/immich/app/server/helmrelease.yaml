@@ -99,6 +99,11 @@ spec:
           gethomepage.dev/name: Immich
           gethomepage.dev/description: "Photo library and management"
           gethomepage.dev/icon: immich
+          # TODO: [immich] Enable widget
+          # gethomepage.dev/widget.type: immich
+          # gethomepage.dev/widget.url: "http://photos.media.svc.cluster.local:2283"
+          # gethomepage.dev/widget.key: "tobeadded"
+          # gethomepage.dev/widget.version: "2"
         hosts:
           - host: &host "photos.${SECRET_DOMAIN}"
             paths:
