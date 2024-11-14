@@ -118,6 +118,7 @@ spec:
         name: *configMap
         globalMounts:
           - path: *configLocation
+            subPath: immich-config.json
             readOnly: true
       library:
         storageClass: openebs-hostpath
