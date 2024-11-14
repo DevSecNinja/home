@@ -78,7 +78,7 @@
     "storageQuotaClaim": "immich_quota"
   },
   "passwordLogin": {
-    "enabled": false
+    "enabled": true
   },
   "reverseGeocoding": {
     "enabled": true
