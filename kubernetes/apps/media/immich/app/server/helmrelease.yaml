@@ -115,7 +115,7 @@ spec:
         type: emptyDir
       config-file:
         type: configMap
-        name: *configMap
+        name: immich-server-config
         globalMounts:
           - path: *configLocation
             subPath: immich-config.json

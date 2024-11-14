@@ -5,7 +5,7 @@ kind: Kustomization
 resources:
   - ./helmrelease.yaml
 configMapGenerator:
-  - name: immich
+  - name: immich-server-config
     files:
       - ./config/immich-config.json
 generatorOptions:
