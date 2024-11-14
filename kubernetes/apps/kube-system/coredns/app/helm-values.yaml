@@ -9,6 +9,13 @@ service:
 # As we run a single node cluster, we need to make sure at least 2 replicas
 # are up to prevent full cluster downtime during the upgrade of CoreDNS.
 replicaCount: 2
+prometheus:
+  service:
+    enabled: true
+  monitor:
+    enabled: true
+podAnnotations:
+  configmap.reloader.stakater.com/reload: "coredns"
 servers:
   - zones:
       - zone: .
