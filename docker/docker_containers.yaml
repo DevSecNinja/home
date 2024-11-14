@@ -111,13 +111,6 @@
 - container_name: papermerge
   image: papermerge/papermerge:3.2.0@sha256:11bd6e47622b295ee40f1e719c63235544121839a30e5083d959208931007b62
   url: papermerge.$DOMAINNAME
-- container_name: photoprism
-  image: photoprism/photoprism:preview@sha256:a81205292ff10b031d9d3df11d456ad2d9c68577b71f75ecdaac7ab146c76b84
-  url: photos.$DOMAINNAME
-- container_name: photoprism-db
-  image: mariadb:11.5.2@sha256:4a1de8fa2a929944373d7421105500ff6f889ce90dcb883fbb2fdb070e4d427e
-- container_name: photoprism-db-backup
-  image: tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
 - container_name: phpmyadmin
   image: phpmyadmin:5.2.1-apache@sha256:2ec46aba67db196e8a6987440dcd6dde7d15aa8f0435d84c8b8442d2b39f15c7
   url: phpmyadmin.$DOMAINNAME

@@ -526,19 +526,23 @@
 
 ### Service: photoprism
 
+> :warning: **Deprecation Notice:** Replaced by: Kubernetes deployment of Immich
+
 **container_name:** photoprism
 
-**image:** photoprism/photoprism:preview@sha256:a81205292ff10b031d9d3df11d456ad2d9c68577b71f75ecdaac7ab146c76b84
-
-**url:** photos.$DOMAINNAME
+**image:** photoprism/photoprism
 
 ### Service: photoprism-db
 
+> :warning: **Deprecation Notice:** Replaced by: Kubernetes deployment of Immich
+
 **container_name:** photoprism-db
 
-**image:** mariadb:11.5.2@sha256:4a1de8fa2a929944373d7421105500ff6f889ce90dcb883fbb2fdb070e4d427e
+**image:** mariadb
 
 ### Service: photoprism-db-backup
+
+> :warning: **Deprecation Notice:** Replaced by: Kubernetes deployment of Immich
 
 **container_name:** photoprism-db-backup
 
