@@ -43,7 +43,7 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
           configmap.reloader.stakater.com/reload: &configMap immich-configmap
-          secret.reloader.stakater.com/reload: &secret immich
+          secret.reloader.stakater.com/reload: &secret immich-secret
         initContainers:
           init-db:
             image:
@@ -62,8 +62,8 @@ spec:
             envFrom: *envFrom
             env:
               LOG_LEVEL: log
-              IMMICH_MEDIA_LOCATION: &mediaLocation ./upload
-              # IMMICH_CONFIG_FILE: /config/immich-config.json
+              IMMICH_MEDIA_LOCATION: &mediaLocation /usr/src/app/upload
+              IMMICH_CONFIG_FILE: &configLocation /config/immich-config.json
             resources:
               requests:
                 cpu: 50m
@@ -111,10 +111,14 @@ spec:
               - *host
     persistence:
       config:
+        enabled: true
+        type: emptyDir
+      config-file:
         type: configMap
-        name: immich-server-config
+        name: *configMap
         globalMounts:
-          - path: /config
+          - path: *configLocation
+            readOnly: true
       library:
         storageClass: openebs-hostpath
         accessMode: ReadWriteOnce
@@ -122,11 +126,3 @@ spec:
         size: 10Gi
         globalMounts:
           - path: *mediaLocation
-      # geocoding-dump:
-      #   type: emptyDir
-      #   globalMounts:
-      #     - path: /usr/src/app/.reverse-geocoding-dump
-      # transformers-cache:
-      #   type: emptyDir
-      #   globalMounts:
-      #     - path: /usr/src/app/.transformers_cache
