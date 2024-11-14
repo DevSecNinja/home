@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: immich-configmap
+  name: immich
 data:
   TZ: Europe/Amsterdam
   NODE_ENV: production
