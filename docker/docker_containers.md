@@ -174,7 +174,7 @@
 
 **container_name:** foldingathome
 
-**image:** lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:6431f7f1009a849b2daae40a99ccd28fec9f4df4cea8a3d02ad925a36df3ebd1
+**image:** lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:ea935e320dc0eac34007f8632c471557cdb938ac3fa3f138a715123ab5cddc26
 
 ## docker/ansible/templates/compose-modules/gatus.yml
 
@@ -190,7 +190,7 @@
 
 **container_name:** gatus-db
 
-**image:** docker.io/library/postgres:16.4-alpine@sha256:d898b0b78a2627cb4ee63464a14efc9d296884f1b28c841b0ab7d7c42f1fffdf
+**image:** docker.io/library/postgres:16.4-alpine@sha256:5660c2cbfea50c7a9127d17dc4e48543eedd3d7a41a595a2dfa572471e37e64c
 
 ### Service: gatus-db-backup
 
@@ -256,7 +256,7 @@
 
 **container_name:** hoppscotch-db
 
-**image:** docker.io/library/postgres:16.4-alpine@sha256:d898b0b78a2627cb4ee63464a14efc9d296884f1b28c841b0ab7d7c42f1fffdf
+**image:** docker.io/library/postgres:16.4-alpine@sha256:5660c2cbfea50c7a9127d17dc4e48543eedd3d7a41a595a2dfa572471e37e64c
 
 ### Service: hoppscotch-db-backup
 
@@ -316,7 +316,7 @@
 
 **container_name:** linkding-db
 
-**image:** docker.io/library/postgres:16.4-alpine@sha256:d898b0b78a2627cb4ee63464a14efc9d296884f1b28c841b0ab7d7c42f1fffdf
+**image:** docker.io/library/postgres:16.4-alpine@sha256:5660c2cbfea50c7a9127d17dc4e48543eedd3d7a41a595a2dfa572471e37e64c
 
 ### Service: linkding-db-backup
 
@@ -358,7 +358,7 @@
 
 **container_name:** n8n-db
 
-**image:** docker.io/library/postgres:16.4-alpine@sha256:d898b0b78a2627cb4ee63464a14efc9d296884f1b28c841b0ab7d7c42f1fffdf
+**image:** docker.io/library/postgres:16.4-alpine@sha256:5660c2cbfea50c7a9127d17dc4e48543eedd3d7a41a595a2dfa572471e37e64c
 
 ### Service: n8n-db-backup
 
@@ -372,7 +372,7 @@
 
 **container_name:** nextcloud
 
-**image:** nextcloud:30.0.2-apache@sha256:9fd332ef6a4ea95b0333b79e2246d8a766acebed828cf431ebe82143bc2e22a3
+**image:** nextcloud:30.0.2-apache@sha256:300c55b0ebe11991c61a346025791ea5ebd90a14cec4abc6048aab2f1baaf69c
 
 **url:** cloud.$DOMAINNAME
 
@@ -380,7 +380,7 @@
 
 **container_name:** nextcloud-cron
 
-**image:** nextcloud:30.0.2-apache@sha256:9fd332ef6a4ea95b0333b79e2246d8a766acebed828cf431ebe82143bc2e22a3
+**image:** nextcloud:30.0.2-apache@sha256:300c55b0ebe11991c61a346025791ea5ebd90a14cec4abc6048aab2f1baaf69c
 
 ### Service: nextcloud-db
 
@@ -454,7 +454,7 @@
 
 **container_name:** outline-db
 
-**image:** docker.io/library/postgres:16.4-alpine@sha256:d898b0b78a2627cb4ee63464a14efc9d296884f1b28c841b0ab7d7c42f1fffdf
+**image:** docker.io/library/postgres:16.4-alpine@sha256:5660c2cbfea50c7a9127d17dc4e48543eedd3d7a41a595a2dfa572471e37e64c
 
 ### Service: outline-db-backup
 
@@ -478,7 +478,7 @@
 
 **container_name:** paperless-db
 
-**image:** docker.io/library/postgres:16.4-alpine@sha256:d898b0b78a2627cb4ee63464a14efc9d296884f1b28c841b0ab7d7c42f1fffdf
+**image:** docker.io/library/postgres:16.4-alpine@sha256:5660c2cbfea50c7a9127d17dc4e48543eedd3d7a41a595a2dfa572471e37e64c
 
 ### Service: paperless-db-backup
 
@@ -664,7 +664,7 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:7.0.15@sha256:7ba1f8fd37a86f52a99f484b1f3cb5a140472c0752ad0d3c52045f0a6cb88d37
+**image:** mongo:7.0.15@sha256:8ff7333c6a9fbc00597fcce4c836e8bcc6b29fd34d49259479c43174e32d72be
 
 ### Service: unifi-db-backup
 
