@@ -58,7 +58,7 @@ spec:
           app:
             image:
               repository: ghcr.io/immich-app/immich-server
-              tag: v1.120.0@sha256:ac215f5c1a52f7b25617924db61d54bb72b534d902ccb58eb595cdba98899aa3
+              tag: v1.120.2@sha256:99f97cb61cd1b49c23fbee46a0ed067f171970518d8834c7e8b2dd3ac0d39c63
             envFrom: *envFrom
             env:
               LOG_LEVEL: log
