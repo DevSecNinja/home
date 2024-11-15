@@ -24,7 +24,7 @@
   image: ghcr.io/gchq/cyberchef:10.19.4@sha256:a2bfe382b2547bdd0a3d0523b9a6b85fab833c56bcec86d600ba6266910b533e
   url: cyberchef.$DOMAINNAME
 - container_name: dozzle
-  image: amir20/dozzle:v8.7.2@sha256:91cbc2bc90c73ff8f2bdea54d341b3c181dcf9f1c931061ce6cdc166b9007e7c
+  image: amir20/dozzle:v8.7.3@sha256:7234eadb844a0454bee8d2596b20f15c7803b6813b04eefddf82ea42f1da1281
   url: dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: dozzle-docker-proxy
   image: lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:792bdde50356861db095884bb914f2e7004a851d92301a0c7150ea174be26864
@@ -112,7 +112,7 @@
   image: papermerge/papermerge:3.2.0@sha256:11bd6e47622b295ee40f1e719c63235544121839a30e5083d959208931007b62
   url: papermerge.$DOMAINNAME
 - container_name: phpmyadmin
-  image: phpmyadmin:5.2.1-apache@sha256:2ec46aba67db196e8a6987440dcd6dde7d15aa8f0435d84c8b8442d2b39f15c7
+  image: phpmyadmin:5.2.1-apache@sha256:4c1653fac64f6562f52c718c366ebcd2f0537585f70cda0014399d47bf920b5f
   url: phpmyadmin.$DOMAINNAME
 - container_name: plex
   image: lscr.io/linuxserver/plex:version-1.41.1.9057-af5eaea7a@sha256:8e4e0c2348eed53aed2ee7136dc58b733d5edd50dd0e65eeb2dc42eeb978bb0f

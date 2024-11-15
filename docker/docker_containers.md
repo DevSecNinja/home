@@ -128,7 +128,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v8.7.2@sha256:91cbc2bc90c73ff8f2bdea54d341b3c181dcf9f1c931061ce6cdc166b9007e7c
+**image:** amir20/dozzle:v8.7.3@sha256:7234eadb844a0454bee8d2596b20f15c7803b6813b04eefddf82ea42f1da1281
 
 **url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -554,7 +554,7 @@
 
 **container_name:** phpmyadmin
 
-**image:** phpmyadmin:5.2.1-apache@sha256:2ec46aba67db196e8a6987440dcd6dde7d15aa8f0435d84c8b8442d2b39f15c7
+**image:** phpmyadmin:5.2.1-apache@sha256:4c1653fac64f6562f52c718c366ebcd2f0537585f70cda0014399d47bf920b5f
 
 **url:** phpmyadmin.$DOMAINNAME
 
