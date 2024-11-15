@@ -25,7 +25,7 @@ spec:
     - name: immich-server
   values:
     controllers:
-      immichml:
+      ${APP}:
         strategy: Recreate
         annotations:
           configmap.reloader.stakater.com/reload: immich
@@ -78,7 +78,7 @@ spec:
                   app.kubernetes.io/name: *app
     service:
       app:
-        controller: immichml
+        controller: *app
         ports:
           http:
             port: *port

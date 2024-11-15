@@ -39,7 +39,7 @@ spec:
               app.kubernetes.io/name: *app
 
     controllers:
-      immich:
+      ${APP}:
         annotations:
           reloader.stakater.com/auto: "true"
           configmap.reloader.stakater.com/reload: &configMap immich
@@ -87,7 +87,7 @@ spec:
                 enabled: false
     service:
       app:
-        controller: immich
+        controller: *app
         ports:
           http:
             port: *port
@@ -99,7 +99,7 @@ spec:
           gethomepage.dev/group: Media
           gethomepage.dev/name: Immich
           gethomepage.dev/description: "Photo library and management"
-          gethomepage.dev/icon: immich
+          gethomepage.dev/icon: *app
           # TODO: [immich] Enable widget
           # gethomepage.dev/widget.type: immich
           # gethomepage.dev/widget.url: "http://photos.media.svc.cluster.local:2283"
