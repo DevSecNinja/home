@@ -116,7 +116,8 @@ spec:
           # TODO: [unifi] Investigate using homepage widget
           # https://gethomepage.dev/widgets/services/unifi-controller/
         hosts:
-          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          # - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - host: &host "unifi-new.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
