@@ -82,7 +82,7 @@ spec:
             port: *port
     persistence:
       library:
-        existingClaim: immich-library
+        existingClaim: immich-server-immich-library
         globalMounts:
           - path: *mediaLocation
       cache:
