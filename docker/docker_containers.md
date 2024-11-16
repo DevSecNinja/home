@@ -58,7 +58,7 @@
 
 **container_name:** bitwarden-db
 
-**image:** mariadb:11.5.2@sha256:4a1de8fa2a929944373d7421105500ff6f889ce90dcb883fbb2fdb070e4d427e
+**image:** mariadb:11.5.2@sha256:2d50fe0f77dac919396091e527e5e148a9de690e58f32875f113bef6506a17f5
 
 ### Service: bitwarden-db-backup
 
@@ -222,7 +222,7 @@
 
 **container_name:** home-assistant
 
-**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:c7f8797b241c097df89145f9d8beca21c2ddc3bb3945dfb426bff654b11f4bfc
+**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:b447bbb6e77ee969d1aa2de1c29e11921180b4588361d5059b9ede77f55a8d7c
 
 **url:** home-assistant.$DOMAINNAME
 
@@ -386,7 +386,7 @@
 
 **container_name:** nextcloud-db
 
-**image:** mariadb:11.5.2@sha256:4a1de8fa2a929944373d7421105500ff6f889ce90dcb883fbb2fdb070e4d427e
+**image:** mariadb:11.5.2@sha256:2d50fe0f77dac919396091e527e5e148a9de690e58f32875f113bef6506a17f5
 
 ### Service: nextcloud-db-backup
 
@@ -732,7 +732,7 @@
 
 **container_name:** wallabag-db
 
-**image:** mariadb:11.5.2@sha256:4a1de8fa2a929944373d7421105500ff6f889ce90dcb883fbb2fdb070e4d427e
+**image:** mariadb:11.5.2@sha256:2d50fe0f77dac919396091e527e5e148a9de690e58f32875f113bef6506a17f5
 
 ### Service: wallabag-db-backup
 
