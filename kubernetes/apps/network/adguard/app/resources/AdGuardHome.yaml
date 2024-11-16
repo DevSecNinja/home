@@ -136,6 +136,7 @@ filtering:
   blocking_ipv6: ""
   blocked_services:
     schedule:
+      # Timezone ${TIMEZONE}
       time_zone: Europe/Amsterdam
     ids:
       - qq
