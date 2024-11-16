@@ -129,10 +129,9 @@ spec:
           - path: *configLocation
             subPath: immich-config.json
             readOnly: true
-      library:
+      data:
         storageClass: openebs-hostpath
         accessMode: ReadWriteOnce
-        nameOverride: immich-library
         retain: true
         size: 10Gi
         globalMounts:
