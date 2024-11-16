@@ -78,7 +78,7 @@ spec:
                   app.kubernetes.io/name: *app
     service:
       app:
-        controller: immichml
+        controller: *app
         ports:
           http:
             port: *port
