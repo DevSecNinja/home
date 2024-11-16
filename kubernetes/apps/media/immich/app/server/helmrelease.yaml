@@ -1,5 +1,5 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -21,6 +21,8 @@ spec:
     cleanupOnFail: true
     remediation:
       retries: 3
+  uninstall:
+    keepHistory: false
   values:
     defaultPodOptions:
       enableServiceLinks: false
@@ -61,6 +63,7 @@ spec:
               tag: v1.120.2@sha256:99f97cb61cd1b49c23fbee46a0ed067f171970518d8834c7e8b2dd3ac0d39c63
             envFrom: *envFrom
             env:
+              TZ: ${TIMEZONE}
               LOG_LEVEL: log
               SERVER_PORT: &port 2283
               IMMICH_MEDIA_LOCATION: &mediaLocation /usr/src/app/upload
@@ -93,7 +96,6 @@ spec:
             port: *port
     ingress:
       app:
-        className: internal
         annotations:
           gethomepage.dev/enabled: "true"
           gethomepage.dev/group: Media
