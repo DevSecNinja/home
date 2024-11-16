@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: echo-server
+  name: &app echo-server
 spec:
   interval: 30m
   chart:
@@ -23,7 +23,7 @@ spec:
       retries: 3
   values:
     controllers:
-      echo-server:
+      ${APP}:
         strategy: RollingUpdate
         containers:
           app:
@@ -66,13 +66,13 @@ spec:
         seccompProfile: { type: RuntimeDefault }
     service:
       app:
-        controller: echo-server
+        controller: *app
         ports:
           http:
             port: *port
     serviceMonitor:
       app:
-        serviceName: echo-server
+        serviceName: *app
         endpoints:
           - port: http
             scheme: http
