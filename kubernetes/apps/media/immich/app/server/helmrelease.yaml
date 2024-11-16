@@ -90,7 +90,8 @@ spec:
                 enabled: false
     service:
       app:
-        controller: *app
+        # TODO: [immich] Investigate on rename 'No enabled controller found with this identifier. (service: 'app', controller: 'immich-server')'
+        controller: "immich"
         ports:
           http:
             port: *port
