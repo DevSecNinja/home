@@ -1,5 +1,5 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -21,17 +21,19 @@ spec:
     cleanupOnFail: true
     remediation:
       retries: 3
+  uninstall:
+    keepHistory: false
   dependsOn:
     - name: immich-server
   values:
     controllers:
-      ${APP}:
+      main:
         strategy: Recreate
         annotations:
           configmap.reloader.stakater.com/reload: immich
           secret.reloader.stakater.com/reload: immich
         containers:
-          app:
+          main:
             image:
               repository: ghcr.io/immich-app/immich-machine-learning
               tag: v1.120.2@sha256:3cca923bc8eaa3616c48fc6088005e08d574cf1acf6c1253c92393ae11e4788d
@@ -77,14 +79,14 @@ spec:
                 matchLabels:
                   app.kubernetes.io/name: *app
     service:
-      app:
-        controller: "immichml"
+      main:
+        controller: main
         ports:
           http:
             port: *port
     persistence:
       library:
-        existingClaim: immich-server-immich-library
+        existingClaim: immich-server-data
         globalMounts:
           - path: *mediaLocation
       cache:
