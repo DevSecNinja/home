@@ -67,7 +67,7 @@
     "clientId": "${IMMICH_OAUTH_CLIENT_ID}",
     "clientSecret": "${IMMICH_OAUTH_CLIENT_SECRET}",
     "defaultStorageQuota": 0,
-    "enabled": true,
+    "enabled": false,
     "issuerUrl": "https://login.microsoftonline.com/${IMMICH_OAUTH_ENTRA_TENANT_ID}/v2.0",
     "mobileOverrideEnabled": false,
     "mobileRedirectUri": "",
