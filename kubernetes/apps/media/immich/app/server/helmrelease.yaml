@@ -87,7 +87,7 @@ spec:
                 enabled: false
     service:
       app:
-        controller: immich
+        controller: *app
         ports:
           http:
             port: *port
