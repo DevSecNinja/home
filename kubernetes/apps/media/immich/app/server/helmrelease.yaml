@@ -41,7 +41,7 @@ spec:
               app.kubernetes.io/name: *app
 
     controllers:
-      ${APP}:
+      main:
         annotations:
           reloader.stakater.com/auto: "true"
           configmap.reloader.stakater.com/reload: &configMap immich
@@ -91,7 +91,7 @@ spec:
     service:
       app:
         # TODO: [immich] Investigate on rename 'No enabled controller found with this identifier. (service: 'app', controller: 'immich-server')'
-        controller: "immich"
+        controller: main
         ports:
           http:
             port: *port
