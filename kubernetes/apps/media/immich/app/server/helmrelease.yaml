@@ -120,9 +120,6 @@ spec:
               - *host
     persistence:
       config:
-        enabled: true
-        type: emptyDir
-      config-file:
         type: configMap
         name: *configMap
         globalMounts:
