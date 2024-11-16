@@ -16,3 +16,4 @@ data:
   TRANSFORMERS_CACHE: /usr/src/app/.transformers_cache
   TYPESENSE_DATA_DIR: /config
   TYPESENSE_HOST: immich-typesense.media.svc.cluster.local.
+  TIMEZONE: ${TIMEZONE}
