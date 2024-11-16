@@ -57,7 +57,7 @@ spec:
               - secretRef:
                   name: *secret
         containers:
-          app:
+          main:
             image:
               repository: ghcr.io/immich-app/immich-server
               tag: v1.120.2@sha256:99f97cb61cd1b49c23fbee46a0ed067f171970518d8834c7e8b2dd3ac0d39c63
@@ -89,14 +89,14 @@ spec:
               startup:
                 enabled: false
     service:
-      app:
+      main:
         # TODO: [immich] Investigate on rename 'No enabled controller found with this identifier. (service: 'app', controller: 'immich-server')'
         controller: main
         ports:
           http:
             port: *port
     ingress:
-      app:
+      main:
         annotations:
           gethomepage.dev/enabled: "true"
           gethomepage.dev/group: Media
@@ -113,7 +113,7 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: app
+                  identifier: main
                   port: http
         tls:
           - hosts:
