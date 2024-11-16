@@ -106,7 +106,7 @@ spec:
           # gethomepage.dev/widget.key: "tobeadded"
           # gethomepage.dev/widget.version: "2"
         hosts:
-          - host: &host "photos.${SECRET_DOMAIN}"
+          - host: &host ${GATUS_SUBDOMAIN:-${APP}}.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
