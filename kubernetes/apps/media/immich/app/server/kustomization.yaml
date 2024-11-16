@@ -5,7 +5,7 @@ kind: Kustomization
 resources:
   - ./helmrelease.yaml
 configMapGenerator:
-  - name: immich-server-config
+  - name: immich
     options:
       labels:
         app.kubernetes.io/config-owner: immich
