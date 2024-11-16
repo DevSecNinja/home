@@ -133,6 +133,7 @@ spec:
         storageClass: openebs-hostpath
         accessMode: ReadWriteOnce
         nameOverride: immich-library
+        retain: true
         size: 10Gi
         globalMounts:
           - path: *mediaLocation
