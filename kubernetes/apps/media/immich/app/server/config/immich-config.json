@@ -61,13 +61,13 @@
     "enabled": true
   },
   "oauth": {
-    "autoLaunch": false,
+    "autoLaunch": true,
     "autoRegister": true,
     "buttonText": "Login with Microsoft Entra ID",
     "clientId": "${IMMICH_OAUTH_CLIENT_ID}",
     "clientSecret": "${IMMICH_OAUTH_CLIENT_SECRET}",
     "defaultStorageQuota": 0,
-    "enabled": false,
+    "enabled": true,
     "issuerUrl": "https://login.microsoftonline.com/${IMMICH_OAUTH_ENTRA_TENANT_ID}/v2.0",
     "mobileOverrideEnabled": false,
     "mobileRedirectUri": "",
@@ -78,7 +78,7 @@
     "storageQuotaClaim": "immich_quota"
   },
   "passwordLogin": {
-    "enabled": true
+    "enabled": false
   },
   "reverseGeocoding": {
     "enabled": true
