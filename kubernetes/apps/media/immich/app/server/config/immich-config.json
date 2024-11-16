@@ -61,7 +61,7 @@
     "enabled": true
   },
   "oauth": {
-    "autoLaunch": true,
+    "autoLaunch": false,
     "autoRegister": true,
     "buttonText": "Login with Microsoft Entra ID",
     "clientId": "${IMMICH_OAUTH_CLIENT_ID}",
