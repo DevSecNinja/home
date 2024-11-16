@@ -7,7 +7,7 @@
   image: bitwarden/self-host:2024.10.2-beta@sha256:f3e31a3f8e4d3998ca6409ec81ebe2dc0bcc44c51d9985fa6e285514aae96cd8
   url: bitwarden.$DOMAINNAME
 - container_name: bitwarden-db
-  image: mariadb:11.5.2@sha256:4a1de8fa2a929944373d7421105500ff6f889ce90dcb883fbb2fdb070e4d427e
+  image: mariadb:11.5.2@sha256:2d50fe0f77dac919396091e527e5e148a9de690e58f32875f113bef6506a17f5
 - container_name: bitwarden-db-backup
   image: tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
 - container_name: change-detection
@@ -47,7 +47,7 @@
 - container_name: gatus-db-backup
   image: tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
 - container_name: home-assistant
-  image: ghcr.io/home-assistant/home-assistant:beta@sha256:c7f8797b241c097df89145f9d8beca21c2ddc3bb3945dfb426bff654b11f4bfc
+  image: ghcr.io/home-assistant/home-assistant:beta@sha256:b447bbb6e77ee969d1aa2de1c29e11921180b4588361d5059b9ede77f55a8d7c
   url: home-assistant.$DOMAINNAME
 - container_name: homepage
   image: ghcr.io/gethomepage/homepage:v0.9.11@sha256:d41dca72f3a68d2c675eb232a448104af200096f05e2610ffbfdb16bc7f71410
@@ -87,7 +87,7 @@
 - container_name: nextcloud-cron
   image: nextcloud:30.0.2-apache@sha256:300c55b0ebe11991c61a346025791ea5ebd90a14cec4abc6048aab2f1baaf69c
 - container_name: nextcloud-db
-  image: mariadb:11.5.2@sha256:4a1de8fa2a929944373d7421105500ff6f889ce90dcb883fbb2fdb070e4d427e
+  image: mariadb:11.5.2@sha256:2d50fe0f77dac919396091e527e5e148a9de690e58f32875f113bef6506a17f5
 - container_name: nextcloud-db-backup
   image: tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
 - container_name: nextcloud-redis
@@ -139,7 +139,7 @@
   image: wallabag/wallabag:2.6.10@sha256:8854765d299d8e93f962d4be02ceb5703ed2ee24ec6c884f870bb7a18de41378
   url: wallabag.$DOMAINNAME
 - container_name: wallabag-db
-  image: mariadb:11.5.2@sha256:4a1de8fa2a929944373d7421105500ff6f889ce90dcb883fbb2fdb070e4d427e
+  image: mariadb:11.5.2@sha256:2d50fe0f77dac919396091e527e5e148a9de690e58f32875f113bef6506a17f5
 - container_name: wallabag-db-backup
   image: tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
 - container_name: wallabag-redis
