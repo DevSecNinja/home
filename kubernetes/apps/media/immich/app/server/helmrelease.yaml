@@ -102,7 +102,7 @@ spec:
           gethomepage.dev/group: Media
           gethomepage.dev/name: Immich
           gethomepage.dev/description: "Photo library and management"
-          gethomepage.dev/icon: *app
+          gethomepage.dev/icon: immich
           # TODO: [immich] Enable widget
           # gethomepage.dev/widget.type: immich
           # gethomepage.dev/widget.url: "http://photos.media.svc.cluster.local:2283"
