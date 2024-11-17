@@ -52,7 +52,7 @@ spec:
               repository: ghcr.io/kiwigrid/k8s-sidecar
               tag: 1.28.0@sha256:4166a019eeafd1f0fef4d867dc5f224f18d84ec8681dbb31f3ca258ecf07bcf2
             env:
-              FOLDER: /config
+              FOLDER: &configParentLocation /config
               LABEL: app.kubernetes.io/config-owner
               LABEL_VALUE: "immich"
               UNIQUE_FILENAMES: false
@@ -83,7 +83,7 @@ spec:
               LOG_LEVEL: log
               SERVER_PORT: &port 2283
               IMMICH_MEDIA_LOCATION: &mediaLocation /usr/src/app/upload
-              IMMICH_CONFIG_FILE: &configParentLocation /config
+              IMMICH_CONFIG_FILE: &configLocation /config/immich-config.json
             resources:
               requests:
                 cpu: 50m
@@ -107,7 +107,7 @@ spec:
           config-sync:
             image: *configSyncImage
             env:
-              FOLDER: /config
+              FOLDER: *configParentLocation
               LABEL: app.kubernetes.io/config-owner
               LABEL_VALUE: "immich"
               UNIQUE_FILENAMES: false
@@ -149,8 +149,9 @@ spec:
 
     persistence:
       config:
-        enabled: true
-        type: emptyDir
+        storageClass: openebs-hostpath
+        accessMode: ReadWriteOnce
+        size: 1Gi
         globalMounts:
           - path: *configParentLocation
 
