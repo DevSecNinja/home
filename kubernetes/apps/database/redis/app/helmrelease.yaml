@@ -59,7 +59,7 @@ spec:
       persistence:
         enabled: false
     sentinel:
-      enabled: true
+      enabled: false
       masterSet: redis-master
       getMasterTimeout: 10
       startupProbe:
