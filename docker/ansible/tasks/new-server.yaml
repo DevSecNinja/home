@@ -1,4 +1,10 @@
 ---
+- name: Update apt repo and cache
+  ansible.builtin.apt:
+    autoclean: true
+    update_cache: true
+    cache_valid_time: 3600
+
 - name: Install minimal required packages
   ansible.builtin.apt:
     name: "{{ packages__base }}"
@@ -85,6 +91,12 @@
     exit 0
   args:
     executable: /bin/bash
+
+- name: Update apt repo and cache
+  ansible.builtin.apt:
+    autoclean: true
+    update_cache: true
+    cache_valid_time: 3600
 
 - name: Install additional packages
   ansible.builtin.apt:

@@ -15,6 +15,7 @@ generic__hostname_os_type: "{{ inventory_hostname_short[2] }}"
 #
 
 packages__base:
+  - "gnupg"
   - "cron"
   - "dnsutils"
   - "lsb-release"

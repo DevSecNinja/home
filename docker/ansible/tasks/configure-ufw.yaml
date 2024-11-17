@@ -55,11 +55,11 @@
     - { rule: 'allow', port: '51820', proto: 'udp', comment: 'Wireguard' }
   when: "'vpnservers' in group_names"
 
-- name: Configure ufw rules - production
+- name: Configure ufw rules - samba
   ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }} comment={{ item.comment }}
   with_items:
     - { rule: 'allow', port: '445', proto: 'tcp', comment: 'Samba' }
-  when: "'production' in group_names"
+  when: "'samba' in group_names"
 
 - name: Enable ufw logging
   ufw: logging=on
