@@ -3,6 +3,7 @@ name: Validate Docker image
 on:
   pull_request:
     types: [opened, synchronize, reopened]
+    paths: ["docker/**"]
 
 permissions:
   contents: read
