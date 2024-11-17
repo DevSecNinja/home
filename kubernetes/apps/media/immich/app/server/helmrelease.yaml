@@ -47,6 +47,22 @@ spec:
           configmap.reloader.stakater.com/reload: &configMap immich
           secret.reloader.stakater.com/reload: &secret immich
         initContainers:
+          init-config:
+            image: &configSyncImage
+              repository: ghcr.io/kiwigrid/k8s-sidecar
+              tag: 1.28.0@sha256:4166a019eeafd1f0fef4d867dc5f224f18d84ec8681dbb31f3ca258ecf07bcf2
+            env:
+              FOLDER: /config
+              LABEL: app.kubernetes.io/config-owner
+              LABEL_VALUE: "immich"
+              UNIQUE_FILENAMES: false
+              METHOD: LIST
+            resources: &configSyncResources
+              requests:
+                cpu: 10m
+                memory: 10Mi
+              limits:
+                memory: 128Mi
           init-db:
             image:
               repository: ghcr.io/onedr0p/postgres-init
@@ -67,7 +83,7 @@ spec:
               LOG_LEVEL: log
               SERVER_PORT: &port 2283
               IMMICH_MEDIA_LOCATION: &mediaLocation /usr/src/app/upload
-              IMMICH_CONFIG_FILE: &configLocation /config/immich-config.json
+              IMMICH_CONFIG_FILE: &configParentLocation /config
             resources:
               requests:
                 cpu: 50m
@@ -88,6 +104,15 @@ spec:
               readiness: *probes
               startup:
                 enabled: false
+          config-sync:
+            image: *configSyncImage
+            env:
+              FOLDER: /config
+              LABEL: app.kubernetes.io/config-owner
+              LABEL_VALUE: "immich"
+              UNIQUE_FILENAMES: false
+              METHOD: WATCH
+            resources: *configSyncResources
     service:
       main:
         # TODO: [immich] Investigate on rename 'No enabled controller found with this identifier. (service: 'app', controller: 'immich-server')'
@@ -120,12 +145,11 @@ spec:
               - *host
     persistence:
       config:
-        type: configMap
-        name: *configMap
+        enabled: true
+        type: emptyDir
         globalMounts:
-          - path: *configLocation
-            subPath: immich-config.json
-            readOnly: true
+          - path: *configParentLocation
+
       data:
         storageClass: openebs-hostpath
         accessMode: ReadWriteOnce
