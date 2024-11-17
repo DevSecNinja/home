@@ -51,6 +51,11 @@ spec:
             image: &configSyncImage
               repository: ghcr.io/kiwigrid/k8s-sidecar
               tag: 1.28.0@sha256:4166a019eeafd1f0fef4d867dc5f224f18d84ec8681dbb31f3ca258ecf07bcf2
+            envFrom: &envFrom
+              - configMapRef:
+                  name: *configMap
+              - secretRef:
+                  name: *secret
             env:
               FOLDER: &configParentLocation /config
               LABEL: app.kubernetes.io/config-owner
@@ -67,11 +72,8 @@ spec:
             image:
               repository: ghcr.io/onedr0p/postgres-init
               tag: 16
-            envFrom: &envFrom
-              - configMapRef:
-                  name: *configMap
-              - secretRef:
-                  name: *secret
+            envFrom: *envFrom
+
         containers:
           main:
             image:
@@ -106,6 +108,7 @@ spec:
                 enabled: false
           config-sync:
             image: *configSyncImage
+            envFrom: *envFrom
             env:
               FOLDER: *configParentLocation
               LABEL: app.kubernetes.io/config-owner

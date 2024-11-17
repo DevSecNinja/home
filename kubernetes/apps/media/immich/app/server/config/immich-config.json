@@ -65,7 +65,7 @@
     "autoRegister": true,
     "buttonText": "Login with Microsoft Entra ID",
     "clientId": "${IMMICH_OAUTH_CLIENT_ID}",
-    "clientSecret": "${SECRET_DOMAIN}",
+    "clientSecret": "${IMMICH_OAUTH_CLIENT_SECRET}",
     "defaultStorageQuota": 0,
     "enabled": false,
     "issuerUrl": "https://login.microsoftonline.com/${IMMICH_OAUTH_ENTRA_TENANT_ID}/v2.0",
