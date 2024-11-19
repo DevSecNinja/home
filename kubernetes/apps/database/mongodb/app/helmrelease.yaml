@@ -9,6 +9,9 @@ spec:
   interval: 5m
   chart:
     spec:
+      # Requirement: mongodb >5 requires AVX instructions which are not available on x86-64-v2-AES architecture
+      # Set Proxmox CPU architecture to 'host' or use x86-64-v3
+      # Check with lscpu | grep avx
       chart: mongodb
       version: 16.3.0
       sourceRef:
