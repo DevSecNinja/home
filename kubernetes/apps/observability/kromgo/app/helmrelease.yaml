@@ -82,9 +82,10 @@ spec:
             port: &port 8080
     ingress:
       app:
-        className: external
+        # className: external
+        className: internal
         annotations:
-          external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
+          # external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
           gethomepage.dev/enabled: "true"
           gethomepage.dev/description: "Safely expose metrics and health checks"
           gethomepage.dev/group: Observability
