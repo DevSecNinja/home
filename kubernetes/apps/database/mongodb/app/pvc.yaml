@@ -1,25 +1,11 @@
 ---
 apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: pv-mongodb
-  namespace: database
-spec:
-  storageClassName: openebs-hostpath
-  capacity:
-    storage: 1Gi
-  accessModes:
-    - ReadWriteOnce
----
-apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: pvc-mongodb
-  namespace: database
 spec:
   accessModes:
     - ReadWriteOnce
-  volumeName: pv-mongodb
   storageClassName: openebs-hostpath
   resources:
     requests:
