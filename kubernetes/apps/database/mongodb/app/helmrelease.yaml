@@ -26,8 +26,8 @@ spec:
   values:
     image:
       repository: bitnami/mongodb
-      tag: 7.0.15 # Version <= 7 required for Unifi
-      digest: "245fbb5504bdf6677d40b39c37aabc207b9a699faee5831181df18c340ba4948"
+      # Version <= 7 required for Unifi
+      tag: 7.0.15@sha256:245fbb5504bdf6677d40b39c37aabc207b9a699faee5831181df18c340ba4948
     persistence:
       existingClaim: pvc-mongodb
     auth:
