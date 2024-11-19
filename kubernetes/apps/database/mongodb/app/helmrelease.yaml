@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: mongodb
-      version: 15.1.1
+      version: 16.3.0
       sourceRef:
         kind: HelmRepository
         name: bitnami-charts
@@ -24,6 +24,10 @@ spec:
     remediation:
       retries: 5
   values:
+    image:
+      repository: bitnami/mongodb
+      tag: 7.0.15 # Version <= 7 required for Unifi
+      digest: "245fbb5504bdf6677d40b39c37aabc207b9a699faee5831181df18c340ba4948"
     persistence:
       existingClaim: pvc-mongodb
     auth:
