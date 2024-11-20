@@ -16,6 +16,7 @@ brew "kubeconform"
 brew "kubernetes-cli"
 brew "kustomize"
 brew "minijinja-cli"
+brew "mongosh" # Needed for the Unifi database
 brew "moreutils"
 brew "python3"
 brew "siderolabs/tap/talosctl"
