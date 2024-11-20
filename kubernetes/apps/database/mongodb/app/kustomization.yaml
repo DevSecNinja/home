@@ -5,5 +5,6 @@ kind: Kustomization
 namespace: database
 resources:
   - ./helmrelease.yaml
+  - ./secret.sops.yaml
   - ./pvc.yaml
   - ../../../../templates/gatus/internal-backend

@@ -35,7 +35,13 @@ spec:
       existingClaim: pvc-mongodb
     auth:
       # TODO: [mongodb] Enable authentication
-      enabled: false
+      enabled: true
+      rootUser: root
+      existingSecret: mongodb-auth-secret
+      usernames:
+        - unifi
+      databases:
+        - unifi
     service:
       externalTrafficPolicy: Cluster
       type: LoadBalancer
