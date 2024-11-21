@@ -51,6 +51,7 @@ spec:
           gethomepage.dev/group: "Observability"
           gethomepage.dev/icon: "https://raw.githubusercontent.com/FairwindsOps/goldilocks/master/pkg/dashboard/assets/images/favicon.ico"
           gethomepage.dev/description: "Kubernetes Resource Recommendations"
+          gethomepage.dev/app: *app
         hosts:
           - host: &host ${GATUS_SUBDOMAIN:-${APP}}.${SECRET_DOMAIN}
             paths:
