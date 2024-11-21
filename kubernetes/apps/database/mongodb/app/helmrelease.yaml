@@ -38,10 +38,6 @@ spec:
       enabled: true
       rootUser: root
       existingSecret: mongodb-auth-secret
-      usernames:
-        - unifi
-      databases:
-        - unifi
     service:
       externalTrafficPolicy: Cluster
       type: LoadBalancer
