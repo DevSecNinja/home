@@ -8,6 +8,7 @@ resources:
   - ./cloudnative-pg.yaml
   - ./coredns.yaml
   - ./external-dns.yaml
+  - ./fairwinds.yaml
   - ./grafana.yaml
   - ./ingress-nginx.yaml
   - ./jetstack.yaml
