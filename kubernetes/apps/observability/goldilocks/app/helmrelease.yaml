@@ -52,7 +52,7 @@ spec:
           gethomepage.dev/icon: "https://raw.githubusercontent.com/FairwindsOps/goldilocks/master/pkg/dashboard/assets/images/favicon.ico"
           gethomepage.dev/description: "Kubernetes Resource Recommendations"
         hosts:
-          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - host: &host ${GATUS_SUBDOMAIN:-${APP}}.${SECRET_DOMAIN}
             paths:
               - path: /
                 type: ImplementationSpecific
