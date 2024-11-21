@@ -63,6 +63,13 @@ spec:
       masterSet: redis-master
       persistence:
         enabled: false
+    resources:
+      requests:
+        cpu: 100m
+        memory: 768Mi
+      limits:
+        cpu: null
+        memory: 768Mi
     metrics:
       enabled: true
       serviceMonitor:
