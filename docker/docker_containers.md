@@ -222,7 +222,7 @@
 
 **container_name:** home-assistant
 
-**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:b447bbb6e77ee969d1aa2de1c29e11921180b4588361d5059b9ede77f55a8d7c
+**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:cb7b20244ff99508adeaa4d2970bdae5b72e55f390ab0e164985867ace263c85
 
 **url:** home-assistant.$DOMAINNAME
 
@@ -372,7 +372,7 @@
 
 **container_name:** nextcloud
 
-**image:** nextcloud:30.0.2-apache@sha256:300c55b0ebe11991c61a346025791ea5ebd90a14cec4abc6048aab2f1baaf69c
+**image:** nextcloud:30.0.2-apache@sha256:7e6bb7e7b3d5b5951613ac1f91f794c5ed6b0e2d61a9c1c9bc6083e689c844da
 
 **url:** cloud.$DOMAINNAME
 
@@ -380,7 +380,7 @@
 
 **container_name:** nextcloud-cron
 
-**image:** nextcloud:30.0.2-apache@sha256:300c55b0ebe11991c61a346025791ea5ebd90a14cec4abc6048aab2f1baaf69c
+**image:** nextcloud:30.0.2-apache@sha256:7e6bb7e7b3d5b5951613ac1f91f794c5ed6b0e2d61a9c1c9bc6083e689c844da
 
 ### Service: nextcloud-db
 
@@ -554,7 +554,7 @@
 
 **container_name:** phpmyadmin
 
-**image:** phpmyadmin:5.2.1-apache@sha256:4c1653fac64f6562f52c718c366ebcd2f0537585f70cda0014399d47bf920b5f
+**image:** phpmyadmin:5.2.1-apache@sha256:361f1188ec5ad345feade293277261b96b17f881e24b0f9d3843a5a2acf414c8
 
 **url:** phpmyadmin.$DOMAINNAME
 
@@ -688,7 +688,7 @@
 
 **container_name:** vault
 
-**image:** hashicorp/vault:1.18@sha256:3580fa352195aa7e76449cb8fadeef6d2f90a454c38982d30cf094e9013be786
+**image:** hashicorp/vault:1.18@sha256:2090eb7ac7a4bdef802f685698bd4dc0740de683affe8ff7df55f4fc77077ba7
 
 **url:** vault.$DOMAINNAME`) && PathPrefix(`/v1
 
