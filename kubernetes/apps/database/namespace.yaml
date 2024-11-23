@@ -4,5 +4,6 @@ kind: Namespace
 metadata:
   name: database
   labels:
-    goldilocks.fairwinds.com/enabled: true
+    # TODO: [flux] Applying labels via flux doesn't work
+    # goldilocks.fairwinds.com/enabled: true
     kustomize.toolkit.fluxcd.io/prune: disabled
