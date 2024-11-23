@@ -64,12 +64,13 @@ spec:
       persistence:
         enabled: false
     resources:
+      # 23-11-2024 - Goldilocks Burstable QoS
       requests:
-        cpu: 100m
-        memory: 768Mi
+        cpu: 10m
+        memory: 35M
       limits:
-        cpu: null
-        memory: 768Mi
+        cpu: 16m
+        memory: 36M
     metrics:
       enabled: true
       serviceMonitor:
