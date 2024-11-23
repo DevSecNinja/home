@@ -88,11 +88,13 @@ spec:
                   periodSeconds: 10
 
             resources:
+              # 23-11-2024 - Goldilocks Burstable QoS
               requests:
-                cpu: 100m
-                memory: 250M
+                cpu: 15m
+                memory: 105M
               limits:
-                memory: 1G
+                cpu: 16m
+                memory: 105M
 
     service:
       app:
