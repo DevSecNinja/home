@@ -45,7 +45,7 @@ spec:
       enabled: true
       service:
         type: LoadBalancer
-    resourcesPreset: "nano"
+    resourcesPreset: "none"
     # resources:
     #   # 23-11-2024 - Goldilocks Burstable QoS
     #   requests:
