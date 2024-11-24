@@ -27,6 +27,9 @@ spec:
     controllers:
       ${APP}:
         strategy: RollingUpdate
+        rollingUpdate:
+          maxUnavailable: 0
+          maxSurge: 25%
         annotations:
           # Since we don't link the config map here but use k8s-sidecar,
           # we have to tell stakater the config map it needs to monitor
