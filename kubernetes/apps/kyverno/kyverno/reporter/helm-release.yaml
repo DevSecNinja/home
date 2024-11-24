@@ -41,7 +41,7 @@ spec:
           nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_DOMAIN}/oauth2/auth/oauth2/start?rd=$scheme://$host$request_uri"
           ##
           gethomepage.dev/enabled: "true"
-          gethomepage.dev/name: "Kyberno Policy Reporter"
+          gethomepage.dev/name: "Kyverno Policy Reporter"
           gethomepage.dev/group: "Observability"
           gethomepage.dev/icon: "https://kyverno.github.io/policy-reporter/favicon.ico"
           gethomepage.dev/description: "Policy Reporter"
