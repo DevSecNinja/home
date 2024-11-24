@@ -3,8 +3,9 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: datree-webhook
+  name: kyverno
   namespace: flux-system
 spec:
-  interval: 1h
-  url: https://datreeio.github.io/admission-webhook-datree
+  type: oci
+  interval: 5m
+  url: oci://ghcr.io/kyverno/charts
