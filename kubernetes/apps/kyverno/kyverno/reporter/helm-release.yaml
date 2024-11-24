@@ -8,7 +8,7 @@ spec:
   interval: 30m
   chart:
     spec:
-      chart: policy-reporter
+      chart: &chart policy-reporter
       version: 3.0.0-rc.9
       sourceRef:
         kind: HelmRepository
@@ -45,7 +45,12 @@ spec:
           gethomepage.dev/group: "Observability"
           gethomepage.dev/icon: "https://kyverno.github.io/policy-reporter/favicon.ico"
           gethomepage.dev/description: "Policy Reporter"
-          gethomepage.dev/app: *app
+          gethomepage.dev/app: *chart
+          gethomepage.dev/podSelector: >-
+            app.kubernetes.io/instance in (
+                kyverno,
+                kyverno-reporter
+            )
         hosts:
           - host: &host ${GATUS_SUBDOMAIN:-${APP}}.${SECRET_DOMAIN}
             paths:
