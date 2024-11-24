@@ -50,7 +50,7 @@
 
 **container_name:** bitwarden
 
-**image:** bitwarden/self-host:2024.10.2-beta@sha256:f3e31a3f8e4d3998ca6409ec81ebe2dc0bcc44c51d9985fa6e285514aae96cd8
+**image:** bitwarden/self-host:2024.11.0-beta@sha256:18053c106ce1e9fef963843760b9bbe0d76cc47325f5e69cd2b4e15893a827b3
 
 **url:** bitwarden.$DOMAINNAME
 
@@ -58,7 +58,7 @@
 
 **container_name:** bitwarden-db
 
-**image:** mariadb:11.5.2@sha256:2d50fe0f77dac919396091e527e5e148a9de690e58f32875f113bef6506a17f5
+**image:** mariadb:11.6.2@sha256:0a620383fe05d20b3cc7510ebccc6749f83f1b0f97f3030d10dd2fa199371f07
 
 ### Service: bitwarden-db-backup
 
@@ -128,7 +128,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v8.7.4@sha256:0723b35ef122167253ffea91ab8cb0b188455a7f39b713699d7aa8dcde80e2c3
+**image:** amir20/dozzle:v8.8.1@sha256:f3942ddd88f45648708dc5595b83a2d9757194ac0e80cc25944f031e02ac03bf
 
 **url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -190,7 +190,7 @@
 
 **container_name:** gatus-db
 
-**image:** docker.io/library/postgres:16.4-alpine@sha256:5660c2cbfea50c7a9127d17dc4e48543eedd3d7a41a595a2dfa572471e37e64c
+**image:** docker.io/library/postgres:16.6-alpine@sha256:52bba373df3c13594014b5e9ccc9f3c2cdb2221d50db1a91ec64570819f18aba
 
 ### Service: gatus-db-backup
 
@@ -232,7 +232,7 @@
 
 **container_name:** homepage
 
-**image:** ghcr.io/gethomepage/homepage:v0.9.12@sha256:31820dab8e3f830f8a88c3ef1b3a1d103b899f2b8f2f51879d960d0db164a573
+**image:** ghcr.io/gethomepage/homepage:v0.9.13@sha256:1504b26bd82523e68adbae8c5a908d1633d02c68c65b62d084d81a6866552db6
 
 **url:** homepage-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -256,7 +256,7 @@
 
 **container_name:** hoppscotch-db
 
-**image:** docker.io/library/postgres:16.4-alpine@sha256:5660c2cbfea50c7a9127d17dc4e48543eedd3d7a41a595a2dfa572471e37e64c
+**image:** docker.io/library/postgres:16.6-alpine@sha256:52bba373df3c13594014b5e9ccc9f3c2cdb2221d50db1a91ec64570819f18aba
 
 ### Service: hoppscotch-db-backup
 
@@ -316,7 +316,7 @@
 
 **container_name:** linkding-db
 
-**image:** docker.io/library/postgres:16.4-alpine@sha256:5660c2cbfea50c7a9127d17dc4e48543eedd3d7a41a595a2dfa572471e37e64c
+**image:** docker.io/library/postgres:16.6-alpine@sha256:52bba373df3c13594014b5e9ccc9f3c2cdb2221d50db1a91ec64570819f18aba
 
 ### Service: linkding-db-backup
 
@@ -330,7 +330,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:v1.29.6@sha256:afebfaaeb516f502e64b21019531525aca58f28a777c95463c297b2ec1f177b2
+**image:** lobehub/lobe-chat:v1.32.8@sha256:73063b9055f72cc0c64a240b8e77ccf807446437761cd00edbf820fb782bdd12
 
 **url:** chat.$DOMAINNAME
 
@@ -358,7 +358,7 @@
 
 **container_name:** n8n-db
 
-**image:** docker.io/library/postgres:16.4-alpine@sha256:5660c2cbfea50c7a9127d17dc4e48543eedd3d7a41a595a2dfa572471e37e64c
+**image:** docker.io/library/postgres:16.6-alpine@sha256:52bba373df3c13594014b5e9ccc9f3c2cdb2221d50db1a91ec64570819f18aba
 
 ### Service: n8n-db-backup
 
@@ -386,7 +386,7 @@
 
 **container_name:** nextcloud-db
 
-**image:** mariadb:11.5.2@sha256:2d50fe0f77dac919396091e527e5e148a9de690e58f32875f113bef6506a17f5
+**image:** mariadb:11.6.2@sha256:0a620383fe05d20b3cc7510ebccc6749f83f1b0f97f3030d10dd2fa199371f07
 
 ### Service: nextcloud-db-backup
 
@@ -454,7 +454,7 @@
 
 **container_name:** outline-db
 
-**image:** docker.io/library/postgres:16.4-alpine@sha256:5660c2cbfea50c7a9127d17dc4e48543eedd3d7a41a595a2dfa572471e37e64c
+**image:** docker.io/library/postgres:16.6-alpine@sha256:52bba373df3c13594014b5e9ccc9f3c2cdb2221d50db1a91ec64570819f18aba
 
 ### Service: outline-db-backup
 
@@ -478,7 +478,7 @@
 
 **container_name:** paperless-db
 
-**image:** docker.io/library/postgres:16.4-alpine@sha256:5660c2cbfea50c7a9127d17dc4e48543eedd3d7a41a595a2dfa572471e37e64c
+**image:** docker.io/library/postgres:16.6-alpine@sha256:52bba373df3c13594014b5e9ccc9f3c2cdb2221d50db1a91ec64570819f18aba
 
 ### Service: paperless-db-backup
 
@@ -490,7 +490,7 @@
 
 **container_name:** paperless-gotenberg
 
-**image:** docker.io/gotenberg/gotenberg:8.13.0@sha256:1917c80269a30d53979f8354bce6aabb8a2a62a38f727362c394edfbceaa7640
+**image:** docker.io/gotenberg/gotenberg:8.14.1@sha256:c81f625afc869ba10819622f7e7d6d76708b2a32645b3fb74fbee610bf030465
 
 ### Service: paperless-redis
 
@@ -732,7 +732,7 @@
 
 **container_name:** wallabag-db
 
-**image:** mariadb:11.5.2@sha256:2d50fe0f77dac919396091e527e5e148a9de690e58f32875f113bef6506a17f5
+**image:** mariadb:11.6.2@sha256:0a620383fe05d20b3cc7510ebccc6749f83f1b0f97f3030d10dd2fa199371f07
 
 ### Service: wallabag-db-backup
 
