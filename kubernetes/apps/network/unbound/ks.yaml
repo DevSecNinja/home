@@ -19,6 +19,10 @@ spec:
       kind: HelmRelease
       name: *app
       namespace: network
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: *app
+      namespace: network
   wait: true
   interval: 30m
   retryInterval: 1m
