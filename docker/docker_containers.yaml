@@ -27,7 +27,7 @@
   image: amir20/dozzle:v8.7.4@sha256:0723b35ef122167253ffea91ab8cb0b188455a7f39b713699d7aa8dcde80e2c3
   url: dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: dozzle-docker-proxy
-  image: lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:792bdde50356861db095884bb914f2e7004a851d92301a0c7150ea174be26864
+  image: lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:d6d936c98bd7ab4f643ace8c548293d6cd511f0692471e1e9bfb5e144e63627a
 - container_name: drawio
   image: jgraph/drawio:24.7.17@sha256:3e14dbd7818bb2222ef93d920809771dbbdc1bf8e1d8794c99314ad9a922eeb6
   url: draw.$DOMAINNAME
@@ -53,7 +53,7 @@
   image: ghcr.io/gethomepage/homepage:v0.9.12@sha256:31820dab8e3f830f8a88c3ef1b3a1d103b899f2b8f2f51879d960d0db164a573
   url: homepage-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: homepage-docker-proxy
-  image: lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:792bdde50356861db095884bb914f2e7004a851d92301a0c7150ea174be26864
+  image: lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:d6d936c98bd7ab4f643ace8c548293d6cd511f0692471e1e9bfb5e144e63627a
 - container_name: hoppscotch
   image: hoppscotch/hoppscotch:2024.10.1@sha256:87197b41262f8c23a57136d3848954d244d7d716a189c05bc4b9738c09bee535
   url: api-tester.$DOMAINNAME
@@ -115,13 +115,13 @@
   image: phpmyadmin:5.2.1-apache@sha256:361f1188ec5ad345feade293277261b96b17f881e24b0f9d3843a5a2acf414c8
   url: phpmyadmin.$DOMAINNAME
 - container_name: plex
-  image: lscr.io/linuxserver/plex:version-1.41.1.9057-af5eaea7a@sha256:8e4e0c2348eed53aed2ee7136dc58b733d5edd50dd0e65eeb2dc42eeb978bb0f
+  image: lscr.io/linuxserver/plex:version-1.41.1.9057-af5eaea7a@sha256:25fea67a8ed67ed0e1d89d3cbe0538a7d12dfd984f987f33abc5a66ac3cb641b
   url: plex-noauth.$DOMAINNAME
 - container_name: portainer
   image: portainer/portainer-ce:2.23.0-alpine@sha256:97342cf8a821d64d59880bdede8f45ea9c869fea702dd56128a67d552dc632ab
   url: portainer-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: portainer-docker-proxy
-  image: lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:792bdde50356861db095884bb914f2e7004a851d92301a0c7150ea174be26864
+  image: lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:d6d936c98bd7ab4f643ace8c548293d6cd511f0692471e1e9bfb5e144e63627a
 - container_name: traefik-forward-auth
   image: ghcr.io/italypaleale/traefik-forward-auth:3.1.5@sha256:fc717ff42f367f5bc5f0101880cd488d46acd56c7fd3a6094c78a414e58c183d
   url: auth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
