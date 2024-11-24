@@ -26,6 +26,7 @@ spec:
   values:
     controllers:
       ${APP}:
+        strategy: RollingUpdate
         annotations:
           # Since we don't link the config map here but use k8s-sidecar,
           # we have to tell stakater the config map it needs to monitor
