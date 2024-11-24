@@ -112,7 +112,7 @@ services:
       - "traefik.http.routers.paperless-ngx-noauth-rtr.service=paperless-ngx"
 
   paperless-gotenberg:
-    image: docker.io/gotenberg/gotenberg:8.13.0@sha256:1917c80269a30d53979f8354bce6aabb8a2a62a38f727362c394edfbceaa7640
+    image: docker.io/gotenberg/gotenberg:8.14.1@sha256:c81f625afc869ba10819622f7e7d6d76708b2a32645b3fb74fbee610bf030465
     container_name: paperless-gotenberg
     restart: always
     security_opt:
