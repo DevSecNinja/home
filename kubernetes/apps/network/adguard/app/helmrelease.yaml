@@ -65,13 +65,19 @@ spec:
               tag: v0.107.54@sha256:ec59d9d8d083b74620f827879bee7ad88621f96bc0c4347c84c176ffa349484c
             env:
               TZ: ${TIMEZONE}
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: false
+                type: TCP
+              readiness: *probes
             resources:
               requests:
                 cpu: 10m
                 memory: 256M
               limits:
                 memory: 512M
-            # TODO: [adguard] Add probes & service monitors
+            # TODO: [adguard] Add service monitors
           config-sync:
             image: *configSyncImage
             env:
