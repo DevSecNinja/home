@@ -564,7 +564,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.41.1.9057-af5eaea7a@sha256:25fea67a8ed67ed0e1d89d3cbe0538a7d12dfd984f987f33abc5a66ac3cb641b
+**image:** lscr.io/linuxserver/plex:version-1.41.2.9200-c6bbc1b53@sha256:a3a3a850a64fb747c59f85dbc19b157781c3b9c921a83799127894b0ebdf3a68
 
 **url:** plex-noauth.$DOMAINNAME
 
