@@ -5,4 +5,5 @@ kind: Kustomization
 resources:
   - ./baseline-latest.yaml
   - ./deny-ingress-implementationspecific.yaml
+  - ./require-image-checksum.yaml
   - ./require-probes.yaml
