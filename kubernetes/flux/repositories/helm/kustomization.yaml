@@ -15,6 +15,7 @@ resources:
   - ./k8s-gateway.yaml
   - ./kubernetes-dashboard.yaml
   - ./kyverno.yaml
+  - ./kyverno-reporter.yaml
   - ./metrics-server.yaml
   - ./openebs.yaml
   - ./postfinance.yaml
