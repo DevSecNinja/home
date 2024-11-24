@@ -72,7 +72,7 @@
 - container_name: linkding-db-backup
   image: tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
 - container_name: lobe-chat
-  image: lobehub/lobe-chat:v1.32.8@sha256:73063b9055f72cc0c64a240b8e77ccf807446437761cd00edbf820fb782bdd12
+  image: lobehub/lobe-chat:v1.32.9@sha256:90ac64210b0194d87c65e8c7cd8fd957bf8749f5fba09f2699c5f9ed8299d79c
   url: chat.$DOMAINNAME
 - container_name: n8n
   image: n8nio/n8n:1.67.1@sha256:ee4ef2c8a4439ca01efe60d7c56cd678facdce2b411a1e338bd446e6deb8e061
