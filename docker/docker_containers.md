@@ -350,7 +350,7 @@
 
 **container_name:** n8n
 
-**image:** n8nio/n8n:1.67.1@sha256:ee4ef2c8a4439ca01efe60d7c56cd678facdce2b411a1e338bd446e6deb8e061
+**image:** n8nio/n8n:1.69.2@sha256:0adfff289ee1d4cc64644e909a140d620ec0f7d645fa0bc0852c369afadbe0e6
 
 **url:** n8n.$DOMAINNAME
 
