@@ -130,15 +130,6 @@
 - container_name: vault
   image: hashicorp/vault:1.18@sha256:2090eb7ac7a4bdef802f685698bd4dc0740de683affe8ff7df55f4fc77077ba7
   url: vault.$DOMAINNAME`) && PathPrefix(`/v1
-- container_name: wallabag
-  image: wallabag/wallabag:2.6.10@sha256:8854765d299d8e93f962d4be02ceb5703ed2ee24ec6c884f870bb7a18de41378
-  url: wallabag.$DOMAINNAME
-- container_name: wallabag-db
-  image: mariadb:11.6.2@sha256:0a620383fe05d20b3cc7510ebccc6749f83f1b0f97f3030d10dd2fa199371f07
-- container_name: wallabag-db-backup
-  image: tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
-- container_name: wallabag-redis
-  image: redis:alpine3.19@sha256:892b41c092a599f76c30b48e9dcfb185ce8cea3560970b1c4f2745c89bb34344
 - container_name: whoogle
   image: benbusby/whoogle-search:latest@sha256:60e071aa7c8b8d486c9bca773e26688744ca22cfdb61f58fa6a7f41fc50cd848
   url: search.$DOMAINNAME

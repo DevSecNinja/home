@@ -724,29 +724,35 @@
 
 ### Service: wallabag
 
+> :warning: **Deprecation Notice:** Replaced by: <none>
+
 **container_name:** wallabag
 
-**image:** wallabag/wallabag:2.6.10@sha256:8854765d299d8e93f962d4be02ceb5703ed2ee24ec6c884f870bb7a18de41378
-
-**url:** wallabag.$DOMAINNAME
+**image:** wallabag/wallabag
 
 ### Service: wallabag-db
 
+> :warning: **Deprecation Notice:** Replaced by: <none>
+
 **container_name:** wallabag-db
 
-**image:** mariadb:11.6.2@sha256:0a620383fe05d20b3cc7510ebccc6749f83f1b0f97f3030d10dd2fa199371f07
+**image:** mariadb
 
 ### Service: wallabag-db-backup
 
+> :warning: **Deprecation Notice:** Replaced by: <none>
+
 **container_name:** wallabag-db-backup
 
-**image:** tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
+**image:** tiredofit/db-backup
 
 ### Service: wallabag-redis
 
+> :warning: **Deprecation Notice:** Replaced by: <none>
+
 **container_name:** wallabag-redis
 
-**image:** redis:alpine3.19@sha256:892b41c092a599f76c30b48e9dcfb185ce8cea3560970b1c4f2745c89bb34344
+**image:** redis
 
 ## docker/ansible/templates/compose-modules/watchtower.yml
 
