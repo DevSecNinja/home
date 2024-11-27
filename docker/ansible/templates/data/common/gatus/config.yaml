@@ -205,9 +205,9 @@ endpoints:
   #   <<: *defaults
   #   url: "https://vikunja.${DOMAINNAME}"
 
-  - name: Wallabag - HTTP
-    <<: *defaults
-    url: "https://wallabag.${DOMAINNAME}"
+  # - name: Wallabag - HTTP
+  #   <<: *defaults
+  #   url: "https://wallabag.${DOMAINNAME}"
 
   # - name: Wireguard - HTTP
   #   <<: *defaults
