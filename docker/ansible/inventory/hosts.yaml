@@ -13,8 +13,6 @@ samba:
   children:
     production:
       hosts:
-        svlsmb.PRODUCTION:
-          ansible_user: "jean-paul"
         svlprod.PRODUCTION:
           ansible_user: "jean-paul"
 
