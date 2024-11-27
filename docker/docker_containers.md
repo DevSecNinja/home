@@ -572,17 +572,19 @@
 
 ### Service: portainer
 
+> :warning: **Deprecation Notice:** Replaced by: using the CLI
+
 **container_name:** portainer
 
-**image:** portainer/portainer-ce:2.23.0-alpine@sha256:97342cf8a821d64d59880bdede8f45ea9c869fea702dd56128a67d552dc632ab
-
-**url:** portainer-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
+**image:** portainer/portainer-ce
 
 ### Service: portainer-docker-proxy
 
+> :warning: **Deprecation Notice:** Replaced by: using the CLI
+
 **container_name:** portainer-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:d6d936c98bd7ab4f643ace8c548293d6cd511f0692471e1e9bfb5e144e63627a
+**image:** lscr.io/linuxserver/socket-proxy
 
 ## docker/ansible/templates/compose-modules/prometheus.yml
 
