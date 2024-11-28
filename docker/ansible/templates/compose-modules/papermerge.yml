@@ -1,8 +1,15 @@
+#
+#### DEPRECATION NOTICE
+## This compose module is no longer in use
+## Replaced by: None
+## Last used version: 3.2.0@sha256:11bd6e47622b295ee40f1e719c63235544121839a30e5083d959208931007b62
+#
+
 services:
   # TODO: [papermerge] Add advanced config after PoC
   # See: https://docs.papermerge.io/3.0/setup/docker-compose/
   papermerge:
-    image: papermerge/papermerge:3.2.0@sha256:11bd6e47622b295ee40f1e719c63235544121839a30e5083d959208931007b62
+    image: papermerge/papermerge
     container_name: papermerge
     restart: always
     security_opt:

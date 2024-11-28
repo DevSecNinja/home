@@ -133,9 +133,9 @@ endpoints:
   #   <<: *defaults
   #   url: "https://jupyter.${DOMAINNAME}"
 
-  - name: Linkding - HTTP
-    <<: *defaults
-    url: "https://linkding.${DOMAINNAME}"
+  # - name: Linkding - HTTP
+  #   <<: *defaults
+  #   url: "https://linkding.${DOMAINNAME}"
 
   - name: Lobe Chat - HTTP
     <<: *defaults
@@ -149,9 +149,9 @@ endpoints:
   #   <<: *defaults
   #   url: "https://paperless.${DOMAINNAME}"
 
-  - name: Papermerge - HTTP
-    <<: *defaults
-    url: "https://papermerge.${DOMAINNAME}"
+  # - name: Papermerge - HTTP
+  #   <<: *defaults
+  #   url: "https://papermerge.${DOMAINNAME}"
 
   - name: Photos - HTTP
     <<: *defaults
