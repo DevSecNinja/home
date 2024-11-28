@@ -11,11 +11,11 @@ include:
   - $DOCKERDIR/data/compose/gatus.yml
   # - $DOCKERDIR/data/compose/grafana.yml
   # - $DOCKERDIR/data/compose/influxdb.yml
-  - $DOCKERDIR/data/compose/phpmyadmin.yml
+  # - $DOCKERDIR/data/compose/phpmyadmin.yml
   # - $DOCKERDIR/data/compose/prometheus.yml
   # - $DOCKERDIR/data/compose/promtail.yml
   - $DOCKERDIR/data/compose/unifi.yml
-  - $DOCKERDIR/data/compose/vault.yml
+  # - $DOCKERDIR/data/compose/vault.yml
 {% endif %}
 {% if 'production' in group_names %}
   - $DOCKERDIR/data/compose/code-server.yml

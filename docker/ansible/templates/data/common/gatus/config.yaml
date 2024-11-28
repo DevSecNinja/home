@@ -115,11 +115,15 @@ endpoints:
 
   - name: Homepage MGMT - HTTP
     <<: *defaults
-    url: "https://homepage-mgmt.${DOMAINNAME}"
+    url: "https://apps-mgmt.${DOMAINNAME}"
 
   - name: Homepage PROD - HTTP
     <<: *defaults
-    url: "https://homepage-prod.${DOMAINNAME}"
+    url: "https://apps-prod.${DOMAINNAME}"
+
+  - name: Homepage PROD - EXT
+    <<: *defaults
+    url: "https://apps-ext.${DOMAINNAME}"
 
   - name: Hoppscotch - HTTP
     <<: *defaults
