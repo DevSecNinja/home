@@ -306,23 +306,27 @@
 
 ### Service: linkding
 
+> :warning: **Deprecation Notice:** Replaced by: None
+
 **container_name:** linkding
 
-**image:** sissbruecker/linkding:1.36.0-alpine@sha256:137dd201797c186419c92c32f0c42c61bdb85f60653932c96985a0e6995a4286
-
-**url:** linkding.$DOMAINNAME
+**image:** sissbruecker/linkding
 
 ### Service: linkding-db
 
+> :warning: **Deprecation Notice:** Replaced by: None
+
 **container_name:** linkding-db
 
-**image:** docker.io/library/postgres:16.6-alpine@sha256:52bba373df3c13594014b5e9ccc9f3c2cdb2221d50db1a91ec64570819f18aba
+**image:** docker.io/library/postgres
 
 ### Service: linkding-db-backup
 
+> :warning: **Deprecation Notice:** Replaced by: None
+
 **container_name:** linkding-db-backup
 
-**image:** tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
+**image:** tiredofit/db-backup
 
 ## docker/ansible/templates/compose-modules/lobe-chat.yml
 
@@ -516,11 +520,11 @@
 
 ### Service: papermerge
 
+> :warning: **Deprecation Notice:** Replaced by: None
+
 **container_name:** papermerge
 
-**image:** papermerge/papermerge:3.2.0@sha256:11bd6e47622b295ee40f1e719c63235544121839a30e5083d959208931007b62
-
-**url:** papermerge.$DOMAINNAME
+**image:** papermerge/papermerge
 
 ## docker/ansible/templates/compose-modules/photoprism.yml
 

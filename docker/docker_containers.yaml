@@ -64,13 +64,6 @@
 - container_name: it-tools
   image: ghcr.io/corentinth/it-tools:2023.12.21-5ed3693@sha256:4aaf67eab769afc9dac5614a15614537446e11150d53eab3be34ac9775a27e3a
   url: tools.$DOMAINNAME
-- container_name: linkding
-  image: sissbruecker/linkding:1.36.0-alpine@sha256:137dd201797c186419c92c32f0c42c61bdb85f60653932c96985a0e6995a4286
-  url: linkding.$DOMAINNAME
-- container_name: linkding-db
-  image: docker.io/library/postgres:16.6-alpine@sha256:52bba373df3c13594014b5e9ccc9f3c2cdb2221d50db1a91ec64570819f18aba
-- container_name: linkding-db-backup
-  image: tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
 - container_name: lobe-chat
   image: lobehub/lobe-chat:v1.32.9@sha256:90ac64210b0194d87c65e8c7cd8fd957bf8749f5fba09f2699c5f9ed8299d79c
   url: chat.$DOMAINNAME
@@ -108,9 +101,6 @@
 - container_name: paperless-web
   image: ghcr.io/paperless-ngx/paperless-ngx:2.13.5@sha256:199c67ed55bfb9d58bf90db2ee280880ae9ebc63413e54c73522f9c4ebdc7bad
   url: paperless.$DOMAINNAME
-- container_name: papermerge
-  image: papermerge/papermerge:3.2.0@sha256:11bd6e47622b295ee40f1e719c63235544121839a30e5083d959208931007b62
-  url: papermerge.$DOMAINNAME
 - container_name: phpmyadmin
   image: phpmyadmin:5.2.1-apache@sha256:361f1188ec5ad345feade293277261b96b17f881e24b0f9d3843a5a2acf414c8
   url: phpmyadmin.$DOMAINNAME
