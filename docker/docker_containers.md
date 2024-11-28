@@ -234,7 +234,7 @@
 
 **image:** ghcr.io/gethomepage/homepage:v0.9.13@sha256:1504b26bd82523e68adbae8c5a908d1633d02c68c65b62d084d81a6866552db6
 
-**url:** homepage-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
+**url:** apps-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
 ### Service: homepage-docker-proxy
 
