@@ -11,6 +11,7 @@ include:
   - $DOCKERDIR/data/compose/gatus.yml
   # - $DOCKERDIR/data/compose/grafana.yml
   # - $DOCKERDIR/data/compose/influxdb.yml
+  - $DOCKERDIR/data/compose/openspeedtest.yml
   # - $DOCKERDIR/data/compose/phpmyadmin.yml
   # - $DOCKERDIR/data/compose/prometheus.yml
   # - $DOCKERDIR/data/compose/promtail.yml
@@ -18,16 +19,14 @@ include:
   # - $DOCKERDIR/data/compose/vault.yml
 {% endif %}
 {% if 'production' in group_names %}
-  - $DOCKERDIR/data/compose/code-server.yml
-  - $DOCKERDIR/data/compose/home-assistant.yml
+  # - $DOCKERDIR/data/compose/code-server.yml
+  # - $DOCKERDIR/data/compose/home-assistant.yml
   # - $DOCKERDIR/data/compose/linkding.yml
-  - $DOCKERDIR/data/compose/n8n.yml
-  - $DOCKERDIR/data/compose/nextcloud.yml
-  - $DOCKERDIR/data/compose/openspeedtest.yml
+  # - $DOCKERDIR/data/compose/nextcloud.yml
   # - $DOCKERDIR/data/compose/paperless-ngx.yml
   # - $DOCKERDIR/data/compose/papermerge.yml
   # - $DOCKERDIR/data/compose/photoprism.yml
-  - $DOCKERDIR/data/compose/plex.yml
+  # - $DOCKERDIR/data/compose/plex.yml
   # - $DOCKERDIR/data/compose/vikunja.yml
   # - $DOCKERDIR/data/compose/wallabag.yml
 {% endif %}
@@ -54,6 +53,7 @@ include:
   - $DOCKERDIR/data/compose/hoppscotch.yml
   - $DOCKERDIR/data/compose/it-tools.yml
   - $DOCKERDIR/data/compose/lobe-chat.yml
+  - $DOCKERDIR/data/compose/n8n.yml
   - $DOCKERDIR/data/compose/whoogle.yml
 {% endif %}
 {% if 'vpnservers' in group_names %}
