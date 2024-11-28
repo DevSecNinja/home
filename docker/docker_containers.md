@@ -80,11 +80,11 @@
 
 ### Service: change-detection
 
+> :warning: **Deprecation Notice:** Replaced by: None
+
 **container_name:** change-detection
 
-**image:** ghcr.io/dgtlmoon/changedetection.io:0.47.06@sha256:6e9dcf4abc1cfb0b1eeba6b6ff52a4b6f790110d6cdc8b7942c6cecf34e56265
-
-**url:** change-detection.$DOMAINNAME
+**image:** ghcr.io/dgtlmoon/changedetection.io
 
 ## docker/ansible/templates/compose-modules/cloudflare-companion.yml
 
