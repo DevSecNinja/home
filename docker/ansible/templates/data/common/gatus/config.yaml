@@ -69,9 +69,9 @@ endpoints:
   #   <<: *defaults
   #   url: "https://bitwarden.${DOMAINNAME}"
 
-  - name: Change-Detection - HTTP
-    <<: *defaults
-    url: "https://change-detection.${DOMAINNAME}"
+  # - name: Change-Detection - HTTP
+  #   <<: *defaults
+  #   url: "https://change-detection.${DOMAINNAME}"
 
   - name: Cloud - HTTP
     <<: *defaults
