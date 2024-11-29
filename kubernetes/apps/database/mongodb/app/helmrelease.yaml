@@ -13,7 +13,7 @@ spec:
       # Set Proxmox CPU architecture to 'host' or use x86-64-v3
       # Check with lscpu | grep avx
       chart: mongodb
-      version: 16.3.0
+      version: 16.3.1
       sourceRef:
         kind: HelmRepository
         name: bitnami-charts
