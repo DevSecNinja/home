@@ -50,7 +50,7 @@
 
 **container_name:** bitwarden
 
-**image:** bitwarden/self-host:2024.11.0-beta@sha256:18053c106ce1e9fef963843760b9bbe0d76cc47325f5e69cd2b4e15893a827b3
+**image:** bitwarden/self-host:2024.11.1-beta@sha256:18053c106ce1e9fef963843760b9bbe0d76cc47325f5e69cd2b4e15893a827b3
 
 **url:** bitwarden.$DOMAINNAME
 
@@ -128,7 +128,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v8.8.1@sha256:f3942ddd88f45648708dc5595b83a2d9757194ac0e80cc25944f031e02ac03bf
+**image:** amir20/dozzle:v8.8.2@sha256:5e4a5d0e0e5136d5387af6c4345379655f1ca2249a6b136ba69bef516fc75312
 
 **url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -164,7 +164,7 @@
 
 **container_name:** excalidraw
 
-**image:** excalidraw/excalidraw:latest@sha256:4d5423c1d80f353458307324b169500df334856eccc2e39fc6fa13808a64e1c2
+**image:** excalidraw/excalidraw:latest@sha256:c6b7fc35e9e9cfb2b85e76081530223407b00157896b00a01f272b4085ffe4c9
 
 **url:** excalidraw.$DOMAINNAME
 
@@ -222,7 +222,7 @@
 
 **container_name:** home-assistant
 
-**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:cb7b20244ff99508adeaa4d2970bdae5b72e55f390ab0e164985867ace263c85
+**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:a80b3c73c9e4028c3f8a016cb005c700cd96bd23ce34bfea372562776d6c6b6d
 
 **url:** home-assistant.$DOMAINNAME
 
@@ -248,7 +248,7 @@
 
 **container_name:** hoppscotch
 
-**image:** hoppscotch/hoppscotch:2024.10.2@sha256:3ab82ce5c36b4cf8a8cb5d92a71d59a8ed188b1d2bfe11310e36750d1d547860
+**image:** hoppscotch/hoppscotch:2024.11.0@sha256:538fe6ded4b6d8e79d8dd0d1699ffb65686ac3ea9e6bca58eed8543475331e3e
 
 **url:** api-tester.$DOMAINNAME
 
@@ -334,7 +334,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:v1.32.9@sha256:90ac64210b0194d87c65e8c7cd8fd957bf8749f5fba09f2699c5f9ed8299d79c
+**image:** lobehub/lobe-chat:v1.34.5@sha256:e44587a5c0aae910f32a923a20d4e2251c0f96f4754cc89ebc227c7cde24df91
 
 **url:** chat.$DOMAINNAME
 
@@ -354,7 +354,7 @@
 
 **container_name:** n8n
 
-**image:** n8nio/n8n:1.69.2@sha256:0adfff289ee1d4cc64644e909a140d620ec0f7d645fa0bc0852c369afadbe0e6
+**image:** n8nio/n8n:1.70.1@sha256:6f9d7b46c1e7299a71aebdc31ae9928395fd2c2d8d9b459b1ae6f75c2b1f0d25
 
 **url:** n8n.$DOMAINNAME
 
