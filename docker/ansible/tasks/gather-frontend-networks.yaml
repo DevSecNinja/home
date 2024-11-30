@@ -1,0 +1,13 @@
+---
+- name: List all Docker networks using Docker CLI
+  ansible.builtin.shell: "docker network ls --format '{{ '{{' }}.Name{{ '}}' }}' | grep -E '.*-frontend$' || true"
+  register: cli_docker_networks
+  changed_when: false
+
+- name: Store frontend network names
+  set_fact:
+    frontend_networks: "{{ cli_docker_networks.stdout_lines }}"
+
+- name: Output frontend networks
+  debug:
+    msg: "Docker networks ending with '-frontend': {{ frontend_networks }}"

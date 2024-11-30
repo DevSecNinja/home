@@ -8,6 +8,7 @@ services:
     restart: always
     networks:
       - t2_proxy
+      - n8n-frontend
       - n8n-backend
     security_opt:
       - no-new-privileges=true
@@ -115,6 +116,9 @@ volumes:
   n8n_data:
 
 networks:
+  n8n-frontend:
+    name: n8n-frontend
+    driver: bridge
   n8n-backend:
     name: n8n-backend
     driver: bridge
