@@ -9,6 +9,11 @@ services:
       t2_proxy:
         ipv4_address: 192.168.101.200
       traefik-backend:
+      {% for network in frontend_networks +%}
+      # Dynamically added by Ansible
+      {{ network }}: {}
+      # End of Ansible
+      {% endfor +%}
     security_opt:
       - no-new-privileges=true
     ports:
