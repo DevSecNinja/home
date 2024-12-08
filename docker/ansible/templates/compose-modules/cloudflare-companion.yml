@@ -1,7 +1,7 @@
 services:
   cloudflare-companion:
     container_name: cloudflare-companion
-    image: tiredofit/traefik-cloudflare-companion:7.3.2@sha256:716a265a69f5f75ddbb089c19fe8e4b52cfd891f1dd426fe0e525a3ddf941ac8
+    image: tiredofit/traefik-cloudflare-companion:7.3.3@sha256:20bfbde87b5a06a8935f05f7ae384e10c6694c2e25595065e488a25571a803b3
     depends_on:
       - traefik
     # volumes:
