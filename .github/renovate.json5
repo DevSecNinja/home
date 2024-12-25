@@ -13,7 +13,7 @@
   "suppressNotifications": ["prEditedNotification", "prIgnoreNotification"],
   "rebaseWhen": "conflicted",
   "schedule": ["every weekend", "on Friday"],
-  "ignorePaths": ["**/*.sops.*", ".archive/**"],
+  "ignorePaths": ["**/*.sops.*", ".archive/**", "kubernetes/**"],
   "timezone": "Europe/Amsterdam",
   "flux": {
     "fileMatch": [
