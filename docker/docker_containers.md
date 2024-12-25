@@ -16,34 +16,6 @@
 
 **image:** mvance/unbound:1.22.0@sha256:76906da36d1806f3387338f15dcf8b357c51ce6897fb6450d6ce010460927e90
 
-## docker/ansible/templates/compose-modules/alertmanager.yml
-
-### Service: alertmanager
-
-> :warning: **Deprecation Notice:** Replaced by: Kubernetes cluster resource
-
-**container_name:** alertmanager
-
-**image:** prom/alertmanager
-
-## docker/ansible/templates/compose-modules/authelia.yml
-
-### Service: authelia
-
-> :warning: **Deprecation Notice:** Replaced by: Traefik Forward Auth with Entra ID authentication
-
-**container_name:** authelia
-
-**image:** authelia/authelia
-
-### Service: authelia-db-backup
-
-> :warning: **Deprecation Notice:** Replaced by: Traefik Forward Auth with Entra ID authentication
-
-**container_name:** authelia-db-backup
-
-**image:** tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
-
 ## docker/ansible/templates/compose-modules/bitwarden.yml
 
 ### Service: bitwarden
@@ -65,34 +37,6 @@
 **container_name:** bitwarden-db-backup
 
 **image:** tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
-
-## docker/ansible/templates/compose-modules/cadvisor.yml
-
-### Service: cadvisor
-
-> :warning: **Deprecation Notice:** Replaced by: Kubernetes cluster resource
-
-**container_name:** cadvisor
-
-**image:** gcr.io/cadvisor/cadvisor
-
-## docker/ansible/templates/compose-modules/change-detection.yml
-
-### Service: change-detection
-
-> :warning: **Deprecation Notice:** Replaced by: None
-
-**container_name:** change-detection
-
-**image:** ghcr.io/dgtlmoon/changedetection.io
-
-## docker/ansible/templates/compose-modules/cloudflare-companion.yml
-
-### Service: cloudflare-companion
-
-**container_name:** cloudflare-companion
-
-**image:** tiredofit/traefik-cloudflare-companion:7.3.2@sha256:716a265a69f5f75ddbb089c19fe8e4b52cfd891f1dd426fe0e525a3ddf941ac8
 
 ## docker/ansible/templates/compose-modules/cloudflare.yml
 
@@ -198,24 +142,6 @@
 
 **image:** tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
 
-## docker/ansible/templates/compose-modules/grafana.yml
-
-### Service: grafana
-
-> :warning: **Deprecation Notice:** Replaced by: Kubernetes cluster resource
-
-**container_name:** grafana
-
-**image:** grafana/grafana
-
-### Service: loki
-
-> :warning: **Deprecation Notice:** Replaced by: Kubernetes cluster resource
-
-**container_name:** loki
-
-**image:** grafana/loki
-
 ## docker/ansible/templates/compose-modules/home-assistant.yml
 
 ### Service: home-assistant
@@ -264,24 +190,6 @@
 
 **image:** tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
 
-## docker/ansible/templates/compose-modules/influxdb.yml
-
-### Service: influxdb
-
-> :warning: **Deprecation Notice:** Replaced by: Kubernetes cluster resource
-
-**container_name:** influxdb
-
-**image:** influxdb
-
-### Service: influxdb-backup
-
-> :warning: **Deprecation Notice:** Replaced by: Kubernetes cluster resource
-
-**container_name:** influxdb-backup
-
-**image:** tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
-
 ## docker/ansible/templates/compose-modules/it-tools.yml
 
 ### Service: it-tools
@@ -292,42 +200,6 @@
 
 **url:** tools.$DOMAINNAME
 
-## docker/ansible/templates/compose-modules/jupyter.yml
-
-### Service: jupyter
-
-> :warning: **Deprecation Notice:** Replaced by: nothing
-
-**container_name:** jupyter
-
-**image:** quay.io/jupyter/scipy-notebook
-
-## docker/ansible/templates/compose-modules/linkding.yml
-
-### Service: linkding
-
-> :warning: **Deprecation Notice:** Replaced by: None
-
-**container_name:** linkding
-
-**image:** sissbruecker/linkding
-
-### Service: linkding-db
-
-> :warning: **Deprecation Notice:** Replaced by: None
-
-**container_name:** linkding-db
-
-**image:** docker.io/library/postgres
-
-### Service: linkding-db-backup
-
-> :warning: **Deprecation Notice:** Replaced by: None
-
-**container_name:** linkding-db-backup
-
-**image:** tiredofit/db-backup
-
 ## docker/ansible/templates/compose-modules/lobe-chat.yml
 
 ### Service: lobe-chat
@@ -337,16 +209,6 @@
 **image:** lobehub/lobe-chat:v1.34.5@sha256:e44587a5c0aae910f32a923a20d4e2251c0f96f4754cc89ebc227c7cde24df91
 
 **url:** chat.$DOMAINNAME
-
-## docker/ansible/templates/compose-modules/mailrise.yml
-
-### Service: mailrise
-
-> :warning: **Deprecation Notice:** Replaced by: Kubernetes cluster resource
-
-**container_name:** mailrise
-
-**image:** yoryan/mailrise
 
 ## docker/ansible/templates/compose-modules/n8n.yml
 
@@ -404,34 +266,6 @@
 
 **image:** redis:alpine3.19@sha256:892b41c092a599f76c30b48e9dcfb185ce8cea3560970b1c4f2745c89bb34344
 
-## docker/ansible/templates/compose-modules/nodeexporter.yml
-
-### Service: nodeexporter
-
-> :warning: **Deprecation Notice:** Replaced by: Kubernetes cluster resource
-
-**container_name:** nodeexporter
-
-**image:** prom/node-exporter
-
-## docker/ansible/templates/compose-modules/oauth2-proxy.yml
-
-### Service: oauth2_proxy
-
-> :warning: **Deprecation Notice:** Replaced by: Traefik Forward Auth with Entra ID authentication
-
-**container_name:** oauth2-proxy
-
-**image:** bitnami/oauth2-proxy
-
-### Service: oauth2_proxy_redis
-
-> :warning: **Deprecation Notice:** Replaced by: Traefik Forward Auth with Entra ID authentication
-
-**container_name:** oauth2-proxy-redis
-
-**image:** redis:alpine3.19@sha256:892b41c092a599f76c30b48e9dcfb185ce8cea3560970b1c4f2745c89bb34344
-
 ## docker/ansible/templates/compose-modules/openspeedtest.yml
 
 ### Service: openspeedtest
@@ -441,126 +275,6 @@
 **image:** openspeedtest/latest:v2.0.5@sha256:bbddd8eda80cc4deb2a5702efd0acd826137650ba0bfcc6720f896c74bca02ee
 
 **url:** speedtest.$DOMAINNAME
-
-## docker/ansible/templates/compose-modules/outline.yml
-
-### Service: outline
-
-> :warning: **Deprecation Notice:** Replaced by: Kubernetes deployment
-
-**container_name:** outline
-
-**image:** outlinewiki/outline
-
-### Service: outline-db
-
-> :warning: **Deprecation Notice:** Replaced by: Kubernetes deployment
-
-**container_name:** outline-db
-
-**image:** docker.io/library/postgres:16.6-alpine@sha256:52bba373df3c13594014b5e9ccc9f3c2cdb2221d50db1a91ec64570819f18aba
-
-### Service: outline-db-backup
-
-> :warning: **Deprecation Notice:** Replaced by: Kubernetes deployment
-
-**container_name:** outline-db-backup
-
-**image:** tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
-
-### Service: outline-redis
-
-> :warning: **Deprecation Notice:** Replaced by: Kubernetes deployment
-
-**container_name:** outline-redis
-
-**image:** redis:alpine3.19@sha256:892b41c092a599f76c30b48e9dcfb185ce8cea3560970b1c4f2745c89bb34344
-
-## docker/ansible/templates/compose-modules/paperless-ngx.yml
-
-### Service: paperless-db
-
-> :warning: **Deprecation Notice:** Replaced by: None
-
-**container_name:** paperless-db
-
-**image:** docker.io/library/postgres
-
-### Service: paperless-db-backup
-
-> :warning: **Deprecation Notice:** Replaced by: None
-
-**container_name:** paperless-db-backup
-
-**image:** tiredofit/db-backup
-
-### Service: paperless-gotenberg
-
-> :warning: **Deprecation Notice:** Replaced by: None
-
-**container_name:** paperless-gotenberg
-
-**image:** docker.io/gotenberg/gotenberg
-
-### Service: paperless-redis
-
-> :warning: **Deprecation Notice:** Replaced by: None
-
-**container_name:** paperless-redis
-
-**image:** redis
-
-### Service: paperless-tika
-
-> :warning: **Deprecation Notice:** Replaced by: None
-
-**container_name:** paperless-tika
-
-**image:** ghcr.io/paperless-ngx/tika
-
-### Service: paperless-web
-
-> :warning: **Deprecation Notice:** Replaced by: None
-
-**container_name:** paperless-web
-
-**image:** ghcr.io/paperless-ngx/paperless-ngx
-
-## docker/ansible/templates/compose-modules/papermerge.yml
-
-### Service: papermerge
-
-> :warning: **Deprecation Notice:** Replaced by: None
-
-**container_name:** papermerge
-
-**image:** papermerge/papermerge
-
-## docker/ansible/templates/compose-modules/photoprism.yml
-
-### Service: photoprism
-
-> :warning: **Deprecation Notice:** Replaced by: Kubernetes deployment of Immich
-
-**container_name:** photoprism
-
-**image:** photoprism/photoprism
-
-### Service: photoprism-db
-
-> :warning: **Deprecation Notice:** Replaced by: Kubernetes deployment of Immich
-
-**container_name:** photoprism-db
-
-**image:** mariadb
-
-### Service: photoprism-db-backup
-
-> :warning: **Deprecation Notice:** Replaced by: Kubernetes deployment of Immich
-
-**container_name:** photoprism-db-backup
-
-**image:** tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
 
 ## docker/ansible/templates/compose-modules/phpmyadmin.yml
 
@@ -581,80 +295,6 @@
 **image:** lscr.io/linuxserver/plex:version-1.41.2.9200-c6bbc1b53@sha256:a3a3a850a64fb747c59f85dbc19b157781c3b9c921a83799127894b0ebdf3a68
 
 **url:** plex-noauth.$DOMAINNAME
-
-## docker/ansible/templates/compose-modules/portainer.yml
-
-### Service: portainer
-
-> :warning: **Deprecation Notice:** Replaced by: using the CLI
-
-**container_name:** portainer
-
-**image:** portainer/portainer-ce
-
-### Service: portainer-docker-proxy
-
-> :warning: **Deprecation Notice:** Replaced by: using the CLI
-
-**container_name:** portainer-docker-proxy
-
-**image:** lscr.io/linuxserver/socket-proxy
-
-## docker/ansible/templates/compose-modules/prometheus.yml
-
-### Service: prometheus
-
-> :warning: **Deprecation Notice:** Replaced by: Kubernetes cluster resource
-
-**container_name:** prometheus
-
-**image:** prom/prometheus
-
-### Service: pushgateway
-
-> :warning: **Deprecation Notice:** Replaced by: Kubernetes cluster resource
-
-**container_name:** pushgateway
-
-**image:** prom/pushgateway
-
-## docker/ansible/templates/compose-modules/promtail.yml
-
-### Service: promtail
-
-> :warning: **Deprecation Notice:** Replaced by: Kubernetes cluster resource
-
-**container_name:** promtail
-
-**image:** grafana/promtail
-
-### Service: promtail-docker-proxy
-
-> :warning: **Deprecation Notice:** Replaced by: Kubernetes cluster resource
-
-**container_name:** promtail-docker-proxy
-
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:d6d936c98bd7ab4f643ace8c548293d6cd511f0692471e1e9bfb5e144e63627a
-
-## docker/ansible/templates/compose-modules/samba.yml
-
-### Service: samba
-
-> :warning: **Deprecation Notice:** Replaced by: Samba on VM with Ansible role vladgh.samba
-
-**container_name:** samba
-
-**image:** dperson/samba
-
-## docker/ansible/templates/compose-modules/traefik-certs-dumper.yml
-
-### Service: traefik-certs-dumper
-
-> :warning: **Deprecation Notice:** Replaced by: none. Not needed anymore and was causing an extremely high CPU & I/O usage on Raspberry Pi (bug?)
-
-**container_name:** traefik-certs-dumper
-
-**image:** ldez/traefik-certs-dumper
 
 ## docker/ansible/templates/compose-modules/traefik-forward-auth.yml
 
@@ -687,96 +327,6 @@
 **container_name:** unifi-db-backup
 
 **image:** tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
-
-## docker/ansible/templates/compose-modules/uptime-kuma.yml
-
-### Service: uptime-kuma
-
-> :warning: **Deprecation Notice:** Replaced by: Gatus
-
-**container_name:** uptime-kuma
-
-**image:** louislam/uptime-kuma
-
-## docker/ansible/templates/compose-modules/vault.yml
-
-### Service: vault
-
-**container_name:** vault
-
-**image:** hashicorp/vault:1.18@sha256:2090eb7ac7a4bdef802f685698bd4dc0740de683affe8ff7df55f4fc77077ba7
-
-**url:** vault.$DOMAINNAME`) && PathPrefix(`/v1
-
-## docker/ansible/templates/compose-modules/vikunja.yml
-
-### Service: vikunja
-
-> :warning: **Deprecation Notice:** Replaced by: nothing
-
-**container_name:** vikunja
-
-**image:** vikunja/vikunja
-
-### Service: vikunja-db
-
-> :warning: **Deprecation Notice:** Replaced by: nothing
-
-**container_name:** vikunja-db
-
-**image:** mariadb
-
-### Service: vikunja-db-backup
-
-> :warning: **Deprecation Notice:** Replaced by: nothing
-
-**container_name:** vikunja-db-backup
-
-**image:** tiredofit/db-backup
-
-## docker/ansible/templates/compose-modules/wallabag.yml
-
-### Service: wallabag
-
-> :warning: **Deprecation Notice:** Replaced by: <none>
-
-**container_name:** wallabag
-
-**image:** wallabag/wallabag
-
-### Service: wallabag-db
-
-> :warning: **Deprecation Notice:** Replaced by: <none>
-
-**container_name:** wallabag-db
-
-**image:** mariadb
-
-### Service: wallabag-db-backup
-
-> :warning: **Deprecation Notice:** Replaced by: <none>
-
-**container_name:** wallabag-db-backup
-
-**image:** tiredofit/db-backup
-
-### Service: wallabag-redis
-
-> :warning: **Deprecation Notice:** Replaced by: <none>
-
-**container_name:** wallabag-redis
-
-**image:** redis
-
-## docker/ansible/templates/compose-modules/watchtower.yml
-
-### Service: watchtower
-
-> :warning: **Deprecation Notice:** Replaced by: Renovate Bot, GitHub Pull Requests and tags on the image
-
-**container_name:** watchtower
-
-**image:** containrrr/watchtower
 
 ## docker/ansible/templates/compose-modules/whoogle.yml
 
