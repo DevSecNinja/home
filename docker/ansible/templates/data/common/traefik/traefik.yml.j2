@@ -48,7 +48,6 @@ providers:
     # endpoint: "unix:///var/run/docker.sock"
     exposedByDefault: false
     defaultRule: Host(`{{ '{{' }} index .Labels "com.docker.compose.service"{{ '}}' }}.{{ generic__domain_name }}`)
-    network: t2_proxy
     swarmMode: false
   file:
     directory: "/rules"

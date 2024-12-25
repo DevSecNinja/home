@@ -20,7 +20,7 @@ services:
     # privileged: true
     # network_mode: host
     networks:
-      - t2_proxy
+      - home-assistant-frontend
     labels:
       # Homepage
       - homepage.group=Productivity
@@ -30,6 +30,7 @@ services:
       - homepage.description=Open source home automation platform
       # Traefik
       - "traefik.enable=true"
+      - "traefik.docker.network=home-assistant-frontend"
       ## Middlewares
       - "traefik.http.routers.home-assistant-rtr.middlewares=chain-auth@file"
       ## HTTP Services
@@ -40,3 +41,7 @@ services:
 
 volumes:
   home_assistant_data:
+
+networks:
+  home-assistant-frontend:
+    name: home-assistant-frontend

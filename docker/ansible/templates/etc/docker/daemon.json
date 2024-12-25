@@ -1,5 +1,6 @@
 {
   "log-driver": "journald",
+  "bridge": "none",
   "features": {
     "buildkit": true
   },

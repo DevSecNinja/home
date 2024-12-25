@@ -7,7 +7,7 @@ services:
       - homepage-docker-proxy
     restart: always
     networks:
-      - t2_proxy
+      - homepage-frontend
       - homepage-backend
     environment:
       # TODO: [Docker API] Enable Docker API so that Homepage doesn't need to run as root
@@ -24,6 +24,7 @@ services:
     labels:
       # Traefik
       - "traefik.enable=true"
+      - "traefik.docker.network=homepage-frontend"
       ## Middlewares
       - "traefik.http.routers.homepage-rtr.middlewares=chain-no-auth@file"
       ## HTTP Services
@@ -53,6 +54,7 @@ services:
       - /run
 
 networks:
+  homepage-frontend:
+    name: homepage-frontend
   homepage-backend:
     name: homepage-backend
-    driver: bridge

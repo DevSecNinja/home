@@ -6,13 +6,10 @@ services:
       - traefik-docker-proxy
     restart: always
     networks:
-      t2_proxy:
-        ipv4_address: 192.168.101.200
       traefik-backend:
       {% for network in frontend_networks +%}
       # Dynamically added by Ansible
       {{ network }}: {}
-      # End of Ansible
       {% endfor +%}
     security_opt:
       - no-new-privileges=true
@@ -57,8 +54,8 @@ services:
       - homepage.href=https://traefik-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
       - homepage.description=Application Proxy
       ## Widget
-      - homepage.widget.type=traefik
-      - homepage.widget.url=https://traefik:8080
+      # - homepage.widget.type=traefik
+      # - homepage.widget.url=https://traefik:8080
       # Traefik
       - "traefik.enable=true"
       ## Middlewares
@@ -94,13 +91,6 @@ services:
       - /run
 
 networks:
-  t2_proxy:
-    name: t2_proxy
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 192.168.101.0/24
-
   traefik-backend:
     name: traefik-backend
     driver: bridge

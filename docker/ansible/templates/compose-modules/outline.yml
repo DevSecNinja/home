@@ -35,7 +35,7 @@ services:
       - DATABASE_URL=postgresql://outline:${OUTLINE_DB_PASSWORD}@outline-db:5432/outline?connect_timeout=300
       - PGSSLMODE=disable
     networks:
-      - t2_proxy
+      - outline-frontend
       - outline-backend
     labels:
       # Homepage
@@ -46,6 +46,7 @@ services:
       - homepage.description=Documentation
       # Traefik
       - "traefik.enable=true"
+      - "traefik.docker.network=outline-frontend"
       ## Middlewares
       - "traefik.http.routers.outline-rtr.middlewares=chain-auth@file"
       - "traefik.http.routers.outline-rtr.rule=Host(`docs.$DOMAINNAME`)"
@@ -149,6 +150,7 @@ volumes:
   outline_db_data:
 
 networks:
+  outline-frontend:
+    name: outline-frontend
   outline-backend:
     name: outline-backend
-    driver: bridge

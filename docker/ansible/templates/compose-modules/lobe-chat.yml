@@ -17,7 +17,7 @@ services:
       - AZURE_API_VERSION=${LOBE_CHAT_AZURE_API_VERSION}
       - AZURE_MODEL_LIST=${LOBE_CHAT_AZURE_MODEL_LIST}
     networks:
-      - t2_proxy
+      - lobe-chat-frontend
     labels:
       # Homepage
       - homepage.group=Productivity
@@ -27,6 +27,7 @@ services:
       - homepage.description=Your ChatGPT in the Browser
       # Traefik
       - "traefik.enable=true"
+      - "traefik.docker.network=lobe-chat-frontend"
       ## Middlewares
       - "traefik.http.routers.lobe-chat-rtr.middlewares=chain-auth@file"
       ## HTTP Services
@@ -34,3 +35,7 @@ services:
       - "traefik.http.routers.lobe-chat-rtr.service=lobe-chat"
       # Enable the management port
       - "traefik.http.services.lobe-chat.loadbalancer.server.port=3210"
+
+networks:
+  lobe-chat-frontend:
+    name: lobe-chat-frontend

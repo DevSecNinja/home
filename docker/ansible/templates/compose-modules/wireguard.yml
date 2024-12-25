@@ -5,7 +5,7 @@ services:
     depends_on:
       - traefik
     networks:
-      - t2_proxy
+      - wireguard-frontend
     restart: always
     cap_add:
       - NET_ADMIN
@@ -34,6 +34,7 @@ services:
       # - homepage.description=Virtual Private Network
       # Traefik
       - "traefik.enable=true"
+      - "traefik.docker.network=wireguard-frontend"
       ## Middlewares
       - "traefik.udp.routers.wireguard-rtr.entrypoints=wireguard"
       ## UDP Services
@@ -42,3 +43,7 @@ services:
 
 volumes:
   wireguard_data:
+
+networks:
+  wireguard-frontend:
+    name: wireguard-frontend

@@ -64,7 +64,7 @@ services:
       - traefik
       - unifi-db
     networks:
-      - t2_proxy
+      - unifi-frontend
       - unifi-backend
     mem_limit: 2048m
     environment:
@@ -110,6 +110,7 @@ services:
       - docker-volume-backup.stop-during-backup=false # true - otherwise backup can't work with socketproxy
       # Traefik
       - "traefik.enable=true"
+      - "traefik.docker.network=unifi-frontend"
       ## HTTP Routers
       - "traefik.http.routers.unifi-rtr.rule=Host(`unifi.$DOMAINNAME`)"
       - "traefik.http.routers.unifi-guest-rtr.entrypoints=unifi-guest"
@@ -139,6 +140,7 @@ volumes:
   unifi_db_data:
 
 networks:
+  unifi-frontend:
+    name: unifi-frontend
   unifi-backend:
     name: unifi-backend
-    driver: bridge

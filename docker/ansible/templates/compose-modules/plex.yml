@@ -6,7 +6,7 @@ services:
     depends_on:
       - traefik
     networks:
-      - t2_proxy
+      - plex-frontend
     # ports:
     #   - target: 32400
     #     published: 32400
@@ -47,6 +47,7 @@ services:
       - org.label-schema.group=entertainment
       # Traefik
       - "traefik.enable=true"
+      - "traefik.docker.network=plex-frontend"
       ## Middlewares
       ## Using no-auth chain since Plex app doesn't support auth proxy
       - "traefik.http.routers.plex-rtr.middlewares=chain-no-auth@file"
@@ -61,3 +62,7 @@ services:
 
 volumes:
   plex_config_data:
+
+networks:
+  plex-frontend:
+    name: plex-frontend

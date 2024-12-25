@@ -11,3 +11,9 @@
 - name: Output frontend networks
   debug:
     msg: "Docker networks ending with '-frontend': {{ frontend_networks }}"
+
+# TODO: Add a check to see if the frontend networks have changed after running Ansible
+# This is because we would need to run the playbook again. Current process:
+# 1. Create compose file with new network. Network doesn't exist
+# 2. Playbook gathers all the frontend networks and then executes docker-compose up -d and creates the network
+# 3. Now a check needs to take place if a new network was created. If so, run the playbook again to recreate the dynamic Traefik file

@@ -6,7 +6,6 @@
 ##       Pushgateway: v1.10.0@sha256:7a4d0696a24ef4e8bad62bee5656855a0aff2f26416d8cb32009dc28d6263604
 #
 
-
 services:
   prometheus:
     image: prom/prometheus

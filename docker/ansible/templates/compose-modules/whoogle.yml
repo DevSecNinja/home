@@ -25,7 +25,7 @@ services:
       - WHOOGLE_CONFIG_PREFERENCES_KEY=${WHOOGLE_CONFIG_PREFERENCES_KEY}
       - WHOOGLE_CONFIG_URL=https://search.$DOMAINNAME/
     networks:
-      - t2_proxy
+      - whoogle-frontend
     labels:
       # Homepage
       - homepage.group=Productivity
@@ -35,6 +35,7 @@ services:
       - homepage.description=Search Engine
       # Traefik
       - "traefik.enable=true"
+      - "traefik.docker.network=whoogle-frontend"
       ## Middlewares
       - "traefik.http.routers.whoogle-rtr.middlewares=chain-auth@file"
       ## HTTP Services
@@ -42,3 +43,7 @@ services:
       - "traefik.http.routers.whoogle-rtr.service=whoogle"
       # Enable the management port
       - "traefik.http.services.whoogle.loadbalancer.server.port=5000"
+
+networks:
+  whoogle-frontend:
+    name: whoogle-frontend

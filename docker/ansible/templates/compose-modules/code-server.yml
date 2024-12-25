@@ -19,7 +19,7 @@ services:
       # - SUDO_PASSWORD=password #optional
       # - SUDO_PASSWORD_HASH= #optional
     networks:
-      - t2_proxy
+      - code-server-frontend
     volumes:
       - $DOCKERDIR/data/code-server/config:/config
       - $DOCKERDIR/data/code-server/custom-cont-init.d:/custom-cont-init.d:ro
@@ -33,6 +33,7 @@ services:
       - homepage.description=Code Server in the Browser
       # Traefik
       - "traefik.enable=true"
+      - "traefik.docker.network=code-server-frontend"
       ## Middlewares
       - "traefik.http.routers.code-server-rtr.middlewares=chain-auth@file"
       ## HTTP Services
@@ -44,3 +45,7 @@ services:
 volumes:
   ## Add additional volumes
   home_assistant_data:
+
+networks:
+  code-server-frontend:
+    name: code-server-frontend

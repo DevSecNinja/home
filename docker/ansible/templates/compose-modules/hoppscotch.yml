@@ -48,7 +48,7 @@ services:
       # Custom
       - ENABLE_SUBPATH_BASED_ACCESS=false # Setting this to true caused connection issues and needed config changes are unclear
     networks:
-      - t2_proxy
+      - hoppscotch-frontend
       - hoppscotch-backend
     labels:
       # Homepage
@@ -59,6 +59,7 @@ services:
       - homepage.description=API Tester like Postman
       # Traefik
       - "traefik.enable=true"
+      - "traefik.docker.network=hoppscotch-frontend"
       ## Middlewares
       - "traefik.http.routers.hoppscotch-rtr.middlewares=chain-auth-cors@file"
       - "traefik.http.routers.hoppscotch-rtr.rule=Host(`api-tester.$DOMAINNAME`)"
@@ -149,6 +150,7 @@ volumes:
   hoppscotch_db_data:
 
 networks:
+  hoppscotch-frontend:
+    name: hoppscotch-frontend
   hoppscotch-backend:
     name: hoppscotch-backend
-    driver: bridge

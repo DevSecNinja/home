@@ -5,7 +5,7 @@ services:
     depends_on:
       - traefik
     networks:
-      - t2_proxy
+      - traefik-backend
     restart: always
     security_opt:
       - no-new-privileges=true
@@ -41,6 +41,7 @@ services:
       - org.label-schema.group=Infrastructure
       # Traefik
       - "traefik.enable=true"
+      - "traefik.docker.network=traefik-backend"
       ## HTTP Services
       - "traefik.http.routers.treafik-forward-auth-rtr.rule=Host(`auth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
       - "traefik.http.routers.treafik-forward-auth-rtr.service=treafik-forward-auth"

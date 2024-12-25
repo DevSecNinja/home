@@ -8,7 +8,7 @@ services:
       - nextcloud-redis
     restart: always
     networks:
-      - t2_proxy
+      - nextcloud-frontend
       - nextcloud-backend
     security_opt:
       - no-new-privileges=true
@@ -45,6 +45,7 @@ services:
       - org.label-schema.group=productivity
       # Traefik
       - "traefik.enable=true"
+      - "traefik.docker.network=nextcloud-frontend"
       ## Middlewares
       ## Using no-auth chain since Nextcloud App doesn't support auth proxy
       - "traefik.http.routers.nextcloud-rtr.middlewares=chain-auth@file"
@@ -178,6 +179,7 @@ volumes:
   nextcloud_db_data:
 
 networks:
+  nextcloud-frontend:
+    name: nextcloud-frontend
   nextcloud-backend:
     name: nextcloud-backend
-    driver: bridge

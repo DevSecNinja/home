@@ -7,7 +7,6 @@ services:
       - n8n-db
     restart: always
     networks:
-      - t2_proxy
       - n8n-frontend
       - n8n-backend
     security_opt:
@@ -35,6 +34,7 @@ services:
       - org.label-schema.group=productivity
       # Traefik
       - "traefik.enable=true"
+      - "traefik.docker.network=n8n-frontend"
       ## Middlewares
       - "traefik.http.routers.n8n-rtr.middlewares=chain-auth@file"
       - "traefik.http.routers.n8n-rtr.rule=Host(`n8n.$DOMAINNAME`)"

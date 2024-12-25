@@ -10,7 +10,7 @@ services:
         - HTTPS_PORT=443
     restart: always
     networks:
-      - t2_proxy
+      - echo-server-frontend
     mem_limit: 1024m
     security_opt:
       - no-new-privileges=true
@@ -24,6 +24,7 @@ services:
       - homepage.description=Testing Web Requests
       # Traefik
       - "traefik.enable=true"
+      - "traefik.docker.network=echo-server-frontend"
       ## HTTP Routers
       - "traefik.http.routers.echo-server-rtr.rule=Host(`echo-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
       ## Middlewares
@@ -32,3 +33,7 @@ services:
       - "traefik.http.routers.echo-server-rtr.service=echo-server"
       ### Enable the server port
       - "traefik.http.services.echo-server.loadbalancer.server.port=80"
+
+networks:
+  echo-server-frontend:
+    name: echo-server-frontend

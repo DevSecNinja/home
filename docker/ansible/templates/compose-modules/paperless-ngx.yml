@@ -1,6 +1,12 @@
+#
+#### DEPRECATION NOTICE
+## This compose module is no longer in use
+## Replaced by: None
+#
+
 services:
   paperless-redis:
-    image: redis:alpine3.19@sha256:892b41c092a599f76c30b48e9dcfb185ce8cea3560970b1c4f2745c89bb34344
+    image: redis #:alpine3.19@sha256:892b41c092a599f76c30b48e9dcfb185ce8cea3560970b1c4f2745c89bb34344
     container_name: paperless-redis
     # Requirepass is needed as environment variable isn't picked up
     command: >
@@ -22,7 +28,7 @@ services:
       - paperless-backend
 
   paperless-db:
-    image: docker.io/library/postgres:16.6-alpine@sha256:52bba373df3c13594014b5e9ccc9f3c2cdb2221d50db1a91ec64570819f18aba
+    image: docker.io/library/postgres #:16.6-alpine@sha256:52bba373df3c13594014b5e9ccc9f3c2cdb2221d50db1a91ec64570819f18aba
     container_name: paperless-db
     restart: always
     security_opt:
@@ -46,7 +52,7 @@ services:
       - paperless-backend
 
   paperless-web:
-    image: ghcr.io/paperless-ngx/paperless-ngx:2.13.5@sha256:199c67ed55bfb9d58bf90db2ee280880ae9ebc63413e54c73522f9c4ebdc7bad
+    image: ghcr.io/paperless-ngx/paperless-ngx #:2.13.5@sha256:199c67ed55bfb9d58bf90db2ee280880ae9ebc63413e54c73522f9c4ebdc7bad
     container_name: paperless-web
     restart: always
     security_opt:
@@ -87,7 +93,6 @@ services:
       - PAPERLESS_HTTP_REMOTE_USER_HEADER_NAME=HTTP_X_FORWARDED_USER
     networks:
       - paperless-backend
-      - t2_proxy
     labels:
       # Homepage
       - homepage.group=Productivity
@@ -112,7 +117,7 @@ services:
       - "traefik.http.routers.paperless-ngx-noauth-rtr.service=paperless-ngx"
 
   paperless-gotenberg:
-    image: docker.io/gotenberg/gotenberg:8.14.1@sha256:c81f625afc869ba10819622f7e7d6d76708b2a32645b3fb74fbee610bf030465
+    image: docker.io/gotenberg/gotenberg #:8.14.1@sha256:c81f625afc869ba10819622f7e7d6d76708b2a32645b3fb74fbee610bf030465
     container_name: paperless-gotenberg
     restart: always
     security_opt:
@@ -130,7 +135,7 @@ services:
       - paperless-backend
 
   paperless-tika:
-    image: ghcr.io/paperless-ngx/tika:2.9.1-minimal@sha256:20db3df89eaeb1b271dd840888fe909b88b12f4b86ef641ec07a1d45d4c5168f
+    image: ghcr.io/paperless-ngx/tika #:2.9.1-minimal@sha256:20db3df89eaeb1b271dd840888fe909b88b12f4b86ef641ec07a1d45d4c5168f
     container_name: paperless-tika
     restart: always
     security_opt:
@@ -145,7 +150,7 @@ services:
 
   paperless-db-backup:
     container_name: paperless-db-backup
-    image: tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
+    image: tiredofit/db-backup #:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
     depends_on:
       - paperless-db
     volumes:

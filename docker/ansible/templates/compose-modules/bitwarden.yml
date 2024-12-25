@@ -7,7 +7,7 @@ services:
       - bitwarden-db
     restart: always
     networks:
-      - t2_proxy
+      - bitwarden-frontend
       - bitwarden-backend
     security_opt:
       - no-new-privileges=true
@@ -39,6 +39,7 @@ services:
       - org.label-schema.group=productivity
       # Traefik
       - "traefik.enable=true"
+      - "traefik.docker.network=bitwarden-frontend"
       ## Middlewares
       - "traefik.http.routers.bitwarden-rtr.middlewares=chain-auth@file"
       ## HTTP Services
@@ -129,6 +130,7 @@ volumes:
   bitwarden_db_data:
 
 networks:
+  bitwarden-frontend:
+    name: bitwarden-frontend
   bitwarden-backend:
     name: bitwarden-backend
-    driver: bridge
