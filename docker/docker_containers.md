@@ -222,7 +222,7 @@
 
 **container_name:** home-assistant
 
-**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:a80b3c73c9e4028c3f8a016cb005c700cd96bd23ce34bfea372562776d6c6b6d
+**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:55ab10acd751e108213c5235c6251e9cbb4098593c7de60e00b7c45f9ac2d3b1
 
 **url:** home-assistant.$DOMAINNAME
 
@@ -480,41 +480,51 @@
 
 ### Service: paperless-db
 
+> :warning: **Deprecation Notice:** Replaced by: None
+
 **container_name:** paperless-db
 
-**image:** docker.io/library/postgres:16.6-alpine@sha256:52bba373df3c13594014b5e9ccc9f3c2cdb2221d50db1a91ec64570819f18aba
+**image:** docker.io/library/postgres
 
 ### Service: paperless-db-backup
 
+> :warning: **Deprecation Notice:** Replaced by: None
+
 **container_name:** paperless-db-backup
 
-**image:** tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
+**image:** tiredofit/db-backup
 
 ### Service: paperless-gotenberg
 
+> :warning: **Deprecation Notice:** Replaced by: None
+
 **container_name:** paperless-gotenberg
 
-**image:** docker.io/gotenberg/gotenberg:8.14.1@sha256:c81f625afc869ba10819622f7e7d6d76708b2a32645b3fb74fbee610bf030465
+**image:** docker.io/gotenberg/gotenberg
 
 ### Service: paperless-redis
 
+> :warning: **Deprecation Notice:** Replaced by: None
+
 **container_name:** paperless-redis
 
-**image:** redis:alpine3.19@sha256:892b41c092a599f76c30b48e9dcfb185ce8cea3560970b1c4f2745c89bb34344
+**image:** redis
 
 ### Service: paperless-tika
 
+> :warning: **Deprecation Notice:** Replaced by: None
+
 **container_name:** paperless-tika
 
-**image:** ghcr.io/paperless-ngx/tika:2.9.1-minimal@sha256:20db3df89eaeb1b271dd840888fe909b88b12f4b86ef641ec07a1d45d4c5168f
+**image:** ghcr.io/paperless-ngx/tika
 
 ### Service: paperless-web
 
+> :warning: **Deprecation Notice:** Replaced by: None
+
 **container_name:** paperless-web
 
-**image:** ghcr.io/paperless-ngx/paperless-ngx:2.13.5@sha256:199c67ed55bfb9d58bf90db2ee280880ae9ebc63413e54c73522f9c4ebdc7bad
-
-**url:** paperless.$DOMAINNAME
+**image:** ghcr.io/paperless-ngx/paperless-ngx
 
 ## docker/ansible/templates/compose-modules/papermerge.yml
 
