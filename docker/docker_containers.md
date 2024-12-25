@@ -22,7 +22,7 @@
 
 **container_name:** bitwarden
 
-**image:** bitwarden/self-host:2024.11.1-beta@sha256:18053c106ce1e9fef963843760b9bbe0d76cc47325f5e69cd2b4e15893a827b3
+**image:** bitwarden/self-host:2024.12.1-beta@sha256:c67cb999aea3d147d7e491c9cc908d8a480faa13f2e04fc61b32c96481162a01
 
 **url:** bitwarden.$DOMAINNAME
 
@@ -44,7 +44,7 @@
 
 **container_name:** cloudflare-ddns
 
-**image:** favonia/cloudflare-ddns:1.15.0@sha256:d5649aee7c9e8f7e14a6efd5f2aa0db78ff5eee597da4dc78d950cbf6131bef8
+**image:** favonia/cloudflare-ddns:1.15.1@sha256:a4e2089b3531eec8c9328c7a9a586f80e8d67dcd94856e0b596b7896e1de3f62
 
 ## docker/ansible/templates/compose-modules/code-server.yml
 
@@ -108,7 +108,7 @@
 
 **container_name:** excalidraw
 
-**image:** excalidraw/excalidraw:latest@sha256:c6b7fc35e9e9cfb2b85e76081530223407b00157896b00a01f272b4085ffe4c9
+**image:** excalidraw/excalidraw:latest@sha256:56163a0c3eaeaf3444b3addf60d7cb6011a56bd17a7d0e1c24f11e62324a5d07
 
 **url:** excalidraw.$DOMAINNAME
 
@@ -126,7 +126,7 @@
 
 **container_name:** gatus
 
-**image:** twinproduction/gatus:v5.13.1@sha256:977129a3cad3253906ef9c95d16a0f19a3ab5d3892404da809798b5b34bbd04d
+**image:** twinproduction/gatus:v5.14.0@sha256:a00b8db44671c9c0c0815835c34608bcba41b2f66e96d283c3d0809e93ff7cc6
 
 **url:** status-docker.$DOMAINNAME
 
@@ -134,7 +134,7 @@
 
 **container_name:** gatus-db
 
-**image:** docker.io/library/postgres:16.6-alpine@sha256:52bba373df3c13594014b5e9ccc9f3c2cdb2221d50db1a91ec64570819f18aba
+**image:** docker.io/library/postgres:16.6-alpine@sha256:91e75546b4f229fa92cec21a2bf831ba03a1c101fc197daafff657f153e93a39
 
 ### Service: gatus-db-backup
 
@@ -158,7 +158,7 @@
 
 **container_name:** homepage
 
-**image:** ghcr.io/gethomepage/homepage:v0.9.13@sha256:1504b26bd82523e68adbae8c5a908d1633d02c68c65b62d084d81a6866552db6
+**image:** ghcr.io/gethomepage/homepage:v0.10.4@sha256:bf16a9f04a09d96714f723d800888033e9b19039ef546478322bb7ba93791187
 
 **url:** apps-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -182,7 +182,7 @@
 
 **container_name:** hoppscotch-db
 
-**image:** docker.io/library/postgres:16.6-alpine@sha256:52bba373df3c13594014b5e9ccc9f3c2cdb2221d50db1a91ec64570819f18aba
+**image:** docker.io/library/postgres:16.6-alpine@sha256:91e75546b4f229fa92cec21a2bf831ba03a1c101fc197daafff657f153e93a39
 
 ### Service: hoppscotch-db-backup
 
@@ -224,7 +224,7 @@
 
 **container_name:** n8n-db
 
-**image:** docker.io/library/postgres:16.6-alpine@sha256:52bba373df3c13594014b5e9ccc9f3c2cdb2221d50db1a91ec64570819f18aba
+**image:** docker.io/library/postgres:16.6-alpine@sha256:91e75546b4f229fa92cec21a2bf831ba03a1c101fc197daafff657f153e93a39
 
 ### Service: n8n-db-backup
 
@@ -292,7 +292,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.41.2.9200-c6bbc1b53@sha256:a3a3a850a64fb747c59f85dbc19b157781c3b9c921a83799127894b0ebdf3a68
+**image:** lscr.io/linuxserver/plex:version-1.41.3.9314-a0bfb8370@sha256:3d2ed27abb4f72038705c3e0c3d40ff89821a0c66d43e55125873de127197d25
 
 **url:** plex-noauth.$DOMAINNAME
 
@@ -320,7 +320,7 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:7.0.15@sha256:8ff7333c6a9fbc00597fcce4c836e8bcc6b29fd34d49259479c43174e32d72be
+**image:** mongo:7.0.15@sha256:8958f43a940142d2a4572bb4d4f147ab26994a3da1cead6d39876b96451a4f1a
 
 ### Service: unifi-db-backup
 
