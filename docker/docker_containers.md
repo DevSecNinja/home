@@ -6,7 +6,7 @@
 
 **container_name:** adguard
 
-**image:** adguard/adguardhome:v0.107.54@sha256:ec59d9d8d083b74620f827879bee7ad88621f96bc0c4347c84c176ffa349484c
+**image:** adguard/adguardhome:v0.107.55@sha256:2979cc78a28aceb77f90980a5440578dbb7bc406dffe261e9ae402750193bde0
 
 **url:** adguard-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -36,7 +36,7 @@
 
 **container_name:** bitwarden-db-backup
 
-**image:** tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
+**image:** tiredofit/db-backup:4.1.12@sha256:d3ee1a8fe16200587bed037c81fb651db031d68f3809c38d8d62976aa0745e39
 
 ## docker/ansible/templates/compose-modules/cloudflare.yml
 
@@ -72,7 +72,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v8.8.2@sha256:5e4a5d0e0e5136d5387af6c4345379655f1ca2249a6b136ba69bef516fc75312
+**image:** amir20/dozzle:v8.9.0@sha256:290837c69e70f6a38a0414cfd810b70211f08d41cc243189e6151dc07bc450bc
 
 **url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -140,7 +140,7 @@
 
 **container_name:** gatus-db-backup
 
-**image:** tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
+**image:** tiredofit/db-backup:4.1.12@sha256:d3ee1a8fe16200587bed037c81fb651db031d68f3809c38d8d62976aa0745e39
 
 ## docker/ansible/templates/compose-modules/home-assistant.yml
 
@@ -188,7 +188,7 @@
 
 **container_name:** hoppscotch-db-backup
 
-**image:** tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
+**image:** tiredofit/db-backup:4.1.12@sha256:d3ee1a8fe16200587bed037c81fb651db031d68f3809c38d8d62976aa0745e39
 
 ## docker/ansible/templates/compose-modules/it-tools.yml
 
@@ -206,7 +206,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:v1.34.5@sha256:e44587a5c0aae910f32a923a20d4e2251c0f96f4754cc89ebc227c7cde24df91
+**image:** lobehub/lobe-chat:v1.39.3@sha256:e9442229394c044a310923a37b6006d186130b9568e2068aee5918d5720293b4
 
 **url:** chat.$DOMAINNAME
 
@@ -230,7 +230,7 @@
 
 **container_name:** n8n-db-backup
 
-**image:** tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
+**image:** tiredofit/db-backup:4.1.12@sha256:d3ee1a8fe16200587bed037c81fb651db031d68f3809c38d8d62976aa0745e39
 
 ## docker/ansible/templates/compose-modules/nextcloud.yml
 
@@ -258,7 +258,7 @@
 
 **container_name:** nextcloud-db-backup
 
-**image:** tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
+**image:** tiredofit/db-backup:4.1.12@sha256:d3ee1a8fe16200587bed037c81fb651db031d68f3809c38d8d62976aa0745e39
 
 ### Service: nextcloud-redis
 
@@ -326,7 +326,7 @@
 
 **container_name:** unifi-db-backup
 
-**image:** tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
+**image:** tiredofit/db-backup:4.1.12@sha256:d3ee1a8fe16200587bed037c81fb651db031d68f3809c38d8d62976aa0745e39
 
 ## docker/ansible/templates/compose-modules/whoogle.yml
 

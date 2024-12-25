@@ -1,5 +1,5 @@
 - container_name: adguard
-  image: adguard/adguardhome:v0.107.54@sha256:ec59d9d8d083b74620f827879bee7ad88621f96bc0c4347c84c176ffa349484c
+  image: adguard/adguardhome:v0.107.55@sha256:2979cc78a28aceb77f90980a5440578dbb7bc406dffe261e9ae402750193bde0
   url: adguard-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: unbound
   image: mvance/unbound:1.22.0@sha256:76906da36d1806f3387338f15dcf8b357c51ce6897fb6450d6ce010460927e90
@@ -9,7 +9,7 @@
 - container_name: bitwarden-db
   image: mariadb:11.6.2@sha256:a9547599cd87d7242435aea6fda22a9d83e2c06d16c658ef70d2868b3d3f6a80
 - container_name: bitwarden-db-backup
-  image: tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
+  image: tiredofit/db-backup:4.1.12@sha256:d3ee1a8fe16200587bed037c81fb651db031d68f3809c38d8d62976aa0745e39
 - container_name: cloudflare-ddns
   image: favonia/cloudflare-ddns:1.15.1@sha256:a4e2089b3531eec8c9328c7a9a586f80e8d67dcd94856e0b596b7896e1de3f62
 - container_name: code-server
@@ -19,7 +19,7 @@
   image: ghcr.io/gchq/cyberchef:10.19.4@sha256:a2bfe382b2547bdd0a3d0523b9a6b85fab833c56bcec86d600ba6266910b533e
   url: cyberchef.$DOMAINNAME
 - container_name: dozzle
-  image: amir20/dozzle:v8.8.2@sha256:5e4a5d0e0e5136d5387af6c4345379655f1ca2249a6b136ba69bef516fc75312
+  image: amir20/dozzle:v8.9.0@sha256:290837c69e70f6a38a0414cfd810b70211f08d41cc243189e6151dc07bc450bc
   url: dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: dozzle-docker-proxy
   image: lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:46992e6a45e09cec882760aa40f58912fb6ff3b9c1eb1a333e6380a68a232ce8
@@ -40,7 +40,7 @@
 - container_name: gatus-db
   image: docker.io/library/postgres:16.6-alpine@sha256:91e75546b4f229fa92cec21a2bf831ba03a1c101fc197daafff657f153e93a39
 - container_name: gatus-db-backup
-  image: tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
+  image: tiredofit/db-backup:4.1.12@sha256:d3ee1a8fe16200587bed037c81fb651db031d68f3809c38d8d62976aa0745e39
 - container_name: home-assistant
   image: ghcr.io/home-assistant/home-assistant:beta@sha256:fdf9146f8f5c61177979a3bb8e96ecbdb2becb2e7d5123a335f989ade21a4459
   url: home-assistant.$DOMAINNAME
@@ -55,12 +55,12 @@
 - container_name: hoppscotch-db
   image: docker.io/library/postgres:16.6-alpine@sha256:91e75546b4f229fa92cec21a2bf831ba03a1c101fc197daafff657f153e93a39
 - container_name: hoppscotch-db-backup
-  image: tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
+  image: tiredofit/db-backup:4.1.12@sha256:d3ee1a8fe16200587bed037c81fb651db031d68f3809c38d8d62976aa0745e39
 - container_name: it-tools
   image: ghcr.io/corentinth/it-tools:2023.12.21-5ed3693@sha256:4aaf67eab769afc9dac5614a15614537446e11150d53eab3be34ac9775a27e3a
   url: tools.$DOMAINNAME
 - container_name: lobe-chat
-  image: lobehub/lobe-chat:v1.34.5@sha256:e44587a5c0aae910f32a923a20d4e2251c0f96f4754cc89ebc227c7cde24df91
+  image: lobehub/lobe-chat:v1.39.3@sha256:e9442229394c044a310923a37b6006d186130b9568e2068aee5918d5720293b4
   url: chat.$DOMAINNAME
 - container_name: n8n
   image: n8nio/n8n:1.73.1@sha256:9caf109e2293557568ab687b9d6c82646250c8ab7dcb20479c8bef9956811b7a
@@ -68,7 +68,7 @@
 - container_name: n8n-db
   image: docker.io/library/postgres:16.6-alpine@sha256:91e75546b4f229fa92cec21a2bf831ba03a1c101fc197daafff657f153e93a39
 - container_name: n8n-db-backup
-  image: tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
+  image: tiredofit/db-backup:4.1.12@sha256:d3ee1a8fe16200587bed037c81fb651db031d68f3809c38d8d62976aa0745e39
 - container_name: nextcloud
   image: nextcloud:30.0.4-apache@sha256:6cf722637979baff26262cf7f37bc1f39dfe805849449beff5894dcbc982e828
   url: cloud.$DOMAINNAME
@@ -77,7 +77,7 @@
 - container_name: nextcloud-db
   image: mariadb:11.6.2@sha256:a9547599cd87d7242435aea6fda22a9d83e2c06d16c658ef70d2868b3d3f6a80
 - container_name: nextcloud-db-backup
-  image: tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
+  image: tiredofit/db-backup:4.1.12@sha256:d3ee1a8fe16200587bed037c81fb651db031d68f3809c38d8d62976aa0745e39
 - container_name: nextcloud-redis
   image: redis:alpine3.19@sha256:892b41c092a599f76c30b48e9dcfb185ce8cea3560970b1c4f2745c89bb34344
 - container_name: openspeedtest
@@ -98,7 +98,7 @@
 - container_name: unifi-db
   image: mongo:7.0.15@sha256:8958f43a940142d2a4572bb4d4f147ab26994a3da1cead6d39876b96451a4f1a
 - container_name: unifi-db-backup
-  image: tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
+  image: tiredofit/db-backup:4.1.12@sha256:d3ee1a8fe16200587bed037c81fb651db031d68f3809c38d8d62976aa0745e39
 - container_name: whoogle
   image: benbusby/whoogle-search:latest@sha256:60e071aa7c8b8d486c9bca773e26688744ca22cfdb61f58fa6a7f41fc50cd848
   url: search.$DOMAINNAME
