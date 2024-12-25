@@ -1,3 +1,9 @@
+#
+#### DEPRECATION NOTICE
+## This compose module is no longer in use
+## Replaced by: favonia/cloudflare-ddns
+#
+
 services:
   cloudflare-companion:
     container_name: cloudflare-companion

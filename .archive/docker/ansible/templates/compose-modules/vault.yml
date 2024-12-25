@@ -1,3 +1,10 @@
+#
+#### DEPRECATION NOTICE
+## This compose module is no longer in use
+## Replaced by: nothing
+## Reason: Currently unused
+#
+
 services:
   vault:
     container_name: vault

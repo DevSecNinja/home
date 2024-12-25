@@ -6,17 +6,10 @@ include:
   # TODO: [bitwarden] Find out why CPU is 149 %
   # This caused power consumption of the server to double.
   #- $DOCKERDIR/data/compose/bitwarden.yml
-  # - $DOCKERDIR/data/compose/alertmanager.yml
   - $DOCKERDIR/data/compose/cloudflare.yml
   - $DOCKERDIR/data/compose/gatus.yml
-  # - $DOCKERDIR/data/compose/grafana.yml
-  # - $DOCKERDIR/data/compose/influxdb.yml
   - $DOCKERDIR/data/compose/openspeedtest.yml
-  # - $DOCKERDIR/data/compose/phpmyadmin.yml
-  # - $DOCKERDIR/data/compose/prometheus.yml
-  # - $DOCKERDIR/data/compose/promtail.yml
   - $DOCKERDIR/data/compose/unifi.yml
-  # - $DOCKERDIR/data/compose/vault.yml
 {% endif %}
 {% if 'production' in group_names %}
   # - $DOCKERDIR/data/compose/code-server.yml
@@ -34,22 +27,14 @@ include:
   - $DOCKERDIR/data/compose/dozzle.yml
   - $DOCKERDIR/data/compose/echo-server.yml
   - $DOCKERDIR/data/compose/homepage.yml
-  # - $DOCKERDIR/data/compose/portainer.yml
   - $DOCKERDIR/data/compose/traefik-forward-auth.yml
   - $DOCKERDIR/data/compose/traefik-proxy.yml
 {% endif %}
-# {% if 'webservers' in group_names and 'internal' in group_names %}
-#   - $DOCKERDIR/data/compose/cadvisor.yml
-#   - $DOCKERDIR/data/compose/nodeexporter.yml
-#   - $DOCKERDIR/data/compose/mailrise.yml
-# {% endif %}
 {% if 'webservers' in group_names and 'external' in group_names %}
-  # - $DOCKERDIR/data/compose/change-detection.yml
   - $DOCKERDIR/data/compose/cyberchef.yml
   - $DOCKERDIR/data/compose/drawio.yml
   - $DOCKERDIR/data/compose/excalidraw.yml
   - $DOCKERDIR/data/compose/folding-at-home.yml
-  # TODO: [hoppscotch] Fix Hoppscotch not working
   - $DOCKERDIR/data/compose/hoppscotch.yml
   - $DOCKERDIR/data/compose/it-tools.yml
   - $DOCKERDIR/data/compose/lobe-chat.yml
