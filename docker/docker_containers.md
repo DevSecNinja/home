@@ -148,7 +148,7 @@
 
 **container_name:** home-assistant
 
-**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:fdf9146f8f5c61177979a3bb8e96ecbdb2becb2e7d5123a335f989ade21a4459
+**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:4bf60f55e6682bd134574a91fd9a4820dd6970ed5c08b6c0b7b841e4288ecbaa
 
 **url:** home-assistant.$DOMAINNAME
 
@@ -158,7 +158,7 @@
 
 **container_name:** homepage
 
-**image:** ghcr.io/gethomepage/homepage:v0.10.4@sha256:bf16a9f04a09d96714f723d800888033e9b19039ef546478322bb7ba93791187
+**image:** ghcr.io/gethomepage/homepage:v0.10.6@sha256:426d75031d40a47d58b962766a4d11277490973c137ff5a98e051c9d204f5268
 
 **url:** apps-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -238,7 +238,7 @@
 
 **container_name:** nextcloud
 
-**image:** nextcloud:30.0.4-apache@sha256:6cf722637979baff26262cf7f37bc1f39dfe805849449beff5894dcbc982e828
+**image:** nextcloud:30.0.4-apache@sha256:6bba95a59b3bcc95b81c93b8fc5299ad2ea8d83692e6cf289650c132f7151209
 
 **url:** cloud.$DOMAINNAME
 
@@ -246,7 +246,7 @@
 
 **container_name:** nextcloud-cron
 
-**image:** nextcloud:30.0.4-apache@sha256:6cf722637979baff26262cf7f37bc1f39dfe805849449beff5894dcbc982e828
+**image:** nextcloud:30.0.4-apache@sha256:6bba95a59b3bcc95b81c93b8fc5299ad2ea8d83692e6cf289650c132f7151209
 
 ### Service: nextcloud-db
 
@@ -282,7 +282,7 @@
 
 **container_name:** phpmyadmin
 
-**image:** phpmyadmin:5.2.1-apache@sha256:3bee21bf6088fbf7529f29552fce955810ad7f7a6bb0a6240453b1cda9e9fd5a
+**image:** phpmyadmin:5.2.1-apache@sha256:e2306dbeddb7901fb3f08bb0c8e5896ef816e8d53f6bdd82ffb538e5fc5a725e
 
 **url:** phpmyadmin.$DOMAINNAME
 
@@ -320,7 +320,7 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:7.0.15@sha256:8958f43a940142d2a4572bb4d4f147ab26994a3da1cead6d39876b96451a4f1a
+**image:** mongo:7.0.16@sha256:725b4cfe87014950ce9b423ac0a03035f6014a33475030403a3e583eb1485045
 
 ### Service: unifi-db-backup
 
