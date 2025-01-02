@@ -16,6 +16,22 @@
 
 **image:** mvance/unbound:1.22.0@sha256:76906da36d1806f3387338f15dcf8b357c51ce6897fb6450d6ce010460927e90
 
+## docker/ansible/templates/compose-modules/beaverhabits.yml
+
+### Service: beaverhabits
+
+**container_name:** beaverhabits
+
+**image:** daya0576/beaverhabits:0.4@sha256:e7bec8d18e149c3b19973cd178639b0b5f05450265cc4e2bba4e0581937adaae
+
+**url:** habits.$DOMAINNAME
+
+### Service: beaverhabits-db-backup
+
+**container_name:** beaverhabits-db-backup
+
+**image:** tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
+
 ## docker/ansible/templates/compose-modules/bitwarden.yml
 
 ### Service: bitwarden
