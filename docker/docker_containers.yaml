@@ -35,7 +35,7 @@
 - container_name: foldingathome
   image: lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:a11530655be018bc43c9f973bce2a59344f2d140a9e5c843305f765299a5d141
 - container_name: gatus
-  image: twinproduction/gatus:v5.14.0@sha256:a00b8db44671c9c0c0815835c34608bcba41b2f66e96d283c3d0809e93ff7cc6
+  image: twinproduction/gatus:v5.15.0@sha256:244af66f5eacb50040c2f1178913aecb301fc5bcd25720d99f89ec4a65964ecc
   url: status-docker.$DOMAINNAME
 - container_name: gatus-db
   image: docker.io/library/postgres:16.6-alpine@sha256:91e75546b4f229fa92cec21a2bf831ba03a1c101fc197daafff657f153e93a39
@@ -60,7 +60,7 @@
   image: ghcr.io/corentinth/it-tools:2023.12.21-5ed3693@sha256:4aaf67eab769afc9dac5614a15614537446e11150d53eab3be34ac9775a27e3a
   url: tools.$DOMAINNAME
 - container_name: lobe-chat
-  image: lobehub/lobe-chat:v1.39.3@sha256:e9442229394c044a310923a37b6006d186130b9568e2068aee5918d5720293b4
+  image: lobehub/lobe-chat:v1.42.4@sha256:6ce57a7f86d4ad591635e19a6e7f3a02bdeef65c55065a7f722f72dc02485705
   url: chat.$DOMAINNAME
 - container_name: n8n
   image: n8nio/n8n:1.73.1@sha256:9caf109e2293557568ab687b9d6c82646250c8ab7dcb20479c8bef9956811b7a

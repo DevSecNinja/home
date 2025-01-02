@@ -126,7 +126,7 @@
 
 **container_name:** gatus
 
-**image:** twinproduction/gatus:v5.14.0@sha256:a00b8db44671c9c0c0815835c34608bcba41b2f66e96d283c3d0809e93ff7cc6
+**image:** twinproduction/gatus:v5.15.0@sha256:244af66f5eacb50040c2f1178913aecb301fc5bcd25720d99f89ec4a65964ecc
 
 **url:** status-docker.$DOMAINNAME
 
@@ -206,7 +206,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:v1.39.3@sha256:e9442229394c044a310923a37b6006d186130b9568e2068aee5918d5720293b4
+**image:** lobehub/lobe-chat:v1.42.4@sha256:6ce57a7f86d4ad591635e19a6e7f3a02bdeef65c55065a7f722f72dc02485705
 
 **url:** chat.$DOMAINNAME
 
