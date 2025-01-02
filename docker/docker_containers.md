@@ -88,7 +88,7 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:24.7.17@sha256:3e14dbd7818bb2222ef93d920809771dbbdc1bf8e1d8794c99314ad9a922eeb6
+**image:** jgraph/drawio:26.0.2@sha256:1a51e927bd75abb82e93a4151e4a1cfac06c5d622f92c2ad4672850267664287
 
 **url:** draw.$DOMAINNAME
 
@@ -126,7 +126,7 @@
 
 **container_name:** gatus
 
-**image:** twinproduction/gatus:v5.14.0@sha256:a00b8db44671c9c0c0815835c34608bcba41b2f66e96d283c3d0809e93ff7cc6
+**image:** twinproduction/gatus:v5.15.0@sha256:244af66f5eacb50040c2f1178913aecb301fc5bcd25720d99f89ec4a65964ecc
 
 **url:** status-docker.$DOMAINNAME
 
@@ -148,7 +148,7 @@
 
 **container_name:** home-assistant
 
-**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:fdf9146f8f5c61177979a3bb8e96ecbdb2becb2e7d5123a335f989ade21a4459
+**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:4bf60f55e6682bd134574a91fd9a4820dd6970ed5c08b6c0b7b841e4288ecbaa
 
 **url:** home-assistant.$DOMAINNAME
 
@@ -158,7 +158,7 @@
 
 **container_name:** homepage
 
-**image:** ghcr.io/gethomepage/homepage:v0.10.4@sha256:bf16a9f04a09d96714f723d800888033e9b19039ef546478322bb7ba93791187
+**image:** ghcr.io/gethomepage/homepage:v0.10.6@sha256:426d75031d40a47d58b962766a4d11277490973c137ff5a98e051c9d204f5268
 
 **url:** apps-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -174,7 +174,7 @@
 
 **container_name:** hoppscotch
 
-**image:** hoppscotch/hoppscotch:2024.11.0@sha256:538fe6ded4b6d8e79d8dd0d1699ffb65686ac3ea9e6bca58eed8543475331e3e
+**image:** hoppscotch/hoppscotch:2024.12.0@sha256:4119b155dc2fb8cb088ef427e16b955339d02f9a8587e577dcb6812d9f31d890
 
 **url:** api-tester.$DOMAINNAME
 
@@ -206,7 +206,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:v1.39.3@sha256:e9442229394c044a310923a37b6006d186130b9568e2068aee5918d5720293b4
+**image:** lobehub/lobe-chat:v1.42.4@sha256:6ce57a7f86d4ad591635e19a6e7f3a02bdeef65c55065a7f722f72dc02485705
 
 **url:** chat.$DOMAINNAME
 
@@ -238,7 +238,7 @@
 
 **container_name:** nextcloud
 
-**image:** nextcloud:30.0.4-apache@sha256:6cf722637979baff26262cf7f37bc1f39dfe805849449beff5894dcbc982e828
+**image:** nextcloud:30.0.4-apache@sha256:6bba95a59b3bcc95b81c93b8fc5299ad2ea8d83692e6cf289650c132f7151209
 
 **url:** cloud.$DOMAINNAME
 
@@ -246,7 +246,7 @@
 
 **container_name:** nextcloud-cron
 
-**image:** nextcloud:30.0.4-apache@sha256:6cf722637979baff26262cf7f37bc1f39dfe805849449beff5894dcbc982e828
+**image:** nextcloud:30.0.4-apache@sha256:6bba95a59b3bcc95b81c93b8fc5299ad2ea8d83692e6cf289650c132f7151209
 
 ### Service: nextcloud-db
 
@@ -282,7 +282,7 @@
 
 **container_name:** phpmyadmin
 
-**image:** phpmyadmin:5.2.1-apache@sha256:3bee21bf6088fbf7529f29552fce955810ad7f7a6bb0a6240453b1cda9e9fd5a
+**image:** phpmyadmin:5.2.1-apache@sha256:e2306dbeddb7901fb3f08bb0c8e5896ef816e8d53f6bdd82ffb538e5fc5a725e
 
 **url:** phpmyadmin.$DOMAINNAME
 
@@ -320,7 +320,7 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:7.0.15@sha256:8958f43a940142d2a4572bb4d4f147ab26994a3da1cead6d39876b96451a4f1a
+**image:** mongo:7.0.16@sha256:725b4cfe87014950ce9b423ac0a03035f6014a33475030403a3e583eb1485045
 
 ### Service: unifi-db-backup
 
