@@ -106,26 +106,15 @@ services:
     image: tiredofit/db-backup:4.1.12@sha256:d3ee1a8fe16200587bed037c81fb651db031d68f3809c38d8d62976aa0745e39
     depends_on:
       - hoppscotch-db
-    volumes:
-      - $DOCKERDIR/data/backup:/backup
     mem_limit: 1024m
     networks:
       - hoppscotch-backend
-      # - mailrise
     environment:
       - TIMEZONE=${TZ}
       - USER_DBBACKUP=${PUID}
       - GROUP_DBBACKUP=${PGID}
       - CONTAINER_NAME=hoppscotch-db-backup
       - CONTAINER_ENABLE_MONITORING=FALSE # Disables Zabbix backup statistics
-
-      # TODO: [mailrise] Fix mailrise and add it to ext
-      # - ENABLE_NOTIFICATIONS=TRUE
-      # - NOTIFICATION_TYPE=EMAIL
-      # - SMTP_HOST=mailrise
-      # - SMTP_PORT=${NOTIFICATIONS_MAILRISE_SMTP_PORT}
-      # - MAIL_TO=msteams@mailrise.xyz
-      # - MAIL_FROM=hoppscotch-db-backup
 
       - DEFAULT_CHECKSUM=SHA1        # Set standard checksum to SHA1
       - DEFAULT_COMPRESSION=ZSTD     # Compress all with ZSTD
@@ -135,6 +124,12 @@ services:
 
       - DEFAULT_ENCRYPT=TRUE                            # Encrypt backup files with GPG
       - DEFAULT_ENCRYPT_PASSPHRASE=${DB_ENC_PASSPHRASE} # Set encryption password
+
+      - DEFAULT_BACKUP_LOCATION=blobxfer
+      - DEFAULT_BLOBXFER_STORAGE_ACCOUNT=${DB_BACKUP_SA_NAME}
+      - DEFAULT_BLOBXFER_STORAGE_ACCOUNT_KEY=${DB_BACKUP_SA_KEY}
+      - DEFAULT_BLOBXFER_REMOTE_PATH=${DB_BACKUP_SA_PATH}
+      - DEFAULT_BLOBXFER_MODE=${DB_BACKUP_SA_MODE}
 
       - DB01_TYPE=pgsql
       - DB01_HOST=hoppscotch-db

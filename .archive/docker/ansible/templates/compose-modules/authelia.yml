@@ -46,7 +46,7 @@ services:
     image: tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
     volumes:
       - $DOCKERDIR/data/backup:/backup # TODO: [db-backup] Backup directly to SMB Share
-      - authelia_data:/data
+      - authelia_data:/data:ro
     mem_limit: 1024m
     environment:
       - TIMEZONE=${TZ}

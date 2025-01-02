@@ -31,6 +31,7 @@ include:
   - $DOCKERDIR/data/compose/traefik-proxy.yml
 {% endif %}
 {% if 'webservers' in group_names and 'external' in group_names %}
+  - $DOCKERDIR/data/compose/beaverhabits.yml
   - $DOCKERDIR/data/compose/cyberchef.yml
   - $DOCKERDIR/data/compose/drawio.yml
   - $DOCKERDIR/data/compose/excalidraw.yml

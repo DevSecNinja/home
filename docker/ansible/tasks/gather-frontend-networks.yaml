@@ -1,4 +1,9 @@
 ---
+- name: Prune old networks before gathering networks
+  shell:
+    cmd: "docker network prune --force 2>&1"
+    chdir: /srv/docker
+
 - name: List all Docker networks using Docker CLI
   ansible.builtin.shell: "docker network ls --format '{{ '{{' }}.Name{{ '}}' }}' | grep -E '.*-frontend$' || true"
   register: cli_docker_networks
