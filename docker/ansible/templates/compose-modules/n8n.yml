@@ -44,7 +44,7 @@ services:
       - "traefik.http.services.n8n.loadbalancer.server.port=5678"
 
   n8n-db:
-    image: docker.io/library/postgres:16.6-alpine@sha256:91e75546b4f229fa92cec21a2bf831ba03a1c101fc197daafff657f153e93a39
+    image: docker.io/library/postgres:16.6-alpine@sha256:7485c117bff85f9c9a2d9f407de7fe6d0485e4c5043adb53dd276cb166940b44
     container_name: n8n-db
     restart: always
     security_opt:
