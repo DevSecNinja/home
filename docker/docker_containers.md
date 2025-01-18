@@ -88,7 +88,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v8.9.1@sha256:81d9824098e4eaed6200e7cf40693835ffc0a9c669932b9ebb987bddade24dda
+**image:** amir20/dozzle:v8.10.4@sha256:25da7783d75db1a62a24b949cd54a9d2dc7791e63cf97099fa2d43e3f7b98a0e
 
 **url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -104,7 +104,7 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:26.0.4@sha256:cb527f1a797dbd8daffc3a6fc94eb20faafb812037d6d032a0977809845921d2
+**image:** jgraph/drawio:26.0.6@sha256:d8a3a024f7f29b019d49bc92fba1f8288fb0a2b8467732f7b586351d1548f15d
 
 **url:** draw.$DOMAINNAME
 
@@ -222,7 +222,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:v1.42.6@sha256:baa84d20837d3502fafc7e19f17ca06375939accff4b26b8f15f7dcd647c2026
+**image:** lobehub/lobe-chat:v1.47.2@sha256:5d18eda40ec26b9f8c23f523ffb9ed786df610dfcc7ea775a72515c9abcc94b2
 
 **url:** chat.$DOMAINNAME
 
@@ -232,7 +232,7 @@
 
 **container_name:** n8n
 
-**image:** n8nio/n8n:1.73.1@sha256:9caf109e2293557568ab687b9d6c82646250c8ab7dcb20479c8bef9956811b7a
+**image:** n8nio/n8n:1.75.2@sha256:6cf38471f4a368ba0d50dbec31bba0310a4e12565852619d79477953eb010e39
 
 **url:** n8n.$DOMAINNAME
 
@@ -328,7 +328,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-8.4.62@sha256:694bd1e3b06b3f180ccc5cc052f8893ff450484a16e32cef7569565656235f59
+**image:** lscr.io/linuxserver/unifi-network-application:version-9.0.108@sha256:e6daac9a5cc9050e75864e17285df2e607a2082e81ab9b0186fc4946efd38761
 
 **url:** unifi.$DOMAINNAME
 
@@ -350,7 +350,7 @@
 
 **container_name:** whoogle
 
-**image:** benbusby/whoogle-search:latest@sha256:d26b249415fd8a7ca7566a7053d02f62c37e622c76e8e76107bf789d05f43ea8
+**image:** benbusby/whoogle-search:latest@sha256:810bbb2f2e621bc13ed66498fa55a276c2aeee16a1a471c04d1672d405dad899
 
 **url:** search.$DOMAINNAME
 
