@@ -38,7 +38,7 @@
 
 **container_name:** bitwarden
 
-**image:** bitwarden/self-host:2024.12.1-beta@sha256:c67cb999aea3d147d7e491c9cc908d8a480faa13f2e04fc61b32c96481162a01
+**image:** bitwarden/self-host:2025.1.0-beta@sha256:622dfe16bec7584f4a13d089f55438ad84eeebb08cc98d303a0ea5331c374cdd
 
 **url:** bitwarden.$DOMAINNAME
 
@@ -88,7 +88,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v8.9.0@sha256:290837c69e70f6a38a0414cfd810b70211f08d41cc243189e6151dc07bc450bc
+**image:** amir20/dozzle:v8.9.1@sha256:81d9824098e4eaed6200e7cf40693835ffc0a9c669932b9ebb987bddade24dda
 
 **url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -104,7 +104,7 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:26.0.2@sha256:1a51e927bd75abb82e93a4151e4a1cfac06c5d622f92c2ad4672850267664287
+**image:** jgraph/drawio:26.0.4@sha256:cb527f1a797dbd8daffc3a6fc94eb20faafb812037d6d032a0977809845921d2
 
 **url:** draw.$DOMAINNAME
 
@@ -124,7 +124,7 @@
 
 **container_name:** excalidraw
 
-**image:** excalidraw/excalidraw:latest@sha256:56163a0c3eaeaf3444b3addf60d7cb6011a56bd17a7d0e1c24f11e62324a5d07
+**image:** excalidraw/excalidraw:latest@sha256:49905be9d90ccf8d19986f6cfbfafc46c36c8a8ff6fbccad98f2032bb66a85d7
 
 **url:** excalidraw.$DOMAINNAME
 
@@ -150,7 +150,7 @@
 
 **container_name:** gatus-db
 
-**image:** docker.io/library/postgres:16.6-alpine@sha256:91e75546b4f229fa92cec21a2bf831ba03a1c101fc197daafff657f153e93a39
+**image:** docker.io/library/postgres:16.6-alpine@sha256:aba1fab94626cf8b0f4549055214239a37e0a690f03f142b7bca05b9ed36c6db
 
 ### Service: gatus-db-backup
 
@@ -164,7 +164,7 @@
 
 **container_name:** home-assistant
 
-**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:4bf60f55e6682bd134574a91fd9a4820dd6970ed5c08b6c0b7b841e4288ecbaa
+**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:df6d620d49b0d9be2edc92ac96c920b8495da161fd4d4d1b02b2876c54ab21cc
 
 **url:** home-assistant.$DOMAINNAME
 
@@ -174,7 +174,7 @@
 
 **container_name:** homepage
 
-**image:** ghcr.io/gethomepage/homepage:v0.10.6@sha256:426d75031d40a47d58b962766a4d11277490973c137ff5a98e051c9d204f5268
+**image:** ghcr.io/gethomepage/homepage:v0.10.9@sha256:b6d732817572f9af99ec168b10641b8f7820f30cfa5a5cc5c68f1e291804bec8
 
 **url:** apps-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -190,7 +190,7 @@
 
 **container_name:** hoppscotch
 
-**image:** hoppscotch/hoppscotch:2024.12.0@sha256:4119b155dc2fb8cb088ef427e16b955339d02f9a8587e577dcb6812d9f31d890
+**image:** hoppscotch/hoppscotch:2024.12.1@sha256:162e5d932c71c80dbea1d505930b3b903ca8b729e82d0fb2c149df59e590e500
 
 **url:** api-tester.$DOMAINNAME
 
@@ -198,7 +198,7 @@
 
 **container_name:** hoppscotch-db
 
-**image:** docker.io/library/postgres:16.6-alpine@sha256:91e75546b4f229fa92cec21a2bf831ba03a1c101fc197daafff657f153e93a39
+**image:** docker.io/library/postgres:16.6-alpine@sha256:aba1fab94626cf8b0f4549055214239a37e0a690f03f142b7bca05b9ed36c6db
 
 ### Service: hoppscotch-db-backup
 
@@ -222,7 +222,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:v1.42.4@sha256:6ce57a7f86d4ad591635e19a6e7f3a02bdeef65c55065a7f722f72dc02485705
+**image:** lobehub/lobe-chat:v1.42.6@sha256:baa84d20837d3502fafc7e19f17ca06375939accff4b26b8f15f7dcd647c2026
 
 **url:** chat.$DOMAINNAME
 
@@ -240,7 +240,7 @@
 
 **container_name:** n8n-db
 
-**image:** docker.io/library/postgres:16.6-alpine@sha256:91e75546b4f229fa92cec21a2bf831ba03a1c101fc197daafff657f153e93a39
+**image:** docker.io/library/postgres:16.6-alpine@sha256:aba1fab94626cf8b0f4549055214239a37e0a690f03f142b7bca05b9ed36c6db
 
 ### Service: n8n-db-backup
 
@@ -254,7 +254,7 @@
 
 **container_name:** nextcloud
 
-**image:** nextcloud:30.0.4-apache@sha256:6bba95a59b3bcc95b81c93b8fc5299ad2ea8d83692e6cf289650c132f7151209
+**image:** nextcloud:30.0.4-apache@sha256:4a81d50b8f5ff788083a3e30c2fc9b0519e7fbe5f5ede9db5301eb87983c66b8
 
 **url:** cloud.$DOMAINNAME
 
@@ -262,7 +262,7 @@
 
 **container_name:** nextcloud-cron
 
-**image:** nextcloud:30.0.4-apache@sha256:6bba95a59b3bcc95b81c93b8fc5299ad2ea8d83692e6cf289650c132f7151209
+**image:** nextcloud:30.0.4-apache@sha256:4a81d50b8f5ff788083a3e30c2fc9b0519e7fbe5f5ede9db5301eb87983c66b8
 
 ### Service: nextcloud-db
 
@@ -288,7 +288,7 @@
 
 **container_name:** openspeedtest
 
-**image:** openspeedtest/latest:v2.0.5@sha256:bbddd8eda80cc4deb2a5702efd0acd826137650ba0bfcc6720f896c74bca02ee
+**image:** openspeedtest/latest:v2.0.6@sha256:a6a7e3b3e9e93cfe7b9b2eb49c60b2a93644149a0a600845d4df57148b193ff6
 
 **url:** speedtest.$DOMAINNAME
 
@@ -298,7 +298,7 @@
 
 **container_name:** phpmyadmin
 
-**image:** phpmyadmin:5.2.1-apache@sha256:e2306dbeddb7901fb3f08bb0c8e5896ef816e8d53f6bdd82ffb538e5fc5a725e
+**image:** phpmyadmin:5.2.1-apache@sha256:6e75aa8f767c5c9b7f3859e7f3006ad669739159d4e312e7570b66082da7f949
 
 **url:** phpmyadmin.$DOMAINNAME
 
@@ -308,7 +308,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.41.3.9314-a0bfb8370@sha256:3d2ed27abb4f72038705c3e0c3d40ff89821a0c66d43e55125873de127197d25
+**image:** lscr.io/linuxserver/plex:version-1.41.3.9314-a0bfb8370@sha256:dda062ebde8c619a656f7ed6e6da7885ca7e114536c1e76b1de3e32a57d3597b
 
 **url:** plex-noauth.$DOMAINNAME
 
@@ -336,7 +336,7 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:7.0.16@sha256:725b4cfe87014950ce9b423ac0a03035f6014a33475030403a3e583eb1485045
+**image:** mongo:7.0.16@sha256:24077ea3097e7b5dc5208354c62d607b1d08da6267b1c458d108cf77794b590c
 
 ### Service: unifi-db-backup
 
@@ -350,7 +350,7 @@
 
 **container_name:** whoogle
 
-**image:** benbusby/whoogle-search:latest@sha256:60e071aa7c8b8d486c9bca773e26688744ca22cfdb61f58fa6a7f41fc50cd848
+**image:** benbusby/whoogle-search:latest@sha256:d26b249415fd8a7ca7566a7053d02f62c37e622c76e8e76107bf789d05f43ea8
 
 **url:** search.$DOMAINNAME
 
