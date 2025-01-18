@@ -7,7 +7,7 @@
   image: daya0576/beaverhabits:0.4@sha256:e7bec8d18e149c3b19973cd178639b0b5f05450265cc4e2bba4e0581937adaae
   url: habits.$DOMAINNAME
 - container_name: beaverhabits-db-backup
-  image: tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
+  image: tiredofit/db-backup:4.1.12@sha256:d3ee1a8fe16200587bed037c81fb651db031d68f3809c38d8d62976aa0745e39
 - container_name: bitwarden
   image: bitwarden/self-host:2025.1.0-beta@sha256:622dfe16bec7584f4a13d089f55438ad84eeebb08cc98d303a0ea5331c374cdd
   url: bitwarden.$DOMAINNAME
