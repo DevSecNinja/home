@@ -65,7 +65,7 @@
   image: ghcr.io/corentinth/it-tools:2023.12.21-5ed3693@sha256:4aaf67eab769afc9dac5614a15614537446e11150d53eab3be34ac9775a27e3a
   url: tools.$DOMAINNAME
 - container_name: lobe-chat
-  image: lobehub/lobe-chat:v1.47.2@sha256:5d18eda40ec26b9f8c23f523ffb9ed786df610dfcc7ea775a72515c9abcc94b2
+  image: lobehub/lobe-chat:v1.47.4@sha256:6f8faf6bb0060724da52d301d1c55eae57a75d7e345cf9eff14da539aa8164ed
   url: chat.$DOMAINNAME
 - container_name: n8n
   image: n8nio/n8n:1.75.2@sha256:6cf38471f4a368ba0d50dbec31bba0310a4e12565852619d79477953eb010e39
@@ -75,10 +75,10 @@
 - container_name: n8n-db-backup
   image: tiredofit/db-backup:4.1.12@sha256:d3ee1a8fe16200587bed037c81fb651db031d68f3809c38d8d62976aa0745e39
 - container_name: nextcloud
-  image: nextcloud:30.0.4-apache@sha256:4a81d50b8f5ff788083a3e30c2fc9b0519e7fbe5f5ede9db5301eb87983c66b8
+  image: nextcloud:30.0.5-apache@sha256:02441f524c6fab3aadbf7157f6e0484927e231d685b248dc0734fa2941b4445e
   url: cloud.$DOMAINNAME
 - container_name: nextcloud-cron
-  image: nextcloud:30.0.4-apache@sha256:4a81d50b8f5ff788083a3e30c2fc9b0519e7fbe5f5ede9db5301eb87983c66b8
+  image: nextcloud:30.0.5-apache@sha256:02441f524c6fab3aadbf7157f6e0484927e231d685b248dc0734fa2941b4445e
 - container_name: nextcloud-db
   image: mariadb:11.6.2@sha256:a9547599cd87d7242435aea6fda22a9d83e2c06d16c658ef70d2868b3d3f6a80
 - container_name: nextcloud-db-backup
