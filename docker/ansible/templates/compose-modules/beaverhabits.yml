@@ -1,6 +1,6 @@
 services:
   beaverhabits:
-    image: daya0576/beaverhabits:0.4@sha256:9ee652e0c260fb142651f89c39b3e4bbfbc176f127042a47ab09af3e145f454a
+    image: daya0576/beaverhabits:0.4@sha256:390996eb549510e7979bbb9956119b5391184e80be7e9398530b3dd5128ab19b
     user: "${PUID}:${PGID}"
     container_name: beaverhabits
     depends_on:
