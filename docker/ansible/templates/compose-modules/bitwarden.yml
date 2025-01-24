@@ -84,7 +84,7 @@ services:
 
   bitwarden-db-backup:
     container_name: bitwarden-db-backup
-    image: tiredofit/db-backup:4.1.12@sha256:d3ee1a8fe16200587bed037c81fb651db031d68f3809c38d8d62976aa0745e39
+    image: tiredofit/db-backup:4.1.14@sha256:23dd6392a2b448269b4b67e8b357090304536858791d82e4e360dcfaaa438ba3
     depends_on:
       - bitwarden-db
     volumes:
