@@ -1,6 +1,6 @@
 services:
   hoppscotch:
-    image: hoppscotch/hoppscotch:2024.12.1@sha256:162e5d932c71c80dbea1d505930b3b903ca8b729e82d0fb2c149df59e590e500
+    image: hoppscotch/hoppscotch:2024.12.2@sha256:9a552903d063abafa746c1b157966b7d7dce3789766ecc2a2678a257261dd1c2
     container_name: hoppscotch
     depends_on:
       - traefik
