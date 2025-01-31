@@ -70,7 +70,7 @@ services:
 
   n8n-db-backup:
     container_name: n8n-db-backup
-    image: tiredofit/db-backup:4.1.14@sha256:23dd6392a2b448269b4b67e8b357090304536858791d82e4e360dcfaaa438ba3
+    image: tiredofit/db-backup:4.1.15@sha256:52f0befb0c05ee9e1c3f9013e3190acd18a7c558216c145031f3c5068758ebc2
     depends_on:
       - n8n-db
     mem_limit: 512m
