@@ -68,7 +68,7 @@
   image: lobehub/lobe-chat:v1.49.6@sha256:d27484d7c858ec2b1d553851f332a7543c3affed5dc4b2aa2af695f4c26f587e
   url: chat.$DOMAINNAME
 - container_name: n8n
-  image: n8nio/n8n:1.75.2@sha256:a10e63b5783c267b6c3f70555691109473b61d4659f7fefb7f92644d5a7081dd
+  image: n8nio/n8n:1.77.0@sha256:dd093bb2a9099fc43de6d69958220218970ea1683d756cf72bb8801c4452b533
   url: n8n.$DOMAINNAME
 - container_name: n8n-db
   image: docker.io/library/postgres:16.6-alpine@sha256:aba1fab94626cf8b0f4549055214239a37e0a690f03f142b7bca05b9ed36c6db
