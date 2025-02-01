@@ -164,7 +164,7 @@
 
 **container_name:** home-assistant
 
-**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:951177b1225c0837d98c12d7317fc012681b0c70d0c40962f5048f49b180297f
+**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:40c3aa7622d74e9f9519b30ca41e0cc60af9ae1fec0111ac81bb7ecb5d4ff077
 
 **url:** home-assistant.$DOMAINNAME
 

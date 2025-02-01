@@ -47,7 +47,7 @@
 - container_name: gatus-db-backup
   image: tiredofit/db-backup:4.1.15@sha256:52f0befb0c05ee9e1c3f9013e3190acd18a7c558216c145031f3c5068758ebc2
 - container_name: home-assistant
-  image: ghcr.io/home-assistant/home-assistant:beta@sha256:951177b1225c0837d98c12d7317fc012681b0c70d0c40962f5048f49b180297f
+  image: ghcr.io/home-assistant/home-assistant:beta@sha256:40c3aa7622d74e9f9519b30ca41e0cc60af9ae1fec0111ac81bb7ecb5d4ff077
   url: home-assistant.$DOMAINNAME
 - container_name: homepage
   image: ghcr.io/gethomepage/homepage:v0.10.9@sha256:b6d732817572f9af99ec168b10641b8f7820f30cfa5a5cc5c68f1e291804bec8
