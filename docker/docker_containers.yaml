@@ -47,7 +47,7 @@
 - container_name: gatus-db-backup
   image: tiredofit/db-backup:4.1.15@sha256:52f0befb0c05ee9e1c3f9013e3190acd18a7c558216c145031f3c5068758ebc2
 - container_name: home-assistant
-  image: ghcr.io/home-assistant/home-assistant:beta@sha256:40c3aa7622d74e9f9519b30ca41e0cc60af9ae1fec0111ac81bb7ecb5d4ff077
+  image: ghcr.io/home-assistant/home-assistant:beta@sha256:4aff8410bf31d4fbe4ccd7b58607c7c322bba1bfc453ec0d291df9c7a6eb63f4
   url: home-assistant.$DOMAINNAME
 - container_name: homepage
   image: ghcr.io/gethomepage/homepage:v0.10.9@sha256:b6d732817572f9af99ec168b10641b8f7820f30cfa5a5cc5c68f1e291804bec8
@@ -65,7 +65,7 @@
   image: ghcr.io/corentinth/it-tools:2023.12.21-5ed3693@sha256:4aaf67eab769afc9dac5614a15614537446e11150d53eab3be34ac9775a27e3a
   url: tools.$DOMAINNAME
 - container_name: lobe-chat
-  image: lobehub/lobe-chat:v1.49.6@sha256:d27484d7c858ec2b1d553851f332a7543c3affed5dc4b2aa2af695f4c26f587e
+  image: lobehub/lobe-chat:v1.49.9@sha256:29c0b910cd490b21cb3258b21da7d28803a2d5fe034264896aa8338d42d9724c
   url: chat.$DOMAINNAME
 - container_name: n8n
   image: n8nio/n8n:1.77.0@sha256:dd093bb2a9099fc43de6d69958220218970ea1683d756cf72bb8801c4452b533

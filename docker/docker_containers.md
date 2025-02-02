@@ -164,7 +164,7 @@
 
 **container_name:** home-assistant
 
-**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:40c3aa7622d74e9f9519b30ca41e0cc60af9ae1fec0111ac81bb7ecb5d4ff077
+**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:4aff8410bf31d4fbe4ccd7b58607c7c322bba1bfc453ec0d291df9c7a6eb63f4
 
 **url:** home-assistant.$DOMAINNAME
 
@@ -222,7 +222,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:v1.49.6@sha256:d27484d7c858ec2b1d553851f332a7543c3affed5dc4b2aa2af695f4c26f587e
+**image:** lobehub/lobe-chat:v1.49.9@sha256:29c0b910cd490b21cb3258b21da7d28803a2d5fe034264896aa8338d42d9724c
 
 **url:** chat.$DOMAINNAME
 
