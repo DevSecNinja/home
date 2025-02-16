@@ -88,7 +88,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v8.11.1@sha256:cc6060ef301cf937db5f76922713c72b325130d68d9d6571211d6c047c427027
+**image:** amir20/dozzle:v8.11.3@sha256:e4d7a22965376c43520d5019f7ba8ac30af9af031ad3c016d444d3ff218052d3
 
 **url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -150,7 +150,7 @@
 
 **container_name:** gatus-db
 
-**image:** docker.io/library/postgres:16.6-alpine@sha256:1d04b9ba1d4996401f2552b51beda8187f175c0645c091e4781134fc9c9a3eef
+**image:** docker.io/library/postgres:16.7-alpine@sha256:97a14a17b1fea5ae1ab33024ca556bb4fedc8709bea5722cb8b7665a9cabb656
 
 ### Service: gatus-db-backup
 
@@ -198,7 +198,7 @@
 
 **container_name:** hoppscotch-db
 
-**image:** docker.io/library/postgres:16.6-alpine@sha256:1d04b9ba1d4996401f2552b51beda8187f175c0645c091e4781134fc9c9a3eef
+**image:** docker.io/library/postgres:16.7-alpine@sha256:97a14a17b1fea5ae1ab33024ca556bb4fedc8709bea5722cb8b7665a9cabb656
 
 ### Service: hoppscotch-db-backup
 
@@ -222,7 +222,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:1.55.4@sha256:3fa828dd2249d0e98c3764c8b3833f53d35c38784d8026322e0f8cbcbd8192ed
+**image:** lobehub/lobe-chat:1.56.5@sha256:e605a2c4c7540aec82e3bd6aef358e1563f35362bd9442ddf404edca7983ff01
 
 **url:** chat.$DOMAINNAME
 
@@ -240,7 +240,7 @@
 
 **container_name:** n8n-db
 
-**image:** docker.io/library/postgres:16.6-alpine@sha256:1d04b9ba1d4996401f2552b51beda8187f175c0645c091e4781134fc9c9a3eef
+**image:** docker.io/library/postgres:16.7-alpine@sha256:97a14a17b1fea5ae1ab33024ca556bb4fedc8709bea5722cb8b7665a9cabb656
 
 ### Service: n8n-db-backup
 
