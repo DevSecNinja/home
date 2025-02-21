@@ -1,6 +1,6 @@
 services:
   gatus:
-    image: twinproduction/gatus:v5.15.0@sha256:244af66f5eacb50040c2f1178913aecb301fc5bcd25720d99f89ec4a65964ecc
+    image: twinproduction/gatus:v5.16.0@sha256:bb738c87cf2e2a08b8fff180cfc433e7b8b87bb1779c1fb1b00f8b748673e3c3
     container_name: gatus
     depends_on:
       - traefik
