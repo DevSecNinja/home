@@ -1,6 +1,6 @@
 services:
   nextcloud:
-    image: nextcloud:30.0.6-apache@sha256:6456ee9dab40419b9e3349f1a0c46d5764c47a5565fe2a105cd2b5f6ea77dbe5
+    image: nextcloud:30.0.6-apache@sha256:49feadfd86a831eb995916d95d5e1f12736381384630c3892d4f3715867a886e
     container_name: nextcloud
     depends_on:
       - traefik
@@ -117,7 +117,7 @@ services:
       - nextcloud-backend
 
   nextcloud-cron:
-    image: nextcloud:30.0.6-apache@sha256:6456ee9dab40419b9e3349f1a0c46d5764c47a5565fe2a105cd2b5f6ea77dbe5
+    image: nextcloud:30.0.6-apache@sha256:49feadfd86a831eb995916d95d5e1f12736381384630c3892d4f3715867a886e
     container_name: nextcloud-cron
     restart: always
     security_opt:
