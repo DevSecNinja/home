@@ -38,7 +38,7 @@
 
 **container_name:** bitwarden
 
-**image:** bitwarden/self-host:2025.1.3-beta@sha256:b66f681a3eaebfa9d64f14829b33997885a1b3858a1cc8db928cf390bb9bd617
+**image:** bitwarden/self-host:2025.2.0-beta@sha256:75651a95f13b9c389cb87c1e3d9a325d4344778adef88795a8cc51a7cbe85c15
 
 **url:** bitwarden.$DOMAINNAME
 
@@ -88,7 +88,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v8.11.5@sha256:57677aed536d17b5ba5ce321cd4c2039f8476af4488069832e16efc40cab780f
+**image:** amir20/dozzle:v8.11.7@sha256:ac4b71eaad9f65c7dabaeb55b39b586f6d7b15c7846f91dd09ba006d2ae26e52
 
 **url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -150,7 +150,7 @@
 
 **container_name:** gatus-db
 
-**image:** docker.io/library/postgres:16.8-alpine@sha256:43d7ff0cb28bdd6dd9190c306d09f7f7c9f83ed9cdcf12c5caf4be53fb24b714
+**image:** docker.io/library/postgres:16.8-alpine@sha256:3b057e1c2c6dfee60a30950096f3fab33be141dbb0fdd7af3d477083de94166c
 
 ### Service: gatus-db-backup
 
@@ -164,7 +164,7 @@
 
 **container_name:** home-assistant
 
-**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:5b69ca3b3c1a13b8fe05a052a5110f7e2bffca1bf448af44bd52e52a27400c36
+**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:c7de72024c00d5d2e3a357c24ea7f27f620c3c87c8bfe4f1dd454c94483fdbda
 
 **url:** home-assistant.$DOMAINNAME
 
@@ -198,7 +198,7 @@
 
 **container_name:** hoppscotch-db
 
-**image:** docker.io/library/postgres:16.8-alpine@sha256:43d7ff0cb28bdd6dd9190c306d09f7f7c9f83ed9cdcf12c5caf4be53fb24b714
+**image:** docker.io/library/postgres:16.8-alpine@sha256:3b057e1c2c6dfee60a30950096f3fab33be141dbb0fdd7af3d477083de94166c
 
 ### Service: hoppscotch-db-backup
 
@@ -222,7 +222,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:1.62.9@sha256:fa529c035a968f73ffb8d6a5c65b4b983dc14b85f35fd648964581b43d087f02
+**image:** lobehub/lobe-chat:1.66.5@sha256:dc9ad5024d07bc90bd827ae8da8304184d3de4bedf392db367db016ef269aec3
 
 **url:** chat.$DOMAINNAME
 
@@ -232,7 +232,7 @@
 
 **container_name:** n8n
 
-**image:** n8nio/n8n:1.80.3@sha256:76997d169566a957f9304027c2f7e4304bc684ddf7ec7120602dc2a0b66e42ce
+**image:** n8nio/n8n:1.81.2@sha256:b517a2f221157aabcef3580ef0a9a2afa0438462b36754b29d420d1172e5246f
 
 **url:** n8n.$DOMAINNAME
 
@@ -240,7 +240,7 @@
 
 **container_name:** n8n-db
 
-**image:** docker.io/library/postgres:16.8-alpine@sha256:43d7ff0cb28bdd6dd9190c306d09f7f7c9f83ed9cdcf12c5caf4be53fb24b714
+**image:** docker.io/library/postgres:16.8-alpine@sha256:3b057e1c2c6dfee60a30950096f3fab33be141dbb0fdd7af3d477083de94166c
 
 ### Service: n8n-db-backup
 
@@ -254,7 +254,7 @@
 
 **container_name:** nextcloud
 
-**image:** nextcloud:30.0.6-apache@sha256:6456ee9dab40419b9e3349f1a0c46d5764c47a5565fe2a105cd2b5f6ea77dbe5
+**image:** nextcloud:31.0.0-apache@sha256:32c9403b1b770141850ed999a3a0f20c8ff416d487278e531ae5d594e23d55d2
 
 **url:** cloud.$DOMAINNAME
 
@@ -262,7 +262,7 @@
 
 **container_name:** nextcloud-cron
 
-**image:** nextcloud:30.0.6-apache@sha256:6456ee9dab40419b9e3349f1a0c46d5764c47a5565fe2a105cd2b5f6ea77dbe5
+**image:** nextcloud:31.0.0-apache@sha256:32c9403b1b770141850ed999a3a0f20c8ff416d487278e531ae5d594e23d55d2
 
 ### Service: nextcloud-db
 
@@ -298,7 +298,7 @@
 
 **container_name:** phpmyadmin
 
-**image:** phpmyadmin:5.2.2-apache@sha256:b8e9de0186fe7e12e3a9565432c9faf6e8f0ec0f78f07bc3625910fd130afb99
+**image:** phpmyadmin:5.2.2-apache@sha256:fe8e5b08cba6f2bd59511aab29413e7cbd070db7f2b8ca87176d92b5c1a296cc
 
 **url:** phpmyadmin.$DOMAINNAME
 
@@ -308,7 +308,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.41.4.9463-630c9f557@sha256:76d2cf7acc05bba64356dc47fa8d061135519f380c86d0a9a46a48c6bb37102e
+**image:** lscr.io/linuxserver/plex:version-1.41.4.9463-630c9f557@sha256:3f8bae7222401c135eb38056f35d77100b5b3db764f9fde21db92405366dc05c
 
 **url:** plex-noauth.$DOMAINNAME
 
@@ -328,7 +328,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-9.0.114@sha256:1fb43625e37e6d618f1c0d9cbea2fa3fa05a608a7c5379078773a72fe1bbb839
+**image:** lscr.io/linuxserver/unifi-network-application:version-9.0.114@sha256:0b126fc0c5078fb76deeef77b11816c85f0514716cc21fb97bce5d9d2c3604a5
 
 **url:** unifi.$DOMAINNAME
 
@@ -336,7 +336,7 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:7.0.16@sha256:c630c59342c1493d50345136df2af14a76b9e827dd5316bfabee07a0880a5f3a
+**image:** mongo:7.0.17@sha256:ccac38202342a813cf0bc4568ff6e4a2cf9e59f5ffadb44f6a48028fc88665cd
 
 ### Service: unifi-db-backup
 
@@ -350,7 +350,7 @@
 
 **container_name:** whoogle
 
-**image:** benbusby/whoogle-search:latest@sha256:7f23da2308665ff23100aaf11e8e2c5178446a203245745757e973058ef633e7
+**image:** benbusby/whoogle-search:latest@sha256:b5e3f34b60aeead5f96f2ff5a6607c3f5afc4574d2bba964e8d01d6d78d25aa3
 
 **url:** search.$DOMAINNAME
 
