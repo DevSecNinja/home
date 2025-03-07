@@ -1,7 +1,7 @@
 services:
   # NOTE: The Traefik IP needs to be whitelisted in the Home Assistant configuration
   home-assistant:
-    image: ghcr.io/home-assistant/home-assistant:beta@sha256:78ea06b6ae0fa576ae3b50a492d514101a87206ecdf1fe86b9a792dbcb10de67
+    image: ghcr.io/home-assistant/home-assistant:beta@sha256:862f07f14c63589586c6e04a7ea91fc1ab2bc097d44a5104229df6c03bdcebb5
     container_name: home-assistant
     depends_on:
       - traefik
