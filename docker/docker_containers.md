@@ -38,7 +38,7 @@
 
 **container_name:** bitwarden
 
-**image:** bitwarden/self-host:2025.2.0-beta@sha256:75651a95f13b9c389cb87c1e3d9a325d4344778adef88795a8cc51a7cbe85c15
+**image:** bitwarden/self-host:2025.2.1-beta@sha256:d8d510eb726e0c2d265cb1f46f5ee22f208851eef5976efbd27172f1871a570c
 
 **url:** bitwarden.$DOMAINNAME
 
@@ -88,7 +88,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v8.11.7@sha256:ac4b71eaad9f65c7dabaeb55b39b586f6d7b15c7846f91dd09ba006d2ae26e52
+**image:** amir20/dozzle:v8.11.8@sha256:d6b43130cdee36aab01a1a1fae7f83b2b8db63c1ee3b5ef61781cb947967bc9b
 
 **url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -124,7 +124,7 @@
 
 **container_name:** excalidraw
 
-**image:** excalidraw/excalidraw:latest@sha256:03146468df779bae984a60b0c88dd00cc66b9bfd3acafb119ec3fd1f27a24d0a
+**image:** excalidraw/excalidraw:latest@sha256:4ad96a4be4def40c1ad21de7d3eecaa731371e989adf3dc97eb153afe9d5fd43
 
 **url:** excalidraw.$DOMAINNAME
 
@@ -164,7 +164,7 @@
 
 **container_name:** home-assistant
 
-**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:c7de72024c00d5d2e3a357c24ea7f27f620c3c87c8bfe4f1dd454c94483fdbda
+**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:9a85fd0a6b9af0bcdc0d7b3a4d65be3baada22d2b1e3298f30e9e971cfe29ff3
 
 **url:** home-assistant.$DOMAINNAME
 
@@ -222,7 +222,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:1.66.5@sha256:dc9ad5024d07bc90bd827ae8da8304184d3de4bedf392db367db016ef269aec3
+**image:** lobehub/lobe-chat:1.66.6@sha256:64f6346f9c54feeb336544ceeb3f6572e7fefb3c05a52f83bfebc44623b290d9
 
 **url:** chat.$DOMAINNAME
 
@@ -308,7 +308,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.41.4.9463-630c9f557@sha256:3f8bae7222401c135eb38056f35d77100b5b3db764f9fde21db92405366dc05c
+**image:** lscr.io/linuxserver/plex:version-1.41.4.9463-630c9f557@sha256:d4ea24c1f42d36f3c5ee485418a746be0440fe3c2b735c162c15d028f3495a6f
 
 **url:** plex-noauth.$DOMAINNAME
 
@@ -318,7 +318,7 @@
 
 **container_name:** traefik-forward-auth
 
-**image:** ghcr.io/italypaleale/traefik-forward-auth:3.1.5@sha256:fc717ff42f367f5bc5f0101880cd488d46acd56c7fd3a6094c78a414e58c183d
+**image:** ghcr.io/italypaleale/traefik-forward-auth:3.2.0@sha256:3942ad1e29b29592a7bc49272c8153d10afaa19d3d3dfbc1e0edfce15f48024a
 
 **url:** auth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -328,7 +328,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-9.0.114@sha256:0b126fc0c5078fb76deeef77b11816c85f0514716cc21fb97bce5d9d2c3604a5
+**image:** lscr.io/linuxserver/unifi-network-application:version-9.0.114@sha256:b03a7bb9ce1ebad6cebcd32840f83710efdd7fca6f7a26c5d04a0d8c437a8d16
 
 **url:** unifi.$DOMAINNAME
 
