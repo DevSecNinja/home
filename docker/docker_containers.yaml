@@ -29,7 +29,7 @@
 - container_name: dozzle-docker-proxy
   image: lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:46992e6a45e09cec882760aa40f58912fb6ff3b9c1eb1a333e6380a68a232ce8
 - container_name: drawio
-  image: jgraph/drawio:26.0.9@sha256:56c76837a7e801f70f8c0bcf52fa6681dde896e879d61e164d7403da9e573094
+  image: jgraph/drawio:26.1.0@sha256:1cc45bc1fdca5307e8e3e23760e7962884e428ad2b93731f2ad5c0ba350828f0
   url: draw.$DOMAINNAME
 - container_name: echo-server
   image: mendhak/http-https-echo:35@sha256:440ca6b810bc04606aac700e461caca5543eaa882c4e0af96a33424d05a23592
@@ -68,7 +68,7 @@
   image: lobehub/lobe-chat:1.66.6@sha256:64f6346f9c54feeb336544ceeb3f6572e7fefb3c05a52f83bfebc44623b290d9
   url: chat.$DOMAINNAME
 - container_name: n8n
-  image: n8nio/n8n:1.81.2@sha256:b517a2f221157aabcef3580ef0a9a2afa0438462b36754b29d420d1172e5246f
+  image: n8nio/n8n:1.82.1@sha256:9d385ac8e99103d2ed68f81eb2b586a8dd5c2b4d637f304347f4180270b0bc3b
   url: n8n.$DOMAINNAME
 - container_name: n8n-db
   image: docker.io/library/postgres:16.8-alpine@sha256:3b057e1c2c6dfee60a30950096f3fab33be141dbb0fdd7af3d477083de94166c
