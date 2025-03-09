@@ -65,7 +65,7 @@
   image: ghcr.io/corentinth/it-tools:2023.12.21-5ed3693@sha256:4aaf67eab769afc9dac5614a15614537446e11150d53eab3be34ac9775a27e3a
   url: tools.$DOMAINNAME
 - container_name: lobe-chat
-  image: lobehub/lobe-chat:1.66.6@sha256:64f6346f9c54feeb336544ceeb3f6572e7fefb3c05a52f83bfebc44623b290d9
+  image: lobehub/lobe-chat:1.69.3@sha256:11a1cabc782169a79b252913657e8642fbedc97808bf80a85ff71fae662c1333
   url: chat.$DOMAINNAME
 - container_name: n8n
   image: n8nio/n8n:1.82.1@sha256:9d385ac8e99103d2ed68f81eb2b586a8dd5c2b4d637f304347f4180270b0bc3b
