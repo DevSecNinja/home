@@ -88,7 +88,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v8.11.8@sha256:d6b43130cdee36aab01a1a1fae7f83b2b8db63c1ee3b5ef61781cb947967bc9b
+**image:** amir20/dozzle:v8.11.9@sha256:b840926bc5f63be2296d3c99cf7c17a522d631b6afa7fce3fc744d65a1cb92f9
 
 **url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -104,7 +104,7 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:26.1.0@sha256:1cc45bc1fdca5307e8e3e23760e7962884e428ad2b93731f2ad5c0ba350828f0
+**image:** jgraph/drawio:26.1.0@sha256:966e3d89915f95274ea835a92b6b03b5f55ea3f373d806aa0ca26d86ff94514b
 
 **url:** draw.$DOMAINNAME
 
@@ -124,7 +124,7 @@
 
 **container_name:** excalidraw
 
-**image:** excalidraw/excalidraw:latest@sha256:4ad96a4be4def40c1ad21de7d3eecaa731371e989adf3dc97eb153afe9d5fd43
+**image:** excalidraw/excalidraw:latest@sha256:0c95248ae1f3f582d7c4472504a963f52c4f2de4a8174a5b4a3d649e29ee31dc
 
 **url:** excalidraw.$DOMAINNAME
 
@@ -164,7 +164,7 @@
 
 **container_name:** home-assistant
 
-**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:9a85fd0a6b9af0bcdc0d7b3a4d65be3baada22d2b1e3298f30e9e971cfe29ff3
+**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:f34de69aff7b21c7d7d474b86bef4dbce9613668b8d4a936e6c93b3844611505
 
 **url:** home-assistant.$DOMAINNAME
 
@@ -190,7 +190,7 @@
 
 **container_name:** hoppscotch
 
-**image:** hoppscotch/hoppscotch:2025.2.1@sha256:57e7a3f7bea826e713d69336ca49d57cafaaec8bd069077a0075dcc5f257ff7b
+**image:** hoppscotch/hoppscotch:2025.2.2@sha256:05c936b04dd9344dc85c3faa73866e0e756fec5942e5573d330f556c1efe7465
 
 **url:** api-tester.$DOMAINNAME
 
@@ -232,7 +232,7 @@
 
 **container_name:** n8n
 
-**image:** n8nio/n8n:1.82.1@sha256:9d385ac8e99103d2ed68f81eb2b586a8dd5c2b4d637f304347f4180270b0bc3b
+**image:** n8nio/n8n:1.83.2@sha256:5288543ac4dc1ea7149a93e38a24989c913c9007dd2459f6c730ac247c4d958f
 
 **url:** n8n.$DOMAINNAME
 
@@ -254,7 +254,7 @@
 
 **container_name:** nextcloud
 
-**image:** nextcloud:31.0.0-apache@sha256:32c9403b1b770141850ed999a3a0f20c8ff416d487278e531ae5d594e23d55d2
+**image:** nextcloud:31.0.1-apache@sha256:7ec3cf674ee868e3762a3bf913df56887e70a7b8dd1c7681fca6ef76233bd554
 
 **url:** cloud.$DOMAINNAME
 
@@ -262,7 +262,7 @@
 
 **container_name:** nextcloud-cron
 
-**image:** nextcloud:31.0.0-apache@sha256:32c9403b1b770141850ed999a3a0f20c8ff416d487278e531ae5d594e23d55d2
+**image:** nextcloud:31.0.1-apache@sha256:7ec3cf674ee868e3762a3bf913df56887e70a7b8dd1c7681fca6ef76233bd554
 
 ### Service: nextcloud-db
 
@@ -298,7 +298,7 @@
 
 **container_name:** phpmyadmin
 
-**image:** phpmyadmin:5.2.2-apache@sha256:fe8e5b08cba6f2bd59511aab29413e7cbd070db7f2b8ca87176d92b5c1a296cc
+**image:** phpmyadmin:5.2.2-apache@sha256:97fa7d2bb353179c6c8484c09a59fd24ea3402cb16df63ab68c5e3b160c4becb
 
 **url:** phpmyadmin.$DOMAINNAME
 
@@ -308,7 +308,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.41.4.9463-630c9f557@sha256:d4ea24c1f42d36f3c5ee485418a746be0440fe3c2b735c162c15d028f3495a6f
+**image:** lscr.io/linuxserver/plex:version-1.41.5.9522-a96edc606@sha256:535b88a993e3bfe7693edab81346817cd128794eb6fdae0eab02a953823d02f2
 
 **url:** plex-noauth.$DOMAINNAME
 
@@ -328,7 +328,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-9.0.114@sha256:b03a7bb9ce1ebad6cebcd32840f83710efdd7fca6f7a26c5d04a0d8c437a8d16
+**image:** lscr.io/linuxserver/unifi-network-application:version-9.0.114@sha256:79adf36ca9d19395b03fc3762c23478be3738fb9a62a3457b7456bc89ed60ccd
 
 **url:** unifi.$DOMAINNAME
 
@@ -336,7 +336,7 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:7.0.17@sha256:ccac38202342a813cf0bc4568ff6e4a2cf9e59f5ffadb44f6a48028fc88665cd
+**image:** mongo:7.0.17@sha256:ac9e83c57e32bf767f875ac2b9a9d87800d2d91a7829180c3a4826e0599698e8
 
 ### Service: unifi-db-backup
 
