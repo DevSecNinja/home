@@ -6,7 +6,7 @@
 
 **container_name:** adguard
 
-**image:** adguard/adguardhome:v0.107.57@sha256:5c536c1e25f76693ae7ee5e64e8a029893e0f3f1778c8d2a9581383e60cfa9b9
+**image:** adguard/adguardhome:v0.107.59@sha256:5d5e3aef39a8c8906a324f0c2da0a6123929e459b57c1e3f05e401dca5c7bf02
 
 **url:** adguard-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -96,7 +96,7 @@
 
 **container_name:** dozzle-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:46992e6a45e09cec882760aa40f58912fb6ff3b9c1eb1a333e6380a68a232ce8
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.3-r0@sha256:a85b8cd8c30833f3ef2aaa35bd0cbb5170e4afc65efd3c9aef3ba8224e8c1ad6
 
 ## docker/ansible/templates/compose-modules/drawio.yml
 
@@ -104,7 +104,7 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:26.1.0@sha256:966e3d89915f95274ea835a92b6b03b5f55ea3f373d806aa0ca26d86ff94514b
+**image:** jgraph/drawio:26.1.1@sha256:f349ab7cbcb7179f4ec39ec5a6a5c70f81ad26797b8ec3a40d2294ef712ea071
 
 **url:** draw.$DOMAINNAME
 
@@ -124,7 +124,7 @@
 
 **container_name:** excalidraw
 
-**image:** excalidraw/excalidraw:latest@sha256:0c95248ae1f3f582d7c4472504a963f52c4f2de4a8174a5b4a3d649e29ee31dc
+**image:** excalidraw/excalidraw:latest@sha256:393d2b10dcea52d78a7f325fef665d3ccb74f7c50d8bc20d6732551884a086f2
 
 **url:** excalidraw.$DOMAINNAME
 
@@ -164,7 +164,7 @@
 
 **container_name:** home-assistant
 
-**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:f34de69aff7b21c7d7d474b86bef4dbce9613668b8d4a936e6c93b3844611505
+**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:212de3ccbd50ab55e8aedf2e6001ddc4cc8fec59ea0330879c59fdc8cdebbf61
 
 **url:** home-assistant.$DOMAINNAME
 
@@ -182,7 +182,7 @@
 
 **container_name:** homepage-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:46992e6a45e09cec882760aa40f58912fb6ff3b9c1eb1a333e6380a68a232ce8
+**image:** lscr.io/linuxserver/socket-proxy:version-1.26.3-r0@sha256:a85b8cd8c30833f3ef2aaa35bd0cbb5170e4afc65efd3c9aef3ba8224e8c1ad6
 
 ## docker/ansible/templates/compose-modules/hoppscotch.yml
 
@@ -190,7 +190,7 @@
 
 **container_name:** hoppscotch
 
-**image:** hoppscotch/hoppscotch:2025.2.2@sha256:05c936b04dd9344dc85c3faa73866e0e756fec5942e5573d330f556c1efe7465
+**image:** hoppscotch/hoppscotch:2025.2.3@sha256:e87dbe5e0a6a841f4c75a418527922322257f82d7c7eac1c18960b4168970b00
 
 **url:** api-tester.$DOMAINNAME
 
@@ -222,7 +222,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:1.71.2@sha256:d42d1a347f5866a8dfae76fbf88446b77f4c2e9c3c3841514648e84ef0db07ea
+**image:** lobehub/lobe-chat:1.71.3@sha256:9b2108f9158226b47fdaefe9069873b7e2c8b4befddc6994d7030b7ccf9f08ea
 
 **url:** chat.$DOMAINNAME
 
@@ -254,7 +254,7 @@
 
 **container_name:** nextcloud
 
-**image:** nextcloud:31.0.1-apache@sha256:7ec3cf674ee868e3762a3bf913df56887e70a7b8dd1c7681fca6ef76233bd554
+**image:** nextcloud:31.0.2-apache@sha256:090040f97aa1cd6dbfe4c2a3483df41ca95e0abd1d63342e29d973c88a833a52
 
 **url:** cloud.$DOMAINNAME
 
@@ -262,7 +262,7 @@
 
 **container_name:** nextcloud-cron
 
-**image:** nextcloud:31.0.1-apache@sha256:7ec3cf674ee868e3762a3bf913df56887e70a7b8dd1c7681fca6ef76233bd554
+**image:** nextcloud:31.0.2-apache@sha256:090040f97aa1cd6dbfe4c2a3483df41ca95e0abd1d63342e29d973c88a833a52
 
 ### Service: nextcloud-db
 
@@ -298,7 +298,7 @@
 
 **container_name:** phpmyadmin
 
-**image:** phpmyadmin:5.2.2-apache@sha256:97fa7d2bb353179c6c8484c09a59fd24ea3402cb16df63ab68c5e3b160c4becb
+**image:** phpmyadmin:5.2.2-apache@sha256:6cb0a7146734b59c8ca4f450ce7bde9f518e36b10558af75fc36591cbea1d5cc
 
 **url:** phpmyadmin.$DOMAINNAME
 
@@ -308,7 +308,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.41.5.9522-a96edc606@sha256:535b88a993e3bfe7693edab81346817cd128794eb6fdae0eab02a953823d02f2
+**image:** lscr.io/linuxserver/plex:version-1.41.5.9522-a96edc606@sha256:fab6be170cc06a6c97c3b89ba66c8b2d93ea739b799a0723e85e54632e48ac39
 
 **url:** plex-noauth.$DOMAINNAME
 
@@ -328,7 +328,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-9.0.114@sha256:79adf36ca9d19395b03fc3762c23478be3738fb9a62a3457b7456bc89ed60ccd
+**image:** lscr.io/linuxserver/unifi-network-application:version-9.0.114@sha256:d673e01c837337d982bf52ff25b11a3fd61e573fd3f355f998d869549d5948b6
 
 **url:** unifi.$DOMAINNAME
 
@@ -336,7 +336,7 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:7.0.17@sha256:ac9e83c57e32bf767f875ac2b9a9d87800d2d91a7829180c3a4826e0599698e8
+**image:** mongo:7.0.18@sha256:f81cce81939aada2f6ca6187df54b0271ec254bec5b087be47aa674c7e346d1f
 
 ### Service: unifi-db-backup
 
