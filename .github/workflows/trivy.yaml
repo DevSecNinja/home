@@ -24,7 +24,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run Trivy vulnerability scanner in filesystem mode
-        uses: aquasecurity/trivy-action@ea27ac12e15e065601133e2e439657937385d5a8
+        uses: aquasecurity/trivy-action@7aca5acc9500b463826cc47a47a65ad7d404b045
         with:
           scan-type: "fs"
           ignore-unfixed: true
@@ -46,7 +46,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run Trivy vulnerability scanner in IaC mode
-        uses: aquasecurity/trivy-action@ea27ac12e15e065601133e2e439657937385d5a8
+        uses: aquasecurity/trivy-action@7aca5acc9500b463826cc47a47a65ad7d404b045
         with:
           scan-type: 'config'
           hide-progress: true
@@ -110,7 +110,7 @@ jobs:
           echo "Image ID: $IMAGE_ID"
 
       - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@ea27ac12e15e065601133e2e439657937385d5a8
+        uses: aquasecurity/trivy-action@7aca5acc9500b463826cc47a47a65ad7d404b045
         with:
           image-ref: "${{ steps.getimage.outputs.imageid }}"
           format: "sarif"
