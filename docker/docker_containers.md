@@ -114,7 +114,7 @@
 
 **container_name:** echo-server
 
-**image:** mendhak/http-https-echo:35@sha256:440ca6b810bc04606aac700e461caca5543eaa882c4e0af96a33424d05a23592
+**image:** mendhak/http-https-echo:36@sha256:43bdfe52abc5baed00706337efe26825c86360c6b9b74659a72a9aa2fca8bd55
 
 **url:** echo-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
