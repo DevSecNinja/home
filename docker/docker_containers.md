@@ -222,7 +222,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:1.71.3@sha256:9b2108f9158226b47fdaefe9069873b7e2c8b4befddc6994d7030b7ccf9f08ea
+**image:** lobehub/lobe-chat:1.79.10@sha256:76e79ba8a549c52927b15cd8aae815b9405c9cb139987625f2a7582ef0d850b0
 
 **url:** chat.$DOMAINNAME
 
@@ -232,7 +232,7 @@
 
 **container_name:** n8n
 
-**image:** n8nio/n8n:1.83.2@sha256:5288543ac4dc1ea7149a93e38a24989c913c9007dd2459f6c730ac247c4d958f
+**image:** n8nio/n8n:1.89.0@sha256:36bfcad06a946ee05d56c6629330876887fd8edf210d6b860334f0a54e25e6e0
 
 **url:** n8n.$DOMAINNAME
 
