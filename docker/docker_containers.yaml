@@ -95,7 +95,7 @@
   image: lscr.io/linuxserver/plex:version-1.41.6.9685-d301f511a@sha256:c8a8a12e7fb145e0c00b81238488458c900f1d9b1705953171aee82cbdbba596
   url: plex-noauth.$DOMAINNAME
 - container_name: traefik-forward-auth
-  image: ghcr.io/italypaleale/traefik-forward-auth:3.2.0@sha256:3942ad1e29b29592a7bc49272c8153d10afaa19d3d3dfbc1e0edfce15f48024a
+  image: ghcr.io/italypaleale/traefik-forward-auth:3.5.1@sha256:02cd57e208b923d1d6978c66bd56e73d109a8a9d2926a15a5530cb938d7da911
   url: auth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: unifi
   image: lscr.io/linuxserver/unifi-network-application:version-9.0.114@sha256:5018f4cc07ed1016e8c908d9f6b098aec5a21e741dcc19347960a8f638f1f3c9
