@@ -29,7 +29,7 @@
 - container_name: dozzle-docker-proxy
   image: lscr.io/linuxserver/socket-proxy:version-1.26.3-r0@sha256:a85b8cd8c30833f3ef2aaa35bd0cbb5170e4afc65efd3c9aef3ba8224e8c1ad6
 - container_name: drawio
-  image: jgraph/drawio:26.1.1@sha256:038e61414bbac67903caa4584daf9bf8d28fe7c04252c12bfe986efe06a432ad
+  image: jgraph/drawio:26.2.8@sha256:506bd939e7ce0df172cc140f4b2508104c62c2001e3f8a44094921b670a1e0a0
   url: draw.$DOMAINNAME
 - container_name: echo-server
   image: mendhak/http-https-echo:35@sha256:440ca6b810bc04606aac700e461caca5543eaa882c4e0af96a33424d05a23592

@@ -104,7 +104,7 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:26.1.1@sha256:038e61414bbac67903caa4584daf9bf8d28fe7c04252c12bfe986efe06a432ad
+**image:** jgraph/drawio:26.2.8@sha256:506bd939e7ce0df172cc140f4b2508104c62c2001e3f8a44094921b670a1e0a0
 
 **url:** draw.$DOMAINNAME
 
