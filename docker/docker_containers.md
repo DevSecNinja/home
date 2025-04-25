@@ -6,7 +6,7 @@
 
 **container_name:** adguard
 
-**image:** adguard/adguardhome:v0.107.59@sha256:5d5e3aef39a8c8906a324f0c2da0a6123929e459b57c1e3f05e401dca5c7bf02
+**image:** adguard/adguardhome:v0.107.61@sha256:a2085b04bbfc4759e68fa1d13d4e1558aede67c783c55820e036a95a36dd3ebf
 
 **url:** adguard-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -30,7 +30,7 @@
 
 **container_name:** beaverhabits-db-backup
 
-**image:** tiredofit/db-backup:4.1.16@sha256:26541bb600bc817d9a69edd46141b03e6e6ff7612ac011f3a0264882f8435765
+**image:** tiredofit/db-backup:4.1.17@sha256:c2e1ce1707083ad7edcc429ffc8cdf9ab744fbb992d4038f9f85930c0e50cf23
 
 ## docker/ansible/templates/compose-modules/bitwarden.yml
 
@@ -52,7 +52,7 @@
 
 **container_name:** bitwarden-db-backup
 
-**image:** tiredofit/db-backup:4.1.16@sha256:26541bb600bc817d9a69edd46141b03e6e6ff7612ac011f3a0264882f8435765
+**image:** tiredofit/db-backup:4.1.17@sha256:c2e1ce1707083ad7edcc429ffc8cdf9ab744fbb992d4038f9f85930c0e50cf23
 
 ## docker/ansible/templates/compose-modules/cloudflare.yml
 
@@ -88,7 +88,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v8.12.8@sha256:8ff3115c9c9dd7576839df6f2575de345ca7cafa398cf2496f1f19c31d862ac1
+**image:** amir20/dozzle:v8.12.12@sha256:ed63d87135f0059bb45be651b8c73de8ecca29ebc57096fd9b5f8ce049d0dcdf
 
 **url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -104,7 +104,7 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:26.2.8@sha256:506bd939e7ce0df172cc140f4b2508104c62c2001e3f8a44094921b670a1e0a0
+**image:** jgraph/drawio:26.2.8@sha256:232749107d0714c29acfcc0345c67e0e53c47a613235bd01ffb1e387579c6434
 
 **url:** draw.$DOMAINNAME
 
@@ -124,7 +124,7 @@
 
 **container_name:** excalidraw
 
-**image:** excalidraw/excalidraw:latest@sha256:ae015a80c1d0e239c6bcadeaeed29227b6b1837a682bba95f81c9849f2219729
+**image:** excalidraw/excalidraw:latest@sha256:7c6fe0cd7dc44260aa70f79df787ee7635a9f9585e0a7f1d8a6d1f4d9225a4db
 
 **url:** excalidraw.$DOMAINNAME
 
@@ -156,7 +156,7 @@
 
 **container_name:** gatus-db-backup
 
-**image:** tiredofit/db-backup:4.1.16@sha256:26541bb600bc817d9a69edd46141b03e6e6ff7612ac011f3a0264882f8435765
+**image:** tiredofit/db-backup:4.1.17@sha256:c2e1ce1707083ad7edcc429ffc8cdf9ab744fbb992d4038f9f85930c0e50cf23
 
 ## docker/ansible/templates/compose-modules/home-assistant.yml
 
@@ -164,7 +164,7 @@
 
 **container_name:** home-assistant
 
-**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:44076bfc29d52431fcbef76a6a3f92fb6d01d90fe820fdb083d641e351de3ba4
+**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:ab6b0c93c6dd89db4e8982763c19ade14b3b1d06b02198ce2f999f40665ffce9
 
 **url:** home-assistant.$DOMAINNAME
 
@@ -190,7 +190,7 @@
 
 **container_name:** hoppscotch
 
-**image:** hoppscotch/hoppscotch:2025.3.1@sha256:8e462ad5b6c27c68a2376698994de111c29de5b011b5dade6183fd056a92e240
+**image:** hoppscotch/hoppscotch:2025.3.2@sha256:cea441f54fd36585d903ad74a9a5f703cdba1efa916a0b745a6137da08e96c03
 
 **url:** api-tester.$DOMAINNAME
 
@@ -204,7 +204,7 @@
 
 **container_name:** hoppscotch-db-backup
 
-**image:** tiredofit/db-backup:4.1.16@sha256:26541bb600bc817d9a69edd46141b03e6e6ff7612ac011f3a0264882f8435765
+**image:** tiredofit/db-backup:4.1.17@sha256:c2e1ce1707083ad7edcc429ffc8cdf9ab744fbb992d4038f9f85930c0e50cf23
 
 ## docker/ansible/templates/compose-modules/it-tools.yml
 
@@ -222,7 +222,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:1.79.10@sha256:76e79ba8a549c52927b15cd8aae815b9405c9cb139987625f2a7582ef0d850b0
+**image:** lobehub/lobe-chat:1.82.7@sha256:0db6910b10143d532b68351eff0d8c259560522fc03912082311798c99830ecf
 
 **url:** chat.$DOMAINNAME
 
@@ -232,7 +232,7 @@
 
 **container_name:** n8n
 
-**image:** n8nio/n8n:1.89.0@sha256:36bfcad06a946ee05d56c6629330876887fd8edf210d6b860334f0a54e25e6e0
+**image:** n8nio/n8n:1.90.1@sha256:2bfcd8f750a4df151149a1401c27f8a70e5fe77be62c99388631a00d9961d9f1
 
 **url:** n8n.$DOMAINNAME
 
@@ -246,7 +246,7 @@
 
 **container_name:** n8n-db-backup
 
-**image:** tiredofit/db-backup:4.1.16@sha256:26541bb600bc817d9a69edd46141b03e6e6ff7612ac011f3a0264882f8435765
+**image:** tiredofit/db-backup:4.1.17@sha256:c2e1ce1707083ad7edcc429ffc8cdf9ab744fbb992d4038f9f85930c0e50cf23
 
 ## docker/ansible/templates/compose-modules/nextcloud.yml
 
@@ -254,7 +254,7 @@
 
 **container_name:** nextcloud
 
-**image:** nextcloud:31.0.2-apache@sha256:30f08b83aba96464c85bebfa5288a188cfc358e827c267f08436c418bc05946e
+**image:** nextcloud:31.0.4-apache@sha256:dc6004218585aba9d086499cc5c92a0c18f55a9c0d94fc88362722679a5dbed4
 
 **url:** cloud.$DOMAINNAME
 
@@ -262,7 +262,7 @@
 
 **container_name:** nextcloud-cron
 
-**image:** nextcloud:31.0.2-apache@sha256:30f08b83aba96464c85bebfa5288a188cfc358e827c267f08436c418bc05946e
+**image:** nextcloud:31.0.4-apache@sha256:dc6004218585aba9d086499cc5c92a0c18f55a9c0d94fc88362722679a5dbed4
 
 ### Service: nextcloud-db
 
@@ -274,7 +274,7 @@
 
 **container_name:** nextcloud-db-backup
 
-**image:** tiredofit/db-backup:4.1.16@sha256:26541bb600bc817d9a69edd46141b03e6e6ff7612ac011f3a0264882f8435765
+**image:** tiredofit/db-backup:4.1.17@sha256:c2e1ce1707083ad7edcc429ffc8cdf9ab744fbb992d4038f9f85930c0e50cf23
 
 ### Service: nextcloud-redis
 
@@ -308,7 +308,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.41.6.9685-d301f511a@sha256:c8a8a12e7fb145e0c00b81238488458c900f1d9b1705953171aee82cbdbba596
+**image:** lscr.io/linuxserver/plex:version-1.41.6.9685-d301f511a@sha256:c799512e714ea3c5bf5d4589b56a16e29d56bcf8ecfbfc368245514fe6500171
 
 **url:** plex-noauth.$DOMAINNAME
 
@@ -328,7 +328,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-9.0.114@sha256:5018f4cc07ed1016e8c908d9f6b098aec5a21e741dcc19347960a8f638f1f3c9
+**image:** lscr.io/linuxserver/unifi-network-application:version-9.0.114@sha256:08c141dc6ba08fe05db01306ab633ac0478ef8677a1f308ef73bc3342f6f02f1
 
 **url:** unifi.$DOMAINNAME
 
@@ -336,13 +336,13 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:7.0.18@sha256:549107a75d6e6fbaad98edaee35df5c80be6c442c01b6676b22fe0d16223214f
+**image:** mongo:7.0.19@sha256:e5aa36b2b88d39499567ee93a5accc6add94ddc2efd6bb2a5d51b8a84da63e98
 
 ### Service: unifi-db-backup
 
 **container_name:** unifi-db-backup
 
-**image:** tiredofit/db-backup:4.1.16@sha256:26541bb600bc817d9a69edd46141b03e6e6ff7612ac011f3a0264882f8435765
+**image:** tiredofit/db-backup:4.1.17@sha256:c2e1ce1707083ad7edcc429ffc8cdf9ab744fbb992d4038f9f85930c0e50cf23
 
 ## docker/ansible/templates/compose-modules/whoogle.yml
 
