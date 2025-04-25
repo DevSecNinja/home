@@ -27,7 +27,7 @@
   image: amir20/dozzle:v8.12.12@sha256:ed63d87135f0059bb45be651b8c73de8ecca29ebc57096fd9b5f8ce049d0dcdf
   url: dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: dozzle-docker-proxy
-  image: lscr.io/linuxserver/socket-proxy:version-1.26.3-r0@sha256:a85b8cd8c30833f3ef2aaa35bd0cbb5170e4afc65efd3c9aef3ba8224e8c1ad6
+  image: lscr.io/linuxserver/socket-proxy:version-3.0.10-r0@sha256:1cb7a03e3bae30463beeaa65db76aa301b66d3070c0b48e945912a3d23cdb29f
 - container_name: drawio
   image: jgraph/drawio:26.2.8@sha256:232749107d0714c29acfcc0345c67e0e53c47a613235bd01ffb1e387579c6434
   url: draw.$DOMAINNAME
@@ -47,13 +47,13 @@
 - container_name: gatus-db-backup
   image: tiredofit/db-backup:4.1.17@sha256:c2e1ce1707083ad7edcc429ffc8cdf9ab744fbb992d4038f9f85930c0e50cf23
 - container_name: home-assistant
-  image: ghcr.io/home-assistant/home-assistant:beta@sha256:ab6b0c93c6dd89db4e8982763c19ade14b3b1d06b02198ce2f999f40665ffce9
+  image: ghcr.io/home-assistant/home-assistant:beta@sha256:ef20dcfefbadbfa2bfa1039dd82e329e67e3d26f04d9a7d795fe703974c940ca
   url: home-assistant.$DOMAINNAME
 - container_name: homepage
   image: ghcr.io/gethomepage/homepage:v0.10.9@sha256:b6d732817572f9af99ec168b10641b8f7820f30cfa5a5cc5c68f1e291804bec8
   url: apps-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: homepage-docker-proxy
-  image: lscr.io/linuxserver/socket-proxy:version-1.26.3-r0@sha256:a85b8cd8c30833f3ef2aaa35bd0cbb5170e4afc65efd3c9aef3ba8224e8c1ad6
+  image: lscr.io/linuxserver/socket-proxy:version-3.0.10-r0@sha256:1cb7a03e3bae30463beeaa65db76aa301b66d3070c0b48e945912a3d23cdb29f
 - container_name: hoppscotch
   image: hoppscotch/hoppscotch:2025.3.2@sha256:cea441f54fd36585d903ad74a9a5f703cdba1efa916a0b745a6137da08e96c03
   url: api-tester.$DOMAINNAME
