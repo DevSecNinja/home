@@ -1,7 +1,7 @@
 ---
 collections:
   - name: vladgh.samba
-    version: 3.5.0
+    version: 3.5.1
 roles:
   - name: robertdebock.storage
     src: https://github.com/robertdebock/ansible-role-storage
