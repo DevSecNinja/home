@@ -68,7 +68,7 @@
 
 **container_name:** code-server
 
-**image:** lscr.io/linuxserver/code-server:version-4.89.0@sha256:678e01467fecf0d1d32b938f3f5324a69f74f9187d37fadddb8f926024524b8b
+**image:** lscr.io/linuxserver/code-server:version-4.89.0@sha256:07c4a16372f79ca1ba65b706082ebfa83a5d13986cd1da4cc936fe6265a2b295
 
 **url:** code.$DOMAINNAME
 
@@ -88,7 +88,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v8.12.12@sha256:ed63d87135f0059bb45be651b8c73de8ecca29ebc57096fd9b5f8ce049d0dcdf
+**image:** amir20/dozzle:v8.12.14@sha256:3d18f7f82cf5d6bb9f8d7ff01ee213dc81c2a7da3e66297c3af560b77e92daf2
 
 **url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -104,7 +104,7 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:26.2.8@sha256:232749107d0714c29acfcc0345c67e0e53c47a613235bd01ffb1e387579c6434
+**image:** jgraph/drawio:26.2.15@sha256:469ef96c1c3428ecc10ac31f956c7f71e8481887061b2f6888e1be0b9ff0f643
 
 **url:** draw.$DOMAINNAME
 
@@ -124,7 +124,7 @@
 
 **container_name:** excalidraw
 
-**image:** excalidraw/excalidraw:latest@sha256:7c6fe0cd7dc44260aa70f79df787ee7635a9f9585e0a7f1d8a6d1f4d9225a4db
+**image:** excalidraw/excalidraw:latest@sha256:e1c0fdf988f817905314b6e77d2fa6f36996b2c7f1fc29186d494ecc66cc9437
 
 **url:** excalidraw.$DOMAINNAME
 
@@ -164,7 +164,7 @@
 
 **container_name:** home-assistant
 
-**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:ef20dcfefbadbfa2bfa1039dd82e329e67e3d26f04d9a7d795fe703974c940ca
+**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:02ef823ec5c2f5f57330793dfa60e04300954f5efe920740302a52d268a10baa
 
 **url:** home-assistant.$DOMAINNAME
 
@@ -222,7 +222,7 @@
 
 **container_name:** lobe-chat
 
-**image:** lobehub/lobe-chat:1.82.7@sha256:0db6910b10143d532b68351eff0d8c259560522fc03912082311798c99830ecf
+**image:** lobehub/lobe-chat:1.82.10@sha256:0502cfef25500e4f9b8dcb8e90edb7fbeb9a4c860923c94014af1e49baa02a9c
 
 **url:** chat.$DOMAINNAME
 
@@ -232,7 +232,7 @@
 
 **container_name:** n8n
 
-**image:** n8nio/n8n:1.90.1@sha256:2bfcd8f750a4df151149a1401c27f8a70e5fe77be62c99388631a00d9961d9f1
+**image:** n8nio/n8n:1.92.1@sha256:b7b7960111f7b08c301de31758cc57bb511dafefff9fa1809f049f3aea7d5f08
 
 **url:** n8n.$DOMAINNAME
 
@@ -254,7 +254,7 @@
 
 **container_name:** nextcloud
 
-**image:** nextcloud:31.0.4-apache@sha256:dc6004218585aba9d086499cc5c92a0c18f55a9c0d94fc88362722679a5dbed4
+**image:** nextcloud:31.0.4-apache@sha256:ad4da6574b6dcb75c185128b091e6ac613f0aabda7ce7f75c9730d9f706e37d0
 
 **url:** cloud.$DOMAINNAME
 
@@ -262,7 +262,7 @@
 
 **container_name:** nextcloud-cron
 
-**image:** nextcloud:31.0.4-apache@sha256:dc6004218585aba9d086499cc5c92a0c18f55a9c0d94fc88362722679a5dbed4
+**image:** nextcloud:31.0.4-apache@sha256:ad4da6574b6dcb75c185128b091e6ac613f0aabda7ce7f75c9730d9f706e37d0
 
 ### Service: nextcloud-db
 
@@ -280,7 +280,7 @@
 
 **container_name:** nextcloud-redis
 
-**image:** redis:alpine3.19@sha256:892b41c092a599f76c30b48e9dcfb185ce8cea3560970b1c4f2745c89bb34344
+**image:** redis:alpine3.19@sha256:8f157725f8eee31e65a8d4765f1f986d76aedc1a0503345dfb63a2b1b5a441ee
 
 ## docker/ansible/templates/compose-modules/openspeedtest.yml
 
@@ -298,7 +298,7 @@
 
 **container_name:** phpmyadmin
 
-**image:** phpmyadmin:5.2.2-apache@sha256:216747e3a6b7ef8714b79ece498090910c0353a01606c63fe06199a54069683c
+**image:** phpmyadmin:5.2.2-apache@sha256:68d7f9dc247b1b10c3525a244e0688979437f062d253edd5d7bff2019df2a063
 
 **url:** phpmyadmin.$DOMAINNAME
 
@@ -308,7 +308,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.41.6.9685-d301f511a@sha256:c799512e714ea3c5bf5d4589b56a16e29d56bcf8ecfbfc368245514fe6500171
+**image:** lscr.io/linuxserver/plex:version-1.41.6.9685-d301f511a@sha256:53e6a94b2649b3c817757bbdf28d7970bc10e036ec0868b0704f3f51aa612742
 
 **url:** plex-noauth.$DOMAINNAME
 
@@ -336,7 +336,7 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:7.0.19@sha256:e5aa36b2b88d39499567ee93a5accc6add94ddc2efd6bb2a5d51b8a84da63e98
+**image:** mongo:7.0.20@sha256:8314e0ad07eae2dc8ffbd7de5080a7083f41caab62ae0b69363187af5e3b512a
 
 ### Service: unifi-db-backup
 
