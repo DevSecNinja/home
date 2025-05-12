@@ -1,17 +1,75 @@
+#
+# Deprecated in favor for the geerlingguy.docker role
+#
+
 ---
-- hosts: svldock.VM-PROD
-  become: true
-  pre_tasks:
+- hosts: none
+  become: yes
+  tasks:
     - include_tasks: ../tasks/update-os.yaml
     - include_tasks: ../tasks/new-server.yaml
+
+    - name: Install Docker dependencies
+      retries: 20
+      delay: 15
+      ansible.builtin.apt:
+        name: "{{ docker__package_dependencies + docker__pip_dependencies }}"
+        state: present
+        update_cache: yes
+
+    # To use the sops_encrypt module on a remote host, you need to install sops on it:
+    - name: Install sops on remote hosts
+      ansible.builtin.include_role:
+        name: community.sops.install
+      vars:
+        sops_version: "3.8.1"  # leaving this blank installs the latest version
+      # Need to manually install SOPS on ARM
+      # Error: FAILED! => {"changed": false, "msg": "Unable to install package: E:read, still have 8 to read but none left"}
+      when: ansible_architecture == "x86_64"
+
     - include_tasks: ../tasks/configure-ufw.yaml
 
-  roles:
-    - role: geerlingguy.docker
-      docker_users: ['{{ ansible_user }}']
-      become: true
+    - name: "Fix Redis - vm.overcommit_memory=1"
+      lineinfile:
+        dest=/etc/sysctl.conf
+        regexp="^vm.overcommit_memory"
+        line="vm.overcommit_memory = 1"
 
-  post_tasks:
+    - name: Add Docker's APT repository key
+      ansible.builtin.get_url:
+        url: "{{ docker__apt_repository_url }}/gpg"
+        dest: "/etc/apt/keyrings/docker.asc"
+        checksum: "{{ docker__apt_key_checksum }}"
+        owner: "root"
+        group: "root"
+        mode: "0644"
+
+    - name: Configure Docker's upstream APT repository
+      ansible.builtin.apt_repository:
+        repo: "{{ docker__apt_repository }}"
+        update_cache: true
+
+    - name: Ensure group "docker" exists with correct gid
+      ansible.builtin.group:
+        name: docker
+        state: present
+        gid: "{{ pgid }}"
+
+    - name: Add user to docker group
+      user:
+        name: "{{ansible_user}}"
+        group: docker
+        uid: "{{ puid }}"
+        expires: -1
+
+    - name: Install Docker
+      retries: 20
+      delay: 15
+      ansible.builtin.apt:
+        name: "{{ docker__packages }}"
+        state: present
+        update_cache: yes
+
     - name: Create Docker configuration directories
       ansible.builtin.file:
         path: "{{ item }}"
@@ -23,12 +81,26 @@
         - "/srv/docker/data"
         - "/srv/docker/data/backup"
         - "/srv/docker/data/traefik/acme"
+        # - "/srv/docker/data/traefik/certs"
+        # - "/srv/docker/data/traefik/logs"
 
     - name: Create acme config file for traefik
       file:
         path: "/srv/docker/data/traefik/acme/acme.json"
         state: touch
         mode: '0600'
+
+    # - name: Create Traefik log file
+    #   file:
+    #     path: "/srv/docker/data/traefik/logs/traefik.log"
+    #     state: touch
+    #     mode: '0755'
+
+    # - name: Create Traefik access log file
+    #   file:
+    #     path: "/srv/docker/data/traefik/logs/access.log"
+    #     state: touch
+    #     mode: '0755'
 
     - name: Configure DNS settings
       block:

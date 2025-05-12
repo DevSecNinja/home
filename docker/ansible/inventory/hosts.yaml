@@ -21,6 +21,9 @@ docker:
     webservers:
       children:
         linux_amd64:
+          hosts:
+            svldock.VM-PROD:
+              ansible_user: "jean-paul"
           children:
             internal:
               children:
@@ -32,6 +35,8 @@ docker:
                   hosts:
                     svlprod.PRODUCTION:
                       ansible_user: "jean-paul"
+                    # svldock.VM-PROD:
+                    #   ansible_user: "jean-paul"
             external:
               hosts:
                 svlext.ravensberg.org:

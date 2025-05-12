@@ -1,17 +1,20 @@
 ---
 - name: Update apt repo and cache
+  become: true
   ansible.builtin.apt:
     autoclean: true
     update_cache: true
     cache_valid_time: 3600
 
 - name: Upgrade all packages on servers
+  become: true
   ansible.builtin.apt:
     upgrade: dist
     autoremove: true
   register: debian_updates
 
 - name: List installed and updated packages
+  become: true
   shell: grep -E "^$(date +%Y-%m-%d).+ (install|upgrade) " /var/log/dpkg.log |cut -d " " -f 3-5
   register: debian_updates_result
   when: debian_updates.changed
