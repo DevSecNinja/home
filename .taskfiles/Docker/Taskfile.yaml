@@ -33,3 +33,9 @@ tasks:
       vars: ["container"]
     preconditions:
       - { msg: "Missing Ansible inventory file", sh: "test -f {{.ANSIBLE_INVENTORY_FILE}}" }
+
+  install-roles:
+    desc: Install Ansible roles from requirements.yml
+    cmd: "{{.VIRTUAL_ENV}}/bin/ansible-galaxy install -r {{.DOCKER_DIR}}/ansible/requirements.yml -vvv"
+    preconditions:
+      - { msg: "requirements.yml not found", sh: "test -f {{.DOCKER_DIR}}/ansible/requirements.yml" }
