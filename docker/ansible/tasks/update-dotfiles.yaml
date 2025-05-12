@@ -39,7 +39,7 @@
 
 - name: Show git pull results
   debug: msg="{{ pull_result.stdout_lines }}"
-  when: inventory_hostname not in groups['hypervisor']
+  when: inventory_hostname not in groups['hypervisor'] and pull_result.stdout_lines
 
 - name: Run bootstrap script
   become: false
