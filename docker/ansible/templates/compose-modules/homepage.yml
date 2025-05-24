@@ -15,7 +15,7 @@ services:
       # - PUID=${PUID}
       # - PGID=${PGID}
       - TZ=${TZ}
-      - HOMEPAGE_ALLOWED_HOSTS=traefik # Hostname of the Traefik container
+      - HOMEPAGE_ALLOWED_HOSTS=apps-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME # Hostname of the Traefik container
     security_opt:
       - no-new-privileges=true
     mem_limit: 200m
