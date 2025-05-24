@@ -32,7 +32,7 @@
   image: jgraph/drawio:26.2.15@sha256:fdf8141eb204f583014872aca730a5221d819c98fba2ef9e752e3a6c99112312
   url: draw.$DOMAINNAME
 - container_name: echo-server
-  image: mendhak/http-https-echo:36@sha256:43bdfe52abc5baed00706337efe26825c86360c6b9b74659a72a9aa2fca8bd55
+  image: mendhak/http-https-echo:37@sha256:f55000d9196bd3c853d384af7315f509d21ffb85de315c26e9874033b9f83e15
   url: echo-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: excalidraw
   image: excalidraw/excalidraw:latest@sha256:0c75b1cbd5cf6e0673254cc23fc981851a0faaf8c10650fe7bc1088abed44b8a
