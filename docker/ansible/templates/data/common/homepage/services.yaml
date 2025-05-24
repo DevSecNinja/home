@@ -7,19 +7,27 @@
         href: https://svlnas.{{ generic__domain_name }}
         icon: truenas
         description: TrueNAS Scale
+{% if 'internal' in group_names %}
         siteMonitor: https://svlnas.{{ generic__domain_name }}
+{% endif %}
     - JetKVM:
         href: http://jetkvm.MANAGEMENT
         icon: jetkvm
         description: KVM Server
+{% if 'internal' in group_names %}
         siteMonitor: http://jetkvm.MANAGEMENT
+{% endif %}
     - Proxmox SVLHOST01:
         icon: proxmox
         href: https://SVLHOST01.{{ generic__domain_name }}:8006
         description: Proxmox Host 01
+{% if 'internal' in group_names %}
         siteMonitor: https://SVLHOST01.{{ generic__domain_name }}:8006
+{% endif %}
     - Proxmox SVLHOST02:
         icon: proxmox
         href: https://SVLHOST02.management:8006
         description: Proxmox Host 02
+{% if 'internal' in group_names %}
         siteMonitor: https://SVLHOST02.management:8006
+{% endif %}
