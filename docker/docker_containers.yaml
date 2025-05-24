@@ -43,7 +43,7 @@
   image: twinproduction/gatus:v5.17.0@sha256:a8c53f9e9f1a3876cd00e44a42c80fc984e118d5ba0bdbaf08980cb627d61512
   url: status-docker.$DOMAINNAME
 - container_name: gatus-db
-  image: docker.io/library/postgres:16.8-alpine@sha256:3b057e1c2c6dfee60a30950096f3fab33be141dbb0fdd7af3d477083de94166c
+  image: docker.io/library/postgres:16.9-alpine@sha256:7c8c4bf319769e3daf2545ba435248edc650d3621de678db6d9846581036e3da
 - container_name: gatus-db-backup
   image: tiredofit/db-backup:4.1.18@sha256:4b1cd5ca33c011126363c2f4086aa018a35f81337f15f365a3841fad5b0d8c2b
 - container_name: home-assistant
@@ -58,7 +58,7 @@
   image: hoppscotch/hoppscotch:2025.4.2@sha256:b1361d22e2a41ad93f1e296b9e314ff90503ae3b27786aa40dd8f2863f4f1561
   url: api-tester.$DOMAINNAME
 - container_name: hoppscotch-db
-  image: docker.io/library/postgres:16.8-alpine@sha256:3b057e1c2c6dfee60a30950096f3fab33be141dbb0fdd7af3d477083de94166c
+  image: docker.io/library/postgres:16.9-alpine@sha256:7c8c4bf319769e3daf2545ba435248edc650d3621de678db6d9846581036e3da
 - container_name: hoppscotch-db-backup
   image: tiredofit/db-backup:4.1.18@sha256:4b1cd5ca33c011126363c2f4086aa018a35f81337f15f365a3841fad5b0d8c2b
 - container_name: it-tools
@@ -71,7 +71,7 @@
   image: n8nio/n8n:1.92.2@sha256:f8fd85104e5a0cccb0d745536eeed64739c28239e6bfc2d0479380f31c394506
   url: n8n.$DOMAINNAME
 - container_name: n8n-db
-  image: docker.io/library/postgres:16.8-alpine@sha256:3b057e1c2c6dfee60a30950096f3fab33be141dbb0fdd7af3d477083de94166c
+  image: docker.io/library/postgres:16.9-alpine@sha256:7c8c4bf319769e3daf2545ba435248edc650d3621de678db6d9846581036e3da
 - container_name: n8n-db-backup
   image: tiredofit/db-backup:4.1.18@sha256:4b1cd5ca33c011126363c2f4086aa018a35f81337f15f365a3841fad5b0d8c2b
 - container_name: nextcloud
