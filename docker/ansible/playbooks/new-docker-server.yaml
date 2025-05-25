@@ -22,6 +22,7 @@
       loop:
         - "/srv/docker/data"
         - "/srv/docker/data/backup"
+        - "/srv/docker/data/compose"
         - "/srv/docker/data/traefik/acme"
 
     - name: Create acme config file for traefik
