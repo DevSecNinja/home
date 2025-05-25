@@ -216,16 +216,6 @@
 
 **url:** tools.$DOMAINNAME
 
-## docker/ansible/templates/compose-modules/lobe-chat.yml
-
-### Service: lobe-chat
-
-**container_name:** lobe-chat
-
-**image:** lobehub/lobe-chat:1.88.2@sha256:09de1157529595f8c467030bf520ad9dea56388a2f6f875019b41f2860740327
-
-**url:** chat.$DOMAINNAME
-
 ## docker/ansible/templates/compose-modules/n8n.yml
 
 ### Service: n8n
