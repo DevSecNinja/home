@@ -10,11 +10,12 @@ services:
     mem_limit: 1024m
     volumes:
       # SMB Share
-      - /mnt/smb_share_youtube:/downloads
+      - /mnt/smb_share_youtube/metube:/downloads
     user: "$PUID:$PGID"
     environment:
       - TZ=${TZ}
       - AUDIO_DOWNLOAD_DIR=/downloads/audio
+      - DOWNLOAD_DIR=/downloads/
       - TEMP_DIR=/metube-temp-dir
       - 'YTDL_OPTIONS={"format": "best", "exec": "ffmpeg -i %(filepath)q -c:v libx264 -c:a aac %(filepath)q.h264.mp4"}'
     networks:
@@ -25,7 +26,7 @@ services:
       - homepage.name=MeTube
       - homepage.icon=sh-metube
       - homepage.href=https://metube.$DOMAINNAME
-      - homepage.description=My own YouTube
+      - homepage.description=YouTube Individual Downloads
       # Traefik
       - "traefik.enable=true"
       - "traefik.docker.network=metube-frontend"
