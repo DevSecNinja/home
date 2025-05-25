@@ -1,5 +1,5 @@
 ---
-- hosts: svlmedia.VM-PROD
+- hosts: svlapps.VM-PROD
   become: true
   pre_tasks:
     - include_tasks: ../tasks/update-os.yaml

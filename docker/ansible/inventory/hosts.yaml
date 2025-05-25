@@ -17,6 +17,10 @@ docker:
           children:
             internal:
               children:
+                apps:
+                  hosts:
+                    svlapps.VM-PROD:
+                      ansible_user: "jean-paul"
                 management:
                   hosts:
                     svlmgmt.MANAGEMENT:
