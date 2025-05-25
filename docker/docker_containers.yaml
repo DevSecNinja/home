@@ -97,6 +97,9 @@
 - container_name: traefik-forward-auth
   image: ghcr.io/italypaleale/traefik-forward-auth:3.5.2@sha256:1a582590167877ce74bb744fc106136d4ad413a11618fef3ed7ea9a84699e655
   url: auth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
+- container_name: tubesync
+  image: ghcr.io/meeb/tubesync:v0.15.4@sha256:eccdd1ae2ea38a8f77efcb6528a9b865d1fbf0d9a2e8c918e8cb05e4a7495435
+  url: tubesync.$DOMAINNAME
 - container_name: unifi
   image: lscr.io/linuxserver/unifi-network-application:version-9.1.120@sha256:dd5ef5b600d0c18e9e928fe88258e3857f94e2e9187f39d6d0e02c5d31182935
   url: unifi.$DOMAINNAME

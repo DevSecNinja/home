@@ -322,6 +322,16 @@
 
 **url:** auth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
+## docker/ansible/templates/compose-modules/tubesync.yml
+
+### Service: tubesync
+
+**container_name:** tubesync
+
+**image:** ghcr.io/meeb/tubesync:v0.15.4@sha256:eccdd1ae2ea38a8f77efcb6528a9b865d1fbf0d9a2e8c918e8cb05e4a7495435
+
+**url:** tubesync.$DOMAINNAME
+
 ## docker/ansible/templates/compose-modules/unifi.yml
 
 ### Service: unifi
