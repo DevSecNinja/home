@@ -27,8 +27,8 @@ services:
       - HOSTNAME=plex
       - VERSION=docker
       - PLEX_CLAIM=${PLEX_CLAIM_TOKEN} # Get it from: https://www.plex.tv/claim/
-    devices:
-      - /dev/dri:/dev/dri
+    # devices:
+      # - /dev/dri:/dev/dri # TO BE ADDED AFTER MOVING TO INTEL
       #- "/dev/dri/card0:/dev/dri/card0"
       #- "/dev/dri/renderD128:/dev/dri/renderD128"
     volumes:
@@ -51,6 +51,7 @@ services:
       ## Using no-auth chain since Plex app doesn't support auth proxy
       - "traefik.http.routers.plex-rtr.middlewares=chain-no-auth@file"
       ## HTTP Services
+      - "traefik.http.routers.plex-rtr.rule=Host(`plex.$DOMAINNAME`)"
       - "traefik.http.routers.plex-rtr.service=plex"
       ### Enable the server port
       - "traefik.http.services.plex.loadbalancer.server.port=32400"
