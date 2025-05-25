@@ -44,6 +44,9 @@ include:
 {% if 'vpnservers' in group_names %}
   - $DOCKERDIR/data/compose/wireguard.yml
 {% endif %}
+{% if 'media' in group_names %}
+  - $DOCKERDIR/data/compose/metube.yml
+{% endif %}
 
 networks:
   default:
