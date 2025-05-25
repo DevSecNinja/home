@@ -19,6 +19,7 @@
     - include_tasks: ../tasks/configure-ufw.yaml
     - include_tasks: ../tasks/gather-frontend-networks.yaml
     - include_tasks: ../tasks/load-credentials.yaml
+    - include_tasks: ../tasks/mount-smb-shares.yaml
 
     - name: Dynamically create compose file
       ansible.builtin.template:

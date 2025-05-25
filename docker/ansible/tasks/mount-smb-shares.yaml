@@ -1,0 +1,16 @@
+---
+- name: Gather user ID and group ID
+  getent:
+    database: passwd
+- name: Print user ID and group ID
+  debug:
+      msg: "{{ ansible_user }}: {{ getent_passwd[ansible_user].1 }}:{{ getent_passwd[ansible_user].2 }}"
+- name: Mount ephemeral SMB volume
+  ansible.posix.mount:
+    src: //192.168.1.30/YouTube
+    path: /mnt/smb_share_youtube
+    opts: "rw,vers=3,file_mode=0600,dir_mode=0700,uid={{ getent_passwd[ansible_user].1 }},gid={{ getent_passwd[ansible_user].2 }},username={{ generic__svlnas_smb_user }},password={{ generic__svlnas_smb_password }}"
+    fstype: cifs
+    state: mounted
+  become: true # Needed to make the destination dir
+  when: inventory_hostname in groups['media']
