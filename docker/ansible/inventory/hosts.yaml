@@ -9,13 +9,6 @@ hypervisor:
     SVLHOST01.MANAGEMENT:
       ansible_user: "root"
 
-samba:
-  children:
-    production:
-      hosts:
-        svlprod.PRODUCTION:
-          ansible_user: "jean-paul"
-
 docker:
   children:
     webservers:
@@ -31,12 +24,6 @@ docker:
                   hosts:
                     svlmgmt.MANAGEMENT:
                       ansible_user: "jean-paul"
-                production:
-                  hosts:
-                    svlprod.PRODUCTION:
-                      ansible_user: "jean-paul"
-                    # svldock.VM-PROD:
-                    #   ansible_user: "jean-paul"
             external:
               hosts:
                 svlext.ravensberg.org:
