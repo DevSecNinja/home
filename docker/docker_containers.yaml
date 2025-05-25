@@ -93,7 +93,7 @@
   url: phpmyadmin.$DOMAINNAME
 - container_name: plex
   image: lscr.io/linuxserver/plex:version-1.41.7.9799-5bce000f7@sha256:fad37d3811bbd089f95886cd14768addf009648a4913a01ea3db0a623e633025
-  url: plex-noauth.$DOMAINNAME
+  url: plex.$DOMAINNAME
 - container_name: traefik-forward-auth
   image: ghcr.io/italypaleale/traefik-forward-auth:3.5.2@sha256:1a582590167877ce74bb744fc106136d4ad413a11618fef3ed7ea9a84699e655
   url: auth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME

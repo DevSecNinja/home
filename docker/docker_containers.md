@@ -310,7 +310,7 @@
 
 **image:** lscr.io/linuxserver/plex:version-1.41.7.9799-5bce000f7@sha256:fad37d3811bbd089f95886cd14768addf009648a4913a01ea3db0a623e633025
 
-**url:** plex-noauth.$DOMAINNAME
+**url:** plex.$DOMAINNAME
 
 ## docker/ansible/templates/compose-modules/traefik-forward-auth.yml
 
