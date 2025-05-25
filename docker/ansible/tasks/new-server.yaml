@@ -96,7 +96,8 @@
   ansible.builtin.apt:
     autoclean: true
     update_cache: true
-    cache_valid_time: 3600
+    # Must refresh cache in case a new repository was added
+    cache_valid_time: 0
 
 - name: Install additional packages
   ansible.builtin.apt:
