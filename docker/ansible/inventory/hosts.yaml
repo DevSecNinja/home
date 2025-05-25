@@ -14,15 +14,18 @@ docker:
     webservers:
       children:
         linux_amd64:
-          hosts:
-            svldock.VM-PROD:
-              ansible_user: "jean-paul"
           children:
             internal:
               children:
                 management:
                   hosts:
                     svlmgmt.MANAGEMENT:
+                      ansible_user: "jean-paul"
+                production:
+                  hosts:
+                media:
+                  hosts:
+                    svlmedia.VM-PROD:
                       ansible_user: "jean-paul"
             external:
               hosts:
