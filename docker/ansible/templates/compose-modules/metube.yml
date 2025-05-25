@@ -16,7 +16,6 @@ services:
       - TZ=${TZ}
       - AUDIO_DOWNLOAD_DIR=/downloads/audio
       - TEMP_DIR=/metube-temp-dir
-      - PUBLIC_HOST_URL=https://metube.$DOMAINNAME
       - 'YTDL_OPTIONS={"format": "best", "exec": "ffmpeg -i %(filepath)q -c:v libx264 -c:a aac %(filepath)q.h264.mp4"}'
     networks:
       - metube-frontend
