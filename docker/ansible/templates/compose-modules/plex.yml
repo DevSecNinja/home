@@ -33,8 +33,7 @@ services:
       #- "/dev/dri/renderD128:/dev/dri/renderD128"
     volumes:
       - plex_config_data:/config
-      - $DOCKERDATADIR:/data
-      - $DOCKERARCHIVEDIR:/archive
+      - /mnt/smb_share_youtube:/mnt/smb_share_youtube
       - /dev/shm:/data/transcode
     labels:
       # Homepage
