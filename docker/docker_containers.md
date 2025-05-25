@@ -216,6 +216,16 @@
 
 **url:** tools.$DOMAINNAME
 
+## docker/ansible/templates/compose-modules/metube.yml
+
+### Service: metube
+
+**container_name:** metube
+
+**image:** ghcr.io/alexta69/metube:latest@sha256:74ba0025621c288a41218195c84018605393bda28f4e326080c2fdebfaf62340
+
+**url:** metube.$DOMAINNAME
+
 ## docker/ansible/templates/compose-modules/n8n.yml
 
 ### Service: n8n
