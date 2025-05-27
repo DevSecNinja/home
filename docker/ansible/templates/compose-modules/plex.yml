@@ -43,8 +43,15 @@ services:
       #- "/dev/dri/renderD128:/dev/dri/renderD128"
     volumes:
       - plex_config_data:/config
-      - /mnt/smb_share_youtube:/mnt/smb_share_youtube
+      - /mnt/smb_share_backup/plex:/mnt/smb_share_backup/plex
       - /dev/shm:/data/transcode
+      # SMB Media Shares
+      - /mnt/smb_share_audiobooks:/mnt/smb_share_audiobooks
+      - /mnt/smb_share_movies:/mnt/smb_share_movies
+      - /mnt/smb_share_music:/mnt/smb_share_music
+      - /mnt/smb_share_study:/mnt/smb_share_study
+      - /mnt/smb_share_tv:/mnt/smb_share_tv
+      - /mnt/smb_share_youtube:/mnt/smb_share_youtube
     labels:
       # Homepage
       - homepage.group=Entertainment

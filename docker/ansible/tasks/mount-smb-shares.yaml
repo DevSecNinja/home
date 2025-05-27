@@ -7,14 +7,21 @@
   debug:
       msg: "{{ ansible_user }}: {{ getent_passwd[ansible_user].1 }}:{{ getent_passwd[ansible_user].2 }}"
 
-- name: Mount YouTube SMB volume
+- name: Mount Plex SMB volumes
   ansible.posix.mount:
-    src: //192.168.1.30/YouTube
-    path: /mnt/smb_share_youtube
+    src: "//192.168.1.30/{{ item }}"
+    path: "/mnt/smb_share_{{ item | lower }}"
     opts: "rw,vers=3,file_mode=0600,dir_mode=0700,uid={{ getent_passwd[ansible_user].1 }},gid={{ getent_passwd[ansible_user].2 }},username={{ generic__svlnas_smb_user }},password={{ generic__svlnas_smb_password }}"
     fstype: cifs
     state: mounted
-  become: true # Needed to make the destination dir
+  loop:
+    - Audiobooks
+    - Movies
+    - Music
+    - Study
+    - TV
+    - YouTube
+  become: true
   when: inventory_hostname in groups['apps']
 
 - name: Mount Backup SMB volume
