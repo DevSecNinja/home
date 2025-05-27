@@ -19,7 +19,7 @@ docker:
               children:
                 apps:
                   hosts:
-                    svlapps.VM-PROD:
+                    svlapps.ravensberg.org:
                       ansible_user: "jean-paul"
                 management:
                   hosts:
@@ -29,7 +29,7 @@ docker:
                   hosts:
                 media:
                   hosts:
-                    svlmedia.VM-PROD:
+                    svlmedia.ravensberg.org:
                       ansible_user: "jean-paul"
             external:
               hosts:

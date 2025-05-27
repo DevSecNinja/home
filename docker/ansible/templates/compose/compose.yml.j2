@@ -44,11 +44,11 @@ include:
   - $DOCKERDIR/data/compose/wireguard.yml
 {% endif %}
 {% if 'media' in group_names %}
-  - $DOCKERDIR/data/compose/metube.yml
-  - $DOCKERDIR/data/compose/tubesync.yml
 {% endif %}
 {% if 'apps' in group_names %}
+  - $DOCKERDIR/data/compose/metube.yml
   - $DOCKERDIR/data/compose/plex.yml
+  - $DOCKERDIR/data/compose/tubesync.yml
 {% endif %}
 
 networks:

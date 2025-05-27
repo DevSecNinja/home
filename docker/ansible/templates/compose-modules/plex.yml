@@ -1,3 +1,13 @@
+#
+# Manual work to implement on a new server:
+#
+# - Plex claim token must be refreshed
+# - Enable remote access in Plex settings
+# - Set LAN networks in Plex settings to 192.168.0.0/16,172.16.0.0/16 (Traefik uses 172.16.0.0/16 network)
+#   - You should now see streams mentioned as 'Local' instead of 'Remote'
+# - Enable automatic library scanning in Plex settings
+# - Set backup directory in Plex settings under Scheduled Tasks
+
 services:
   plex:
     container_name: plex

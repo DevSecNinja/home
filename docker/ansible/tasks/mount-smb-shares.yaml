@@ -15,4 +15,14 @@
     fstype: cifs
     state: mounted
   become: true # Needed to make the destination dir
+  when: inventory_hostname in groups['apps']
+
+- name: Mount Backup SMB volume
+  ansible.posix.mount:
+    src: //192.168.1.30/backups-{{ inventory_hostname_short }}
+    path: /mnt/smb_share_backup
+    opts: "rw,vers=3,file_mode=0600,dir_mode=0700,uid={{ getent_passwd[ansible_user].1 }},gid={{ getent_passwd[ansible_user].2 }},username={{ generic__svlnas_smb_user }},password={{ generic__svlnas_smb_password }}"
+    fstype: cifs
+    state: mounted
+  become: true # Needed to make the destination dir
   when: inventory_hostname in groups['media'] or inventory_hostname in groups['apps']

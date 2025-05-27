@@ -15,8 +15,8 @@ services:
     # user: "$PUID:$PGID"
     environment:
       - TZ=${TZ}
-      - PUID=$PUID
-      - PGID=$PGID
+      - PUID=$PUID # Needs to align with SMB share mount
+      - PGID=$PGID # Needs to align with SMB share mount
     networks:
       - tubesync-frontend
     labels:
