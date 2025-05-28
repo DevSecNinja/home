@@ -308,7 +308,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.41.7.9799-5bce000f7@sha256:fad37d3811bbd089f95886cd14768addf009648a4913a01ea3db0a623e633025
+**image:** lscr.io/linuxserver/plex:version-1.41.7.9823-59f304c16@sha256:6e473f706e360138b32782e64db2e4b8a9586a6de247de3f1537a6b9d814d39c
 
 **url:** plex.$DOMAINNAME
 

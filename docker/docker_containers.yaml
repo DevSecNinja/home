@@ -92,7 +92,7 @@
   image: phpmyadmin:5.2.2-apache@sha256:73467128842bc4406372310f068bc9ccb6727a82c7b5dc9c4f3d815ead33eab8
   url: phpmyadmin.$DOMAINNAME
 - container_name: plex
-  image: lscr.io/linuxserver/plex:version-1.41.7.9799-5bce000f7@sha256:fad37d3811bbd089f95886cd14768addf009648a4913a01ea3db0a623e633025
+  image: lscr.io/linuxserver/plex:version-1.41.7.9823-59f304c16@sha256:6e473f706e360138b32782e64db2e4b8a9586a6de247de3f1537a6b9d814d39c
   url: plex.$DOMAINNAME
 - container_name: traefik-forward-auth
   image: ghcr.io/italypaleale/traefik-forward-auth:3.5.2@sha256:1a582590167877ce74bb744fc106136d4ad413a11618fef3ed7ea9a84699e655
