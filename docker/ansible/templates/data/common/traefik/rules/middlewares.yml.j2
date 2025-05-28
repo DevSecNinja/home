@@ -79,3 +79,13 @@ http:
           - "https://api-tester-admin.{{ generic__domain_name }}"
         accessControlMaxAge: 100
         addVaryHeader: true
+    # Middleware to spoof headers for apps like Plex
+    # that enforce local access via header inspection
+    middlewares-header-spoof:
+      headers:
+        customRequestHeaders:
+          Host: "127.0.0.1"
+          Referer: "http://127.0.0.1"
+          Origin: "http://127.0.0.1"
+          X-Real-IP: "{clientip}"
+          X-Forwarded-For: "{clientip}"
