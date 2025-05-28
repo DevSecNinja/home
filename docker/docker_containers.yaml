@@ -65,7 +65,7 @@
   image: ghcr.io/corentinth/it-tools:2023.12.21-5ed3693@sha256:4aaf67eab769afc9dac5614a15614537446e11150d53eab3be34ac9775a27e3a
   url: tools.$DOMAINNAME
 - container_name: metube
-  image: ghcr.io/alexta69/metube:latest@sha256:74ba0025621c288a41218195c84018605393bda28f4e326080c2fdebfaf62340
+  image: ghcr.io/alexta69/metube:latest@sha256:35b8e48576b0ffa3d10cb119a1e752fc9476f3a488af1a67b573d395c43e4493
   url: metube.$DOMAINNAME
 - container_name: n8n
   image: n8nio/n8n:1.94.0@sha256:82ef2eab8eae7a796cca7ce1f6f5443dbf96f9606e7714773aaccf0e920ce803
