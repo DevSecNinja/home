@@ -3,16 +3,16 @@
 #
 # - Plex claim token must be refreshed
 # - Set 'Custom server access URLs' to https://plex.$DOMAINNAME (replace variable!) in Plex settings
-# - Enable remote access in Plex settings
 # - Set LAN networks in Plex settings to 192.168.0.0/16,172.16.0.0/16 (Traefik uses 172.16.0.0/16 network)
 #   - You should now see streams mentioned as 'Local' instead of 'Remote'
+#   - Within the Plex portal on the server settings, you'll still see 'Remote' being mentioned, but this is normal (it seems)
 # - Enable automatic library scanning in Plex settings
 # - Set backup directory in Plex settings under Scheduled Tasks
 
 services:
   plex:
     container_name: plex
-    image: lscr.io/linuxserver/plex:version-1.41.7.9799-5bce000f7@sha256:fad37d3811bbd089f95886cd14768addf009648a4913a01ea3db0a623e633025
+    image: lscr.io/linuxserver/plex:version-1.41.7.9823-59f304c16@sha256:6e473f706e360138b32782e64db2e4b8a9586a6de247de3f1537a6b9d814d39c
     restart: always
     depends_on:
       - traefik
@@ -67,7 +67,7 @@ services:
       - "traefik.docker.network=plex-frontend"
       ## Middlewares
       ## Using no-auth chain since Plex app doesn't support auth proxy
-      - "traefik.http.routers.plex-rtr.middlewares=chain-no-auth@file"
+      - "traefik.http.routers.plex-rtr.middlewares=chain-no-auth-plex@file"
       ## HTTP Services
       - "traefik.http.routers.plex-rtr.rule=Host(`plex.$DOMAINNAME`)"
       - "traefik.http.routers.plex-rtr.service=plex"
@@ -75,7 +75,7 @@ services:
       - "traefik.http.services.plex.loadbalancer.server.port=32400"
       ## Extra no-auth endpoint. No need to create a new service
       - "traefik.http.routers.plex-noauth-rtr.rule=Host(`plex-noauth.$DOMAINNAME`)"
-      - "traefik.http.routers.plex-noauth-rtr.middlewares=chain-no-auth@file"
+      - "traefik.http.routers.plex-noauth-rtr.middlewares=chain-no-auth-plex@file"
       - "traefik.http.routers.plex-noauth-rtr.service=plex"
 
 volumes:
