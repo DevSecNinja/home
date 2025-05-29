@@ -5,7 +5,7 @@
 #
 
 puid: "{{ docker__uid_map[inventory_hostname_short] | default(1000, true) }}"
-pgid: 994 # Default GID for the docker group - enforced by Ansible on server creation
+pgid: "{{ docker__uid_map[inventory_hostname_short] | default(994, true) }}"
 
 docker_dir: "/srv/docker"
 docker_data_dir: "/mnt/data"

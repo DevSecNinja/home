@@ -7,17 +7,21 @@ services:
     restart: always
     security_opt:
       - no-new-privileges=true
-    # Limiting to 1024 can cause issues with large downloads. 2048 is more stable.
-    mem_limit: 2048m
+    # Limiting to 1024 can cause issues with large downloads. 2048 is more stable but still not great. 4096 seems to be the best compromise.
+    mem_limit: 4096m
     volumes:
       # SMB Share
       - /mnt/smb_share_youtube/metube:/downloads
+      - metube_config_data:/metube-state-dir
     user: "$PUID:$PGID"
     environment:
+      - UID=${PUID}
+      - GID=${PGID}
       - TZ=${TZ}
       - AUDIO_DOWNLOAD_DIR=/downloads/audio
-      - DOWNLOAD_DIR=/downloads/
+      - DOWNLOAD_DIR=/downloads/video
       - TEMP_DIR=/metube-temp-dir
+      - STATE_DIR=/metube-state-dir
       - DOWNLOAD_MODE=limited
       - MAX_CONCURRENT_DOWNLOADS=1
       # NOTE: Needed for iOS compatibility but seems to reduce quality a lot! Works fine without on Plex
@@ -42,7 +46,10 @@ services:
       # Enable the management port
       - "traefik.http.services.metube.loadbalancer.server.port=8081"
     tmpfs:
-      - /metube-temp-dir:size=4096M,uid=${PUID},gid=${PGID},mode=1700
+      - /metube-temp-dir:size=4G,uid=${PUID},gid=${PGID},mode=1700
+
+volumes:
+  metube_config_data:
 
 networks:
   metube-frontend:
