@@ -1,4 +1,19 @@
 ---
+- name: Ensure docker group exists with specific GID
+  ansible.builtin.group:
+    name: docker
+    gid: "{{ pgid }}" # Ensure we enforce the default GID for the docker group
+    state: present
+
+- name: Create Docker user with specific UID and group
+  ansible.builtin.user:
+    name: docker
+    comment: Docker User to run containers with specific UID and group
+    uid: "{{ puid }}"
+    group: docker
+    shell: /usr/sbin/nologin
+  when: inventory_hostname_short in docker__uid_map
+
 - name: Create Docker configuration directories
   ansible.builtin.file:
     path: "{{ item }}"

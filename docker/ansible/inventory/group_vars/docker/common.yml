@@ -4,8 +4,8 @@
 # Docker
 #
 
-puid: 1000 # Admin user
-pgid: 994 # Docker group is 994
+puid: "{{ docker__uid_map[inventory_hostname_short] | default(1000, true) }}"
+pgid: 994 # Default GID for the docker group - enforced by Ansible on server creation
 
 docker_dir: "/srv/docker"
 docker_data_dir: "/mnt/data"
@@ -14,6 +14,12 @@ docker_archive_dir: "/mnt/archive"
 docker__channel: ["stable"]
 docker__version: ""
 docker__state: "present"
+
+docker__uid_map:
+  svlapps: 3001
+  svldev: 3002
+  svlinfra: 3003
+  svlmedia: 3004
 
 docker__compose_version: ""
 docker__compose_v2_version: ""
