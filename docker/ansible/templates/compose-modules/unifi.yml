@@ -21,7 +21,7 @@ services:
 
   unifi-db-backup:
     container_name: unifi-db-backup
-    image: tiredofit/db-backup:4.1.18@sha256:4b1cd5ca33c011126363c2f4086aa018a35f81337f15f365a3841fad5b0d8c2b
+    image: tiredofit/db-backup:4.1.19@sha256:26eca0cda2b5decb4e296917f9aaebda2e6f89a237663a65e1cb3eccfe432cd0
     depends_on:
       - unifi-db
     volumes:
