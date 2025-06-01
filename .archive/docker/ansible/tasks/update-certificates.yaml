@@ -1,3 +1,34 @@
+#
+# Archived
+# No need for certificates on the servers anymore
+#
+# Execute with:
+    # - include_tasks: ../tasks/update-certificates.yaml
+    #   when: inventory_hostname in groups['docker'] and inventory_hostname in groups['internal']
+
+# And add the following tasks
+
+    # #
+    # # Load encrypted credentials for the update-certificates task
+    # #
+
+    # - name: Load encrypted credentials
+    #   community.sops.load_vars:
+    #     file: ../inventory/group_vars/all/secrets.sops.yml
+    #     age_keyfile: $HOME/git/home/age.key
+    #     config_path: $HOME/git/home/.sops.yaml
+    #     expressions: ignore  # explicitly do not evaluate expressions
+    #                           # on load (this is the default)
+
+    # - name: Load encrypted Docker credentials
+    #   community.sops.load_vars:
+    #     file: ../inventory/group_vars/docker/secrets.sops.yml
+    #     age_keyfile: $HOME/git/home/age.key
+    #     config_path: $HOME/git/home/.sops.yaml
+    #     expressions: ignore  # explicitly do not evaluate expressions
+    #                           # on load (this is the default)
+    #   when: inventory_hostname in groups['docker']
+
 ---
 - name: Install Packages
   apt:

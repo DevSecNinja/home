@@ -1,55 +1,67 @@
 ---
-development:
-  hosts:
-    svldev.MANAGEMENT:
-      ansible_user: "jean-paul"
-
-hypervisor:
-  hosts:
-    SVLHOST01.MANAGEMENT:
-      ansible_user: "root"
-
-docker:
+virtualization:
   children:
-    webservers:
+    hypervisor:
+      hosts:
+        # SVLHOST01.MANAGEMENT:
+        #   ansible_user: "root"
+        SVLHOST02.MANAGEMENT:
+          ansible_user: "root"
+
+storage:
+  children:
+    nas:
+      hosts:
+        svlnas.ravensberg.org:
+          ansible_user: "truenas_admin"
+
+compute:
+  children:
+    development:
+      hosts:
+        svldev.MANAGEMENT:
+          ansible_user: "jean-paul"
+    docker:
       children:
-        linux_amd64:
+        webservers:
           children:
-            internal:
+            linux_amd64:
               children:
-                apps:
+                internal:
+                  children:
+                    apps:
+                      hosts:
+                        svlapps.ravensberg.org:
+                          ansible_user: "jean-paul"
+                    management:
+                      hosts:
+                        svlmgmt.MANAGEMENT:
+                          ansible_user: "jean-paul"
+                    production:
+                      hosts:
+                    media:
+                      hosts:
+                        svlmedia.ravensberg.org:
+                          ansible_user: "jean-paul"
+                external:
                   hosts:
-                    svlapps.ravensberg.org:
+                    svlext.ravensberg.org:
                       ansible_user: "jean-paul"
-                management:
-                  hosts:
-                    svlmgmt.MANAGEMENT:
-                      ansible_user: "jean-paul"
-                production:
-                  hosts:
-                media:
-                  hosts:
-                    svlmedia.ravensberg.org:
-                      ansible_user: "jean-paul"
-            external:
-              hosts:
-                svlext.ravensberg.org:
-                  ansible_user: "jean-paul"
 
-        linux_arm64_v8:
-          children:
-            internal:
+            linux_arm64_v8:
               children:
-                fallback:
+                internal:
+                  children:
+                    fallback:
 
-    dnsservers:
-      hosts:
-        svlmgmt.MANAGEMENT:
-          ansible_user: "jean-paul"
-        svlext.ravensberg.org:
-          ansible_user: "jean-paul"
+        dnsservers:
+          hosts:
+            svlmgmt.MANAGEMENT:
+              ansible_user: "jean-paul"
+            svlext.ravensberg.org:
+              ansible_user: "jean-paul"
 
-    vpnservers:
-      hosts:
-        svlext.ravensberg.org:
-          ansible_user: "jean-paul"
+        vpnservers:
+          hosts:
+            svlext.ravensberg.org:
+              ansible_user: "jean-paul"

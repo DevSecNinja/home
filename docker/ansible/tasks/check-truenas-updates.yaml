@@ -1,0 +1,45 @@
+---
+- name: Detect if host is running TrueNAS SCALE
+  shell: uname -a
+  register: uname_result
+  changed_when: false
+
+- name: Set is_truenas fact
+  set_fact:
+    is_truenas: "{{ 'truenas' in uname_result.stdout | lower }}"
+
+- name: Call midclt to check for updates
+  shell: midclt call update.check_available | jq -r '.status + "|" + (.changes[0].old.version // "unknown") + "|" + (.version // "unknown") + "|" + (.release_notes_url // "")'
+  register: truenas_update_check
+  when: is_truenas
+  changed_when: false
+  failed_when: truenas_update_check.rc != 0 or truenas_update_check.stdout == ""
+
+- name: Debug update check output
+  debug:
+    msg: "midclt output: {{ truenas_update_check.stdout }}"
+  when: is_truenas
+
+- name: Only parse update info if output looks valid
+  set_fact:
+    truenas_update_status: "{{ parts[0] }}"
+    truenas_old_version: "{{ parts[1] }}"
+    truenas_new_version: "{{ parts[2] }}"
+    truenas_release_notes: "{{ parts[3] }}"
+  vars:
+    parts: "{{ truenas_update_check.stdout.split('|') }}"
+  when: is_truenas and truenas_update_check.stdout.count('|') >= 3
+
+- name: Show update information if available
+  debug:
+    msg: >
+      ✅ Update available for TrueNAS: {{ truenas_old_version }} ➡️ {{ truenas_new_version }}
+      🔗 Release notes: {{ truenas_release_notes }}
+  when: is_truenas and truenas_update_status == "AVAILABLE"
+
+- name: Fail if TrueNAS update is available
+  fail:
+    msg: >
+      ❗ Update available for TrueNAS: {{ truenas_old_version }} ➡️ {{ truenas_new_version }}
+      🔗 {{ truenas_release_notes }}
+  when: is_truenas and truenas_update_status == "AVAILABLE"
