@@ -40,7 +40,7 @@
 - container_name: foldingathome
   image: lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:a11530655be018bc43c9f973bce2a59344f2d140a9e5c843305f765299a5d141
 - container_name: gatus
-  image: twinproduction/gatus:v5.17.0@sha256:a8c53f9e9f1a3876cd00e44a42c80fc984e118d5ba0bdbaf08980cb627d61512
+  image: twinproduction/gatus:v5.18.1@sha256:97525568fdef34539b1b4d015aef2d1cf6f58f1bc087443387b349940544394d
   url: status-docker.$DOMAINNAME
 - container_name: gatus-db
   image: docker.io/library/postgres:16.9-alpine@sha256:7c8c4bf319769e3daf2545ba435248edc650d3621de678db6d9846581036e3da
