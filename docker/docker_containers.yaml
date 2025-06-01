@@ -7,14 +7,14 @@
   image: daya0576/beaverhabits:0.4@sha256:390996eb549510e7979bbb9956119b5391184e80be7e9398530b3dd5128ab19b
   url: habits.$DOMAINNAME
 - container_name: beaverhabits-db-backup
-  image: tiredofit/db-backup:4.1.18@sha256:4b1cd5ca33c011126363c2f4086aa018a35f81337f15f365a3841fad5b0d8c2b
+  image: tiredofit/db-backup:4.1.19@sha256:26eca0cda2b5decb4e296917f9aaebda2e6f89a237663a65e1cb3eccfe432cd0
 - container_name: bitwarden
   image: bitwarden/self-host:2025.2.1-beta@sha256:d8d510eb726e0c2d265cb1f46f5ee22f208851eef5976efbd27172f1871a570c
   url: bitwarden.$DOMAINNAME
 - container_name: bitwarden-db
   image: mariadb:11.7.2@sha256:11706a6fd276c2eada52d0d69b1a2aa1f1484cbe78137678e02cca8f7a0ae502
 - container_name: bitwarden-db-backup
-  image: tiredofit/db-backup:4.1.18@sha256:4b1cd5ca33c011126363c2f4086aa018a35f81337f15f365a3841fad5b0d8c2b
+  image: tiredofit/db-backup:4.1.19@sha256:26eca0cda2b5decb4e296917f9aaebda2e6f89a237663a65e1cb3eccfe432cd0
 - container_name: cloudflare-ddns
   image: favonia/cloudflare-ddns:1.15.1@sha256:a4e2089b3531eec8c9328c7a9a586f80e8d67dcd94856e0b596b7896e1de3f62
 - container_name: code-server
@@ -24,18 +24,18 @@
   image: ghcr.io/gchq/cyberchef:10.19.4@sha256:a2bfe382b2547bdd0a3d0523b9a6b85fab833c56bcec86d600ba6266910b533e
   url: cyberchef.$DOMAINNAME
 - container_name: dozzle
-  image: amir20/dozzle:v8.12.17@sha256:7a482fc570fa3a8cbc27afd4980e0a0c572e1489d954beb58758b1868fe4ac51
+  image: amir20/dozzle:v8.12.19@sha256:3d13a8c66f40d6ad34c7864bc5826f3121bdc470bc141f4e64888b66a26cc482
   url: dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: dozzle-docker-proxy
   image: lscr.io/linuxserver/socket-proxy:version-3.0.10-r0@sha256:1cb7a03e3bae30463beeaa65db76aa301b66d3070c0b48e945912a3d23cdb29f
 - container_name: drawio
-  image: jgraph/drawio:27.0.9@sha256:521736283795fa3852e3e2bb320691578622024fc03b219a328835a6bb789d68
+  image: jgraph/drawio:27.0.9@sha256:600e58120bcda3a88c4870f9674a12cd4270e251784cb35cc09699520169205e
   url: draw.$DOMAINNAME
 - container_name: echo-server
   image: mendhak/http-https-echo:37@sha256:f55000d9196bd3c853d384af7315f509d21ffb85de315c26e9874033b9f83e15
   url: echo-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: excalidraw
-  image: excalidraw/excalidraw:latest@sha256:0c75b1cbd5cf6e0673254cc23fc981851a0faaf8c10650fe7bc1088abed44b8a
+  image: excalidraw/excalidraw:latest@sha256:525d72908ffed09807bad50321b94698d725ddc5945118dc3e0b4a494f9772a8
   url: excalidraw.$DOMAINNAME
 - container_name: foldingathome
   image: lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:a11530655be018bc43c9f973bce2a59344f2d140a9e5c843305f765299a5d141
@@ -45,12 +45,12 @@
 - container_name: gatus-db
   image: docker.io/library/postgres:16.9-alpine@sha256:7c8c4bf319769e3daf2545ba435248edc650d3621de678db6d9846581036e3da
 - container_name: gatus-db-backup
-  image: tiredofit/db-backup:4.1.18@sha256:4b1cd5ca33c011126363c2f4086aa018a35f81337f15f365a3841fad5b0d8c2b
+  image: tiredofit/db-backup:4.1.19@sha256:26eca0cda2b5decb4e296917f9aaebda2e6f89a237663a65e1cb3eccfe432cd0
 - container_name: home-assistant
-  image: ghcr.io/home-assistant/home-assistant:beta@sha256:8a99004ff832dbd535e6ac4d141042bc31141ff6a86b4d5bb288b3680fbceac1
+  image: ghcr.io/home-assistant/home-assistant:beta@sha256:8ed88deaa7e1193cfa41006a021e96368f048cfead76474cb71d215588cad1be
   url: home-assistant.$DOMAINNAME
 - container_name: homepage
-  image: ghcr.io/gethomepage/homepage:v1.2.0@sha256:5e6bcbb595c4e857540577135e0f8b3ffc2e97c23d6e0ddc7df183de5bfdd442
+  image: ghcr.io/gethomepage/homepage:v1.3.0@sha256:b3815e5dc3ac685298350e03975948f0a3ba5be48216a97ec1860f8c6515ddfc
   url: apps-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: homepage-docker-proxy
   image: lscr.io/linuxserver/socket-proxy:version-3.0.10-r0@sha256:1cb7a03e3bae30463beeaa65db76aa301b66d3070c0b48e945912a3d23cdb29f
@@ -60,12 +60,12 @@
 - container_name: hoppscotch-db
   image: docker.io/library/postgres:16.9-alpine@sha256:7c8c4bf319769e3daf2545ba435248edc650d3621de678db6d9846581036e3da
 - container_name: hoppscotch-db-backup
-  image: tiredofit/db-backup:4.1.18@sha256:4b1cd5ca33c011126363c2f4086aa018a35f81337f15f365a3841fad5b0d8c2b
+  image: tiredofit/db-backup:4.1.19@sha256:26eca0cda2b5decb4e296917f9aaebda2e6f89a237663a65e1cb3eccfe432cd0
 - container_name: it-tools
   image: ghcr.io/corentinth/it-tools:2023.12.21-5ed3693@sha256:4aaf67eab769afc9dac5614a15614537446e11150d53eab3be34ac9775a27e3a
   url: tools.$DOMAINNAME
 - container_name: metube
-  image: ghcr.io/alexta69/metube:latest@sha256:35b8e48576b0ffa3d10cb119a1e752fc9476f3a488af1a67b573d395c43e4493
+  image: ghcr.io/alexta69/metube:latest@sha256:5f1f5cf530466f4b7c3a9167187a54ab68832bf82824511bf22a731f1349eaa6
   url: metube.$DOMAINNAME
 - container_name: n8n
   image: n8nio/n8n:1.94.0@sha256:82ef2eab8eae7a796cca7ce1f6f5443dbf96f9606e7714773aaccf0e920ce803
@@ -73,7 +73,7 @@
 - container_name: n8n-db
   image: docker.io/library/postgres:16.9-alpine@sha256:7c8c4bf319769e3daf2545ba435248edc650d3621de678db6d9846581036e3da
 - container_name: n8n-db-backup
-  image: tiredofit/db-backup:4.1.18@sha256:4b1cd5ca33c011126363c2f4086aa018a35f81337f15f365a3841fad5b0d8c2b
+  image: tiredofit/db-backup:4.1.19@sha256:26eca0cda2b5decb4e296917f9aaebda2e6f89a237663a65e1cb3eccfe432cd0
 - container_name: nextcloud
   image: nextcloud:31.0.5-apache@sha256:3f71577339ef1db0d1900c8574853d11fa7100452bf24f0a06fae5d9ee019cb4
   url: cloud.$DOMAINNAME
@@ -82,7 +82,7 @@
 - container_name: nextcloud-db
   image: mariadb:11.7.2@sha256:11706a6fd276c2eada52d0d69b1a2aa1f1484cbe78137678e02cca8f7a0ae502
 - container_name: nextcloud-db-backup
-  image: tiredofit/db-backup:4.1.18@sha256:4b1cd5ca33c011126363c2f4086aa018a35f81337f15f365a3841fad5b0d8c2b
+  image: tiredofit/db-backup:4.1.19@sha256:26eca0cda2b5decb4e296917f9aaebda2e6f89a237663a65e1cb3eccfe432cd0
 - container_name: nextcloud-redis
   image: redis:alpine3.19@sha256:8f157725f8eee31e65a8d4765f1f986d76aedc1a0503345dfb63a2b1b5a441ee
 - container_name: openspeedtest
@@ -104,9 +104,9 @@
   image: lscr.io/linuxserver/unifi-network-application:version-9.1.120@sha256:dd5ef5b600d0c18e9e928fe88258e3857f94e2e9187f39d6d0e02c5d31182935
   url: unifi.$DOMAINNAME
 - container_name: unifi-db
-  image: mongo:7.0.20@sha256:30e5dc22a38342e3dc84e51acb8e4059f87bf6ba9d9f4d04d4250fad89514945
+  image: mongo:7.0.20@sha256:e30e473ee65644f2e045840879bdf334accb4e1ddaaa1d15b3522f27d671d3f6
 - container_name: unifi-db-backup
-  image: tiredofit/db-backup:4.1.18@sha256:4b1cd5ca33c011126363c2f4086aa018a35f81337f15f365a3841fad5b0d8c2b
+  image: tiredofit/db-backup:4.1.19@sha256:26eca0cda2b5decb4e296917f9aaebda2e6f89a237663a65e1cb3eccfe432cd0
 - container_name: whoogle
   image: benbusby/whoogle-search:latest@sha256:b5e3f34b60aeead5f96f2ff5a6607c3f5afc4574d2bba964e8d01d6d78d25aa3
   url: search.$DOMAINNAME
