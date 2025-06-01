@@ -7,6 +7,17 @@
   debug:
       msg: "{{ ansible_user }}: {{ getent_passwd[ansible_user].1 }}:{{ getent_passwd[ansible_user].2 }}"
 
+- name: Ensure mount points exist
+  ansible.builtin.file:
+    path: "/mnt/smb_share_{{ item | lower }}"
+    state: directory
+    owner: "{{ puid }}"
+    group: "{{ pgid }}"
+    mode: "0700"
+  loop: "{{ generic__svlnas_smb_shares }}"
+  become: true
+  when: inventory_hostname in groups['apps']
+
 - name: Mount Plex SMB volumes
   ansible.posix.mount:
     src: "//192.168.1.30/{{ item }}"
@@ -14,13 +25,7 @@
     opts: "rw,vers=3,file_mode=0600,dir_mode=0700,uid={{ puid }},gid={{ pgid }},username={{ generic__svlnas_smb_user }},password={{ generic__svlnas_smb_password }}"
     fstype: cifs
     state: mounted
-  loop:
-    - Audiobooks
-    - Movies
-    - Music
-    - Study
-    - TV
-    - YouTube
+  loop: "{{ generic__svlnas_smb_shares }}"
   become: true
   when: inventory_hostname in groups['apps']
 
