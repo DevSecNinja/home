@@ -49,11 +49,6 @@
 - container_name: home-assistant
   image: ghcr.io/home-assistant/home-assistant:beta@sha256:8ed88deaa7e1193cfa41006a021e96368f048cfead76474cb71d215588cad1be
   url: home-assistant.$DOMAINNAME
-- container_name: homepage
-  image: ghcr.io/gethomepage/homepage:v1.3.2@sha256:4f923bf0e9391b3a8bc5527e539b022e92dcc8a3a13e6ab66122ea9ed030e196
-  url: apps-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
-- container_name: homepage-docker-proxy
-  image: lscr.io/linuxserver/socket-proxy:version-3.0.10-r0@sha256:1cb7a03e3bae30463beeaa65db76aa301b66d3070c0b48e945912a3d23cdb29f
 - container_name: hoppscotch
   image: hoppscotch/hoppscotch:2025.5.1@sha256:f7e7671070919d5bfd6e624de3ac01ef0cada5fb9dbf739fa020f8ff7a8d4ac6
   url: api-tester.$DOMAINNAME

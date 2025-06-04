@@ -168,22 +168,6 @@
 
 **url:** home-assistant.$DOMAINNAME
 
-## docker/ansible/templates/compose-modules/homepage.yml
-
-### Service: homepage
-
-**container_name:** homepage
-
-**image:** ghcr.io/gethomepage/homepage:v1.3.2@sha256:4f923bf0e9391b3a8bc5527e539b022e92dcc8a3a13e6ab66122ea9ed030e196
-
-**url:** apps-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
-
-### Service: homepage-docker-proxy
-
-**container_name:** homepage-docker-proxy
-
-**image:** lscr.io/linuxserver/socket-proxy:version-3.0.10-r0@sha256:1cb7a03e3bae30463beeaa65db76aa301b66d3070c0b48e945912a3d23cdb29f
-
 ## docker/ansible/templates/compose-modules/hoppscotch.yml
 
 ### Service: hoppscotch
