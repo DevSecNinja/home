@@ -54,3 +54,10 @@ http:
           - "middlewares-rate-limit"
           - "middlewares-secure-headers"
           - "middlewares-whitelist-svlinfra"
+    chain-basic-auth-svlinfra-whitelist:
+      chain:
+        middlewares:
+          - "middlewares-rate-limit"
+          - "middlewares-secure-headers"
+          - "middlewares-whitelist-svlinfra"
+          - "middlewares-docker-proxy-auth"

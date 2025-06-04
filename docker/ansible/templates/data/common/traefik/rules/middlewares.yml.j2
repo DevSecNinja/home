@@ -39,6 +39,10 @@ http:
         trustForwardHeader: true
         authResponseHeaders:
           - "X-Forwarded-User"
+    middlewares-docker-proxy-auth:
+      basicAuth:
+        users:
+          - "{{ generic__docker_traefik_htpasswd_entry }}"
     middlewares-whitelist-mgmt:
       ipAllowList:
         sourceRange:

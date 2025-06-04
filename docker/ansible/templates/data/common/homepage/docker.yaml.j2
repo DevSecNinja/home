@@ -15,18 +15,13 @@ docker-apps:
   host: homepage-proxy-apps.{{ generic__domain_name }}
   port: 443 # 2375 # Since we run it via proxy, we use port 443
   protocol: https
+  headers:
+    Authorization: Basic {{ generic__docker_traefik_htpasswd_entry_b64 }}
 
 docker-media:
   host: homepage-proxy-media.{{ generic__domain_name }}
   port: 443 # 2375 # Since we run it via proxy, we use port 443
   protocol: https
+  headers:
+    Authorization: Basic {{ generic__docker_traefik_htpasswd_entry_b64 }}
 {% endif %}
-
-# svlfall:
-#   host: svlfall.{{ generic__domain_name }}
-#   port: 2376
-#   tls:
-#     # Note: actual dir used in container: /app/config/certs/docker-client
-#     keyFile: certs/docker-client/private_key.pem
-#     caFile: certs/docker-client/issuing_ca.pem
-#     certFile: certs/docker-client/certificate.pem

@@ -62,7 +62,7 @@ services:
       - "traefik.enable=true"
       - "traefik.docker.network=homepage-frontend"
       ## Middlewares
-      - "traefik.http.routers.homepage-proxy-rtr.middlewares=chain-no-auth-svlinfra-whitelist@file"
+      - "traefik.http.routers.homepage-proxy-rtr.middlewares=chain-basic-auth-svlinfra-whitelist@file"
       ## HTTP Services
       - "traefik.http.routers.homepage-proxy-rtr.rule=Host(`homepage-proxy-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
       - "traefik.http.routers.homepage-proxy-rtr.service=homepage-proxy"
