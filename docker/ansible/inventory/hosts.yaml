@@ -33,6 +33,10 @@ compute:
                       hosts:
                         svlapps.ravensberg.org:
                           ansible_user: "jean-paul"
+                    infra:
+                      hosts:
+                        svlinfra.MANAGEMENT:
+                          ansible_user: "jean-paul"
                     management:
                       hosts:
                         svlmgmt.MANAGEMENT:
