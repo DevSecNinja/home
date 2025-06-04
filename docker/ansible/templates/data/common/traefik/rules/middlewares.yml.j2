@@ -54,6 +54,10 @@ http:
       ipAllowList:
         sourceRange:
           - "192.168.0.0/16"
+    middlewares-whitelist-svlinfra:
+      ipAllowList:
+        sourceRange:
+          - "192.168.1.15"
     middlewares-mtls:
       passTLSClientCert:
         pem: true

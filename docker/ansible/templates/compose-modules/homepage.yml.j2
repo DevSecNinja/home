@@ -39,6 +39,9 @@ services:
     restart: always
     networks:
       - homepage-backend
+{% if 'apps' in group_names or 'media' in group_names %}
+      - homepage-frontend
+{% endif %}
     environment:
       - TZ=${TZ}
       - CONTAINERS=1 # Allow access to viewing containers
@@ -53,6 +56,18 @@ services:
     read_only: true
     tmpfs:
       - /run
+{% if 'apps' in group_names or 'media' in group_names %}
+    labels:
+      # Traefik
+      - "traefik.enable=true"
+      - "traefik.docker.network=homepage-frontend"
+      ## Middlewares
+      - "traefik.http.routers.homepage-proxy-rtr.middlewares=chain-no-auth-svlinfra-whitelist@file"
+      ## HTTP Services
+      - "traefik.http.routers.homepage-proxy-rtr.rule=Host(`homepage-proxy-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
+      - "traefik.http.routers.homepage-proxy-rtr.service=homepage-proxy"
+      - "traefik.http.services.homepage-proxy.loadbalancer.server.port=2375"
+{% endif %}
 
 networks:
   homepage-frontend:

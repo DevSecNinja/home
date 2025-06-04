@@ -48,3 +48,9 @@ http:
           - "middlewares-rate-limit"
           - "middlewares-secure-headers"
           - "middlewares-whitelist-mgmt"
+    chain-no-auth-svlinfra-whitelist:
+      chain:
+        middlewares:
+          - "middlewares-rate-limit"
+          - "middlewares-secure-headers"
+          - "middlewares-whitelist-svlinfra"

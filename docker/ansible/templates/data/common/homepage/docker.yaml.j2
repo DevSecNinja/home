@@ -10,6 +10,18 @@ docker:
   host: homepage-docker-proxy
   port: 2375
 
+{% if 'infra' in group_names %}
+docker-apps:
+  host: homepage-proxy-apps.{{ generic__domain_name }}
+  port: 443 # 2375 # Since we run it via proxy, we use port 443
+  protocol: https
+
+docker-media:
+  host: homepage-proxy-media.{{ generic__domain_name }}
+  port: 443 # 2375 # Since we run it via proxy, we use port 443
+  protocol: https
+{% endif %}
+
 # svlfall:
 #   host: svlfall.{{ generic__domain_name }}
 #   port: 2376
