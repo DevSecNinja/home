@@ -48,8 +48,8 @@ services:
       - CF_DNS_API_TOKEN=$CLOUDFLARE_API_TOKEN
     labels:
       # Homepage
-      - homepage.group=Infrastructure
-      - homepage.name=Traefik
+      - homepage.group=Per Server Consoles
+      - homepage.name=Traefik - $GENERIC_HOSTNAME_SUFFIX
       - homepage.icon=traefik.svg
       - homepage.href=https://traefik-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
       - homepage.description=Application Proxy

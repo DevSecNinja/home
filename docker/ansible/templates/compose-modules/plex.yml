@@ -55,13 +55,13 @@ services:
       - /mnt/smb_share_youtube:/mnt/smb_share_youtube
     labels:
       # Homepage
-      - homepage.group=Entertainment
+      - homepage.group=Media
       - homepage.name=Plex
       - homepage.icon=plex.svg
       - homepage.href=https://plex.$DOMAINNAME
       - homepage.description=Media Services
       # Group
-      - org.label-schema.group=entertainment
+      - org.label-schema.group=media
       # Traefik
       - "traefik.enable=true"
       - "traefik.docker.network=plex-frontend"

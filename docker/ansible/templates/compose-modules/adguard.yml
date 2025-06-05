@@ -43,7 +43,7 @@ services:
       - docker-volume-backup.stop-during-backup=false # true - otherwise backup can't work with socketproxy
       # Homepage
       - homepage.group=Infrastructure
-      - homepage.name=AdGuard
+      - homepage.name=AdGuard - $GENERIC_HOSTNAME_SUFFIX
       - homepage.icon=adguard-home.svg
       - homepage.href=https://adguard-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
       - homepage.description=DNS Service

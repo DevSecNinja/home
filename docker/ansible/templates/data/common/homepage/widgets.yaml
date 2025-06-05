@@ -7,6 +7,8 @@
     target: _blank
 
 - datetime:
-    text_size: xl
+    text_size: l
     format:
+      dateStyle: long
       timeStyle: short
+      hourCycle: h23

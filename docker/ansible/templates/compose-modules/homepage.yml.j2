@@ -19,7 +19,7 @@ services:
       - HOMEPAGE_ALLOWED_HOSTS=apps.$DOMAINNAME # Hostname of the Traefik container
     security_opt:
       - no-new-privileges=true
-    mem_limit: 200m
+    mem_limit: 300m
     volumes:
       - $DOCKERDIR/data/homepage:/app/config
       - /etc/ssl/docker-client:/app/config/certs/docker-client:ro

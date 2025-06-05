@@ -17,8 +17,8 @@ services:
     # No Healthcheck possible since curl is not available in image
     labels:
       # Homepage
-      - homepage.group=Infrastructure
-      - homepage.name=Echo-Server
+      - homepage.group=Per Server Consoles
+      - homepage.name=Echo-Server - $GENERIC_HOSTNAME_SUFFIX
       - homepage.icon=mdi-test-tube-#ffffff
       - homepage.href=https://echo-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
       - homepage.description=Testing Web Requests
