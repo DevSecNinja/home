@@ -62,6 +62,10 @@ http:
       ipAllowList:
         sourceRange:
           - "192.168.1.15"
+    middlewares-whitelist-home:
+      ipAllowList:
+        sourceRange:
+          - "{{ apps__cloudflare_domain_1_obfuscated_fqdn_ip }}"
     middlewares-mtls:
       passTLSClientCert:
         pem: true

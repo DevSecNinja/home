@@ -1,4 +1,5 @@
 services:
+{% if 'infra' in group_names %}
   homepage:
     container_name: homepage
     image: ghcr.io/gethomepage/homepage:v1.3.2@sha256:4f923bf0e9391b3a8bc5527e539b022e92dcc8a3a13e6ab66122ea9ed030e196
@@ -15,7 +16,7 @@ services:
       # - PUID=${PUID}
       # - PGID=${PGID}
       - TZ=${TZ}
-      - HOMEPAGE_ALLOWED_HOSTS=apps-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME # Hostname of the Traefik container
+      - HOMEPAGE_ALLOWED_HOSTS=apps.$DOMAINNAME # Hostname of the Traefik container
     security_opt:
       - no-new-privileges=true
     mem_limit: 200m
@@ -29,9 +30,10 @@ services:
       ## Middlewares
       - "traefik.http.routers.homepage-rtr.middlewares=chain-no-auth@file"
       ## HTTP Services
-      - "traefik.http.routers.homepage-rtr.rule=Host(`apps-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
+      - "traefik.http.routers.homepage-rtr.rule=Host(`apps.$DOMAINNAME`)"
       - "traefik.http.routers.homepage-rtr.service=homepage"
       - "traefik.http.services.homepage.loadbalancer.server.port=3000"
+{% endif %}
 
   homepage-docker-proxy:
     image: lscr.io/linuxserver/socket-proxy:version-3.0.10-r0@sha256:1cb7a03e3bae30463beeaa65db76aa301b66d3070c0b48e945912a3d23cdb29f
@@ -39,7 +41,7 @@ services:
     restart: always
     networks:
       - homepage-backend
-{% if 'apps' in group_names or 'media' in group_names %}
+{% if 'apps' in group_names or 'media' in group_names or 'management' in group_names or 'external' in group_names %}
       - homepage-frontend
 {% endif %}
     environment:
@@ -56,18 +58,21 @@ services:
     read_only: true
     tmpfs:
       - /run
-{% if 'apps' in group_names or 'media' in group_names %}
     labels:
       # Traefik
       - "traefik.enable=true"
       - "traefik.docker.network=homepage-frontend"
+{% if 'apps' in group_names or 'media' in group_names or 'management' in group_names %}
       ## Middlewares
       - "traefik.http.routers.homepage-proxy-rtr.middlewares=chain-basic-auth-svlinfra-whitelist@file"
+{% elif 'external' in group_names %}
+      ## Middlewares
+      - "traefik.http.routers.homepage-proxy-rtr.middlewares=chain-basic-auth-home-whitelist@file"
+{% endif %}
       ## HTTP Services
       - "traefik.http.routers.homepage-proxy-rtr.rule=Host(`homepage-proxy-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
       - "traefik.http.routers.homepage-proxy-rtr.service=homepage-proxy"
       - "traefik.http.services.homepage-proxy.loadbalancer.server.port=2375"
-{% endif %}
 
 networks:
   homepage-frontend:

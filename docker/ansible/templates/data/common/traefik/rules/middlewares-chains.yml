@@ -61,3 +61,10 @@ http:
           - "middlewares-secure-headers"
           - "middlewares-whitelist-svlinfra"
           - "middlewares-docker-proxy-auth"
+    chain-basic-auth-home-whitelist:
+      chain:
+        middlewares:
+          - "middlewares-rate-limit"
+          - "middlewares-secure-headers"
+          - "middlewares-whitelist-home"
+          - "middlewares-docker-proxy-auth"

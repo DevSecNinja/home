@@ -1,0 +1,8 @@
+---
+- name: Get Home IP address of the domain using dig
+  set_fact:
+    apps__cloudflare_domain_1_obfuscated_fqdn_ip: "{{ lookup('community.general.dig', apps__cloudflare_domain_1_obfuscated_fqdn, '@1.1.1.1', 'qtype=A', retry_servfail=true) }}"
+
+- name: Show resolved IP address
+  debug:
+    msg: "Resolved IP for {{ apps__cloudflare_domain_1_obfuscated_fqdn }} is {{ apps__cloudflare_domain_1_obfuscated_fqdn_ip }}"

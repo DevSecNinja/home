@@ -16,6 +16,7 @@
         chdir: /srv/docker
       when: inventory_hostname in groups['external']
 
+    - include_tasks: ../tasks/get-home-ip.yaml
     - include_tasks: ../tasks/configure-ufw.yaml
     - include_tasks: ../tasks/gather-frontend-networks.yaml
     - include_tasks: ../tasks/load-credentials.yaml
