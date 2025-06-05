@@ -44,6 +44,7 @@ include:
   - $DOCKERDIR/data/compose/wireguard.yml
 {% endif %}
 {% if 'media' in group_names %}
+  - $DOCKERDIR/data/compose/sabnzbd.yml
 {% endif %}
 {% if 'apps' in group_names %}
   - $DOCKERDIR/data/compose/metube.yml
