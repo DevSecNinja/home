@@ -89,6 +89,9 @@
 - container_name: plex
   image: lscr.io/linuxserver/plex:version-1.41.7.9823-59f304c16@sha256:6e473f706e360138b32782e64db2e4b8a9586a6de247de3f1537a6b9d814d39c
   url: plex.$DOMAINNAME
+- container_name: sabnzbd
+  image: docker.io/linuxserver/sabnzbd:amd64-4.5.1@sha256:0387d9abeda5c7481905dcfd56b62f64ed96ee7d09bbaf5fc9001f328d525b4e
+  url: sabnzbd.$DOMAINNAME
 - container_name: traefik-forward-auth
   image: ghcr.io/italypaleale/traefik-forward-auth:3.5.2@sha256:1a582590167877ce74bb744fc106136d4ad413a11618fef3ed7ea9a84699e655
   url: auth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME

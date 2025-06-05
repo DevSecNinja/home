@@ -296,6 +296,16 @@
 
 **url:** plex.$DOMAINNAME
 
+## docker/ansible/templates/compose-modules/sabnzbd.yml
+
+### Service: sabnzbd
+
+**container_name:** sabnzbd
+
+**image:** docker.io/linuxserver/sabnzbd:amd64-4.5.1@sha256:0387d9abeda5c7481905dcfd56b62f64ed96ee7d09bbaf5fc9001f328d525b4e
+
+**url:** sabnzbd.$DOMAINNAME
+
 ## docker/ansible/templates/compose-modules/traefik-forward-auth.yml
 
 ### Service: traefik-forward-auth
