@@ -1,7 +1,7 @@
 services:
   dozzle:
     container_name: dozzle
-    image: amir20/dozzle:v8.12.20@sha256:6e3c64615e15493dbd2a476650d17b1b0038ba7dbd3cfe1a611df64ed57e602a
+    image: amir20/dozzle:v8.12.21@sha256:4e4a7ab10dc2db42d401755c780a510072e9b453251529e2457539f9a823400a
     depends_on:
       - traefik
       - dozzle-docker-proxy
@@ -34,7 +34,7 @@ services:
       - "traefik.http.services.dozzle-svc.loadbalancer.server.port=8080"
 
   dozzle-docker-proxy:
-    image: lscr.io/linuxserver/socket-proxy:version-3.0.10-r0@sha256:1cb7a03e3bae30463beeaa65db76aa301b66d3070c0b48e945912a3d23cdb29f
+    image: lscr.io/linuxserver/socket-proxy:version-3.0.10-r0@sha256:426b902e324e63415f23717c98d79c779259d1d7dfd7d6d9b5bd9358d1d93d57
     container_name: dozzle-docker-proxy
     restart: always
     networks:
