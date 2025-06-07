@@ -88,7 +88,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v8.12.20@sha256:6e3c64615e15493dbd2a476650d17b1b0038ba7dbd3cfe1a611df64ed57e602a
+**image:** amir20/dozzle:v8.12.21@sha256:4e4a7ab10dc2db42d401755c780a510072e9b453251529e2457539f9a823400a
 
 **url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -238,7 +238,7 @@
 
 **container_name:** nextcloud
 
-**image:** nextcloud:31.0.5-apache@sha256:3f71577339ef1db0d1900c8574853d11fa7100452bf24f0a06fae5d9ee019cb4
+**image:** nextcloud:31.0.5-apache@sha256:e775d46d9888d87d11c76bd8c5d19561e99e6975052c4c5bd7f2610392b0cbc7
 
 **url:** cloud.$DOMAINNAME
 
@@ -246,7 +246,7 @@
 
 **container_name:** nextcloud-cron
 
-**image:** nextcloud:31.0.5-apache@sha256:3f71577339ef1db0d1900c8574853d11fa7100452bf24f0a06fae5d9ee019cb4
+**image:** nextcloud:31.0.5-apache@sha256:e775d46d9888d87d11c76bd8c5d19561e99e6975052c4c5bd7f2610392b0cbc7
 
 ### Service: nextcloud-db
 
@@ -340,7 +340,7 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:7.0.20@sha256:b85a0d9de31547b2ecad89803d74d126ba94ba4656f19d3264e14ed0d69b3e19
+**image:** mongo:7.0.21@sha256:befd915014332949d8e1f1ddbf8edb1d5066b3f33cded9e0f1e82d5298b52402
 
 ### Service: unifi-db-backup
 
