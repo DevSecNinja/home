@@ -46,7 +46,7 @@
 
 **container_name:** bitwarden-db
 
-**image:** mariadb:11.7.2@sha256:11706a6fd276c2eada52d0d69b1a2aa1f1484cbe78137678e02cca8f7a0ae502
+**image:** mariadb:11.7.2@sha256:fcc7fcd7114adb5d41f14d116b8aac45f94280d2babfbbb71b4782922ee6d8d4
 
 ### Service: bitwarden-db-backup
 
@@ -96,7 +96,7 @@
 
 **container_name:** dozzle-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-3.0.10-r0@sha256:1cb7a03e3bae30463beeaa65db76aa301b66d3070c0b48e945912a3d23cdb29f
+**image:** lscr.io/linuxserver/socket-proxy:version-3.0.10-r0@sha256:426b902e324e63415f23717c98d79c779259d1d7dfd7d6d9b5bd9358d1d93d57
 
 ## docker/ansible/templates/compose-modules/drawio.yml
 
@@ -104,7 +104,7 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:27.0.9@sha256:600e58120bcda3a88c4870f9674a12cd4270e251784cb35cc09699520169205e
+**image:** jgraph/drawio:27.0.9@sha256:4f9f6cdcce1b820d3a5082e8da0d1342eff7235ef19a9b92244c4276f0ec7d86
 
 **url:** draw.$DOMAINNAME
 
@@ -150,7 +150,7 @@
 
 **container_name:** gatus-db
 
-**image:** docker.io/library/postgres:16.9-alpine@sha256:7c8c4bf319769e3daf2545ba435248edc650d3621de678db6d9846581036e3da
+**image:** docker.io/library/postgres:16.9-alpine@sha256:2c80c840f66b8fbe7320d3b95ad345ad4864fa6608e3ad296e22aacc88256463
 
 ### Service: gatus-db-backup
 
@@ -164,7 +164,7 @@
 
 **container_name:** home-assistant
 
-**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:8ed88deaa7e1193cfa41006a021e96368f048cfead76474cb71d215588cad1be
+**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:e7611af2b9a3251dee92488be1142a889e1600e4587fc10c3228ef9302f4a605
 
 **url:** home-assistant.$DOMAINNAME
 
@@ -182,7 +182,7 @@
 
 **container_name:** hoppscotch-db
 
-**image:** docker.io/library/postgres:16.9-alpine@sha256:7c8c4bf319769e3daf2545ba435248edc650d3621de678db6d9846581036e3da
+**image:** docker.io/library/postgres:16.9-alpine@sha256:2c80c840f66b8fbe7320d3b95ad345ad4864fa6608e3ad296e22aacc88256463
 
 ### Service: hoppscotch-db-backup
 
@@ -206,7 +206,7 @@
 
 **container_name:** metube
 
-**image:** ghcr.io/alexta69/metube:latest@sha256:5f1f5cf530466f4b7c3a9167187a54ab68832bf82824511bf22a731f1349eaa6
+**image:** ghcr.io/alexta69/metube:latest@sha256:de75efaa84efe8df92bf1cd85ae6cd7db9ad3b5d6979d1adfe24773a192156c9
 
 **url:** metube.$DOMAINNAME
 
@@ -216,7 +216,7 @@
 
 **container_name:** n8n
 
-**image:** n8nio/n8n:1.95.2@sha256:4af5586ec8d566430ec48f175ae96810f4818d13c733dac067b020c510b8cadf
+**image:** n8nio/n8n:1.97.1@sha256:1f42981993b424a9b9bebd620ab220b531612b319b6f7a75a76929e61ab456b1
 
 **url:** n8n.$DOMAINNAME
 
@@ -224,7 +224,7 @@
 
 **container_name:** n8n-db
 
-**image:** docker.io/library/postgres:16.9-alpine@sha256:7c8c4bf319769e3daf2545ba435248edc650d3621de678db6d9846581036e3da
+**image:** docker.io/library/postgres:16.9-alpine@sha256:2c80c840f66b8fbe7320d3b95ad345ad4864fa6608e3ad296e22aacc88256463
 
 ### Service: n8n-db-backup
 
@@ -252,7 +252,7 @@
 
 **container_name:** nextcloud-db
 
-**image:** mariadb:11.7.2@sha256:11706a6fd276c2eada52d0d69b1a2aa1f1484cbe78137678e02cca8f7a0ae502
+**image:** mariadb:11.7.2@sha256:fcc7fcd7114adb5d41f14d116b8aac45f94280d2babfbbb71b4782922ee6d8d4
 
 ### Service: nextcloud-db-backup
 
@@ -292,7 +292,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.41.7.9823-59f304c16@sha256:6e473f706e360138b32782e64db2e4b8a9586a6de247de3f1537a6b9d814d39c
+**image:** lscr.io/linuxserver/plex:version-1.41.7.9823-59f304c16@sha256:87cf58fff5adfebc97871837198b73bcf255b3551432be39697fbdbbdc58c8f8
 
 **url:** plex.$DOMAINNAME
 
@@ -332,7 +332,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-9.1.120@sha256:dd5ef5b600d0c18e9e928fe88258e3857f94e2e9187f39d6d0e02c5d31182935
+**image:** lscr.io/linuxserver/unifi-network-application:version-9.1.120@sha256:685dc8ee686f2d35305f0de06b1b1c994a1d68d9e509556875e7feca864bb8f6
 
 **url:** unifi.$DOMAINNAME
 
@@ -340,7 +340,7 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:7.0.20@sha256:e30e473ee65644f2e045840879bdf334accb4e1ddaaa1d15b3522f27d671d3f6
+**image:** mongo:7.0.20@sha256:b85a0d9de31547b2ecad89803d74d126ba94ba4656f19d3264e14ed0d69b3e19
 
 ### Service: unifi-db-backup
 
