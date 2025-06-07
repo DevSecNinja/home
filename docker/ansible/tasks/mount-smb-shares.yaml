@@ -7,6 +7,26 @@
   debug:
       msg: "{{ ansible_user }}: {{ getent_passwd[ansible_user].1 }}:{{ getent_passwd[ansible_user].2 }}"
 
+- name: Test if NAS is reachable on TCP/445
+  ansible.builtin.wait_for:
+    host: "{{ generic__ips_nas }}"
+    port: 445
+    timeout: 3
+    state: started
+  register: nas_smb
+  failed_when: false
+  changed_when: false
+  when: inventory_hostname in groups['media'] or inventory_hostname in groups['apps']
+
+- name: Log when NAS is offline but play continues
+  ansible.builtin.debug:
+    msg: >
+      NAS at {{ generic__ips_nas }} is offline (TCP/445 closed);
+      skipping SMB mounts and continuing the playbook.
+  when:
+    - inventory_hostname in groups['media'] or inventory_hostname in groups['apps']
+    - nas_smb.state | default('') != 'started'
+
 - name: Ensure mount points exist
   ansible.builtin.file:
     path: "/mnt/smb_share_{{ item | lower }}"
@@ -16,25 +36,31 @@
     mode: "0700"
   loop: "{{ generic__svlnas_smb_shares }}"
   become: true
-  when: inventory_hostname in groups['apps']
+  when:
+    - inventory_hostname in groups['apps']
+    - nas_smb.state | default('') == 'started'
 
 - name: Mount Plex SMB volumes
   ansible.posix.mount:
-    src: "//192.168.1.30/{{ item }}"
+    src: "//{{ generic__ips_nas }}/{{ item }}"
     path: "/mnt/smb_share_{{ item | lower }}"
     opts: "rw,vers=3,file_mode=0600,dir_mode=0700,uid={{ puid }},gid={{ pgid }},username={{ generic__svlnas_smb_user }},password={{ generic__svlnas_smb_password }}"
     fstype: cifs
     state: mounted
   loop: "{{ generic__svlnas_smb_shares }}"
   become: true
-  when: inventory_hostname in groups['apps']
+  when:
+    - inventory_hostname in groups['apps']
+    - nas_smb.state | default('') == 'started'
 
 - name: Mount Backup SMB volume
   ansible.posix.mount:
-    src: //192.168.1.30/backups-{{ inventory_hostname_short }}
+    src: //{{ generic__ips_nas }}/backups-{{ inventory_hostname_short }}
     path: /mnt/smb_share_backup
     opts: "rw,vers=3,file_mode=0600,dir_mode=0700,uid={{ puid }},gid={{ pgid }},username={{ generic__svlnas_smb_user }},password={{ generic__svlnas_smb_password }}"
     fstype: cifs
     state: mounted
   become: true # Needed to make the destination dir
-  when: inventory_hostname in groups['media'] or inventory_hostname in groups['apps']
+  when:
+    - inventory_hostname in groups['media'] or inventory_hostname in groups['apps']
+    - nas_smb.state | default('') == 'started'
