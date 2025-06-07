@@ -24,7 +24,7 @@
   image: ghcr.io/gchq/cyberchef:10.19.4@sha256:a2bfe382b2547bdd0a3d0523b9a6b85fab833c56bcec86d600ba6266910b533e
   url: cyberchef.$DOMAINNAME
 - container_name: dozzle
-  image: amir20/dozzle:v8.12.20@sha256:6e3c64615e15493dbd2a476650d17b1b0038ba7dbd3cfe1a611df64ed57e602a
+  image: amir20/dozzle:v8.12.21@sha256:4e4a7ab10dc2db42d401755c780a510072e9b453251529e2457539f9a823400a
   url: dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: dozzle-docker-proxy
   image: lscr.io/linuxserver/socket-proxy:version-3.0.10-r0@sha256:426b902e324e63415f23717c98d79c779259d1d7dfd7d6d9b5bd9358d1d93d57
@@ -70,10 +70,10 @@
 - container_name: n8n-db-backup
   image: tiredofit/db-backup:4.1.19@sha256:26eca0cda2b5decb4e296917f9aaebda2e6f89a237663a65e1cb3eccfe432cd0
 - container_name: nextcloud
-  image: nextcloud:31.0.5-apache@sha256:3f71577339ef1db0d1900c8574853d11fa7100452bf24f0a06fae5d9ee019cb4
+  image: nextcloud:31.0.5-apache@sha256:e775d46d9888d87d11c76bd8c5d19561e99e6975052c4c5bd7f2610392b0cbc7
   url: cloud.$DOMAINNAME
 - container_name: nextcloud-cron
-  image: nextcloud:31.0.5-apache@sha256:3f71577339ef1db0d1900c8574853d11fa7100452bf24f0a06fae5d9ee019cb4
+  image: nextcloud:31.0.5-apache@sha256:e775d46d9888d87d11c76bd8c5d19561e99e6975052c4c5bd7f2610392b0cbc7
 - container_name: nextcloud-db
   image: mariadb:11.7.2@sha256:fcc7fcd7114adb5d41f14d116b8aac45f94280d2babfbbb71b4782922ee6d8d4
 - container_name: nextcloud-db-backup
@@ -102,7 +102,7 @@
   image: lscr.io/linuxserver/unifi-network-application:version-9.1.120@sha256:685dc8ee686f2d35305f0de06b1b1c994a1d68d9e509556875e7feca864bb8f6
   url: unifi.$DOMAINNAME
 - container_name: unifi-db
-  image: mongo:7.0.20@sha256:b85a0d9de31547b2ecad89803d74d126ba94ba4656f19d3264e14ed0d69b3e19
+  image: mongo:7.0.21@sha256:befd915014332949d8e1f1ddbf8edb1d5066b3f33cded9e0f1e82d5298b52402
 - container_name: unifi-db-backup
   image: tiredofit/db-backup:4.1.19@sha256:26eca0cda2b5decb4e296917f9aaebda2e6f89a237663a65e1cb3eccfe432cd0
 - container_name: whoogle
