@@ -44,6 +44,6 @@ jobs:
         run: python scripts/generate-containers-overview.py
 
       # Commit all changed files back to the repository
-      - uses: stefanzweifel/git-auto-commit-action@v5
+      - uses: stefanzweifel/git-auto-commit-action@v6
         with:
           commit_message: Update Docker containers overview doc
