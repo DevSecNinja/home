@@ -18,7 +18,7 @@ Under `/docker/docker_containers.md` you can see which Docker containers I use. 
 | 1   | Motherboards           | [Fujitsu D3644-B](https://tweakers.net/pricewatch/1216051/fujitsu-d3644-b.html)            |
 | 2   | Internal Hard Drives   | [Seagate IronWolf, 4TB](https://tweakers.net/pricewatch/569349/seagate-ironwolf-4tb.html)  |
 | 1   | Cases                  | [Fractal Design Core 1000 USB 3.0](https://tweakers.net/pricewatch/346358/fractal-design-core-1000-usb-30.html) |
-| 1   | Computer Accessories   | [Leicke ULL Power Supply 120 W](https://tweakers.net/pricewatch/763817/leicke-ull-power-supply-120-w.html) |
+| 1   | Computer Accessories   | [Leicke ULL Power Supply 156 W](https://tweakers.net/) |
 | 1   | CPU Cooling            | [Arctic Alpine 12 Passive](https://tweakers.net/pricewatch/1257147/arctic-alpine-12-passive.html) |
 | 1   | Fans                   | [Noctua NF-A9 PWM Bruin, 92mm](https://tweakers.net/pricewatch/415491/noctua-nf-a9-pwm-bruin-92mm.html) |
 | 1   | Fans                   | [Scythe Slip Stream PWM, 120mm](https://tweakers.net/pricewatch/248715/scythe-slip-stream-pwm-120mm.html) |
