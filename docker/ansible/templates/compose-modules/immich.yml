@@ -64,7 +64,7 @@ services:
     restart: always
     healthcheck:
       disable: false
-    mem_limit: 2048m
+    mem_limit: 4096m
     security_opt:
       - no-new-privileges=true
     environment:
