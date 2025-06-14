@@ -12,6 +12,13 @@ entryPoints:
     address: ":443"
     http:
       tls: {}
+    # Required for Immich imports to succeed:
+    # https://immich.app/docs/administration/reverse-proxy/#traefik-proxy-example-config
+    transport:
+      respondingTimeouts:
+        readTimeout: 600s
+        idleTimeout: 600s
+        writeTimeout: 600s
 {% if 'management' in group_names %}
   unifi-guest:
     address: ":8843"
