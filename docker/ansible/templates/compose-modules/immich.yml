@@ -44,6 +44,10 @@ services:
       ## HTTP Services
       - "traefik.http.routers.immich-rtr.service=immich-svc"
       - "traefik.http.services.immich-svc.loadbalancer.server.port=2283"
+      ## Extra no-auth endpoint. No need to create a new service
+      - "traefik.http.routers.immich-noauth-rtr.rule=Host(`photos-noauth.$DOMAINNAME`)"
+      - "traefik.http.routers.immich-noauth-rtr.middlewares=chain-no-auth@file"
+      - "traefik.http.routers.immich-noauth-rtr.service=immich-svc"
     networks:
       - immich-frontend
       - immich-backend
