@@ -104,7 +104,7 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:27.0.9@sha256:4f9f6cdcce1b820d3a5082e8da0d1342eff7235ef19a9b92244c4276f0ec7d86
+**image:** jgraph/drawio:27.0.9@sha256:877bfb97547d05659c956eaa1cbde9a6016aaed73222b356e99dbce9f1e21559
 
 **url:** draw.$DOMAINNAME
 
@@ -150,7 +150,7 @@
 
 **container_name:** gatus-db
 
-**image:** docker.io/library/postgres:16.9-alpine@sha256:2c80c840f66b8fbe7320d3b95ad345ad4864fa6608e3ad296e22aacc88256463
+**image:** docker.io/library/postgres:16.9-alpine@sha256:ef2235fd13b6cb29728a98ee17862ff5c9b7d20515a9b34804da4a45062695f6
 
 ### Service: gatus-db-backup
 
@@ -164,7 +164,7 @@
 
 **container_name:** home-assistant
 
-**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:e7611af2b9a3251dee92488be1142a889e1600e4587fc10c3228ef9302f4a605
+**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:857745bd01589750174e60f2c477a65da1169c4f1c098a58db792baae7f7ada6
 
 **url:** home-assistant.$DOMAINNAME
 
@@ -174,7 +174,7 @@
 
 **container_name:** hoppscotch
 
-**image:** hoppscotch/hoppscotch:2025.5.1@sha256:f7e7671070919d5bfd6e624de3ac01ef0cada5fb9dbf739fa020f8ff7a8d4ac6
+**image:** hoppscotch/hoppscotch:2025.5.2@sha256:244128a9189b9cff8f9f93d7fb7745cba6adf19926adb6701f088133c6f0ef6f
 
 **url:** api-tester.$DOMAINNAME
 
@@ -182,7 +182,7 @@
 
 **container_name:** hoppscotch-db
 
-**image:** docker.io/library/postgres:16.9-alpine@sha256:2c80c840f66b8fbe7320d3b95ad345ad4864fa6608e3ad296e22aacc88256463
+**image:** docker.io/library/postgres:16.9-alpine@sha256:ef2235fd13b6cb29728a98ee17862ff5c9b7d20515a9b34804da4a45062695f6
 
 ### Service: hoppscotch-db-backup
 
@@ -206,7 +206,7 @@
 
 **container_name:** metube
 
-**image:** ghcr.io/alexta69/metube:latest@sha256:de75efaa84efe8df92bf1cd85ae6cd7db9ad3b5d6979d1adfe24773a192156c9
+**image:** ghcr.io/alexta69/metube:latest@sha256:4b0f5ac84a955c8db511d132c9a8169a528c27fceba1ec39a0740771ba287ff2
 
 **url:** metube.$DOMAINNAME
 
@@ -224,7 +224,7 @@
 
 **container_name:** n8n-db
 
-**image:** docker.io/library/postgres:16.9-alpine@sha256:2c80c840f66b8fbe7320d3b95ad345ad4864fa6608e3ad296e22aacc88256463
+**image:** docker.io/library/postgres:16.9-alpine@sha256:ef2235fd13b6cb29728a98ee17862ff5c9b7d20515a9b34804da4a45062695f6
 
 ### Service: n8n-db-backup
 
@@ -238,7 +238,7 @@
 
 **container_name:** nextcloud
 
-**image:** nextcloud:31.0.5-apache@sha256:e775d46d9888d87d11c76bd8c5d19561e99e6975052c4c5bd7f2610392b0cbc7
+**image:** nextcloud:31.0.6-apache@sha256:f77b2e823713ecc8b3dab20db4273269719439445170a380f57a9ebf9aef624c
 
 **url:** cloud.$DOMAINNAME
 
@@ -246,7 +246,7 @@
 
 **container_name:** nextcloud-cron
 
-**image:** nextcloud:31.0.5-apache@sha256:e775d46d9888d87d11c76bd8c5d19561e99e6975052c4c5bd7f2610392b0cbc7
+**image:** nextcloud:31.0.6-apache@sha256:f77b2e823713ecc8b3dab20db4273269719439445170a380f57a9ebf9aef624c
 
 ### Service: nextcloud-db
 
@@ -264,7 +264,7 @@
 
 **container_name:** nextcloud-redis
 
-**image:** redis:alpine3.19@sha256:8f157725f8eee31e65a8d4765f1f986d76aedc1a0503345dfb63a2b1b5a441ee
+**image:** redis:7.4.4-alpine@sha256:ee9e8748ace004102a267f7b8265dab2c618317df22507b89d16a8add7154273
 
 ## docker/ansible/templates/compose-modules/openspeedtest.yml
 
@@ -276,13 +276,47 @@
 
 **url:** speedtest.$DOMAINNAME
 
+## docker/ansible/templates/compose-modules/outline.yml
+
+### Service: outline
+
+**container_name:** outline
+
+**image:** outlinewiki/outline:0.84.0@sha256:57717fcb7b697c4397578a30afe183d698c968c47279fe45dc26625343b236a6
+
+**url:** docs.$DOMAINNAME
+
+### Service: outline-db
+
+**container_name:** outline-db
+
+**image:** docker.io/library/postgres:16.9-alpine@sha256:ef2235fd13b6cb29728a98ee17862ff5c9b7d20515a9b34804da4a45062695f6
+
+### Service: outline-db-backup
+
+**container_name:** outline-db-backup
+
+**image:** tiredofit/db-backup:4.1.19@sha256:26eca0cda2b5decb4e296917f9aaebda2e6f89a237663a65e1cb3eccfe432cd0
+
+### Service: outline-redis
+
+**container_name:** outline-redis
+
+**image:** redis:7.4.4-alpine@sha256:ee9e8748ace004102a267f7b8265dab2c618317df22507b89d16a8add7154273
+
+### Service: outline-volume-backup
+
+**container_name:** outline-volume-backup
+
+**image:** offen/docker-volume-backup:v2.43.4@sha256:bdb9b5dffee440a7d21b1b210cd704fd1696a2c29d7cbc6f0f3b13b77264a26a
+
 ## docker/ansible/templates/compose-modules/phpmyadmin.yml
 
 ### Service: phpmyadmin
 
 **container_name:** phpmyadmin
 
-**image:** phpmyadmin:5.2.2-apache@sha256:73467128842bc4406372310f068bc9ccb6727a82c7b5dc9c4f3d815ead33eab8
+**image:** phpmyadmin:5.2.2-apache@sha256:5f37deab81ddca73cb44de568ecbe0109fd738a76d614f41833f6b0788ad4012
 
 **url:** phpmyadmin.$DOMAINNAME
 
@@ -292,7 +326,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.41.7.9823-59f304c16@sha256:87cf58fff5adfebc97871837198b73bcf255b3551432be39697fbdbbdc58c8f8
+**image:** lscr.io/linuxserver/plex:version-1.41.8.9834-071366d65@sha256:7794c25926494a63da421fabf2898dd38c4d6190f9146450fc0e29da8025ed2c
 
 **url:** plex.$DOMAINNAME
 
@@ -302,7 +336,7 @@
 
 **container_name:** sabnzbd
 
-**image:** docker.io/linuxserver/sabnzbd:amd64-4.5.1@sha256:0387d9abeda5c7481905dcfd56b62f64ed96ee7d09bbaf5fc9001f328d525b4e
+**image:** docker.io/linuxserver/sabnzbd:amd64-4.5.1@sha256:2b3e3f1567a25e9538ab09fb2497100cde1116ea31329a87b9e23b6f54e0a735
 
 **url:** sabnzbd.$DOMAINNAME
 
@@ -332,7 +366,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-9.1.120@sha256:685dc8ee686f2d35305f0de06b1b1c994a1d68d9e509556875e7feca864bb8f6
+**image:** lscr.io/linuxserver/unifi-network-application:version-9.1.120@sha256:304bb6bd0005861527719ef4a62cb1b756a64db3a800a0100680060f21a2c29b
 
 **url:** unifi.$DOMAINNAME
 
@@ -340,7 +374,7 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:7.0.21@sha256:befd915014332949d8e1f1ddbf8edb1d5066b3f33cded9e0f1e82d5298b52402
+**image:** mongo:7.0.21@sha256:b59cefef4ac85d75492e4891d790aafeed4a46625f3795600a8d06586632068e
 
 ### Service: unifi-db-backup
 
