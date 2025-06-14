@@ -46,7 +46,7 @@
 
 **container_name:** bitwarden-db
 
-**image:** mariadb:11.7.2@sha256:fcc7fcd7114adb5d41f14d116b8aac45f94280d2babfbbb71b4782922ee6d8d4
+**image:** mariadb:11.8.2@sha256:1e669024fc94f626b9dc48bf47b29b5339cec203c28e61a3dc372991a345daf5
 
 ### Service: bitwarden-db-backup
 
@@ -286,7 +286,7 @@
 
 **container_name:** nextcloud-db
 
-**image:** mariadb:11.7.2@sha256:fcc7fcd7114adb5d41f14d116b8aac45f94280d2babfbbb71b4782922ee6d8d4
+**image:** mariadb:11.8.2@sha256:1e669024fc94f626b9dc48bf47b29b5339cec203c28e61a3dc372991a345daf5
 
 ### Service: nextcloud-db-backup
 
