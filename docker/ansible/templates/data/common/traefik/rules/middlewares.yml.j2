@@ -6,8 +6,9 @@ http:
         permanent: true
     middlewares-rate-limit:
       rateLimit:
-        average: 100
-        burst: 50
+        # Increased both average and burst to fix an issue with Immich: https://github.com/immich-app/immich/discussions/6994
+        average: 200
+        burst: 100
     middlewares-secure-headers:
       headers:
         accessControlAllowMethods:
