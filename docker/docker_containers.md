@@ -190,6 +190,40 @@
 
 **image:** tiredofit/db-backup:4.1.19@sha256:26eca0cda2b5decb4e296917f9aaebda2e6f89a237663a65e1cb3eccfe432cd0
 
+## docker/ansible/templates/compose-modules/immich.yml
+
+### Service: immich-db
+
+**container_name:** immich-db
+
+**image:** ghcr.io/immich-app/postgres:14-vectorchord0.3.0-pgvectors0.2.0@sha256:fa4f6e0971f454cd95fec5a9aaed2ed93d8f46725cc6bc61e0698e97dba96da1
+
+### Service: immich-db-backup
+
+**container_name:** immich-db-backup
+
+**image:** tiredofit/db-backup:4.1.19@sha256:26eca0cda2b5decb4e296917f9aaebda2e6f89a237663a65e1cb3eccfe432cd0
+
+### Service: immich-machine-learning
+
+**container_name:** immich-machine-learning
+
+**image:** ghcr.io/immich-app/immich-machine-learning:v1.134.0@sha256:e157e0fa0d4363b0b6bab1923adab5951bbcdb71cd9016470bc6810dae21d115
+
+### Service: immich-redis
+
+**container_name:** immich-redis
+
+**image:** docker.io/valkey/valkey:8-alpine@sha256:81681ebc32ea2ce5153094084ca541861168ff588b4b0db998046fc896b99ba7
+
+### Service: immich-server
+
+**container_name:** immich-server
+
+**image:** ghcr.io/immich-app/immich-server:v1.134.0@sha256:073fc04c7e3d18ace466c20763809cf17aa55765ed610f12971b392a6a80b50c
+
+**url:** photos.$DOMAINNAME
+
 ## docker/ansible/templates/compose-modules/it-tools.yml
 
 ### Service: it-tools
