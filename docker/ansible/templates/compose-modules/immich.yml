@@ -1,0 +1,178 @@
+services:
+  immich-server:
+    image: ghcr.io/immich-app/immich-server:v1.134.0@sha256:073fc04c7e3d18ace466c20763809cf17aa55765ed610f12971b392a6a80b50c
+    container_name: immich-server
+    depends_on:
+      - traefik
+      - immich-db
+      - immich-redis
+    restart: always
+    mem_limit: 1024m
+    # extends:
+    #   file: hwaccel.transcoding.yml
+    #   service: cpu # set to one of [nvenc, quicksync, rkmpp, vaapi, vaapi-wsl] for accelerated transcoding
+    volumes:
+      - /mnt/smb_share_photos/immich:/usr/src/app/upload
+      - /etc/localtime:/etc/localtime:ro
+    security_opt:
+      - no-new-privileges=true
+    healthcheck:
+      disable: false
+    environment:
+      - TZ=${TZ}
+      - DB_HOSTNAME=immich-db
+      - DB_USERNAME=immich
+      - DB_DATABASE_NAME=immich
+      - DB_PASSWORD=${IMMICH_DB_PASSWORD}
+      #- DB_URL=postgresql://immich:${IMMICH_DB_PASSWORD}@immich-db:5432/immich?connect_timeout=300
+      - REDIS_HOSTNAME=immich-redis
+      - REDIS_PASSWORD=${IMMICH_REDIS_PASSWORD}
+      #- REDIS_URL=redis://:${IMMICH_REDIS_PASSWORD}@immich-redis:6379
+    labels:
+      # Homepage
+      - homepage.group=Productivity
+      - homepage.name=Immich
+      - homepage.icon=si-immich
+      - homepage.href=https://photos.$DOMAINNAME
+      - homepage.description=Photo Library
+      # Traefik
+      - "traefik.enable=true"
+      - "traefik.docker.network=immich-frontend"
+      ## Middlewares
+      - "traefik.http.routers.immich-rtr.middlewares=chain-auth@file"
+      - "traefik.http.routers.immich-rtr.rule=Host(`photos.$DOMAINNAME`)"
+      ## HTTP Services
+      - "traefik.http.routers.immich-rtr.service=immich-svc"
+      - "traefik.http.services.immich-svc.loadbalancer.server.port=2283"
+    networks:
+      - immich-frontend
+      - immich-backend
+
+  immich-machine-learning:
+    # For hardware acceleration, add one of -[armnn, cuda, rocm, openvino, rknn] to the image tag.
+    image: ghcr.io/immich-app/immich-machine-learning:v1.134.0@sha256:e157e0fa0d4363b0b6bab1923adab5951bbcdb71cd9016470bc6810dae21d115
+    container_name: immich-machine-learning
+    # extends: # uncomment this section for hardware acceleration - see https://immich.app/docs/features/ml-hardware-acceleration
+    #   file: hwaccel.ml.yml
+    #   service: cpu # set to one of [armnn, cuda, rocm, openvino, openvino-wsl, rknn] for accelerated inference - use the `-wsl` version for WSL2 where applicable
+    volumes:
+      - immich_model_cache_data:/cache
+    restart: always
+    healthcheck:
+      disable: false
+    mem_limit: 2048m
+    security_opt:
+      - no-new-privileges=true
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    networks:
+      - immich-backend
+
+  immich-redis:
+    image: docker.io/valkey/valkey:8-alpine@sha256:81681ebc32ea2ce5153094084ca541861168ff588b4b0db998046fc896b99ba7
+    container_name: immich-redis
+    # Requirepass is needed as environment variable isn't picked up
+    command: >
+      --requirepass ${IMMICH_REDIS_PASSWORD}
+    restart: always
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 30s
+      retries: 3
+    mem_limit: 1024m
+    security_opt:
+      - no-new-privileges=true
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - REDIS_PASSWORD=${IMMICH_REDIS_PASSWORD}
+    networks:
+      - immich-backend
+
+  immich-db:
+    # Note: The immich-app/postgres image is a custom build of the official Postgres image with pgvector support.
+    image: ghcr.io/immich-app/postgres:14-vectorchord0.3.0-pgvectors0.2.0@sha256:fa4f6e0971f454cd95fec5a9aaed2ed93d8f46725cc6bc61e0698e97dba96da1
+    container_name: immich-db
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+    mem_limit: 1024m
+    volumes:
+      - immich_db_data:/var/lib/postgresql/data
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - POSTGRES_DB=immich
+      - POSTGRES_USER=immich
+      - POSTGRES_PASSWORD=${IMMICH_DB_PASSWORD}
+      - POSTGRES_INITDB_ARGS=--data-checksums
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d immich -U immich"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+    networks:
+      - immich-backend
+
+  immich-db-backup:
+    container_name: immich-db-backup
+    image: tiredofit/db-backup:4.1.19@sha256:26eca0cda2b5decb4e296917f9aaebda2e6f89a237663a65e1cb3eccfe432cd0
+    # Uses s6 overlay which requires running as uid 0 first
+    # S6 will drop to USER_DBBACKUP/GROUP_DBBACKUP after startup
+    # user: "${PUID}:${PGID}"
+    depends_on:
+      - immich-db
+    volumes:
+      - /mnt/smb_share_backup/immich-db:/backup
+    mem_limit: 1024m
+    networks:
+      - immich-backend
+      # - mailrise
+    environment:
+      - TIMEZONE=${TZ}
+      - USER_DBBACKUP=${PUID}
+      - GROUP_DBBACKUP=${PGID}
+      - CONTAINER_NAME=immich-db-backup
+      - CONTAINER_ENABLE_MONITORING=FALSE # Disables Zabbix backup statistics
+
+      # TODO: [mailrise] Fix mailrise and add it to ext
+      # - ENABLE_NOTIFICATIONS=TRUE
+      # - NOTIFICATION_TYPE=EMAIL
+      # - SMTP_HOST=mailrise
+      # - SMTP_PORT=${NOTIFICATIONS_MAILRISE_SMTP_PORT}
+      # - MAIL_TO=msteams@mailrise.xyz
+      # - MAIL_FROM=immich-db-backup
+
+      - DEFAULT_CHECKSUM=SHA1        # Set standard checksum to SHA1
+      - DEFAULT_COMPRESSION=ZSTD     # Compress all with ZSTD
+      - DEFAULT_BACKUP_INTERVAL=1440 # Backup every 1440 minutes = 24 hours
+      - DEFAULT_BACKUP_BEGIN=0000    # Start backing up at midnight
+      - DEFAULT_CLEANUP_TIME=2880    # Cleanup backups after two days
+
+      - DEFAULT_ENCRYPT=TRUE                            # Encrypt backup files with GPG
+      - DEFAULT_ENCRYPT_PASSPHRASE=${DB_ENC_PASSPHRASE} # Set encryption password
+
+      - DB01_TYPE=pgsql
+      - DB01_HOST=immich-db
+      - DB01_NAME=immich
+      - DB01_USER=immich
+      - DB01_PORT=5432
+      - DB01_PASS=${IMMICH_DB_PASSWORD}
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+
+volumes:
+  immich_model_cache_data:
+  immich_db_data:
+
+networks:
+  immich-frontend:
+    name: immich-frontend
+  immich-backend:
+    name: immich-backend
