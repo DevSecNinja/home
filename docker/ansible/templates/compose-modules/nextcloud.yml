@@ -95,7 +95,7 @@ services:
       timeout: 30s
 
   nextcloud-redis:
-    image: redis:alpine3.19@sha256:8f157725f8eee31e65a8d4765f1f986d76aedc1a0503345dfb63a2b1b5a441ee
+    image: redis:7.4.4-alpine@sha256:ee9e8748ace004102a267f7b8265dab2c618317df22507b89d16a8add7154273
     container_name: nextcloud-redis
     # Requirepass is needed as environment variable isn't picked up
     command: >

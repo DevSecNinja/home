@@ -1,22 +1,17 @@
-#
-#### DEPRECATION NOTICE
-## This compose module is no longer in use
-## Replaced by: Kubernetes deployment
-## Last used version: 0.80.3-0@sha256:35dc012bdc674b2857abb1ecff67215893050eee1b7ab0a39eecdb23cab5477d
-#
-
 services:
   outline:
-    image: outlinewiki/outline
+    image: outlinewiki/outline:0.84.0@sha256:57717fcb7b697c4397578a30afe183d698c968c47279fe45dc26625343b236a6
     container_name: outline
     depends_on:
       - traefik
       - outline-db
+      - outline-redis
     restart: always
     mem_limit: 1024m
     volumes:
       - outline_data:/var/lib/outline/data
-    env_file: $DOCKERDIR/data/outline/docker.env
+      # PUID/PGID currently not supported by Outline: https://github.com/outline/outline/discussions/9452
+      #- /mnt/smb_share_notes:/var/lib/outline/data
     security_opt:
       - no-new-privileges=true
     environment:
@@ -27,6 +22,13 @@ services:
       - REDIS_URL=redis://:${OUTLINE_REDIS_PASSWORD}@outline-redis:6379
       - URL=https://docs.$DOMAINNAME
       - PORT=3000
+      - NODE_ENV=production
+      - FORCE_HTTPS=true
+      - ENABLE_UPDATES=false
+      - WEB_CONCURRENCY=1
+      - LOG_LEVEL=info
+      - DEFAULT_LANGUAGE=en_US
+      - RATE_LIMITER_ENABLED=false # Already enabled on Traefik
       ## Authentication
       - AZURE_CLIENT_ID=${OUTLINE_AZURE_CLIENT_ID}
       - AZURE_CLIENT_SECRET=${OUTLINE_AZURE_CLIENT_SECRET}
@@ -34,6 +36,10 @@ services:
       ## Database
       - DATABASE_URL=postgresql://outline:${OUTLINE_DB_PASSWORD}@outline-db:5432/outline?connect_timeout=300
       - PGSSLMODE=disable
+      ## Storage
+      - FILE_STORAGE=local
+      - FILE_STORAGE_LOCAL_ROOT_DIR=/var/lib/outline/data
+      - FILE_STORAGE_UPLOAD_MAX_SIZE=262144000
     networks:
       - outline-frontend
       - outline-backend
@@ -55,7 +61,7 @@ services:
       - "traefik.http.services.outline-svc.loadbalancer.server.port=3000"
 
   outline-db:
-    image: docker.io/library/postgres:16.6-alpine@sha256:52bba373df3c13594014b5e9ccc9f3c2cdb2221d50db1a91ec64570819f18aba
+    image: docker.io/library/postgres:16.9-alpine@sha256:ef2235fd13b6cb29728a98ee17862ff5c9b7d20515a9b34804da4a45062695f6
     container_name: outline-db
     restart: always
     security_opt:
@@ -71,20 +77,23 @@ services:
       - POSTGRES_USER=outline
       - POSTGRES_PASSWORD=${OUTLINE_DB_PASSWORD}
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      test: ["CMD-SHELL", "pg_isready -d outline -U outline"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
     networks:
       - outline-backend
 
   outline-db-backup:
     container_name: outline-db-backup
-    image: tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
+    image: tiredofit/db-backup:4.1.19@sha256:26eca0cda2b5decb4e296917f9aaebda2e6f89a237663a65e1cb3eccfe432cd0
+    # Uses s6 overlay which requires running as uid 0 first
+    # S6 will drop to USER_DBBACKUP/GROUP_DBBACKUP after startup
+    # user: "${PUID}:${PGID}"
     depends_on:
       - outline-db
     volumes:
-      - $DOCKERDIR/data/backup:/backup
+      - /mnt/smb_share_backup/outline-db:/backup
     mem_limit: 1024m
     networks:
       - outline-backend
@@ -123,8 +132,32 @@ services:
     security_opt:
       - no-new-privileges=true
 
+  outline-volume-backup:
+    container_name: outline-volume-backup
+    image: offen/docker-volume-backup:v2.43.4@sha256:bdb9b5dffee440a7d21b1b210cd704fd1696a2c29d7cbc6f0f3b13b77264a26a
+    user: "${PUID}:${PGID}"
+    volumes:
+      - outline_data:/backup:ro
+      # Backup destination location
+      - /mnt/smb_share_backup/outline:/archive
+      # Ensure cron & backup logs are in my timezone
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    mem_limit: 512m
+    environment:
+      - BACKUP_CRON_EXPRESSION=@daily
+      - BACKUP_RETENTION_DAYS=14
+      - GPG_PASSPHRASE=${DB_ENC_PASSPHRASE}
+      # Backup source locations
+      - BACKUP_SOURCES=/backup
+      # Backup destination location
+      - BACKUP_ARCHIVE=/archive
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+
   outline-redis:
-    image: redis:alpine3.19@sha256:892b41c092a599f76c30b48e9dcfb185ce8cea3560970b1c4f2745c89bb34344
+    image: redis:7.4.4-alpine@sha256:ee9e8748ace004102a267f7b8265dab2c618317df22507b89d16a8add7154273
     container_name: outline-redis
     # Requirepass is needed as environment variable isn't picked up
     command: >
@@ -132,8 +165,9 @@ services:
     restart: always
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
-      interval: 20s
-      timeout: 3s
+      interval: 10s
+      timeout: 30s
+      retries: 3
     mem_limit: 1024m
     security_opt:
       - no-new-privileges=true
