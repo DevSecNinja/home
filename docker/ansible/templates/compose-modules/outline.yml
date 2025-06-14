@@ -145,6 +145,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
     mem_limit: 512m
     environment:
+      - TZ=${TZ}
       - BACKUP_CRON_EXPRESSION=@daily
       - BACKUP_RETENTION_DAYS=14
       - GPG_PASSPHRASE=${DB_ENC_PASSPHRASE}
