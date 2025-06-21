@@ -88,7 +88,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v8.13.0@sha256:fb4a914897aafdf7af86ff6f8d8914241b580aeb56c781c848f411eb110fd77e
+**image:** amir20/dozzle:v8.13.1@sha256:7ba6766590e4a6a7b20676a29697666b37f9871d26283e91bcbf18c609fa70a9
 
 **url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -174,7 +174,7 @@
 
 **container_name:** hoppscotch
 
-**image:** hoppscotch/hoppscotch:2025.5.2@sha256:244128a9189b9cff8f9f93d7fb7745cba6adf19926adb6701f088133c6f0ef6f
+**image:** hoppscotch/hoppscotch:2025.5.3@sha256:bf6394a78ed56490c5de350ee62ee6064808c41a15238f803eb1e6034da5ee81
 
 **url:** api-tester.$DOMAINNAME
 
@@ -196,7 +196,7 @@
 
 **container_name:** immich-db
 
-**image:** ghcr.io/immich-app/postgres:14-vectorchord0.3.0-pgvectors0.2.0@sha256:fa4f6e0971f454cd95fec5a9aaed2ed93d8f46725cc6bc61e0698e97dba96da1
+**image:** ghcr.io/immich-app/postgres:14-vectorchord0.3.0-pgvectors0.2.0@sha256:007a98749340534a0408a26435b1a0ab5ded76df788f897fdb6342c9c1b95448
 
 ### Service: immich-db-backup
 
@@ -220,7 +220,7 @@
 
 **container_name:** immich-server
 
-**image:** ghcr.io/immich-app/immich-server:v1.134.0@sha256:073fc04c7e3d18ace466c20763809cf17aa55765ed610f12971b392a6a80b50c
+**image:** ghcr.io/immich-app/immich-server:v1.135.3@sha256:df5bbf4e29eff4688063a005708f8b96f13073200b4a7378f7661568459b31e9
 
 **url:** photos.$DOMAINNAME
 

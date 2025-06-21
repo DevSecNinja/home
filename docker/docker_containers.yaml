@@ -24,7 +24,7 @@
   image: ghcr.io/gchq/cyberchef:10.19.4@sha256:a2bfe382b2547bdd0a3d0523b9a6b85fab833c56bcec86d600ba6266910b533e
   url: cyberchef.$DOMAINNAME
 - container_name: dozzle
-  image: amir20/dozzle:v8.13.0@sha256:fb4a914897aafdf7af86ff6f8d8914241b580aeb56c781c848f411eb110fd77e
+  image: amir20/dozzle:v8.13.1@sha256:7ba6766590e4a6a7b20676a29697666b37f9871d26283e91bcbf18c609fa70a9
   url: dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: dozzle-docker-proxy
   image: lscr.io/linuxserver/socket-proxy:version-3.0.10-r0@sha256:426b902e324e63415f23717c98d79c779259d1d7dfd7d6d9b5bd9358d1d93d57
@@ -50,14 +50,14 @@
   image: ghcr.io/home-assistant/home-assistant:beta@sha256:857745bd01589750174e60f2c477a65da1169c4f1c098a58db792baae7f7ada6
   url: home-assistant.$DOMAINNAME
 - container_name: hoppscotch
-  image: hoppscotch/hoppscotch:2025.5.2@sha256:244128a9189b9cff8f9f93d7fb7745cba6adf19926adb6701f088133c6f0ef6f
+  image: hoppscotch/hoppscotch:2025.5.3@sha256:bf6394a78ed56490c5de350ee62ee6064808c41a15238f803eb1e6034da5ee81
   url: api-tester.$DOMAINNAME
 - container_name: hoppscotch-db
   image: docker.io/library/postgres:16.9-alpine@sha256:ef2235fd13b6cb29728a98ee17862ff5c9b7d20515a9b34804da4a45062695f6
 - container_name: hoppscotch-db-backup
   image: tiredofit/db-backup:4.1.19@sha256:26eca0cda2b5decb4e296917f9aaebda2e6f89a237663a65e1cb3eccfe432cd0
 - container_name: immich-db
-  image: ghcr.io/immich-app/postgres:14-vectorchord0.3.0-pgvectors0.2.0@sha256:fa4f6e0971f454cd95fec5a9aaed2ed93d8f46725cc6bc61e0698e97dba96da1
+  image: ghcr.io/immich-app/postgres:14-vectorchord0.3.0-pgvectors0.2.0@sha256:007a98749340534a0408a26435b1a0ab5ded76df788f897fdb6342c9c1b95448
 - container_name: immich-db-backup
   image: tiredofit/db-backup:4.1.19@sha256:26eca0cda2b5decb4e296917f9aaebda2e6f89a237663a65e1cb3eccfe432cd0
 - container_name: immich-machine-learning
@@ -65,7 +65,7 @@
 - container_name: immich-redis
   image: docker.io/valkey/valkey:8-alpine@sha256:81681ebc32ea2ce5153094084ca541861168ff588b4b0db998046fc896b99ba7
 - container_name: immich-server
-  image: ghcr.io/immich-app/immich-server:v1.134.0@sha256:073fc04c7e3d18ace466c20763809cf17aa55765ed610f12971b392a6a80b50c
+  image: ghcr.io/immich-app/immich-server:v1.135.3@sha256:df5bbf4e29eff4688063a005708f8b96f13073200b4a7378f7661568459b31e9
   url: photos.$DOMAINNAME
 - container_name: it-tools
   image: ghcr.io/corentinth/it-tools:2023.12.21-5ed3693@sha256:4aaf67eab769afc9dac5614a15614537446e11150d53eab3be34ac9775a27e3a
