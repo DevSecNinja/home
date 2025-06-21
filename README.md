@@ -1,4 +1,4 @@
-# Home Kubernetes Cluster
+# Home ~~Kubernetes Cluster~~ Docker Servers
 
 I run a single node TrueNAS Scale server as my NAS with VMs such as Home Assistant OS and a few Docker servers. Before I converted it into a NAS, it used to be a single node Proxmox server with a Talos VM and a Home Assistant OS VM on it. I am still considering going back to Kubernetes one day, but for now most of the good stuff is in the `/docker` folder. I moved back to Docker as my i3-9100 CPU didn't have enough capacity to run a decent amount of services in Kubernetes, while under Docker this is totally fine.
 
