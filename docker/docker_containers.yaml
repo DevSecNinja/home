@@ -24,12 +24,12 @@
   image: ghcr.io/gchq/cyberchef:10.19.4@sha256:a2bfe382b2547bdd0a3d0523b9a6b85fab833c56bcec86d600ba6266910b533e
   url: cyberchef.$DOMAINNAME
 - container_name: dozzle
-  image: amir20/dozzle:v8.13.0@sha256:fb4a914897aafdf7af86ff6f8d8914241b580aeb56c781c848f411eb110fd77e
+  image: amir20/dozzle:v8.13.1@sha256:7ba6766590e4a6a7b20676a29697666b37f9871d26283e91bcbf18c609fa70a9
   url: dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: dozzle-docker-proxy
-  image: lscr.io/linuxserver/socket-proxy:version-3.0.10-r0@sha256:426b902e324e63415f23717c98d79c779259d1d7dfd7d6d9b5bd9358d1d93d57
+  image: lscr.io/linuxserver/socket-proxy:version-3.2.1-r0@sha256:2f43ca3448409aca133003ff2f7a23b4911e74c4e8a94a24a5a564b89902494e
 - container_name: drawio
-  image: jgraph/drawio:27.0.9@sha256:877bfb97547d05659c956eaa1cbde9a6016aaed73222b356e99dbce9f1e21559
+  image: jgraph/drawio:27.1.6@sha256:7871e39b8d3a874ee335ecd94e3cfc171a18e3a1dd02f3b1010c1be814c6c43b
   url: draw.$DOMAINNAME
 - container_name: echo-server
   image: mendhak/http-https-echo:37@sha256:f55000d9196bd3c853d384af7315f509d21ffb85de315c26e9874033b9f83e15
@@ -50,22 +50,22 @@
   image: ghcr.io/home-assistant/home-assistant:beta@sha256:857745bd01589750174e60f2c477a65da1169c4f1c098a58db792baae7f7ada6
   url: home-assistant.$DOMAINNAME
 - container_name: hoppscotch
-  image: hoppscotch/hoppscotch:2025.5.2@sha256:244128a9189b9cff8f9f93d7fb7745cba6adf19926adb6701f088133c6f0ef6f
+  image: hoppscotch/hoppscotch:2025.5.3@sha256:bf6394a78ed56490c5de350ee62ee6064808c41a15238f803eb1e6034da5ee81
   url: api-tester.$DOMAINNAME
 - container_name: hoppscotch-db
   image: docker.io/library/postgres:16.9-alpine@sha256:ef2235fd13b6cb29728a98ee17862ff5c9b7d20515a9b34804da4a45062695f6
 - container_name: hoppscotch-db-backup
   image: tiredofit/db-backup:4.1.19@sha256:26eca0cda2b5decb4e296917f9aaebda2e6f89a237663a65e1cb3eccfe432cd0
 - container_name: immich-db
-  image: ghcr.io/immich-app/postgres:14-vectorchord0.3.0-pgvectors0.2.0@sha256:fa4f6e0971f454cd95fec5a9aaed2ed93d8f46725cc6bc61e0698e97dba96da1
+  image: ghcr.io/immich-app/postgres:14-vectorchord0.3.0-pgvectors0.2.0@sha256:007a98749340534a0408a26435b1a0ab5ded76df788f897fdb6342c9c1b95448
 - container_name: immich-db-backup
   image: tiredofit/db-backup:4.1.19@sha256:26eca0cda2b5decb4e296917f9aaebda2e6f89a237663a65e1cb3eccfe432cd0
 - container_name: immich-machine-learning
-  image: ghcr.io/immich-app/immich-machine-learning:v1.134.0@sha256:e157e0fa0d4363b0b6bab1923adab5951bbcdb71cd9016470bc6810dae21d115
+  image: ghcr.io/immich-app/immich-machine-learning:v1.135.3@sha256:9f2f61d86af82d04926f9b896c995c502303052905517c5485dd26bf1e42a44e
 - container_name: immich-redis
   image: docker.io/valkey/valkey:8-alpine@sha256:81681ebc32ea2ce5153094084ca541861168ff588b4b0db998046fc896b99ba7
 - container_name: immich-server
-  image: ghcr.io/immich-app/immich-server:v1.134.0@sha256:073fc04c7e3d18ace466c20763809cf17aa55765ed610f12971b392a6a80b50c
+  image: ghcr.io/immich-app/immich-server:v1.135.3@sha256:df5bbf4e29eff4688063a005708f8b96f13073200b4a7378f7661568459b31e9
   url: photos.$DOMAINNAME
 - container_name: it-tools
   image: ghcr.io/corentinth/it-tools:2023.12.21-5ed3693@sha256:4aaf67eab769afc9dac5614a15614537446e11150d53eab3be34ac9775a27e3a
@@ -74,7 +74,7 @@
   image: ghcr.io/alexta69/metube:latest@sha256:4b0f5ac84a955c8db511d132c9a8169a528c27fceba1ec39a0740771ba287ff2
   url: metube.$DOMAINNAME
 - container_name: n8n
-  image: n8nio/n8n:1.98.1@sha256:1d35d503d0ec6586d55ab7d0eb34d9bafdf9a908e3c5127020ad851ad3b0e629
+  image: n8nio/n8n:1.99.1@sha256:2537366a01590c499a4f2c9006da55cdda4c572fd2765a99f5687187ae1cd4be
   url: n8n.$DOMAINNAME
 - container_name: n8n-db
   image: docker.io/library/postgres:16.9-alpine@sha256:ef2235fd13b6cb29728a98ee17862ff5c9b7d20515a9b34804da4a45062695f6
@@ -121,7 +121,7 @@
   image: ghcr.io/meeb/tubesync:v0.15.4@sha256:eccdd1ae2ea38a8f77efcb6528a9b865d1fbf0d9a2e8c918e8cb05e4a7495435
   url: tubesync.$DOMAINNAME
 - container_name: unifi
-  image: lscr.io/linuxserver/unifi-network-application:version-9.1.120@sha256:304bb6bd0005861527719ef4a62cb1b756a64db3a800a0100680060f21a2c29b
+  image: lscr.io/linuxserver/unifi-network-application:version-9.2.87@sha256:6d2168fd2404ff3c332e9cf6a26bebf0e34595ead32bf1f2e66896098949c261
   url: unifi.$DOMAINNAME
 - container_name: unifi-db
   image: mongo:7.0.21@sha256:b59cefef4ac85d75492e4891d790aafeed4a46625f3795600a8d06586632068e

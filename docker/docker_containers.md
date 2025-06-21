@@ -88,7 +88,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v8.13.0@sha256:fb4a914897aafdf7af86ff6f8d8914241b580aeb56c781c848f411eb110fd77e
+**image:** amir20/dozzle:v8.13.1@sha256:7ba6766590e4a6a7b20676a29697666b37f9871d26283e91bcbf18c609fa70a9
 
 **url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -96,7 +96,7 @@
 
 **container_name:** dozzle-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-3.0.10-r0@sha256:426b902e324e63415f23717c98d79c779259d1d7dfd7d6d9b5bd9358d1d93d57
+**image:** lscr.io/linuxserver/socket-proxy:version-3.2.1-r0@sha256:2f43ca3448409aca133003ff2f7a23b4911e74c4e8a94a24a5a564b89902494e
 
 ## docker/ansible/templates/compose-modules/drawio.yml
 
@@ -104,7 +104,7 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:27.0.9@sha256:877bfb97547d05659c956eaa1cbde9a6016aaed73222b356e99dbce9f1e21559
+**image:** jgraph/drawio:27.1.6@sha256:7871e39b8d3a874ee335ecd94e3cfc171a18e3a1dd02f3b1010c1be814c6c43b
 
 **url:** draw.$DOMAINNAME
 
@@ -174,7 +174,7 @@
 
 **container_name:** hoppscotch
 
-**image:** hoppscotch/hoppscotch:2025.5.2@sha256:244128a9189b9cff8f9f93d7fb7745cba6adf19926adb6701f088133c6f0ef6f
+**image:** hoppscotch/hoppscotch:2025.5.3@sha256:bf6394a78ed56490c5de350ee62ee6064808c41a15238f803eb1e6034da5ee81
 
 **url:** api-tester.$DOMAINNAME
 
@@ -196,7 +196,7 @@
 
 **container_name:** immich-db
 
-**image:** ghcr.io/immich-app/postgres:14-vectorchord0.3.0-pgvectors0.2.0@sha256:fa4f6e0971f454cd95fec5a9aaed2ed93d8f46725cc6bc61e0698e97dba96da1
+**image:** ghcr.io/immich-app/postgres:14-vectorchord0.3.0-pgvectors0.2.0@sha256:007a98749340534a0408a26435b1a0ab5ded76df788f897fdb6342c9c1b95448
 
 ### Service: immich-db-backup
 
@@ -208,7 +208,7 @@
 
 **container_name:** immich-machine-learning
 
-**image:** ghcr.io/immich-app/immich-machine-learning:v1.134.0@sha256:e157e0fa0d4363b0b6bab1923adab5951bbcdb71cd9016470bc6810dae21d115
+**image:** ghcr.io/immich-app/immich-machine-learning:v1.135.3@sha256:9f2f61d86af82d04926f9b896c995c502303052905517c5485dd26bf1e42a44e
 
 ### Service: immich-redis
 
@@ -220,7 +220,7 @@
 
 **container_name:** immich-server
 
-**image:** ghcr.io/immich-app/immich-server:v1.134.0@sha256:073fc04c7e3d18ace466c20763809cf17aa55765ed610f12971b392a6a80b50c
+**image:** ghcr.io/immich-app/immich-server:v1.135.3@sha256:df5bbf4e29eff4688063a005708f8b96f13073200b4a7378f7661568459b31e9
 
 **url:** photos.$DOMAINNAME
 
@@ -250,7 +250,7 @@
 
 **container_name:** n8n
 
-**image:** n8nio/n8n:1.98.1@sha256:1d35d503d0ec6586d55ab7d0eb34d9bafdf9a908e3c5127020ad851ad3b0e629
+**image:** n8nio/n8n:1.99.1@sha256:2537366a01590c499a4f2c9006da55cdda4c572fd2765a99f5687187ae1cd4be
 
 **url:** n8n.$DOMAINNAME
 
@@ -400,7 +400,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-9.1.120@sha256:304bb6bd0005861527719ef4a62cb1b756a64db3a800a0100680060f21a2c29b
+**image:** lscr.io/linuxserver/unifi-network-application:version-9.2.87@sha256:6d2168fd2404ff3c332e9cf6a26bebf0e34595ead32bf1f2e66896098949c261
 
 **url:** unifi.$DOMAINNAME
 
