@@ -1,7 +1,7 @@
 services:
   dozzle:
     container_name: dozzle
-    image: amir20/dozzle:v8.13.1@sha256:7ba6766590e4a6a7b20676a29697666b37f9871d26283e91bcbf18c609fa70a9
+    image: amir20/dozzle:v8.13.3@sha256:a3915e87fbb20166edd89b977b3e795f2d0a67244ec084a13a038b44fe633c3a
     depends_on:
       - traefik
       - dozzle-docker-proxy
