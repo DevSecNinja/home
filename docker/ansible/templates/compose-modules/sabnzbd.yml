@@ -1,6 +1,6 @@
 services:
   sabnzbd:
-    image: docker.io/linuxserver/sabnzbd:amd64-4.5.1@sha256:95a3cec22c92c6cd8f74f26748e04d97ff4e44c212b10956a8413e26510492c0
+    image: docker.io/linuxserver/sabnzbd:amd64-4.5.1@sha256:39952ab247d97c9d3345a572385ebee158ce497887652d8421f4c0ac44cddf7e
     container_name: sabnzbd
     depends_on:
       - traefik
