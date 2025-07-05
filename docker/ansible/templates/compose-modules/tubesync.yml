@@ -1,6 +1,6 @@
 services:
   tubesync:
-    image: ghcr.io/meeb/tubesync:v0.15.4@sha256:eccdd1ae2ea38a8f77efcb6528a9b865d1fbf0d9a2e8c918e8cb05e4a7495435
+    image: ghcr.io/meeb/tubesync:v0.15.7@sha256:2be1af72b10c97dd78f25d8a64efc43cc6149296c00e0d4b8e93847d9015e264
     container_name: tubesync
     depends_on:
       - traefik
