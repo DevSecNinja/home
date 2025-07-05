@@ -6,7 +6,7 @@
 
 **container_name:** adguard
 
-**image:** adguard/adguardhome:v0.107.62@sha256:b04764acecf1f663a23f55e95724a3c7ca0dc7f3a6f957d29005728b6bd036f2
+**image:** adguard/adguardhome:v0.107.63@sha256:320ab49bd5f55091c7da7d1232ed3875f687769d6bb5e55eb891471528e2e18f
 
 **url:** adguard-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -30,7 +30,7 @@
 
 **container_name:** bitwarden-db
 
-**image:** mariadb:11.8.2@sha256:1e669024fc94f626b9dc48bf47b29b5339cec203c28e61a3dc372991a345daf5
+**image:** mariadb:11.8.2@sha256:1e4ec03d1b73af8e7a63137b8ef4820ac7d54c654a1e99eb76235f210f7f0a06
 
 ### Service: bitwarden-db-backup
 
@@ -72,7 +72,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v8.13.1@sha256:7ba6766590e4a6a7b20676a29697666b37f9871d26283e91bcbf18c609fa70a9
+**image:** amir20/dozzle:v8.13.4@sha256:36707d180462e764eac81aac793f8352296048404fa4dea1f280fa3cefa7fce3
 
 **url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -88,7 +88,7 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:27.1.6@sha256:7871e39b8d3a874ee335ecd94e3cfc171a18e3a1dd02f3b1010c1be814c6c43b
+**image:** jgraph/drawio:27.1.6@sha256:1e4e1b0419b4e86e42bb1678683aea7a262e3ddae5c9a162eafc14313afb803e
 
 **url:** draw.$DOMAINNAME
 
@@ -148,7 +148,7 @@
 
 **container_name:** home-assistant
 
-**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:857745bd01589750174e60f2c477a65da1169c4f1c098a58db792baae7f7ada6
+**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:e876528e4159974e844bbf3555e67ff48d73a78bf432b717dd9d178328230b40
 
 **url:** home-assistant.$DOMAINNAME
 
@@ -158,7 +158,7 @@
 
 **container_name:** hoppscotch
 
-**image:** hoppscotch/hoppscotch:2025.5.3@sha256:bf6394a78ed56490c5de350ee62ee6064808c41a15238f803eb1e6034da5ee81
+**image:** hoppscotch/hoppscotch:2025.6.0@sha256:0cf0077e618c0a9c04f52deb2ae1e49116a6234984b3e0e39cf338dec2e58f0b
 
 **url:** api-tester.$DOMAINNAME
 
@@ -224,7 +224,7 @@
 
 **container_name:** metube
 
-**image:** ghcr.io/alexta69/metube:latest@sha256:4b0f5ac84a955c8db511d132c9a8169a528c27fceba1ec39a0740771ba287ff2
+**image:** ghcr.io/alexta69/metube:latest@sha256:6ca874e368e4f54d0a586a0c24b1bc8ade386b5505a7214ffef4edff11514beb
 
 **url:** metube.$DOMAINNAME
 
@@ -256,7 +256,7 @@
 
 **container_name:** nextcloud
 
-**image:** nextcloud:31.0.6-apache@sha256:f77b2e823713ecc8b3dab20db4273269719439445170a380f57a9ebf9aef624c
+**image:** nextcloud:31.0.6-apache@sha256:588609d76b217cfd0feda653eea9894eeb12e612b327d2f1dcd38221ad242be0
 
 **url:** cloud.$DOMAINNAME
 
@@ -264,13 +264,13 @@
 
 **container_name:** nextcloud-cron
 
-**image:** nextcloud:31.0.6-apache@sha256:f77b2e823713ecc8b3dab20db4273269719439445170a380f57a9ebf9aef624c
+**image:** nextcloud:31.0.6-apache@sha256:588609d76b217cfd0feda653eea9894eeb12e612b327d2f1dcd38221ad242be0
 
 ### Service: nextcloud-db
 
 **container_name:** nextcloud-db
 
-**image:** mariadb:11.8.2@sha256:1e669024fc94f626b9dc48bf47b29b5339cec203c28e61a3dc372991a345daf5
+**image:** mariadb:11.8.2@sha256:1e4ec03d1b73af8e7a63137b8ef4820ac7d54c654a1e99eb76235f210f7f0a06
 
 ### Service: nextcloud-db-backup
 
@@ -334,7 +334,7 @@
 
 **container_name:** phpmyadmin
 
-**image:** phpmyadmin:5.2.2-apache@sha256:5f37deab81ddca73cb44de568ecbe0109fd738a76d614f41833f6b0788ad4012
+**image:** phpmyadmin:5.2.2-apache@sha256:167d118153d351966f8a245b7d0dbaeaa9c1b26d52bddb19f452b4ba21d4364d
 
 **url:** phpmyadmin.$DOMAINNAME
 
@@ -344,7 +344,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.41.8.9834-071366d65@sha256:7794c25926494a63da421fabf2898dd38c4d6190f9146450fc0e29da8025ed2c
+**image:** lscr.io/linuxserver/plex:version-1.41.8.9834-071366d65@sha256:14e8d783f2b0ec7e7ca2836d3d7185f5e68c60ba0e4eac77666bee4f0f819043
 
 **url:** plex.$DOMAINNAME
 
@@ -354,7 +354,7 @@
 
 **container_name:** sabnzbd
 
-**image:** docker.io/linuxserver/sabnzbd:amd64-4.5.1@sha256:2b3e3f1567a25e9538ab09fb2497100cde1116ea31329a87b9e23b6f54e0a735
+**image:** docker.io/linuxserver/sabnzbd:amd64-4.5.1@sha256:95a3cec22c92c6cd8f74f26748e04d97ff4e44c212b10956a8413e26510492c0
 
 **url:** sabnzbd.$DOMAINNAME
 
@@ -374,7 +374,7 @@
 
 **container_name:** tubesync
 
-**image:** ghcr.io/meeb/tubesync:v0.15.4@sha256:eccdd1ae2ea38a8f77efcb6528a9b865d1fbf0d9a2e8c918e8cb05e4a7495435
+**image:** ghcr.io/meeb/tubesync:v0.15.7@sha256:2be1af72b10c97dd78f25d8a64efc43cc6149296c00e0d4b8e93847d9015e264
 
 **url:** tubesync.$DOMAINNAME
 
@@ -384,7 +384,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-9.2.87@sha256:6d2168fd2404ff3c332e9cf6a26bebf0e34595ead32bf1f2e66896098949c261
+**image:** lscr.io/linuxserver/unifi-network-application:version-9.2.87@sha256:9d10634136c8a521a9a4c80aee7444a8a7178bf36b6a126b1ea975117fc7b204
 
 **url:** unifi.$DOMAINNAME
 
@@ -392,7 +392,7 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:7.0.21@sha256:b59cefef4ac85d75492e4891d790aafeed4a46625f3795600a8d06586632068e
+**image:** mongo:7.0.21@sha256:2c29f46a1b56f33364ad5375639526a121bc8dfdefc89a901d3d7992b110c877
 
 ### Service: unifi-db-backup
 
