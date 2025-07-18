@@ -158,7 +158,7 @@ services:
       - no-new-privileges=true
 
   outline-redis:
-    image: redis:7.4.5-alpine@sha256:0c0142c3cd69bc030ea09fecfa1c1c0c7d0e7d6081be6bb4957804f23d2cf57a
+    image: redis:7.4.5-alpine@sha256:bb186d083732f669da90be8b0f975a37812b15e913465bb14d845db72a4e3e08
     container_name: outline-redis
     # Requirepass is needed as environment variable isn't picked up
     command: >
