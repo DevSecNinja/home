@@ -7,7 +7,7 @@
   image: bitwarden/self-host:2025.2.1-beta@sha256:d8d510eb726e0c2d265cb1f46f5ee22f208851eef5976efbd27172f1871a570c
   url: bitwarden.$DOMAINNAME
 - container_name: bitwarden-db
-  image: mariadb:11.8.2@sha256:1e4ec03d1b73af8e7a63137b8ef4820ac7d54c654a1e99eb76235f210f7f0a06
+  image: mariadb:11.8.2@sha256:2bcbaec92bd9d4f6591bc8103d3a8e6d0512ee2235506e47a2e129d190444405
 - container_name: bitwarden-db-backup
   image: tiredofit/db-backup:4.1.19@sha256:26eca0cda2b5decb4e296917f9aaebda2e6f89a237663a65e1cb3eccfe432cd0
 - container_name: cloudflare-ddns
@@ -19,12 +19,12 @@
   image: ghcr.io/gchq/cyberchef:10.19.4@sha256:a2bfe382b2547bdd0a3d0523b9a6b85fab833c56bcec86d600ba6266910b533e
   url: cyberchef.$DOMAINNAME
 - container_name: dozzle
-  image: amir20/dozzle:v8.13.4@sha256:36707d180462e764eac81aac793f8352296048404fa4dea1f280fa3cefa7fce3
+  image: amir20/dozzle:v8.13.8@sha256:b6791e8893adce2ea73512b618e0bca2370e77f1ef32848bf6478663633cc31d
   url: dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: dozzle-docker-proxy
-  image: lscr.io/linuxserver/socket-proxy:version-3.2.1-r0@sha256:2f43ca3448409aca133003ff2f7a23b4911e74c4e8a94a24a5a564b89902494e
+  image: lscr.io/linuxserver/socket-proxy:version-3.2.3-r0@sha256:63d2e0ce6bb0d12dfdbde5c3af31d08fee343ec3801a050c8197a3f5ffae8bed
 - container_name: drawio
-  image: jgraph/drawio:27.1.6@sha256:1e4e1b0419b4e86e42bb1678683aea7a262e3ddae5c9a162eafc14313afb803e
+  image: jgraph/drawio:27.1.6@sha256:69561c499707a5d60ec84c67a45c738a9e04b2da45b07abb8e865ab731a124b1
   url: draw.$DOMAINNAME
 - container_name: echo-server
   image: mendhak/http-https-echo:37@sha256:f55000d9196bd3c853d384af7315f509d21ffb85de315c26e9874033b9f83e15
@@ -38,76 +38,76 @@
   image: twinproduction/gatus:v5.19.0@sha256:12362572b78c1bb6f234248de33392a393f7e604d94779e3086ec2dbba1bedf3
   url: status-docker.$DOMAINNAME
 - container_name: gatus-db
-  image: docker.io/library/postgres:16.9-alpine@sha256:ef2235fd13b6cb29728a98ee17862ff5c9b7d20515a9b34804da4a45062695f6
+  image: docker.io/library/postgres:16.9-alpine@sha256:7c688148e5e156d0e86df7ba8ae5a05a2386aaec1e2ad8e6d11bdf10504b1fb7
 - container_name: gatus-db-backup
   image: tiredofit/db-backup:4.1.19@sha256:26eca0cda2b5decb4e296917f9aaebda2e6f89a237663a65e1cb3eccfe432cd0
 - container_name: home-assistant
-  image: ghcr.io/home-assistant/home-assistant:beta@sha256:e876528e4159974e844bbf3555e67ff48d73a78bf432b717dd9d178328230b40
+  image: ghcr.io/home-assistant/home-assistant:beta@sha256:9682a29fdfde74dd67c78d724105a9c11cb2affaf350192b0a89447f958547df
   url: home-assistant.$DOMAINNAME
 - container_name: hoppscotch
-  image: hoppscotch/hoppscotch:2025.6.0@sha256:0cf0077e618c0a9c04f52deb2ae1e49116a6234984b3e0e39cf338dec2e58f0b
+  image: hoppscotch/hoppscotch:2025.6.1@sha256:c92ee84c9ade9778aa76d35e0e902bea4f148d4b3d8fda5a80056fef14a5da3a
   url: api-tester.$DOMAINNAME
 - container_name: hoppscotch-db
-  image: docker.io/library/postgres:16.9-alpine@sha256:ef2235fd13b6cb29728a98ee17862ff5c9b7d20515a9b34804da4a45062695f6
+  image: docker.io/library/postgres:16.9-alpine@sha256:7c688148e5e156d0e86df7ba8ae5a05a2386aaec1e2ad8e6d11bdf10504b1fb7
 - container_name: hoppscotch-db-backup
   image: tiredofit/db-backup:4.1.19@sha256:26eca0cda2b5decb4e296917f9aaebda2e6f89a237663a65e1cb3eccfe432cd0
 - container_name: immich-db
-  image: ghcr.io/immich-app/postgres:14-vectorchord0.3.0-pgvectors0.2.0@sha256:007a98749340534a0408a26435b1a0ab5ded76df788f897fdb6342c9c1b95448
+  image: ghcr.io/immich-app/postgres:14-vectorchord0.3.0-pgvectors0.2.0@sha256:f36625fffae9611b0e6e28cc1a9bb573d20a9d3cc5e62ab0ff1a19874e34e1f4
 - container_name: immich-db-backup
   image: tiredofit/db-backup:4.1.19@sha256:26eca0cda2b5decb4e296917f9aaebda2e6f89a237663a65e1cb3eccfe432cd0
 - container_name: immich-machine-learning
   image: ghcr.io/immich-app/immich-machine-learning:v1.135.3@sha256:9f2f61d86af82d04926f9b896c995c502303052905517c5485dd26bf1e42a44e
 - container_name: immich-redis
-  image: docker.io/valkey/valkey:8-alpine@sha256:81681ebc32ea2ce5153094084ca541861168ff588b4b0db998046fc896b99ba7
+  image: docker.io/valkey/valkey:8-alpine@sha256:0d27f0bca0249f61d060029a6aaf2e16b2c417d68d02a508e1dfb763fa2948b4
 - container_name: immich-server
-  image: ghcr.io/immich-app/immich-server:v1.135.3@sha256:df5bbf4e29eff4688063a005708f8b96f13073200b4a7378f7661568459b31e9
+  image: ghcr.io/immich-app/immich-server:v1.136.0@sha256:8c9633b96ca5b748b10875a99c498ee6f1e5d7f7d1df2bf341909cacb88ad672
   url: photos.$DOMAINNAME
 - container_name: it-tools
   image: ghcr.io/corentinth/it-tools:2023.12.21-5ed3693@sha256:4aaf67eab769afc9dac5614a15614537446e11150d53eab3be34ac9775a27e3a
   url: tools.$DOMAINNAME
 - container_name: metube
-  image: ghcr.io/alexta69/metube:latest@sha256:6ca874e368e4f54d0a586a0c24b1bc8ade386b5505a7214ffef4edff11514beb
+  image: ghcr.io/alexta69/metube:latest@sha256:feb459b8fd785b102c33b56cb3c5bb08c1e91dbfa268379a62a08e26864a0b73
   url: metube.$DOMAINNAME
 - container_name: n8n
   image: n8nio/n8n:1.101.1@sha256:20f9a5424b44fe24ce86258c70ce1fb3fe8412b01f95314da9733aba9545fd46
   url: n8n.$DOMAINNAME
 - container_name: n8n-db
-  image: docker.io/library/postgres:16.9-alpine@sha256:ef2235fd13b6cb29728a98ee17862ff5c9b7d20515a9b34804da4a45062695f6
+  image: docker.io/library/postgres:16.9-alpine@sha256:7c688148e5e156d0e86df7ba8ae5a05a2386aaec1e2ad8e6d11bdf10504b1fb7
 - container_name: n8n-db-backup
   image: tiredofit/db-backup:4.1.19@sha256:26eca0cda2b5decb4e296917f9aaebda2e6f89a237663a65e1cb3eccfe432cd0
 - container_name: nextcloud
-  image: nextcloud:31.0.6-apache@sha256:588609d76b217cfd0feda653eea9894eeb12e612b327d2f1dcd38221ad242be0
+  image: nextcloud:31.0.7-apache@sha256:31d564f5f9f43f2aed0633854a2abd39155f85aa156997f7252f5af908efa99b
   url: cloud.$DOMAINNAME
 - container_name: nextcloud-cron
-  image: nextcloud:31.0.6-apache@sha256:588609d76b217cfd0feda653eea9894eeb12e612b327d2f1dcd38221ad242be0
+  image: nextcloud:31.0.7-apache@sha256:31d564f5f9f43f2aed0633854a2abd39155f85aa156997f7252f5af908efa99b
 - container_name: nextcloud-db
-  image: mariadb:11.8.2@sha256:1e4ec03d1b73af8e7a63137b8ef4820ac7d54c654a1e99eb76235f210f7f0a06
+  image: mariadb:11.8.2@sha256:2bcbaec92bd9d4f6591bc8103d3a8e6d0512ee2235506e47a2e129d190444405
 - container_name: nextcloud-db-backup
   image: tiredofit/db-backup:4.1.19@sha256:26eca0cda2b5decb4e296917f9aaebda2e6f89a237663a65e1cb3eccfe432cd0
 - container_name: nextcloud-redis
-  image: redis:7.4.4-alpine@sha256:ee9e8748ace004102a267f7b8265dab2c618317df22507b89d16a8add7154273
+  image: redis:7.4.5-alpine@sha256:bb186d083732f669da90be8b0f975a37812b15e913465bb14d845db72a4e3e08
 - container_name: openspeedtest
   image: openspeedtest/latest:v2.0.6@sha256:a6a7e3b3e9e93cfe7b9b2eb49c60b2a93644149a0a600845d4df57148b193ff6
   url: speedtest.$DOMAINNAME
 - container_name: outline
-  image: outlinewiki/outline:0.85.0@sha256:ffe0737c606a2b4e36b79eb850bf2a9e86ea642bea03d08f1abb2286b4ebfcb6
+  image: outlinewiki/outline:0.85.1@sha256:490b5de174d0f7be9b9d482cf9769b66438d9ce844d12f3c348ba80e36590c0a
   url: docs.$DOMAINNAME
 - container_name: outline-db
-  image: docker.io/library/postgres:16.9-alpine@sha256:ef2235fd13b6cb29728a98ee17862ff5c9b7d20515a9b34804da4a45062695f6
+  image: docker.io/library/postgres:16.9-alpine@sha256:7c688148e5e156d0e86df7ba8ae5a05a2386aaec1e2ad8e6d11bdf10504b1fb7
 - container_name: outline-db-backup
   image: tiredofit/db-backup:4.1.19@sha256:26eca0cda2b5decb4e296917f9aaebda2e6f89a237663a65e1cb3eccfe432cd0
 - container_name: outline-redis
-  image: redis:7.4.4-alpine@sha256:ee9e8748ace004102a267f7b8265dab2c618317df22507b89d16a8add7154273
+  image: redis:7.4.5-alpine@sha256:bb186d083732f669da90be8b0f975a37812b15e913465bb14d845db72a4e3e08
 - container_name: outline-volume-backup
   image: offen/docker-volume-backup:v2.43.4@sha256:bdb9b5dffee440a7d21b1b210cd704fd1696a2c29d7cbc6f0f3b13b77264a26a
 - container_name: phpmyadmin
-  image: phpmyadmin:5.2.2-apache@sha256:167d118153d351966f8a245b7d0dbaeaa9c1b26d52bddb19f452b4ba21d4364d
+  image: phpmyadmin:5.2.2-apache@sha256:c23c54bd48ace4a01761cadd61239ccecd2996a1a893caec6faf96ef08e11d6c
   url: phpmyadmin.$DOMAINNAME
 - container_name: plex
-  image: lscr.io/linuxserver/plex:version-1.41.8.9834-071366d65@sha256:14e8d783f2b0ec7e7ca2836d3d7185f5e68c60ba0e4eac77666bee4f0f819043
+  image: lscr.io/linuxserver/plex:version-1.41.9.9961-46083195d@sha256:f8ed359f87f1becab37c2586af9f3414bd5c604d031d47f75e8422baf5224ef5
   url: plex.$DOMAINNAME
 - container_name: sabnzbd
-  image: docker.io/linuxserver/sabnzbd:amd64-4.5.1@sha256:95a3cec22c92c6cd8f74f26748e04d97ff4e44c212b10956a8413e26510492c0
+  image: docker.io/linuxserver/sabnzbd:amd64-4.5.1@sha256:39952ab247d97c9d3345a572385ebee158ce497887652d8421f4c0ac44cddf7e
   url: sabnzbd.$DOMAINNAME
 - container_name: traefik-forward-auth
   image: ghcr.io/italypaleale/traefik-forward-auth:3.5.2@sha256:1a582590167877ce74bb744fc106136d4ad413a11618fef3ed7ea9a84699e655
@@ -116,10 +116,10 @@
   image: ghcr.io/meeb/tubesync:v0.15.7@sha256:2be1af72b10c97dd78f25d8a64efc43cc6149296c00e0d4b8e93847d9015e264
   url: tubesync.$DOMAINNAME
 - container_name: unifi
-  image: lscr.io/linuxserver/unifi-network-application:version-9.2.87@sha256:9d10634136c8a521a9a4c80aee7444a8a7178bf36b6a126b1ea975117fc7b204
+  image: lscr.io/linuxserver/unifi-network-application:version-9.2.87@sha256:0a757b41978541ff9274a311b71437b9c65009f1887d53608011dd3f9a60f02a
   url: unifi.$DOMAINNAME
 - container_name: unifi-db
-  image: mongo:7.0.21@sha256:2c29f46a1b56f33364ad5375639526a121bc8dfdefc89a901d3d7992b110c877
+  image: mongo:7.0.21@sha256:3d715950d83061ff2fbc910d12d3703212538cacf6b3003e3736fa5c7f51a2e1
 - container_name: unifi-db-backup
   image: tiredofit/db-backup:4.1.19@sha256:26eca0cda2b5decb4e296917f9aaebda2e6f89a237663a65e1cb3eccfe432cd0
 - container_name: whoogle
