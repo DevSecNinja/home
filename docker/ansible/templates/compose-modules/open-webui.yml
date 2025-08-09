@@ -21,6 +21,7 @@ services:
       - WEBUI_SECRET_KEY=${OPEN_WEBUI_SECRET_KEY}
       - ENABLE_LOGIN_FORM=true # Required for OAuth to work. Otherwise you'll get a strange error
       - ENABLE_OPENAI_API=true
+      - ENABLE_EVALUATION_ARENA_MODELS=false
       - OPENAI_API_KEY=${OPEN_WEBUI_AZURE_API_KEYS}
       - OPENAI_API_BASE_URL=${OPEN_WEBUI_AZURE_API_URLS}
       - OLLAMA_BASE_URL=${OPEN_WEBUI_OLLAMA_BASE_URL}
