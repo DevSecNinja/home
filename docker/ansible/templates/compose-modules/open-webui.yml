@@ -26,7 +26,7 @@ services:
       # Homepage
       - homepage.group=Productivity
       - homepage.name=Open WebUI
-      - homepage.icon=openwebui.svg
+      - homepage.icon=open-webui.svg
       - homepage.href=https://chat.$DOMAINNAME
       - homepage.description=Your ChatGPT in the Browser
       # Traefik
@@ -38,7 +38,7 @@ services:
       - "traefik.http.routers.open-webui-rtr.rule=Host(`chat.$DOMAINNAME`)"
       - "traefik.http.routers.open-webui-rtr.service=open-webui"
       # Enable the management port
-      - "traefik.http.services.open-webui.loadbalancer.server.port=3210"
+      - "traefik.http.services.open-webui.loadbalancer.server.port=8080"
 
 networks:
   open-webui-frontend:
