@@ -40,6 +40,7 @@ http:
         trustForwardHeader: true
         authResponseHeaders:
           - "X-Forwarded-User"
+          - "X-Forwarded-DisplayName"
     middlewares-docker-proxy-auth:
       basicAuth:
         users:
