@@ -310,7 +310,7 @@
 
 **container_name:** outline
 
-**image:** outlinewiki/outline:0.85.1@sha256:490b5de174d0f7be9b9d482cf9769b66438d9ce844d12f3c348ba80e36590c0a
+**image:** outlinewiki/outline:0.86.1@sha256:57481d58bcca16493f10644b72a17c508baa7e039abf83208e182cc793525d75
 
 **url:** docs.$DOMAINNAME
 
