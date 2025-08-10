@@ -126,7 +126,7 @@
 
 **container_name:** gatus
 
-**image:** twinproduction/gatus:v5.20.0@sha256:e655d13d0cb89c64a2e53a853bbca9556a7238e788bc4a08c19aa5fb7938d0da
+**image:** twinproduction/gatus:v5.21.0@sha256:b45c89b1f8bfd5be456306b2bf1a581cc13ca0d897faf357ef77c35ac9eca1fa
 
 **url:** status-docker.$DOMAINNAME
 
@@ -234,7 +234,7 @@
 
 **container_name:** n8n
 
-**image:** n8nio/n8n:1.104.1@sha256:9407654247bf815a3e389242a3ef5db7b100b62c7e563e6f59d379efecde6dcc
+**image:** n8nio/n8n:1.106.2@sha256:a9665e7cd0018474f4ea1e2753a594f13146ad635bfbbcb4e3d695a58691dd6c
 
 **url:** n8n.$DOMAINNAME
 
@@ -394,7 +394,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-9.2.87@sha256:cf5a275ebb2f3e57d51bb850dc27157e8083aedc830b82fe2394fc78ef8ce5eb
+**image:** lscr.io/linuxserver/unifi-network-application:version-9.3.45@sha256:ee536899e67aaaf53e310cf3baa0c74293170902514c216f967795df47a68626
 
 **url:** unifi.$DOMAINNAME
 
