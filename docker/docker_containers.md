@@ -158,7 +158,7 @@
 
 **container_name:** hoppscotch
 
-**image:** hoppscotch/hoppscotch:2025.6.1@sha256:c92ee84c9ade9778aa76d35e0e902bea4f148d4b3d8fda5a80056fef14a5da3a
+**image:** hoppscotch/hoppscotch:2025.7.1@sha256:82f47708304db43ecbb866e68a79d30aef707bfa3cdc233006f798a7e676145a
 
 **url:** api-tester.$DOMAINNAME
 
@@ -192,7 +192,7 @@
 
 **container_name:** immich-machine-learning
 
-**image:** ghcr.io/immich-app/immich-machine-learning:v1.136.0@sha256:198d52734136fe9840866cc2f48a8141e0d002c2a25be7e35cd28ef7936b6c67
+**image:** ghcr.io/immich-app/immich-machine-learning:v1.137.3@sha256:ef517c041fa4a6a84a6c3c4f88a1124058e686c9c92bf09a973e7e60c3c3ea1e
 
 ### Service: immich-redis
 
@@ -204,7 +204,7 @@
 
 **container_name:** immich-server
 
-**image:** ghcr.io/immich-app/immich-server:v1.136.0@sha256:8c9633b96ca5b748b10875a99c498ee6f1e5d7f7d1df2bf341909cacb88ad672
+**image:** ghcr.io/immich-app/immich-server:v1.137.3@sha256:e517f806457057d44695152a0af2dfa094225a7d85eb37f518925e68864c658d
 
 **url:** photos.$DOMAINNAME
 
