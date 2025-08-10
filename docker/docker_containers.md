@@ -290,7 +290,7 @@
 
 **container_name:** open-webui
 
-**image:** ghcr.io/open-webui/open-webui:v0.6.18@sha256:ff87dd7605720f33411d87ed5550357b665cec4880378176f2f95bfe751f5e32
+**image:** ghcr.io/open-webui/open-webui:v0.6.20@sha256:b82efe121615b1d652b63bb01059c1a827d7875707267ee0765efb01d5ca6617
 
 **url:** chat.$DOMAINNAME
 
