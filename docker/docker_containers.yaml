@@ -107,7 +107,7 @@
   image: phpmyadmin:5.2.2-apache@sha256:6caf3364591449d645ab568bbe2e0637a7ec368c3aa6a7f06178d35343963be2
   url: phpmyadmin.$DOMAINNAME
 - container_name: plex
-  image: lscr.io/linuxserver/plex:version-1.41.9.9961-46083195d@sha256:67f81a4cb821fd4327df1004e69de9b5375917ac661a74296992a16b3038d6f4
+  image: lscr.io/linuxserver/plex:version-1.42.1.10054-f333bdaa8@sha256:06a0cde0379869ad62f443de1a708e3477100bfdd2b406206f7d3fc95295ef36
   url: plex.$DOMAINNAME
 - container_name: sabnzbd
   image: docker.io/linuxserver/sabnzbd:amd64-4.5.1@sha256:39952ab247d97c9d3345a572385ebee158ce497887652d8421f4c0ac44cddf7e
