@@ -28,7 +28,8 @@ services:
       # Keeping the variable name as KEYS and URLS for future compatibility
       - OPENAI_API_KEY=${OPEN_WEBUI_AZURE_API_KEYS}
       - OPENAI_API_BASE_URL=${OPEN_WEBUI_AZURE_API_URLS}
-      - OLLAMA_BASE_URL=${OPEN_WEBUI_OLLAMA_BASE_URL}
+      # NOTE: Add once the URL is live. Open WebUI will slow down a lot when this URL isn't available
+      #- OLLAMA_BASE_URL=${OPEN_WEBUI_OLLAMA_BASE_URL}
 
       # TODO: [open-webui] Fix manual task: To be added when implemented by Open WebUI
       # ${OPEN_WEBUI_AZURE_API_PREFIX_IDS}
