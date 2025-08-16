@@ -30,7 +30,7 @@
 
 **container_name:** bitwarden-db
 
-**image:** mariadb:11.8.2@sha256:2bcbaec92bd9d4f6591bc8103d3a8e6d0512ee2235506e47a2e129d190444405
+**image:** mariadb:11.8.3@sha256:272084c2dec70619714df329c4ffcb336e3f8c723072c3f56f2e4015997bbf2c
 
 ### Service: bitwarden-db-backup
 
@@ -45,16 +45,6 @@
 **container_name:** cloudflare-ddns
 
 **image:** favonia/cloudflare-ddns:1.15.1@sha256:a4e2089b3531eec8c9328c7a9a586f80e8d67dcd94856e0b596b7896e1de3f62
-
-## docker/ansible/templates/compose-modules/code-server.yml
-
-### Service: code-server
-
-**container_name:** code-server
-
-**image:** lscr.io/linuxserver/code-server:version-4.89.0@sha256:07c4a16372f79ca1ba65b706082ebfa83a5d13986cd1da4cc936fe6265a2b295
-
-**url:** code.$DOMAINNAME
 
 ## docker/ansible/templates/compose-modules/cyberchef.yml
 
@@ -72,7 +62,7 @@
 
 **container_name:** dozzle
 
-**image:** amir20/dozzle:v8.13.8@sha256:b6791e8893adce2ea73512b618e0bca2370e77f1ef32848bf6478663633cc31d
+**image:** amir20/dozzle:v8.13.9@sha256:e1db2e3040372a9ed52f00049a02b8b76d7750feee4dce77a8915db08708a07c
 
 **url:** dozzle-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -88,7 +78,7 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:28.0.7@sha256:f5952ee725911931099e23168916b62aa063072f5ab68cb9c923c11748de37fe
+**image:** jgraph/drawio:28.0.9@sha256:79cb86fc7f69b4d5a2b78097def23cb752ed680839b596f71fd10d0f86a2f9d6
 
 **url:** draw.$DOMAINNAME
 
@@ -134,23 +124,13 @@
 
 **container_name:** gatus-db
 
-**image:** docker.io/library/postgres:16.9-alpine@sha256:7c688148e5e156d0e86df7ba8ae5a05a2386aaec1e2ad8e6d11bdf10504b1fb7
+**image:** docker.io/library/postgres:16.10-alpine@sha256:abf1ee8583ce8e4eba7d4686e249c30c951a310e8186665feaf49f4a60a329f1
 
 ### Service: gatus-db-backup
 
 **container_name:** gatus-db-backup
 
 **image:** tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
-
-## docker/ansible/templates/compose-modules/home-assistant.yml
-
-### Service: home-assistant
-
-**container_name:** home-assistant
-
-**image:** ghcr.io/home-assistant/home-assistant:beta@sha256:35c4134b1d0d83cb91bfe2da29fd4ca2c009e58993a345ef0922e61317c0c6ca
-
-**url:** home-assistant.$DOMAINNAME
 
 ## docker/ansible/templates/compose-modules/hoppscotch.yml
 
@@ -166,7 +146,7 @@
 
 **container_name:** hoppscotch-db
 
-**image:** docker.io/library/postgres:16.9-alpine@sha256:7c688148e5e156d0e86df7ba8ae5a05a2386aaec1e2ad8e6d11bdf10504b1fb7
+**image:** docker.io/library/postgres:16.10-alpine@sha256:abf1ee8583ce8e4eba7d4686e249c30c951a310e8186665feaf49f4a60a329f1
 
 ### Service: hoppscotch-db-backup
 
@@ -198,7 +178,7 @@
 
 **container_name:** immich-redis
 
-**image:** docker.io/valkey/valkey:8-alpine@sha256:e5e6cbd527c9848b263b956872184df549af888112823cca71812d787cd06d60
+**image:** docker.io/valkey/valkey:8-alpine@sha256:9c3e63b9b6ba69f2fe5d4e32dd8c0e2be3b3e9cbee3940c0cde6a884d55a303a
 
 ### Service: immich-server
 
@@ -224,7 +204,7 @@
 
 **container_name:** metube
 
-**image:** ghcr.io/alexta69/metube:latest@sha256:2f81ad0ca25d52a7f17d33164c7cf2dc6db299a2011b8bfddb68b3edc2523b7a
+**image:** ghcr.io/alexta69/metube:latest@sha256:b4344e4e1614513b96d6bd57669ae077d72c231f5b3866a45dfd1059badffd40
 
 **url:** metube.$DOMAINNAME
 
@@ -234,7 +214,7 @@
 
 **container_name:** n8n
 
-**image:** n8nio/n8n:1.106.2@sha256:a9665e7cd0018474f4ea1e2753a594f13146ad635bfbbcb4e3d695a58691dd6c
+**image:** n8nio/n8n:1.107.2@sha256:49e155af65aef02cb5dd6d39eed22f6e078b1cd567836bc02c8a1616ee2a6017
 
 **url:** n8n.$DOMAINNAME
 
@@ -242,7 +222,7 @@
 
 **container_name:** n8n-db
 
-**image:** docker.io/library/postgres:16.9-alpine@sha256:7c688148e5e156d0e86df7ba8ae5a05a2386aaec1e2ad8e6d11bdf10504b1fb7
+**image:** docker.io/library/postgres:16.10-alpine@sha256:abf1ee8583ce8e4eba7d4686e249c30c951a310e8186665feaf49f4a60a329f1
 
 ### Service: n8n-db-backup
 
@@ -250,47 +230,13 @@
 
 **image:** tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
 
-## docker/ansible/templates/compose-modules/nextcloud.yml
-
-### Service: nextcloud
-
-**container_name:** nextcloud
-
-**image:** nextcloud:31.0.7-apache@sha256:a834f43b159890322d471862a3d8ab48602d4a619499aa7bc94b662cf4463e66
-
-**url:** cloud.$DOMAINNAME
-
-### Service: nextcloud-cron
-
-**container_name:** nextcloud-cron
-
-**image:** nextcloud:31.0.7-apache@sha256:a834f43b159890322d471862a3d8ab48602d4a619499aa7bc94b662cf4463e66
-
-### Service: nextcloud-db
-
-**container_name:** nextcloud-db
-
-**image:** mariadb:11.8.2@sha256:2bcbaec92bd9d4f6591bc8103d3a8e6d0512ee2235506e47a2e129d190444405
-
-### Service: nextcloud-db-backup
-
-**container_name:** nextcloud-db-backup
-
-**image:** tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
-
-### Service: nextcloud-redis
-
-**container_name:** nextcloud-redis
-
-**image:** redis:7.4.5-alpine@sha256:bb186d083732f669da90be8b0f975a37812b15e913465bb14d845db72a4e3e08
-
 ## docker/ansible/templates/compose-modules/open-webui.yml
 
 ### Service: open-webui
 
 **container_name:** open-webui
 
-**image:** ghcr.io/open-webui/open-webui:v0.6.20@sha256:b82efe121615b1d652b63bb01059c1a827d7875707267ee0765efb01d5ca6617
+**image:** ghcr.io/open-webui/open-webui:0.6.22@sha256:fb739f0e9cb0b51d66f0c43bab8bab00960dac38804a243aca1323a563add9cd
 
 **url:** chat.$DOMAINNAME
 
@@ -318,7 +264,7 @@
 
 **container_name:** outline-db
 
-**image:** docker.io/library/postgres:16.9-alpine@sha256:7c688148e5e156d0e86df7ba8ae5a05a2386aaec1e2ad8e6d11bdf10504b1fb7
+**image:** docker.io/library/postgres:16.10-alpine@sha256:abf1ee8583ce8e4eba7d4686e249c30c951a310e8186665feaf49f4a60a329f1
 
 ### Service: outline-db-backup
 
@@ -344,7 +290,7 @@
 
 **container_name:** phpmyadmin
 
-**image:** phpmyadmin:5.2.2-apache@sha256:6caf3364591449d645ab568bbe2e0637a7ec368c3aa6a7f06178d35343963be2
+**image:** phpmyadmin:5.2.2-apache@sha256:bb1f68d134bc4c99881f1228c53f91de28f06f02fb953ae7603c963be3c8a988
 
 **url:** phpmyadmin.$DOMAINNAME
 
@@ -354,7 +300,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.42.1.10054-f333bdaa8@sha256:06a0cde0379869ad62f443de1a708e3477100bfdd2b406206f7d3fc95295ef36
+**image:** lscr.io/linuxserver/plex:version-1.42.1.10060-4e8b05daf@sha256:28f18c27b6822328df994154dbf7c0f511032d9f91bbd10881030b706afd8593
 
 **url:** plex.$DOMAINNAME
 
@@ -394,7 +340,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-9.3.45@sha256:ee536899e67aaaf53e310cf3baa0c74293170902514c216f967795df47a68626
+**image:** lscr.io/linuxserver/unifi-network-application:version-9.3.45@sha256:022dc69b44c28f39d6beb4a269a02f4d0794ec4513d0625eaa2357f4974fdd7f
 
 **url:** unifi.$DOMAINNAME
 
