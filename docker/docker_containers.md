@@ -102,7 +102,7 @@
 
 **container_name:** gatus-db
 
-**image:** docker.io/library/postgres:16.10-alpine@sha256:abf1ee8583ce8e4eba7d4686e249c30c951a310e8186665feaf49f4a60a329f1
+**image:** docker.io/library/postgres:17.6-alpine@sha256:a283fb08619d3517039ae2106413cad68918934025640696a966f4fa468fe376
 
 ### Service: gatus-db-backup
 
@@ -124,7 +124,7 @@
 
 **container_name:** hoppscotch-db
 
-**image:** docker.io/library/postgres:16.10-alpine@sha256:abf1ee8583ce8e4eba7d4686e249c30c951a310e8186665feaf49f4a60a329f1
+**image:** docker.io/library/postgres:17.6-alpine@sha256:a283fb08619d3517039ae2106413cad68918934025640696a966f4fa468fe376
 
 ### Service: hoppscotch-db-backup
 
@@ -200,7 +200,7 @@
 
 **container_name:** n8n-db
 
-**image:** docker.io/library/postgres:16.10-alpine@sha256:abf1ee8583ce8e4eba7d4686e249c30c951a310e8186665feaf49f4a60a329f1
+**image:** docker.io/library/postgres:17.6-alpine@sha256:a283fb08619d3517039ae2106413cad68918934025640696a966f4fa468fe376
 
 ### Service: n8n-db-backup
 
@@ -242,7 +242,7 @@
 
 **container_name:** outline-db
 
-**image:** docker.io/library/postgres:16.10-alpine@sha256:abf1ee8583ce8e4eba7d4686e249c30c951a310e8186665feaf49f4a60a329f1
+**image:** docker.io/library/postgres:17.6-alpine@sha256:a283fb08619d3517039ae2106413cad68918934025640696a966f4fa468fe376
 
 ### Service: outline-db-backup
 
