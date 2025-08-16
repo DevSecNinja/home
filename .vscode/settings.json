@@ -23,6 +23,37 @@
       "**/node_modules/*/**": true,
       "**/.venv/*/**": true
     },
+    "files.exclude": {
+      "**/.git": true,
+      "**/.svn": true,
+      "**/.hg": true,
+      "**/CVS": true,
+      "**/.DS_Store": true,
+      "**/Thumbs.db": true
+    },
+    "search.exclude": {
+      "**/.git": true,
+      "**/.venv": true,
+      "**/__pycache__": true,
+      "**/.pytest_cache": true,
+      "**/node_modules": true,
+      "**/.next": true,
+      "**/dist": true,
+      "**/build": true,
+      "**/.cache": true,
+      "**/logs": true,
+      "**/*.log": true,
+      "**/.nyc_output": true,
+      "**/coverage": true,
+      "**/.coverage": true,
+      "**/htmlcov": true,
+      "**/.tox": true,
+      "**/.mypy_cache": true,
+      "**/.ruff_cache": true,
+      "**/target": true,
+      "**/bin": true,
+      "**/obj": true
+    },
     "sops.defaults.ageKeyFile": "age.key",
     "terminal.integrated.defaultProfile.linux": "zsh",
     "yaml.schemas": {
