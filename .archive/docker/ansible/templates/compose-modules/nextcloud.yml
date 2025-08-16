@@ -1,6 +1,6 @@
 services:
   nextcloud:
-    image: nextcloud:31.0.7-apache@sha256:a834f43b159890322d471862a3d8ab48602d4a619499aa7bc94b662cf4463e66
+    image: nextcloud:31.0.8-apache@sha256:25b7e083b03acf9e9bf1176212235ca086c865e64f03dd076ea92235a8615518
     container_name: nextcloud
     depends_on:
       - traefik
@@ -60,7 +60,7 @@ services:
       - "traefik.http.routers.nextcloud-noauth-rtr.service=nextcloud"
 
   nextcloud-db:
-    image: mariadb:11.8.2@sha256:2bcbaec92bd9d4f6591bc8103d3a8e6d0512ee2235506e47a2e129d190444405
+    image: mariadb:11.8.3@sha256:272084c2dec70619714df329c4ffcb336e3f8c723072c3f56f2e4015997bbf2c
     container_name: nextcloud-db
     command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
     restart: always
@@ -117,7 +117,7 @@ services:
       - nextcloud-backend
 
   nextcloud-cron:
-    image: nextcloud:31.0.7-apache@sha256:a834f43b159890322d471862a3d8ab48602d4a619499aa7bc94b662cf4463e66
+    image: nextcloud:31.0.8-apache@sha256:25b7e083b03acf9e9bf1176212235ca086c865e64f03dd076ea92235a8615518
     container_name: nextcloud-cron
     restart: always
     security_opt:
