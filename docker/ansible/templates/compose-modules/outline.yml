@@ -61,7 +61,7 @@ services:
       - "traefik.http.services.outline-svc.loadbalancer.server.port=3000"
 
   outline-db:
-    image: docker.io/library/postgres:16.9-alpine@sha256:7c688148e5e156d0e86df7ba8ae5a05a2386aaec1e2ad8e6d11bdf10504b1fb7
+    image: docker.io/library/postgres:16.10-alpine@sha256:abf1ee8583ce8e4eba7d4686e249c30c951a310e8186665feaf49f4a60a329f1
     container_name: outline-db
     restart: always
     security_opt:
