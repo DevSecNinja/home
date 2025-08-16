@@ -138,7 +138,7 @@
 
 **container_name:** immich-db
 
-**image:** ghcr.io/immich-app/postgres:14-vectorchord0.3.0-pgvectors0.2.0@sha256:f36625fffae9611b0e6e28cc1a9bb573d20a9d3cc5e62ab0ff1a19874e34e1f4
+**image:** ghcr.io/immich-app/postgres:16-vectorchord0.3.0-pgvectors0.2.0@sha256:61c6cc4d89605fc0900cfe9e607717b0409d12f4da284827d452c3e3f19f3335
 
 ### Service: immich-db-backup
 
@@ -254,7 +254,7 @@
 
 **container_name:** outline-redis
 
-**image:** redis:7.4.5-alpine@sha256:bb186d083732f669da90be8b0f975a37812b15e913465bb14d845db72a4e3e08
+**image:** redis:8.2.0-alpine@sha256:7521abdff715d396aa482183942f3fe643344287c29ccb66eee16ac08a92190f
 
 ### Service: outline-volume-backup
 
