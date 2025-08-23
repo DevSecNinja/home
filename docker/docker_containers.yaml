@@ -56,7 +56,7 @@
   image: ghcr.io/alexta69/metube:latest@sha256:3eb6cf27932d14a3ead8a6ba28f54c5d2fde22c0cf929a0362985bddbf0ea640
   url: metube.$DOMAINNAME
 - container_name: n8n
-  image: n8nio/n8n:1.107.2@sha256:49e155af65aef02cb5dd6d39eed22f6e078b1cd567836bc02c8a1616ee2a6017
+  image: n8nio/n8n:1.108.1@sha256:8509288ac9c0591ddb8a4e4a8e432e003f3cc91bf492cfed6e2c8125c3de3a94
   url: n8n.$DOMAINNAME
 - container_name: n8n-db
   image: docker.io/library/postgres:16.10-alpine@sha256:8ffca822c1933bdc8be7dbbe9c2330974bdb43f5027f47717772fa35925412b0
