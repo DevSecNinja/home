@@ -6,7 +6,7 @@
 
 **container_name:** adguard
 
-**image:** adguard/adguardhome:v0.107.64@sha256:23243d0004d9398cf9c83bdfce3dd92005df72aef010f537e7325a021f31a6f5
+**image:** adguard/adguardhome:v0.107.65@sha256:d765078d2140b464ce837128a4f536f80b4c9ab7fd5b6833ae690b72fae40897
 
 **url:** adguard-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -48,7 +48,7 @@
 
 **container_name:** dozzle-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-3.2.3-r0@sha256:63d2e0ce6bb0d12dfdbde5c3af31d08fee343ec3801a050c8197a3f5ffae8bed
+**image:** lscr.io/linuxserver/socket-proxy:version-3.2.3-r0@sha256:f678a19b06ffb54ae5c479aa55b915bbc3bc7d217bd785b6ce3fad6134759f24
 
 ## docker/ansible/templates/compose-modules/drawio.yml
 
@@ -56,7 +56,7 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:28.0.9@sha256:79cb86fc7f69b4d5a2b78097def23cb752ed680839b596f71fd10d0f86a2f9d6
+**image:** jgraph/drawio:28.0.9@sha256:8d7f123e0ad2b3ca6ea1282cfe02a2c0c4c2b8e71c542ec6b879b748cfa4de4c
 
 **url:** draw.$DOMAINNAME
 
@@ -76,7 +76,7 @@
 
 **container_name:** excalidraw
 
-**image:** excalidraw/excalidraw:latest@sha256:525d72908ffed09807bad50321b94698d725ddc5945118dc3e0b4a494f9772a8
+**image:** excalidraw/excalidraw:latest@sha256:712cd4e7383509ffa50998e743d1a0d02b5aa8eeae714e4d073b7cfb7884f15c
 
 **url:** excalidraw.$DOMAINNAME
 
@@ -150,19 +150,19 @@
 
 **container_name:** immich-machine-learning
 
-**image:** ghcr.io/immich-app/immich-machine-learning:v1.138.0@sha256:25fca00128f10444303c93829516927bd14804ccbe9b7450eb41c64c722c5ac4
+**image:** ghcr.io/immich-app/immich-machine-learning:v1.138.1@sha256:f34e855424fd91c5990132e5b2bde91e1d178ec5205de293ebd8779839a4a77c
 
 ### Service: immich-redis
 
 **container_name:** immich-redis
 
-**image:** docker.io/valkey/valkey:8-alpine@sha256:9c3e63b9b6ba69f2fe5d4e32dd8c0e2be3b3e9cbee3940c0cde6a884d55a303a
+**image:** docker.io/valkey/valkey:8-alpine@sha256:d827e7f7552cdee40cc7482dbae9da020f42bc47669af6f71182a4ef76a22773
 
 ### Service: immich-server
 
 **container_name:** immich-server
 
-**image:** ghcr.io/immich-app/immich-server:v1.138.0@sha256:12cee930e2cc211a95acae12ad780c0b2eecaea0479a06e255c73a4deb0b3efb
+**image:** ghcr.io/immich-app/immich-server:v1.138.1@sha256:1d303559b4c7c6b4ea3cea2276279e4cafdf605c624625674924a6ac04f263cb
 
 **url:** photos.$DOMAINNAME
 
@@ -182,7 +182,7 @@
 
 **container_name:** metube
 
-**image:** ghcr.io/alexta69/metube:latest@sha256:b4344e4e1614513b96d6bd57669ae077d72c231f5b3866a45dfd1059badffd40
+**image:** ghcr.io/alexta69/metube:latest@sha256:3eb6cf27932d14a3ead8a6ba28f54c5d2fde22c0cf929a0362985bddbf0ea640
 
 **url:** metube.$DOMAINNAME
 
@@ -214,7 +214,7 @@
 
 **container_name:** open-webui
 
-**image:** ghcr.io/open-webui/open-webui:0.6.22@sha256:fb739f0e9cb0b51d66f0c43bab8bab00960dac38804a243aca1323a563add9cd
+**image:** ghcr.io/open-webui/open-webui:v0.6.25@sha256:1c2c3e7e84d5bb0b5471e4de881539cf39e724835a5c53b252518e82ea0c568e
 
 **url:** chat.$DOMAINNAME
 
@@ -254,7 +254,7 @@
 
 **container_name:** outline-redis
 
-**image:** redis:8.2.0-alpine@sha256:7521abdff715d396aa482183942f3fe643344287c29ccb66eee16ac08a92190f
+**image:** redis:8.2.1-alpine@sha256:987c376c727652f99625c7d205a1cba3cb2c53b92b0b62aade2bd48ee1593232
 
 ### Service: outline-volume-backup
 
@@ -326,7 +326,7 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:8.0.12@sha256:95a98776f273721a295b03098578b06bc10281bb56aa828c77e9f60ecc70b150
+**image:** mongo:8.0.13@sha256:bf41aa48a1cc0ccc8e6071236acfc428b7110ec2cf14b47c8961bc472e2c7c61
 
 ### Service: unifi-db-backup
 
