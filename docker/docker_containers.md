@@ -48,7 +48,7 @@
 
 **container_name:** dozzle-docker-proxy
 
-**image:** lscr.io/linuxserver/socket-proxy:version-3.2.3-r0@sha256:f678a19b06ffb54ae5c479aa55b915bbc3bc7d217bd785b6ce3fad6134759f24
+**image:** lscr.io/linuxserver/socket-proxy:version-3.2.4-r0@sha256:eaa680cf252ccf1dea354801f2444728fbfabb6431897aaa57d67bbf2121cce0
 
 ## docker/ansible/templates/compose-modules/drawio.yml
 
@@ -138,7 +138,7 @@
 
 **container_name:** immich-db
 
-**image:** ghcr.io/immich-app/postgres:16-vectorchord0.3.0-pgvectors0.2.0@sha256:61c6cc4d89605fc0900cfe9e607717b0409d12f4da284827d452c3e3f19f3335
+**image:** ghcr.io/immich-app/postgres:16-vectorchord0.3.0-pgvectors0.2.0@sha256:5de86005c298abdf351b1e0ba2c5d47cc571eff0f9f9815eccc19821a2bd0b13
 
 ### Service: immich-db-backup
 
@@ -182,7 +182,7 @@
 
 **container_name:** metube
 
-**image:** ghcr.io/alexta69/metube:latest@sha256:3eb6cf27932d14a3ead8a6ba28f54c5d2fde22c0cf929a0362985bddbf0ea640
+**image:** ghcr.io/alexta69/metube:latest@sha256:7e8b3357a585fa05b64987be74c305b987eb4d65262fd4b716c25e683683aafb
 
 **url:** metube.$DOMAINNAME
 
@@ -214,7 +214,7 @@
 
 **container_name:** open-webui
 
-**image:** ghcr.io/open-webui/open-webui:v0.6.25@sha256:1c2c3e7e84d5bb0b5471e4de881539cf39e724835a5c53b252518e82ea0c568e
+**image:** ghcr.io/open-webui/open-webui:v0.6.26@sha256:3121ba5f8526bcc7f4ff387d0fc8a9caab54f84c4a6fb552b634575d10b1582b
 
 **url:** chat.$DOMAINNAME
 
@@ -268,7 +268,7 @@
 
 **container_name:** phpmyadmin
 
-**image:** phpmyadmin:5.2.2-apache@sha256:bb1f68d134bc4c99881f1228c53f91de28f06f02fb953ae7603c963be3c8a988
+**image:** phpmyadmin:5.2.2-apache@sha256:67164b9984eff0677b6a234c15be5c7dcec13e2d06ff502ccdf5cb1cc279f95b
 
 **url:** phpmyadmin.$DOMAINNAME
 
@@ -333,6 +333,16 @@
 **container_name:** unifi-db-backup
 
 **image:** tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
+
+## docker/ansible/templates/compose-modules/vidaud.yml
+
+### Service: vidaud
+
+**container_name:** vidaud
+
+**image:** ghcr.io/devsecninja/vidaud:0.1.1@sha256:40c45608b06d255303dc458e6dadef45ca2e23c151941c66a351ef4a850d2111
+
+**url:** vidaud.$DOMAINNAME
 
 ## docker/ansible/templates/compose-modules/whoogle.yml
 
