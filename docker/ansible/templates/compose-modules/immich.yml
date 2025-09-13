@@ -99,7 +99,7 @@ services:
 
   immich-db:
     # Note: The immich-app/postgres image is a custom build of the official Postgres image with pgvector support.
-    image: ghcr.io/immich-app/postgres:16-vectorchord0.3.0-pgvectors0.2.0@sha256:5de86005c298abdf351b1e0ba2c5d47cc571eff0f9f9815eccc19821a2bd0b13
+    image: ghcr.io/immich-app/postgres:16-vectorchord0.3.0-pgvectors0.2.0@sha256:86a3d915f48076d3cac24b21c832729ad1679c1b5bfb41157785a4029998bae5
     container_name: immich-db
     restart: always
     security_opt:
