@@ -78,7 +78,7 @@ services:
       - "traefik.http.services.hoppscotch-api-svc.loadbalancer.server.port=3170"
 
   hoppscotch-db:
-    image: docker.io/library/postgres:16.10-alpine@sha256:8ffca822c1933bdc8be7dbbe9c2330974bdb43f5027f47717772fa35925412b0
+    image: docker.io/library/postgres:16.10-alpine@sha256:1c6d2f6e4d30d49c529e09a627e8178db5011dde88d955eb08db2e135e64aa09
     container_name: hoppscotch-db
     restart: always
     security_opt:
