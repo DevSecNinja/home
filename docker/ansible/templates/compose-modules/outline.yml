@@ -1,6 +1,6 @@
 services:
   outline:
-    image: outlinewiki/outline:0.86.1@sha256:57481d58bcca16493f10644b72a17c508baa7e039abf83208e182cc793525d75
+    image: outlinewiki/outline:0.87.4@sha256:659a8bf588ef2d914ef4e519409f38e472145369383c0a5aa89b286b4dfe860c
     container_name: outline
     depends_on:
       - traefik
