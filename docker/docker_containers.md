@@ -94,7 +94,7 @@
 
 **container_name:** gatus
 
-**image:** twinproduction/gatus:v5.23.2@sha256:041514059279f102d8e549a7c7c9f813ae9a0bf505c6d7c37aea9201af0bec3a
+**image:** twinproduction/gatus:v5.24.0@sha256:fc97bbb1ec78b5209d06c523413a50b93476ed79dce677bf7a2c63dda6f87584
 
 **url:** status-docker.$DOMAINNAME
 
