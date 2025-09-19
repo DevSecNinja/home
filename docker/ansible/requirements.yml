@@ -8,7 +8,7 @@ roles:
     version: 6.0.4
   - name: geerlingguy.docker
     src: https://github.com/geerlingguy/ansible-role-docker
-    version: 7.5.0
+    version: 7.5.4
   - name: geerlingguy.security
     src: https://github.com/geerlingguy/ansible-role-security
     version: 3.0.0
