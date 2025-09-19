@@ -6,7 +6,7 @@
 
 **container_name:** adguard
 
-**image:** adguard/adguardhome:v0.107.65@sha256:d765078d2140b464ce837128a4f536f80b4c9ab7fd5b6833ae690b72fae40897
+**image:** adguard/adguardhome:v0.107.66@sha256:cc8757742e547c722bb0bd9a3b11fce22771a75a5b0e07ce9a789ad62a2bfd37
 
 **url:** adguard-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -116,7 +116,7 @@
 
 **container_name:** hoppscotch
 
-**image:** hoppscotch/hoppscotch:2025.7.1@sha256:82f47708304db43ecbb866e68a79d30aef707bfa3cdc233006f798a7e676145a
+**image:** hoppscotch/hoppscotch:2025.8.1@sha256:bbf30918d0f58743947fd691a9dd9544d5a37aae313c3909478470b8c72e0396
 
 **url:** api-tester.$DOMAINNAME
 
@@ -162,7 +162,7 @@
 
 **container_name:** immich-server
 
-**image:** ghcr.io/immich-app/immich-server:v1.138.1@sha256:1d303559b4c7c6b4ea3cea2276279e4cafdf605c624625674924a6ac04f263cb
+**image:** ghcr.io/immich-app/immich-server:v1.142.1@sha256:06bc7715fa4c4a1641bd0b566c949cd7327f420632b480389fd4d1e70665d046
 
 **url:** photos.$DOMAINNAME
 
@@ -214,7 +214,7 @@
 
 **container_name:** open-webui
 
-**image:** ghcr.io/open-webui/open-webui:0.6.28@sha256:4fe25c664d4d50f98f21594f12b59612bf7f5cabcff8e516c5c8521193d9c498
+**image:** ghcr.io/open-webui/open-webui:v0.6.30@sha256:b9f7930a5eea6a3284f45ab6d20f9e1e02a5cd6da6b57b962b05422de5233f23
 
 **url:** chat.$DOMAINNAME
 
@@ -318,7 +318,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-9.3.45@sha256:022dc69b44c28f39d6beb4a269a02f4d0794ec4513d0625eaa2357f4974fdd7f
+**image:** lscr.io/linuxserver/unifi-network-application:version-9.4.19@sha256:1e59277d29efda7fd024ad1dc72567e46db6530e82e43733044423e9750e4e05
 
 **url:** unifi.$DOMAINNAME
 
