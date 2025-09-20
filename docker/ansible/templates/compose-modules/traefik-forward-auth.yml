@@ -1,6 +1,6 @@
 services:
   traefik-forward-auth:
-    image: ghcr.io/italypaleale/traefik-forward-auth:3.6.0@sha256:e76ca5f507d29ca7d5aea38c49f384ea3da4b5b48873dfb77e8b3b2217bd824b
+    image: ghcr.io/italypaleale/traefik-forward-auth:4.0.0@sha256:cffd543df892b22fa1c997f0a6b984d00b9565b65bfdfc1e43f38de7d3e2bc3e
     container_name: traefik-forward-auth
     depends_on:
       - traefik
@@ -11,25 +11,10 @@ services:
       - no-new-privileges=true
     read_only: true
     mem_limit: 200m
+    volumes:
+      - $DOCKERDIR/data/traefik-forward-auth/config.yaml:/etc/traefik-forward-auth/config.yaml:ro
     environment:
       - TZ=${TZ}
-      # Hostname where the application can be reached at externally
-      - TFA_HOSTNAME=auth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
-      # Domain for setting cookies
-      - TFA_COOKIEDOMAIN=$DOMAINNAME
-      # Configure authentication with Entra ID
-      - TFA_AUTHPROVIDER=microsoftentraid
-      - TFA_AUTHMICROSOFTENTRAID_TENANTID=$OAUTH2_PROXY_AZURE_TENANT_ID
-      - TFA_AUTHMICROSOFTENTRAID_CLIENTID=$OAUTH2_PROXY_AZURE_CLIENT_ID
-      - TFA_AUTHMICROSOFTENTRAID_CLIENTSECRET=$OAUTH2_PROXY_AZURE_CLIENT_SECRET
-      # Cooke & Session
-      - TFA_COOKIENAME=_forward_auth_$GENERIC_HOSTNAME_SUFFIX
-      - TFA_SESSIONLIFETIME=12h
-      # Enable Prometheus metrics
-      - TFA_ENABLEMETRICS=true
-      - TFA_TOKENSIGNINGKEY=$TRAEFIK_FORWARD_AUTH_SECRET
-      # TODO: Implement mTLS for Traefik Forward Auth:
-      # Docs: https://github.com/ItalyPaleAle/traefik-forward-auth?tab=readme-ov-file#mtls-between-traefik-and-traefik-forward-auth
     labels:
       # Homepage
       # - homepage.group=Infrastructure

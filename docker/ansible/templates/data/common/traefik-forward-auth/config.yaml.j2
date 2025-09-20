@@ -27,3 +27,6 @@ portals:
           tenantID: "{{ apps__oauth2_proxy_azure_tenant_id }}"
           clientID: "{{ apps__oauth2_proxy_azure_client_id }}"
           clientSecret: "{{ apps__oauth2_proxy_azure_client_secret }}"
+
+# Since we only use one portal, we can set it as the default
+defaultPortal: "main"
