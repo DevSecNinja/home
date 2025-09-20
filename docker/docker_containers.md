@@ -138,7 +138,7 @@
 
 **container_name:** immich-db
 
-**image:** ghcr.io/immich-app/postgres:16-vectorchord0.3.0-pgvectors0.2.0@sha256:24e0dd61e4923ec3daa9272aa0660625bafd2012b4a2a32c3cb796f392ec356f
+**image:** ghcr.io/immich-app/postgres:14-vectorchord0.3.0-pgvectors0.2.0@sha256:f36625fffae9611b0e6e28cc1a9bb573d20a9d3cc5e62ab0ff1a19874e34e1f4
 
 ### Service: immich-db-backup
 
