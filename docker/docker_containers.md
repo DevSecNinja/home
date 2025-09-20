@@ -228,40 +228,6 @@
 
 **url:** speedtest.$DOMAINNAME
 
-## docker/ansible/templates/compose-modules/outline.yml
-
-### Service: outline
-
-**container_name:** outline
-
-**image:** outlinewiki/outline:0.87.4@sha256:659a8bf588ef2d914ef4e519409f38e472145369383c0a5aa89b286b4dfe860c
-
-**url:** docs.$DOMAINNAME
-
-### Service: outline-db
-
-**container_name:** outline-db
-
-**image:** docker.io/library/postgres:16.10-alpine@sha256:1c6d2f6e4d30d49c529e09a627e8178db5011dde88d955eb08db2e135e64aa09
-
-### Service: outline-db-backup
-
-**container_name:** outline-db-backup
-
-**image:** tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
-
-### Service: outline-redis
-
-**container_name:** outline-redis
-
-**image:** redis:8.2.1-alpine@sha256:987c376c727652f99625c7d205a1cba3cb2c53b92b0b62aade2bd48ee1593232
-
-### Service: outline-volume-backup
-
-**container_name:** outline-volume-backup
-
-**image:** offen/docker-volume-backup:v2.44.0@sha256:fcf92e0f192214ccda0a89f989bed6c49d4ed77da4e59b38ddfcf05a05512337
-
 ## docker/ansible/templates/compose-modules/phpmyadmin.yml
 
 ### Service: phpmyadmin
