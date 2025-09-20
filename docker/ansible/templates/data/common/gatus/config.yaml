@@ -141,9 +141,9 @@ endpoints:
     <<: *defaults
     url: "https://chat.${DOMAINNAME}"
 
-  - name: Outline
-    <<: *defaults
-    url: "https://docs.${DOMAINNAME}"
+  # - name: Outline
+  #   <<: *defaults
+  #   url: "https://docs.${DOMAINNAME}"
 
   # - name: Paperless - HTTP
   #   <<: *defaults
