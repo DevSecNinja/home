@@ -38,13 +38,12 @@ services:
       - HOSTNAME=plex
       - VERSION=docker
       - PLEX_CLAIM=${PLEX_CLAIM_TOKEN} # Get it from: https://www.plex.tv/claim/
-    # devices:
-      # - /dev/dri:/dev/dri # TO BE ADDED AFTER MOVING TO INTEL
-      #- "/dev/dri/card0:/dev/dri/card0"
-      #- "/dev/dri/renderD128:/dev/dri/renderD128"
+    devices:
+      - /dev/dri/renderD128:/dev/dri/renderD128
     volumes:
       - plex_config_data:/config
       - /mnt/smb_share_backup/plex:/mnt/smb_share_backup/plex
+      # Note: make sure to set "Transcoder temporary directory" to /data/transcode in Plex settings
       - /dev/shm:/data/transcode
       # SMB Media Shares
       - /mnt/smb_share_audiobooks:/mnt/smb_share_audiobooks
