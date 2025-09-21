@@ -8,9 +8,9 @@ services:
       - immich-redis
     restart: always
     mem_limit: 1024m
-    # extends:
-    #   file: hwaccel.transcoding.yml
-    #   service: cpu # set to one of [nvenc, quicksync, rkmpp, vaapi, vaapi-wsl] for accelerated transcoding
+    extends:
+      file: $DOCKERDIR/data/immich/hwaccel.transcoding.yml
+      service: quicksync # set to one of [cpu, nvenc, quicksync, rkmpp, vaapi, vaapi-wsl] for accelerated transcoding
     volumes:
       - /mnt/smb_share_photos/immich:/usr/src/app/upload
       - /etc/localtime:/etc/localtime:ro
