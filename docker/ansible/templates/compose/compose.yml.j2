@@ -23,7 +23,7 @@ include:
   # - $DOCKERDIR/data/compose/wallabag.yml
 {% endif %}
 {% if 'webservers' in group_names %}
-  - $DOCKERDIR/data/compose/dozzle.yml
+  # - $DOCKERDIR/data/compose/dozzle.yml
   - $DOCKERDIR/data/compose/echo-server.yml
   - $DOCKERDIR/data/compose/homepage.yml
   - $DOCKERDIR/data/compose/traefik-forward-auth.yml

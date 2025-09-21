@@ -85,14 +85,6 @@ endpoints:
     <<: *defaults
     url: "https://cyberchef.${DOMAINNAME}"
 
-  - name: Dozzle MGMT - HTTP
-    <<: *defaults
-    url: "https://dozzle-mgmt.${DOMAINNAME}"
-
-  - name: Dozzle PROD - HTTP
-    <<: *defaults
-    url: "https://dozzle-prod.${DOMAINNAME}"
-
   - name: Draw - HTTP
     <<: *defaults
     url: "https://draw.${DOMAINNAME}"
