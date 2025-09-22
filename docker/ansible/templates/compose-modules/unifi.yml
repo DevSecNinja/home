@@ -10,14 +10,28 @@ services:
     mem_limit: 1024m
     environment:
       - TZ=${TZ}
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=${UNIFI_MONGO_ROOT_PASS}
+      - MONGO_INITDB_DATABASE=unifi
+      - MONGO_USER=unifi
+      - MONGO_PASS=${UNIFI_MONGO_PASS}
+      - MONGO_DBNAME=unifi
+      # Create the user in the unifi database, not the admin database
+      - MONGO_AUTHSOURCE=unifi
     security_opt:
       - no-new-privileges=true
     networks:
       - unifi-backend
     volumes:
       - unifi_db_data:/data/db
-      - $DOCKERDIR/data/mongodb/init-mongo-unifi-db.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - $DOCKERDIR/data/mongodb/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh:ro
     restart: always
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping')"]
+      interval: 30s      # how often to run the check
+      timeout: 10s       # how long to wait for a response
+      retries: 3         # consecutive failures before unhealthy
+      start_period: 30s  # extra time to let Mongo start up
 
   unifi-db-backup:
     container_name: unifi-db-backup

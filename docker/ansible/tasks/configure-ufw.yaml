@@ -30,7 +30,7 @@
 #     - { rule: 'allow', port: '2376', proto: 'tcp', comment: 'Docker Daemon', from: '192.168.1.11' }
 #   when: "'docker' in group_names"
 
-- name: Configure ufw rules - management
+- name: Configure ufw rules - unifi
   ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }} comment={{ item.comment }}
   with_items:
     - { rule: 'allow', port: '3478', proto: 'udp', comment: 'Unifi' }
@@ -39,7 +39,7 @@
     - { rule: 'allow', port: '8080', proto: 'tcp', comment: 'Unifi' }
     - { rule: 'allow', port: '1900', proto: 'udp', comment: 'Unifi' }
     - { rule: 'allow', port: '6789', proto: 'tcp', comment: 'Unifi' }
-  when: "'management' in group_names"
+  when: "'management' in group_names or 'infra' in group_names"
 
 - name: Configure ufw rules - dnsservers
   ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }} comment={{ item.comment }}

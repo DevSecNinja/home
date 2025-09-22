@@ -5,8 +5,8 @@ virtualization:
       hosts:
         # SVLHOST01.MANAGEMENT:
         #   ansible_user: "root"
-        SVLHOST02.MANAGEMENT:
-          ansible_user: "root"
+        # SVLHOST02.MANAGEMENT:
+        #   ansible_user: "root"
 
 storage:
   children:
@@ -63,6 +63,8 @@ compute:
             svlmgmt.MANAGEMENT:
               ansible_user: "jean-paul"
             svlext.ravensberg.org:
+              ansible_user: "jean-paul"
+            svlinfra.MANAGEMENT:
               ansible_user: "jean-paul"
 
         vpnservers:

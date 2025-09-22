@@ -3,12 +3,6 @@ include:
   - $DOCKERDIR/data/compose/adguard.yml
 {% endif %}
 {% if 'management' in group_names %}
-  # TODO: [bitwarden] Find out why CPU is 149 %
-  # This caused power consumption of the server to double.
-  #- $DOCKERDIR/data/compose/bitwarden.yml
-  - $DOCKERDIR/data/compose/cloudflare.yml
-  - $DOCKERDIR/data/compose/gatus.yml
-  - $DOCKERDIR/data/compose/openspeedtest.yml
   - $DOCKERDIR/data/compose/unifi.yml
 {% endif %}
 {% if 'production' in group_names %}
@@ -23,7 +17,6 @@ include:
   # - $DOCKERDIR/data/compose/wallabag.yml
 {% endif %}
 {% if 'webservers' in group_names %}
-  # - $DOCKERDIR/data/compose/dozzle.yml
   - $DOCKERDIR/data/compose/echo-server.yml
   - $DOCKERDIR/data/compose/homepage.yml
   - $DOCKERDIR/data/compose/traefik-forward-auth.yml
@@ -50,9 +43,15 @@ include:
   - $DOCKERDIR/data/compose/immich.yml
   - $DOCKERDIR/data/compose/metube.yml
   - $DOCKERDIR/data/compose/open-webui.yml
+  - $DOCKERDIR/data/compose/openspeedtest.yml
   #- $DOCKERDIR/data/compose/outline.yml
   - $DOCKERDIR/data/compose/plex.yml
   - $DOCKERDIR/data/compose/tubesync.yml
+{% endif %}
+{% if 'infra' in group_names %}
+  - $DOCKERDIR/data/compose/cloudflare.yml
+  - $DOCKERDIR/data/compose/gatus.yml
+  - $DOCKERDIR/data/compose/unifi.yml
 {% endif %}
 
 networks:
