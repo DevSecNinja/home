@@ -42,7 +42,6 @@ services:
       - /dev/dri/renderD128:/dev/dri/renderD128
     volumes:
       - plex_config_data:/config
-      - /mnt/smb_share_backup/plex:/mnt/smb_share_backup/plex
       # Note: make sure to set "Transcoder temporary directory" to /data/transcode in Plex settings
       - /dev/shm:/data/transcode
       # SMB Media Shares

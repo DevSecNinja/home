@@ -16,7 +16,10 @@
   register: nas_smb
   failed_when: false
   changed_when: false
-  when: inventory_hostname in groups['media'] or inventory_hostname in groups['apps']
+  when:
+    # Internal web servers
+    - inventory_hostname in groups['webservers']
+    - inventory_hostname in groups['internal']
 
 - name: Log when NAS is offline but play continues
   ansible.builtin.debug:
@@ -62,5 +65,7 @@
     state: mounted
   become: true # Needed to make the destination dir
   when:
-    - inventory_hostname in groups['media'] or inventory_hostname in groups['apps']
+    # Internal web servers
+    - inventory_hostname in groups['webservers']
+    - inventory_hostname in groups['internal']
     - nas_smb.state | default('') == 'started'

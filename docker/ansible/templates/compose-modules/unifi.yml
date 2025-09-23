@@ -40,7 +40,7 @@ services:
     depends_on:
       - unifi-db
     volumes:
-      - $DOCKERDIR/data/backup:/backup # TODO: [db-backup] Backup directly to SMB Share
+      - /mnt/smb_share_backup/unifi:/backup
     networks:
       - unifi-backend
     mem_limit: 1024m
@@ -68,6 +68,7 @@ services:
       - DB01_USER=unifi
       - DB01_PORT=27017
       - DB01_PASS=${UNIFI_MONGO_PASS}
+      - DB01_AUTH=admin
     restart: always
     security_opt:
       - no-new-privileges=true

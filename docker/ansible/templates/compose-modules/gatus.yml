@@ -81,7 +81,7 @@ services:
     depends_on:
       - gatus-db
     volumes:
-      - $DOCKERDIR/data/backup:/backup
+      - /mnt/smb_share_backup/gatus:/backup
     mem_limit: 1024m
     networks:
       - gatus-backend
