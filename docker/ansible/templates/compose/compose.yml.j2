@@ -2,9 +2,6 @@ include:
 {% if 'dnsservers' in group_names %}
   - $DOCKERDIR/data/compose/adguard.yml
 {% endif %}
-{% if 'management' in group_names %}
-  - $DOCKERDIR/data/compose/unifi.yml
-{% endif %}
 {% if 'production' in group_names %}
   # - $DOCKERDIR/data/compose/code-server.yml
   # - $DOCKERDIR/data/compose/home-assistant.yml

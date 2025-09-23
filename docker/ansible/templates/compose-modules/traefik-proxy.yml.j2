@@ -22,7 +22,7 @@ services:
         published: 443
         protocol: tcp
         mode: host
-{% if 'management' in group_names %}
+{% if 'infra' in group_names %}
       # Unifi Guest portal can only be reached on 8843
       - target: 8843
         published: 8843

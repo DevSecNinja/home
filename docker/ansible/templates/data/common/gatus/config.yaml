@@ -217,20 +217,20 @@ endpoints:
     url: "${IP_SVLEXT}" # Address of the DNS server to use
     group: External
     dns:
-      query-name: "SVLMGMT.${DOMAINNAME}"
+      query-name: "SVLINFRA.${DOMAINNAME}"
       query-type: "A"
     conditions:
-      - "[BODY] == 192.168.1.11"
+      - "[BODY] == 192.168.1.15"
       - "[DNS_RCODE] == NOERROR"
 
   - name: AdGuard Router - DNS
     url: "192.168.1.1" # Address of the DNS server to use
     group: Internal
     dns:
-      query-name: "SVLMGMT.${DOMAINNAME}"
+      query-name: "SVLINFRA.${DOMAINNAME}"
       query-type: "A"
     conditions:
-      - "[BODY] == 192.168.1.11"
+      - "[BODY] == 192.168.1.15"
       - "[DNS_RCODE] == NOERROR"
 
   - name: Google.com - DNS

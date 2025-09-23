@@ -17,4 +17,6 @@ db.createUser({
     { db: "${MONGO_DBNAME}_audit", role: "dbOwner" }
   ]
 })
+# To prevent error: not authorized on admin to execute command
+db.grantRolesToUser("${MONGO_USER}", [{ role: "clusterMonitor", db: "${MONGO_AUTHSOURCE}" }]);
 EOF

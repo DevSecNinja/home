@@ -41,7 +41,7 @@ services:
     restart: always
     networks:
       - homepage-backend
-{% if 'apps' in group_names or 'media' in group_names or 'management' in group_names or 'external' in group_names %}
+{% if 'apps' in group_names or 'media' in group_names or 'infra' in group_names or 'external' in group_names %}
       - homepage-frontend
 {% endif %}
     environment:
@@ -62,7 +62,7 @@ services:
       # Traefik
       - "traefik.enable=true"
       - "traefik.docker.network=homepage-frontend"
-{% if 'apps' in group_names or 'media' in group_names or 'management' in group_names %}
+{% if 'apps' in group_names or 'media' in group_names or 'infra' in group_names %}
       ## Middlewares
       - "traefik.http.routers.homepage-proxy-rtr.middlewares=chain-basic-auth-svlinfra-whitelist@file"
 {% elif 'external' in group_names %}

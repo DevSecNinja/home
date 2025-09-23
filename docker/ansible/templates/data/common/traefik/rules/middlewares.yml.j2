@@ -45,16 +45,16 @@ http:
       basicAuth:
         users:
           - "{{ generic__docker_traefik_htpasswd_entry }}"
-    middlewares-whitelist-mgmt:
+    middlewares-whitelist-infra:
       ipAllowList:
         sourceRange:
           - "127.0.0.1/32"
-          - "192.168.1.11"
+          - "192.168.1.15"
     middlewares-whitelist-webservers:
       ipAllowList:
         sourceRange:
           - "127.0.0.1/32"
-          - "192.168.1.11"
+          - "192.168.1.15"
           - "192.168.60.2"
     middlewares-whitelist-localnetwork:
       ipAllowList:

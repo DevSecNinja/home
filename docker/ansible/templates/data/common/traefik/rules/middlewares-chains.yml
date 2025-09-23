@@ -42,12 +42,12 @@ http:
           - "middlewares-secure-headers"
           - "middlewares-mtls"
           - "middlewares-whitelist-localnetwork"
-    chain-no-auth-mgmt-whitelist:
+    chain-no-auth-infra-whitelist:
       chain:
         middlewares:
           - "middlewares-rate-limit"
           - "middlewares-secure-headers"
-          - "middlewares-whitelist-mgmt"
+          - "middlewares-whitelist-infra"
     chain-no-auth-svlinfra-whitelist:
       chain:
         middlewares:

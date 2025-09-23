@@ -12,12 +12,13 @@ services:
       - TZ=${TZ}
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=${UNIFI_MONGO_ROOT_PASS}
-      - MONGO_INITDB_DATABASE=unifi
+      # No need to pre-create the DB as Unifi will take care of that
+      #- MONGO_INITDB_DATABASE=unifi
       - MONGO_USER=unifi
       - MONGO_PASS=${UNIFI_MONGO_PASS}
       - MONGO_DBNAME=unifi
-      # Create the user in the unifi database, not the admin database
-      - MONGO_AUTHSOURCE=unifi
+      # User gets created in the admin database
+      - MONGO_AUTHSOURCE=admin
     security_opt:
       - no-new-privileges=true
     networks:
@@ -90,6 +91,8 @@ services:
       - MONGO_HOST=unifi-db
       - MONGO_PORT=27017
       - MONGO_DBNAME=unifi
+      # User gets created in the admin database- MONGO_AUTHSOURCE=admin
+      - MONGO_AUTHSOURCE=admin
       - MEM_LIMIT=1024 #optional
     volumes:
       - unifi_data:/config
@@ -104,7 +107,7 @@ services:
       - 3478:3478/udp # used for STUN
       - 10001:10001/udp # used for device discovery
       - 8080:8080 # used for device and controller communications
-      - 1900:1900/udp #optional - used for "Make controller discoverable on L2 network" in controller settings
+      # - 1900:1900/udp #optional - used for "Make controller discoverable on L2 network" in controller settings # Currently turned off in settings
       # - 8843:8843 #optional - used for HTTPS portal redirection
       # - 8880:8880 #optional - used for HTTP portal redirection
       - 6789:6789 #optional - used for UniFi mobile speed test

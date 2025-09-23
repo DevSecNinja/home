@@ -24,10 +24,10 @@
     # - { rule: 'allow', port: '8085', proto: 'tcp', comment: 'Traefik'  }
   when: "'webservers' in group_names"
 
-# - name: Configure ufw rules - management server connections
+# - name: Configure ufw rules - infra server connections
 #   ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }} comment={{ item.comment }} from={{ item.from }}
 #   with_items:
-#     - { rule: 'allow', port: '2376', proto: 'tcp', comment: 'Docker Daemon', from: '192.168.1.11' }
+#     - { rule: 'allow', port: '2376', proto: 'tcp', comment: 'Docker Daemon', from: '192.168.1.15' }
 #   when: "'docker' in group_names"
 
 - name: Configure ufw rules - unifi
@@ -39,7 +39,7 @@
     - { rule: 'allow', port: '8080', proto: 'tcp', comment: 'Unifi' }
     - { rule: 'allow', port: '1900', proto: 'udp', comment: 'Unifi' }
     - { rule: 'allow', port: '6789', proto: 'tcp', comment: 'Unifi' }
-  when: "'management' in group_names or 'infra' in group_names"
+  when: "'infra' in group_names"
 
 - name: Configure ufw rules - dnsservers
   ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }} comment={{ item.comment }}
