@@ -47,32 +47,166 @@ For more information about the Docker services and containers I deploy, see the 
 
 ## Upgrading databases
 
-### MongoDB major release
+### Checklist - MongoDB Major Upgrade
 
-This instruction was created for updating MongoDB 7.0.21 to 8.0.12. We use `unifi-db` as an example:
+This guide covers upgrading MongoDB from one major version to another (e.g., 7.0.21 to 8.0.12). We use `unifi-db` as an example, but these steps apply to any MongoDB instance.
 
-- [ ] Confirm the application you are running works with the new major version of the database by checking their documentation.
-- [ ] Do not merge the mongodb Renovate commit to upgrade to a major version yet, but do keep the version + SHA hash on the clipboard.
-- [ ] Despite the daily backups, make sure to take a snapshot of the VM that runs the container for easy restore.
+#### Pre-upgrade preparation
 
-For each of the databases that is included in the Renovate commit:
+- [ ] **Verify application compatibility**: Check the application documentation to confirm it supports the new MongoDB major version
+- [ ] **Prepare Renovate commit**: Do not merge the MongoDB Renovate commit yet, but keep the new version and SHA hash readily available
+- [ ] **Create VM snapshot**: Despite daily backups, take a VM snapshot for quick rollback if needed
+- [ ] **Schedule maintenance window**: Plan for potential downtime during the upgrade process
 
-- [ ] Login on the applicable Docker server
-- [ ] Run `docker exec -it unifi-db mongosh` to connect to the MongoDB server
-- [ ] Run `show dbs` to view the databases
-- [ ] Run `db.adminCommand({ getParameter: 1, featureCompatibilityVersion: 1 })` to check the Feature Compatibility Version. Note that this should be max N-1 and N+1. So if this command returns `{ featureCompatibilityVersion: { version: '6.0' }, ok: 1 }`, the database will work with both version 5 and 7, but not with 8 or 4.
-- [ ] Run `test> db.adminCommand({ setFeatureCompatibilityVersion: "<X>.0" })` with the desired version at position X.
-- [ ] You might receive a notification like `MongoServerError[Location7369100]: Once you have upgraded to 7.0, you will not be able to downgrade FCV and binary version without support assistance. Please re-run this command with 'confirm: true' to acknowledge this and continue with the FCV upgrade.`. Make sure to run the previous command with `confirm: true`. In this example: `db.adminCommand({ setFeatureCompatibilityVersion: "7.0", confirm: true})`. It should return `{ ok: 1 }`.
-- [ ] Stop the application docker container (in this case, `unifi`)
-- [ ] Manually add the new MongoDB version to the Docker compose file
-- [ ] Run `docker compose up -d unifi-db --wait`
-- [ ] Check the logs of the database: `docker logs unifi-db` and look for the log `"msg":"Waiting for connections","attr":{"port":27017,"ssl":"off"}}`
-- [ ] Also check the logs for any post-upgrade errors
-- [ ] Run `docker compose up -d unifi --wait` to start the application server. Confirm that the application runs correctly.
-- [ ] Remove the VM snapshot if everything runs well.
+#### Upgrade procedure
 
-- [ ] To prevent the next major upgrade to break, consider upgrading the `featureCompatibilityVersion` to the version that the database server is running now.
-    - [ ] Stop the application container once more
-    - [ ] Rerun the `setFeatureCompatibilityVersion` command
-    - [ ] As a precaution, restart the DB container
-    - [ ] Check the logs of the database: `docker logs unifi-db` and look for the log `"msg":"Waiting for connections","attr":{"port":27017,"ssl":"off"}}`
+For each MongoDB database in the upgrade:
+
+##### Step 1: Check Feature Compatibility Version (FCV)
+
+- [ ] Login to the applicable Docker server
+- [ ] Connect to MongoDB: `docker exec -it unifi-db mongosh`
+- [ ] List databases: `show dbs`
+- [ ] Check current FCV: `db.adminCommand({ getParameter: 1, featureCompatibilityVersion: 1 })`
+    - *Note: FCV supports N-1 and N+1 versions. For example, FCV 6.0 works with MongoDB versions 5.x and 7.x, but not 4.x or 8.x*
+
+##### Step 2: Update Feature Compatibility Version (if needed)
+
+- [ ] Set FCV to target version: `db.adminCommand({ setFeatureCompatibilityVersion: "<X>.0" })` (replace `<X>` with desired major version)
+- [ ] If prompted with confirmation warning, re-run with confirmation:
+
+    ```javascript
+    db.adminCommand({ setFeatureCompatibilityVersion: "7.0", confirm: true})
+    ```
+
+- [ ] Verify command returns `{ ok: 1 }`
+
+##### Step 3: Upgrade MongoDB binaries
+
+- [ ] Stop the application container: `docker stop unifi`
+- [ ] Update the MongoDB version in the Docker Compose file
+- [ ] Start the database with new version: `docker compose up -d unifi-db --wait`
+- [ ] Monitor database logs: `docker logs unifi-db`
+    - *Look for: `"msg":"Waiting for connections","attr":{"port":27017,"ssl":"off"}`*
+- [ ] Check for any upgrade-related errors in the logs
+
+##### Step 4: Validate and restart services
+
+- [ ] Restart the application: `docker compose up -d unifi --wait`
+- [ ] Verify application functionality through its interface
+- [ ] Test key application features to ensure compatibility
+- [ ] Remove VM snapshot once everything is confirmed working
+
+#### Post-upgrade optimization (recommended)
+
+- [ ] **Update FCV to current version** (prevents issues with future upgrades):
+    - [ ] Stop application container: `docker stop unifi`
+    - [ ] Connect to MongoDB and update FCV to match the running version
+    - [ ] Restart database container: `docker compose restart unifi-db`
+    - [ ] Verify database connectivity: `docker logs unifi-db`
+    - [ ] Restart application: `docker compose up -d unifi --wait`
+
+### Checklist - PostgreSQL Major Upgrade
+
+This guide covers upgrading PostgreSQL from one major version to another (e.g., PostgreSQL 15 to 16). The process varies slightly depending on whether your PostgreSQL instance uses extensions.
+
+#### PostgreSQL pre-upgrade preparation
+
+- [ ] **Verify application compatibility**: Check that your applications support the new PostgreSQL major version
+- [ ] **Identify PostgreSQL instances**: Review your compose files to identify all PostgreSQL containers that need upgrading
+- [ ] **Check for extensions**: Note any special PostgreSQL images with extensions (e.g., `immich-db` with vector extensions)
+- [ ] **Create VM snapshot**: Take a snapshot of the VM hosting the containers for quick rollback
+- [ ] **Verify backup status**: Ensure your `tiredofit/db-backup` containers are functioning and recent backups exist
+- [ ] **Schedule maintenance window**: Plan for downtime during the upgrade process
+
+#### Backup verification
+
+- [ ] Check recent backup status: `docker logs <service>-db-backup`
+- [ ] Verify backup files exist: `ls -la $DOCKERDIR/data/backup/`
+- [ ] Note backup encryption status and ensure you have the decryption passphrase
+
+#### PostgreSQL upgrade procedure (Standard PostgreSQL)
+
+For standard PostgreSQL instances (gatus-db, hoppscotch-db, etc.):
+
+##### Step 1: Prepare for upgrade
+
+- [ ] Login to the applicable Docker server
+- [ ] Stop the application container: `docker stop <service>`
+- [ ] Stop the PostgreSQL container: `docker stop <service>-db`
+- [ ] Create a manual backup before proceeding:
+
+    ```bash
+    docker run --rm --network <service>-backend \
+      -v $DOCKERDIR/data/backup:/backup \
+      postgres:16.10-alpine pg_dump -h <service>-db -U <username> <database> > /backup/pre-upgrade-$(date +%Y%m%d).sql
+    ```
+
+##### Step 2: Upgrade using dump and restore method
+
+- [ ] Export current data:
+
+    ```bash
+    docker run --rm --network <service>-backend \
+      -v <service>_db_data:/var/lib/postgresql/data \
+      -v $DOCKERDIR/data/backup:/backup \
+      postgres:OLD_VERSION pg_dumpall -U <username> > /backup/full-dump-$(date +%Y%m%d).sql
+    ```
+
+- [ ] Remove old data volume: `docker volume rm <service>_db_data`
+- [ ] Update PostgreSQL version in Docker Compose file
+- [ ] Start new PostgreSQL container: `docker compose up -d <service>-db --wait`
+- [ ] Restore data:
+
+    ```bash
+    docker exec -i <service>-db psql -U postgres < /backup/full-dump-$(date +%Y%m%d).sql
+    ```
+
+##### Step 3: Validate upgrade
+
+- [ ] Check PostgreSQL logs: `docker logs <service>-db`
+- [ ] Verify database connectivity: `docker exec -it <service>-db psql -U <username> -d <database> -c '\l'`
+- [ ] Start application container: `docker compose up -d <service> --wait`
+- [ ] Test application functionality through its interface
+
+#### PostgreSQL upgrade procedure (PostgreSQL with extensions)
+
+For PostgreSQL instances with special extensions (like `immich-db`):
+
+##### Step 1: Check extension compatibility
+
+- [ ] Research extension compatibility with new PostgreSQL version
+- [ ] Verify the specialized Docker image supports the target PostgreSQL version
+- [ ] Note any extension-specific upgrade procedures
+
+##### Step 2: Follow standard upgrade with additional considerations
+
+- [ ] Ensure the new Docker image includes all required extensions
+- [ ] After restore, verify extensions are properly loaded:
+
+    ```sql
+    SELECT * FROM pg_extension;
+    ```
+
+- [ ] Test extension-specific functionality in the application
+
+#### Rollback procedure (if needed)
+
+If the upgrade fails:
+
+- [ ] Stop all containers: `docker stop <service> <service>-db`
+- [ ] Restore VM snapshot to previous state
+- [ ] Alternatively, restore from backup:
+    - [ ] Remove failed data volume: `docker volume rm <service>_db_data`
+    - [ ] Revert Docker Compose file to previous PostgreSQL version
+    - [ ] Start old PostgreSQL version: `docker compose up -d <service>-db --wait`
+    - [ ] Restore from backup: `docker exec -i <service>-db psql -U postgres < /backup/pre-upgrade-<date>.sql`
+
+#### Post-upgrade tasks
+
+- [ ] **Update backup configuration**: Ensure backup containers work with new PostgreSQL version
+- [ ] **Update monitoring**: Verify health checks and monitoring still function correctly
+- [ ] **Test backup/restore**: Perform a test restore to ensure backup compatibility
+- [ ] **Update documentation**: Record any service-specific notes for future upgrades
+- [ ] **Remove VM snapshot**: Clean up snapshots once everything is confirmed working
+- [ ] **Schedule follow-up check**: Monitor application stability over the next few days
