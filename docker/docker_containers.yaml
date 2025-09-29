@@ -38,11 +38,11 @@
 - container_name: immich-db-backup
   image: tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
 - container_name: immich-machine-learning
-  image: ghcr.io/immich-app/immich-machine-learning:v1.142.1@sha256:9855f6a0a998db508ca97894997b17f3a0a61e9388b204d861110c19c42814eb
+  image: ghcr.io/immich-app/immich-machine-learning:v1.143.1@sha256:cc94659771d7e394d6406ebb0664069f2523062fda4f934def31648e903c4de2
 - container_name: immich-redis
   image: docker.io/valkey/valkey:8-alpine@sha256:d827e7f7552cdee40cc7482dbae9da020f42bc47669af6f71182a4ef76a22773
 - container_name: immich-server
-  image: ghcr.io/immich-app/immich-server:v1.142.1@sha256:06bc7715fa4c4a1641bd0b566c949cd7327f420632b480389fd4d1e70665d046
+  image: ghcr.io/immich-app/immich-server:v1.143.1@sha256:a5935f03b93137952c38b14a47148525023f4c36a2db174d8266a9d3b37e7e3b
   url: photos.$DOMAINNAME
 - container_name: it-tools
   image: ghcr.io/corentinth/it-tools:2023.12.21-5ed3693@sha256:4aaf67eab769afc9dac5614a15614537446e11150d53eab3be34ac9775a27e3a
@@ -51,7 +51,7 @@
   image: ghcr.io/alexta69/metube:latest@sha256:dfcc268c8069211a9f41822e41081a5b398daa96d71885bfef44c0ac6a5a0ff0
   url: metube.$DOMAINNAME
 - container_name: n8n
-  image: n8nio/n8n:1.112.3@sha256:c5fe3ff0b79f7831dc21f9c709bdb7eee4fff4453a28ce84c8e9fa5b9f562686
+  image: n8nio/n8n:1.114.0@sha256:53fa4605b931ccb0076b6b9163844ce36bb7f33f12ca5a6b4f14ddfba2dc077c
   url: n8n.$DOMAINNAME
 - container_name: n8n-db
   image: docker.io/library/postgres:16.10-alpine@sha256:66266770619a23ab310c7fa60043b6d1fa041038cb232ced59d2c509fecd297b
