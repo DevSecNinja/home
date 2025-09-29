@@ -40,7 +40,7 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:28.2.3@sha256:02675b384cebd1b26b557e7b9505c02c0313b146cf81f1305f734a2bca262fa4
+**image:** jgraph/drawio:28.2.5@sha256:b0990d9ac6c9207789c03f07fe67106c7ef9d458d7631cd130a49a1c444a1a88
 
 **url:** draw.$DOMAINNAME
 
@@ -60,7 +60,7 @@
 
 **container_name:** excalidraw
 
-**image:** excalidraw/excalidraw:latest@sha256:333be98e977744ca7f457074720fed1ad8b470bdeb699d3fcc4a8622bac83f48
+**image:** excalidraw/excalidraw:latest@sha256:d299ddcf67d815dd49f22fc7f22b41272afaafe3d0b73377f3b33d0d88a445c5
 
 **url:** excalidraw.$DOMAINNAME
 
@@ -78,7 +78,7 @@
 
 **container_name:** gatus
 
-**image:** twinproduction/gatus:v5.24.2@sha256:0e333eb7c25e3b5be93eaf94ea182a9f0c97bd69f9902fd0c5769437645dcb75
+**image:** twinproduction/gatus:v5.24.3@sha256:19b064c8be229df4848475f5e07f7dcd19cabbe8c27ea7ed6ff0e5af8e2050b6
 
 **url:** status-docker.$DOMAINNAME
 
@@ -86,7 +86,7 @@
 
 **container_name:** gatus-db
 
-**image:** docker.io/library/postgres:16.10-alpine@sha256:1c6d2f6e4d30d49c529e09a627e8178db5011dde88d955eb08db2e135e64aa09
+**image:** docker.io/library/postgres:16.10-alpine@sha256:66266770619a23ab310c7fa60043b6d1fa041038cb232ced59d2c509fecd297b
 
 ### Service: gatus-db-backup
 
@@ -108,7 +108,7 @@
 
 **container_name:** hoppscotch-db
 
-**image:** docker.io/library/postgres:16.10-alpine@sha256:1c6d2f6e4d30d49c529e09a627e8178db5011dde88d955eb08db2e135e64aa09
+**image:** docker.io/library/postgres:16.10-alpine@sha256:66266770619a23ab310c7fa60043b6d1fa041038cb232ced59d2c509fecd297b
 
 ### Service: hoppscotch-db-backup
 
@@ -166,7 +166,7 @@
 
 **container_name:** metube
 
-**image:** ghcr.io/alexta69/metube:latest@sha256:df4b25db48351e58fe732b26a92e5d5b06734e1470894707c659fb1bafd3688e
+**image:** ghcr.io/alexta69/metube:latest@sha256:dfcc268c8069211a9f41822e41081a5b398daa96d71885bfef44c0ac6a5a0ff0
 
 **url:** metube.$DOMAINNAME
 
@@ -184,7 +184,7 @@
 
 **container_name:** n8n-db
 
-**image:** docker.io/library/postgres:16.10-alpine@sha256:1c6d2f6e4d30d49c529e09a627e8178db5011dde88d955eb08db2e135e64aa09
+**image:** docker.io/library/postgres:16.10-alpine@sha256:66266770619a23ab310c7fa60043b6d1fa041038cb232ced59d2c509fecd297b
 
 ### Service: n8n-db-backup
 
@@ -198,7 +198,7 @@
 
 **container_name:** open-webui
 
-**image:** ghcr.io/open-webui/open-webui:v0.6.30@sha256:b9f7930a5eea6a3284f45ab6d20f9e1e02a5cd6da6b57b962b05422de5233f23
+**image:** ghcr.io/open-webui/open-webui:v0.6.31@sha256:807a4e918d5ffddebc5ac6ff1b9c0966162be366691852d3b96983305b43fd5e
 
 **url:** chat.$DOMAINNAME
 
@@ -228,7 +228,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.42.1.10060-4e8b05daf@sha256:3380d8901bf62a9b2246e665d6b8d1f9e03847327b539fb95feef681a8a171ff
+**image:** lscr.io/linuxserver/plex:version-1.42.2.10156-f737b826c@sha256:fb775e66e1dfcac73d1a909636b9884d753849c4846c262d9471cb574f75d2d7
 
 **url:** plex.$DOMAINNAME
 
@@ -268,7 +268,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-9.4.19@sha256:1e59277d29efda7fd024ad1dc72567e46db6530e82e43733044423e9750e4e05
+**image:** lscr.io/linuxserver/unifi-network-application:version-9.4.19@sha256:bba8e9e142ebb4909df5d34ef79bfe988d6d8743db4b8eee14bce21e312018d9
 
 **url:** unifi.$DOMAINNAME
 
@@ -276,7 +276,7 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:8.0.13@sha256:cf340b1e5283843c63eb12999922f20c463ae31285f746d30f05dcc21cd1d47c
+**image:** mongo:8.0.14@sha256:3031bfad5692e3fa1defcd054d4794370889c93b2049e0c323f2b7571e495413
 
 ### Service: unifi-db-backup
 

@@ -9,28 +9,28 @@
   image: ghcr.io/gchq/cyberchef:10.19.4@sha256:a2bfe382b2547bdd0a3d0523b9a6b85fab833c56bcec86d600ba6266910b533e
   url: cyberchef.$DOMAINNAME
 - container_name: drawio
-  image: jgraph/drawio:28.2.3@sha256:02675b384cebd1b26b557e7b9505c02c0313b146cf81f1305f734a2bca262fa4
+  image: jgraph/drawio:28.2.5@sha256:b0990d9ac6c9207789c03f07fe67106c7ef9d458d7631cd130a49a1c444a1a88
   url: draw.$DOMAINNAME
 - container_name: echo-server
   image: mendhak/http-https-echo:37@sha256:f55000d9196bd3c853d384af7315f509d21ffb85de315c26e9874033b9f83e15
   url: echo-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: excalidraw
-  image: excalidraw/excalidraw:latest@sha256:333be98e977744ca7f457074720fed1ad8b470bdeb699d3fcc4a8622bac83f48
+  image: excalidraw/excalidraw:latest@sha256:d299ddcf67d815dd49f22fc7f22b41272afaafe3d0b73377f3b33d0d88a445c5
   url: excalidraw.$DOMAINNAME
 - container_name: foldingathome
   image: lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:a11530655be018bc43c9f973bce2a59344f2d140a9e5c843305f765299a5d141
 - container_name: gatus
-  image: twinproduction/gatus:v5.24.2@sha256:0e333eb7c25e3b5be93eaf94ea182a9f0c97bd69f9902fd0c5769437645dcb75
+  image: twinproduction/gatus:v5.24.3@sha256:19b064c8be229df4848475f5e07f7dcd19cabbe8c27ea7ed6ff0e5af8e2050b6
   url: status-docker.$DOMAINNAME
 - container_name: gatus-db
-  image: docker.io/library/postgres:16.10-alpine@sha256:1c6d2f6e4d30d49c529e09a627e8178db5011dde88d955eb08db2e135e64aa09
+  image: docker.io/library/postgres:16.10-alpine@sha256:66266770619a23ab310c7fa60043b6d1fa041038cb232ced59d2c509fecd297b
 - container_name: gatus-db-backup
   image: tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
 - container_name: hoppscotch
   image: hoppscotch/hoppscotch:2025.8.1@sha256:bbf30918d0f58743947fd691a9dd9544d5a37aae313c3909478470b8c72e0396
   url: api-tester.$DOMAINNAME
 - container_name: hoppscotch-db
-  image: docker.io/library/postgres:16.10-alpine@sha256:1c6d2f6e4d30d49c529e09a627e8178db5011dde88d955eb08db2e135e64aa09
+  image: docker.io/library/postgres:16.10-alpine@sha256:66266770619a23ab310c7fa60043b6d1fa041038cb232ced59d2c509fecd297b
 - container_name: hoppscotch-db-backup
   image: tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
 - container_name: immich-db
@@ -48,17 +48,17 @@
   image: ghcr.io/corentinth/it-tools:2023.12.21-5ed3693@sha256:4aaf67eab769afc9dac5614a15614537446e11150d53eab3be34ac9775a27e3a
   url: tools.$DOMAINNAME
 - container_name: metube
-  image: ghcr.io/alexta69/metube:latest@sha256:df4b25db48351e58fe732b26a92e5d5b06734e1470894707c659fb1bafd3688e
+  image: ghcr.io/alexta69/metube:latest@sha256:dfcc268c8069211a9f41822e41081a5b398daa96d71885bfef44c0ac6a5a0ff0
   url: metube.$DOMAINNAME
 - container_name: n8n
   image: n8nio/n8n:1.112.3@sha256:c5fe3ff0b79f7831dc21f9c709bdb7eee4fff4453a28ce84c8e9fa5b9f562686
   url: n8n.$DOMAINNAME
 - container_name: n8n-db
-  image: docker.io/library/postgres:16.10-alpine@sha256:1c6d2f6e4d30d49c529e09a627e8178db5011dde88d955eb08db2e135e64aa09
+  image: docker.io/library/postgres:16.10-alpine@sha256:66266770619a23ab310c7fa60043b6d1fa041038cb232ced59d2c509fecd297b
 - container_name: n8n-db-backup
   image: tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
 - container_name: open-webui
-  image: ghcr.io/open-webui/open-webui:v0.6.30@sha256:b9f7930a5eea6a3284f45ab6d20f9e1e02a5cd6da6b57b962b05422de5233f23
+  image: ghcr.io/open-webui/open-webui:v0.6.31@sha256:807a4e918d5ffddebc5ac6ff1b9c0966162be366691852d3b96983305b43fd5e
   url: chat.$DOMAINNAME
 - container_name: openspeedtest
   image: openspeedtest/latest:v2.0.6@sha256:a6a7e3b3e9e93cfe7b9b2eb49c60b2a93644149a0a600845d4df57148b193ff6
@@ -67,7 +67,7 @@
   image: phpmyadmin:5.2.2-apache@sha256:23d39937547eebf3cb0d81b9b655e924afb82b5cdd573c9dcd9064b5c0610d4b
   url: phpmyadmin.$DOMAINNAME
 - container_name: plex
-  image: lscr.io/linuxserver/plex:version-1.42.1.10060-4e8b05daf@sha256:3380d8901bf62a9b2246e665d6b8d1f9e03847327b539fb95feef681a8a171ff
+  image: lscr.io/linuxserver/plex:version-1.42.2.10156-f737b826c@sha256:fb775e66e1dfcac73d1a909636b9884d753849c4846c262d9471cb574f75d2d7
   url: plex.$DOMAINNAME
 - container_name: sabnzbd
   image: docker.io/linuxserver/sabnzbd:amd64-4.5.1@sha256:39952ab247d97c9d3345a572385ebee158ce497887652d8421f4c0ac44cddf7e
@@ -79,10 +79,10 @@
   image: ghcr.io/meeb/tubesync:v0.15.9@sha256:d919db81e9c552ff56f8efdce61b5b37934c4946354c0f54a589f22e5708572d
   url: tubesync.$DOMAINNAME
 - container_name: unifi
-  image: lscr.io/linuxserver/unifi-network-application:version-9.4.19@sha256:1e59277d29efda7fd024ad1dc72567e46db6530e82e43733044423e9750e4e05
+  image: lscr.io/linuxserver/unifi-network-application:version-9.4.19@sha256:bba8e9e142ebb4909df5d34ef79bfe988d6d8743db4b8eee14bce21e312018d9
   url: unifi.$DOMAINNAME
 - container_name: unifi-db
-  image: mongo:8.0.13@sha256:cf340b1e5283843c63eb12999922f20c463ae31285f746d30f05dcc21cd1d47c
+  image: mongo:8.0.14@sha256:3031bfad5692e3fa1defcd054d4794370889c93b2049e0c323f2b7571e495413
 - container_name: unifi-db-backup
   image: tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
 - container_name: whoogle
