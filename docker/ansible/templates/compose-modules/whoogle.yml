@@ -1,6 +1,6 @@
 services:
   whoogle:
-    image: benbusby/whoogle-search:latest@sha256:b71765b59c96fc1fdd9b770a15c9662b5621f710369d30e42e36bf7af537e4f5
+    image: benbusby/whoogle-search:latest@sha256:255258e1abfcc4eec900bf3a38698629f7742371aaa06594107facd915fb44fa
     container_name: whoogle
     depends_on:
       - traefik
