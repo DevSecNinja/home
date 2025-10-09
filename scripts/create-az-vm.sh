@@ -25,6 +25,12 @@ export LOCATION="westeurope"
 #export WORKER_COUNT=1
 export CONTROL_PLANE_COUNT=1
 
+# Get my current external IP (dynamic)
+export MY_IP=$(curl -s https://ifconfig.me)
+
+# Internal VNET CIDR
+export INTERNAL_CIDR="10.0.0.0/16"
+
 # Change to the right subscription
 az account set --subscription $SUBSCRIPTION
 
@@ -41,7 +47,6 @@ az storage container create --name $STORAGE_CONTAINER \
                             --public-access off
 
 # Get storage account connection string based on info above
-#CONNECTION=""
 export CONNECTION=$(az storage account show-connection-string \
                     -n $STORAGE_ACCOUNT \
                     -g $GROUP \
@@ -79,47 +84,59 @@ fi
 az network vnet create \
   --resource-group $GROUP \
   --location $LOCATION \
+  --address-prefix $INTERNAL_CIDR \
   --name talos-vnet \
   --subnet-name talos-subnet
 
 # Create network security group
 az network nsg create -g $GROUP -n talos-sg
 
-# Client -> apid
+# Allow apid (Talos API) only from my IP
 az network nsg rule create \
   -g $GROUP \
   --nsg-name talos-sg \
   -n apid \
   --priority 1001 \
+  --direction inbound \
+  --protocol Tcp \
+  --source-address-prefixes [$INTERNAL_CIDR,${MY_IP}/32] \
   --destination-port-ranges 50000 \
-  --direction inbound
+  --access Allow
 
-# Trustd
-az network nsg rule create \
-  -g $GROUP \
-  --nsg-name talos-sg \
-  -n trustd \
-  --priority 1002 \
-  --destination-port-ranges 50001 \
-  --direction inbound
-
-# etcd
-az network nsg rule create \
-  -g $GROUP \
-  --nsg-name talos-sg \
-  -n etcd \
-  --priority 1003 \
-  --destination-port-ranges 2379-2380 \
-  --direction inbound
-
-# Kubernetes API Server
+# Allow Kubernetes API only from my IP
 az network nsg rule create \
   -g $GROUP \
   --nsg-name talos-sg \
   -n kube \
-  --priority 1004 \
+  --priority 1002 \
+  --direction inbound \
+  --protocol Tcp \
+  --source-address-prefixes [$INTERNAL_CIDR,${MY_IP}/32] \
   --destination-port-ranges 6443 \
-  --direction inbound
+  --access Allow
+
+# Allow internal cluster communication for trustd and etcd
+az network nsg rule create \
+  -g $GROUP \
+  --nsg-name talos-sg \
+  -n trustd-internal \
+  --priority 1003 \
+  --direction inbound \
+  --protocol Tcp \
+  --source-address-prefixes $INTERNAL_CIDR \
+  --destination-port-ranges 50001 \
+  --access Allow
+
+az network nsg rule create \
+  -g $GROUP \
+  --nsg-name talos-sg \
+  -n etcd-internal \
+  --priority 1004 \
+  --direction inbound \
+  --protocol Tcp \
+  --source-address-prefixes $INTERNAL_CIDR \
+  --destination-port-ranges 2379-2380 \
+  --access Allow
 
 # Create public ip
 az network public-ip create \
@@ -174,17 +191,20 @@ for ((i=0;i<=CONTROL_PLANE_COUNT-1;i++)); do
     --lb-address-pools talos-be-pool
 done
 
-# NOTES:
-# Talos can detect PublicIPs automatically if PublicIP SKU is Basic.
-# Use `--sku Basic` to set SKU to Basic.
-
 LB_PUBLIC_IP=$(az network public-ip show \
               --resource-group $GROUP \
               --name talos-public-ip \
               --query "ipAddress" \
               --output tsv)
 
-# talosctl gen config talos-k8s-azure https://${LB_PUBLIC_IP}:6443
+# Check if talos-k8s-azure directory exists
+if [ -d "talos-k8s-azure" ]; then
+    echo "talos-k8s-azure directory already exists, skipping config creation..."
+else
+    echo "Creating talos-k8s-azure directory and generating config..."
+    mkdir talos-k8s-azure
+    talosctl gen config talos-k8s-azure https://${LB_PUBLIC_IP}:6443 --output-dir talos-k8s-azure
+fi
 
 # Create availability set
 az vm availability-set create \
@@ -208,8 +228,8 @@ for ((i=0;i<=CONTROL_PLANE_COUNT-1;i++)); do
     --nics talos-controlplane-nic-$i \
     --availability-set talos-controlplane-av-set \
     --size Standard_D4as_v5 \
+    --custom-data ./talos-k8s-azure/controlplane.yaml \
     # --no-wait
-    # --custom-data ./controlplane.yaml \ # Instead of the generated config, we'll use the one from this repo
 done
 
 # # Create worker node
@@ -226,7 +246,7 @@ done
 #     --nsg talos-sg \
 #     --os-disk-size-gb 20 \
 #     # --no-wait
-#     # --custom-data ./worker.yaml \ # Instead of the generated config, we'll use the one from this repo
+#     # --custom-data ./talos-k8s-azure/worker.yaml \ # Instead of the generated config, we'll use the one from this repo
 
 # NOTES:
 # `--admin-username` and `--generate-ssh-keys` are required by the az cli,
@@ -244,17 +264,17 @@ CONTROL_PLANE_0_IP=$(az network public-ip show \
 printf "%s\n" "Control plane 0 IP: $CONTROL_PLANE_0_IP"
 printf "%s\n" "Load balancer IP: $LB_PUBLIC_IP"
 
-echo "You can now use this IP in setting up your k8s cluster from the cluster-template in this repository."
+echo "You can now use this IP in setting up your k8s cluster from the cluster-template in this repository. Or if you have provided custom-data files, proceed to bootstrap the cluster by continuing."
 
 printf "%s " "Press enter to continue"
 read ans
 
-# talosctl --talosconfig talos-k8s-azure config endpoint $CONTROL_PLANE_0_IP
-# talosctl --talosconfig talos-k8s-azure config node $CONTROL_PLANE_0_IP
+talosctl --talosconfig talos-k8s-azure/talosconfig config endpoint $CONTROL_PLANE_0_IP
+talosctl --talosconfig talos-k8s-azure/talosconfig config node $CONTROL_PLANE_0_IP
 
-# talosctl --talosconfig talos-k8s-azure bootstrap
+talosctl --talosconfig talos-k8s-azure/talosconfig bootstrap
 
-# talosctl --talosconfig talos-k8s-azure kubeconfig .
+talosctl --talosconfig talos-k8s-azure/talosconfig kubeconfig .
 
 printf "%s " "Want to remove the local talos image files? Only do this when you are done deploying..."
 read ans

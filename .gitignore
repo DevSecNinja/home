@@ -1,6 +1,7 @@
 # JVR
 docker/security-reports
 *.donotcommit.*
+talos-k8s-azure
 # Trash
 .DS_Store
 Thumbs.db
