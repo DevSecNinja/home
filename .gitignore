@@ -1,5 +1,6 @@
 # JVR
 docker/security-reports
+*.donotcommit.*
 # Trash
 .DS_Store
 Thumbs.db

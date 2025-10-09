@@ -18,3 +18,7 @@ creation_rules:
     key_groups:
       - age:
           - age182vhhzupcql0c9l272gm3z004x7hnukt7ptugwqwrqnh2slyu9zskphzdk
+  - path_regex: scripts/.*\.sops\.ya?ml
+    key_groups:
+      - age:
+          - age182vhhzupcql0c9l272gm3z004x7hnukt7ptugwqwrqnh2slyu9zskphzdk
