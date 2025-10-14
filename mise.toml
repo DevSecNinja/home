@@ -12,7 +12,7 @@ description = "Install Python dependencies"
 run = "uv pip install -r requirements.txt"
 
 [tools]
-python = "3.13"
+python = "3.14.0"
 "aqua:astral-sh/uv" = "latest"
 "aqua:budimanjojo/talhelper" = "latest"
 "aqua:cloudflare/cloudflared" = "latest"
