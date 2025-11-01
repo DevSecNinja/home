@@ -6,7 +6,7 @@
 
 **container_name:** adguard
 
-**image:** adguard/adguardhome:v0.107.67@sha256:927dc14b3e3cbd359e84658914590270a77d54446a6565e9498bef3444c286a4
+**image:** adguard/adguardhome:v0.107.69@sha256:8a4107ec812023842ccab9e04600c5d39d3be6b15e907c34a36339c184c8fccf
 
 **url:** adguard-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -40,7 +40,7 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:28.2.5@sha256:96cc65358665458ed603fff458f7c5451cf36e6fc57eb42d0c4807a36ef5972e
+**image:** jgraph/drawio:28.2.8@sha256:376e32784cdb49c8bd566599646a9931cd455a5542198282414239eae2bc69ef
 
 **url:** draw.$DOMAINNAME
 
@@ -60,7 +60,7 @@
 
 **container_name:** excalidraw
 
-**image:** excalidraw/excalidraw:latest@sha256:b5b9454af5f9c4403ea3b8ef06f2a3e29ac68e79e7d457f373f4d4a4b603d4bc
+**image:** excalidraw/excalidraw:latest@sha256:ddcc677525fd796fa871bdf2b2ffae8f3bc311e19037ab29abfc735b7dc415f7
 
 **url:** excalidraw.$DOMAINNAME
 
@@ -86,7 +86,7 @@
 
 **container_name:** gatus-db
 
-**image:** docker.io/library/postgres:16.10-alpine@sha256:84fb5d5bdd7d47f1889f325e534f3ce643f853f460832c8a61949f5391b8dc42
+**image:** docker.io/library/postgres:16.10-alpine@sha256:029660641a0cfc575b14f336ba448fb8a75fd595d42e1fa316b9fb4378742297
 
 ### Service: gatus-db-backup
 
@@ -100,7 +100,7 @@
 
 **container_name:** hoppscotch
 
-**image:** hoppscotch/hoppscotch:2025.9.1@sha256:56ddb0db675db66a0b1ac54d8b0720e32859a85d95ba7ebb1bce9957dc8c60dd
+**image:** hoppscotch/hoppscotch:2025.9.2@sha256:c64f8413c18ef0ace73301228c11190d7e9f88593502c83042b36d2170c38245
 
 **url:** api-tester.$DOMAINNAME
 
@@ -108,7 +108,7 @@
 
 **container_name:** hoppscotch-db
 
-**image:** docker.io/library/postgres:16.10-alpine@sha256:84fb5d5bdd7d47f1889f325e534f3ce643f853f460832c8a61949f5391b8dc42
+**image:** docker.io/library/postgres:16.10-alpine@sha256:029660641a0cfc575b14f336ba448fb8a75fd595d42e1fa316b9fb4378742297
 
 ### Service: hoppscotch-db-backup
 
@@ -122,7 +122,7 @@
 
 **container_name:** immich-db
 
-**image:** ghcr.io/immich-app/postgres:14-vectorchord0.3.0-pgvectors0.2.0@sha256:dc9a4dc44b228aba661f76ead06ef142a16c4f57ae9d77cdb9d50f6667e3065c
+**image:** ghcr.io/immich-app/postgres:14-vectorchord0.3.0-pgvectors0.2.0@sha256:c570d9e1c2494f65d2a0a379a7f6df66e8441964254a30aa62cc58e8ebf1dee0
 
 ### Service: immich-db-backup
 
@@ -166,7 +166,7 @@
 
 **container_name:** metube
 
-**image:** ghcr.io/alexta69/metube:latest@sha256:27732bcb27fc926313cc7f0b5192bcb5667ae6a0097cf40e0c26c46b2f18d83a
+**image:** ghcr.io/alexta69/metube:latest@sha256:46be73330a37503772249bee27d03dd2c831ab3d135c932abbc448fcbe7e57a6
 
 **url:** metube.$DOMAINNAME
 
@@ -184,7 +184,7 @@
 
 **container_name:** n8n-db
 
-**image:** docker.io/library/postgres:16.10-alpine@sha256:84fb5d5bdd7d47f1889f325e534f3ce643f853f460832c8a61949f5391b8dc42
+**image:** docker.io/library/postgres:16.10-alpine@sha256:029660641a0cfc575b14f336ba448fb8a75fd595d42e1fa316b9fb4378742297
 
 ### Service: n8n-db-backup
 
@@ -198,7 +198,7 @@
 
 **container_name:** open-webui
 
-**image:** ghcr.io/open-webui/open-webui:0.6.32@sha256:412334cec4b49ed51bfa9a6d28d1fbf3d5622c3ac42f57736e7d5d2bf5f3e94a
+**image:** ghcr.io/open-webui/open-webui:0.6.34@sha256:98d13c0a9285c110fba9814ef8bfbbaff9250863236fe3a18d29e93534289312
 
 **url:** chat.$DOMAINNAME
 
@@ -218,7 +218,7 @@
 
 **container_name:** phpmyadmin
 
-**image:** phpmyadmin:5.2.2-apache@sha256:6b5ab5f9ebfe3dbb38388b5695c2ff5ba3e26cdc2c4ce0bd97092eefc6a20bfd
+**image:** phpmyadmin:5.2.3-apache@sha256:cbe1dd47934079ea3e4853dcd55abf772b149fb322f8b319a636347a2f8f7624
 
 **url:** phpmyadmin.$DOMAINNAME
 
@@ -228,7 +228,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.42.2.10156-f737b826c@sha256:57c690bb1a54685e626b730b01d8b40e25ddd468df1cf63374d85b0b16490f5c
+**image:** lscr.io/linuxserver/plex:version-1.42.2.10156-f737b826c@sha256:a59133e5b94b3ca19158e4ab272657c77c62dc9abdbebe1172b7657da138badb
 
 **url:** plex.$DOMAINNAME
 
@@ -258,7 +258,7 @@
 
 **container_name:** tubesync
 
-**image:** ghcr.io/meeb/tubesync:v0.15.10@sha256:5310726d930d6f99df39ed1c78afd6f5b3d2b3ab675cadf464c25bd479561521
+**image:** ghcr.io/meeb/tubesync:v0.15.11@sha256:6f916006740963ea58dd91139e20c95b670840f41803eae785cfabc77ca756d3
 
 **url:** tubesync.$DOMAINNAME
 
@@ -268,7 +268,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-9.4.19@sha256:a0acbc9cf1986823505d6dad041f0816388252f1e66e4c66397848fc0314c03b
+**image:** lscr.io/linuxserver/unifi-network-application:version-9.4.19@sha256:6e44301b9a6a6c8bccdf04a30d01d3f04f613e96c7888be0c2d81492f76a05b8
 
 **url:** unifi.$DOMAINNAME
 
@@ -276,7 +276,7 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:8.0.15@sha256:ea783d8ac4dcac9f8a7ff236b26a52e36649fc1bdd1778ffb44ba5e4de776cda
+**image:** mongo:8.0.15@sha256:bc0c381d51fb4a316a8f420bf35b6c29ca45167cdea4ec1df4e6e64c9b90022a
 
 ### Service: unifi-db-backup
 
