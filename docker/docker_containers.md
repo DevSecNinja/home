@@ -176,7 +176,7 @@
 
 **container_name:** n8n
 
-**image:** n8nio/n8n:1.114.2@sha256:07bd01b531ae173237f0753bda754dca0e2fd69170aa5f353e35da0162c91955
+**image:** n8nio/n8n:1.118.1@sha256:cf74d4ebe7dca858c390ee317b9a4f554ea57f0444b2d760f6d69e4f18d5d312
 
 **url:** n8n.$DOMAINNAME
 
