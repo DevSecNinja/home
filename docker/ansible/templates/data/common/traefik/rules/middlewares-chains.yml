@@ -16,6 +16,13 @@ http:
         middlewares:
           - "middlewares-rate-limit"
           - "middlewares-cors"
+    chain-no-auth-immich-server:
+      chain:
+        middlewares:
+          - "middlewares-rate-limit"
+          - "middlewares-secure-headers"
+          - "middlewares-redirect-to-https"
+          - "middlewares-big-file-upload"
     chain-no-auth-plex:
       chain:
         middlewares:

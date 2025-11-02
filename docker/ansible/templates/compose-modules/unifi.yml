@@ -153,6 +153,32 @@ services:
       - "traefik.http.routers.unifi-noauth-rtr.middlewares=chain-no-auth@file"
       - "traefik.http.routers.unifi-noauth-rtr.service=unifi"
 
+  unifi-volume-backup:
+    container_name: unifi-volume-backup
+    image: offen/docker-volume-backup:v2.44.0@sha256:fcf92e0f192214ccda0a89f989bed6c49d4ed77da4e59b38ddfcf05a05512337
+    user: "${PUID}:${PGID}"
+    volumes:
+      - unifi_data:/backup:ro
+      # Backup destination location
+      - /mnt/smb_share_backup/unifi_data:/archive
+      # Ensure cron & backup logs are in my timezone
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    mem_limit: 512m
+    environment:
+      - TZ=${TZ}
+      - BACKUP_CRON_EXPRESSION=@daily
+      - BACKUP_RETENTION_DAYS=14
+      - GPG_PASSPHRASE=${DB_ENC_PASSPHRASE}
+      # Backup source locations
+      # Backup specific to Unifi - only backup the folder that is used for auto backups in the Unifi application
+      - BACKUP_SOURCES=/backup/data/backup
+      # Backup destination location
+      - BACKUP_ARCHIVE=/archive
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+
 volumes:
   unifi_data:
   unifi_db_data:
