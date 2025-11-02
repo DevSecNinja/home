@@ -288,7 +288,7 @@
 
 **container_name:** unifi-volume-backup
 
-**image:** offen/docker-volume-backup:v2.44.0@sha256:fcf92e0f192214ccda0a89f989bed6c49d4ed77da4e59b38ddfcf05a05512337
+**image:** offen/docker-volume-backup:v2.46.0@sha256:6cfa57b4b09b3e1f029f8a9aac299f85d286c29f650beda4ebcf42850272b9c7
 
 ## docker/ansible/templates/compose-modules/whoogle.yml
 
