@@ -125,7 +125,7 @@ services:
   gatus-db-upgrade:
     image: pgautoupgrade/pgautoupgrade:17.6-alpine@sha256:66fc7b3167eb27406fd04636d9fc0da732e487d4c4ad8fef0bfc0079b6aed414
     container_name: gatus-db-upgrade
-    restart: no
+    restart: "no"
     security_opt:
       - no-new-privileges=true
     mem_limit: 1024m
