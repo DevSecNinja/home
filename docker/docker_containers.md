@@ -284,6 +284,12 @@
 
 **image:** tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
 
+### Service: unifi-volume-backup
+
+**container_name:** unifi-volume-backup
+
+**image:** offen/docker-volume-backup:v2.44.0@sha256:fcf92e0f192214ccda0a89f989bed6c49d4ed77da4e59b38ddfcf05a05512337
+
 ## docker/ansible/templates/compose-modules/whoogle.yml
 
 ### Service: whoogle
