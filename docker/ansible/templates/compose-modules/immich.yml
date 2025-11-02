@@ -7,7 +7,9 @@ services:
       - immich-db
       - immich-redis
     restart: always
-    mem_limit: 1024m
+    # 4096 is not enough and the server will be killed automatically
+    # Recommended: https://docs.immich.app/install/requirements/
+    mem_limit: 6144m
     extends:
       file: $DOCKERDIR/data/immich/hwaccel.transcoding.yml
       service: quicksync # set to one of [cpu, nvenc, quicksync, rkmpp, vaapi, vaapi-wsl] for accelerated transcoding
@@ -104,7 +106,8 @@ services:
     restart: always
     security_opt:
       - no-new-privileges=true
-    mem_limit: 1024m
+    # Recommended: https://docs.immich.app/install/requirements/
+    mem_limit: 2048m
     volumes:
       - immich_db_data:/var/lib/postgresql/data
     environment:
