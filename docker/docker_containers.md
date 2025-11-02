@@ -86,7 +86,7 @@
 
 **container_name:** gatus-db
 
-**image:** docker.io/library/postgres:16.10-alpine@sha256:029660641a0cfc575b14f336ba448fb8a75fd595d42e1fa316b9fb4378742297
+**image:** docker.io/library/postgres:17.6-alpine@sha256:ef257d85f76e48da1c64832459b59fcaba1a4dac97bf5d7450c77753542eee94
 
 ### Service: gatus-db-backup
 
@@ -98,7 +98,7 @@
 
 **container_name:** gatus-db-upgrade
 
-**image:** pgautoupgrade/pgautoupgrade:16.10-alpine@sha256:c61fb07a2f010abf858f5b23c7b54c8db4b40540fe9c4863e3a4f73501b0fc07
+**image:** pgautoupgrade/pgautoupgrade:17.6-alpine@sha256:66fc7b3167eb27406fd04636d9fc0da732e487d4c4ad8fef0bfc0079b6aed414
 
 ## docker/ansible/templates/compose-modules/hoppscotch.yml
 
