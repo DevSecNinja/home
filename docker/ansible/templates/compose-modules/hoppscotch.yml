@@ -85,6 +85,9 @@ services:
       - no-new-privileges=true
     mem_limit: 1024m
     shm_size: 128mb
+    depends_on:
+      hoppscotch-db-upgrade:
+        condition: service_completed_successfully
     volumes:
       - hoppscotch_db_data:/var/lib/postgresql/data
     environment:
@@ -161,8 +164,7 @@ services:
       - POSTGRES_PASSWORD=${HOPPSCOTCH_DB_PASSWORD}
       - PGDATA=/var/lib/postgresql/data
       - PGAUTO_ONESHOT=yes
-    networks:
-      - hoppscotch-backend
+    network_mode: none
 
 volumes:
   hoppscotch_db_data:

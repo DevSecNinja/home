@@ -59,6 +59,9 @@ services:
       - no-new-privileges=true
     mem_limit: 1024m
     shm_size: 128mb
+    depends_on:
+      gatus-db-upgrade:
+        condition: service_completed_successfully
     volumes:
       - gatus_db_data:/var/lib/postgresql/data
     environment:
@@ -138,8 +141,7 @@ services:
       - POSTGRES_PASSWORD=${GATUS_DB_PASSWORD}
       - PGDATA=/var/lib/postgresql/data
       - PGAUTO_ONESHOT=yes
-    networks:
-      - gatus-backend
+    network_mode: none
 
 volumes:
   gatus_db_data:
