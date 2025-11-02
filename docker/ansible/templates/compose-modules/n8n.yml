@@ -44,7 +44,7 @@ services:
       - "traefik.http.services.n8n.loadbalancer.server.port=5678"
 
   n8n-db:
-    image: docker.io/library/postgres:16.10-alpine@sha256:029660641a0cfc575b14f336ba448fb8a75fd595d42e1fa316b9fb4378742297
+    image: docker.io/library/postgres:17.6-alpine@sha256:ef257d85f76e48da1c64832459b59fcaba1a4dac97bf5d7450c77753542eee94
     container_name: n8n-db
     restart: always
     security_opt:
@@ -108,6 +108,28 @@ services:
     restart: always
     security_opt:
       - no-new-privileges=true
+
+  n8n-db-upgrade:
+    image: pgautoupgrade/pgautoupgrade:17.6-alpine@sha256:66fc7b3167eb27406fd04636d9fc0da732e487d4c4ad8fef0bfc0079b6aed414
+    container_name: n8n-db-upgrade
+    restart: no
+    security_opt:
+      - no-new-privileges=true
+    mem_limit: 1024m
+    shm_size: 128mb
+    volumes:
+      - n8n_db_data:/var/lib/postgresql/data
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - POSTGRES_DB=n8n
+      - POSTGRES_USER=n8n
+      - POSTGRES_PASSWORD=${N8N_DB_PASSWORD}
+      - PGDATA=/var/lib/postgresql/data
+      - PGAUTO_ONESHOT=yes
+    networks:
+      - n8n-backend
 
 volumes:
   n8n_db_data:
