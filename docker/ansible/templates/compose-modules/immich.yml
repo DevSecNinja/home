@@ -109,6 +109,9 @@ services:
     # Recommended: https://docs.immich.app/install/requirements/
     mem_limit: 2048m
     shm_size: 128mb
+    # depends_on:
+    #   immich-db-upgrade:
+    #     condition: service_completed_successfully
     volumes:
       - immich_db_data:/var/lib/postgresql/data
     environment:
@@ -174,6 +177,29 @@ services:
     restart: always
     security_opt:
       - no-new-privileges=true
+
+# Doesn't seem to work. Fails at 'Creating dump of database schemas'
+  # immich-db-upgrade:
+  #   # Note that this one deviates from the others as Immich uses Postgres 16
+  #   image: pgautoupgrade/pgautoupgrade:16-alpine@sha256:c61fb07a2f010abf858f5b23c7b54c8db4b40540fe9c4863e3a4f73501b0fc07
+  #   container_name: immich-db-upgrade
+  #   restart: "no"
+  #   security_opt:
+  #     - no-new-privileges=true
+  #   mem_limit: 1024m
+  #   shm_size: 128mb
+  #   volumes:
+  #     - immich_db_data:/var/lib/postgresql/data
+  #   environment:
+  #     - PUID=${PUID}
+  #     - PGID=${PGID}
+  #     - TZ=${TZ}
+  #     - POSTGRES_DB=immich
+  #     - POSTGRES_USER=immich
+  #     - POSTGRES_PASSWORD=${IMMICH_DB_PASSWORD}
+  #     - PGDATA=/var/lib/postgresql/data
+  #     - PGAUTO_ONESHOT=yes
+  #   network_mode: none
 
 volumes:
   immich_model_cache_data:
