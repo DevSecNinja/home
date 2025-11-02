@@ -94,6 +94,12 @@
 
 **image:** tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
 
+### Service: gatus-db-upgrade
+
+**container_name:** gatus-db-upgrade
+
+**image:** pgautoupgrade/pgautoupgrade:16.10-alpine@sha256:c61fb07a2f010abf858f5b23c7b54c8db4b40540fe9c4863e3a4f73501b0fc07
+
 ## docker/ansible/templates/compose-modules/hoppscotch.yml
 
 ### Service: hoppscotch
