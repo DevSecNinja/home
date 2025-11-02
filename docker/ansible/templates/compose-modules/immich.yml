@@ -108,6 +108,7 @@ services:
       - no-new-privileges=true
     # Recommended: https://docs.immich.app/install/requirements/
     mem_limit: 2048m
+    shm_size: 128mb
     volumes:
       - immich_db_data:/var/lib/postgresql/data
     environment:

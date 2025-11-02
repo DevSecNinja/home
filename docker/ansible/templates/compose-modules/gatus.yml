@@ -58,6 +58,7 @@ services:
     security_opt:
       - no-new-privileges=true
     mem_limit: 1024m
+    shm_size: 128mb
     volumes:
       - gatus_db_data:/var/lib/postgresql/data
     environment:
@@ -117,6 +118,28 @@ services:
     restart: always
     security_opt:
       - no-new-privileges=true
+
+  gatus-db-upgrade:
+    image: pgautoupgrade/pgautoupgrade:16.10-alpine@sha256:c61fb07a2f010abf858f5b23c7b54c8db4b40540fe9c4863e3a4f73501b0fc07
+    container_name: gatus-db-upgrade
+    restart: no
+    security_opt:
+      - no-new-privileges=true
+    mem_limit: 1024m
+    shm_size: 128mb
+    volumes:
+      - gatus_db_data:/var/lib/postgresql/data
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - POSTGRES_DB=gatus
+      - POSTGRES_USER=gatus
+      - POSTGRES_PASSWORD=${GATUS_DB_PASSWORD}
+      - PGDATA=/var/lib/postgresql/data
+      - PGAUTO_ONESHOT=yes
+    networks:
+      - gatus-backend
 
 volumes:
   gatus_db_data:

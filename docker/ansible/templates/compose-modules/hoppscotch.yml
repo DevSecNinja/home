@@ -84,6 +84,7 @@ services:
     security_opt:
       - no-new-privileges=true
     mem_limit: 1024m
+    shm_size: 128mb
     volumes:
       - hoppscotch_db_data:/var/lib/postgresql/data
     environment:
