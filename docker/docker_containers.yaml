@@ -32,9 +32,11 @@
   image: hoppscotch/hoppscotch:2025.9.2@sha256:c64f8413c18ef0ace73301228c11190d7e9f88593502c83042b36d2170c38245
   url: api-tester.$DOMAINNAME
 - container_name: hoppscotch-db
-  image: docker.io/library/postgres:16.10-alpine@sha256:029660641a0cfc575b14f336ba448fb8a75fd595d42e1fa316b9fb4378742297
+  image: docker.io/library/postgres:17.6-alpine@sha256:ef257d85f76e48da1c64832459b59fcaba1a4dac97bf5d7450c77753542eee94
 - container_name: hoppscotch-db-backup
   image: tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
+- container_name: hoppscotch-db-upgrade
+  image: pgautoupgrade/pgautoupgrade:17.6-alpine@sha256:66fc7b3167eb27406fd04636d9fc0da732e487d4c4ad8fef0bfc0079b6aed414
 - container_name: immich-db
   image: ghcr.io/immich-app/postgres:14-vectorchord0.3.0-pgvectors0.2.0@sha256:c570d9e1c2494f65d2a0a379a7f6df66e8441964254a30aa62cc58e8ebf1dee0
 - container_name: immich-db-backup
@@ -56,9 +58,11 @@
   image: n8nio/n8n:1.118.1@sha256:cf74d4ebe7dca858c390ee317b9a4f554ea57f0444b2d760f6d69e4f18d5d312
   url: n8n.$DOMAINNAME
 - container_name: n8n-db
-  image: docker.io/library/postgres:16.10-alpine@sha256:029660641a0cfc575b14f336ba448fb8a75fd595d42e1fa316b9fb4378742297
+  image: docker.io/library/postgres:17.6-alpine@sha256:ef257d85f76e48da1c64832459b59fcaba1a4dac97bf5d7450c77753542eee94
 - container_name: n8n-db-backup
   image: tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
+- container_name: n8n-db-upgrade
+  image: pgautoupgrade/pgautoupgrade:17.6-alpine@sha256:66fc7b3167eb27406fd04636d9fc0da732e487d4c4ad8fef0bfc0079b6aed414
 - container_name: open-webui
   image: ghcr.io/open-webui/open-webui:0.6.34@sha256:98d13c0a9285c110fba9814ef8bfbbaff9250863236fe3a18d29e93534289312
   url: chat.$DOMAINNAME

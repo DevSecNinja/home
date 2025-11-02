@@ -114,13 +114,19 @@
 
 **container_name:** hoppscotch-db
 
-**image:** docker.io/library/postgres:16.10-alpine@sha256:029660641a0cfc575b14f336ba448fb8a75fd595d42e1fa316b9fb4378742297
+**image:** docker.io/library/postgres:17.6-alpine@sha256:ef257d85f76e48da1c64832459b59fcaba1a4dac97bf5d7450c77753542eee94
 
 ### Service: hoppscotch-db-backup
 
 **container_name:** hoppscotch-db-backup
 
 **image:** tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
+
+### Service: hoppscotch-db-upgrade
+
+**container_name:** hoppscotch-db-upgrade
+
+**image:** pgautoupgrade/pgautoupgrade:17.6-alpine@sha256:66fc7b3167eb27406fd04636d9fc0da732e487d4c4ad8fef0bfc0079b6aed414
 
 ## docker/ansible/templates/compose-modules/immich.yml
 
@@ -190,13 +196,19 @@
 
 **container_name:** n8n-db
 
-**image:** docker.io/library/postgres:16.10-alpine@sha256:029660641a0cfc575b14f336ba448fb8a75fd595d42e1fa316b9fb4378742297
+**image:** docker.io/library/postgres:17.6-alpine@sha256:ef257d85f76e48da1c64832459b59fcaba1a4dac97bf5d7450c77753542eee94
 
 ### Service: n8n-db-backup
 
 **container_name:** n8n-db-backup
 
 **image:** tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
+
+### Service: n8n-db-upgrade
+
+**container_name:** n8n-db-upgrade
+
+**image:** pgautoupgrade/pgautoupgrade:17.6-alpine@sha256:66fc7b3167eb27406fd04636d9fc0da732e487d4c4ad8fef0bfc0079b6aed414
 
 ## docker/ansible/templates/compose-modules/open-webui.yml
 
