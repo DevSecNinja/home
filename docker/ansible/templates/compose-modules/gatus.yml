@@ -27,7 +27,7 @@ services:
       - DOMAINNAME=${DOMAINNAME}
       - IP_SVLEXT=${GENERIC_IPS_SVLEXT}
     volumes:
-      - $DOCKERDIR/data/gatus/config.yaml:/config/config.yaml
+      - $DOCKERDIR/data/gatus/config.yaml:/config/config.yaml:ro
     labels:
       # Homepage
       - homepage.group=Infrastructure
@@ -72,7 +72,7 @@ services:
       - POSTGRES_USER=gatus
       - POSTGRES_PASSWORD=${GATUS_DB_PASSWORD}
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready"]
+      test: [ "CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
       interval: 10s
       timeout: 5s
       retries: 5
