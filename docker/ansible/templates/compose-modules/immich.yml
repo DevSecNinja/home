@@ -149,13 +149,19 @@ services:
       - CONTAINER_NAME=immich-db-backup
       - CONTAINER_ENABLE_MONITORING=FALSE # Disables Zabbix backup statistics
 
-      # TODO: [mailrise] Fix mailrise and add it to ext
-      # - ENABLE_NOTIFICATIONS=TRUE
-      # - NOTIFICATION_TYPE=EMAIL
-      # - SMTP_HOST=mailrise
-      # - SMTP_PORT=${NOTIFICATIONS_MAILRISE_SMTP_PORT}
-      # - MAIL_TO=msteams@mailrise.xyz
-      # - MAIL_FROM=immich-db-backup
+      - ENABLE_NOTIFICATIONS=TRUE
+      - NOTIFICATION_TYPE=EMAIL
+      - SMTP_HOST=${NOTIFICATIONS_EMAIL_HOST}
+      - SMTP_DOMAIN=${NOTIFICATIONS_EMAIL_DOMAIN}
+      - SMTP_PORT=${NOTIFICATIONS_EMAIL_PORT}
+      - SMTP_USER=${NOTIFICATIONS_EMAIL_USERNAME}
+      - SMTP_PASS=${NOTIFICATIONS_EMAIL_PASSWORD}
+      - MAIL_TO=${NOTIFICATIONS_EMAIL_TO}
+      - MAIL_FROM=${NOTIFICATIONS_EMAIL_FROM}
+      - SMTP_AUTHENTICATION="on"
+      - SMTP_TLSCERTCHECK=TRUE
+      - SMTP_STARTTLS=on
+      - SMTP_TLS=on
 
       - DEFAULT_CHECKSUM=SHA1        # Set standard checksum to SHA1
       - DEFAULT_COMPRESSION=ZSTD     # Compress all with ZSTD
