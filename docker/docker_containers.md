@@ -40,7 +40,7 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:28.2.8@sha256:376e32784cdb49c8bd566599646a9931cd455a5542198282414239eae2bc69ef
+**image:** jgraph/drawio:28.2.9@sha256:111755d69926b8106f426e5c085331d13a9e730f675445fc9119c0162792c8b4
 
 **url:** draw.$DOMAINNAME
 
@@ -60,7 +60,7 @@
 
 **container_name:** excalidraw
 
-**image:** excalidraw/excalidraw:latest@sha256:ddcc677525fd796fa871bdf2b2ffae8f3bc311e19037ab29abfc735b7dc415f7
+**image:** excalidraw/excalidraw:latest@sha256:b0b28b8d822519bf7fb9e2fab4a1e74754a557a4f6f42d36756ce95d281d62c5
 
 **url:** excalidraw.$DOMAINNAME
 
@@ -98,7 +98,7 @@
 
 **container_name:** gatus-db-upgrade
 
-**image:** pgautoupgrade/pgautoupgrade:17.6-alpine@sha256:66fc7b3167eb27406fd04636d9fc0da732e487d4c4ad8fef0bfc0079b6aed414
+**image:** pgautoupgrade/pgautoupgrade:17.6-alpine@sha256:587ca0ebbfcd7d82f9cdfa7c6f8759d61b2cf7692c2e931021d7ffd790c02e23
 
 ## docker/ansible/templates/compose-modules/hoppscotch.yml
 
@@ -106,7 +106,7 @@
 
 **container_name:** hoppscotch
 
-**image:** hoppscotch/hoppscotch:2025.9.2@sha256:c64f8413c18ef0ace73301228c11190d7e9f88593502c83042b36d2170c38245
+**image:** hoppscotch/hoppscotch:2025.10.0@sha256:0a4520ce7adc49bb16cbc663a88007a681e3dd08a5e05c45f1f339edd29e843d
 
 **url:** api-tester.$DOMAINNAME
 
@@ -126,7 +126,7 @@
 
 **container_name:** hoppscotch-db-upgrade
 
-**image:** pgautoupgrade/pgautoupgrade:17.6-alpine@sha256:66fc7b3167eb27406fd04636d9fc0da732e487d4c4ad8fef0bfc0079b6aed414
+**image:** pgautoupgrade/pgautoupgrade:17.6-alpine@sha256:587ca0ebbfcd7d82f9cdfa7c6f8759d61b2cf7692c2e931021d7ffd790c02e23
 
 ## docker/ansible/templates/compose-modules/immich.yml
 
@@ -146,7 +146,7 @@
 
 **container_name:** immich-machine-learning
 
-**image:** ghcr.io/immich-app/immich-machine-learning:v2.2.1@sha256:590a76bba3d88ccf78b03cde0c0fb8788f7d76ae6caf90ad33a34b5b4cc35f11
+**image:** ghcr.io/immich-app/immich-machine-learning:v2.2.3@sha256:bf339cbb44af6c2ef25d9128e1da51b2bec0cfd524846a83e3017c21bd71ddb4
 
 ### Service: immich-redis
 
@@ -158,7 +158,7 @@
 
 **container_name:** immich-server
 
-**image:** ghcr.io/immich-app/immich-server:v2.2.1@sha256:2c951a4063b55ec2de197fdf6a85e32b05872d3a18a18eaf851b827ff2622814
+**image:** ghcr.io/immich-app/immich-server:v2.2.3@sha256:4504d794123c3f5410cc45bbc61e4d7dbcacec1e1b0cd2e599691430c94e5849
 
 **url:** photos.$DOMAINNAME
 
@@ -208,7 +208,7 @@
 
 **container_name:** n8n-db-upgrade
 
-**image:** pgautoupgrade/pgautoupgrade:17.6-alpine@sha256:66fc7b3167eb27406fd04636d9fc0da732e487d4c4ad8fef0bfc0079b6aed414
+**image:** pgautoupgrade/pgautoupgrade:17.6-alpine@sha256:587ca0ebbfcd7d82f9cdfa7c6f8759d61b2cf7692c2e931021d7ffd790c02e23
 
 ## docker/ansible/templates/compose-modules/open-webui.yml
 
@@ -216,7 +216,7 @@
 
 **container_name:** open-webui
 
-**image:** ghcr.io/open-webui/open-webui:0.6.34@sha256:98d13c0a9285c110fba9814ef8bfbbaff9250863236fe3a18d29e93534289312
+**image:** ghcr.io/open-webui/open-webui:v0.6.36@sha256:dfe43b30a5474164b1a81e1cce298a6769bb22144f74df556beefee4ccca5394
 
 **url:** chat.$DOMAINNAME
 
@@ -236,7 +236,7 @@
 
 **container_name:** phpmyadmin
 
-**image:** phpmyadmin:5.2.3-apache@sha256:cbe1dd47934079ea3e4853dcd55abf772b149fb322f8b319a636347a2f8f7624
+**image:** phpmyadmin:5.2.3-apache@sha256:3feff4c3b4c73143add178ce318c7c090a98503c1bc895341a2677a3780560a1
 
 **url:** phpmyadmin.$DOMAINNAME
 
@@ -294,7 +294,7 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:8.0.15@sha256:bc0c381d51fb4a316a8f420bf35b6c29ca45167cdea4ec1df4e6e64c9b90022a
+**image:** mongo:8.2.1@sha256:86835e8da0f94efd61334decb320fa43e8a60027688cbd856bf29d065b470338
 
 ### Service: unifi-db-backup
 
@@ -306,7 +306,7 @@
 
 **container_name:** unifi-volume-backup
 
-**image:** offen/docker-volume-backup:v2.46.0@sha256:6cfa57b4b09b3e1f029f8a9aac299f85d286c29f650beda4ebcf42850272b9c7
+**image:** offen/docker-volume-backup:v2.46.1@sha256:039188f012d26178e68a0bb906cd408b9fc197069e8076d03014a31a5fed1406
 
 ## docker/ansible/templates/compose-modules/whoogle.yml
 
