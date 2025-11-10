@@ -6,8 +6,15 @@ storage:
 metrics: true
 
 alerting:
-  teams:
-    webhook-url: ${GATUS_MSTEAMS_WEBHOOK_URL}
+  email:
+    from: ${NOTIFICATIONS_EMAIL_FROM}
+    username: ${NOTIFICATIONS_EMAIL_USERNAME}
+    password: ${NOTIFICATIONS_EMAIL_PASSWORD}
+    host: ${NOTIFICATIONS_EMAIL_HOST}
+    port: ${NOTIFICATIONS_EMAIL_PORT}
+    to: ${NOTIFICATIONS_EMAIL_TO}
+    client:
+      insecure: false
     default-alert:
       description: "Health check failed"
       send-on-resolved: true
@@ -24,7 +31,7 @@ endpoint-defaults: &defaults
     - "[CERTIFICATE_EXPIRATION] > 48h"
     - "[RESPONSE_TIME] < 1000"
   alerts:
-    - type: teams
+    - type: email
       description: "Health check failed"
       send-on-resolved: true
 
