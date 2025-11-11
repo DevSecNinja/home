@@ -62,103 +62,61 @@ endpoints:
 
   - name: AdGuard Primary - HTTP
     <<: *defaults
-    url: "https://adguard-mgmt.${DOMAINNAME}"
-
-  - name: Auth MGMT - HTTP
-    <<: *defaults
-    url: "https://auth-mgmt.${DOMAINNAME}"
-
-  - name: Auth PROD - HTTP
-    <<: *defaults
-    url: "https://auth-prod.${DOMAINNAME}"
-
-  # - name: Bitwarden - HTTP
-  #   <<: *defaults
-  #   url: "https://bitwarden.${DOMAINNAME}"
-
-  # - name: Change-Detection - HTTP
-  #   <<: *defaults
-  #   url: "https://change-detection.${DOMAINNAME}"
-
-  - name: Cloud - HTTP
-    <<: *defaults
-    url: "https://cloud.${DOMAINNAME}"
-
-  - name: Code - HTTP
-    <<: *defaults
-    url: "https://code.${DOMAINNAME}"
+    url: "https://adguard-infra.${DOMAINNAME}"
+    headers:
+      X-Monitor-Key: "${GENERIC_MONITORING_HEADER_SECRET}"
 
   - name: Cyberchef - HTTP
     <<: *defaults
     url: "https://cyberchef.${DOMAINNAME}"
+    headers:
+      X-Monitor-Key: "${GENERIC_MONITORING_HEADER_SECRET}"
 
-  - name: Draw - HTTP
+  - name: Draw.io - HTTP
     <<: *defaults
     url: "https://draw.${DOMAINNAME}"
-
-  - name: Echo MGMT - HTTP
-    <<: *defaults
-    url: "https://echo-mgmt.${DOMAINNAME}"
-
-  - name: Echo PROD - HTTP
-    <<: *defaults
-    url: "https://echo-prod.${DOMAINNAME}"
+    headers:
+      X-Monitor-Key: "${GENERIC_MONITORING_HEADER_SECRET}"
 
   - name: Excalidraw - HTTP
     <<: *defaults
     url: "https://excalidraw.${DOMAINNAME}"
+    headers:
+      X-Monitor-Key: "${GENERIC_MONITORING_HEADER_SECRET}"
 
-  - name: Home Assistant - HTTP
+  - name: Homepage - HTTP
     <<: *defaults
-    url: "https://home-assistant.${DOMAINNAME}"
-
-  - name: Homepage MGMT - HTTP
-    <<: *defaults
-    url: "https://apps-mgmt.${DOMAINNAME}"
-
-  - name: Homepage PROD - HTTP
-    <<: *defaults
-    url: "https://apps-prod.${DOMAINNAME}"
-
-  - name: Homepage PROD - EXT
-    <<: *defaults
-    url: "https://apps-ext.${DOMAINNAME}"
+    url: "https://apps.${DOMAINNAME}"
 
   - name: Hoppscotch - HTTP
     <<: *defaults
     url: "https://api-tester.${DOMAINNAME}"
+    headers:
+      X-Monitor-Key: "${GENERIC_MONITORING_HEADER_SECRET}"
 
-  # - name: Jupyter - HTTP
-  #   <<: *defaults
-  #   url: "https://jupyter.${DOMAINNAME}"
+  - name: metube - HTTP
+    <<: *defaults
+    url: "https://metube.${DOMAINNAME}"
+    headers:
+      X-Monitor-Key: "${GENERIC_MONITORING_HEADER_SECRET}"
 
-  # - name: Linkding - HTTP
-  #   <<: *defaults
-  #   url: "https://linkding.${DOMAINNAME}"
+  - name: n8n - HTTP
+    <<: *defaults
+    url: "https://api-tester.${DOMAINNAME}"
+    headers:
+      X-Monitor-Key: "${GENERIC_MONITORING_HEADER_SECRET}"
 
-  - name: Lobe Chat - HTTP
+  - name: open-webui - HTTP
     <<: *defaults
     url: "https://chat.${DOMAINNAME}"
-
-  # - name: Outline
-  #   <<: *defaults
-  #   url: "https://docs.${DOMAINNAME}"
-
-  # - name: Paperless - HTTP
-  #   <<: *defaults
-  #   url: "https://paperless.${DOMAINNAME}"
-
-  # - name: Papermerge - HTTP
-  #   <<: *defaults
-  #   url: "https://papermerge.${DOMAINNAME}"
+    headers:
+      X-Monitor-Key: "${GENERIC_MONITORING_HEADER_SECRET}"
 
   - name: Photos - HTTP
     <<: *defaults
     url: "https://photos.${DOMAINNAME}"
-
-  - name: Phpmyadmin - HTTP
-    <<: *defaults
-    url: "https://phpmyadmin.${DOMAINNAME}"
+    headers:
+      X-Monitor-Key: "${GENERIC_MONITORING_HEADER_SECRET}"
 
   - name: Plex-Noauth - HTTP
     <<: *defaults
@@ -168,53 +126,39 @@ endpoints:
       - "[CERTIFICATE_EXPIRATION] > 48h"
       - "[RESPONSE_TIME] < 1000"
 
-  - name: Portainer MGMT - HTTP
+  - name: SABnzbd - HTTP
     <<: *defaults
-    url: "https://portainer-mgmt.${DOMAINNAME}"
-
-  - name: Portainer PROD - HTTP
-    <<: *defaults
-    url: "https://portainer-prod.${DOMAINNAME}"
-
-  - name: Search - HTTP
-    <<: *defaults
-    url: "https://search.${DOMAINNAME}"
+    url: "https://sabnzbd.${DOMAINNAME}"
+    headers:
+      X-Monitor-Key: "${GENERIC_MONITORING_HEADER_SECRET}"
 
   - name: Speedtest - HTTP
     <<: *defaults
     url: "https://speedtest.${DOMAINNAME}"
+    headers:
+      X-Monitor-Key: "${GENERIC_MONITORING_HEADER_SECRET}"
 
   - name: Tools - HTTP
     <<: *defaults
     url: "https://tools.${DOMAINNAME}"
+    headers:
+      X-Monitor-Key: "${GENERIC_MONITORING_HEADER_SECRET}"
 
-  - name: Unifi - HTTP
+  - name: TubeSync - HTTP
+    <<: *defaults
+    url: "https://tubesync.${DOMAINNAME}"
+    headers:
+      X-Monitor-Key: "${GENERIC_MONITORING_HEADER_SECRET}"
+
+  - name: UniFi - HTTP
     <<: *defaults
     url: "https://unifi.${DOMAINNAME}"
+    headers:
+      X-Monitor-Key: "${GENERIC_MONITORING_HEADER_SECRET}"
 
-  - name: Unifi Guest - HTTP
+  - name: UniFi Guest - HTTP
     <<: *defaults
     url: "https://unifi-guest.${DOMAINNAME}:8843/guest/s/default/"
-
-  - name: Vault CA - HTTP
-    <<: *defaults
-    url: "https://vault.${DOMAINNAME}/v1/pki_int/ca"
-
-  - name: Vault CRL - HTTP
-    <<: *defaults
-    url: "https://vault.${DOMAINNAME}/v1/pki_int/crl"
-
-  # - name: Vikunja - HTTP
-  #   <<: *defaults
-  #   url: "https://vikunja.${DOMAINNAME}"
-
-  # - name: Wallabag - HTTP
-  #   <<: *defaults
-  #   url: "https://wallabag.${DOMAINNAME}"
-
-  # - name: Wireguard - HTTP
-  #   <<: *defaults
-  #   url: "https://wireguard.${DOMAINNAME}"
 
   #
   # DNS
@@ -264,4 +208,3 @@ endpoints:
     group: External
     conditions:
       - "[CONNECTED] == true"
-
