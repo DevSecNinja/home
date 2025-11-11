@@ -31,6 +31,7 @@ services:
       # Other
       - DOMAINNAME=${DOMAINNAME}
       - IP_SVLEXT=${GENERIC_IPS_SVLEXT}
+      - GENERIC_MONITORING_HEADER_SECRET=${GENERIC_MONITORING_HEADER_SECRET}
     volumes:
       - $DOCKERDIR/data/gatus/config.yaml:/config/config.yaml:ro
     labels:
