@@ -7,7 +7,7 @@
   image: favonia/cloudflare-ddns:1.15.1@sha256:a4e2089b3531eec8c9328c7a9a586f80e8d67dcd94856e0b596b7896e1de3f62
 - container_name: cyberchef
   image: ghcr.io/gchq/cyberchef:10.19.4@sha256:a2bfe382b2547bdd0a3d0523b9a6b85fab833c56bcec86d600ba6266910b533e
-  url: cyberchef.$DOMAINNAME
+  url: cyberchef.$DOMAINNAME`) && Headers(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 - container_name: drawio
   image: jgraph/drawio:28.2.9@sha256:111755d69926b8106f426e5c085331d13a9e730f675445fc9119c0162792c8b4
   url: draw.$DOMAINNAME
