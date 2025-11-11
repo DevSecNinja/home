@@ -62,7 +62,7 @@
 
 **image:** excalidraw/excalidraw:latest@sha256:b0b28b8d822519bf7fb9e2fab4a1e74754a557a4f6f42d36756ce95d281d62c5
 
-**url:** excalidraw.$DOMAINNAME
+**url:** excalidraw.$DOMAINNAME`) && Headers(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
 ## docker/ansible/templates/compose-modules/folding-at-home.yml
 
@@ -238,7 +238,7 @@
 
 **image:** phpmyadmin:5.2.3-apache@sha256:3feff4c3b4c73143add178ce318c7c090a98503c1bc895341a2677a3780560a1
 
-**url:** phpmyadmin.$DOMAINNAME
+**url:** phpmyadmin.$DOMAINNAME`) && Headers(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
 ## docker/ansible/templates/compose-modules/plex.yml
 
