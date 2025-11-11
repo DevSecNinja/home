@@ -230,16 +230,6 @@
 
 **url:** speedtest.$DOMAINNAME
 
-## docker/ansible/templates/compose-modules/phpmyadmin.yml
-
-### Service: phpmyadmin
-
-**container_name:** phpmyadmin
-
-**image:** phpmyadmin:5.2.3-apache@sha256:3feff4c3b4c73143add178ce318c7c090a98503c1bc895341a2677a3780560a1
-
-**url:** phpmyadmin.$DOMAINNAME`) && Headers(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
-
 ## docker/ansible/templates/compose-modules/plex.yml
 
 ### Service: plex

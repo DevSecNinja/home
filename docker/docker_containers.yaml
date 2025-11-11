@@ -69,9 +69,6 @@
 - container_name: openspeedtest
   image: openspeedtest/latest:v2.0.6@sha256:a6a7e3b3e9e93cfe7b9b2eb49c60b2a93644149a0a600845d4df57148b193ff6
   url: speedtest.$DOMAINNAME
-- container_name: phpmyadmin
-  image: phpmyadmin:5.2.3-apache@sha256:3feff4c3b4c73143add178ce318c7c090a98503c1bc895341a2677a3780560a1
-  url: phpmyadmin.$DOMAINNAME`) && Headers(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 - container_name: plex
   image: lscr.io/linuxserver/plex:version-1.42.2.10156-f737b826c@sha256:a59133e5b94b3ca19158e4ab272657c77c62dc9abdbebe1172b7657da138badb
   url: plex.$DOMAINNAME
