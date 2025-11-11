@@ -76,6 +76,11 @@ services:
       - "traefik.http.routers.hoppscotch-api-rtr.rule=Host(`api-tester-api.$DOMAINNAME`)"
       - "traefik.http.routers.hoppscotch-api-rtr.service=hoppscotch-api-svc"
       - "traefik.http.services.hoppscotch-api-svc.loadbalancer.server.port=3170"
+      ## Router for Gatus — bypass auth if secret header is present
+      - "traefik.http.routers.hoppscotch-monitor-rtr.rule=Host(`api-tester.$DOMAINNAME`) && Headers(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
+      - "traefik.http.routers.hoppscotch-monitor-rtr.service=hoppscotch-svc"
+      - "traefik.http.routers.hoppscotch-monitor-rtr.priority=100"  # Higher priority so it matches first
+
 
   hoppscotch-db:
     image: docker.io/library/postgres:17.6-alpine@sha256:ef257d85f76e48da1c64832459b59fcaba1a4dac97bf5d7450c77753542eee94

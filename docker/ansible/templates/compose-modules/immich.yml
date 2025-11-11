@@ -50,6 +50,10 @@ services:
       - "traefik.http.routers.immich-noauth-rtr.rule=Host(`photos-noauth.$DOMAINNAME`)"
       - "traefik.http.routers.immich-noauth-rtr.middlewares=chain-no-auth-immich-server@file"
       - "traefik.http.routers.immich-noauth-rtr.service=immich-svc"
+      ## Router for Gatus — bypass auth if secret header is present
+      - "traefik.http.routers.immich-monitor-rtr.rule=Host(`photos.$DOMAINNAME`) && Headers(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
+      - "traefik.http.routers.immich-monitor-rtr.service=immich-svc"
+      - "traefik.http.routers.immich-monitor-rtr.priority=100"  # Higher priority so it matches first
     networks:
       - immich-frontend
       - immich-backend

@@ -33,6 +33,10 @@ services:
       - "traefik.http.routers.echo-server-rtr.service=echo-server"
       ### Enable the server port
       - "traefik.http.services.echo-server.loadbalancer.server.port=80"
+      ## Router for Gatus — bypass auth if secret header is present
+      - "traefik.http.routers.echo-server-monitor-rtr.rule=Host(`echo-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`) && Headers(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
+      - "traefik.http.routers.echo-server-monitor-rtr.service=echo-server"
+      - "traefik.http.routers.echo-server-monitor-rtr.priority=100"  # Higher priority so it matches first
 
 networks:
   echo-server-frontend:

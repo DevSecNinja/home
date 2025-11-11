@@ -28,6 +28,10 @@ services:
       - "traefik.http.routers.openspeedtest-rtr.rule=Host(`speedtest.$DOMAINNAME`)"
       - "traefik.http.routers.openspeedtest-rtr.service=openspeedtest-svc"
       - "traefik.http.services.openspeedtest-svc.loadbalancer.server.port=3000"
+      ## Router for Gatus — bypass auth if secret header is present
+      - "traefik.http.routers.openspeedtest-monitor-rtr.rule=Host(`speedtest.$DOMAINNAME`) && Headers(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
+      - "traefik.http.routers.openspeedtest-monitor-rtr.service=openspeedtest-svc"
+      - "traefik.http.routers.openspeedtest-monitor-rtr.priority=100"  # Higher priority so it matches first
 
 networks:
   openspeedtest-frontend:

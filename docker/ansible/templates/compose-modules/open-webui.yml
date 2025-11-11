@@ -55,6 +55,10 @@ services:
       - "traefik.http.routers.open-webui-rtr.service=open-webui"
       # Enable the management port
       - "traefik.http.services.open-webui.loadbalancer.server.port=8080"
+      ## Router for Gatus — bypass auth if secret header is present
+      - "traefik.http.routers.open-webui-monitor-rtr.rule=Host(`chat.$DOMAINNAME`) && Headers(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
+      - "traefik.http.routers.open-webui-monitor-rtr.service=open-webui"
+      - "traefik.http.routers.open-webui-monitor-rtr.priority=100"  # Higher priority so it matches first
 
 networks:
   open-webui-frontend:

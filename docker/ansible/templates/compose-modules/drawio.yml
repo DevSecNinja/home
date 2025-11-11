@@ -31,6 +31,10 @@ services:
       ## HTTP Services
       - "traefik.http.routers.drawio-rtr.service=drawio-svc"
       - "traefik.http.services.drawio-svc.loadbalancer.server.port=8080"
+      ## Router for Gatus — bypass auth if secret header is present
+      - "traefik.http.routers.drawio-monitor-rtr.rule=Host(`draw.$DOMAINNAME`) && Headers(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
+      - "traefik.http.routers.drawio-monitor-rtr.service=drawio-svc"
+      - "traefik.http.routers.drawio-monitor-rtr.priority=100"  # Higher priority so it matches first
     # Saves some CPU cycles + healthcheck doesn't do anything on failure
     # healthcheck:
     #   test: ["CMD-SHELL", "curl -f http://drawio:8080 || exit 1"]

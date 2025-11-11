@@ -28,6 +28,10 @@ services:
       - "traefik.http.routers.it-tools-rtr.rule=Host(`tools.$DOMAINNAME`)"
       - "traefik.http.routers.it-tools-rtr.service=it-tools-svc"
       - "traefik.http.services.it-tools-svc.loadbalancer.server.port=80"
+      ## Router for Gatus — bypass auth if secret header is present
+      - "traefik.http.routers.it-tools-monitor-rtr.rule=Host(`tools.$DOMAINNAME`) && Headers(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
+      - "traefik.http.routers.it-tools-monitor-rtr.service=it-tools-svc"
+      - "traefik.http.routers.it-tools-monitor-rtr.priority=100"  # Higher priority so it matches first
 
 networks:
   it-tools-frontend:
