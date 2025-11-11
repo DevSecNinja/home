@@ -93,9 +93,6 @@
   image: tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
 - container_name: unifi-volume-backup
   image: offen/docker-volume-backup:v2.46.1@sha256:039188f012d26178e68a0bb906cd408b9fc197069e8076d03014a31a5fed1406
-- container_name: whoogle
-  image: benbusby/whoogle-search:latest@sha256:255258e1abfcc4eec900bf3a38698629f7742371aaa06594107facd915fb44fa
-  url: search.$DOMAINNAME
 - container_name: wireguard
   image: lscr.io/linuxserver/wireguard:version-v1.0.20210914@sha256:c3c7a910e46c9bd25daf22e38bb48cbc10d32727c5ee1fe5ede32ee4c34f6a36
   url: wireguard.$DOMAINNAME

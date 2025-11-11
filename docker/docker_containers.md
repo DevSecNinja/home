@@ -308,16 +308,6 @@
 
 **image:** offen/docker-volume-backup:v2.46.1@sha256:039188f012d26178e68a0bb906cd408b9fc197069e8076d03014a31a5fed1406
 
-## docker/ansible/templates/compose-modules/whoogle.yml
-
-### Service: whoogle
-
-**container_name:** whoogle
-
-**image:** benbusby/whoogle-search:latest@sha256:255258e1abfcc4eec900bf3a38698629f7742371aaa06594107facd915fb44fa
-
-**url:** search.$DOMAINNAME
-
 ## docker/ansible/templates/compose-modules/wireguard.yml
 
 ### Service: wireguard
