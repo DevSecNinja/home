@@ -182,6 +182,8 @@ services:
       - BACKUP_CRON_EXPRESSION=@daily
       - BACKUP_RETENTION_DAYS=14
       - GPG_PASSPHRASE=${DB_ENC_PASSPHRASE}
+      # Notification doesn't work as Auth Login doesn't seem supported: https://github.com/containrrr/shoutrrr/issues/334
+      #- NOTIFICATION_URLS=${NOTIFICATIONS_EMAIL_SHOUTRRR_URL}
       # Backup source locations
       # Backup specific to Unifi - only backup the folder that is used for auto backups in the Unifi application
       - BACKUP_SOURCES=/backup/data/backup
