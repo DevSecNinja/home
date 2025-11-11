@@ -34,7 +34,7 @@ services:
       # Homepage
       - homepage.group=Productivity
       - homepage.name=Immich
-      - homepage.icon=si-immich
+      - homepage.icon=sh-immich
       - homepage.href=https://photos.$DOMAINNAME
       - homepage.description=Photo Library
       # Traefik
