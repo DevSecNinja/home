@@ -19,7 +19,7 @@
   "docker-compose": {
     "enabled": true,
     "fileMatch": [
-      "(^|/)docker/.+\\.ya?ml(?:\\.j2)?$"
+      "(^|/)docker/ansible/templates/compose-modules/.+\\.ya?ml(?:\\.j2)?$"
     ]
   },
   "flux": {
