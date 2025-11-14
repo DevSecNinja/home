@@ -32,11 +32,6 @@
       '/(^|/)kubernetes/.+\\.ya?ml(?:\\.j2)?$/',
     ],
   },
-  "docker-compose": {
-    "managerFilePatterns": [
-      "(^|/)docker/ansible/templates/compose-modules/.+\\.ya?ml(?:\\.j2)?$"
-    ]
-  },
   'helm-values': {
     managerFilePatterns: [
       '/(^|/)ansible/.+\\.ya?ml(?:\\.j2)?$/',
@@ -427,6 +422,19 @@
         'python-version:\\s*("|)?(?<currentValue>\\d+\\.\\d+\\.\\d+)("|)?',
       ],
       datasourceTemplate: '{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}',
+    },
+    {
+      "customType": "regex",
+      "description": "Docker images inside Jinja2-based compose templates",
+      "fileMatch": [
+        "(^|/)docker/ansible/templates/compose-modules/.+\\.ya?ml(?:\\.j2)?$"
+      ],
+      "matchStrings": [
+        # captures things like:
+        #   image: ghcr.io/my/image:1.2.3
+        "image:\\s*(?<depName>[^:\\s]+):(?<currentValue>[\\w\\.-]+)"
+      ],
+      "datasourceTemplate": "docker"
     },
   ],
 }
