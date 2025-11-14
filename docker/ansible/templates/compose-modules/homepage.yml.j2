@@ -2,7 +2,7 @@ services:
 {% if 'infra' in group_names %}
   homepage:
     container_name: homepage
-    image: ghcr.io/gethomepage/homepage:v1.3.2@sha256:4f923bf0e9391b3a8bc5527e539b022e92dcc8a3a13e6ab66122ea9ed030e196
+    image: ghcr.io/gethomepage/homepage:v1.7.0@sha256:b6ac42c31845ea7c862d71451c16413a6284430d8ff08e16ad791f42718a7c71
     depends_on:
       - traefik
       - homepage-docker-proxy
