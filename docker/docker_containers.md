@@ -98,7 +98,7 @@
 
 **container_name:** gatus-db-upgrade
 
-**image:** pgautoupgrade/pgautoupgrade:17.6-alpine@sha256:587ca0ebbfcd7d82f9cdfa7c6f8759d61b2cf7692c2e931021d7ffd790c02e23
+**image:** pgautoupgrade/pgautoupgrade:17.6-alpine@sha256:85e950ab2e76ba33898667a3e441ce85f4cf7109762014d08aa2b06ea4ab4300
 
 ## docker/ansible/templates/compose-modules/hoppscotch.yml
 
@@ -126,7 +126,7 @@
 
 **container_name:** hoppscotch-db-upgrade
 
-**image:** pgautoupgrade/pgautoupgrade:17.6-alpine@sha256:587ca0ebbfcd7d82f9cdfa7c6f8759d61b2cf7692c2e931021d7ffd790c02e23
+**image:** pgautoupgrade/pgautoupgrade:17.6-alpine@sha256:85e950ab2e76ba33898667a3e441ce85f4cf7109762014d08aa2b06ea4ab4300
 
 ## docker/ansible/templates/compose-modules/immich.yml
 
@@ -208,7 +208,7 @@
 
 **container_name:** n8n-db-upgrade
 
-**image:** pgautoupgrade/pgautoupgrade:17.6-alpine@sha256:587ca0ebbfcd7d82f9cdfa7c6f8759d61b2cf7692c2e931021d7ffd790c02e23
+**image:** pgautoupgrade/pgautoupgrade:17.6-alpine@sha256:85e950ab2e76ba33898667a3e441ce85f4cf7109762014d08aa2b06ea4ab4300
 
 ## docker/ansible/templates/compose-modules/open-webui.yml
 
@@ -236,7 +236,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.42.2.10156-f737b826c@sha256:a59133e5b94b3ca19158e4ab272657c77c62dc9abdbebe1172b7657da138badb
+**image:** lscr.io/linuxserver/plex:version-1.42.2.10156-f737b826c@sha256:a4749f3b84dc3f923a7bd4d2bc4ddc1e871b5a656b62022d3827d3d98afd5efd
 
 **url:** plex.$DOMAINNAME
 
