@@ -19,16 +19,16 @@ entryPoints:
         readTimeout: 600s
         idleTimeout: 600s
         writeTimeout: 600s
-{% if 'infra' in group_names %}
+#% if 'infra' in group_names %#
   unifi-guest:
     address: ":8843"
     http:
       tls: {}
-{% endif %}
-{% if 'vpnservers' in group_names %}
+#% endif %#
+#% if 'vpnservers' in group_names %#
   wireguard:
     address: ":51820/udp"
-{% endif %}
+#% endif %#
 
 metrics:
   prometheus:
@@ -73,12 +73,12 @@ certificatesResolvers:
           - "1.0.0.1:53"
         delayBeforeCheck: 90
 
-{% if 'infra' in group_names %}
+#% if 'infra' in group_names %#
 serversTransport:
   # TODO: [traefik] Investigate insecureSkipVerify still need to be set to true
   # Required for Unifi to function. Prevents "Internal Server Error"
   insecureSkipVerify: true
-{% endif %}
+#% endif %#
 
 accessLog:
   # bufferingSize: 500
