@@ -30,7 +30,7 @@ jobs:
           ref: ${{ github.head_ref }}
 
       - name: Setup Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@e797f83bcb11b83ae66e0230d6156d7c80228e7c # v6
         id: setup-python
         with:
           python-version: "3.14"
@@ -44,6 +44,6 @@ jobs:
         run: python scripts/generate-containers-overview.py
 
       # Commit all changed files back to the repository
-      - uses: stefanzweifel/git-auto-commit-action@v7
+      - uses: stefanzweifel/git-auto-commit-action@28e16e81777b558cc906c8750092100bbb34c5e3 # v7
         with:
           commit_message: Update Docker containers overview doc
