@@ -165,7 +165,7 @@ services:
       - no-new-privileges=true
 
   hoppscotch-db-upgrade:
-    image: pgautoupgrade/pgautoupgrade:17.6-alpine@sha256:587ca0ebbfcd7d82f9cdfa7c6f8759d61b2cf7692c2e931021d7ffd790c02e23
+    image: pgautoupgrade/pgautoupgrade:17.6-alpine@sha256:85e950ab2e76ba33898667a3e441ce85f4cf7109762014d08aa2b06ea4ab4300
     container_name: hoppscotch-db-upgrade
     restart: "no"
     security_opt:
