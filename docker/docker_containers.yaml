@@ -15,7 +15,7 @@
   image: mendhak/http-https-echo:38@sha256:c73e039e883944a38e37eaba829eb9a67641cd03eff868827683951feceef96e
   url: echo-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: excalidraw
-  image: excalidraw/excalidraw:latest@sha256:b0b28b8d822519bf7fb9e2fab4a1e74754a557a4f6f42d36756ce95d281d62c5
+  image: excalidraw/excalidraw:latest@sha256:67c6b93d6155fac09d30759ea5f28e5ce01b4e865a783fb418c878806bf5397d
   url: excalidraw.$DOMAINNAME`) && Headers(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 - container_name: foldingathome
   image: lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:a11530655be018bc43c9f973bce2a59344f2d140a9e5c843305f765299a5d141
@@ -29,7 +29,7 @@
 - container_name: gatus-db-upgrade
   image: pgautoupgrade/pgautoupgrade:17.6-alpine@sha256:587ca0ebbfcd7d82f9cdfa7c6f8759d61b2cf7692c2e931021d7ffd790c02e23
 - container_name: hoppscotch
-  image: hoppscotch/hoppscotch:2025.10.0@sha256:0a4520ce7adc49bb16cbc663a88007a681e3dd08a5e05c45f1f339edd29e843d
+  image: hoppscotch/hoppscotch:2025.10.1@sha256:4c632010dc3c700d0c76b631d6ece726d5a6fe45a0f9e62d488e5392c54aec25
   url: api-tester.$DOMAINNAME
 - container_name: hoppscotch-db
   image: docker.io/library/postgres:17.6-alpine@sha256:ef257d85f76e48da1c64832459b59fcaba1a4dac97bf5d7450c77753542eee94
@@ -52,7 +52,7 @@
   image: ghcr.io/corentinth/it-tools:2023.12.21-5ed3693@sha256:4aaf67eab769afc9dac5614a15614537446e11150d53eab3be34ac9775a27e3a
   url: tools.$DOMAINNAME
 - container_name: metube
-  image: ghcr.io/alexta69/metube:latest@sha256:46be73330a37503772249bee27d03dd2c831ab3d135c932abbc448fcbe7e57a6
+  image: ghcr.io/alexta69/metube:latest@sha256:75c227ff12ffbcb3bcbfe9cb0b8ff067cde30de2771d7992f41d9680ba46fdd9
   url: metube.$DOMAINNAME
 - container_name: n8n
   image: n8nio/n8n:1.119.1@sha256:4a43ddf853afe3ad44be51379e7ed85c16b974cae26cf732d2fcbf71d0cb16c4
@@ -85,7 +85,7 @@
   image: lscr.io/linuxserver/unifi-network-application:version-9.4.19@sha256:6e44301b9a6a6c8bccdf04a30d01d3f04f613e96c7888be0c2d81492f76a05b8
   url: unifi.$DOMAINNAME
 - container_name: unifi-db
-  image: mongo:8.2.1@sha256:86835e8da0f94efd61334decb320fa43e8a60027688cbd856bf29d065b470338
+  image: mongo:8.2.1@sha256:e64a984d36b24419327c558b49a9100cf78191706222da6a7c8cf56a743ad3db
 - container_name: unifi-db-backup
   image: tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
 - container_name: unifi-volume-backup

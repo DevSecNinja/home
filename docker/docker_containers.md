@@ -60,7 +60,7 @@
 
 **container_name:** excalidraw
 
-**image:** excalidraw/excalidraw:latest@sha256:b0b28b8d822519bf7fb9e2fab4a1e74754a557a4f6f42d36756ce95d281d62c5
+**image:** excalidraw/excalidraw:latest@sha256:67c6b93d6155fac09d30759ea5f28e5ce01b4e865a783fb418c878806bf5397d
 
 **url:** excalidraw.$DOMAINNAME`) && Headers(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
@@ -106,7 +106,7 @@
 
 **container_name:** hoppscotch
 
-**image:** hoppscotch/hoppscotch:2025.10.0@sha256:0a4520ce7adc49bb16cbc663a88007a681e3dd08a5e05c45f1f339edd29e843d
+**image:** hoppscotch/hoppscotch:2025.10.1@sha256:4c632010dc3c700d0c76b631d6ece726d5a6fe45a0f9e62d488e5392c54aec25
 
 **url:** api-tester.$DOMAINNAME
 
@@ -178,7 +178,7 @@
 
 **container_name:** metube
 
-**image:** ghcr.io/alexta69/metube:latest@sha256:46be73330a37503772249bee27d03dd2c831ab3d135c932abbc448fcbe7e57a6
+**image:** ghcr.io/alexta69/metube:latest@sha256:75c227ff12ffbcb3bcbfe9cb0b8ff067cde30de2771d7992f41d9680ba46fdd9
 
 **url:** metube.$DOMAINNAME
 
@@ -284,7 +284,7 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:8.2.1@sha256:86835e8da0f94efd61334decb320fa43e8a60027688cbd856bf29d065b470338
+**image:** mongo:8.2.1@sha256:e64a984d36b24419327c558b49a9100cf78191706222da6a7c8cf56a743ad3db
 
 ### Service: unifi-db-backup
 
