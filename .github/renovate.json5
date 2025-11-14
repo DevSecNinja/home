@@ -3,6 +3,7 @@
   "extends": [
     "config:recommended",
     "docker:enableMajor",
+    "helpers:pinGitHubActionDigests",
     ":disableRateLimiting",
     ":dependencyDashboard",
     ":semanticCommits",
@@ -15,6 +16,12 @@
   "schedule": ["every weekend", "on Friday"],
   "ignorePaths": ["**/*.sops.*", ".archive/**", "kubernetes/**", "bootstrap/**"],
   "timezone": "Europe/Amsterdam",
+  "docker-compose": {
+    "enabled": true,
+    "fileMatch": [
+      "(^|/)docker/.+\\.ya?ml(?:\\.j2)?$"
+    ]
+  },
   "flux": {
     "fileMatch": [
       "(^|/)ansible/.+\\.ya?ml(?:\\.j2)?$",
