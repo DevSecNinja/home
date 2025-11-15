@@ -23,7 +23,7 @@
   image: twinproduction/gatus:v5.31.0@sha256:3a432fcc2826b8eb2b38caceb83e7777fda139b8058b1d022c73a82be7342682
   url: status-docker.$DOMAINNAME
 - container_name: gatus-db
-  image: docker.io/library/postgres:17.6-alpine@sha256:ef257d85f76e48da1c64832459b59fcaba1a4dac97bf5d7450c77753542eee94
+  image: docker.io/library/postgres:17.7-alpine@sha256:9a78577340f3d26384b6aebeb475c0d46d664fd4ffa68503b4be4e4462745f94
 - container_name: gatus-db-backup
   image: tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
 - container_name: gatus-db-upgrade
@@ -32,7 +32,7 @@
   image: hoppscotch/hoppscotch:2025.10.1@sha256:4c632010dc3c700d0c76b631d6ece726d5a6fe45a0f9e62d488e5392c54aec25
   url: api-tester.$DOMAINNAME
 - container_name: hoppscotch-db
-  image: docker.io/library/postgres:17.6-alpine@sha256:ef257d85f76e48da1c64832459b59fcaba1a4dac97bf5d7450c77753542eee94
+  image: docker.io/library/postgres:17.7-alpine@sha256:9a78577340f3d26384b6aebeb475c0d46d664fd4ffa68503b4be4e4462745f94
 - container_name: hoppscotch-db-backup
   image: tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
 - container_name: hoppscotch-db-upgrade
@@ -55,10 +55,10 @@
   image: ghcr.io/alexta69/metube:latest@sha256:75c227ff12ffbcb3bcbfe9cb0b8ff067cde30de2771d7992f41d9680ba46fdd9
   url: metube.$DOMAINNAME
 - container_name: n8n
-  image: n8nio/n8n:1.119.1@sha256:4a43ddf853afe3ad44be51379e7ed85c16b974cae26cf732d2fcbf71d0cb16c4
+  image: n8nio/n8n:1.120.3@sha256:e047444709aa5ce8e2be7c952b51d95c35989ea8a36ed7b4ed478c2193df5825
   url: n8n.$DOMAINNAME
 - container_name: n8n-db
-  image: docker.io/library/postgres:17.6-alpine@sha256:ef257d85f76e48da1c64832459b59fcaba1a4dac97bf5d7450c77753542eee94
+  image: docker.io/library/postgres:17.7-alpine@sha256:9a78577340f3d26384b6aebeb475c0d46d664fd4ffa68503b4be4e4462745f94
 - container_name: n8n-db-backup
   image: tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
 - container_name: n8n-db-upgrade
