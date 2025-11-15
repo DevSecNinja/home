@@ -7,10 +7,10 @@ services:
     restart: always
     networks:
       traefik-backend:
-      {% for network in frontend_networks +%}
+      #% for network in frontend_networks +%#
       # Dynamically added by Ansible
       {{ network }}: {}
-      {% endfor +%}
+      #% endfor +%#
     security_opt:
       - no-new-privileges=true
     ports:
@@ -22,20 +22,20 @@ services:
         published: 443
         protocol: tcp
         mode: host
-{% if 'infra' in group_names %}
+#% if 'infra' in group_names %#
       # Unifi Guest portal can only be reached on 8843
       - target: 8843
         published: 8843
         protocol: tcp
         mode: host
-{% endif %}
-{% if 'vpnservers' in group_names %}
+#% endif %#
+#% if 'vpnservers' in group_names %#
       # Wireguard VPN
       - target: 51820
         published: 51820
         protocol: udp
         mode: host
-{% endif %}
+#% endif %#
     volumes:
       - $DOCKERDIR/data/traefik/acme/acme.json:/acme.json
       - $DOCKERDIR/data/traefik/certchain:/certchain

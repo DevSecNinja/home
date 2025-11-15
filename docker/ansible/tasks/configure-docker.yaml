@@ -39,6 +39,8 @@
     owner: "root"
     group: "root"
     mode: "0644"
+    block_start_string: "#%"
+    block_end_string: "%#"
   notify: ["Restart Docker"]
 
 - name: Configure Docker daemon options (flags)
@@ -48,6 +50,8 @@
     owner: "root"
     group: "root"
     mode: "0644"
+    block_start_string: "#%"
+    block_end_string: "%#"
   notify: ["Reload systemd daemon", "Restart Docker"]
 
 - name: Configure Docker daemon environment variables
@@ -57,6 +61,8 @@
     owner: "root"
     group: "root"
     mode: "0644"
+    block_start_string: "#%"
+    block_end_string: "%#"
   notify: ["Reload systemd daemon", "Restart Docker"]
 
 - name: Configure custom systemd unit file override
@@ -66,6 +72,8 @@
     owner: "root"
     group: "root"
     mode: "0644"
+    block_start_string: "#%"
+    block_end_string: "%#"
   notify: ["Reload systemd daemon", "Restart Docker"]
 
 - name: Remove Docker related cron jobs
