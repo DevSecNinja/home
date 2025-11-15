@@ -46,7 +46,7 @@ services:
       # Enable the management port
       - "traefik.http.services.metube.loadbalancer.server.port=8081"
       ## Router for Gatus — bypass auth if secret header is present
-      - "traefik.http.routers.metube-monitor-rtr.rule=Host(`metube.$DOMAINNAME`) && Headers(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
+      - "traefik.http.routers.metube-monitor-rtr.rule=Host(`metube.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
       - "traefik.http.routers.metube-monitor-rtr.service=metube"
       - "traefik.http.routers.metube-monitor-rtr.priority=100"  # Higher priority so it matches first
     tmpfs:

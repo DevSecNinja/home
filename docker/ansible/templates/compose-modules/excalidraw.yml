@@ -30,7 +30,7 @@ services:
       - "traefik.http.routers.excalidraw-rtr.service=excalidraw-svc"
       - "traefik.http.services.excalidraw-svc.loadbalancer.server.port=80"
       ## Router for Gatus — bypass auth if secret header is present
-      - "traefik.http.routers.excalidraw-monitor-rtr.rule=Host(`excalidraw.$DOMAINNAME`) && Headers(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
+      - "traefik.http.routers.excalidraw-monitor-rtr.rule=Host(`excalidraw.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
       - "traefik.http.routers.excalidraw-monitor-rtr.service=excalidraw-svc"
       - "traefik.http.routers.excalidraw-monitor-rtr.priority=100"  # Higher priority so it matches first
 

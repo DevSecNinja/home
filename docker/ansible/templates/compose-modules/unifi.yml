@@ -165,7 +165,7 @@ services:
       - "traefik.http.routers.unifi-noauth-rtr.middlewares=chain-no-auth@file"
       - "traefik.http.routers.unifi-noauth-rtr.service=unifi"
       ## Router for Gatus — bypass auth if secret header is present
-      - "traefik.http.routers.unifi-monitor-rtr.rule=Host(`unifi.$DOMAINNAME`) && Headers(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
+      - "traefik.http.routers.unifi-monitor-rtr.rule=Host(`unifi.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
       - "traefik.http.routers.unifi-monitor-rtr.service=unifi"
       - "traefik.http.routers.unifi-monitor-rtr.priority=100"  # Higher priority so it matches first
 

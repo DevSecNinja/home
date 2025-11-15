@@ -77,7 +77,7 @@ services:
       - "traefik.http.routers.hoppscotch-api-rtr.service=hoppscotch-api-svc"
       - "traefik.http.services.hoppscotch-api-svc.loadbalancer.server.port=3170"
       ## Router for Gatus — bypass auth if secret header is present
-      - "traefik.http.routers.hoppscotch-monitor-rtr.rule=Host(`api-tester.$DOMAINNAME`) && Headers(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
+      - "traefik.http.routers.hoppscotch-monitor-rtr.rule=Host(`api-tester.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
       - "traefik.http.routers.hoppscotch-monitor-rtr.service=hoppscotch-svc"
       - "traefik.http.routers.hoppscotch-monitor-rtr.priority=100"  # Higher priority so it matches first
 

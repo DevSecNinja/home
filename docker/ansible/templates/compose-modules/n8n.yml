@@ -43,7 +43,7 @@ services:
       ### Enable the server port
       - "traefik.http.services.n8n.loadbalancer.server.port=5678"
       ## Router for Gatus — bypass auth if secret header is present
-      - "traefik.http.routers.n8n-monitor-rtr.rule=Host(`n8n.$DOMAINNAME`) && Headers(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
+      - "traefik.http.routers.n8n-monitor-rtr.rule=Host(`n8n.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
       - "traefik.http.routers.n8n-monitor-rtr.service=n8n"
       - "traefik.http.routers.n8n-monitor-rtr.priority=100"  # Higher priority so it matches first
 

@@ -37,7 +37,7 @@ services:
       # Enable the management port
       - "traefik.http.services.tubesync.loadbalancer.server.port=4848"
       ## Router for Gatus — bypass auth if secret header is present
-      - "traefik.http.routers.tubesync-monitor-rtr.rule=Host(`tubesync.$DOMAINNAME`) && Headers(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
+      - "traefik.http.routers.tubesync-monitor-rtr.rule=Host(`tubesync.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
       - "traefik.http.routers.tubesync-monitor-rtr.service=tubesync"
       - "traefik.http.routers.tubesync-monitor-rtr.priority=100"  # Higher priority so it matches first
 

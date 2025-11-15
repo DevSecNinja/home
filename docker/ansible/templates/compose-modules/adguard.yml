@@ -58,7 +58,7 @@ services:
       # Enable the management port
       - "traefik.http.services.adguard.loadbalancer.server.port=80"
       ## Router for Gatus — bypass auth if secret header is present
-      - "traefik.http.routers.adguard-monitor-rtr.rule=Host(`adguard-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`) && Headers(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
+      - "traefik.http.routers.adguard-monitor-rtr.rule=Host(`adguard-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
       - "traefik.http.routers.adguard-monitor-rtr.service=adguard"
       - "traefik.http.routers.adguard-monitor-rtr.priority=100"  # Higher priority so it matches first
 

@@ -41,7 +41,7 @@ services:
       # Enable the management port
       - "traefik.http.services.sabnzbd.loadbalancer.server.port=8080"
       ## Router for Gatus — bypass auth if secret header is present
-      - "traefik.http.routers.sabnzbd-monitor-rtr.rule=Host(`sabnzbd.$DOMAINNAME`) && Headers(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
+      - "traefik.http.routers.sabnzbd-monitor-rtr.rule=Host(`sabnzbd.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
       - "traefik.http.routers.sabnzbd-monitor-rtr.service=sabnzbd"
       - "traefik.http.routers.sabnzbd-monitor-rtr.priority=100"  # Higher priority so it matches first
 

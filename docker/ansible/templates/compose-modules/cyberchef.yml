@@ -28,7 +28,7 @@ services:
       - "traefik.http.routers.cyberchef-rtr.service=cyberchef-svc"
       - "traefik.http.services.cyberchef-svc.loadbalancer.server.port=80"
       ## Router for Gatus — bypass auth if secret header is present
-      - "traefik.http.routers.cyberchef-monitor-rtr.rule=Host(`cyberchef.$DOMAINNAME`) && Headers(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
+      - "traefik.http.routers.cyberchef-monitor-rtr.rule=Host(`cyberchef.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
       - "traefik.http.routers.cyberchef-monitor-rtr.service=cyberchef-svc"
       - "traefik.http.routers.cyberchef-monitor-rtr.priority=100"  # Higher priority so it matches first
 
