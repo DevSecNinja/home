@@ -9,7 +9,7 @@
   image: ghcr.io/gchq/cyberchef:10.19.4@sha256:a2bfe382b2547bdd0a3d0523b9a6b85fab833c56bcec86d600ba6266910b533e
   url: cyberchef.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 - container_name: drawio
-  image: jgraph/drawio:28.2.9@sha256:111755d69926b8106f426e5c085331d13a9e730f675445fc9119c0162792c8b4
+  image: jgraph/drawio:29.0.2@sha256:5b4429b9e2222f337342d053c7b1bb211f93831e7956dfb6b4afc89da16c5e7f
   url: draw.$DOMAINNAME
 - container_name: echo-server
   image: mendhak/http-https-echo:38@sha256:c73e039e883944a38e37eaba829eb9a67641cd03eff868827683951feceef96e
