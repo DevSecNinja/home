@@ -7,13 +7,13 @@
         href: https://svlnas.{{ generic__domain_name }}
         icon: truenas
         description: TrueNAS Scale
-#% if 'internal' in group_names %#
+{% if 'internal' in group_names %}
         siteMonitor: https://svlnas.{{ generic__domain_name }}
-#% endif %#
+{% endif %}
     - JetKVM:
         href: http://jetkvm.MANAGEMENT
         icon: jetkvm
         description: KVM Server
-#% if 'internal' in group_names %#
+{% if 'internal' in group_names %}
         siteMonitor: http://jetkvm.MANAGEMENT
-#% endif %#
+{% endif %}
