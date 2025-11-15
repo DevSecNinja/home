@@ -91,7 +91,7 @@ services:
       - CONTAINER_NAME=n8n-db-backup
       - CONTAINER_ENABLE_MONITORING=FALSE # Disables Zabbix backup statistics
 
-      - ENABLE_NOTIFICATIONS=TRUE
+      - ENABLE_NOTIFICATIONS=FALSE # TODO: Fix n8n/hoppscotch backup permission issue
       - NOTIFICATION_TYPE=EMAIL
       - SMTP_HOST=${NOTIFICATIONS_EMAIL_HOST}
       - SMTP_DOMAIN=${NOTIFICATIONS_EMAIL_DOMAIN}
