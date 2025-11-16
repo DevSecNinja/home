@@ -34,6 +34,34 @@
 
 **url:** cyberchef.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
+## docker/ansible/templates/compose-modules/dawarich.yml
+
+### Service: dawarich
+
+**container_name:** dawarich
+
+**image:** freikin/dawarich:latest
+
+**url:** dawarich.$DOMAINNAME
+
+### Service: dawarich-db
+
+**container_name:** dawarich-db
+
+**image:** postgis/postgis:17-3.5-alpine
+
+### Service: dawarich-redis
+
+**container_name:** dawarich-redis
+
+**image:** redis:7.4.5-alpine@sha256:bb186d083732f669da90be8b0f975a37812b15e913465bb14d845db72a4e3e08
+
+### Service: dawarich-sidekiq
+
+**container_name:** dawarich-sidekiq
+
+**image:** freikin/dawarich:latest
+
 ## docker/ansible/templates/compose-modules/drawio.yml
 
 ### Service: drawio
