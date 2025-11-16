@@ -29,6 +29,13 @@ services:
         protocol: tcp
         mode: host
 #% endif %#
+#% if 'external' in group_names %#
+      # Separate port for public HTTPS access
+      - target: {{ generic__public_https_port }}
+        published: {{ generic__public_https_port }}
+        protocol: tcp
+        mode: host
+#% endif %#
 #% if 'vpnservers' in group_names %#
       # Wireguard VPN
       - target: 51820

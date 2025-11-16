@@ -25,6 +25,12 @@ entryPoints:
     http:
       tls: {}
 #% endif %#
+#% if 'external' in group_names %#
+  https-public:
+    address: ":{{ generic__public_https_port }}"
+    http:
+      tls: {}
+#% endif %#
 #% if 'vpnservers' in group_names %#
   wireguard:
     address: ":51820/udp"

@@ -1,0 +1,196 @@
+services:
+  dawarich-redis:
+    image: redis:7.4.5-alpine@sha256:bb186d083732f669da90be8b0f975a37812b15e913465bb14d845db72a4e3e08
+    container_name: dawarich-redis
+    command: redis-server
+    networks:
+      - dawarich-backend
+    volumes:
+      - dawarich_shared:/data
+    restart: always
+    mem_limit: 1024m
+    security_opt:
+      - no-new-privileges=true
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    healthcheck:
+      test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
+
+  dawarich-db:
+    image: postgis/postgis:17-3.5-alpine
+    shm_size: 1G
+    container_name: dawarich-db
+    volumes:
+      - dawarich_db_data:/var/lib/postgresql/data
+      - dawarich_shared:/var/shared
+      # - ./postgresql.conf:/etc/postgresql/postgresql.conf # Optional, uncomment if you want to use a custom config
+    networks:
+      - dawarich-backend
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-dawarich}
+      POSTGRES_PASSWORD: ${DAWARICH_DB_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:-dawarich_development}
+    restart: always
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-dawarich_development}" ]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
+    # command: postgres -c config_file=/etc/postgresql/postgresql.conf # Use custom config, uncomment if you want to use a custom config
+
+  dawarich:
+    image: freikin/dawarich:latest
+    container_name: dawarich
+    volumes:
+      - dawarich_public:/var/app/public
+      - dawarich_watched:/var/app/tmp/imports/watched
+      - dawarich_storage:/var/app/storage
+      - dawarich_db_data:/dawarich_db_data
+    networks:
+      - dawarich-frontend
+      - dawarich-backend
+    stdin_open: true
+    tty: true
+    entrypoint: web-entrypoint.sh
+    command: ['bin/rails', 'server', '-p', '3000', '-b', '::']
+    restart: on-failure
+    environment:
+      RAILS_ENV: ${RAILS_ENV:-development}
+      REDIS_URL: ${REDIS_URL:-redis://dawarich-redis:6379}
+      DATABASE_HOST: ${DATABASE_HOST:-dawarich-db}
+      DATABASE_PORT: ${DATABASE_PORT:-5432}
+      DATABASE_USERNAME: ${DATABASE_USERNAME:-dawarich}
+      DATABASE_PASSWORD: ${DAWARICH_DB_PASSWORD}
+      DATABASE_NAME: ${DATABASE_NAME:-dawarich_development}
+      MIN_MINUTES_SPENT_IN_CITY: ${MIN_MINUTES_SPENT_IN_CITY:-60}
+      APPLICATION_HOSTS: ${APPLICATION_HOSTS:-localhost,::1,127.0.0.1,dawarich.$DOMAINNAME,dawarich-noauth.$DOMAINNAME}
+      TIME_ZONE: ${TZ:-Europe/London}
+      APPLICATION_PROTOCOL: ${APPLICATION_PROTOCOL:-http}
+      PROMETHEUS_EXPORTER_ENABLED: ${PROMETHEUS_EXPORTER_ENABLED:-false}
+      PROMETHEUS_EXPORTER_HOST: ${PROMETHEUS_EXPORTER_HOST:-0.0.0.0}
+      PROMETHEUS_EXPORTER_PORT: ${PROMETHEUS_EXPORTER_PORT:-9394}
+      SECRET_KEY_BASE: ${DAWARICH_SECRET_KEY_BASE}
+      RAILS_LOG_TO_STDOUT: ${RAILS_LOG_TO_STDOUT:-true}
+      SELF_HOSTED: ${SELF_HOSTED:-true}
+      STORE_GEODATA: ${STORE_GEODATA:-true}
+    labels:
+      # Homepage
+      - homepage.group=Productivity
+      - homepage.name=Dawarich
+      - homepage.icon=dawarich.svg
+      - homepage.href=https://dawarich.$DOMAINNAME
+      - homepage.description=Location Tracking
+      # Group
+      - org.label-schema.group=productivity
+      # Traefik
+      - "traefik.enable=true"
+      - "traefik.docker.network=dawarich-frontend"
+      ## Middlewares
+      - "traefik.http.routers.dawarich-rtr.middlewares=chain-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.dawarich-rtr.rule=Host(`dawarich.$DOMAINNAME`)"
+      - "traefik.http.routers.dawarich-rtr.service=dawarich"
+      ### Enable the server port
+      - "traefik.http.services.dawarich.loadbalancer.server.port=3000"
+      ## Extra web no-auth endpoint for external access (e.g. mobile app)
+      - "traefik.http.routers.dawarich-noauth-rtr.middlewares=chain-no-auth-custom-port@file"
+      - "traefik.http.routers.dawarich-noauth-rtr.rule=Host(`dawarich-noauth.$DOMAINNAME`)"
+      - "traefik.http.routers.dawarich-noauth-rtr.service=dawarich"
+      - "traefik.http.routers.dawarich-noauth-rtr.entrypoints=https-public"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: ${LOG_MAX_SIZE:-100m}
+        max-file: ${LOG_MAX_FILE:-5}
+    healthcheck:
+      test: [ "CMD-SHELL", "wget -qO - http://127.0.0.1:3000/api/v1/health | grep -q '\"status\"\\s*:\\s*\"ok\"'" ]
+      interval: 10s
+      retries: 30
+      start_period: 30s
+      timeout: 10s
+    depends_on:
+      dawarich-db:
+        condition: service_healthy
+        restart: true
+      dawarich-redis:
+        condition: service_healthy
+        restart: true
+    deploy:
+      resources:
+        limits:
+          cpus: ${APP_CPU_LIMIT:-0.50}
+          memory: ${APP_MEMORY_LIMIT:-4G}
+
+  dawarich-sidekiq:
+    image: freikin/dawarich:latest
+    container_name: dawarich-sidekiq
+    volumes:
+      - dawarich_public:/var/app/public
+      - dawarich_watched:/var/app/tmp/imports/watched
+      - dawarich_storage:/var/app/storage
+    networks:
+      - dawarich-backend
+    stdin_open: true
+    tty: true
+    entrypoint: sidekiq-entrypoint.sh
+    command: ['sidekiq']
+    restart: on-failure
+    environment:
+      RAILS_ENV: ${RAILS_ENV:-development}
+      REDIS_URL: ${REDIS_URL:-redis://dawarich-redis:6379}
+      DATABASE_HOST: ${DATABASE_HOST:-dawarich-db}
+      DATABASE_PORT: ${DATABASE_PORT:-5432}
+      DATABASE_USERNAME: ${DATABASE_USERNAME:-dawarich}
+      DATABASE_PASSWORD: ${DAWARICH_DB_PASSWORD}
+      DATABASE_NAME: ${DATABASE_NAME:-dawarich_development}
+      APPLICATION_HOSTS: ${APPLICATION_HOSTS:-localhost,::1,127.0.0.1,dawarich-noauth.$DOMAINNAME,dawarich.$DOMAINNAME}
+      BACKGROUND_PROCESSING_CONCURRENCY: ${BACKGROUND_PROCESSING_CONCURRENCY:-10}
+      APPLICATION_PROTOCOL: ${APPLICATION_PROTOCOL:-http}
+      PROMETHEUS_EXPORTER_ENABLED: ${PROMETHEUS_EXPORTER_ENABLED:-false}
+      PROMETHEUS_EXPORTER_HOST: ${PROMETHEUS_EXPORTER_HOST_SIDEKIQ:-dawarich}
+      PROMETHEUS_EXPORTER_PORT: ${PROMETHEUS_EXPORTER_PORT:-9394}
+      SECRET_KEY_BASE: ${DAWARICH_SECRET_KEY_BASE}
+      RAILS_LOG_TO_STDOUT: ${RAILS_LOG_TO_STDOUT:-true}
+      SELF_HOSTED: ${SELF_HOSTED:-true}
+      STORE_GEODATA: ${STORE_GEODATA:-true}
+    logging:
+      driver: "json-file"
+      options:
+        max-size: ${LOG_MAX_SIZE:-100m}
+        max-file: ${LOG_MAX_FILE:-5}
+    healthcheck:
+      test: [ "CMD-SHELL", "pgrep -f sidekiq" ]
+      interval: 10s
+      retries: 30
+      start_period: 30s
+      timeout: 10s
+    depends_on:
+      dawarich-db:
+        condition: service_healthy
+        restart: true
+      dawarich-redis:
+        condition: service_healthy
+        restart: true
+      dawarich:
+        condition: service_healthy
+        restart: true
+
+volumes:
+  dawarich_db_data:
+  dawarich_shared:
+  dawarich_public:
+  dawarich_watched:
+  dawarich_storage:
+
+networks:
+  dawarich-frontend:
+    name: dawarich-frontend
+  dawarich-backend:
+    name: dawarich-backend

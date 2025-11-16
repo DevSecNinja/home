@@ -49,6 +49,12 @@
     - { rule: 'allow', port: '853', proto: 'tcp', comment: 'AdGuard' }
   when: "'dnsservers' in group_names"
 
+- name: Configure ufw rules - external
+  ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }} comment={{ item.comment }}
+  with_items:
+    - { rule: 'allow', port: '{{ generic__public_https_port }}', proto: 'tcp', comment: 'Traefik Public HTTPS service' }
+  when: inventory_hostname in groups['external'] and inventory_hostname in groups['webservers']
+
 - name: Configure ufw rules - vpnservers
   ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }} comment={{ item.comment }}
   with_items:

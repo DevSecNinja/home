@@ -72,6 +72,12 @@ endpoints:
     headers:
       X-Monitor-Key: "${GENERIC_MONITORING_HEADER_SECRET}"
 
+  - name: Dawarich - HTTP
+    <<: *defaults
+    url: "https://dawarich.${DOMAINNAME}"
+    headers:
+      X-Monitor-Key: "${GENERIC_MONITORING_HEADER_SECRET}"
+
   - name: Draw.io - HTTP
     <<: *defaults
     url: "https://draw.${DOMAINNAME}"
