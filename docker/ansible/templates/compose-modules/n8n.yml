@@ -131,7 +131,7 @@ services:
       - no-new-privileges=true
 
   n8n-db-upgrade:
-    image: pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:9d5f6551a8b5771e0162c36b5ac16b2d6533b439806dfcc1c24928bd383fefd6
+    image: pgautoupgrade/pgautoupgrade:18.1-alpine@sha256:717735dfe16106183589ae9ebf79b2c6c3770e6bf72a346b0c9184e9848f3605
     container_name: n8n-db-upgrade
     restart: "no"
     security_opt:
