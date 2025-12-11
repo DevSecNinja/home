@@ -33,7 +33,7 @@ services:
     networks:
       - dawarich-backend
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:-dawarich}
+      POSTGRES_USER: dawarich
       POSTGRES_PASSWORD: ${DAWARICH_DB_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB:-dawarich_development}
     restart: always
@@ -44,6 +44,56 @@ services:
       start_period: 30s
       timeout: 10s
     # command: postgres -c config_file=/etc/postgresql/postgresql.conf # Use custom config, uncomment if you want to use a custom config
+
+  dawarich-db-backup:
+    container_name: dawarich-db-backup
+    image: tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
+    depends_on:
+      - dawarich-db
+    volumes:
+      - /mnt/smb_share_backup/dawarich:/backup
+    mem_limit: 1024m
+    networks:
+      - dawarich-backend
+    environment:
+      - TIMEZONE=${TZ}
+      - USER_DBBACKUP=${PUID}
+      - GROUP_DBBACKUP=${PGID}
+      - CONTAINER_NAME=dawarich-db-backup
+      - CONTAINER_ENABLE_MONITORING=FALSE # Disables Zabbix backup statistics
+
+      - ENABLE_NOTIFICATIONS=TRUE
+      - NOTIFICATION_TYPE=EMAIL
+      - SMTP_HOST=${NOTIFICATIONS_EMAIL_HOST}
+      - SMTP_DOMAIN=${NOTIFICATIONS_EMAIL_DOMAIN}
+      - SMTP_PORT=${NOTIFICATIONS_EMAIL_PORT}
+      - SMTP_USER=${NOTIFICATIONS_EMAIL_USERNAME}
+      - SMTP_PASS=${NOTIFICATIONS_EMAIL_PASSWORD}
+      - MAIL_TO=${NOTIFICATIONS_EMAIL_TO}
+      - MAIL_FROM=${NOTIFICATIONS_EMAIL_FROM}
+      - SMTP_AUTHENTICATION="on"
+      - SMTP_TLSCERTCHECK=TRUE
+      - SMTP_STARTTLS=on
+      - SMTP_TLS=on
+
+      - DEFAULT_CHECKSUM=SHA1        # Set standard checksum to SHA1
+      - DEFAULT_COMPRESSION=ZSTD     # Compress all with ZSTD
+      - DEFAULT_BACKUP_INTERVAL=1440 # Backup every 1440 minutes = 24 hours
+      - DEFAULT_BACKUP_BEGIN=0000    # Start backing up at midnight
+      - DEFAULT_CLEANUP_TIME=2880    # Cleanup backups after two days
+
+      - DEFAULT_ENCRYPT=TRUE                            # Encrypt backup files with GPG
+      - DEFAULT_ENCRYPT_PASSPHRASE=${DB_ENC_PASSPHRASE} # Set encryption password
+
+      - DB01_TYPE=pgsql
+      - DB01_HOST=dawarich-db
+      - DB01_NAME=${POSTGRES_DB:-dawarich_development}
+      - DB01_USER=dawarich
+      - DB01_PORT=5432
+      - DB01_PASS=${DAWARICH_DB_PASSWORD}
+    restart: always
+    security_opt:
+      - no-new-privileges=true
 
   dawarich:
     image: freikin/dawarich:latest
