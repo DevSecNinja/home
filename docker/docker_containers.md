@@ -50,6 +50,12 @@
 
 **image:** postgis/postgis:17-3.5-alpine
 
+### Service: dawarich-db-backup
+
+**container_name:** dawarich-db-backup
+
+**image:** tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
+
 ### Service: dawarich-redis
 
 **container_name:** dawarich-redis
@@ -68,7 +74,7 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:29.0.2@sha256:5b4429b9e2222f337342d053c7b1bb211f93831e7956dfb6b4afc89da16c5e7f
+**image:** jgraph/drawio:29.0.3@sha256:ef3b524cb5c4195cf4abde2880bbdb24cae6fa90567936a0dddc790bdde6d1d0
 
 **url:** draw.$DOMAINNAME
 
