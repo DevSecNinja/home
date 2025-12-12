@@ -1,6 +1,6 @@
 services:
   dawarich-redis:
-    image: redis:7.4.5-alpine@sha256:bb186d083732f669da90be8b0f975a37812b15e913465bb14d845db72a4e3e08
+    image: redis:7.4.7-alpine@sha256:ee64a64eaab618d88051c3ade8f6352d11531fcf79d9a4818b9b183d8c1d18ba
     container_name: dawarich-redis
     command: redis-server
     networks:
