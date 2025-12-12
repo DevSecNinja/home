@@ -87,7 +87,7 @@
   image: docker.io/linuxserver/sabnzbd:amd64-4.5.1@sha256:39952ab247d97c9d3345a572385ebee158ce497887652d8421f4c0ac44cddf7e
   url: sabnzbd.$DOMAINNAME
 - container_name: traefik-forward-auth
-  image: ghcr.io/italypaleale/traefik-forward-auth:4.1.0@sha256:1d01039c168dd88308b670ff2823798f0acbdd1661870cbcb0f46ea46518344c
+  image: ghcr.io/italypaleale/traefik-forward-auth:4.3.1@sha256:00822205b2901d5ed04420bb0a6eafa815a628f6449317fe60058b08d339b58c
   url: auth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: tubesync
   image: ghcr.io/meeb/tubesync:v0.15.12@sha256:0885fd4e800fdd9bb0e4103522da3b51ac603dd9852899ed0e749e74c77f92fd
