@@ -318,7 +318,7 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:8.2.1@sha256:e64a984d36b24419327c558b49a9100cf78191706222da6a7c8cf56a743ad3db
+**image:** mongo:8.2.2@sha256:bf5995bcccb65725aa81fd92e68449323c94b96bf1c1fa9f7acbc2a8ad518114
 
 ### Service: unifi-db-backup
 
