@@ -20,7 +20,7 @@
 - container_name: dawarich-sidekiq
   image: freikin/dawarich:latest
 - container_name: drawio
-  image: jgraph/drawio:29.0.3@sha256:ef3b524cb5c4195cf4abde2880bbdb24cae6fa90567936a0dddc790bdde6d1d0
+  image: jgraph/drawio:29.2.7@sha256:b2082ee9e1e3f213ab9cac7b428816c5ca2c6eaee471abbc9abe0a041ffe2998
   url: draw.$DOMAINNAME
 - container_name: echo-server
   image: mendhak/http-https-echo:38@sha256:c73e039e883944a38e37eaba829eb9a67641cd03eff868827683951feceef96e
