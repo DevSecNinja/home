@@ -300,7 +300,7 @@
 
 **container_name:** tubesync
 
-**image:** ghcr.io/meeb/tubesync:v0.15.11@sha256:6f916006740963ea58dd91139e20c95b670840f41803eae785cfabc77ca756d3
+**image:** ghcr.io/meeb/tubesync:v0.15.12@sha256:0885fd4e800fdd9bb0e4103522da3b51ac603dd9852899ed0e749e74c77f92fd
 
 **url:** tubesync.$DOMAINNAME
 
