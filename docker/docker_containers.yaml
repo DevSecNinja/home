@@ -40,7 +40,7 @@
 - container_name: gatus-db-upgrade
   image: pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:9d5f6551a8b5771e0162c36b5ac16b2d6533b439806dfcc1c24928bd383fefd6
 - container_name: hoppscotch
-  image: hoppscotch/hoppscotch:2025.10.1@sha256:4c632010dc3c700d0c76b631d6ece726d5a6fe45a0f9e62d488e5392c54aec25
+  image: hoppscotch/hoppscotch:2025.11.2@sha256:370f2fa5559b1e82113fb22943a0defd50d49c915439ea3de84fcec9b4b9d690
   url: api-tester.$DOMAINNAME
 - container_name: hoppscotch-db
   image: docker.io/library/postgres:17.7-alpine@sha256:9a78577340f3d26384b6aebeb475c0d46d664fd4ffa68503b4be4e4462745f94
@@ -93,7 +93,7 @@
   image: ghcr.io/meeb/tubesync:v0.15.12@sha256:0885fd4e800fdd9bb0e4103522da3b51ac603dd9852899ed0e749e74c77f92fd
   url: tubesync.$DOMAINNAME
 - container_name: unifi
-  image: lscr.io/linuxserver/unifi-network-application:version-9.4.19@sha256:6e44301b9a6a6c8bccdf04a30d01d3f04f613e96c7888be0c2d81492f76a05b8
+  image: lscr.io/linuxserver/unifi-network-application:version-9.5.21@sha256:f45155f97d755373f5ad06abafa59fd2a5c2df690ae5d9e6d22e69548788c11b
   url: unifi.$DOMAINNAME
 - container_name: unifi-db
   image: mongo:8.2.1@sha256:e64a984d36b24419327c558b49a9100cf78191706222da6a7c8cf56a743ad3db

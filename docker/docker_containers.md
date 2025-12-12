@@ -140,7 +140,7 @@
 
 **container_name:** hoppscotch
 
-**image:** hoppscotch/hoppscotch:2025.10.1@sha256:4c632010dc3c700d0c76b631d6ece726d5a6fe45a0f9e62d488e5392c54aec25
+**image:** hoppscotch/hoppscotch:2025.11.2@sha256:370f2fa5559b1e82113fb22943a0defd50d49c915439ea3de84fcec9b4b9d690
 
 **url:** api-tester.$DOMAINNAME
 
@@ -310,7 +310,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-9.4.19@sha256:6e44301b9a6a6c8bccdf04a30d01d3f04f613e96c7888be0c2d81492f76a05b8
+**image:** lscr.io/linuxserver/unifi-network-application:version-9.5.21@sha256:f45155f97d755373f5ad06abafa59fd2a5c2df690ae5d9e6d22e69548788c11b
 
 **url:** unifi.$DOMAINNAME
 
