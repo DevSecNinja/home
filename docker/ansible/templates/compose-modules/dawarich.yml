@@ -23,7 +23,7 @@ services:
       timeout: 10s
 
   dawarich-db:
-    image: postgis/postgis:17-3.5-alpine
+    image: postgis/postgis:17-3.5-alpine@sha256:2a740fc1482e900f1ee947ef50666acd0638d49546c043ff3871e501538ddf88
     shm_size: 1G
     container_name: dawarich-db
     volumes:
@@ -33,10 +33,16 @@ services:
     networks:
       - dawarich-backend
     environment:
-      POSTGRES_USER: dawarich
-      POSTGRES_PASSWORD: ${DAWARICH_DB_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB:-dawarich_development}
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - POSTGRES_USER=dawarich
+      - POSTGRES_PASSWORD=${DAWARICH_DB_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB:-dawarich_development}
     restart: always
+    mem_limit: 1024m
+    security_opt:
+      - no-new-privileges=true
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-dawarich_development}" ]
       interval: 10s
@@ -96,13 +102,14 @@ services:
       - no-new-privileges=true
 
   dawarich:
-    image: freikin/dawarich:latest
+    image: freikin/dawarich:0.36.2@sha256:c302b2bec65d8523a4b450b859d89ff348170551317254f9fdbbe22005f38d27
     container_name: dawarich
     volumes:
       - dawarich_public:/var/app/public
       - dawarich_watched:/var/app/tmp/imports/watched
       - dawarich_storage:/var/app/storage
       - dawarich_db_data:/dawarich_db_data
+    mem_limit: 2048m
     networks:
       - dawarich-frontend
       - dawarich-backend
@@ -111,25 +118,27 @@ services:
     entrypoint: web-entrypoint.sh
     command: ['bin/rails', 'server', '-p', '3000', '-b', '::']
     restart: on-failure
+    security_opt:
+      - no-new-privileges=true
     environment:
-      RAILS_ENV: ${RAILS_ENV:-development}
-      REDIS_URL: ${REDIS_URL:-redis://dawarich-redis:6379}
-      DATABASE_HOST: ${DATABASE_HOST:-dawarich-db}
-      DATABASE_PORT: ${DATABASE_PORT:-5432}
-      DATABASE_USERNAME: ${DATABASE_USERNAME:-dawarich}
-      DATABASE_PASSWORD: ${DAWARICH_DB_PASSWORD}
-      DATABASE_NAME: ${DATABASE_NAME:-dawarich_development}
-      MIN_MINUTES_SPENT_IN_CITY: ${MIN_MINUTES_SPENT_IN_CITY:-60}
-      APPLICATION_HOSTS: ${APPLICATION_HOSTS:-localhost,::1,127.0.0.1,dawarich.$DOMAINNAME,dawarich-noauth.$DOMAINNAME}
-      TIME_ZONE: ${TZ:-Europe/London}
-      APPLICATION_PROTOCOL: ${APPLICATION_PROTOCOL:-http}
-      PROMETHEUS_EXPORTER_ENABLED: ${PROMETHEUS_EXPORTER_ENABLED:-false}
-      PROMETHEUS_EXPORTER_HOST: ${PROMETHEUS_EXPORTER_HOST:-0.0.0.0}
-      PROMETHEUS_EXPORTER_PORT: ${PROMETHEUS_EXPORTER_PORT:-9394}
-      SECRET_KEY_BASE: ${DAWARICH_SECRET_KEY_BASE}
-      RAILS_LOG_TO_STDOUT: ${RAILS_LOG_TO_STDOUT:-true}
-      SELF_HOSTED: ${SELF_HOSTED:-true}
-      STORE_GEODATA: ${STORE_GEODATA:-true}
+      - RAILS_ENV=${RAILS_ENV:-development}
+      - REDIS_URL=${REDIS_URL:-redis://dawarich-redis:6379}
+      - DATABASE_HOST=${DATABASE_HOST:-dawarich-db}
+      - DATABASE_PORT=${DATABASE_PORT:-5432}
+      - DATABASE_USERNAME=${DATABASE_USERNAME:-dawarich}
+      - DATABASE_PASSWORD=${DAWARICH_DB_PASSWORD}
+      - DATABASE_NAME=${DATABASE_NAME:-dawarich_development}
+      - MIN_MINUTES_SPENT_IN_CITY=${MIN_MINUTES_SPENT_IN_CITY:-60}
+      - APPLICATION_HOSTS=${APPLICATION_HOSTS:-localhost,::1,127.0.0.1,dawarich.$DOMAINNAME,dawarich-noauth.$DOMAINNAME}
+      - TIME_ZONE=${TZ:-Europe/London}
+      - APPLICATION_PROTOCOL=${APPLICATION_PROTOCOL:-http}
+      - PROMETHEUS_EXPORTER_ENABLED=${PROMETHEUS_EXPORTER_ENABLED:-false}
+      - PROMETHEUS_EXPORTER_HOST=${PROMETHEUS_EXPORTER_HOST:-0.0.0.0}
+      - PROMETHEUS_EXPORTER_PORT=${PROMETHEUS_EXPORTER_PORT:-9394}
+      - SECRET_KEY_BASE=${DAWARICH_SECRET_KEY_BASE}
+      - RAILS_LOG_TO_STDOUT=${RAILS_LOG_TO_STDOUT:-true}
+      - SELF_HOSTED=${SELF_HOSTED:-true}
+      - STORE_GEODATA=${STORE_GEODATA:-true}
     labels:
       # Homepage
       - homepage.group=Productivity
@@ -179,12 +188,13 @@ services:
           memory: ${APP_MEMORY_LIMIT:-4G}
 
   dawarich-sidekiq:
-    image: freikin/dawarich:latest
+    image: freikin/dawarich:0.36.2@sha256:c302b2bec65d8523a4b450b859d89ff348170551317254f9fdbbe22005f38d27
     container_name: dawarich-sidekiq
     volumes:
       - dawarich_public:/var/app/public
       - dawarich_watched:/var/app/tmp/imports/watched
       - dawarich_storage:/var/app/storage
+    mem_limit: 2048m
     networks:
       - dawarich-backend
     stdin_open: true
@@ -192,24 +202,27 @@ services:
     entrypoint: sidekiq-entrypoint.sh
     command: ['sidekiq']
     restart: on-failure
+    security_opt:
+      - no-new-privileges=true
     environment:
-      RAILS_ENV: ${RAILS_ENV:-development}
-      REDIS_URL: ${REDIS_URL:-redis://dawarich-redis:6379}
-      DATABASE_HOST: ${DATABASE_HOST:-dawarich-db}
-      DATABASE_PORT: ${DATABASE_PORT:-5432}
-      DATABASE_USERNAME: ${DATABASE_USERNAME:-dawarich}
-      DATABASE_PASSWORD: ${DAWARICH_DB_PASSWORD}
-      DATABASE_NAME: ${DATABASE_NAME:-dawarich_development}
-      APPLICATION_HOSTS: ${APPLICATION_HOSTS:-localhost,::1,127.0.0.1,dawarich-noauth.$DOMAINNAME,dawarich.$DOMAINNAME}
-      BACKGROUND_PROCESSING_CONCURRENCY: ${BACKGROUND_PROCESSING_CONCURRENCY:-10}
-      APPLICATION_PROTOCOL: ${APPLICATION_PROTOCOL:-http}
-      PROMETHEUS_EXPORTER_ENABLED: ${PROMETHEUS_EXPORTER_ENABLED:-false}
-      PROMETHEUS_EXPORTER_HOST: ${PROMETHEUS_EXPORTER_HOST_SIDEKIQ:-dawarich}
-      PROMETHEUS_EXPORTER_PORT: ${PROMETHEUS_EXPORTER_PORT:-9394}
-      SECRET_KEY_BASE: ${DAWARICH_SECRET_KEY_BASE}
-      RAILS_LOG_TO_STDOUT: ${RAILS_LOG_TO_STDOUT:-true}
-      SELF_HOSTED: ${SELF_HOSTED:-true}
-      STORE_GEODATA: ${STORE_GEODATA:-true}
+      - RAILS_ENV=${RAILS_ENV:-development}
+      - REDIS_URL=${REDIS_URL:-redis://dawarich-redis:6379}
+      - DATABASE_HOST=${DATABASE_HOST:-dawarich-db}
+      - DATABASE_PORT=${DATABASE_PORT:-5432}
+      - DATABASE_USERNAME=${DATABASE_USERNAME:-dawarich}
+      - DATABASE_PASSWORD=${DAWARICH_DB_PASSWORD}
+      - DATABASE_NAME=${DATABASE_NAME:-dawarich_development}
+      - APPLICATION_HOSTS=${APPLICATION_HOSTS:-localhost,::1,127.0.0.1,dawarich-noauth.$DOMAINNAME,dawarich.$DOMAINNAME}
+      - BACKGROUND_PROCESSING_CONCURRENCY=${BACKGROUND_PROCESSING_CONCURRENCY:-10}
+      - APPLICATION_PROTOCOL=${APPLICATION_PROTOCOL:-http}
+      - PROMETHEUS_EXPORTER_ENABLED=${PROMETHEUS_EXPORTER_ENABLED:-false}
+      - PROMETHEUS_EXPORTER_HOST=${PROMETHEUS_EXPORTER_HOST_SIDEKIQ:-dawarich}
+      - PROMETHEUS_EXPORTER_PORT=${PROMETHEUS_EXPORTER_PORT:-9394}
+      - SECRET_KEY_BASE=${DAWARICH_SECRET_KEY_BASE}
+      - RAILS_LOG_TO_STDOUT=${RAILS_LOG_TO_STDOUT:-true}
+      - SELF_HOSTED=${SELF_HOSTED:-true}
+      - STORE_GEODATA=${STORE_GEODATA:-true}
+      - TIME_ZONE=${TZ:-Europe/London}
     logging:
       driver: "json-file"
       options:

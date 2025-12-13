@@ -7,10 +7,10 @@ class TestDockerComposeFiles(unittest.TestCase):
 
     important_properties = {
         'container_name': [r'^.+'],
-        'environment': [r'(?:- )?(TZ|TIMEZONE)[:=]\s*\${TZ}'],
+        'environment': [r'(?:- )?(?:TZ|TIMEZONE|TIME_ZONE)[:=]\s*\${TZ(?::-[^}]+)?}'],
         'image': [r'.+:[\w\.-]+@sha256:[0-9a-fA-F]{64}$'],
         'mem_limit': [r'^\d+[bBkKmMgG]?$'],
-        'restart': [r'^(always|no)$'],
+        'restart': [r'^(always|no|on-failure)$'],
         'security_opt': ['no-new-privileges=true']
     }
 
