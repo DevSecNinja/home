@@ -60,7 +60,7 @@
 
 **container_name:** dawarich-redis
 
-**image:** redis:7.4.7-alpine@sha256:ee64a64eaab618d88051c3ade8f6352d11531fcf79d9a4818b9b183d8c1d18ba
+**image:** redis:8.4.0-alpine@sha256:6cbef353e480a8a6e7f10ec545f13d7d3fa85a212cdcc5ffaf5a1c818b9d3798
 
 ### Service: dawarich-sidekiq
 
@@ -222,7 +222,7 @@
 
 **container_name:** n8n
 
-**image:** n8nio/n8n:1.123.5@sha256:c8ea89d97e420858c61d39ead4f310284dba3a4462521ec169e54a0254f213c2
+**image:** n8nio/n8n:2.0.2@sha256:e3a4256dd2aa3b987e10da3c1194081575933987b26a604a4f52d2bdd62a5b72
 
 **url:** n8n.$DOMAINNAME
 
