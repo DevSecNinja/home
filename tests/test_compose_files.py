@@ -134,5 +134,114 @@ class TestDockerComposeFiles(unittest.TestCase):
                                 self.assertEqual(service_value, expected_service,
                                     f"{file_name} service {service} has Traefik router '{router_name}' with incorrect service value '{service_value}'. Expected '{expected_service}' (router name minus suffix).")
 
+    def test_traefik_label_consistency(self):
+        for folder, file_name, function_content in self.get_compose_files():
+            with self.subTest(file_name=file_name, folder_name=folder):
+                compose_dict = self.parse_compose_content(function_content)
+                services = compose_dict['services']
+
+                for service, config in services.items():
+                    if 'labels' in config:
+                        labels = config['labels']
+
+                        # Convert labels to list of strings if it's a dictionary
+                        if isinstance(labels, dict):
+                            labels = [f"{key}={value}" for key, value in labels.items()]
+                        elif isinstance(labels, str):
+                            labels = [labels]
+
+                        # Check if Traefik is enabled
+                        traefik_enabled = False
+                        docker_network = None
+                        routers = []
+                        service_definitions = []
+
+                        for label in labels:
+                            label_str = str(label)
+                            
+                            # Check for traefik.enable=true
+                            if label_str == 'traefik.enable=true':
+                                traefik_enabled = True
+                            
+                            # Extract docker network
+                            network_match = re.match(r'traefik\.docker\.network=(.+)', label_str)
+                            if network_match:
+                                docker_network = network_match.group(1)
+                            
+                            # Find router definitions (rule, middlewares, service) - support both HTTP and UDP
+                            router_match = re.match(r'traefik\.(http|udp)\.routers\.([^.]+)\.(.+)=(.+)', label_str)
+                            if router_match:
+                                protocol = router_match.group(1)
+                                router_name = router_match.group(2)
+                                router_property = router_match.group(3)
+                                router_value = router_match.group(4)
+                                routers.append((router_name, router_property, router_value, protocol))
+                            
+                            # Find service port definitions - support both HTTP and UDP
+                            service_match = re.match(r'traefik\.(http|udp)\.services\.([^.]+)\.loadbalancer\.server\.port=(.+)', label_str)
+                            if service_match:
+                                protocol = service_match.group(1)
+                                service_name = service_match.group(2)
+                                port = service_match.group(3)
+                                service_definitions.append((service_name, port, protocol))
+
+                        # If Traefik is enabled, validate required labels
+                        if traefik_enabled:
+                            # Must have docker network
+                            self.assertIsNotNone(docker_network, 
+                                f"{file_name} service {service} has traefik.enable=true but missing traefik.docker.network label")
+                            
+                            # Must have at least one router
+                            self.assertTrue(len(routers) > 0, 
+                                f"{file_name} service {service} has traefik.enable=true but no traefik.http.routers.* or traefik.udp.routers.* labels")
+                            
+                            # Group routers by name and protocol to validate completeness
+                            router_groups = {}
+                            for router_name, router_property, router_value, protocol in routers:
+                                key = f"{router_name}_{protocol}"
+                                if key not in router_groups:
+                                    router_groups[key] = {'name': router_name, 'protocol': protocol, 'props': {}}
+                                router_groups[key]['props'][router_property] = router_value
+                            
+                            # Each router must have service, and HTTP routers should have rule (UDP routers don't always need rule)
+                            for router_key, router_data in router_groups.items():
+                                router_name = router_data['name']
+                                protocol = router_data['protocol']
+                                router_props = router_data['props']
+                                
+                                self.assertIn('service', router_props, 
+                                    f"{file_name} service {service} Traefik {protocol} router '{router_name}' is missing service definition")
+                                
+                                # HTTP routers should have rule (but allow automatic inference when domain matches container name)
+                                if protocol == 'http':
+                                    # Only require rule if it's not a monitor-only router or has middlewares
+                                    if 'middlewares' in router_props or not router_name.endswith('-monitor-rtr'):
+                                        if 'rule' not in router_props:
+                                            # Check if rule can be automatically inferred (container name matches expected domain)
+                                            container_name = config.get('container_name', service)
+                                            # If router name starts with container name, rule can be inferred
+                                            if not router_name.startswith(container_name):
+                                                self.fail(f"{file_name} service {service} Traefik HTTP router '{router_name}' is missing rule definition and cannot be automatically inferred (router name doesn't match container name '{container_name}')")
+                                
+                                    # If rule exists, it should contain Host() for HTTP
+                                    if 'rule' in router_props:
+                                        rule = router_props['rule']
+                                        self.assertRegex(rule, r'Host\(`[^`]+`\)', 
+                                            f"{file_name} service {service} Traefik HTTP router '{router_name}' rule '{rule}' should contain Host() definition")
+                            
+                            # Must have at least one service port definition
+                            self.assertTrue(len(service_definitions) > 0, 
+                                f"{file_name} service {service} has traefik.enable=true but no traefik.http.services.* or traefik.udp.services.* loadbalancer.server.port labels")
+                            
+                            # Validate that router services match defined services
+                            defined_service_names = [svc_name for svc_name, port, protocol in service_definitions]
+                            for router_key, router_data in router_groups.items():
+                                router_props = router_data['props']
+                                router_name = router_data['name']
+                                if 'service' in router_props:
+                                    router_service = router_props['service']
+                                    self.assertIn(router_service, defined_service_names, 
+                                        f"{file_name} service {service} Traefik router '{router_name}' references service '{router_service}' but no matching traefik.*.services.{router_service}.loadbalancer.server.port label found")
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
