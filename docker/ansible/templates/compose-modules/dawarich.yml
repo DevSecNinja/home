@@ -166,7 +166,7 @@ services:
       - "traefik.http.routers.dawarich-noauth-rtr.entrypoints=https-public"
       ## Router for Gatus — bypass auth if secret header is present
       - "traefik.http.routers.dawarich-monitor-rtr.rule=Host(`dawarich.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
-      - "traefik.http.routers.dawarich-monitor-rtr.service=dawarich-svc"
+      - "traefik.http.routers.dawarich-monitor-rtr.service=dawarich"
       - "traefik.http.routers.dawarich-monitor-rtr.priority=100"  # Higher priority so it matches first
     logging:
       driver: "json-file"
