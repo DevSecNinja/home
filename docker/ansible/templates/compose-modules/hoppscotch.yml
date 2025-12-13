@@ -64,21 +64,21 @@ services:
       - "traefik.http.routers.hoppscotch-rtr.middlewares=chain-auth-cors@file"
       - "traefik.http.routers.hoppscotch-rtr.rule=Host(`api-tester.$DOMAINNAME`)"
       ## HTTP Services
-      - "traefik.http.routers.hoppscotch-rtr.service=hoppscotch-svc"
-      - "traefik.http.services.hoppscotch-svc.loadbalancer.server.port=3000"
+      - "traefik.http.routers.hoppscotch-rtr.service=hoppscotch"
+      - "traefik.http.services.hoppscotch.loadbalancer.server.port=3000"
       ## Extra admin endpoint
       - "traefik.http.routers.hoppscotch-admin-rtr.middlewares=chain-no-auth-cors@file"
       - "traefik.http.routers.hoppscotch-admin-rtr.rule=Host(`api-tester-admin.$DOMAINNAME`)"
-      - "traefik.http.routers.hoppscotch-admin-rtr.service=hoppscotch-admin-svc"
-      - "traefik.http.services.hoppscotch-admin-svc.loadbalancer.server.port=3100"
+      - "traefik.http.routers.hoppscotch-admin-rtr.service=hoppscotch-admin"
+      - "traefik.http.services.hoppscotch-admin.loadbalancer.server.port=3100"
       ## Extra API endpoint
       - "traefik.http.routers.hoppscotch-api-rtr.middlewares=chain-no-auth-cors@file"
       - "traefik.http.routers.hoppscotch-api-rtr.rule=Host(`api-tester-api.$DOMAINNAME`)"
-      - "traefik.http.routers.hoppscotch-api-rtr.service=hoppscotch-api-svc"
-      - "traefik.http.services.hoppscotch-api-svc.loadbalancer.server.port=3170"
+      - "traefik.http.routers.hoppscotch-api-rtr.service=hoppscotch-api"
+      - "traefik.http.services.hoppscotch-api.loadbalancer.server.port=3170"
       ## Router for Gatus — bypass auth if secret header is present
       - "traefik.http.routers.hoppscotch-monitor-rtr.rule=Host(`api-tester.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
-      - "traefik.http.routers.hoppscotch-monitor-rtr.service=hoppscotch-svc"
+      - "traefik.http.routers.hoppscotch-monitor-rtr.service=hoppscotch"
       - "traefik.http.routers.hoppscotch-monitor-rtr.priority=100"  # Higher priority so it matches first
 
 
