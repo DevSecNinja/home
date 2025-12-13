@@ -10,6 +10,13 @@
     templates_common_src_path: "../templates/data/common"
     templates_dest_path: "/srv/docker/data"
   tasks:
+    - name: Run Docker Compose tests
+      shell:
+        cmd: "python3 tests/test_compose_files.py"
+        chdir: "{{ playbook_dir }}/../../.."
+      delegate_to: localhost
+      run_once: true
+
     - name: Stop Folding at Home
       shell:
         cmd: "docker compose down foldingathome 2>&1"
