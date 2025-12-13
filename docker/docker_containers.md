@@ -40,7 +40,7 @@
 
 **container_name:** dawarich
 
-**image:** freikin/dawarich:latest
+**image:** freikin/dawarich:0.36.2@sha256:c302b2bec65d8523a4b450b859d89ff348170551317254f9fdbbe22005f38d27
 
 **url:** dawarich.$DOMAINNAME
 
@@ -48,7 +48,7 @@
 
 **container_name:** dawarich-db
 
-**image:** postgis/postgis:17-3.5-alpine
+**image:** postgis/postgis:17-3.5-alpine@sha256:2a740fc1482e900f1ee947ef50666acd0638d49546c043ff3871e501538ddf88
 
 ### Service: dawarich-db-backup
 
@@ -66,7 +66,7 @@
 
 **container_name:** dawarich-sidekiq
 
-**image:** freikin/dawarich:latest
+**image:** freikin/dawarich:0.36.2@sha256:c302b2bec65d8523a4b450b859d89ff348170551317254f9fdbbe22005f38d27
 
 ## docker/ansible/templates/compose-modules/drawio.yml
 
