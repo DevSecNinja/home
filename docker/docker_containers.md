@@ -120,7 +120,7 @@
 
 **container_name:** gatus-db
 
-**image:** docker.io/library/postgres:17.7-alpine@sha256:9a78577340f3d26384b6aebeb475c0d46d664fd4ffa68503b4be4e4462745f94
+**image:** docker.io/library/postgres:17.7-alpine@sha256:7cd12b4b4bf00307d4ab00e98622290e589e5de767cb55a48b1cf0e71770ae24
 
 ### Service: gatus-db-backup
 
@@ -148,7 +148,7 @@
 
 **container_name:** hoppscotch-db
 
-**image:** docker.io/library/postgres:17.7-alpine@sha256:9a78577340f3d26384b6aebeb475c0d46d664fd4ffa68503b4be4e4462745f94
+**image:** docker.io/library/postgres:17.7-alpine@sha256:7cd12b4b4bf00307d4ab00e98622290e589e5de767cb55a48b1cf0e71770ae24
 
 ### Service: hoppscotch-db-backup
 
@@ -230,7 +230,7 @@
 
 **container_name:** n8n-db
 
-**image:** docker.io/library/postgres:17.7-alpine@sha256:9a78577340f3d26384b6aebeb475c0d46d664fd4ffa68503b4be4e4462745f94
+**image:** docker.io/library/postgres:17.7-alpine@sha256:7cd12b4b4bf00307d4ab00e98622290e589e5de767cb55a48b1cf0e71770ae24
 
 ### Service: n8n-db-backup
 

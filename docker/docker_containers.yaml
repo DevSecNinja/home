@@ -34,7 +34,7 @@
   image: twinproduction/gatus:v5.33.1@sha256:7121b5916c069eac6e266875d4984ec9262d84bd1274963939b358b32476d25b
   url: status-docker.$DOMAINNAME
 - container_name: gatus-db
-  image: docker.io/library/postgres:17.7-alpine@sha256:9a78577340f3d26384b6aebeb475c0d46d664fd4ffa68503b4be4e4462745f94
+  image: docker.io/library/postgres:17.7-alpine@sha256:7cd12b4b4bf00307d4ab00e98622290e589e5de767cb55a48b1cf0e71770ae24
 - container_name: gatus-db-backup
   image: tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
 - container_name: gatus-db-upgrade
@@ -43,7 +43,7 @@
   image: hoppscotch/hoppscotch:2025.11.2@sha256:370f2fa5559b1e82113fb22943a0defd50d49c915439ea3de84fcec9b4b9d690
   url: api-tester.$DOMAINNAME
 - container_name: hoppscotch-db
-  image: docker.io/library/postgres:17.7-alpine@sha256:9a78577340f3d26384b6aebeb475c0d46d664fd4ffa68503b4be4e4462745f94
+  image: docker.io/library/postgres:17.7-alpine@sha256:7cd12b4b4bf00307d4ab00e98622290e589e5de767cb55a48b1cf0e71770ae24
 - container_name: hoppscotch-db-backup
   image: tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
 - container_name: hoppscotch-db-upgrade
@@ -69,7 +69,7 @@
   image: n8nio/n8n:1.123.5@sha256:c8ea89d97e420858c61d39ead4f310284dba3a4462521ec169e54a0254f213c2
   url: n8n.$DOMAINNAME
 - container_name: n8n-db
-  image: docker.io/library/postgres:17.7-alpine@sha256:9a78577340f3d26384b6aebeb475c0d46d664fd4ffa68503b4be4e4462745f94
+  image: docker.io/library/postgres:17.7-alpine@sha256:7cd12b4b4bf00307d4ab00e98622290e589e5de767cb55a48b1cf0e71770ae24
 - container_name: n8n-db-backup
   image: tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
 - container_name: n8n-db-upgrade
