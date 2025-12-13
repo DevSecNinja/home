@@ -191,6 +191,20 @@ class TestDockerComposeFiles(unittest.TestCase):
                             self.assertIsNotNone(docker_network,
                                 f"{file_name} service {service} has traefik.enable=true but missing traefik.docker.network label")
 
+                            # Network should follow naming pattern: *-frontend (except for auth services which can use *-backend)
+                            if docker_network:
+                                is_auth_service = 'auth' in service.lower() or 'auth' in file_name.lower()
+                                valid_network_suffix = docker_network.endswith('-frontend') or (is_auth_service and docker_network.endswith('-backend'))
+                                if not valid_network_suffix:
+                                    expected_pattern = "'{name}-frontend' or '{name}-backend' for auth services" if is_auth_service else "'{name}-frontend'"
+                                    self.fail(f"{file_name} service {service} Traefik network '{docker_network}' should follow expected pattern: {expected_pattern}")
+
+                            # Network should be defined in networks section
+                            if docker_network and 'networks' in compose_dict:
+                                network_names = list(compose_dict['networks'].keys())
+                                self.assertIn(docker_network, network_names,
+                                    f"{file_name} service {service} Traefik network '{docker_network}' is not defined in networks section")
+
                             # Must have at least one router
                             self.assertTrue(len(routers) > 0,
                                 f"{file_name} service {service} has traefik.enable=true but no traefik.http.routers.* or traefik.udp.routers.* labels")
@@ -228,6 +242,18 @@ class TestDockerComposeFiles(unittest.TestCase):
                                         rule = router_props['rule']
                                         self.assertRegex(rule, r'Host\(`[^`]+`\)',
                                             f"{file_name} service {service} Traefik HTTP router '{router_name}' rule '{rule}' should contain Host() definition")
+
+                                    # HTTP routers should have middleware chains (except monitor routers and auth services)
+                                    is_auth_service = 'auth' in service.lower() or 'auth' in file_name.lower()
+                                    if not router_name.endswith('-monitor-rtr') and not is_auth_service:
+                                        self.assertIn('middlewares', router_props,
+                                            f"{file_name} service {service} Traefik HTTP router '{router_name}' is missing middlewares definition")
+
+                                    # Middleware should follow expected pattern: chain-*@file (if present)
+                                    if 'middlewares' in router_props:
+                                        middlewares = router_props['middlewares']
+                                        self.assertRegex(middlewares, r'^chain-[^@]+@file$',
+                                            f"{file_name} service {service} Traefik HTTP router '{router_name}' middlewares '{middlewares}' should follow pattern 'chain-{{name}}@file'")
 
                             # Must have at least one service port definition
                             self.assertTrue(len(service_definitions) > 0,
