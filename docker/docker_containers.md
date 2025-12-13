@@ -310,7 +310,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-9.5.21@sha256:f45155f97d755373f5ad06abafa59fd2a5c2df690ae5d9e6d22e69548788c11b
+**image:** lscr.io/linuxserver/unifi-network-application:version-10.0.162@sha256:421ef61ced63ccf60a55d0dd4a33f940b97f950a377e1175d60e40b3184cd54f
 
 **url:** unifi.$DOMAINNAME
 
