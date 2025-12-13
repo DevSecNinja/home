@@ -41,7 +41,6 @@ services:
       ## Middlewares
       - "traefik.http.routers.metube-rtr.middlewares=chain-auth@file"
       ## HTTP Services
-      - "traefik.http.routers.metube-rtr.rule=Host(`metube.$DOMAINNAME`)"
       - "traefik.http.routers.metube-rtr.service=metube"
       # Enable the management port
       - "traefik.http.services.metube.loadbalancer.server.port=8081"

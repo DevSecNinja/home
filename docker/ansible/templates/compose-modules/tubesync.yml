@@ -32,7 +32,6 @@ services:
       ## Middlewares
       - "traefik.http.routers.tubesync-rtr.middlewares=chain-auth@file"
       ## HTTP Services
-      - "traefik.http.routers.tubesync-rtr.rule=Host(`tubesync.$DOMAINNAME`)"
       - "traefik.http.routers.tubesync-rtr.service=tubesync"
       # Enable the management port
       - "traefik.http.services.tubesync.loadbalancer.server.port=4848"

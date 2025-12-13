@@ -158,16 +158,16 @@ class TestDockerComposeFiles(unittest.TestCase):
 
                         for label in labels:
                             label_str = str(label)
-                            
+
                             # Check for traefik.enable=true
                             if label_str == 'traefik.enable=true':
                                 traefik_enabled = True
-                            
+
                             # Extract docker network
                             network_match = re.match(r'traefik\.docker\.network=(.+)', label_str)
                             if network_match:
                                 docker_network = network_match.group(1)
-                            
+
                             # Find router definitions (rule, middlewares, service) - support both HTTP and UDP
                             router_match = re.match(r'traefik\.(http|udp)\.routers\.([^.]+)\.(.+)=(.+)', label_str)
                             if router_match:
@@ -176,7 +176,7 @@ class TestDockerComposeFiles(unittest.TestCase):
                                 router_property = router_match.group(3)
                                 router_value = router_match.group(4)
                                 routers.append((router_name, router_property, router_value, protocol))
-                            
+
                             # Find service port definitions - support both HTTP and UDP
                             service_match = re.match(r'traefik\.(http|udp)\.services\.([^.]+)\.loadbalancer\.server\.port=(.+)', label_str)
                             if service_match:
@@ -188,13 +188,13 @@ class TestDockerComposeFiles(unittest.TestCase):
                         # If Traefik is enabled, validate required labels
                         if traefik_enabled:
                             # Must have docker network
-                            self.assertIsNotNone(docker_network, 
+                            self.assertIsNotNone(docker_network,
                                 f"{file_name} service {service} has traefik.enable=true but missing traefik.docker.network label")
-                            
+
                             # Must have at least one router
-                            self.assertTrue(len(routers) > 0, 
+                            self.assertTrue(len(routers) > 0,
                                 f"{file_name} service {service} has traefik.enable=true but no traefik.http.routers.* or traefik.udp.routers.* labels")
-                            
+
                             # Group routers by name and protocol to validate completeness
                             router_groups = {}
                             for router_name, router_property, router_value, protocol in routers:
@@ -202,16 +202,16 @@ class TestDockerComposeFiles(unittest.TestCase):
                                 if key not in router_groups:
                                     router_groups[key] = {'name': router_name, 'protocol': protocol, 'props': {}}
                                 router_groups[key]['props'][router_property] = router_value
-                            
+
                             # Each router must have service, and HTTP routers should have rule (UDP routers don't always need rule)
                             for router_key, router_data in router_groups.items():
                                 router_name = router_data['name']
                                 protocol = router_data['protocol']
                                 router_props = router_data['props']
-                                
-                                self.assertIn('service', router_props, 
+
+                                self.assertIn('service', router_props,
                                     f"{file_name} service {service} Traefik {protocol} router '{router_name}' is missing service definition")
-                                
+
                                 # HTTP routers should have rule (but allow automatic inference when domain matches container name)
                                 if protocol == 'http':
                                     # Only require rule if it's not a monitor-only router or has middlewares
@@ -222,17 +222,33 @@ class TestDockerComposeFiles(unittest.TestCase):
                                             # If router name starts with container name, rule can be inferred
                                             if not router_name.startswith(container_name):
                                                 self.fail(f"{file_name} service {service} Traefik HTTP router '{router_name}' is missing rule definition and cannot be automatically inferred (router name doesn't match container name '{container_name}')")
-                                
+
                                     # If rule exists, it should contain Host() for HTTP
                                     if 'rule' in router_props:
                                         rule = router_props['rule']
-                                        self.assertRegex(rule, r'Host\(`[^`]+`\)', 
+                                        self.assertRegex(rule, r'Host\(`[^`]+`\)',
                                             f"{file_name} service {service} Traefik HTTP router '{router_name}' rule '{rule}' should contain Host() definition")
-                            
+
                             # Must have at least one service port definition
-                            self.assertTrue(len(service_definitions) > 0, 
+                            self.assertTrue(len(service_definitions) > 0,
                                 f"{file_name} service {service} has traefik.enable=true but no traefik.http.services.* or traefik.udp.services.* loadbalancer.server.port labels")
-                            
+
+                            # Validate port values are valid
+                            for svc_name, port, protocol in service_definitions:
+                                # Port should not be empty
+                                self.assertTrue(port and str(port).strip(),
+                                    f"{file_name} service {service} Traefik service '{svc_name}' has empty or invalid port value")
+
+                                # Port should be numeric
+                                try:
+                                    port_num = int(str(port).strip())
+                                except ValueError:
+                                    self.fail(f"{file_name} service {service} Traefik service '{svc_name}' has non-numeric port '{port}'. Port must be a valid number.")
+
+                                # Port should be in valid range (1-65535)
+                                self.assertTrue(1 <= port_num <= 65535,
+                                    f"{file_name} service {service} Traefik service '{svc_name}' has invalid port '{port_num}'. Port must be between 1 and 65535.")
+
                             # Validate that router services match defined services
                             defined_service_names = [svc_name for svc_name, port, protocol in service_definitions]
                             for router_key, router_data in router_groups.items():
@@ -240,8 +256,48 @@ class TestDockerComposeFiles(unittest.TestCase):
                                 router_name = router_data['name']
                                 if 'service' in router_props:
                                     router_service = router_props['service']
-                                    self.assertIn(router_service, defined_service_names, 
+                                    self.assertIn(router_service, defined_service_names,
                                         f"{file_name} service {service} Traefik router '{router_name}' references service '{router_service}' but no matching traefik.*.services.{router_service}.loadbalancer.server.port label found")
+
+    def test_traefik_redundant_rules(self):
+        for folder, file_name, function_content in self.get_compose_files():
+            with self.subTest(file_name=file_name, folder_name=folder):
+                compose_dict = self.parse_compose_content(function_content)
+                services = compose_dict['services']
+
+                for service, config in services.items():
+                    if 'labels' in config:
+                        labels = config['labels']
+
+                        # Convert labels to list of strings if it's a dictionary
+                        if isinstance(labels, dict):
+                            labels = [f"{key}={value}" for key, value in labels.items()]
+                        elif isinstance(labels, str):
+                            labels = [labels]
+
+                        container_name = config.get('container_name', service)
+
+                        # Find router rules that might be redundant
+                        for label in labels:
+                            label_str = str(label)
+                            # Match traefik.http.routers.{router-name}.rule=Host(`{domain}`)
+                            rule_match = re.match(r'traefik\.http\.routers\.([^.]+)\.rule=Host\(`([^`]+)`\)', label_str)
+
+                            if rule_match:
+                                router_name = rule_match.group(1)
+                                domain = rule_match.group(2)
+
+                                # Check if this is a simple domain that matches container name
+                                # Expected pattern: {container_name}.$DOMAINNAME
+                                expected_domain = f"{container_name}.$DOMAINNAME"
+
+                                # Skip monitor, noauth, and other special routers - only check main routers
+                                if router_name.endswith('-rtr') and not any(suffix in router_name for suffix in ['-monitor-', '-noauth-', '-auth-']):
+                                    base_router_name = router_name.replace('-rtr', '')
+
+                                    # If the domain matches the expected auto-inferred domain, the rule is redundant
+                                    if domain == expected_domain and base_router_name == container_name:
+                                        self.fail(f"{file_name} service {service} has redundant Traefik rule '{domain}' for router '{router_name}'. This rule can be automatically inferred from container name '{container_name}' and should be removed.")
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

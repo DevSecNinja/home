@@ -67,7 +67,6 @@ services:
       ## Using no-auth chain since Plex app doesn't support auth proxy
       - "traefik.http.routers.plex-rtr.middlewares=chain-no-auth-plex@file"
       ## HTTP Services
-      - "traefik.http.routers.plex-rtr.rule=Host(`plex.$DOMAINNAME`)"
       - "traefik.http.routers.plex-rtr.service=plex"
       ### Enable the server port
       - "traefik.http.services.plex.loadbalancer.server.port=32400"

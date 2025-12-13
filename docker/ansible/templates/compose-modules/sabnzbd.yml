@@ -36,7 +36,6 @@ services:
       ## Middlewares
       - "traefik.http.routers.sabnzbd-rtr.middlewares=chain-auth@file"
       ## HTTP Services
-      - "traefik.http.routers.sabnzbd-rtr.rule=Host(`sabnzbd.$DOMAINNAME`)"
       - "traefik.http.routers.sabnzbd-rtr.service=sabnzbd"
       # Enable the management port
       - "traefik.http.services.sabnzbd.loadbalancer.server.port=8080"

@@ -155,7 +155,6 @@ services:
       ## Middlewares
       - "traefik.http.routers.dawarich-rtr.middlewares=chain-auth@file"
       ## HTTP Services
-      - "traefik.http.routers.dawarich-rtr.rule=Host(`dawarich.$DOMAINNAME`)"
       - "traefik.http.routers.dawarich-rtr.service=dawarich"
       ### Enable the server port
       - "traefik.http.services.dawarich.loadbalancer.server.port=3000"
