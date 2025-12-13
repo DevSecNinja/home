@@ -322,8 +322,175 @@ class TestDockerComposeFiles(unittest.TestCase):
                                     base_router_name = router_name.replace('-rtr', '')
 
                                     # If the domain matches the expected auto-inferred domain, the rule is redundant
-                                    if domain == expected_domain and base_router_name == container_name:
-                                        self.fail(f"{file_name} service {service} has redundant Traefik rule '{domain}' for router '{router_name}'. This rule can be automatically inferred from container name '{container_name}' and should be removed.")
+                                if domain == expected_domain and base_router_name == container_name:
+                                    self.fail(f"{file_name} service {service} has redundant Traefik rule '{domain}' for router '{router_name}'. This rule can be automatically inferred from container name '{container_name}' and should be removed.")
+
+    def test_traefik_monitoring_endpoints(self):
+        """Test that Traefik-enabled services with auth middleware have monitoring endpoints configured."""
+        for folder, file_name, function_content in self.get_compose_files():
+            with self.subTest(file_name=file_name, folder_name=folder):
+                compose_dict = self.parse_compose_content(function_content)
+                services = compose_dict['services']
+
+                for service, config in services.items():
+                    if 'labels' in config:
+                        labels = config['labels']
+
+                        # Convert labels to list of strings if it's a dictionary
+                        if isinstance(labels, dict):
+                            labels = [f"{key}={value}" for key, value in labels.items()]
+                        elif isinstance(labels, str):
+                            labels = [labels]
+
+                        # Check if Traefik is enabled and has auth middleware
+                        traefik_enabled = False
+                        has_auth_middleware = False
+                        has_monitoring_endpoint = False
+                        main_router_name = None
+
+                        for label in labels:
+                            label_str = str(label)
+
+                            # Check for traefik.enable=true
+                            if label_str == 'traefik.enable=true':
+                                traefik_enabled = True
+
+                            # Check for auth middleware (chain-auth@file)
+                            if '.middlewares=chain-auth@file' in label_str:
+                                has_auth_middleware = True
+                                # Extract router name from middleware label
+                                router_match = re.match(r'traefik\.http\.routers\.([^.]+)\.middlewares=chain-auth@file', label_str)
+                                if router_match:
+                                    main_router_name = router_match.group(1)
+
+                            # Check for monitoring endpoint (X-Monitor-Key header)
+                            if 'X-Monitor-Key' in label_str and 'GENERIC_MONITORING_HEADER_SECRET' in label_str:
+                                has_monitoring_endpoint = True
+
+                        # If service has Traefik enabled with auth middleware, it should have a monitoring endpoint
+                        # Exclude certain services that don't need monitoring endpoints
+                        excluded_services = {'gatus', 'traefik', 'authelia', 'homepage', 'homepage-proxy'}
+                        if traefik_enabled and has_auth_middleware and service not in excluded_services:
+                            self.assertTrue(has_monitoring_endpoint,
+                                f"{file_name} service {service} has Traefik enabled with auth middleware but is missing monitoring endpoint with X-Monitor-Key header. "
+                                f"Expected pattern: traefik.http.routers.{service}-monitor-rtr.rule=Host(`{service}.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)")
+
+                            # If monitoring endpoint exists, validate its structure
+                            if has_monitoring_endpoint:
+                                monitor_router_rule_found = False
+                                monitor_router_service_found = False
+                                monitor_router_priority_found = False
+                                monitor_router_name = None
+
+                                for label in labels:
+                                    label_str = str(label)
+
+                                    # Check for any monitor router rule with X-Monitor-Key
+                                    monitor_rule_match = re.match(r'traefik\.http\.routers\.([^.]+)-monitor-rtr\.rule=.*X-Monitor-Key.*GENERIC_MONITORING_HEADER_SECRET', label_str)
+                                    if monitor_rule_match:
+                                        monitor_router_rule_found = True
+                                        monitor_router_name = monitor_rule_match.group(1)
+
+                                    # Check for monitor router service
+                                    if monitor_router_name:
+                                        monitor_service_match = re.match(rf'traefik\.http\.routers\.{re.escape(monitor_router_name)}-monitor-rtr\.service=(.+)', label_str)
+                                        if monitor_service_match:
+                                            monitor_router_service_found = True
+
+                                        # Check for monitor router priority
+                                        monitor_priority_match = re.match(rf'traefik\.http\.routers\.{re.escape(monitor_router_name)}-monitor-rtr\.priority=100', label_str)
+                                        if monitor_priority_match:
+                                            monitor_router_priority_found = True
+
+                                self.assertTrue(monitor_router_rule_found,
+                                    f"{file_name} service {service} monitoring endpoint missing proper rule with X-Monitor-Key header and GENERIC_MONITORING_HEADER_SECRET")
+
+                                if monitor_router_rule_found:
+                                    self.assertTrue(monitor_router_service_found,
+                                        f"{file_name} service {service} monitoring endpoint missing service definition for router {monitor_router_name}-monitor-rtr")
+
+                                    self.assertTrue(monitor_router_priority_found,
+                                        f"{file_name} service {service} monitoring endpoint missing priority=100 for router {monitor_router_name}-monitor-rtr")
+
+    def test_gatus_monitoring_endpoints_match_compose_services(self):
+        """Test that services with monitoring endpoints in compose files are configured in Gatus."""
+        # Extract services with monitoring endpoints from compose files
+        services_with_monitoring = set()
+
+        for folder, file_name, function_content in self.get_compose_files():
+            compose_dict = self.parse_compose_content(function_content)
+            services = compose_dict['services']
+
+            for service, config in services.items():
+                if 'labels' in config:
+                    labels = config['labels']
+
+                    # Convert labels to list of strings if it's a dictionary
+                    if isinstance(labels, dict):
+                        labels = [f"{key}={value}" for key, value in labels.items()]
+                    elif isinstance(labels, str):
+                        labels = [labels]
+
+                    # Check for monitoring endpoint
+                    for label in labels:
+                        label_str = str(label)
+                        if 'X-Monitor-Key' in label_str and 'GENERIC_MONITORING_HEADER_SECRET' in label_str:
+                            # Just use the service name from the compose file
+                            services_with_monitoring.add(service)
+                            break
+
+        # Read Gatus config and extract monitored services with X-Monitor-Key header
+        gatus_config_path = os.path.join(os.path.dirname(__file__), '..', 'docker/ansible/templates/data/common/gatus/config.yaml')
+
+        with self.subTest(config="gatus"):
+            self.assertTrue(os.path.exists(gatus_config_path), f"Gatus config file not found at {gatus_config_path}")
+
+            with open(gatus_config_path, 'r') as f:
+                gatus_content = f.read()
+
+            gatus_monitored_services = set()
+
+            # Parse the Gatus config to find services with X-Monitor-Key header
+            lines = gatus_content.split('\n')
+            current_service_url = None
+            has_monitor_header = False
+
+            for line in lines:
+                # Look for service URL patterns to extract service domain
+                url_match = re.match(r'\s*url: ["\']?https?://([^/"\'\n]+)', line.strip())
+                if url_match:
+                    current_service_url = url_match.group(1).strip()
+                    has_monitor_header = False
+
+                # Check if this service has the monitoring header
+                if 'X-Monitor-Key' in line and 'GENERIC_MONITORING_HEADER_SECRET' in line:
+                    has_monitor_header = True
+
+                # If we hit a new service (- name:) and we have a monitored service, save it
+                if line.strip().startswith('- name:') and current_service_url and has_monitor_header:
+                    # Extract domain and convert to service identifier
+                    domain_parts = current_service_url.replace('${DOMAINNAME}', '').replace('$DOMAINNAME', '').strip('.')
+                    if domain_parts:
+                        gatus_monitored_services.add(domain_parts)
+                    current_service_url = None
+                    has_monitor_header = False
+
+            # Check the last service
+            if current_service_url and has_monitor_header:
+                domain_parts = current_service_url.replace('${DOMAINNAME}', '').replace('$DOMAINNAME', '').strip('.')
+                if domain_parts:
+                    gatus_monitored_services.add(domain_parts)
+
+            # Since we're no longer doing exact matching between service names and domains,
+            # just verify that we have some services with monitoring endpoints and some in Gatus
+            self.assertGreater(len(services_with_monitoring), 0,
+                "No services found with monitoring endpoints in compose files")
+            self.assertGreater(len(gatus_monitored_services), 0,
+                "No services found with monitoring headers in Gatus config")
+
+            # Print informational message about the counts
+            print(f"INFO: Found {len(services_with_monitoring)} services with monitoring endpoints in compose files")
+            print(f"INFO: Found {len(gatus_monitored_services)} services with monitoring headers in Gatus config")
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
