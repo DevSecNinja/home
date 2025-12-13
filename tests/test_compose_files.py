@@ -9,7 +9,7 @@ class TestDockerComposeFiles(unittest.TestCase):
         'container_name': [r'^.+'],
         'environment': [r'(?:- )?(?:TZ|TIMEZONE|TIME_ZONE)[:=]\s*\${TZ(?::-[^}]+)?}'],
         'image': [r'.+:[\w\.-]+@sha256:[0-9a-fA-F]{64}$'],
-        'mem_limit': [r'^\d+[bBkKmMgG]?$'],
+        'mem_limit': [r'^(?:\d+[bBkKmMgG]?|\$\{[A-Za-z_][A-Za-z0-9_]*(?::-[^}]*)?\})$'],
         'restart': [r'^(always|no|on-failure)$'],
         'security_opt': ['no-new-privileges=true']
     }
@@ -78,6 +78,15 @@ class TestDockerComposeFiles(unittest.TestCase):
                     if service.endswith('-db'):
                         backup_service = f"{service}-backup"
                         self.assertIn(backup_service, services, f"{file_name} is missing the {backup_service} service for {service}")
+
+    def test_no_swarm_deploy_configuration(self):
+        for folder, file_name, function_content in self.get_compose_files():
+            with self.subTest(file_name=file_name, folder_name=folder):
+                compose_dict = self.parse_compose_content(function_content)
+                services = compose_dict['services']
+
+                for service, config in services.items():
+                    self.assertNotIn('deploy', config, f"{file_name} service {service} contains 'deploy' configuration which is for Docker Swarm mode and should not be used")
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

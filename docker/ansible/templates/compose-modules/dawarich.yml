@@ -109,7 +109,8 @@ services:
       - dawarich_watched:/var/app/tmp/imports/watched
       - dawarich_storage:/var/app/storage
       - dawarich_db_data:/dawarich_db_data
-    mem_limit: 2048m
+    mem_limit: ${APP_MEMORY_LIMIT:-4G}
+    cpus: ${APP_CPU_LIMIT:-0.50}
     networks:
       - dawarich-frontend
       - dawarich-backend
@@ -181,11 +182,6 @@ services:
       dawarich-redis:
         condition: service_healthy
         restart: true
-    deploy:
-      resources:
-        limits:
-          cpus: ${APP_CPU_LIMIT:-0.50}
-          memory: ${APP_MEMORY_LIMIT:-4G}
 
   dawarich-sidekiq:
     image: freikin/dawarich:0.36.2@sha256:c302b2bec65d8523a4b450b859d89ff348170551317254f9fdbbe22005f38d27
