@@ -48,7 +48,7 @@
 
 **container_name:** dawarich-db
 
-**image:** postgis/postgis:17-3.5-alpine@sha256:2a740fc1482e900f1ee947ef50666acd0638d49546c043ff3871e501538ddf88
+**image:** postgis/postgis:17-3.5-alpine@sha256:d2479a02791972a0210f271de539b69eeeedb5d225e7ff974c5661740d3ed598
 
 ### Service: dawarich-db-backup
 
@@ -94,7 +94,7 @@
 
 **container_name:** excalidraw
 
-**image:** excalidraw/excalidraw:latest@sha256:67c6b93d6155fac09d30759ea5f28e5ce01b4e865a783fb418c878806bf5397d
+**image:** excalidraw/excalidraw:latest@sha256:b2b642fdaca652cf23c20e07d3603bed5b22b2e1c88a15bec5f92e8a38d9041c
 
 **url:** excalidraw.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
@@ -132,7 +132,7 @@
 
 **container_name:** gatus-db-upgrade
 
-**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:9d5f6551a8b5771e0162c36b5ac16b2d6533b439806dfcc1c24928bd383fefd6
+**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:b77b67da5583df5f21d81520477a190c46910c741a3c28d73832adb62d312875
 
 ## docker/ansible/templates/compose-modules/hoppscotch.yml
 
@@ -160,7 +160,7 @@
 
 **container_name:** hoppscotch-db-upgrade
 
-**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:9d5f6551a8b5771e0162c36b5ac16b2d6533b439806dfcc1c24928bd383fefd6
+**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:b77b67da5583df5f21d81520477a190c46910c741a3c28d73832adb62d312875
 
 ## docker/ansible/templates/compose-modules/immich.yml
 
@@ -186,7 +186,7 @@
 
 **container_name:** immich-redis
 
-**image:** docker.io/valkey/valkey:9-alpine@sha256:b4ee67d73e00393e712accc72cfd7003b87d0fcd63f0eba798b23251bfc9c394
+**image:** docker.io/valkey/valkey:9-alpine@sha256:1be494495248d53e3558b198a1c704e6b559d5e99fe4c926e14a8ad24d76c6fa
 
 ### Service: immich-server
 
@@ -212,7 +212,7 @@
 
 **container_name:** metube
 
-**image:** ghcr.io/alexta69/metube:latest@sha256:75c227ff12ffbcb3bcbfe9cb0b8ff067cde30de2771d7992f41d9680ba46fdd9
+**image:** ghcr.io/alexta69/metube:latest@sha256:153c71f0d7ec031d8e1a3c5dfc501745c2557867a6c40d8c2ce9ab829e5a8708
 
 **url:** metube.$DOMAINNAME
 
@@ -242,7 +242,7 @@
 
 **container_name:** n8n-db-upgrade
 
-**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:9d5f6551a8b5771e0162c36b5ac16b2d6533b439806dfcc1c24928bd383fefd6
+**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:b77b67da5583df5f21d81520477a190c46910c741a3c28d73832adb62d312875
 
 ## docker/ansible/templates/compose-modules/open-webui.yml
 
@@ -270,7 +270,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.42.2.10156-f737b826c@sha256:a4749f3b84dc3f923a7bd4d2bc4ddc1e871b5a656b62022d3827d3d98afd5efd
+**image:** lscr.io/linuxserver/plex:version-1.42.2.10156-f737b826c@sha256:ab81c7313fb5dc4d1f9562e5bbd5e5877a8a3c5ca6b9f9fff3437b5096a2b123
 
 **url:** plex.$DOMAINNAME
 
