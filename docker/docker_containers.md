@@ -42,7 +42,7 @@
 
 **image:** freikin/dawarich:0.36.2@sha256:c302b2bec65d8523a4b450b859d89ff348170551317254f9fdbbe22005f38d27
 
-**url:** dawarich.$DOMAINNAME
+**url:** dawarich-noauth.$DOMAINNAME
 
 ### Service: dawarich-db
 
@@ -214,7 +214,7 @@
 
 **image:** ghcr.io/alexta69/metube:latest@sha256:153c71f0d7ec031d8e1a3c5dfc501745c2557867a6c40d8c2ce9ab829e5a8708
 
-**url:** metube.$DOMAINNAME
+**url:** metube.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
 ## docker/ansible/templates/compose-modules/n8n.yml
 
@@ -224,7 +224,7 @@
 
 **image:** n8nio/n8n:2.0.2@sha256:e3a4256dd2aa3b987e10da3c1194081575933987b26a604a4f52d2bdd62a5b72
 
-**url:** n8n.$DOMAINNAME
+**url:** n8n.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
 ### Service: n8n-db
 
@@ -272,7 +272,7 @@
 
 **image:** lscr.io/linuxserver/plex:version-1.42.2.10156-f737b826c@sha256:ab81c7313fb5dc4d1f9562e5bbd5e5877a8a3c5ca6b9f9fff3437b5096a2b123
 
-**url:** plex.$DOMAINNAME
+**url:** plex-noauth.$DOMAINNAME
 
 ## docker/ansible/templates/compose-modules/sabnzbd.yml
 
@@ -282,7 +282,7 @@
 
 **image:** docker.io/linuxserver/sabnzbd:amd64-4.5.1@sha256:39952ab247d97c9d3345a572385ebee158ce497887652d8421f4c0ac44cddf7e
 
-**url:** sabnzbd.$DOMAINNAME
+**url:** sabnzbd.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
 ## docker/ansible/templates/compose-modules/traefik-forward-auth.yml
 
@@ -302,7 +302,7 @@
 
 **image:** ghcr.io/meeb/tubesync:v0.15.12@sha256:0885fd4e800fdd9bb0e4103522da3b51ac603dd9852899ed0e749e74c77f92fd
 
-**url:** tubesync.$DOMAINNAME
+**url:** tubesync.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
 ## docker/ansible/templates/compose-modules/unifi.yml
 
@@ -312,7 +312,7 @@
 
 **image:** lscr.io/linuxserver/unifi-network-application:version-10.0.162@sha256:421ef61ced63ccf60a55d0dd4a33f940b97f950a377e1175d60e40b3184cd54f
 
-**url:** unifi.$DOMAINNAME
+**url:** unifi-guest.$DOMAINNAME
 
 ### Service: unifi-db
 
