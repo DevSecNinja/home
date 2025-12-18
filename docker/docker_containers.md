@@ -212,7 +212,7 @@
 
 **container_name:** metube
 
-**image:** ghcr.io/alexta69/metube:latest@sha256:153c71f0d7ec031d8e1a3c5dfc501745c2557867a6c40d8c2ce9ab829e5a8708
+**image:** ghcr.io/alexta69/metube:latest@sha256:9a2e1292c574dd1c2a2b51ead3e23fd143e071a38d0dc8d2f81ffcb4d265ba11
 
 **url:** metube.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
@@ -270,7 +270,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.42.2.10156-f737b826c@sha256:ab81c7313fb5dc4d1f9562e5bbd5e5877a8a3c5ca6b9f9fff3437b5096a2b123
+**image:** lscr.io/linuxserver/plex:version-1.42.2.10156-f737b826c@sha256:7cc7874ad35b105fe1fe4d99ef27be9c5eb2f4115ccf91af5a7283cae0024599
 
 **url:** plex-noauth.$DOMAINNAME
 
