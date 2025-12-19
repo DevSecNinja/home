@@ -42,8 +42,8 @@ services:
       - homepage.href=https://status-docker.$DOMAINNAME
       - homepage.description=Uptime Monitoring
       ## Widget
-      - homepage.widget.type=gatus
-      - homepage.widget.url=https://status-docker.$DOMAINNAME
+      #- homepage.widget.type=gatus
+      #- homepage.widget.url=https://status-docker.$DOMAINNAME
       # Group
       - org.label-schema.group=productivity
       # Traefik
