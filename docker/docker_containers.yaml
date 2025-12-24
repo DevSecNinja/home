@@ -12,7 +12,7 @@
   image: ghcr.io/gchq/cyberchef:10.19.4@sha256:a2bfe382b2547bdd0a3d0523b9a6b85fab833c56bcec86d600ba6266910b533e
   url: cyberchef.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 - container_name: dawarich
-  image: freikin/dawarich:0.36.3@sha256:4f83ccbfcbc5166ba9f96ba7571ab0812c2596f99079ceffc7808a3f896bef0b
+  image: freikin/dawarich:0.36.2@sha256:c302b2bec65d8523a4b450b859d89ff348170551317254f9fdbbe22005f38d27
   url: dawarich-noauth.$DOMAINNAME
 - container_name: dawarich-db
   image: postgis/postgis:17-3.5-alpine@sha256:8353c2cb385e2ba5b33e09e2158ed820316642b4eebd0502c80ce0bcdb29fcb3
@@ -21,7 +21,7 @@
 - container_name: dawarich-redis
   image: redis:8.4.0-alpine@sha256:6cbef353e480a8a6e7f10ec545f13d7d3fa85a212cdcc5ffaf5a1c818b9d3798
 - container_name: dawarich-sidekiq
-  image: freikin/dawarich:0.36.3@sha256:4f83ccbfcbc5166ba9f96ba7571ab0812c2596f99079ceffc7808a3f896bef0b
+  image: freikin/dawarich:0.36.2@sha256:c302b2bec65d8523a4b450b859d89ff348170551317254f9fdbbe22005f38d27
 - container_name: drawio
   image: jgraph/drawio:29.2.9@sha256:e4e09123e7b296e7a8d19eda122daed1f0e99be8374981a62b5131efa605c2ee
   url: draw.$DOMAINNAME
