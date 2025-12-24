@@ -61,8 +61,9 @@ services:
       - homepage.href=https://traefik-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
       - homepage.description=Application Proxy
       ## Widget
-      # - homepage.widget.type=traefik
-      # - homepage.widget.url=https://traefik:8080
+      - homepage.widget.type=traefik
+      - homepage.widget.url=https://traefik-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
+      - homepage.widget.headers.X-Monitor-Key=${GENERIC_MONITORING_HEADER_SECRET}
       # Traefik
       - "traefik.enable=true"
       ## Middlewares
@@ -74,6 +75,10 @@ services:
       - "traefik.http.routers.traefik-rtr.tls.certresolver=dns-cloudflare"
       - "traefik.http.routers.traefik-rtr.tls.domains[0].main=$DOMAINNAME"
       - "traefik.http.routers.traefik-rtr.tls.domains[0].sans=*.$DOMAINNAME"
+      ## Router for Gatus — bypass auth if secret header is present
+      - "traefik.http.routers.traefik-monitor-rtr.rule=Host(`traefik-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
+      - "traefik.http.routers.traefik-monitor-rtr.service=api@internal"
+      - "traefik.http.routers.traefik-monitor-rtr.priority=100"  # Higher priority so it matches first
     # Saves some CPU cycles + healthcheck doesn't do anything on failure
     # healthcheck:
     #   test: ["CMD-SHELL","traefik healthcheck --ping.entrypoint ping --entryPoints.ping.address=:8267 --ping"]

@@ -51,6 +51,16 @@ endpoints:
     url: "https://devsecninja.com/"
     group: External
 
+  - name: hadiscover - HTTP
+    <<: *defaults
+    url: "https://hadiscover.com/"
+    group: External
+
+  - name: hadiscover API - HTTP
+    <<: *defaults
+    url: "https://api.hadiscover.com/"
+    group: External
+
   - name: Bing - HTTP
     <<: *defaults
     url: "https://bing.com/"
@@ -63,6 +73,12 @@ endpoints:
   - name: AdGuard Primary - HTTP
     <<: *defaults
     url: "https://adguard-infra.${DOMAINNAME}"
+    headers:
+      X-Monitor-Key: "${GENERIC_MONITORING_HEADER_SECRET}"
+
+  - name: Bazarr - HTTP
+    <<: *defaults
+    url: "https://bazarr.${DOMAINNAME}"
     headers:
       X-Monitor-Key: "${GENERIC_MONITORING_HEADER_SECRET}"
 
@@ -100,6 +116,12 @@ endpoints:
     headers:
       X-Monitor-Key: "${GENERIC_MONITORING_HEADER_SECRET}"
 
+  - name: Lidarr - HTTP
+    <<: *defaults
+    url: "https://lidarr.${DOMAINNAME}"
+    headers:
+      X-Monitor-Key: "${GENERIC_MONITORING_HEADER_SECRET}"
+
   - name: metube - HTTP
     <<: *defaults
     url: "https://metube.${DOMAINNAME}"
@@ -132,15 +154,45 @@ endpoints:
       - "[CERTIFICATE_EXPIRATION] > 48h"
       - "[RESPONSE_TIME] < 1000"
 
+  - name: Prowlarr - HTTP
+    <<: *defaults
+    url: "https://prowlarr.${DOMAINNAME}"
+    headers:
+      X-Monitor-Key: "${GENERIC_MONITORING_HEADER_SECRET}"
+
+  - name: qBittorrent - HTTP
+    <<: *defaults
+    url: "https://qbittorrent.${DOMAINNAME}"
+    headers:
+      X-Monitor-Key: "${GENERIC_MONITORING_HEADER_SECRET}"
+
   - name: SABnzbd - HTTP
     <<: *defaults
     url: "https://sabnzbd.${DOMAINNAME}"
     headers:
       X-Monitor-Key: "${GENERIC_MONITORING_HEADER_SECRET}"
 
+  - name: Radarr - HTTP
+    <<: *defaults
+    url: "https://radarr.${DOMAINNAME}"
+    headers:
+      X-Monitor-Key: "${GENERIC_MONITORING_HEADER_SECRET}"
+
+  - name: Sonarr - HTTP
+    <<: *defaults
+    url: "https://sonarr.${DOMAINNAME}"
+    headers:
+      X-Monitor-Key: "${GENERIC_MONITORING_HEADER_SECRET}"
+
   - name: Speedtest - HTTP
     <<: *defaults
     url: "https://speedtest.${DOMAINNAME}"
+    headers:
+      X-Monitor-Key: "${GENERIC_MONITORING_HEADER_SECRET}"
+
+  - name: Spottarr - HTTP
+    <<: *defaults
+    url: "https://spottarr.${DOMAINNAME}"
     headers:
       X-Monitor-Key: "${GENERIC_MONITORING_HEADER_SECRET}"
 

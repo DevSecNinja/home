@@ -34,7 +34,14 @@ include:
   - $DOCKERDIR/data/compose/wireguard.yml
 #% endif %#
 #% if 'media' in group_names %#
+  - $DOCKERDIR/data/compose/bazarr.yml
+  - $DOCKERDIR/data/compose/lidarr.yml
+  - $DOCKERDIR/data/compose/prowlarr.yml
+  - $DOCKERDIR/data/compose/qbittorrent.yml
+  - $DOCKERDIR/data/compose/radarr.yml
   - $DOCKERDIR/data/compose/sabnzbd.yml
+  - $DOCKERDIR/data/compose/sonarr.yml
+  - $DOCKERDIR/data/compose/spottarr.yml
 #% endif %#
 #% if 'apps' in group_names %#
   - $DOCKERDIR/data/compose/immich.yml

@@ -42,8 +42,9 @@ services:
       - homepage.href=https://status-docker.$DOMAINNAME
       - homepage.description=Uptime Monitoring
       ## Widget
-      #- homepage.widget.type=gatus
-      #- homepage.widget.url=https://status-docker.$DOMAINNAME
+      - homepage.widget.type=gatus
+      - homepage.widget.url=https://status-docker.$DOMAINNAME
+      - homepage.widget.headers.X-Monitor-Key=${GENERIC_MONITORING_HEADER_SECRET}
       # Group
       - org.label-schema.group=productivity
       # Traefik
@@ -56,6 +57,10 @@ services:
       - "traefik.http.routers.gatus-rtr.service=gatus"
       ### Enable the server port
       - "traefik.http.services.gatus.loadbalancer.server.port=8080"
+      ## Router for Gatus — bypass auth if secret header is present
+      - "traefik.http.routers.gatus-monitor-rtr.rule=Host(`status-docker.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
+      - "traefik.http.routers.gatus-monitor-rtr.service=gatus"
+      - "traefik.http.routers.gatus-monitor-rtr.priority=100"  # Higher priority so it matches first
 
   gatus-db:
     image: docker.io/library/postgres:17.7-alpine@sha256:ff4ccc02b97e0ebb6b328ef9ff92522f95586f83be6801896b615088defc8ad2

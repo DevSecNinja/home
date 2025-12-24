@@ -47,6 +47,10 @@ services:
       - homepage.icon=adguard-home.svg
       - homepage.href=https://adguard-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
       - homepage.description=DNS Service
+      ## Widget
+      - homepage.widget.type=adguard
+      - homepage.widget.url=https://adguard-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
+      - homepage.widget.headers.X-Monitor-Key=${GENERIC_MONITORING_HEADER_SECRET}
       # Traefik
       - "traefik.enable=true"
       - "traefik.docker.network=adguard-frontend"
