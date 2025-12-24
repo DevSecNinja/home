@@ -108,7 +108,7 @@
   image: ghcr.io/spottarr/spottarr:1.12.1@sha256:b773a1fbd3c7684d2cc59e61e5790888efb02cdcd09dd1b75aebcf3f59c82dd0
   url: spottarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 - container_name: traefik-forward-auth
-  image: ghcr.io/italypaleale/traefik-forward-auth:4.3.1@sha256:00822205b2901d5ed04420bb0a6eafa815a628f6449317fe60058b08d339b58c
+  image: ghcr.io/italypaleale/traefik-forward-auth:4.4.0@sha256:d012b79e6a7494c94577c7da2566fd31d12ae337b908cc724ed0df10d5ab1c36
   url: auth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: tubesync
   image: ghcr.io/meeb/tubesync:v0.15.12@sha256:0885fd4e800fdd9bb0e4103522da3b51ac603dd9852899ed0e749e74c77f92fd
