@@ -16,6 +16,16 @@
 
 **image:** mvance/unbound:1.22.0@sha256:76906da36d1806f3387338f15dcf8b357c51ce6897fb6450d6ce010460927e90
 
+## docker/ansible/templates/compose-modules/bazarr.yml
+
+### Service: bazarr
+
+**container_name:** bazarr
+
+**image:** lscr.io/linuxserver/bazarr:version-v1.5.3@sha256:648f694532a3a53d8cf78bc888919ef538659bad41af4c680b0427ad1047d171
+
+**url:** bazarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
+
 ## docker/ansible/templates/compose-modules/cloudflare.yml
 
 ### Service: cloudflare-ddns
@@ -48,7 +58,7 @@
 
 **container_name:** dawarich-db
 
-**image:** postgis/postgis:17-3.5-alpine@sha256:d2479a02791972a0210f271de539b69eeeedb5d225e7ff974c5661740d3ed598
+**image:** postgis/postgis:17-3.5-alpine@sha256:8353c2cb385e2ba5b33e09e2158ed820316642b4eebd0502c80ce0bcdb29fcb3
 
 ### Service: dawarich-db-backup
 
@@ -74,7 +84,7 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:29.2.7@sha256:b2082ee9e1e3f213ab9cac7b428816c5ca2c6eaee471abbc9abe0a041ffe2998
+**image:** jgraph/drawio:29.2.9@sha256:e4e09123e7b296e7a8d19eda122daed1f0e99be8374981a62b5131efa605c2ee
 
 **url:** draw.$DOMAINNAME
 
@@ -132,7 +142,7 @@
 
 **container_name:** gatus-db-upgrade
 
-**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:b77b67da5583df5f21d81520477a190c46910c741a3c28d73832adb62d312875
+**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:7f11675003847f629f48d2d9dee36fecad7bc39c8037b2371641c5e8b1faacb2
 
 ## docker/ansible/templates/compose-modules/hoppscotch.yml
 
@@ -160,7 +170,7 @@
 
 **container_name:** hoppscotch-db-upgrade
 
-**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:b77b67da5583df5f21d81520477a190c46910c741a3c28d73832adb62d312875
+**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:7f11675003847f629f48d2d9dee36fecad7bc39c8037b2371641c5e8b1faacb2
 
 ## docker/ansible/templates/compose-modules/immich.yml
 
@@ -206,6 +216,16 @@
 
 **url:** tools.$DOMAINNAME
 
+## docker/ansible/templates/compose-modules/lidarr.yml
+
+### Service: lidarr
+
+**container_name:** lidarr
+
+**image:** lscr.io/linuxserver/lidarr:version-3.1.0.4875@sha256:ede2bb17350cc97a0d3f24389aa91803f655eac29aa022c77a71f4a61cc621e4
+
+**url:** lidarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
+
 ## docker/ansible/templates/compose-modules/metube.yml
 
 ### Service: metube
@@ -242,7 +262,7 @@
 
 **container_name:** n8n-db-upgrade
 
-**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:b77b67da5583df5f21d81520477a190c46910c741a3c28d73832adb62d312875
+**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:7f11675003847f629f48d2d9dee36fecad7bc39c8037b2371641c5e8b1faacb2
 
 ## docker/ansible/templates/compose-modules/open-webui.yml
 
@@ -274,6 +294,36 @@
 
 **url:** plex-noauth.$DOMAINNAME
 
+## docker/ansible/templates/compose-modules/prowlarr.yml
+
+### Service: prowlarr
+
+**container_name:** prowlarr
+
+**image:** lscr.io/linuxserver/prowlarr:version-2.3.0.5236@sha256:67a8aaedcfd6989f3030b937a6a07007310b1dfc7ee8df16d2cbfa48d1c1158c
+
+**url:** prowlarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
+
+## docker/ansible/templates/compose-modules/qbittorrent.yml
+
+### Service: qbittorrent
+
+**container_name:** qbittorrent
+
+**image:** lscr.io/linuxserver/qbittorrent:5.1.4@sha256:043498de39c3dd63eec94360c5ad966a51271d1581070f42cb73ab0cf4776f29
+
+**url:** qbittorrent.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
+
+## docker/ansible/templates/compose-modules/radarr.yml
+
+### Service: radarr
+
+**container_name:** radarr
+
+**image:** lscr.io/linuxserver/radarr:version-6.0.4.10291@sha256:6c0948b42c149e36bb3dbc0b64d36c77b2d3c9dccf1b424c4f72af1e57ba0c21
+
+**url:** radarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
+
 ## docker/ansible/templates/compose-modules/sabnzbd.yml
 
 ### Service: sabnzbd
@@ -283,6 +333,26 @@
 **image:** docker.io/linuxserver/sabnzbd:amd64-4.5.1@sha256:39952ab247d97c9d3345a572385ebee158ce497887652d8421f4c0ac44cddf7e
 
 **url:** sabnzbd.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
+
+## docker/ansible/templates/compose-modules/sonarr.yml
+
+### Service: sonarr
+
+**container_name:** sonarr
+
+**image:** lscr.io/linuxserver/sonarr:version-4.0.16.2944@sha256:60e5edcac39172294ad22d55d1b08c2c0a9fe658cad2f2c4d742ae017d7874de
+
+**url:** sonarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
+
+## docker/ansible/templates/compose-modules/spottarr.yml
+
+### Service: spottarr
+
+**container_name:** spottarr
+
+**image:** ghcr.io/spottarr/spottarr:1.12.1@sha256:b773a1fbd3c7684d2cc59e61e5790888efb02cdcd09dd1b75aebcf3f59c82dd0
+
+**url:** spottarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
 ## docker/ansible/templates/compose-modules/traefik-forward-auth.yml
 
@@ -318,7 +388,7 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:8.2.2@sha256:bf5995bcccb65725aa81fd92e68449323c94b96bf1c1fa9f7acbc2a8ad518114
+**image:** mongo:8.2.3@sha256:7f5bbdafebde7c42e42e33396d01c0eda3eb753da8dae99071a30e350568a0a4
 
 ### Service: unifi-db-backup
 
