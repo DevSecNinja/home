@@ -316,6 +316,7 @@ class TestDockerComposeFiles(unittest.TestCase):
                                 # Check if this is a simple domain that matches container name
                                 # Expected pattern: {container_name}.$DOMAINNAME
                                 expected_domain = f"{container_name}.$DOMAINNAME"
+                                base_router_name = ""
 
                                 # Skip monitor, noauth, and other special routers - only check main routers
                                 if router_name.endswith('-rtr') and not any(suffix in router_name for suffix in ['-monitor-', '-noauth-', '-auth-']):
