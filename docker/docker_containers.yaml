@@ -103,7 +103,7 @@
   image: lscr.io/linuxserver/sonarr:version-4.0.16.2944@sha256:60e5edcac39172294ad22d55d1b08c2c0a9fe658cad2f2c4d742ae017d7874de
   url: sonarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 - container_name: spottarr
-  image: ghcr.io/spottarr/spottarr:1.12.1@sha256:b773a1fbd3c7684d2cc59e61e5790888efb02cdcd09dd1b75aebcf3f59c82dd0
+  image: ghcr.io/spottarr/spottarr:1.13.0@sha256:ce70a1c98cb58ea1a30949c9230a7f5ed5fd5dd278eeedb97c224b697eb5e0a2
   url: spottarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 - container_name: traefik-forward-auth
   image: ghcr.io/italypaleale/traefik-forward-auth:4.4.0@sha256:d012b79e6a7494c94577c7da2566fd31d12ae337b908cc724ed0df10d5ab1c36
