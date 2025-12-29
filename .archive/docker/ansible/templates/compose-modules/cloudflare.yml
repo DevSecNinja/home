@@ -1,7 +1,14 @@
+#
+#### DEPRECATION NOTICE
+## This compose module is no longer in use
+## Replaced by: Ubiquiti integration
+## Last used version: 1.15.1@sha256:a4e2089b3531eec8c9328c7a9a586f80e8d67dcd94856e0b596b7896e1de3f62
+#
+
 services:
   cloudflare-ddns:
     container_name: cloudflare-ddns
-    image: favonia/cloudflare-ddns:1.15.1@sha256:a4e2089b3531eec8c9328c7a9a586f80e8d67dcd94856e0b596b7896e1de3f62
+    image: favonia/cloudflare-ddns
     restart: always
     user: "${PUID}:${PGID}"
     cap_drop:
