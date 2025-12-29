@@ -26,14 +26,6 @@
 
 **url:** bazarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
-## docker/ansible/templates/compose-modules/cloudflare.yml
-
-### Service: cloudflare-ddns
-
-**container_name:** cloudflare-ddns
-
-**image:** favonia/cloudflare-ddns:1.15.1@sha256:a4e2089b3531eec8c9328c7a9a586f80e8d67dcd94856e0b596b7896e1de3f62
-
 ## docker/ansible/templates/compose-modules/cyberchef.yml
 
 ### Service: cyberchef
