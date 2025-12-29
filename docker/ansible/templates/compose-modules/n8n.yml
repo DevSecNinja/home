@@ -47,7 +47,7 @@ services:
       - "traefik.http.routers.n8n-monitor-rtr.priority=100"  # Higher priority so it matches first
 
   n8n-db:
-    image: docker.io/library/postgres:17.7-alpine@sha256:ff4ccc02b97e0ebb6b328ef9ff92522f95586f83be6801896b615088defc8ad2
+    image: docker.io/library/postgres:18.1-alpine@sha256:b40d931bd0e7ce6eecc59a5a6ac3b3c04a01e559750e73e7086b6dbd7f8bf545
     container_name: n8n-db
     restart: always
     security_opt:
