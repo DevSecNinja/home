@@ -50,7 +50,7 @@
 
 **container_name:** dawarich-db
 
-**image:** postgis/postgis:17-3.5-alpine@sha256:8353c2cb385e2ba5b33e09e2158ed820316642b4eebd0502c80ce0bcdb29fcb3
+**image:** postgis/postgis:17-3.5-alpine@sha256:4294c33e9e52ed2ba617419286923d97ddc5483207cdd5e4d326cc64f0a45c96
 
 ### Service: dawarich-db-backup
 
@@ -79,16 +79,6 @@
 **image:** jgraph/drawio:29.2.9@sha256:4c064d20674e9ef24b4b7ca1a9b9fb6596d9cd8b2fb7bf042435f23ce4c361c2
 
 **url:** draw.$DOMAINNAME
-
-## docker/ansible/templates/compose-modules/echo-server.yml
-
-### Service: echo-server
-
-**container_name:** echo-server
-
-**image:** mendhak/http-https-echo:38@sha256:c73e039e883944a38e37eaba829eb9a67641cd03eff868827683951feceef96e
-
-**url:** echo-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
 ## docker/ansible/templates/compose-modules/excalidraw.yml
 
@@ -262,7 +252,7 @@
 
 **container_name:** open-webui
 
-**image:** ghcr.io/open-webui/open-webui:0.6.41@sha256:3e07bcede92e97cc3e741de095045a8b5d20bc257ecdb713bd2a47f68e9dff72
+**image:** ghcr.io/open-webui/open-webui:0.6.43@sha256:9cb724e0bc84f05ba2f81a3da5f53f5add07e1001065d83f3b6b70b9a9eeef19
 
 **url:** chat.$DOMAINNAME
 
