@@ -42,7 +42,7 @@
 
 **container_name:** dawarich
 
-**image:** freikin/dawarich:0.36.2@sha256:c302b2bec65d8523a4b450b859d89ff348170551317254f9fdbbe22005f38d27
+**image:** freikin/dawarich:0.36.4@sha256:c70432e01716ee6cd2c05a2bda7449c6b9c93d3b346b699792736f3282d9568f
 
 **url:** dawarich-noauth.$DOMAINNAME
 
@@ -68,7 +68,7 @@
 
 **container_name:** dawarich-sidekiq
 
-**image:** freikin/dawarich:0.36.2@sha256:c302b2bec65d8523a4b450b859d89ff348170551317254f9fdbbe22005f38d27
+**image:** freikin/dawarich:0.36.4@sha256:c70432e01716ee6cd2c05a2bda7449c6b9c93d3b346b699792736f3282d9568f
 
 ## docker/ansible/templates/compose-modules/drawio.yml
 
@@ -134,7 +134,7 @@
 
 **container_name:** gatus-db-upgrade
 
-**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:7f11675003847f629f48d2d9dee36fecad7bc39c8037b2371641c5e8b1faacb2
+**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:6a429e7e047643ca38f25cd0b2e6e3d4b42bf4924a5280a31ab8c907bcf1bbda
 
 ## docker/ansible/templates/compose-modules/hoppscotch.yml
 
@@ -162,7 +162,7 @@
 
 **container_name:** hoppscotch-db-upgrade
 
-**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:7f11675003847f629f48d2d9dee36fecad7bc39c8037b2371641c5e8b1faacb2
+**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:6a429e7e047643ca38f25cd0b2e6e3d4b42bf4924a5280a31ab8c907bcf1bbda
 
 ## docker/ansible/templates/compose-modules/immich.yml
 
@@ -254,7 +254,7 @@
 
 **container_name:** n8n-db-upgrade
 
-**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:7f11675003847f629f48d2d9dee36fecad7bc39c8037b2371641c5e8b1faacb2
+**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:6a429e7e047643ca38f25cd0b2e6e3d4b42bf4924a5280a31ab8c907bcf1bbda
 
 ## docker/ansible/templates/compose-modules/open-webui.yml
 
