@@ -71,6 +71,16 @@
     - name: "[Common] Copy data templates files recursively"
       ansible.builtin.template: src={{ item }} dest={{templates_dest_path}}/{{ item|replace(templates_common_src_path+'/', '')|replace('.j2', '') }} owner={{ansible_user}} group=docker mode=0755  block_start_string="#%" block_end_string="%#"
       with_items: "{{ lookup('pipe', 'find '+ templates_common_src_path +'/ -type f -name *.j2').split('\n') }}"
+      when:
+        - inventory_hostname in groups['trusted']
+
+    - name: "[Common] Copy selected data templates files recursively for untrusted servers"
+      ansible.builtin.template: src={{ item }} dest={{templates_dest_path}}/{{ item|replace(templates_common_src_path+'/', '')|replace('.j2', '') }} owner={{ansible_user}} group=docker mode=0755  block_start_string="#%" block_end_string="%#"
+      with_items:
+        - "{{ templates_common_src_path }}/traefik/traefik.yml.j2"
+        - "{{ templates_common_src_path }}/traefik/rules/middlewares.yml.j2"
+      when:
+        - inventory_hostname in groups['untrusted']
 
     # Server specific
     - name: Check if server specific folder exists
@@ -126,6 +136,13 @@
     - name: "[Compose] Copy data templates files recursively"
       ansible.builtin.template: src={{ item }} dest={{compose_dest_path}}/{{ item|replace(compose_src_path+'/', '')|replace('.j2', '') }} owner={{ansible_user}} group=docker mode=0755 block_start_string="#%" block_end_string="%#"
       with_items: "{{ lookup('pipe', 'find '+ compose_src_path +'/ -type f -name *.j2').split('\n') }}"
+
+    - name: "[Compose] Copy selected data templates files recursively for untrusted servers"
+      ansible.builtin.template: src={{ item }} dest={{compose_dest_path}}/{{ item|replace(compose_src_path+'/', '')|replace('.j2', '') }} owner={{ansible_user}} group=docker mode=0755 block_start_string="#%" block_end_string="%#"
+      with_items:
+        - "{{ compose_src_path }}/echo-server.yml.j2"
+      when:
+        - inventory_hostname in groups['untrusted']
 
     - name: Pull images
       shell:

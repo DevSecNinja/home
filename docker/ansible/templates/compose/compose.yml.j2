@@ -15,9 +15,11 @@ include:
 #% endif %#
 #% if 'webservers' in group_names %#
   - $DOCKERDIR/data/compose/echo-server.yml
+  - $DOCKERDIR/data/compose/traefik-proxy.yml
+#% endif %#
+#% if 'webservers' in group_names and 'trusted' in group_names %#
   - $DOCKERDIR/data/compose/homepage.yml
   - $DOCKERDIR/data/compose/traefik-forward-auth.yml
-  - $DOCKERDIR/data/compose/traefik-proxy.yml
 #% endif %#
 #% if 'webservers' in group_names and 'external' in group_names %#
   #- $DOCKERDIR/data/compose/beaverhabits.yml

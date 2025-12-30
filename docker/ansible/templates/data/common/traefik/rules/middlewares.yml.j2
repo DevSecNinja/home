@@ -44,7 +44,9 @@ http:
     middlewares-docker-proxy-auth:
       basicAuth:
         users:
+          #% if 'trusted' in group_names %#
           - "{{ generic__docker_traefik_htpasswd_entry }}"
+          #% endif %#
     middlewares-whitelist-infra:
       ipAllowList:
         sourceRange:

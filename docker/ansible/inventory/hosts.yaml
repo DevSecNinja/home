@@ -47,7 +47,7 @@ compute:
                           ansible_user: "jean-paul"
                 untrusted:
                   children:
-                    external:
+                    dmz:
                       hosts:
                         svldmz.ravensberg.org:
                           ansible_user: "jean-paul"
