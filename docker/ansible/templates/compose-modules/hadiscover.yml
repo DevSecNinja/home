@@ -1,0 +1,42 @@
+services:
+  hadiscover-api:
+    container_name: hadiscover-api
+    image: ghcr.io/devsecninja/hadiscover/backend:0.2.2@sha256:d0d1d3d656ab733aba57bd2763c2ec3f20cde22beecce72bcbc5242a67e920ed
+    depends_on:
+      - traefik
+    networks:
+      # Despite it's name, the backend serves as a frontend as well
+      - hadiscover-frontend
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+    mem_limit: 1024m
+    environment:
+      - TZ=${TZ}
+    volumes:
+      # Persist database across container restarts
+      - hadiscover-api-data:/app/data
+    labels:
+      # Homepage
+      - homepage.group=Production
+      - homepage.name=hadiscover API
+      #- homepage.icon=sh-hadiscover
+      - homepage.href=https://api.hadiscover.com
+      - homepage.description=Home Assistant Discover API
+      # Traefik
+      - "traefik.enable=true"
+      - "traefik.docker.network=hadiscover-frontend"
+      ## Middlewares
+      - "traefik.http.routers.hadiscover-api-rtr.middlewares=chain-noauth@file"
+      ## HTTP Services
+      - "traefik.http.routers.hadiscover-api-rtr.rule=Host(`api.hadiscover.com`)"
+      - "traefik.http.routers.hadiscover-api-rtr.service=hadiscover-api"
+      - "traefik.http.services.hadiscover-api.loadbalancer.server.port=8000"
+
+networks:
+  hadiscover-frontend:
+    name: hadiscover-frontend
+
+volumes:
+  hadiscover-api-data:
+    name: hadiscover-api-data

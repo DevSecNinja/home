@@ -58,6 +58,9 @@ include:
   - $DOCKERDIR/data/compose/gatus.yml
   - $DOCKERDIR/data/compose/unifi.yml
 #% endif %#
+#% if 'untrusted' in group_names %#
+  - $DOCKERDIR/data/compose/hadiscover.yml
+#% endif %#
 
 networks:
   default:
