@@ -1,5 +1,5 @@
 ---
-- hosts: svlinfra.MANAGEMENT
+- hosts: svldmz.ravensberg.org
   become: true
   pre_tasks:
     - include_tasks: ../tasks/update-os.yaml
@@ -8,7 +8,21 @@
 
   roles:
     - role: geerlingguy.docker
+      # TODO: Investigate if I should use a separate user for docker
       docker_users: ['{{ ansible_user }}']
+      docker_daemon_options:
+        log-driver: "journald"
+        bridge: "none"
+        features:
+          buildkit: true
+        hosts:
+          - "unix:///var/run/docker.sock"
+        default-address-pools:
+          - base: "172.17.0.0/12"
+            size: 20
+          - base: "192.168.0.0/16"
+            size: 24
+        no-new-privileges: true
       become: true
 
   post_tasks:
@@ -25,7 +39,7 @@
         - "/srv/docker/data/compose"
         - "/srv/docker/data/traefik/acme"
 
-    - name: Create acme config file for traefik
+    - name: Create acme config file for Traefik
       file:
         path: "/srv/docker/data/traefik/acme/acme.json"
         state: touch
