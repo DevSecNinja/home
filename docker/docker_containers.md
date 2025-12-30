@@ -126,6 +126,16 @@
 
 **image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:6a429e7e047643ca38f25cd0b2e6e3d4b42bf4924a5280a31ab8c907bcf1bbda
 
+## docker/ansible/templates/compose-modules/hadiscover.yml
+
+### Service: hadiscover-api
+
+**container_name:** hadiscover-api
+
+**image:** ghcr.io/devsecninja/hadiscover/backend:0.2.2@sha256:d0d1d3d656ab733aba57bd2763c2ec3f20cde22beecce72bcbc5242a67e920ed
+
+**url:** api.hadiscover.com
+
 ## docker/ansible/templates/compose-modules/hoppscotch.yml
 
 ### Service: hoppscotch
