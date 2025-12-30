@@ -1,6 +1,6 @@
 services:
   qbittorrent:
-    image: lscr.io/linuxserver/qbittorrent:5.1.4@sha256:043498de39c3dd63eec94360c5ad966a51271d1581070f42cb73ab0cf4776f29
+    image: lscr.io/linuxserver/qbittorrent:5.1.4@sha256:1497b6e047ad47b738f94739219f0e5c5b2ad7a5953b7cf0050f2fedddd8c601
     container_name: qbittorrent
     depends_on:
       - traefik
