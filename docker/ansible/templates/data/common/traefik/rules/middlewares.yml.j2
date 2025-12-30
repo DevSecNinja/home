@@ -42,9 +42,9 @@ http:
           - "X-Forwarded-User"
           - "X-Forwarded-DisplayName"
     middlewares-docker-proxy-auth:
+#% if 'trusted' in group_names %#
       basicAuth:
         users:
-#% if 'trusted' in group_names %#
           - "{{ generic__docker_traefik_htpasswd_entry }}"
 #% endif %#
     middlewares-whitelist-infra:
