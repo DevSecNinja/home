@@ -55,11 +55,29 @@ endpoints:
     <<: *defaults
     url: "https://hadiscover.com/"
     group: External
+    interval: 1m
+    conditions:
+      - "[BODY] == pat(*Built with 💙 for the Home Assistant community*)"
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 48h"
+      - "[RESPONSE_TIME] < 1000"
 
   - name: hadiscover API - HTTP
     <<: *defaults
-    url: "https://api.hadiscover.com/"
+    url: "https://api.hadiscover.com/api/v1/statistics"
     group: External
+    method: GET
+    headers:
+      Accept: application/json
+    interval: 1m
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 48h"
+      - "[RESPONSE_TIME] < 1000"
+      - "[BODY].total_repositories != null"
+      - "[BODY].total_automations != null"
+      - "[BODY].total_repositories > 0"
+      - "[BODY].total_automations > 10"
 
   - name: Bing - HTTP
     <<: *defaults
