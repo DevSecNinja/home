@@ -27,7 +27,7 @@ services:
       - "traefik.enable=true"
       - "traefik.docker.network=hadiscover-frontend"
       ## Middlewares
-      - "traefik.http.routers.hadiscover-api-rtr.middlewares=chain-noauth@file"
+      - "traefik.http.routers.hadiscover-api-rtr.middlewares=chain-no-auth@file"
       ## HTTP Services
       - "traefik.http.routers.hadiscover-api-rtr.rule=Host(`api.hadiscover.com`)"
       - "traefik.http.routers.hadiscover-api-rtr.service=hadiscover-api"
