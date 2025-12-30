@@ -22,7 +22,7 @@
 
 **container_name:** bazarr
 
-**image:** lscr.io/linuxserver/bazarr:version-v1.5.3@sha256:648f694532a3a53d8cf78bc888919ef538659bad41af4c680b0427ad1047d171
+**image:** lscr.io/linuxserver/bazarr:version-v1.5.3@sha256:001875e61839c8a50743f0bc0fa4da2a55ed8a038b9b5ed0dd2c663dd3d0bfc7
 
 **url:** bazarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
@@ -76,7 +76,7 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:29.2.9@sha256:e4e09123e7b296e7a8d19eda122daed1f0e99be8374981a62b5131efa605c2ee
+**image:** jgraph/drawio:29.2.9@sha256:4c064d20674e9ef24b4b7ca1a9b9fb6596d9cd8b2fb7bf042435f23ce4c361c2
 
 **url:** draw.$DOMAINNAME
 
@@ -188,7 +188,7 @@
 
 **container_name:** immich-redis
 
-**image:** docker.io/valkey/valkey:9-alpine@sha256:1be494495248d53e3558b198a1c704e6b559d5e99fe4c926e14a8ad24d76c6fa
+**image:** docker.io/valkey/valkey:9-alpine@sha256:c106a0c03bcb23cbdf9febe693114cb7800646b11ca8b303aee7409de005faa8
 
 ### Service: immich-server
 
@@ -224,7 +224,7 @@
 
 **container_name:** metube
 
-**image:** ghcr.io/alexta69/metube:latest@sha256:9a2e1292c574dd1c2a2b51ead3e23fd143e071a38d0dc8d2f81ffcb4d265ba11
+**image:** ghcr.io/alexta69/metube:latest@sha256:f99c77ae35b21316a5a91bf5fcf9637670a4c87d7f4439dee329c9a3579eb78a
 
 **url:** metube.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
@@ -282,7 +282,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.42.2.10156-f737b826c@sha256:7cc7874ad35b105fe1fe4d99ef27be9c5eb2f4115ccf91af5a7283cae0024599
+**image:** lscr.io/linuxserver/plex:version-1.42.2.10156-f737b826c@sha256:1720efa8e919a724ff3003cce7c1c0ae91a54e097ca3c8f6713a780c6fd73432
 
 **url:** plex-noauth.$DOMAINNAME
 
@@ -302,7 +302,7 @@
 
 **container_name:** qbittorrent
 
-**image:** lscr.io/linuxserver/qbittorrent:5.1.4@sha256:043498de39c3dd63eec94360c5ad966a51271d1581070f42cb73ab0cf4776f29
+**image:** lscr.io/linuxserver/qbittorrent:5.1.4@sha256:1497b6e047ad47b738f94739219f0e5c5b2ad7a5953b7cf0050f2fedddd8c601
 
 **url:** qbittorrent.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
@@ -332,7 +332,7 @@
 
 **container_name:** sonarr
 
-**image:** lscr.io/linuxserver/sonarr:version-4.0.16.2944@sha256:60e5edcac39172294ad22d55d1b08c2c0a9fe658cad2f2c4d742ae017d7874de
+**image:** lscr.io/linuxserver/sonarr:version-4.0.16.2944@sha256:8b9f2138ec50fc9e521960868f79d2ad0d529bc610aef19031ea8ff80b54c5e0
 
 **url:** sonarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
@@ -372,7 +372,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-10.0.162@sha256:421ef61ced63ccf60a55d0dd4a33f940b97f950a377e1175d60e40b3184cd54f
+**image:** lscr.io/linuxserver/unifi-network-application:version-10.0.162@sha256:0e7a91af1db0ef28ed13125dcdd78a95b4a461f546ace9be90e0a26c89d54ffa
 
 **url:** unifi-guest.$DOMAINNAME
 
