@@ -132,7 +132,7 @@
 
 **container_name:** hadiscover-api
 
-**image:** ghcr.io/devsecninja/hadiscover/backend:0.2.4@sha256:24e96be5f908917cc060e0f8c4c8d71b79df39b90c80a9c4e01239be9ac77566
+**image:** ghcr.io/devsecninja/hadiscover/backend:0.2.6@sha256:64fc6398072bfb4a1750e4534d56bd72230923445d58fcc03b9230dea5fbbdff
 
 **url:** api.hadiscover.com
 
