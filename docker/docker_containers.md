@@ -132,7 +132,7 @@
 
 **container_name:** hadiscover-api
 
-**image:** ghcr.io/devsecninja/hadiscover/backend:0.2.6@sha256:64fc6398072bfb4a1750e4534d56bd72230923445d58fcc03b9230dea5fbbdff
+**image:** ghcr.io/devsecninja/hadiscover/backend:0.2.7@sha256:0a159112dd84d4caf678fa32e6165177a8c18f90f5d72ad285c7ce8651cfe6f7
 
 **url:** api.hadiscover.com
 
@@ -224,7 +224,7 @@
 
 **container_name:** metube
 
-**image:** ghcr.io/alexta69/metube:latest@sha256:f99c77ae35b21316a5a91bf5fcf9637670a4c87d7f4439dee329c9a3579eb78a
+**image:** ghcr.io/alexta69/metube:latest@sha256:3c5e59886f404583196a45aa3e3fa9fb7b06e16fcdb71d2db5159b7c4e51b38a
 
 **url:** metube.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
@@ -372,7 +372,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-10.0.162@sha256:0e7a91af1db0ef28ed13125dcdd78a95b4a461f546ace9be90e0a26c89d54ffa
+**image:** lscr.io/linuxserver/unifi-network-application:version-10.0.162@sha256:268340299e6a8a85c29800923e242c60ed7baa24557943f0ff5ec4ea52804232
 
 **url:** unifi-guest.$DOMAINNAME
 
