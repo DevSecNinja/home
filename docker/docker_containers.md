@@ -132,7 +132,7 @@
 
 **container_name:** hadiscover-api
 
-**image:** ghcr.io/devsecninja/hadiscover/backend:0.2.7@sha256:0a159112dd84d4caf678fa32e6165177a8c18f90f5d72ad285c7ce8651cfe6f7
+**image:** ghcr.io/devsecninja/hadiscover/backend:0.2.13@sha256:7daa79ec1b01cc17bc619d3848f5c4f78d6879d38a4ba3ab68e96517fe3db860
 
 **url:** api.hadiscover.com
 
@@ -234,7 +234,7 @@
 
 **container_name:** n8n
 
-**image:** n8nio/n8n:2.2.1@sha256:ee59276d9d5c7daa97462830cfae12d71cea55adcad705e1756e0c616fcf26b9
+**image:** n8nio/n8n:2.2.2@sha256:913ad6aa6dd4c9b3c7990cef306eda98ef8c99fe1a099b1729f5cb1c37ffef44
 
 **url:** n8n.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
