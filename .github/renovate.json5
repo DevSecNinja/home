@@ -94,7 +94,7 @@
       automerge: true,
       automergeType: 'pr',
       ignoreTests: false,
-      pinDigests: true
+      pinDigests: true,
       matchUpdateTypes: [
         'digest',
         'patch',
