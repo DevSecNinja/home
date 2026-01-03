@@ -352,7 +352,7 @@
 
 **container_name:** traefik-forward-auth
 
-**image:** ghcr.io/italypaleale/traefik-forward-auth:4.4.0@sha256:d012b79e6a7494c94577c7da2566fd31d12ae337b908cc724ed0df10d5ab1c36
+**image:** ghcr.io/italypaleale/traefik-forward-auth:4.5.0@sha256:4bc20751924975b6c06589efdb4bbf8db98768abcea361f0d6484873f707ccbc
 
 **url:** auth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
