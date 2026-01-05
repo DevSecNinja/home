@@ -62,6 +62,17 @@ endpoints:
       - "[CERTIFICATE_EXPIRATION] > 48h"
       - "[RESPONSE_TIME] < 1000"
 
+  - name: hadiscover WWW - HTTP
+    <<: *defaults
+    url: "https://www.hadiscover.com/"
+    group: External
+    interval: 1m
+    conditions:
+      - "[BODY] == pat(*Built with 💙 for the Home Assistant community*)"
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 48h"
+      - "[RESPONSE_TIME] < 1000"
+
   - name: hadiscover API - HTTP
     <<: *defaults
     url: "https://api.hadiscover.com/api/v1/statistics"
