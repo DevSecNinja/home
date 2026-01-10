@@ -1,6 +1,6 @@
 services:
   traefik-forward-auth:
-    image: ghcr.io/italypaleale/traefik-forward-auth:4.5.0@sha256:4bc20751924975b6c06589efdb4bbf8db98768abcea361f0d6484873f707ccbc
+    image: ghcr.io/italypaleale/traefik-forward-auth:4.6.0@sha256:bb9475ea74de9befca2730bd56e4c97a1d333fb5cc250382dcf39ba92a974f8a
     container_name: traefik-forward-auth
     depends_on:
       - traefik
