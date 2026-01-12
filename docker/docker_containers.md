@@ -42,7 +42,7 @@
 
 **container_name:** dawarich
 
-**image:** freikin/dawarich:0.37.2@sha256:5383151e5a478c62e7c6883a040c686d4083a37c59e9906e0033990532267668
+**image:** freikin/dawarich:0.37.3@sha256:efab2e677baf912f5cc68363ec26e648015fa2c703b4a0cf8e03418415e1ed0d
 
 **url:** dawarich-noauth.$DOMAINNAME
 
@@ -50,7 +50,7 @@
 
 **container_name:** dawarich-db
 
-**image:** postgis/postgis:17-3.5-alpine@sha256:4294c33e9e52ed2ba617419286923d97ddc5483207cdd5e4d326cc64f0a45c96
+**image:** postgis/postgis:17-3.5-alpine@sha256:3ca0a5e29f27d7f789f120e29fb84d748397d65fae63ab9f9967bf9a5a3eff71
 
 ### Service: dawarich-db-backup
 
@@ -68,7 +68,7 @@
 
 **container_name:** dawarich-sidekiq
 
-**image:** freikin/dawarich:0.37.2@sha256:5383151e5a478c62e7c6883a040c686d4083a37c59e9906e0033990532267668
+**image:** freikin/dawarich:0.37.3@sha256:efab2e677baf912f5cc68363ec26e648015fa2c703b4a0cf8e03418415e1ed0d
 
 ## docker/ansible/templates/compose-modules/drawio.yml
 
@@ -76,7 +76,7 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:29.2.9@sha256:4c064d20674e9ef24b4b7ca1a9b9fb6596d9cd8b2fb7bf042435f23ce4c361c2
+**image:** jgraph/drawio:29.2.9@sha256:fff32eb35e0dc5d76ed234799c7312ce367db2e2d222bd40e55b003381584cb6
 
 **url:** draw.$DOMAINNAME
 
@@ -142,7 +142,7 @@
 
 **container_name:** hoppscotch
 
-**image:** hoppscotch/hoppscotch:2025.12.0@sha256:0bf0d0c1a34399d8bc4a0d89126b41c717db771c5a451d69d076cb4305b9eaff
+**image:** hoppscotch/hoppscotch:2025.12.1@sha256:8cb58bf214d08360453aa4b4be748295e4c8a8abedc22850bc800272d9c41850
 
 **url:** api-tester.$DOMAINNAME
 
@@ -214,7 +214,7 @@
 
 **container_name:** lidarr
 
-**image:** lscr.io/linuxserver/lidarr:version-3.1.0.4875@sha256:ede2bb17350cc97a0d3f24389aa91803f655eac29aa022c77a71f4a61cc621e4
+**image:** lscr.io/linuxserver/lidarr:version-3.1.0.4875@sha256:0922867151c5175f394f4d865f6b3e63e8c05141132188e8790a1e66358e7196
 
 **url:** lidarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
@@ -224,7 +224,7 @@
 
 **container_name:** metube
 
-**image:** ghcr.io/alexta69/metube:latest@sha256:3c5e59886f404583196a45aa3e3fa9fb7b06e16fcdb71d2db5159b7c4e51b38a
+**image:** ghcr.io/alexta69/metube:latest@sha256:dbbf9a25660b6255cc0726a00c06cf2968941803e29813e1d23863919794713c
 
 **url:** metube.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
@@ -302,7 +302,7 @@
 
 **container_name:** qbittorrent
 
-**image:** lscr.io/linuxserver/qbittorrent:5.1.4@sha256:c4e1276d9eec06f2520b4cdffcff49aea4215e5ac2d51bf0de81cce9f8aa85d4
+**image:** lscr.io/linuxserver/qbittorrent:5.1.4@sha256:95114034a7f74672b76f795f6938921b0ca795f85b59b48691035dc66714f34c
 
 **url:** qbittorrent.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
