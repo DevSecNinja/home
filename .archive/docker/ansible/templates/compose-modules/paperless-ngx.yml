@@ -1,0 +1,201 @@
+#
+#### DEPRECATION NOTICE
+## This compose module is no longer in use
+## Replaced by: None
+#
+
+services:
+  paperless-redis:
+    image: redis #:alpine3.19@sha256:892b41c092a599f76c30b48e9dcfb185ce8cea3560970b1c4f2745c89bb34344
+    container_name: paperless-redis
+    # Requirepass is needed as environment variable isn't picked up
+    command: >
+      --requirepass ${PAPERLESS_REDIS_PASSWORD}
+    restart: always
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 20s
+      timeout: 3s
+    mem_limit: 1024m
+    security_opt:
+      - no-new-privileges=true
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - REDIS_PASSWORD=${PAPERLESS_REDIS_PASSWORD}
+    networks:
+      - paperless-backend
+
+  paperless-db:
+    image: docker.io/library/postgres #:16.6-alpine@sha256:52bba373df3c13594014b5e9ccc9f3c2cdb2221d50db1a91ec64570819f18aba
+    container_name: paperless-db
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+    volumes:
+      - paperless_db_data:/var/lib/postgresql/data
+    mem_limit: 1024m
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - POSTGRES_DB=paperless
+      - POSTGRES_USER=paperless
+      - POSTGRES_PASSWORD=${PAPERLESS_DB_PASSWORD}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - paperless-backend
+
+  paperless-web:
+    image: ghcr.io/paperless-ngx/paperless-ngx #:2.13.5@sha256:199c67ed55bfb9d58bf90db2ee280880ae9ebc63413e54c73522f9c4ebdc7bad
+    container_name: paperless-web
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+    depends_on:
+      - paperless-db
+      - paperless-redis
+      - paperless-gotenberg
+      - paperless-tika
+    volumes:
+      - paperless_data:/usr/src/paperless/data
+      - paperless_media_data:/usr/src/paperless/media
+      - $DOCKERDIR/data/paperless-ngx/export:/usr/src/paperless/export
+      - $DOCKERDIR/data/paperless-ngx/consume:/usr/src/paperless/consume
+    mem_limit: 2048m
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - PAPERLESS_REDIS=redis://:${PAPERLESS_REDIS_PASSWORD}@paperless-redis:6379
+      - PAPERLESS_SECRET_KEY=${PAPERLESS_SECRET_KEY}
+      - PAPERLESS_DBHOST=paperless-db
+      - PAPERLESS_DBUSER=paperless
+      - PAPERLESS_DBPASS=${PAPERLESS_DB_PASSWORD}
+      - PAPERLESS_DBNAME=paperless
+      - PAPERLESS_TIKA_ENABLED=1
+      - PAPERLESS_TIKA_GOTENBERG_ENDPOINT=http://paperless-gotenberg:3000
+      - PAPERLESS_TIKA_ENDPOINT=http://paperless-tika:9998
+      - PAPERLESS_URL=https://paperless.$DOMAINNAME
+      - PAPERLESS_ADMIN_MAIL=${PAPERLESS_ADMIN_EMAIL}
+      - PAPERLESS_ADMIN_USER=${PAPERLESS_ADMIN_USER}
+      - PAPERLESS_ADMIN_PASSWORD=${PAPERLESS_ADMIN_PASSWORD}
+      - PAPERLESS_OCR_LANGUAGES=nld
+      ## Authentication
+      ### Manual step needed to grant access: https://github.com/paperless-ngx/paperless-ngx/issues/2228#issuecomment-1455179830
+      - PAPERLESS_ENABLE_HTTP_REMOTE_USER=TRUE
+      - PAPERLESS_ENABLE_HTTP_REMOTE_USER_API=FALSE
+      - PAPERLESS_HTTP_REMOTE_USER_HEADER_NAME=HTTP_X_FORWARDED_USER
+    networks:
+      - paperless-backend
+    labels:
+      # Homepage
+      - homepage.group=Productivity
+      - homepage.name=Paperless NGX
+      - homepage.icon=paperless.svg
+      - homepage.href=https://paperless.$DOMAINNAME
+      - homepage.description=Document Service
+      # Group
+      - org.label-schema.group=productivity
+      # Traefik
+      - "traefik.enable=true"
+      ## Middlewares
+      - "traefik.http.routers.paperless-ngx-rtr.middlewares=chain-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.paperless-ngx-rtr.rule=Host(`paperless.$DOMAINNAME`)"
+      - "traefik.http.routers.paperless-ngx-rtr.service=paperless-ngx"
+      ### Enable the server port
+      - "traefik.http.services.paperless-ngx.loadbalancer.server.port=8000"
+      ## Extra no-auth endpoint. No need to create a new service
+      - "traefik.http.routers.paperless-ngx-noauth-rtr.rule=Host(`paperless-noauth.$DOMAINNAME`)"
+      - "traefik.http.routers.paperless-ngx-noauth-rtr.middlewares=chain-no-auth@file"
+      - "traefik.http.routers.paperless-ngx-noauth-rtr.service=paperless-ngx"
+
+  paperless-gotenberg:
+    image: docker.io/gotenberg/gotenberg #:8.14.1@sha256:c81f625afc869ba10819622f7e7d6d76708b2a32645b3fb74fbee610bf030465
+    container_name: paperless-gotenberg
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+    command:
+      - "gotenberg"
+      - "--chromium-disable-javascript=true"
+      - "--chromium-allow-list=file:///tmp/.*"
+    mem_limit: 1024m
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    networks:
+      - paperless-backend
+
+  paperless-tika:
+    image: ghcr.io/paperless-ngx/tika #:2.9.1-minimal@sha256:20db3df89eaeb1b271dd840888fe909b88b12f4b86ef641ec07a1d45d4c5168f
+    container_name: paperless-tika
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+    mem_limit: 1024m
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    networks:
+      - paperless-backend
+
+  paperless-db-backup:
+    container_name: paperless-db-backup
+    image: tiredofit/db-backup #:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
+    depends_on:
+      - paperless-db
+    volumes:
+      - $DOCKERDIR/data/backup:/backup
+    networks:
+      - paperless-backend
+    mem_limit: 1024m
+    environment:
+      - TIMEZONE=${TZ}
+      - USER_DBBACKUP=${PUID}
+      - GROUP_DBBACKUP=${PGID}
+      - CONTAINER_NAME=paperless-db-backup
+      - CONTAINER_ENABLE_MONITORING=FALSE # Disables Zabbix backup statistics
+
+      - ENABLE_NOTIFICATIONS=TRUE
+      - NOTIFICATION_TYPE=EMAIL
+      - SMTP_HOST=mailrise
+      - SMTP_PORT=${NOTIFICATIONS_MAILRISE_SMTP_PORT}
+      - MAIL_TO=msteams@mailrise.xyz
+      - MAIL_FROM=paperless-db-backup
+
+      - DEFAULT_CHECKSUM=SHA1        # Set standard checksum to SHA1
+      - DEFAULT_COMPRESSION=ZSTD     # Compress all with ZSTD
+      - DEFAULT_BACKUP_INTERVAL=1440 # Backup every 1440 minutes = 24 hours
+      - DEFAULT_BACKUP_BEGIN=0000    # Start backing up at midnight
+      - DEFAULT_CLEANUP_TIME=2880    # Cleanup backups after two days
+
+      - DEFAULT_ENCRYPT=TRUE                            # Encrypt backup files with GPG
+      - DEFAULT_ENCRYPT_PASSPHRASE=${DB_ENC_PASSPHRASE} # Set encryption password
+
+      - DB01_TYPE=pgsql
+      - DB01_HOST=paperless-db
+      - DB01_NAME=paperless
+      - DB01_USER=paperless
+      - DB01_PORT=5432
+      - DB01_PASS=${PAPERLESS_DB_PASSWORD}
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+
+volumes:
+  paperless_data:
+  paperless_media_data:
+  paperless_db_data:
+  paperless_redis_data:
+
+networks:
+  paperless-backend:

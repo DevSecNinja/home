@@ -1,0 +1,52 @@
+#
+#### DEPRECATION NOTICE
+## This compose module is no longer in use
+## Replaced by: Samba on VM with Ansible role vladgh.samba
+## Reason: docker image hasn't been updated in a while and worked unstable (files disappeared sometimes)
+## Last used version: amd64@sha256:e1d2a7366690749a7be06f72bdbf6a5a7d15726fc84e4e4f41e967214516edfd
+#
+
+services:
+  samba:
+    container_name: samba
+    image: dperson/samba
+    restart: always
+    networks:
+      - samba
+    ports:
+      - "445:445/tcp"
+    mem_limit: 1024m
+    security_opt:
+      - no-new-privileges=true
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - USERID=${PUID}
+      - GROUPID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - $DOCKERDATADIR:/data
+      - $DOCKERARCHIVEDIR:/archive
+      # Paperless
+      - $DOCKERDIR/data/paperless-ngx:/docker/data/paperless-ngx
+      - paperless_media_data:/docker/data/docs:ro
+    # -r = disable recycle bin
+    # -p = set ownership and permissions on the shares
+    command: >
+      -s "Archive;/archive;yes;no;no;${SAMBA_USERNAME}"
+      -s "Backup;/archive/backup;yes;no;no;${SAMBA_USERNAME},${SAMBA_BACKUP_USERNAME}"
+      -s "Data;/data;yes;no;no;${SAMBA_USERNAME}"
+      -s "Docs;/docker/data/docs/documents/originals;yes;no;no;${SAMBA_USERNAME}"
+      -s "HomeAssistantBackup;/archive/backup/HomeAssistant;no;no;no;${SAMBA_USERNAME},${SAMBA_HOME_ASSISTANT_USERNAME}"
+      -s "Paperless;/docker/data/paperless-ngx;yes;no;no;${SAMBA_USERNAME}"
+      -s "Study;/data/media/study;yes;no;no;${SAMBA_USERNAME}"
+      -u "${SAMBA_USERNAME};${SAMBA_PASSWORD}"
+      -u "${SAMBA_HOME_ASSISTANT_USERNAME};${SAMBA_HOME_ASSISTANT_PASSWORD}"
+      -u "${SAMBA_BACKUP_USERNAME};${SAMBA_BACKUP_PASSWORD}"
+      -p
+      -r
+
+networks:
+  samba:
+    name: samba
+    driver: bridge

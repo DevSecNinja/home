@@ -1,0 +1,41 @@
+#
+#### DEPRECATION NOTICE
+## This compose module is no longer in use
+## Replaced by: Kubernetes cluster resource
+## Last used version: v0.27.0@sha256:e13b6ed5cb929eeaee733479dce55e10eb3bc2e9c4586c705a4e8da41e5eacf5
+#
+
+services:
+  alertmanager:
+    image: prom/alertmanager
+    container_name: alertmanager
+    volumes:
+      - $DOCKERDIR/data/alertmanager:/etc/alertmanager
+    command:
+      - '--config.file=/etc/alertmanager/config.yml'
+      - '--storage.path=/alertmanager'
+    mem_limit: 1024m
+    environment:
+      - TZ=${TZ}
+    restart: always
+    networks:
+      - t2_proxy
+    security_opt:
+      - no-new-privileges=true
+    labels:
+      # Homepage
+      - homepage.group=Infrastructure
+      - homepage.name=Alertmanager
+      - homepage.icon=alertmanager.svg
+      - homepage.href=https://alertmanager.$DOMAINNAME
+      - homepage.description=Alert System
+      # Group
+      - org.label-schema.group=infrastructure
+      # Traefik
+      - "traefik.enable=true"
+      ## Middlewares
+      - "traefik.http.routers.alertmanager-rtr.middlewares=chain-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.alertmanager-rtr.service=alertmanager"
+      ### Enable the server port
+      - "traefik.http.services.alertmanager.loadbalancer.server.port=9093"

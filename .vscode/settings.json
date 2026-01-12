@@ -1,18 +1,87 @@
 {
+    "ansible.ansible.path": ".venv/bin/ansible",
+    "ansible.python.activationScript": ".venv/bin/activate",
+    "ansible.python.interpreterPath": ".venv/bin/python3",
+    "ansible.validation.enabled": true,
+    "ansible.validation.lint.arguments": "-c ansible/.ansible-lint",
+    "ansible.validation.lint.enabled": true,
+    "ansible.validation.lint.path": ".venv/bin/ansible-lint",
     "editor.bracketPairColorization.enabled": true,
+    "files.autoSave": "onWindowChange",
     "files.associations": {
-        "**/*.json5": "json5"
+        "*.json5": "jsonc",
+        "*.y*ml.j2": "yaml",
+        "*.conf.j2": "properties",
+        "**/*.json5": "json5",
+        "./ansible/**/*.yaml": "ansible",
+        "./ansible/**/*.sops.yaml": "yaml",
+        "./ansible/**/inventory/**/*.yaml": "yaml",
+        "./kubernetes/**/*.sops.toml": "plaintext",
+        "alert.rules": "yaml"
+    },
+    "files.watcherExclude": {
+      "**/.git/objects/**": true,
+      "**/.git/subtree-cache/**": true,
+      "**/node_modules/*/**": true,
+      "**/.venv/*/**": true
+    },
+    "files.exclude": {
+      "**/.git": true,
+      "**/.svn": true,
+      "**/.hg": true,
+      "**/CVS": true,
+      "**/.DS_Store": true,
+      "**/Thumbs.db": true
+    },
+    "search.exclude": {
+      "**/.git": true,
+      "**/.venv": true,
+      "**/__pycache__": true,
+      "**/.pytest_cache": true,
+      "**/node_modules": true,
+      "**/.next": true,
+      "**/dist": true,
+      "**/build": true,
+      "**/.cache": true,
+      "**/logs": true,
+      "**/*.log": true,
+      "**/.nyc_output": true,
+      "**/coverage": true,
+      "**/.coverage": true,
+      "**/htmlcov": true,
+      "**/.tox": true,
+      "**/.mypy_cache": true,
+      "**/.ruff_cache": true,
+      "**/target": true,
+      "**/bin": true,
+      "**/obj": true
     },
     "files.trimTrailingWhitespace": true,
     "sops.defaults.ageKeyFile": "age.key",
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "yaml.schemas": {
+        "ansible": "./ansible/*.yaml",
+        "https://taskfile.dev/schema.json": [
+          "**/Taskfile.yml",
+          "./path/to/any/other/taskfile.yml"
+        ],
+        "Kubernetes": "./kubernetes/*.yaml",
+        "kubernetes": "./kubernetes/**/*.yaml"
+    },
+    "yaml.schemaStore.enable": true,
     "vs-kubernetes": {
         "vs-kubernetes.kubeconfig": "./kubeconfig",
         "vs-kubernetes.knownKubeconfigs": [
           "./kubeconfig"
       ]
     },
-    "yaml.schemaStore.enable": true,
-    "yaml.schemas": {
-        "kubernetes": "./kubernetes/**/*.yaml"
-    }
+    "python.testing.unittestArgs": [
+      "-v",
+      "-s",
+      "./tests",
+      "-p",
+      "test_*.py"
+    ],
+    "python.testing.pytestEnabled": false,
+    "python.testing.unittestEnabled": true
 }

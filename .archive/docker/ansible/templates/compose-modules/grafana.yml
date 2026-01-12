@@ -1,0 +1,108 @@
+#
+#### DEPRECATION NOTICE
+## This compose module is no longer in use
+## Replaced by: Kubernetes cluster resource
+## Last used version: 11.3.0@sha256:a0f881232a6fb71a0554a47d0fe2203b6888fe77f4cefb7ea62bed7eb54e13c3
+##              Loki: 3.2.1@sha256:09a53b4a4ff81ffcd8f13886df19d33fac7a8d3aaf952e3c7e66cbade5b2fc31
+#
+
+services:
+  grafana:
+    # Note: seems that RenovateBot sometimes mixes up and selects
+    # the ARM image for AMD64 instead of taking the multi-arch image
+    image: grafana/grafana
+    container_name: grafana
+    depends_on:
+      - traefik
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - $DOCKERDIR/data/grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
+      - $DOCKERDIR/data/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - GF_SECURITY_ADMIN_USER=${GRAFANA_ADMIN_USER}
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD}
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_ANALYTICS_REPORTING_ENABLED=false
+      - GF_METRICS_ENABLED=true # default
+      ## Authentication
+      - GF_AUTH_PROXY_ENABLED=true
+      - GF_AUTH_PROXY_HEADER_NAME=X-Forwarded-User
+      - GF_AUTH_PROXY_HEADER_PROPERTY=email
+      - GF_AUTH_PROXY_AUTO_SIGN_UP=true
+      - GF_AUTH_PROXY_ENABLE_LOGIN_TOKEN=false
+      - GF_AUTH_PROXY_HEADERS="Name:X-Forwarded-User Email:X-Forwarded-User"
+      - GF_USERS_AUTO_ASSIGN_ORG_ROLE=Admin # Security Warning: authenticated users will be an admin
+    restart: always
+    networks:
+      - t2_proxy
+      - grafana
+    mem_limit: 1024m
+    security_opt:
+      - no-new-privileges=true
+    # Saves some CPU cycles + healthcheck doesn't do anything on failure
+    # healthcheck:
+    #   test: ["CMD-SHELL", "curl -f localhost:3000/api/health && echo 'ready'"]
+    #   interval: 10s
+    #   retries: 30
+    labels:
+      # Homepage
+      - homepage.group=Infrastructure
+      - homepage.name=Grafana
+      - homepage.icon=grafana.svg
+      - homepage.href=https://grafana.$DOMAINNAME
+      - homepage.description=Analytics Platform
+      # Group
+      - org.label-schema.group=infrastructure
+      # Traefik
+      - "traefik.enable=true"
+      ## Middlewares
+      - "traefik.http.routers.grafana-rtr.middlewares=chain-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.grafana-rtr.service=grafana"
+      ### Enable the server port
+      - "traefik.http.services.grafana.loadbalancer.server.port=3000"
+
+  loki:
+    image: grafana/loki
+    container_name: loki
+    volumes:
+      - $DOCKERDIR/data/loki/loki.yml:/etc/loki/loki.yml
+    environment:
+      - TZ=${TZ}
+    command: -config.file=/etc/loki/loki.yml
+    restart: always
+    mem_limit: 1024m
+    networks:
+      - t2_proxy
+    security_opt:
+      - no-new-privileges=true
+    labels:
+      # Loki is only accessed from Grafana and doesn't have a GUI
+      # Homepage
+      # - homepage.group=Infrastructure
+      # - homepage.name=Loki
+      # - homepage.icon=grafana.svg
+      # - homepage.href=https://loki.$DOMAINNAME
+      # - homepage.description=Logging Stack
+      # Group
+      - org.label-schema.group=infrastructure
+      # Traefik
+      - "traefik.enable=true"
+      ## Middlewares
+      ## Using no-auth chain but whitelisting management traffic so I can still push logs
+      - "traefik.http.routers.loki-rtr.middlewares=chain-no-auth-mgmt-whitelist@file"
+      ## HTTP Services
+      - "traefik.http.routers.loki-rtr.service=loki"
+      ### Enable the server port
+      - "traefik.http.services.loki.loadbalancer.server.port=3100"
+
+volumes:
+  grafana_data:
+
+networks:
+  grafana:
+    name: grafana
+    driver: bridge

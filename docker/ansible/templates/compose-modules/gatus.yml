@@ -1,0 +1,171 @@
+services:
+  gatus:
+    image: twinproduction/gatus:v5.34.0@sha256:3fff895e77d35ee62e898860f4613755bc2344127d93e3f326429d40270e2115
+    container_name: gatus
+    depends_on:
+      - traefik
+      - gatus-db
+    restart: always
+    networks:
+      - gatus-frontend
+      - gatus-backend
+    security_opt:
+      - no-new-privileges=true
+    mem_limit: 500m
+    environment:
+      - TZ=${TZ}
+      # Database
+      - DB_ENGINE=postgres
+      - DB_DATABASE=gatus
+      - DB_USER=gatus
+      - DB_PASSWORD=${GATUS_DB_PASSWORD}
+      - DB_HOST=gatus-db
+      - DB_PORT=5432
+      # Webhooks
+      - NOTIFICATIONS_EMAIL_FROM=${NOTIFICATIONS_EMAIL_FROM}
+      - NOTIFICATIONS_EMAIL_TO=${NOTIFICATIONS_EMAIL_TO}
+      - NOTIFICATIONS_EMAIL_HOST=${NOTIFICATIONS_EMAIL_HOST}
+      - NOTIFICATIONS_EMAIL_USERNAME=${NOTIFICATIONS_EMAIL_USERNAME}
+      - NOTIFICATIONS_EMAIL_PASSWORD=${NOTIFICATIONS_EMAIL_PASSWORD}
+      - NOTIFICATIONS_EMAIL_PORT=${NOTIFICATIONS_EMAIL_PORT}
+      # Other
+      - DOMAINNAME=${DOMAINNAME}
+      - IP_SVLEXT=${GENERIC_IPS_SVLEXT}
+      - GENERIC_MONITORING_HEADER_SECRET=${GENERIC_MONITORING_HEADER_SECRET}
+    volumes:
+      - $DOCKERDIR/data/gatus/config.yaml:/config/config.yaml:ro
+    labels:
+      # Homepage
+      - homepage.group=Infrastructure
+      - homepage.name=Gatus
+      - homepage.icon=gatus.svg
+      - homepage.href=https://status-docker.$DOMAINNAME
+      - homepage.description=Uptime Monitoring
+      ## Widget
+      - homepage.widget.type=gatus
+      - homepage.widget.url=https://status-docker.$DOMAINNAME
+      - homepage.widget.headers.X-Monitor-Key=${GENERIC_MONITORING_HEADER_SECRET}
+      # Group
+      - org.label-schema.group=productivity
+      # Traefik
+      - "traefik.enable=true"
+      - "traefik.docker.network=gatus-frontend"
+      ## Middlewares
+      - "traefik.http.routers.gatus-rtr.middlewares=chain-auth@file"
+      - "traefik.http.routers.gatus-rtr.rule=Host(`status-docker.$DOMAINNAME`)"
+      ## HTTP Services
+      - "traefik.http.routers.gatus-rtr.service=gatus"
+      ### Enable the server port
+      - "traefik.http.services.gatus.loadbalancer.server.port=8080"
+      ## Router for Gatus — bypass auth if secret header is present
+      - "traefik.http.routers.gatus-monitor-rtr.rule=Host(`status-docker.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
+      - "traefik.http.routers.gatus-monitor-rtr.service=gatus"
+      - "traefik.http.routers.gatus-monitor-rtr.priority=100"  # Higher priority so it matches first
+
+  gatus-db:
+    image: docker.io/library/postgres:17.7-alpine@sha256:ff4ccc02b97e0ebb6b328ef9ff92522f95586f83be6801896b615088defc8ad2
+    container_name: gatus-db
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+    mem_limit: 1024m
+    shm_size: 128mb
+    depends_on:
+      gatus-db-upgrade:
+        condition: service_completed_successfully
+    volumes:
+      - gatus_db_data:/var/lib/postgresql/data
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - POSTGRES_DB=gatus
+      - POSTGRES_USER=gatus
+      - POSTGRES_PASSWORD=${GATUS_DB_PASSWORD}
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - gatus-backend
+
+  gatus-db-backup:
+    container_name: gatus-db-backup
+    image: tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
+    depends_on:
+      - gatus-db
+    volumes:
+      - /mnt/smb_share_backup/gatus:/backup
+    mem_limit: 1024m
+    networks:
+      - gatus-backend
+    environment:
+      - TIMEZONE=${TZ}
+      - USER_DBBACKUP=${PUID}
+      - GROUP_DBBACKUP=${PGID}
+      - CONTAINER_NAME=gatus-db-backup
+      - CONTAINER_ENABLE_MONITORING=FALSE # Disables Zabbix backup statistics
+
+      - ENABLE_NOTIFICATIONS=TRUE
+      - NOTIFICATION_TYPE=EMAIL
+      - SMTP_HOST=${NOTIFICATIONS_EMAIL_HOST}
+      - SMTP_DOMAIN=${NOTIFICATIONS_EMAIL_DOMAIN}
+      - SMTP_PORT=${NOTIFICATIONS_EMAIL_PORT}
+      - SMTP_USER=${NOTIFICATIONS_EMAIL_USERNAME}
+      - SMTP_PASS=${NOTIFICATIONS_EMAIL_PASSWORD}
+      - MAIL_TO=${NOTIFICATIONS_EMAIL_TO}
+      - MAIL_FROM=${NOTIFICATIONS_EMAIL_FROM}
+      - SMTP_AUTHENTICATION="on"
+      - SMTP_TLSCERTCHECK=TRUE
+      - SMTP_STARTTLS=on
+      - SMTP_TLS=on
+
+      - DEFAULT_CHECKSUM=SHA1        # Set standard checksum to SHA1
+      - DEFAULT_COMPRESSION=ZSTD     # Compress all with ZSTD
+      - DEFAULT_BACKUP_INTERVAL=1440 # Backup every 1440 minutes = 24 hours
+      - DEFAULT_BACKUP_BEGIN=0000    # Start backing up at midnight
+      - DEFAULT_CLEANUP_TIME=2880    # Cleanup backups after two days
+
+      - DEFAULT_ENCRYPT=TRUE                            # Encrypt backup files with GPG
+      - DEFAULT_ENCRYPT_PASSPHRASE=${DB_ENC_PASSPHRASE} # Set encryption password
+
+      - DB01_TYPE=pgsql
+      - DB01_HOST=gatus-db
+      - DB01_NAME=gatus
+      - DB01_USER=gatus
+      - DB01_PORT=5432
+      - DB01_PASS=${GATUS_DB_PASSWORD}
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+
+  gatus-db-upgrade:
+    image: pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:6a429e7e047643ca38f25cd0b2e6e3d4b42bf4924a5280a31ab8c907bcf1bbda
+    container_name: gatus-db-upgrade
+    restart: "no"
+    security_opt:
+      - no-new-privileges=true
+    mem_limit: 1024m
+    shm_size: 128mb
+    volumes:
+      - gatus_db_data:/var/lib/postgresql/data
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - POSTGRES_DB=gatus
+      - POSTGRES_USER=gatus
+      - POSTGRES_PASSWORD=${GATUS_DB_PASSWORD}
+      - PGDATA=/var/lib/postgresql/data
+      - PGAUTO_ONESHOT=yes
+    network_mode: none
+
+volumes:
+  gatus_db_data:
+
+networks:
+  gatus-frontend:
+    name: gatus-frontend
+  gatus-backend:
+    name: gatus-backend

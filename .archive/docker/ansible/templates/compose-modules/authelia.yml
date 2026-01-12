@@ -1,0 +1,79 @@
+#
+#### DEPRECATION NOTICE
+## This compose module is no longer in use
+## Replaced by: Traefik Forward Auth with Entra ID authentication
+## Last used version: 4.37.5@sha256:82831059ce5c1151d4ccd37f803cdf35fccbd488c80fe7f9f8de6b76adf40447
+#
+
+services:
+  authelia:
+    container_name: authelia
+    image: authelia/authelia
+    depends_on:
+      - traefik
+    networks:
+      authelia-frontend:
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+    volumes:
+      - $DOCKERDIR/data/authelia/config:/config:ro
+      - authelia_data:/data
+    mem_limit: 1024m
+    environment:
+      - TZ=${TZ}
+    labels:
+      # Homepage
+      - homepage.group=Infrastructure
+      - homepage.name=Authelia
+      - homepage.icon=authelia.svg
+      - homepage.href=https://authelia-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
+      - homepage.description=Authentication Service
+      # Traefik
+      - "traefik.enable=true"
+      - "traefik.docker.network=authelia-frontend"
+      ## Middlewares
+      ## Using no-auth chain to use the Authelia service
+      - "traefik.http.routers.authelia-rtr.middlewares=chain-no-auth@file"
+      ## Note: Authelia middleware can be found in middlewares.yml file in Traefik
+      ## HTTP Services
+      - "traefik.http.routers.authelia-rtr.rule=Host(`authelia-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
+      - "traefik.http.routers.authelia-rtr.service=authelia-svc"
+      - "traefik.http.services.authelia-svc.loadbalancer.server.port=9091"
+
+  authelia-db-backup:
+    container_name: authelia-db-backup
+    image: tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
+    volumes:
+      - $DOCKERDIR/data/backup:/backup # TODO: [db-backup] Backup directly to SMB Share
+      - authelia_data:/data:ro
+    mem_limit: 1024m
+    environment:
+      - TIMEZONE=${TZ}
+      - USER_DBBACKUP=${PUID}
+      - GROUP_DBBACKUP=${PGID}
+      - CONTAINER_NAME=authelia-db-backup
+      - CONTAINER_ENABLE_MONITORING=FALSE # Disables Zabbix backup statistics
+
+      - ENABLE_NOTIFICATIONS=FALSE   # TODO: [db-backup] Use notifications (SMTP auth not supported)
+
+      - DEFAULT_CHECKSUM=SHA1        # Set standard checksum to SHA1
+      - DEFAULT_COMPRESSION=ZSTD     # Compress all with ZSTD
+      - DEFAULT_BACKUP_INTERVAL=1440 # Backup every 1440 minutes = 24 hours
+      - DEFAULT_BACKUP_BEGIN=0000    # Start backing up at midnight
+      - DEFAULT_CLEANUP_TIME=2880    # Cleanup backups after two days
+
+      - DEFAULT_ENCRYPT=TRUE                            # Encrypt backup files with GPG
+      - DEFAULT_ENCRYPT_PASSPHRASE=${DB_ENC_PASSPHRASE} # Set encryption password
+
+      - DB01_TYPE=sqlite3
+      - DB01_HOST=/data/db.sqlite3
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+
+volumes:
+  authelia_data:
+
+networks:
+  authelia-frontend:

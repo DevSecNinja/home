@@ -1,0 +1,124 @@
+name: Trivy
+
+on:
+  workflow_dispatch:
+  # Note: we just run Trivy weekly so that we can run the full scan
+  # and code scanning alerts don't get confused
+  # push:
+  #   branches:
+  #     - main
+  schedule:
+    - cron: '0 0 * * 0'
+
+permissions:
+  security-events: write
+  contents: read
+
+jobs:
+  scan_fs:
+    name: Security Scan - GitHub Action Runner Filesystem
+    runs-on: ubuntu-24.04
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+
+      - name: Run Trivy vulnerability scanner in filesystem mode
+        uses: aquasecurity/trivy-action@22438a435773de8c97dc0958cc0b823c45b064ac
+        with:
+          scan-type: "fs"
+          ignore-unfixed: true
+          format: "sarif"
+          output: "trivy-results-fs.sarif"
+          severity: "CRITICAL"
+
+      - name: Upload Trivy filesystem scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: "trivy-results-fs.sarif"
+          category: "gh-action-runner-filesystem"
+
+  scan_iac:
+    name: Security Scan - IAC
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+
+      - name: Run Trivy vulnerability scanner in IaC mode
+        uses: aquasecurity/trivy-action@22438a435773de8c97dc0958cc0b823c45b064ac
+        with:
+          scan-type: 'config'
+          hide-progress: true
+          format: 'sarif'
+          output: 'trivy-results-iac.sarif'
+          ignore-unfixed: true
+          severity: 'CRITICAL,HIGH'
+
+      - name: Upload Trivy IaC scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: "trivy-results-iac.sarif"
+          category: "infra-as-code"
+
+  changed-files:
+    name: Get changed files
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.changed-files.outputs.all_changed_files }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          fetch-depth: 0
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v47
+        with:
+          matrix: true
+          since: "2020-01-01" # Get all the files
+          files: |
+            docker/ansible/templates/compose-modules/**.yml
+      - name: List all changed files
+        run: echo '${{ steps.changed-files.outputs.all_changed_files }}'
+
+  scan-docker-images:
+    name: Security Scan - Docker Images
+    runs-on: ubuntu-24.04
+    needs: [changed-files]
+    permissions:
+      security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
+      contents: read # for actions/checkout to fetch code
+    if: ${{ needs.changed-files.outputs.matrix != '[]' && needs.changed-files.outputs.matrix != '' }}
+    strategy:
+      matrix:
+        files: ${{ fromJSON(needs.changed-files.outputs.matrix) }}
+      max-parallel: 4
+      fail-fast: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+
+      - name: Get image ID
+        id: getimage
+        # TODO: [trivy] Make pipeline compatible with multiple images from the same file
+        # TODO: [trivy] Use Python to get the image ID properly and skip deprecated images
+        run: |
+          IMAGE_ID=$(cat ${{ matrix.files }} | grep 'image:' | sed 's/image:\s*//g' | tr -d '[:blank:]' | head -n 1)
+          echo "::set-output name=imageid::$IMAGE_ID"
+          echo "Image ID: $IMAGE_ID"
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@22438a435773de8c97dc0958cc0b823c45b064ac
+        with:
+          image-ref: "${{ steps.getimage.outputs.imageid }}"
+          format: "sarif"
+          ignore-unfixed: true
+          severity: "CRITICAL,HIGH"
+          output: "trivy-results.sarif"
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: "trivy-results.sarif"

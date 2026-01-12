@@ -1,0 +1,49 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: Update Docker containers overview
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+    paths: ["docker/**"]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-24.04
+
+    if: github.actor != 'renovate[bot]' && !github.event.issue.pull_request # We shouldn't mess with the Renovate[bot] commits in PRs
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        id: setup-python
+        with:
+          python-version: "3.14"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+
+      - name: Run script
+        run: python scripts/generate-containers-overview.py
+
+      # Commit all changed files back to the repository
+      - uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: Update Docker containers overview doc

@@ -1,0 +1,36 @@
+---
+- name: Mount data disks and create a filesystem
+  hosts: svlprod.PRODUCTION
+  become: yes
+  gather_facts: yes
+  vars:
+    disk_name: "/dev/sdc"
+    partition_number: 1
+    mount_path: "/mnt/datatest"
+    volume_fstype: "ext4"
+
+  pre_tasks:
+    - name: Unmount a mounted volume
+      ansible.posix.mount:
+        path: "{{ mount_path }}"
+        state: unmounted
+
+  roles:
+    - role: robertdebock.storage
+      storage_partitions:
+        - name: "{{ disk_name }}"
+          number: "{{ partition_number }}"
+          part_end: 100%
+          label: gpt
+          resize: true
+
+  post_tasks:
+    - name: "Resize the filesystem"
+      command: resize2fs -f {{ disk_name }}{{ partition_number }}
+
+    - name: Mount volume
+      ansible.posix.mount:
+        path: "{{ mount_path }}"
+        fstype: "{{ volume_fstype }}"
+        src: "{{ disk_name }}{{ partition_number }}"
+        state: mounted

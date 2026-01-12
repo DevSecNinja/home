@@ -1,0 +1,76 @@
+services:
+  unbound:
+    container_name: unbound
+    image: mvance/unbound:1.22.0@sha256:76906da36d1806f3387338f15dcf8b357c51ce6897fb6450d6ce010460927e90
+    # [unbound] If you need amd64 and arm64 support, use the following image:
+    # pedantic/unbound:<tag>
+    restart: always
+    networks:
+      - adguard-backend
+    mem_limit: 1024m
+    environment:
+      - TZ=${TZ}
+    security_opt:
+      - no-new-privileges=true
+    volumes:
+      - $DOCKERDIR/data/unbound/a-records.conf:/opt/unbound/etc/unbound/a-records.conf:ro
+      - $DOCKERDIR/data/unbound/forward-records.conf:/opt/unbound/etc/unbound/forward-records.conf:ro
+
+  adguard:
+    container_name: adguard
+    image: adguard/adguardhome:v0.107.71@sha256:92929135ced2554aaf94706f766a98ad348f211df61b0704e2db7e8498cc00b7
+    depends_on:
+      - traefik
+      - unbound
+    mem_limit: 1024m
+    networks:
+      adguard-frontend:
+      adguard-backend:
+    ports:
+      - '53:53/tcp'
+      - '53:53/udp'
+      - '853:853/tcp'
+    volumes:
+      - adguard_data:/opt/adguardhome/work
+      - $DOCKERDIR/data/adguard/conf:/opt/adguardhome/conf
+    environment:
+      - TZ=${TZ}
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+    labels:
+      # Backup
+      - docker-volume-backup.stop-during-backup=false # true - otherwise backup can't work with socketproxy
+      # Homepage
+      - homepage.group=Infrastructure
+      - homepage.name=AdGuard - $GENERIC_HOSTNAME_SUFFIX
+      - homepage.icon=adguard-home.svg
+      - homepage.href=https://adguard-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
+      - homepage.description=DNS Service
+      ## Widget
+      - homepage.widget.type=adguard
+      - homepage.widget.url=https://adguard-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
+      - homepage.widget.headers.X-Monitor-Key=${GENERIC_MONITORING_HEADER_SECRET}
+      # Traefik
+      - "traefik.enable=true"
+      - "traefik.docker.network=adguard-frontend"
+      ## Middlewares
+      - "traefik.http.routers.adguard-rtr.middlewares=chain-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.adguard-rtr.rule=Host(`adguard-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
+      - "traefik.http.routers.adguard-rtr.service=adguard"
+      # Enable the management port
+      - "traefik.http.services.adguard.loadbalancer.server.port=80"
+      ## Router for Gatus — bypass auth if secret header is present
+      - "traefik.http.routers.adguard-monitor-rtr.rule=Host(`adguard-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
+      - "traefik.http.routers.adguard-monitor-rtr.service=adguard"
+      - "traefik.http.routers.adguard-monitor-rtr.priority=100"  # Higher priority so it matches first
+
+networks:
+  adguard-frontend:
+    name: adguard-frontend
+  adguard-backend:
+    name: adguard-backend
+
+volumes:
+  adguard_data:

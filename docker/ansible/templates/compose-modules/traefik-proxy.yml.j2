@@ -1,0 +1,114 @@
+services:
+  traefik:
+    container_name: traefik
+    image: traefik:v3.6.6@sha256:82d3d16dde0474a51fef00b28de143d48b67f7a27453224d5e7b5aaefff26a97
+    depends_on:
+      - traefik-docker-proxy
+    restart: always
+    networks:
+      traefik-backend:
+      #% for network in frontend_networks +%#
+      # Dynamically added by Ansible
+      {{ network }}: {}
+      #% endfor +%#
+    security_opt:
+      - no-new-privileges=true
+    ports:
+      - target: 80
+        published: 80
+        protocol: tcp
+        mode: host
+      - target: 443
+        published: 443
+        protocol: tcp
+        mode: host
+#% if 'infra' in group_names %#
+      # Unifi Guest portal can only be reached on 8843
+      - target: 8843
+        published: 8843
+        protocol: tcp
+        mode: host
+#% endif %#
+#% if 'external' in group_names %#
+      # Separate port for public HTTPS access
+      - target: {{ generic__public_https_port }}
+        published: {{ generic__public_https_port }}
+        protocol: tcp
+        mode: host
+#% endif %#
+#% if 'vpnservers' in group_names %#
+      # Wireguard VPN
+      - target: 51820
+        published: 51820
+        protocol: udp
+        mode: host
+#% endif %#
+    volumes:
+      - $DOCKERDIR/data/traefik/acme/acme.json:/acme.json
+      - $DOCKERDIR/data/traefik/certchain:/certchain
+      - $DOCKERDIR/data/traefik/rules:/rules
+      - $DOCKERDIR/data/traefik/traefik.yml:/etc/traefik/traefik.yml:ro
+    mem_limit: 1024m
+    environment:
+      - TZ=${TZ}
+      - CF_API_EMAIL=$CLOUDFLARE_EMAIL
+      - CF_DNS_API_TOKEN=$CLOUDFLARE_API_TOKEN
+    labels:
+      # Homepage
+      - homepage.group=Per Server Consoles
+      - homepage.name=Traefik - $GENERIC_HOSTNAME_SUFFIX
+      - homepage.icon=traefik.svg
+      - homepage.href=https://traefik-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
+      - homepage.description=Application Proxy
+      ## Widget
+      - homepage.widget.type=traefik
+      - homepage.widget.url=https://traefik-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
+      - homepage.widget.headers.X-Monitor-Key=${GENERIC_MONITORING_HEADER_SECRET}
+      # Traefik
+      - "traefik.enable=true"
+      ## TLS
+      - "traefik.http.routers.traefik-rtr.tls.certresolver=dns-cloudflare"
+      - "traefik.http.routers.traefik-rtr.tls.domains[0].main=$DOMAINNAME"
+      - "traefik.http.routers.traefik-rtr.tls.domains[0].sans=*.$DOMAINNAME"
+#% if 'untrusted' in group_names %#
+      - "traefik.http.routers.traefik-rtr.tls.domains[1].main=hadiscover.com"
+      - "traefik.http.routers.traefik-rtr.tls.domains[1].sans=*.hadiscover.com"
+#% endif %#
+#% if 'trusted' in group_names %#
+      ## Middlewares
+      - "traefik.http.routers.traefik-rtr.middlewares=chain-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.traefik-rtr.rule=Host(`traefik-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
+      - "traefik.http.routers.traefik-rtr.service=api@internal"
+      ## Router for Gatus — bypass auth if secret header is present
+      - "traefik.http.routers.traefik-monitor-rtr.rule=Host(`traefik-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
+      - "traefik.http.routers.traefik-monitor-rtr.service=api@internal"
+      - "traefik.http.routers.traefik-monitor-rtr.priority=100"  # Higher priority so it matches first
+#% endif %#
+    # Saves some CPU cycles + healthcheck doesn't do anything on failure
+    # healthcheck:
+    #   test: ["CMD-SHELL","traefik healthcheck --ping.entrypoint ping --entryPoints.ping.address=:8267 --ping"]
+
+  traefik-docker-proxy:
+    # TODO: [docker] Restore version pinning for ghcr.io hosted images since they have a distinct digest per arch
+    image: lscr.io/linuxserver/socket-proxy:version-3.2.10-r0@sha256:0fce1fb8edeb8a891940ed4b3f6dd52c9517925a40bf9d1dbf540930c852ce66
+    container_name: traefik-docker-proxy
+    restart: always
+    networks:
+      - traefik-backend
+    environment:
+      - TZ=${TZ}
+      - CONTAINERS=1 # Allow access to viewing containers
+    security_opt:
+      - no-new-privileges=true
+    mem_limit: 50m
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    read_only: true
+    tmpfs:
+      - /run
+
+networks:
+  traefik-backend:
+    name: traefik-backend
+    driver: bridge

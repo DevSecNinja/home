@@ -1,0 +1,15 @@
+# Allow certificate generation
+path "pki_int/issue/{{ apps__vault_entra_id_role_name }}"
+{
+  capabilities = [ "create", "update" ]
+}
+
+path "pki_int/issue/docker-server"
+{
+  capabilities = [ "create", "update" ]
+}
+
+path "pki_int/issue/docker-client"
+{
+  capabilities = [ "create", "update" ]
+}

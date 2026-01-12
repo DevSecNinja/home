@@ -1,0 +1,13 @@
+---
+- hosts: compute
+  name: "Get free disk space on compute servers"
+  become: yes
+  vars:
+  tasks:
+    - name: "[Disk Space] Get free disk space"
+      command: df -h /
+      register: disk_space
+
+    - name: "[Disk Space] Display free disk space"
+      debug:
+        msg: "Free disk space on / : {{ disk_space.stdout_lines[1].split()[3] }}, percent used: {{ disk_space.stdout_lines[1].split()[4] }}"

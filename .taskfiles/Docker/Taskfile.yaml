@@ -1,0 +1,41 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+
+vars:
+  ANSIBLE_INVENTORY_FILE: "{{.DOCKER_DIR}}/ansible/inventory/hosts.yaml"
+
+env:
+  ANSIBLE_VARS_ENABLED: "host_group_vars,community.sops.sops"
+  ANSIBLE_INVENTORY: "{{.DOCKER_DIR}}/ansible/inventory/hosts"
+
+tasks:
+
+  run:
+    desc: Run an Ansible playbook for configuring a Docker host
+    summary: |
+      Args:
+        playbook: Playbook to run (required)
+    # prompt: Run Ansible playbook '{{.playbook}}'... continue?
+    cmd: "{{.VIRTUAL_ENV}}/bin/ansible-playbook --inventory {{.ANSIBLE_INVENTORY_FILE}} {{.DOCKER_DIR}}/ansible/playbooks/{{.playbook}}.yaml {{.CLI_ARGS}}"
+    requires:
+      vars: ["playbook"]
+    preconditions:
+      - { msg: "Missing Ansible inventory file", sh: "test -f {{.ANSIBLE_INVENTORY_FILE}}" }
+
+  restart:
+    desc: Restart a Docker container on all Docker hosts
+    summary: |
+      Args:
+        container: Docker container to restart (required)
+    cmd: "{{.VIRTUAL_ENV}}/bin/ansible docker --inventory {{.ANSIBLE_INVENTORY_FILE}} -a 'chdir=/srv/docker docker compose restart {{.container}}'"
+    requires:
+      vars: ["container"]
+    preconditions:
+      - { msg: "Missing Ansible inventory file", sh: "test -f {{.ANSIBLE_INVENTORY_FILE}}" }
+
+  install-roles:
+    desc: Install Ansible roles from requirements.yml
+    cmd: "{{.VIRTUAL_ENV}}/bin/ansible-galaxy install -r {{.DOCKER_DIR}}/ansible/requirements.yml -vvv"
+    preconditions:
+      - { msg: "requirements.yml not found", sh: "test -f {{.DOCKER_DIR}}/ansible/requirements.yml" }

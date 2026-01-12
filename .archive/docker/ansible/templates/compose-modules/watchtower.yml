@@ -1,0 +1,21 @@
+#
+#### DEPRECATION NOTICE
+## This compose module is no longer in use.
+## Replaced by: Renovate Bot, GitHub Pull Requests and tags on the image
+## Last used version: 1.7.1@sha256:6dd50763bbd632a83cb154d5451700530d1e44200b268a4e9488fefdfcf2b038
+#
+
+services:
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock # Note: more secure to use Docker socket proxy here
+    mem_limit: 1024m
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+    environment:
+      - TZ=${TZ}
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_NOTIFICATION_URL=${NOTIFICATIONS_TEAMS_WEBHOOK_CONTAINRRR}

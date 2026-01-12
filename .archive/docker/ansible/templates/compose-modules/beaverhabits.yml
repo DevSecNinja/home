@@ -1,0 +1,86 @@
+#
+#### DEPRECATION NOTICE
+## This compose module is no longer in use
+## Replaced by: None
+## Last used version: 0.4@sha256:390996eb549510e7979bbb9956119b5391184e80be7e9398530b3dd5128ab19b
+#
+
+services:
+  beaverhabits:
+    image: daya0576/beaverhabits
+    user: "${PUID}:${PGID}"
+    container_name: beaverhabits
+    depends_on:
+      - traefik
+    restart: always
+    mem_limit: 512m
+    security_opt:
+      - no-new-privileges=true
+    environment:
+      - TZ=${TZ}
+      - HABITS_STORAGE=DATABASE
+      - MAX_USER_COUNT=1
+    networks:
+      - beaverhabits-frontend
+    volumes:
+      - beaverhabits_data:/app/.user/
+    labels:
+      # Homepage
+      - homepage.group=Productivity
+      - homepage.name=Beaver Habit Tracker
+      - homepage.icon=sh-beaver-habit-tracker
+      - homepage.href=https://habits.$DOMAINNAME
+      - homepage.description=Simple habit tracker
+      # Traefik
+      - "traefik.enable=true"
+      - "traefik.docker.network=beaverhabits-frontend"
+      ## HTTP Routers
+      - "traefik.http.routers.beaverhabits-rtr.rule=Host(`habits.$DOMAINNAME`)"
+      ## Middlewares
+      - "traefik.http.routers.beaverhabits-rtr.middlewares=chain-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.beaverhabits-rtr.service=beaverhabits-svc"
+      - "traefik.http.services.beaverhabits-svc.loadbalancer.server.port=8080"
+
+  beaverhabits-db-backup:
+    container_name: beaverhabits-db-backup
+    image: tiredofit/db-backup # :4.1.19@sha256:26eca0cda2b5decb4e296917f9aaebda2e6f89a237663a65e1cb3eccfe432cd0
+    volumes:
+      - beaverhabits_data:/data:ro
+    mem_limit: 512m
+    environment:
+      - TIMEZONE=${TZ}
+      - USER_DBBACKUP=${PUID}
+      - GROUP_DBBACKUP=${PGID}
+      - CONTAINER_NAME=beaverhabits-db-backup
+      - CONTAINER_ENABLE_MONITORING=FALSE # Disables Zabbix backup statistics
+
+      - ENABLE_NOTIFICATIONS=FALSE   # TODO: [db-backup] Use notifications (SMTP auth not supported)
+
+      - DEFAULT_CHECKSUM=SHA1        # Set standard checksum to SHA1
+      - DEFAULT_COMPRESSION=ZSTD     # Compress all with ZSTD
+      - DEFAULT_BACKUP_INTERVAL=1440 # Backup every 1440 minutes = 24 hours
+      - DEFAULT_BACKUP_BEGIN=0000    # Start backing up at midnight
+      - DEFAULT_CLEANUP_TIME=2880    # Cleanup backups after two days
+
+      - DEFAULT_ENCRYPT=TRUE                            # Encrypt backup files with GPG
+      - DEFAULT_ENCRYPT_PASSPHRASE=${DB_ENC_PASSPHRASE} # Set encryption password
+
+      - DEFAULT_BACKUP_LOCATION=blobxfer
+      - DEFAULT_BLOBXFER_STORAGE_ACCOUNT=${DB_BACKUP_SA_NAME}
+      - DEFAULT_BLOBXFER_STORAGE_ACCOUNT_KEY=${DB_BACKUP_SA_KEY}
+      - DEFAULT_BLOBXFER_REMOTE_PATH=${DB_BACKUP_SA_PATH}
+      - DEFAULT_BLOBXFER_MODE=${DB_BACKUP_SA_MODE}
+
+      - DB01_TYPE=sqlite3
+      - DB01_HOST=/data/habits.db
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+
+volumes:
+  beaverhabits_data:
+
+networks:
+  beaverhabits-frontend:
+    name: beaverhabits-frontend

@@ -1,0 +1,9 @@
+---
+- hosts: docker
+  become: yes
+  vars:
+  tasks:
+    - include_tasks: ../tasks/configure-docker.yaml
+
+  handlers:
+    - import_tasks: ../handlers/main.yml

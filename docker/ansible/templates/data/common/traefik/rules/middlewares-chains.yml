@@ -1,0 +1,77 @@
+http:
+  middlewares:
+    chain-no-auth:
+      chain:
+        middlewares:
+          - "middlewares-rate-limit"
+          - "middlewares-secure-headers"
+          - "middlewares-redirect-to-https"
+    chain-no-auth-custom-port:
+      chain:
+        middlewares:
+          - "middlewares-rate-limit"
+          - "middlewares-secure-headers"
+    chain-no-auth-cors:
+      chain:
+        middlewares:
+          - "middlewares-rate-limit"
+          - "middlewares-cors"
+    chain-no-auth-immich-server:
+      chain:
+        middlewares:
+          - "middlewares-rate-limit"
+          - "middlewares-secure-headers"
+          - "middlewares-redirect-to-https"
+          - "middlewares-big-file-upload"
+    chain-no-auth-plex:
+      chain:
+        middlewares:
+          - "middlewares-rate-limit"
+          - "middlewares-secure-headers"
+          - "middlewares-redirect-to-https"
+          - "middlewares-header-spoof"
+    chain-auth:
+      chain:
+        middlewares:
+          - "middlewares-rate-limit"
+          - "middlewares-secure-headers"
+          - "middlewares-auth"
+    chain-auth-cors:
+      chain:
+        middlewares:
+          - "middlewares-rate-limit"
+          - "middlewares-cors"
+          - "middlewares-auth"
+    chain-mtls:
+      chain:
+        middlewares:
+          - "middlewares-rate-limit"
+          - "middlewares-secure-headers"
+          - "middlewares-mtls"
+          - "middlewares-whitelist-localnetwork"
+    chain-no-auth-infra-whitelist:
+      chain:
+        middlewares:
+          - "middlewares-rate-limit"
+          - "middlewares-secure-headers"
+          - "middlewares-whitelist-infra"
+    chain-no-auth-svlinfra-whitelist:
+      chain:
+        middlewares:
+          - "middlewares-rate-limit"
+          - "middlewares-secure-headers"
+          - "middlewares-whitelist-svlinfra"
+    chain-basic-auth-svlinfra-whitelist:
+      chain:
+        middlewares:
+          - "middlewares-rate-limit"
+          - "middlewares-secure-headers"
+          - "middlewares-whitelist-svlinfra"
+          - "middlewares-docker-proxy-auth"
+    chain-basic-auth-home-whitelist:
+      chain:
+        middlewares:
+          - "middlewares-rate-limit"
+          - "middlewares-secure-headers"
+          - "middlewares-whitelist-home"
+          - "middlewares-docker-proxy-auth"

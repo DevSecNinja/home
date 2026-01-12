@@ -1,0 +1,72 @@
+#
+#### DEPRECATION NOTICE
+## This compose module is no longer in use
+## Replaced by: Kubernetes cluster resource
+## Last used version: 3.2.1@sha256:bf617e9d67e80247a59f717f9c1ad388d7d32dc0a1d29abd5799516d15e0a9b5
+#
+
+services:
+  promtail:
+    image: grafana/promtail
+    container_name: promtail
+    depends_on:
+      - loki
+      - promtail-docker-proxy
+    volumes:
+      - $DOCKERDIR/data/promtail/promtail.yml:/etc/promtail/promtail.yml
+      # TODO: [promtail] Check what the implications are of not mounting outside of Docker folder which is a security issue
+      #- /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - TZ=${TZ}
+    command: -config.file=/etc/promtail/promtail.yml
+    restart: always
+    networks:
+      - t2_proxy
+      - promtail-backend
+    mem_limit: 1024m
+    security_opt:
+      - no-new-privileges=true
+    labels:
+      # Homepage
+      - homepage.group=Infrastructure
+      - homepage.name=Promtail
+      - homepage.icon=grafana.svg
+      - homepage.href=https://promtail.$DOMAINNAME
+      - homepage.description=Log Collector
+      # Group
+      - org.label-schema.group=infrastructure
+      # Traefik
+      - "traefik.enable=true"
+      ## Middlewares
+      - "traefik.http.routers.promtail-rtr.middlewares=chain-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.promtail-rtr.service=promtail"
+      ### Enable the server port
+      - "traefik.http.services.promtail.loadbalancer.server.port=9080"
+
+  promtail-docker-proxy:
+    image: lscr.io/linuxserver/socket-proxy:version-1.26.2-r0@sha256:d6d936c98bd7ab4f643ace8c548293d6cd511f0692471e1e9bfb5e144e63627a
+    container_name: promtail-docker-proxy
+    restart: always
+    networks:
+      - promtail-backend
+    environment:
+      - TZ=${TZ}
+      - NODES=1
+      - NETWORKS=1
+      - SERVICES=1
+      - TASKS=1
+    security_opt:
+      - no-new-privileges=true
+    mem_limit: 50m
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    read_only: true
+    tmpfs:
+      - /run
+
+networks:
+  promtail-backend:
+    name: promtail-backend
+    driver: bridge

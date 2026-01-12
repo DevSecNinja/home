@@ -1,0 +1,119 @@
+---
+- name: Samba Server
+  hosts: svlprod.PRODUCTION
+  become: true
+  tasks:
+    - name: Load encrypted credentials
+      community.sops.load_vars:
+        file: ../inventory/group_vars/all/secrets.sops.yml
+        age_keyfile: $HOME/git/home/age.key
+        config_path: $HOME/git/home/.sops.yaml
+        expressions: ignore  # explicitly do not evaluate expressions
+                             # on load (this is the default)
+
+    - name: Load encrypted Docker credentials
+      community.sops.load_vars:
+        file: ../inventory/group_vars/docker/secrets.sops.yml
+        age_keyfile: $HOME/git/home/age.key
+        config_path: $HOME/git/home/.sops.yaml
+        expressions: ignore  # explicitly do not evaluate expressions
+                             # on load (this is the default)
+      when: inventory_hostname in groups['docker']
+
+    #
+    # Groups
+    #
+
+    - name: Create media group
+      ansible.builtin.group:
+        name: media
+        state: present
+        gid: 1750
+
+    - name: Create homeassistantbackup group
+      ansible.builtin.group:
+        name: homeassistantbackup
+        state: present
+        gid: 1751
+
+    - name: Create "{{ apps__samba_desktop_backup_username }}" group
+      ansible.builtin.group:
+        name: "{{ apps__samba_desktop_backup_username }}"
+        state: present
+        gid: 1752
+
+    #
+    # Users
+    #
+
+    - name: Add user "{{ apps__samba_home_assistant_username }}"
+      ansible.builtin.user:
+        name: "{{ apps__samba_home_assistant_username }}"
+        shell: /sbin/nologin
+        password: "{{ apps__samba_home_assistant_password }}"
+        groups: homeassistantbackup
+        append: true
+        create_home: no
+        comment: "Samba User"
+        state: present
+
+    - name: Add user "{{ apps__samba_desktop_backup_username }}"
+      ansible.builtin.user:
+        name: "{{ apps__samba_desktop_backup_username }}"
+        shell: /sbin/nologin
+        password: "{{ apps__samba_backup_password }}"
+        groups: "{{ apps__samba_desktop_backup_username }}"
+        append: true
+        create_home: no
+        comment: "Samba User"
+        state: present
+
+    # Update existing user
+    - name: Add user "{{ apps__samba_username }}"
+      ansible.builtin.user:
+        name: "{{ apps__samba_username }}"
+        groups: "media"
+        append: true
+
+    - name: Include Samba Server role
+      ansible.builtin.include_role:
+        name: vladgh.samba.server
+      vars:
+        samba_users:
+          - name: "{{ apps__samba_home_assistant_username }}"
+            password: "{{ apps__samba_home_assistant_password }}"
+          - name: "{{ apps__samba_desktop_backup_username }}"
+            password: "{{ apps__samba_desktop_backup_password }}"
+          - name: "{{ apps__samba_username }}"
+            password: "{{ apps__samba_password }}"
+        samba_shares:
+          - name: Media
+            comment: "Media Location"
+            group: media
+            write_list: "+media"
+            valid_users: "+media" # Otherwise, registered users can read
+            path: "{{ docker_data_dir }}/media"
+            browseable: true # Visibility in Explorer
+          - name: HomeAssistantBackup
+            comment: "Home Assistant Backup Location"
+            group: homeassistantbackup
+            write_list: "+homeassistantbackup"
+            valid_users: "+homeassistantbackup" # Otherwise, registered users can read
+            path: "{{ docker_archive_dir }}/backup/HomeAssistant"
+            browseable: false # Visibility in Explorer
+          - name: "{{ apps__samba_desktop_backup_username }}"
+            comment: "{{ generic__hostnames_desktop }} Backup Location"
+            group: "{{ apps__samba_desktop_backup_username }}"
+            write_list: "+{{ apps__samba_desktop_backup_username }}"
+            valid_users: "+{{ apps__samba_desktop_backup_username }}" # Otherwise, registered users can read
+            path: "{{ docker_archive_dir }}/backup/{{ generic__hostnames_desktop }}"
+            browseable: false # Visibility in Explorer
+
+  post_tasks:
+    - name: Display smb.conf contents
+      command: cat smb.conf chdir=/etc/samba
+      register: smb_conf_output
+
+    - name: Print to console
+      debug:
+        msg: "{{ smb_conf_output.stdout_lines }}"

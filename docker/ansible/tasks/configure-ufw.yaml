@@ -1,0 +1,76 @@
+---
+# to verify ufw configuration run:
+# sudo ufw status verbose
+
+- name: Install ufw
+  apt: package=ufw state=present
+
+- name: Configure ufw defaults
+  ufw: direction={{ item.direction }} policy={{ item.policy }}
+  with_items:
+    - { direction: 'incoming', policy: 'deny' }
+    - { direction: 'outgoing', policy: 'allow' }
+
+- name: Configure ufw rules - all
+  ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }} comment={{ item.comment }}
+  with_items:
+    - { rule: 'limit', port: '{{ ssh_port | default("22") }}', proto: 'tcp', comment: 'SSH' }
+
+- name: Configure ufw rules - webservers
+  ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }} comment={{ item.comment }}
+  with_items:
+    - { rule: 'allow', port: '80', proto: 'tcp', comment: 'Traefik' }
+    - { rule: 'allow', port: '443', proto: 'tcp', comment: 'Traefik'  }
+    # - { rule: 'allow', port: '8085', proto: 'tcp', comment: 'Traefik'  }
+  when: "'webservers' in group_names"
+
+# - name: Configure ufw rules - infra server connections
+#   ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }} comment={{ item.comment }} from={{ item.from }}
+#   with_items:
+#     - { rule: 'allow', port: '2376', proto: 'tcp', comment: 'Docker Daemon', from: '192.168.1.15' }
+#   when: "'docker' in group_names"
+
+- name: Configure ufw rules - unifi
+  ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }} comment={{ item.comment }}
+  with_items:
+    - { rule: 'allow', port: '3478', proto: 'udp', comment: 'Unifi' }
+    - { rule: 'allow', port: '8843', proto: 'tcp', comment: 'Unifi' }
+    - { rule: 'allow', port: '10001', proto: 'udp', comment: 'Unifi' }
+    - { rule: 'allow', port: '8080', proto: 'tcp', comment: 'Unifi' }
+    - { rule: 'allow', port: '1900', proto: 'udp', comment: 'Unifi' }
+    - { rule: 'allow', port: '6789', proto: 'tcp', comment: 'Unifi' }
+  when: "'infra' in group_names"
+
+- name: Configure ufw rules - dnsservers
+  ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }} comment={{ item.comment }}
+  with_items:
+    - { rule: 'allow', port: '53', proto: 'tcp', comment: 'AdGuard' }
+    - { rule: 'allow', port: '53', proto: 'udp', comment: 'AdGuard' }
+    - { rule: 'allow', port: '853', proto: 'tcp', comment: 'AdGuard' }
+  when: "'dnsservers' in group_names"
+
+- name: Configure ufw rules - external
+  ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }} comment={{ item.comment }}
+  with_items:
+    - { rule: 'allow', port: '{{ generic__public_https_port }}', proto: 'tcp', comment: 'Traefik Public HTTPS service' }
+  when: inventory_hostname in groups['external'] and inventory_hostname in groups['webservers']
+
+- name: Configure ufw rules - vpnservers
+  ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }} comment={{ item.comment }}
+  with_items:
+    - { rule: 'allow', port: '51820', proto: 'udp', comment: 'Wireguard' }
+  when: "'vpnservers' in group_names"
+
+- name: Configure ufw rules - samba
+  ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }} comment={{ item.comment }}
+  with_items:
+    - { rule: 'allow', port: '445', proto: 'tcp', comment: 'Samba' }
+  when: "'samba' in group_names"
+
+- name: Enable ufw logging
+  ufw: logging=on
+  notify:
+    - restart ufw
+
+- name: Enable ufw
+  ufw: state=enabled

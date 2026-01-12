@@ -1,0 +1,71 @@
+---
+virtualization:
+  children:
+    hypervisor:
+      hosts:
+
+storage:
+  children:
+    nas:
+      hosts:
+        svlnas.ravensberg.org:
+          ansible_user: "truenas_admin"
+
+compute:
+  children:
+    development:
+      hosts:
+        svldev.MANAGEMENT:
+          ansible_user: "jean-paul"
+    docker:
+      children:
+        webservers:
+          children:
+            linux_amd64:
+              children:
+                trusted:
+                  children:
+                    internal:
+                      children:
+                        apps:
+                          hosts:
+                            svlapps.ravensberg.org:
+                              ansible_user: "jean-paul"
+                        infra:
+                          hosts:
+                            svlinfra.MANAGEMENT:
+                              ansible_user: "jean-paul"
+                        production:
+                          hosts:
+                        media:
+                          hosts:
+                            svlmedia.ravensberg.org:
+                              ansible_user: "jean-paul"
+                    external:
+                      hosts:
+                        svlext.ravensberg.org:
+                          ansible_user: "jean-paul"
+                untrusted:
+                  children:
+                    dmz:
+                      hosts:
+                        svldmz.ravensberg.org:
+                          ansible_user: "jean-paul"
+
+            linux_arm64_v8:
+              children:
+                internal:
+                  children:
+                    fallback:
+
+        dnsservers:
+          hosts:
+            svlext.ravensberg.org:
+              ansible_user: "jean-paul"
+            svlinfra.MANAGEMENT:
+              ansible_user: "jean-paul"
+
+        vpnservers:
+          hosts:
+            svlext.ravensberg.org:
+              ansible_user: "jean-paul"

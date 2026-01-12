@@ -1,0 +1,19 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/latest/configs/services
+
+- Infrastructure:
+    - NAS:
+        href: https://svlnas.{{ generic__domain_name }}
+        icon: truenas
+        description: TrueNAS Scale
+#% if 'internal' in group_names %#
+        siteMonitor: https://svlnas.{{ generic__domain_name }}
+#% endif %#
+    - JetKVM:
+        href: http://jetkvm.MANAGEMENT
+        icon: jetkvm
+        description: KVM Server
+#% if 'internal' in group_names %#
+        siteMonitor: http://jetkvm.MANAGEMENT
+#% endif %#

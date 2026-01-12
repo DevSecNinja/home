@@ -1,0 +1,154 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &name outline
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+
+  install:
+    timeout: 10m
+    replace: true
+    crds: CreateReplace
+    remediation:
+      retries: 3
+
+  upgrade:
+    remediation:
+      remediateLastFailure: true
+      retries: 3
+      strategy: rollback
+    cleanupOnFail: true
+    crds: CreateReplace
+
+  test:
+    enable: true
+
+  rollback:
+    recreate: true
+    force: true
+    cleanupOnFail: true
+
+  uninstall:
+    keepHistory: false
+
+  maxHistory: 1
+
+  values:
+
+    controllers:
+      ${APP}:
+        enabled: true
+        type: deployment
+        annotations:
+          reloader.stakater.com/auto: "true"
+        replicas: 1
+
+        pod:
+          securityContext:
+            fsGroup: 1001
+            runAsUser: 1001
+            runAsGroup: 1001
+            fsGroupChangePolicy: "OnRootMismatch"
+
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: 16
+            envFrom: &envFrom
+              - secretRef:
+                  name: outline-secret
+
+        containers:
+          app:
+            nameOverride: *name
+            image:
+              repository: docker.io/outlinewiki/outline
+              tag: 0.81.1@sha256:e539971b59b2523ab54bf792105d1cff6432974a37e18211c175cd053d7feb62
+              pullPolicy: IfNotPresent
+
+            env:
+              TZ: ${TIMEZONE}
+              NODE_ENV: production
+              PGSSLMODE: disable
+              URL: https://${GATUS_SUBDOMAIN}.${SECRET_DOMAIN}
+              PORT: &port 3000
+              ENABLE_UPDATES: false
+
+              FILE_STORAGE: local
+              FILE_STORAGE_UPLOAD_MAX_SIZE: "26214400" # Requires string
+              FILE_STORAGE_IMPORT_MAX_SIZE: "26214400" # Requires string
+              DATABASE_CONNECTION_POOL_MAX: 10
+              WEB_CONCURRENCY: 10
+            envFrom: *envFrom
+            command: ["/bin/sh", "-c", "yarn db:migrate --env=production-ssl-disabled && yarn start --env=production-ssl-disabled"]
+
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 750Mi
+
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+              startup:
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 5
+
+    service:
+      app:
+        controller: *name
+        ports:
+          http:
+            port: *port
+
+    ingress:
+      app:
+        enabled: true
+        annotations:
+          ## Enable Oauth2 Authentication
+          nginx.ingress.kubernetes.io/auth-url: "http://oauth2-proxy.security.svc.cluster.local:4180/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_DOMAIN}/oauth2/auth/oauth2/start?rd=$scheme://$host$request_uri"
+          ##
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/description: "Documentation and notes"
+          gethomepage.dev/group: Productivity
+          gethomepage.dev/icon: outline.png
+          gethomepage.dev/name: Outline
+        hosts:
+          - host: &host ${GATUS_SUBDOMAIN:-${APP}}.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+
+        tls:
+         - hosts:
+             - *host
+
+    persistence:
+      file-storage:
+        enabled: true
+        type: persistentVolumeClaim
+        storageClass: openebs-hostpath
+        accessMode: ReadWriteOnce
+        size: 5Gi
+        retain: true
+        globalMounts:
+          - path: /var/lib/outline/data

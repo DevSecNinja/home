@@ -1,0 +1,41 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/latest/configs/docker/
+
+# my-docker:
+#   host: 127.0.0.1
+#   port: 2375
+
+docker:
+  host: homepage-docker-proxy
+  port: 2375
+
+#% if 'infra' in group_names %#
+docker-apps:
+  host: homepage-proxy-apps.{{ generic__domain_name }}
+  port: 443 # 2375 # Since we run it via proxy, we use port 443
+  protocol: https
+  headers:
+    Authorization: Basic {{ generic__docker_traefik_htpasswd_entry_b64 }}
+
+docker-external:
+  host: homepage-proxy-ext.{{ generic__domain_name }}
+  port: 443 # 2375 # Since we run it via proxy, we use port 443
+  protocol: https
+  headers:
+    Authorization: Basic {{ generic__docker_traefik_htpasswd_entry_b64 }}
+
+docker-media:
+  host: homepage-proxy-media.{{ generic__domain_name }}
+  port: 443 # 2375 # Since we run it via proxy, we use port 443
+  protocol: https
+  headers:
+    Authorization: Basic {{ generic__docker_traefik_htpasswd_entry_b64 }}
+
+docker-mgmt:
+  host: homepage-proxy-mgmt.{{ generic__domain_name }}
+  port: 443 # 2375 # Since we run it via proxy, we use port 443
+  protocol: https
+  headers:
+    Authorization: Basic {{ generic__docker_traefik_htpasswd_entry_b64 }}
+#% endif %#

@@ -1,0 +1,9 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - include_tasks: ../tasks/update-os.yaml
+    - include_tasks: ../tasks/new-server.yaml
+
+  handlers:
+    - import_tasks: ../handlers/main.yml

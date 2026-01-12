@@ -1,0 +1,62 @@
+#
+#### DEPRECATION NOTICE
+## This compose module is no longer in use
+## Replaced by: Kubernetes cluster resource
+## Last used version: v0.51.0@sha256:771a65c7877817cd9bb4c2d9eecb9fd1ac56f370287617658c51a35061efa71a
+#
+
+services:
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor
+    container_name: cadvisor
+    privileged: true
+    devices:
+      - /dev/kmsg:/dev/kmsg
+    volumes:
+      # TODO: [cadvisor] Check what the implications are of not mounting root which is a security issue
+      #- /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      # TODO: [cadvisor] Check what the implications are of not mounting outside of Docker folder which is a security issue
+      #- /var/lib/docker:/var/lib/docker:ro
+    restart: always
+    networks:
+      - t2_proxy
+    mem_limit: 2048m
+    security_opt:
+      - no-new-privileges=true
+    environment:
+      - TZ=${TZ}
+    command:
+      - "-housekeeping_interval=10s" # Housekeeping is the periodic actions cAdvisor takes. During these actions, cAdvisor will gather container stats.
+      - "-docker_only=true" # do not report raw cgroup metrics, except the root cgroup.
+      - "-store_container_labels=false" # prevent that for each metric also the labels are stored
+      # - "-disable_metrics=percpu,sched,network,tcp,udp,disk,diskIO,hugetlb,referenced_memory,cpu_topology,resctrl,process"
+    labels:
+      # Homepage
+      - homepage.group=Infrastructure
+      - homepage.name=cAdvisor
+      - homepage.icon=mdi-owl-#ffffff
+      - homepage.href=https://cadvisor-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
+      - homepage.description=Docker Monitoring
+      # Group
+      - org.label-schema.group=infrastructure
+      # Traefik
+      - "traefik.enable=true"
+      ## Middlewares
+      - "traefik.http.routers.cadvisor-rtr.middlewares=chain-auth@file"
+      ## Extra no-auth endpoint. No need to create a new service
+      - "traefik.http.routers.cadvisor-noauth-rtr.rule=Host(`cadvisor-noauth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
+      - "traefik.http.routers.cadvisor-noauth-rtr.middlewares=chain-no-auth-mgmt-whitelist@file"
+      ## HTTP Services
+      - "traefik.http.routers.cadvisor-rtr.rule=Host(`cadvisor-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
+      - "traefik.http.routers.cadvisor-rtr.service=cadvisor"
+      ### Enable the server port
+      - "traefik.http.services.cadvisor.loadbalancer.server.port=8080"
+    # Saves some CPU cycles + healthcheck doesn't do anything on failure
+    # healthcheck:
+    #   test: wget --quiet --tries=1 --spider http://localhost:9102/healthz || exit 1
+    #   interval: 15s
+    #   timeout: 15s
+    #   retries: 5
+    #   start_period: 30s

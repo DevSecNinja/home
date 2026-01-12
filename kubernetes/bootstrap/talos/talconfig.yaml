@@ -1,0 +1,85 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/budimanjojo/talhelper/master/pkg/config/schemas/talconfig.json
+---
+# renovate: datasource=docker depName=ghcr.io/siderolabs/installer
+talosVersion: v1.8.4
+# renovate: datasource=docker depName=ghcr.io/siderolabs/kubelet
+kubernetesVersion: v1.31.3
+
+clusterName: "home"
+endpoint: https://192.168.60.50:6443
+clusterPodNets:
+  - "10.69.0.0/16"
+clusterSvcNets:
+  - "10.96.0.0/16"
+additionalApiServerCertSans: &sans
+  - "192.168.60.50"
+  - 127.0.0.1 # KubePrism
+  - "svlk8s"
+  - "svlk8s.ravensberg.org"
+  - "k8s.ravensberg.org"
+additionalMachineCertSans: *sans
+
+# Disable built-in Flannel to use Cilium
+cniConfig:
+  name: none
+
+nodes:
+  - hostname: "svlk8s1"
+    ipAddress: "192.168.60.51"
+    installDisk: "/dev/sda"
+    machineSpec:
+      secureboot: true
+    talosImageURL: factory.talos.dev/installer-secureboot/dcac6b92c17d1d8947a0cee5e0e6b6904089aa878c70d66196bb1138dbd05d1a
+    controlPlane: true
+    networkInterfaces:
+      - deviceSelector:
+          hardwareAddr: "bc:24:11:ca:d5:32"
+        dhcp: false
+        addresses:
+          - "192.168.60.51/24"
+        routes:
+          - network: 0.0.0.0/0
+            gateway: "192.168.60.1"
+        mtu: 
+        vip:
+          ip: "192.168.60.50"
+
+# Global patches
+patches:
+  - # Force nameserver
+    |-
+    machine:
+      network:
+        nameservers:
+          - 9.9.9.9
+          - 149.112.112.112
+  - # Encrypt system disk with TPM
+    |-
+    machine:
+      systemDiskEncryption:
+        ephemeral:
+          provider: luks2
+          keys:
+            - slot: 0
+              tpm: {}
+        state:
+          provider: luks2
+          keys:
+            - slot: 0
+              tpm: {}
+  - "@./patches/global/cluster-discovery.yaml"
+  - "@./patches/global/containerd.yaml"
+  - "@./patches/global/disable-search-domain.yaml"
+  - "@./patches/global/hostdns.yaml"
+  - "@./patches/global/kubelet.yaml"
+  - "@./patches/global/openebs-local.yaml"
+  - "@./patches/global/sysctl.yaml"
+
+# Controller patches
+controlPlane:
+  patches:
+    - "@./patches/controller/api-access.yaml"
+    - "@./patches/controller/cluster.yaml"
+    - "@./patches/controller/disable-admission-controller.yaml"
+    - "@./patches/controller/etcd.yaml"
+

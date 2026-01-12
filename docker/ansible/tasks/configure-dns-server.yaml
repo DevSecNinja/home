@@ -1,0 +1,80 @@
+---
+
+- name: Configure DNS settings
+  block:
+    - name: Get the current hostname
+      command: hostname
+      register: current_hostname
+
+    - name: Set the hostname in /etc/hosts
+      lineinfile:
+        path: /etc/hosts
+        regexp: '.*{{ current_hostname.stdout }}.*'
+        line: '127.0.0.1       {{ current_hostname.stdout | lower }} {{ current_hostname.stdout | upper }} # ansible_managed'
+        state: present
+        backup: yes
+
+    - name: Set DNS Server - Internal
+      ini_file:
+        path: /etc/systemd/resolved.conf
+        section: Resolve
+        option: DNS
+        value: "{{ generic__ips_home_default_gateway }}"
+        no_extra_spaces: yes
+      when: inventory_hostname in groups['internal']
+
+    - name: Set DNS Server - External
+      ini_file:
+        path: /etc/systemd/resolved.conf
+        section: Resolve
+        option: DNS
+        value: 9.9.9.9
+        no_extra_spaces: yes
+      when: inventory_hostname in groups['external']
+
+    - name: Set DNS Fallback Server - External
+      ini_file:
+        path: /etc/systemd/resolved.conf
+        section: Resolve
+        option: FallbackDNS
+        value: 149.112.112.112
+        no_extra_spaces: yes
+      when: inventory_hostname in groups['external']
+
+    - name: Disable systemd-resolved stub listener
+      ini_file:
+        path: /etc/systemd/resolved.conf
+        section: Resolve
+        option: DNSStubListener
+        value: "no"
+        no_extra_spaces: yes
+
+    - name: Point resolv.conf away from stub
+      file:
+        src: /run/systemd/resolve/resolv.conf
+        dest: /etc/resolv.conf
+        state: link
+        force: yes
+
+    - name: Set default as DNS operational mode
+      ini_file:
+        path: /etc/NetworkManager/NetworkManager.conf
+        section: main
+        option: dns
+        value: default
+        no_extra_spaces: yes
+  notify:
+    - "Remove STUB"
+    - "Unmask and Restart systemd-resolved"
+  when: inventory_hostname in groups['dnsservers']
+
+- name: Disable systemd-resolved
+  systemd:
+    name: systemd-resolved
+    state: stopped
+    enabled: no
+    masked: yes
+  notify:
+    - "Remove STUB"
+  # ansible_architecture == "x86_64" because the service doesn't seem to exist on my RPI with Debian ARM
+  when: inventory_hostname in groups['dnsservers'] and ansible_architecture == "x86_64"

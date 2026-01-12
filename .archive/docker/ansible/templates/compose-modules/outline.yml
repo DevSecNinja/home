@@ -1,0 +1,191 @@
+services:
+  outline:
+    image: outlinewiki/outline:0.87.4@sha256:659a8bf588ef2d914ef4e519409f38e472145369383c0a5aa89b286b4dfe860c
+    container_name: outline
+    depends_on:
+      - traefik
+      - outline-db
+      - outline-redis
+    restart: always
+    mem_limit: 1024m
+    volumes:
+      - outline_data:/var/lib/outline/data
+      # PUID/PGID currently not supported by Outline: https://github.com/outline/outline/discussions/9452
+      #- /mnt/smb_share_notes:/var/lib/outline/data
+    security_opt:
+      - no-new-privileges=true
+    environment:
+      - TZ=${TZ}
+      # Outline Config
+      - SECRET_KEY=${OUTLINE_SECRET_KEY}
+      - UTILS_SECRET=${OUTLINE_UTILS_SECRET}
+      - REDIS_URL=redis://:${OUTLINE_REDIS_PASSWORD}@outline-redis:6379
+      - URL=https://docs.$DOMAINNAME
+      - PORT=3000
+      - NODE_ENV=production
+      - FORCE_HTTPS=true
+      - ENABLE_UPDATES=false
+      - WEB_CONCURRENCY=1
+      - LOG_LEVEL=info
+      - DEFAULT_LANGUAGE=en_US
+      - RATE_LIMITER_ENABLED=false # Already enabled on Traefik
+      ## Authentication
+      - AZURE_CLIENT_ID=${OUTLINE_AZURE_CLIENT_ID}
+      - AZURE_CLIENT_SECRET=${OUTLINE_AZURE_CLIENT_SECRET}
+      - AZURE_RESOURCE_APP_ID=${OUTLINE_AZURE_RESOURCE_APP_ID}
+      ## Database
+      - DATABASE_URL=postgresql://outline:${OUTLINE_DB_PASSWORD}@outline-db:5432/outline?connect_timeout=300
+      - PGSSLMODE=disable
+      ## Storage
+      - FILE_STORAGE=local
+      - FILE_STORAGE_LOCAL_ROOT_DIR=/var/lib/outline/data
+      - FILE_STORAGE_UPLOAD_MAX_SIZE=262144000
+    networks:
+      - outline-frontend
+      - outline-backend
+    labels:
+      # Homepage
+      - homepage.group=Productivity
+      - homepage.name=Outline
+      - homepage.icon=si-outline
+      - homepage.href=https://docs.$DOMAINNAME
+      - homepage.description=Documentation
+      # Traefik
+      - "traefik.enable=true"
+      - "traefik.docker.network=outline-frontend"
+      ## Middlewares
+      - "traefik.http.routers.outline-rtr.middlewares=chain-auth@file"
+      - "traefik.http.routers.outline-rtr.rule=Host(`docs.$DOMAINNAME`)"
+      ## HTTP Services
+      - "traefik.http.routers.outline-rtr.service=outline-svc"
+      - "traefik.http.services.outline-svc.loadbalancer.server.port=3000"
+
+  outline-db:
+    image: docker.io/library/postgres:16.10-alpine@sha256:1c6d2f6e4d30d49c529e09a627e8178db5011dde88d955eb08db2e135e64aa09
+    container_name: outline-db
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+    mem_limit: 1024m
+    volumes:
+      - outline_db_data:/var/lib/postgresql/data
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - POSTGRES_DB=outline
+      - POSTGRES_USER=outline
+      - POSTGRES_PASSWORD=${OUTLINE_DB_PASSWORD}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d outline -U outline"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+    networks:
+      - outline-backend
+
+  outline-db-backup:
+    container_name: outline-db-backup
+    image: tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
+    # Uses s6 overlay which requires running as uid 0 first
+    # S6 will drop to USER_DBBACKUP/GROUP_DBBACKUP after startup
+    # user: "${PUID}:${PGID}"
+    depends_on:
+      - outline-db
+    volumes:
+      - /mnt/smb_share_backup/outline-db:/backup
+    mem_limit: 1024m
+    networks:
+      - outline-backend
+      # - mailrise
+    environment:
+      - TIMEZONE=${TZ}
+      - USER_DBBACKUP=${PUID}
+      - GROUP_DBBACKUP=${PGID}
+      - CONTAINER_NAME=outline-db-backup
+      - CONTAINER_ENABLE_MONITORING=FALSE # Disables Zabbix backup statistics
+
+      # TODO: [mailrise] Fix mailrise and add it to ext
+      # - ENABLE_NOTIFICATIONS=TRUE
+      # - NOTIFICATION_TYPE=EMAIL
+      # - SMTP_HOST=mailrise
+      # - SMTP_PORT=${NOTIFICATIONS_MAILRISE_SMTP_PORT}
+      # - MAIL_TO=msteams@mailrise.xyz
+      # - MAIL_FROM=outline-db-backup
+
+      - DEFAULT_CHECKSUM=SHA1        # Set standard checksum to SHA1
+      - DEFAULT_COMPRESSION=ZSTD     # Compress all with ZSTD
+      - DEFAULT_BACKUP_INTERVAL=1440 # Backup every 1440 minutes = 24 hours
+      - DEFAULT_BACKUP_BEGIN=0000    # Start backing up at midnight
+      - DEFAULT_CLEANUP_TIME=2880    # Cleanup backups after two days
+
+      - DEFAULT_ENCRYPT=TRUE                            # Encrypt backup files with GPG
+      - DEFAULT_ENCRYPT_PASSPHRASE=${DB_ENC_PASSPHRASE} # Set encryption password
+
+      - DB01_TYPE=pgsql
+      - DB01_HOST=outline-db
+      - DB01_NAME=outline
+      - DB01_USER=outline
+      - DB01_PORT=5432
+      - DB01_PASS=${OUTLINE_DB_PASSWORD}
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+
+  outline-volume-backup:
+    container_name: outline-volume-backup
+    image: offen/docker-volume-backup:v2.44.0@sha256:fcf92e0f192214ccda0a89f989bed6c49d4ed77da4e59b38ddfcf05a05512337
+    user: "${PUID}:${PGID}"
+    volumes:
+      - outline_data:/backup:ro
+      # Backup destination location
+      - /mnt/smb_share_backup/outline:/archive
+      # Ensure cron & backup logs are in my timezone
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    mem_limit: 512m
+    environment:
+      - TZ=${TZ}
+      - BACKUP_CRON_EXPRESSION=@daily
+      - BACKUP_RETENTION_DAYS=14
+      - GPG_PASSPHRASE=${DB_ENC_PASSPHRASE}
+      # Backup source locations
+      - BACKUP_SOURCES=/backup
+      # Backup destination location
+      - BACKUP_ARCHIVE=/archive
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+
+  outline-redis:
+    image: redis:8.2.1-alpine@sha256:987c376c727652f99625c7d205a1cba3cb2c53b92b0b62aade2bd48ee1593232
+    container_name: outline-redis
+    # Requirepass is needed as environment variable isn't picked up
+    command: >
+      --requirepass ${OUTLINE_REDIS_PASSWORD}
+    restart: always
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 30s
+      retries: 3
+    mem_limit: 1024m
+    security_opt:
+      - no-new-privileges=true
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - REDIS_PASSWORD=${OUTLINE_REDIS_PASSWORD}
+    networks:
+      - outline-backend
+
+volumes:
+  outline_data:
+  outline_db_data:
+
+networks:
+  outline-frontend:
+    name: outline-frontend
+  outline-backend:
+    name: outline-backend

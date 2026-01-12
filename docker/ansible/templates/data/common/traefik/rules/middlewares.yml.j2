@@ -1,0 +1,114 @@
+http:
+  middlewares:
+    middlewares-redirect-to-https:
+      redirectscheme:
+        scheme: "https"
+        permanent: true
+    middlewares-rate-limit:
+      rateLimit:
+        # Increased both average and burst to fix an issue with Immich: https://github.com/immich-app/immich/discussions/6994
+        average: 200
+        burst: 100
+    middlewares-secure-headers:
+      headers:
+        accessControlAllowMethods:
+          - "GET"
+          - "OPTIONS"
+          - "PUT"
+        accessControlMaxAge: 100
+        hostsProxyHeaders:
+          - "X-Forwarded-Host"
+        stsSeconds: 63072000
+        stsIncludeSubdomains: true
+        stsPreload: true
+        forceSTSHeader: true
+        # frameDeny: true # overwritten by customFrameOptionsValue
+        contentTypeNosniff: true
+        browserXssFilter: true
+        referrerPolicy: "same-origin"
+        # Setting contentSecurityPolicy is more secure but it can break things. Proper auth will reduce the risk.
+        # the below line also breaks some apps due to 'none' - sonarr, radarr, etc.
+        permissionsPolicy: "camera 'none'; geolocation 'none'; microphone 'none'; payment 'none'; usb 'none'; vr 'none';"
+        customRequestHeaders:
+          X-Forwarded-Proto: https
+        customResponseHeaders:
+          X-Robots-Tag: "none,noarchive,nosnippet,notranslate,noimageindex,"
+          server: ""
+    middlewares-auth:
+      forwardAuth:
+        address: "http://traefik-forward-auth:4181"
+        trustForwardHeader: true
+        authResponseHeaders:
+          - "X-Forwarded-User"
+          - "X-Forwarded-DisplayName"
+    middlewares-docker-proxy-auth:
+#% if 'trusted' in group_names %#
+      basicAuth:
+        users:
+          - "{{ generic__docker_traefik_htpasswd_entry }}"
+#% endif %#
+    middlewares-whitelist-infra:
+      ipAllowList:
+        sourceRange:
+          - "127.0.0.1/32"
+          - "192.168.1.15"
+    middlewares-whitelist-webservers:
+      ipAllowList:
+        sourceRange:
+          - "127.0.0.1/32"
+          - "192.168.1.15"
+          - "192.168.60.2"
+    middlewares-whitelist-localnetwork:
+      ipAllowList:
+        sourceRange:
+          - "192.168.0.0/16"
+    middlewares-whitelist-svlinfra:
+      ipAllowList:
+        sourceRange:
+          - "192.168.1.15"
+    middlewares-whitelist-home:
+      ipAllowList:
+        sourceRange:
+          - "{{ apps__cloudflare_domain_1_obfuscated_fqdn_ip }}"
+    middlewares-mtls:
+      passTLSClientCert:
+        pem: true
+        info:
+          sans: true
+          subject:
+            commonName: true
+            serialNumber: true
+    middlewares-cors:
+      headers:
+        accessControlAllowMethods:
+          - "GET"
+          - "OPTIONS"
+          - "POST"
+          - "PUT"
+        accessControlAllowHeaders:
+          - "Content-Type"
+          - "Authorization"
+          - "X-Requested-With"
+        accessControlAllowCredentials: true
+        accessControlAllowOriginList:
+          - "https://api-tester.{{ generic__domain_name }}"
+          - "https://api-tester-admin.{{ generic__domain_name }}"
+        accessControlMaxAge: 100
+        addVaryHeader: true
+    # Middleware to spoof headers for apps like Plex
+    # that enforce local access via header inspection
+    middlewares-header-spoof:
+      headers:
+        customRequestHeaders:
+          Host: "127.0.0.1"
+          Referer: "http://127.0.0.1"
+          Origin: "http://127.0.0.1"
+          X-Real-IP: "{clientip}"
+          X-Forwarded-For: "{clientip}"
+    middlewares-big-file-upload:
+      buffering:
+        maxRequestBodyBytes: 0 # disable limit
+        maxResponseBodyBytes: 0 # disable limit
+        memRequestBodyBytes: 20971520 # 20MB in memory before spilling to disk
+        memResponseBodyBytes: 20971520 # 20MB in memory before spilling to disk
+        retryExpression: "IsNetworkError() && Attempts() < 2"

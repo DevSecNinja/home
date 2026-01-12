@@ -1,0 +1,53 @@
+---
+- hosts: compute
+  name: "Update the basics"
+  become: yes
+  gather_facts: true
+  vars:
+  tasks:
+    - name: Stop Folding at Home
+      shell:
+        cmd: "docker compose down foldingathome 2>&1"
+        chdir: /srv/docker
+      when: inventory_hostname in groups['external']
+      failed_when: false
+
+    - include_tasks: ../tasks/new-server.yaml
+    - include_tasks: ../tasks/update-dotfiles.yaml
+    - include_tasks: ../tasks/update-omz.yaml
+
+  handlers:
+    - import_tasks: ../handlers/main.yml
+
+- hosts: compute, virtualization
+  name: "Update risky components (OS, packages, etc.)"
+  become: yes
+  gather_facts: true
+  order: sorted # Runs alphabetically
+  serial: 1 # Run all tasks on one host before going to the next
+  vars:
+  tasks:
+    - include_tasks: ../tasks/update-os.yaml
+    - include_tasks: ../tasks/update-brew.yaml
+    - include_tasks: ../tasks/reboot-check.yaml
+
+    - name: Start Folding at Home
+      shell:
+        cmd: "docker compose up -d foldingathome --wait 2>&1"
+        chdir: /srv/docker
+      when: inventory_hostname in groups['external']
+
+  handlers:
+    - import_tasks: ../handlers/main.yml
+
+- hosts: nas
+  name: "Check for TrueNAS updates"
+  become: false
+  gather_facts: false
+  order: sorted # Runs alphabetically
+  serial: 1 # Run all tasks on one host before going to the next
+  tasks:
+    - include_tasks: ../tasks/check-truenas-updates.yaml
+
+  handlers:
+    - import_tasks: ../handlers/main.yml

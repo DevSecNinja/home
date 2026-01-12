@@ -1,0 +1,111 @@
+name: Validate Docker image
+
+on:
+  workflow_dispatch:
+  # pull_request:
+  #   types: [opened, synchronize, reopened]
+  #   paths: ["docker/**"]
+
+permissions:
+  contents: read
+
+jobs:
+  changed-files:
+    name: Get changed files
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.changed-files.outputs.all_changed_files }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          fetch-depth: 0
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v47
+        with:
+          matrix: true
+          files: |
+            docker/ansible/templates/compose-modules/**.yml
+      - name: List all changed files
+        run: echo '${{ steps.changed-files.outputs.all_changed_files }}'
+
+  scan-docker-images:
+    name: Scan Docker images
+    runs-on: ubuntu-24.04
+    needs: [changed-files]
+    permissions:
+      security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
+      contents: read # for actions/checkout to fetch code
+      pull-requests: write # for actions/github-script to close PRs
+    if: ${{ needs.changed-files.outputs.matrix != '[]' && needs.changed-files.outputs.matrix != '' }}
+    strategy:
+      matrix:
+        files: ${{ fromJSON(needs.changed-files.outputs.matrix) }}
+      max-parallel: 4
+      fail-fast: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+
+      - name: Get image ID
+        id: getimage
+        # TODO: [validate-image] Make pipeline compatible with multiple images from the same file
+        # TODO: [validate-image] Use Python to get the image ID properly
+        run: |
+          IMAGE_ID=$(cat ${{ matrix.files }} | grep 'image:' | sed 's/image:\s*//g' | tr -d '[:blank:]' | head -n 1)
+          echo "::set-output name=imageid::$IMAGE_ID"
+
+      # - name: Run Trivy vulnerability scanner
+      #   uses: aquasecurity/trivy-action@841fb371db7b5cd339e5b2d55c92f5dbd730ac9f
+      #   with:
+      #     image-ref: "${{ steps.getimage.outputs.imageid }}"
+      #     format: "sarif"
+      #     severity: "CRITICAL,HIGH"
+      #     output: "trivy-results.sarif"
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@22438a435773de8c97dc0958cc0b823c45b064ac
+        with:
+          image-ref: "${{ steps.getimage.outputs.imageid }}"
+          format: "json"
+          severity: "CRITICAL,HIGH"
+          output: "trivy-results.json"
+
+      # - name: Upload Trivy scan results to GitHub Security tab
+      #   uses: github/codeql-action/upload-sarif@v3
+      #   with:
+      #     sarif_file: "trivy-results.sarif"
+
+      - name: Check image architecture
+        id: archcheck
+        run: |
+          RESULTS_FILE="trivy-results.json"
+          if [[ -s "$RESULTS_FILE" ]]; then
+            ARCHITECTURE=$(cat $RESULTS_FILE | jq -r '.Metadata.ImageConfig.architecture')
+            if [[ "$ARCHITECTURE" != "amd64" ]]; then
+              echo "Image architecture is not amd64! It is $ARCHITECTURE"
+              echo "::set-output name=image_arch::$ARCHITECTURE"
+              exit 1
+            else
+              echo "Architecture is amd64"
+              echo "::set-output name=image_arch::$ARCHITECTURE"
+            fi
+          fi
+
+      - name: Failure - Close Pull Request
+        run: gh pr close "$NUMBER" --comment "$COMMENT"
+        if: failure() && steps.archcheck.outputs.image_arch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          NUMBER: ${{ github.event.number }}
+          COMMENT: >
+            ❌ Image architecture is not AMD64! It's ${{ steps.archcheck.outputs.image_arch }}.
+
+      - name: Comment PR - Success
+        uses: thollander/actions-comment-pull-request@v3
+        if: success() && steps.archcheck.outputs.image_arch
+        with:
+          message: |
+            ✅ Image architecture is ${{ steps.archcheck.outputs.image_arch }}.

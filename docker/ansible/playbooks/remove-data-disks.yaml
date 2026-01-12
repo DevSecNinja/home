@@ -1,0 +1,43 @@
+---
+- name: Removing the data disk
+  hosts: svlprod.PRODUCTION
+  become: yes
+  gather_facts: yes
+  vars:
+    disk_name: "/dev/sdc"
+    partition_number: 1
+    mount_path: "/mnt/datatest"
+    volume_fstype: "ext4"
+  vars_prompt:
+    - name: nuke
+      prompt: |-
+        Are you sure you want to nuke the disk {{ disk_name }} mounted at {{ mount_path }}?
+        Type 'YES I WANT TO DESTROY THIS DISK' to proceed
+      default: "n"
+      private: false
+  pre_tasks:
+    - name: Check for confirmation
+      ansible.builtin.fail:
+        msg: Aborted nuking the disk
+      when: nuke != 'YES I WANT TO DESTROY THIS DISK'
+
+    - name: Pausing for 5 seconds...
+      ansible.builtin.pause:
+        seconds: 5
+
+  tasks:
+    - name: Unmount a mounted volume & remove from fstab
+      ansible.posix.mount:
+        path: "{{ mount_path }}"
+        state: absent
+
+    - name: Remove filesystem
+      community.general.filesystem:
+        dev: "{{ disk_name }}{{ partition_number }}"
+        state: absent
+
+    - name: Remove partition
+      community.general.parted:
+        device: "{{ disk_name }}"
+        number: "{{ partition_number }}"
+        state: absent

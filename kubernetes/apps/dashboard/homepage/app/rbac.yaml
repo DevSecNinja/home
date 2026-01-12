@@ -1,0 +1,33 @@
+# Assigns the homepage service account the ability to list and watch ingresses in the dashboard namespace
+# The homepage service account gets created in the homepage helm release
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: homepage-clusterrole
+rules:
+  # Required for the services to show up in the dashboard
+  - apiGroups: ["networking.k8s.io"]
+    resources: ["ingresses"]
+    verbs: ["get", "list", "watch"]
+  # Required to get the pod status in the dashboard
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "list", "watch"]
+  # Required to get the metrics in the dashboard
+  - apiGroups: ["metrics.k8s.io"]
+    resources: ["pods"]
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: homepage-clusterrolebinding
+roleRef:
+  kind: ClusterRole
+  name: homepage-clusterrole
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+  - kind: ServiceAccount
+    name: homepage
+    namespace: dashboard

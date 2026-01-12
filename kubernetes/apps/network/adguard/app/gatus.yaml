@@ -1,0 +1,36 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "${APP}-dns-gatus-ep"
+  labels:
+    gatus.io/enabled: "true"
+data:
+  config.yaml: |
+    endpoints:
+      - name: "${APP} - dns - google.com"
+        group: internal-backend
+        url: "${GATUS_SUBDOMAIN:-${APP}}.${GATUS_NAMESPACE}.svc.cluster.local"
+        dns:
+          query-name: "google.com"
+          query-type: "A"
+        conditions:
+          - "[DNS_RCODE] == NOERROR"
+
+      - name: "${APP} - dns - internal"
+        group: internal-backend
+        url: "${GATUS_SUBDOMAIN:-${APP}}.${GATUS_NAMESPACE}.svc.cluster.local"
+        dns:
+          query-name: "${APP}.${SECRET_DOMAIN}"
+          query-type: "A"
+        conditions:
+          - "[DNS_RCODE] == NOERROR"
+
+      - name: "${APP} - dns - load balancer"
+        group: internal
+        url: "192.168.60.56"
+        dns:
+          query-name: "${APP}.${SECRET_DOMAIN}"
+          query-type: "A"
+        conditions:
+          - "[DNS_RCODE] == NOERROR"

@@ -1,3 +1,40 @@
+# Home ~~Kubernetes Cluster~~ Docker Servers
+
+I run a single node TrueNAS Scale server as my NAS with VMs such as Home Assistant OS and a few Docker servers. Before I converted it into a NAS, it used to be a single node Proxmox server with a Talos VM and a Home Assistant OS VM on it. I am still considering going back to Kubernetes one day, but for now most of the good stuff is in the `/docker` folder. I moved back to Docker as my i3-9100 CPU didn't have enough capacity to run a decent amount of services in Kubernetes, while under Docker this is totally fine.
+
+## Docker deployment
+
+To configure the VMs from scratch & provision Docker services, I am using Ansible extensively. This allows me to easily add or reprovision a new Docker server. Have a look at the templates I use under `/docker/ansible`.
+
+## Docker services
+
+Under `/docker/docker_containers.md` you can see which Docker containers I use. This markdown is automatically kept up-to-date.
+
+## Hardware
+
+| #   | Category               | Product                                                                                   |
+|-----|------------------------|-------------------------------------------------------------------------------------------|
+| 1   | Processors             | [Intel Core i3-9100 Boxed](https://tweakers.net/pricewatch/1402228/intel-core-i3-9100-boxed.html) |
+| 1   | Motherboards           | [Fujitsu D3644-B](https://tweakers.net/pricewatch/1216051/fujitsu-d3644-b.html)            |
+| 2   | Internal Hard Drives   | [Seagate IronWolf, 4TB](https://tweakers.net/pricewatch/569349/seagate-ironwolf-4tb.html)  |
+| 1   | Cases                  | [Fractal Design Core 1000 USB 3.0](https://tweakers.net/pricewatch/346358/fractal-design-core-1000-usb-30.html) |
+| 1   | Computer Accessories   | [Leicke ULL Power Supply 156 W](https://tweakers.net/) |
+| 1   | CPU Cooling            | [Arctic Alpine 12 Passive](https://tweakers.net/pricewatch/1257147/arctic-alpine-12-passive.html) |
+| 1   | Fans                   | [Noctua NF-A9 PWM Bruin, 92mm](https://tweakers.net/pricewatch/415491/noctua-nf-a9-pwm-bruin-92mm.html) |
+| 1   | Fans                   | [Scythe Slip Stream PWM, 120mm](https://tweakers.net/pricewatch/248715/scythe-slip-stream-pwm-120mm.html) |
+| 2   | Internal Memory        | [Kingston KSM26ED8/32MF](https://tweakers.net/pricewatch/1858278/kingston-ksm26ed8-32mf.html) |
+| 1   | Power Supplies         | [Mini-box picoPSU PicoPSU-160-XT](https://tweakers.net/pricewatch/317405/mini-box-picopsu-picopsu-160-xt.html) |
+| 1   | SSDs                   | [Samsung 970 Evo Plus 2TB](https://tweakers.net/pricewatch/1310208/samsung-970-evo-plus-2tb.html) |
+
+## Credits
+
+Big thanks to onedr0p and the `k8s-at-home` community for making Kubernetes accessible to the Home Lab enthusiasts!
+
+## Cluster Template README
+
+<details>
+<summary>Open here</summary>
+
 # ⛵ Cluster Template
 
 Welcome to my template designed for deploying a single Kubernetes cluster. Whether you're setting up a cluster at home on bare-metal or virtual machines (VMs), this project aims to simplify the process and make Kubernetes more accessible. This template is inspired by my personal [home-ops](https://github.com/onedr0p/home-ops) repository, providing a practical starting point for anyone interested in managing their own Kubernetes environment.
@@ -492,3 +529,5 @@ If this repo is too hot to handle or too cold to hold check out these following 
 ## 🤝 Thanks
 
 Big shout out to all the contributors, sponsors and everyone else who has helped on this project.
+
+</details>

@@ -1,0 +1,309 @@
+#
+# Archived
+# No need for certificates on the servers anymore
+#
+# Execute with:
+    # - include_tasks: ../tasks/update-certificates.yaml
+    #   when: inventory_hostname in groups['docker'] and inventory_hostname in groups['internal']
+
+# And add the following tasks
+
+    # #
+    # # Load encrypted credentials for the update-certificates task
+    # #
+
+    # - name: Load encrypted credentials
+    #   community.sops.load_vars:
+    #     file: ../inventory/group_vars/all/secrets.sops.yml
+    #     age_keyfile: $HOME/git/home/age.key
+    #     config_path: $HOME/git/home/.sops.yaml
+    #     expressions: ignore  # explicitly do not evaluate expressions
+    #                           # on load (this is the default)
+
+    # - name: Load encrypted Docker credentials
+    #   community.sops.load_vars:
+    #     file: ../inventory/group_vars/docker/secrets.sops.yml
+    #     age_keyfile: $HOME/git/home/age.key
+    #     config_path: $HOME/git/home/.sops.yaml
+    #     expressions: ignore  # explicitly do not evaluate expressions
+    #                           # on load (this is the default)
+    #   when: inventory_hostname in groups['docker']
+
+---
+- name: Install Packages
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  loop:
+    - python3-pip
+    - python3-hvac
+    - python3-cryptography
+
+# TODO: [ansible] Convert duplicate code to an Ansible Role
+
+#
+# Standard certificate
+#
+
+- name: Ensure TLS config dir
+  ansible.builtin.file:
+    path: "/etc/ssl/{{ apps__vault_entra_id_role_name }}"
+    state: directory
+    mode: 0700
+    owner: root
+    group: root
+
+- name: Stat cert files
+  ansible.builtin.stat:
+    path: "/etc/ssl/{{ apps__vault_entra_id_role_name }}/{{ item }}.pem"
+  register: stat
+  loop:
+    - certificate
+    - private_key
+    - issuing_ca
+
+- name: Set issue_cert
+  delegate_to: localhost
+  ansible.builtin.set_fact:
+    issue_cert: "{{ false in (stat.results | community.general.json_query('[*].stat.exists')) }}"
+
+- name: Check certs
+  when: false not in (stat.results | community.general.json_query('[*].stat.exists'))
+  block:
+    - name: Get cert facts
+      community.crypto.x509_certificate_info:
+        path: /etc/ssl/{{ apps__vault_entra_id_role_name }}/certificate.pem
+      register: cert_info
+    - name: Set expired fact
+      ansible.builtin.set_fact:
+        issue_cert: cert_info.expired
+  rescue:
+    - name: Remove expired cert
+      ansible.builtin.file:
+        path: "/etc/ssl/{{ apps__vault_entra_id_role_name }}/{{ item }}.pem"
+        state: absent
+      loop:
+        - certificate
+        - private_key
+        - issuing_ca
+    - name: Set issue_cert fact
+      ansible.builtin.set_fact:
+        issue_cert: true
+
+- name: Issue certificate to host
+  when: (issue_cert | bool)
+  block:
+    - name: Login and use the resulting token
+      when: login_data is undefined
+      community.hashi_vault.vault_login:
+        url: https://vault.{{ generic__domain_name }}
+        auth_method: userpass
+        username: "{{ apps__vault_ansible_username }}"
+        password: "{{ apps__vault_ansible_password }}"
+      register: login_data
+
+    - name: Issue cert from Vault
+      become: false
+      community.hashi_vault.vault_pki_generate_certificate: # noqa syntax-check
+        role_name: "{{ apps__vault_entra_id_role_name }}"
+        common_name: "{{ inventory_hostname_short }}.{{ generic__domain_name }}"
+        ttl: 365d
+        engine_mount_point: "pki_int"
+        url: https://vault.{{ generic__domain_name }}
+        auth_method: token
+        token: "{{ login_data.login.auth.client_token }}"
+      register: cert_data
+
+    # Note: to verify the certs, download the root CA and run:
+    # sudo openssl verify -CAfile /etc/ssl/<org>/root-ca.pem -untrusted /etc/ssl/<org>/ca-chain.pem /etc/ssl/<org>/certificate.pem
+    - name: Deliver certs
+      ansible.builtin.copy:
+        dest: "/etc/ssl/{{ apps__vault_entra_id_role_name }}/{{ item }}.pem"
+        content: "{{ cert_data.data.data[item] }}"
+        mode: 0644
+        owner: root
+        group: root
+      loop:
+        - ca_chain
+        - certificate
+        - issuing_ca
+        - private_key
+
+#
+# Docker Server
+#
+
+- name: Ensure TLS config dir
+  ansible.builtin.file:
+    path: "/etc/ssl/docker-server"
+    state: directory
+    mode: 0700
+    owner: root
+    group: root
+
+- name: Stat cert files
+  ansible.builtin.stat:
+    path: "/etc/ssl/docker-server/{{ item }}.pem"
+  register: stat
+  loop:
+    - certificate
+    - private_key
+    - issuing_ca
+
+- name: Set issue_cert
+  delegate_to: localhost
+  ansible.builtin.set_fact:
+    issue_cert: "{{ false in (stat.results | community.general.json_query('[*].stat.exists')) }}"
+
+- name: Check certs
+  when: false not in (stat.results | community.general.json_query('[*].stat.exists'))
+  block:
+    - name: Get cert facts
+      community.crypto.x509_certificate_info:
+        path: /etc/ssl/docker-server/certificate.pem
+      register: cert_info
+    - name: Set expired fact
+      ansible.builtin.set_fact:
+        issue_cert: cert_info.expired
+  rescue:
+    - name: Remove expired cert
+      ansible.builtin.file:
+        path: "/etc/ssl/docker-server/{{ item }}.pem"
+        state: absent
+      loop:
+        - certificate
+        - private_key
+        - issuing_ca
+    - name: Set issue_cert fact
+      ansible.builtin.set_fact:
+        issue_cert: true
+
+- name: Issue certificate to host
+  when: (issue_cert | bool)
+  block:
+    - name: Login and use the resulting token
+      when: login_data is undefined
+      community.hashi_vault.vault_login:
+        url: https://vault.{{ generic__domain_name }}
+        auth_method: userpass
+        username: "{{ apps__vault_ansible_username }}"
+        password: "{{ apps__vault_ansible_password }}"
+      register: login_data
+
+    - name: Issue cert from Vault
+      become: false
+      community.hashi_vault.vault_pki_generate_certificate: # noqa syntax-check
+        role_name: "docker-server"
+        common_name: "{{ inventory_hostname_short }}.{{ generic__domain_name }}"
+        alt_names: "localhost" # Needed for Docker daemon
+        ip_sans: ["127.0.0.1", "{{ ansible_default_ipv4.address|default(ansible_all_ipv4_addresses[0]) }}"]
+        ttl: 365d
+        engine_mount_point: "pki_int"
+        url: https://vault.{{ generic__domain_name }}
+        auth_method: token
+        token: "{{ login_data.login.auth.client_token }}"
+      register: cert_data
+
+    # Note: to verify the certs, download the root CA and run:
+    # sudo openssl verify -CAfile /etc/ssl/<org>/root-ca.pem -untrusted /etc/ssl/<org>/ca-chain.pem /etc/ssl/<org>/certificate.pem
+    - name: Deliver certs
+      ansible.builtin.copy:
+        dest: "/etc/ssl/docker-server/{{ item }}.pem"
+        content: "{{ cert_data.data.data[item] }}"
+        mode: 0644
+        owner: root
+        group: root
+      loop:
+        - ca_chain
+        - certificate
+        - issuing_ca
+        - private_key
+
+#
+# Docker Client
+#
+
+- name: Ensure TLS config dir
+  ansible.builtin.file:
+    path: "/etc/ssl/docker-client"
+    state: directory
+    mode: 0700
+    owner: "{{ansible_user}}"
+    group: "docker"
+
+- name: Stat cert files
+  ansible.builtin.stat:
+    path: "/etc/ssl/docker-client/{{ item }}.pem"
+  register: stat
+  loop:
+    - certificate
+    - private_key
+    - issuing_ca
+
+- name: Set issue_cert
+  delegate_to: localhost
+  ansible.builtin.set_fact:
+    issue_cert: "{{ false in (stat.results | community.general.json_query('[*].stat.exists')) }}"
+
+- name: Check certs
+  when: false not in (stat.results | community.general.json_query('[*].stat.exists'))
+  block:
+    - name: Get cert facts
+      community.crypto.x509_certificate_info:
+        path: /etc/ssl/docker-client/certificate.pem
+      register: cert_info
+    - name: Set expired fact
+      ansible.builtin.set_fact:
+        issue_cert: cert_info.expired
+  rescue:
+    - name: Remove expired cert
+      ansible.builtin.file:
+        path: "/etc/ssl/docker-client/{{ item }}.pem"
+        state: absent
+      loop:
+        - certificate
+        - private_key
+        - issuing_ca
+    - name: Set issue_cert fact
+      ansible.builtin.set_fact:
+        issue_cert: true
+
+- name: Issue certificate to host
+  when: (issue_cert | bool)
+  block:
+    - name: Login and use the resulting token
+      when: login_data is undefined
+      community.hashi_vault.vault_login:
+        url: https://vault.{{ generic__domain_name }}
+        auth_method: userpass
+        username: "{{ apps__vault_ansible_username }}"
+        password: "{{ apps__vault_ansible_password }}"
+      register: login_data
+
+    - name: Issue cert from Vault
+      become: false
+      community.hashi_vault.vault_pki_generate_certificate: # noqa syntax-check
+        role_name: "docker-client"
+        common_name: "{{ inventory_hostname_short }}.{{ generic__domain_name }}"
+        ttl: 365d
+        engine_mount_point: "pki_int"
+        url: https://vault.{{ generic__domain_name }}
+        auth_method: token
+        token: "{{ login_data.login.auth.client_token }}"
+      register: cert_data
+
+    # Note: to verify the certs, download the root CA and run:
+    # sudo openssl verify -CAfile /etc/ssl/<org>/root-ca.pem -untrusted /etc/ssl/<org>/ca-chain.pem /etc/ssl/<org>/certificate.pem
+    - name: Deliver certs
+      ansible.builtin.copy:
+        dest: "/etc/ssl/docker-client/{{ item }}.pem"
+        content: "{{ cert_data.data.data[item] }}"
+        mode: 0644
+        owner: "{{ansible_user}}"
+        group: "docker"
+      loop:
+        - ca_chain
+        - certificate
+        - issuing_ca
+        - private_key

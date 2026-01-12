@@ -1,0 +1,109 @@
+#
+#### DEPRECATION NOTICE
+## This compose module is no longer in use
+## Replaced by: nothing
+## Reason: Currently unused
+#
+
+services:
+  vault:
+    container_name: vault
+    image: hashicorp/vault:1.18@sha256:2090eb7ac7a4bdef802f685698bd4dc0740de683affe8ff7df55f4fc77077ba7
+    depends_on:
+      - traefik
+    command: server # Run in PRD
+    networks:
+      - vault-frontend
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+    volumes:
+      - vault_data:/vault/file
+      - vault_data:/vault/logs
+      - $DOCKERDIR/data/vault:/config
+    mem_limit: 1024m
+    cap_add:
+      - IPC_LOCK
+    environment:
+      TZ: ${TZ}
+      VAULT_ADDR: "http://0.0.0.0:8200"
+      VAULT_ADDR_HTTP: "http://0.0.0.0:8200"
+      VAULT_API_ADDR: "http://0.0.0.0:8200"
+      VAULT_URL: "https://vault.$DOMAINNAME"
+      # TODO: [vault] Understand why IPC_LOCK cap is added and I still get the
+      # "Error initializing core: Failed to lock memory: cannot allocate memory" error.
+      # Workaround:
+      # SKIP_SETCAP and "disable_mlock" - don't do this in production
+      SKIP_SETCAP: true
+      VAULT_LOG_LEVEL: info # Default is info, use "debug" for debug messages
+      VAULT_LOCAL_CONFIG: >-
+        {
+            "ui": true,
+            "backend": {
+                "file": {
+                    "path": "/vault/file"
+                }
+            },
+            "default_lease_ttl": "168h",
+            "listener": {
+                "tcp": {
+                    "address": "0.0.0.0:8200",
+                    "tls_disable": "1"
+                }
+            },
+            "disable_mlock": true,
+            "max_lease_ttl": "720h"
+        }
+      #### Used for Vault setup
+      ROOT_CA_COMMON_NAME: $VAULT_ROOT_CA_COMMON_NAME
+      INT_CA_COMMON_NAME: $VAULT_INT_CA_COMMON_NAME
+      ENTRA_ID_CLIENT_ID: $VAULT_ENTRA_ID_CLIENT_ID
+      ENTRA_ID_CLIENT_SECRET: $VAULT_ENTRA_ID_CLIENT_SECRET
+      ENTRA_ID_DISCOVERY_URL: $GENERIC_ENTRA_ID_ISSUER_URL
+      ENTRA_ID_DEFAULT_ROLE: $VAULT_ENTRA_ID_DEFAULT_ROLE
+      VAULT_ENTRA_ID_ROLE_NAME: $VAULT_ENTRA_ID_ROLE_NAME
+      DOMAINNAME: $DOMAINNAME
+      ORGANIZATION: $ORGANIZATION_NAME
+    labels:
+      # Homepage
+      - homepage.group=Infrastructure
+      - homepage.name=Vault
+      - homepage.icon=vault.svg
+      - homepage.href=https://vault.$DOMAINNAME
+      - homepage.description=Certificate Authority
+      # Group
+      - org.label-schema.group=infrastructure
+      # Traefik
+      - "traefik.enable=true"
+      - "traefik.docker.network=vault-frontend"
+      ## Middlewares
+      - "traefik.http.routers.vault-rtr.middlewares=chain-auth@file"
+      - "traefik.http.routers.vault-ca-rtr.middlewares=chain-no-auth@file"
+      - "traefik.http.routers.vault-api-rtr.middlewares=chain-no-auth@file"
+      ## HTTP Routers
+      #- "traefik.http.routers.vault-rtr.rule=Host(`vault.$DOMAINNAME`)"
+      - "traefik.http.routers.vault-rtr.priority=10"
+      #- "traefik.http.routers.vault-rtr.tls=true"
+      ### Expose API without Entra ID Authentication
+      - "traefik.http.routers.vault-api-rtr.rule=Host(`vault.$DOMAINNAME`) && PathPrefix(`/v1`)"
+      - "traefik.http.routers.vault-api-rtr.priority=50"
+      #- "traefik.http.routers.vault-api-rtr.tls=true"
+      ### Expose CRL & CA Endpoints without authentication
+      - "traefik.http.routers.vault-ca-rtr.entrypoints=http"
+      - "traefik.http.routers.vault-ca-rtr.rule=Host(`vault.$DOMAINNAME`) && PathPrefix(`/v1/pki`)"
+      - "traefik.http.routers.vault-ca-rtr.priority=100"
+      - "traefik.http.routers.vault-ca-rtr.tls=false"
+      ## HTTP Services
+      - "traefik.http.routers.vault-rtr.service=vault"
+      - "traefik.http.routers.vault-ca-rtr.service=vault"
+      - "traefik.http.routers.vault-api-rtr.service=vault"
+      ### Enable the server port
+      - "traefik.http.services.vault.loadbalancer.server.port=8200"
+    tmpfs:
+      - /run/secrets # Put secrets in a temporary directory
+
+volumes:
+  vault_data:
+
+networks:
+  vault-frontend:

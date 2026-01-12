@@ -1,0 +1,93 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: homepage-config
+  labels:
+    app.kubernetes.io/name: homepage
+data:
+  bookmarks.yaml: |
+    - Developer:
+        - Ad Blocker Tester:
+            - href: https://d3ward.github.io/toolz/adblock
+              icon: si-adblock-#e5e7eb
+        - AdGuard Temporary Email:
+            - icon: adguard-home.svg
+              href: https://adguard.com/en/adguard-temp-mail/overview.html
+        - Certificate Search:
+            - href: https://crt.sh
+              icon: si-letsencrypt-#e5e7eb
+        - Cronjob Schedule Maker:
+            - icon: mdi-clock-outline-#e5e7eb
+              href: https://crontab.guru/
+        - Kubesearch:
+            - icon: kubernetes-dashboard.png
+              href: https://kubesearch.dev
+        - Speedtest:
+            - href: https://speed.cloudflare.com
+              icon: cloudflare
+    - GitHub:
+        - GitHub Repository:
+            - icon: si-github-#e5e7eb
+              href: https://github.com/DevSecNinja/Home
+        - Renovate Dashboard:
+            - icon: si-renovatebot
+              href: https://github.com/DevSecNinja/home/issues/21
+        - Renovate Jobs:
+            - icon: si-renovatebot
+              href: https://developer.mend.io/github/DevSecNinja/home
+    - Productivity:
+        - Photopea:
+            - icon: si-photopea-#e5e7eb
+              href: https://www.photopea.com/
+  docker.yaml: ""
+  kubernetes.yaml: |
+    mode: cluster
+  services.yaml: |
+    - Network:
+        - Cloudflared:
+            href: https://dash.cloudflare.com
+            icon: cloudflare-zero-trust.png
+            description: Cloudflared Tunnel
+            widget:
+              type: cloudflared
+              accountid: "{{HOMEPAGE_VAR_CLOUDFLARED_ACCOUNTID}}"
+              tunnelid: "{{HOMEPAGE_VAR_CLOUDFLARED_TUNNELID}}"
+              key: "{{HOMEPAGE_VAR_CLOUDFLARED_API_TOKEN}}"
+  settings.yaml: |
+    title: Dashboard
+    theme: dark
+    color: slate
+    useEqualHeights: true
+    hideVersion: true
+    showStats: true
+    headerStyle: clean
+    layout:
+      Home:
+        icon: mdi-home-analytics
+      Productivity:
+        icon: mdi-briefcase
+      Media:
+        icon: mdi-multimedia
+      Network:
+        icon: mdi-graph
+      Observability:
+        icon: mdi-chart-line
+      Database:
+        icon: mdi-database
+  widgets.yaml: |
+    - resources:
+        backend: kubernetes
+        cpu: true
+        expanded: true
+        memory: true
+    - search:
+        provider: ["google"]
+        focus: false
+        target: _blank
+    - datetime:
+        text_size: l
+        format:
+          dateStyle: long
+          timeStyle: short
+          hourCycle: h23

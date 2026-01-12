@@ -1,0 +1,43 @@
+#
+#### DEPRECATION NOTICE
+## This compose module is no longer in use
+## Replaced by: Gatus
+## Last used version: 1.23.11-alpine@sha256:f7c59b4ba04a63b57f4f8210be77cf90221991a3250ec301136183c56de579ab
+#
+
+services:
+  uptime-kuma:
+    image: louislam/uptime-kuma
+    container_name: uptime-kuma
+    depends_on:
+      - traefik
+    restart: always
+    mem_limit: 1024m
+    security_opt:
+      - no-new-privileges=true
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    networks:
+      - t2_proxy
+    volumes:
+      - uptime_kuma_data:/app/data
+    labels:
+      # Homepage
+      - homepage.group=Infrastructure
+      - homepage.name=Uptime Kuma
+      - homepage.icon=si-uptimekuma
+      - homepage.href=https://uptime-kuma.$DOMAINNAME
+      - homepage.description=Uptime Monitoring
+      # Traefik
+      - "traefik.enable=true"
+      ## Middlewares
+      - "traefik.http.routers.uptime-kuma-rtr.middlewares=chain-auth@file"
+      #- "traefik.http.routers.uptime-kuma-rtr.rule=Host(`status.$DOMAINNAME`)"
+      ## HTTP Services
+      - "traefik.http.routers.uptime-kuma-rtr.service=uptime-kuma-svc"
+      - "traefik.http.services.uptime-kuma-svc.loadbalancer.server.port=3001"
+
+volumes:
+  uptime_kuma_data:

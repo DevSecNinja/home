@@ -1,0 +1,134 @@
+#
+#### DEPRECATION NOTICE
+## This compose module is no longer in use
+## Replaced by: None
+## Last used version: 1.36.0-alpine@sha256:137dd201797c186419c92c32f0c42c61bdb85f60653932c96985a0e6995a4286
+##                DB: 16.6-alpine@sha256:52bba373df3c13594014b5e9ccc9f3c2cdb2221d50db1a91ec64570819f18aba
+##         DB Backup: 4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
+#
+
+services:
+  linkding:
+    image: sissbruecker/linkding
+    container_name: linkding
+    depends_on:
+      - traefik
+      - linkding-db
+    restart: always
+    networks:
+      - t2_proxy
+      - linkding-backend
+    security_opt:
+      - no-new-privileges=true
+    mem_limit: 500m
+    environment:
+      - TZ=${TZ}
+      # Database
+      - LD_DB_ENGINE=postgres
+      - LD_DB_DATABASE=linkding
+      - LD_DB_USER=linkding
+      - LD_DB_PASSWORD=${LINKDING_DB_PASSWORD}
+      - LD_DB_HOST=linkding-db
+      - LD_DB_PORT=5432
+      # Linkding
+      - LD_SUPERUSER_NAME=${LINKDING_ADMIN_USERNAME}
+      - LD_SUPERUSER_PASSWORD=${LINKDING_ADMIN_PASSWORD}
+      # Authentication
+      - LD_ENABLE_AUTH_PROXY=true
+      - LD_AUTH_PROXY_USERNAME_HEADER=HTTP_X_FORWARDED_USER
+      - LD_AUTH_PROXY_LOGOUT_URL=https://homepage-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
+    volumes:
+      - linkding_data:/etc/linkding/data"
+    labels:
+      # Homepage
+      - homepage.group=Productivity
+      - homepage.name=Linkding
+      - homepage.icon=linkding.svg
+      - homepage.href=https://linkding.$DOMAINNAME
+      - homepage.description=Bookmark Collector
+      # Group
+      - org.label-schema.group=productivity
+      # Traefik
+      - "traefik.enable=true"
+      ## Middlewares
+      - "traefik.http.routers.linkding-rtr.middlewares=chain-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.linkding-rtr.service=linkding"
+      ### Enable the server port
+      - "traefik.http.services.linkding.loadbalancer.server.port=9090"
+
+  linkding-db:
+    image: docker.io/library/postgres
+    container_name: linkding-db
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+    mem_limit: 1024m
+    volumes:
+      - linkding_db_data:/var/lib/postgresql/data
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - POSTGRES_DB=linkding
+      - POSTGRES_USER=linkding
+      - POSTGRES_PASSWORD=${LINKDING_DB_PASSWORD}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - linkding-backend
+
+  linkding-db-backup:
+    container_name: linkding-db-backup
+    image: tiredofit/db-backup
+    depends_on:
+      - linkding-db
+    volumes:
+      - $DOCKERDIR/data/backup:/backup
+    mem_limit: 1024m
+    networks:
+      - linkding-backend
+    environment:
+      - TIMEZONE=${TZ}
+      - USER_DBBACKUP=${PUID}
+      - GROUP_DBBACKUP=${PGID}
+      - CONTAINER_NAME=linkding-db-backup
+      - CONTAINER_ENABLE_MONITORING=FALSE # Disables Zabbix backup statistics
+
+      - ENABLE_NOTIFICATIONS=TRUE
+      - NOTIFICATION_TYPE=EMAIL
+      - SMTP_HOST=mailrise
+      - SMTP_PORT=${NOTIFICATIONS_MAILRISE_SMTP_PORT}
+      - MAIL_TO=msteams@mailrise.xyz
+      - MAIL_FROM=linkding-db-backup
+
+      - DEFAULT_CHECKSUM=SHA1        # Set standard checksum to SHA1
+      - DEFAULT_COMPRESSION=ZSTD     # Compress all with ZSTD
+      - DEFAULT_BACKUP_INTERVAL=1440 # Backup every 1440 minutes = 24 hours
+      - DEFAULT_BACKUP_BEGIN=0000    # Start backing up at midnight
+      - DEFAULT_CLEANUP_TIME=2880    # Cleanup backups after two days
+
+      - DEFAULT_ENCRYPT=TRUE                            # Encrypt backup files with GPG
+      - DEFAULT_ENCRYPT_PASSPHRASE=${DB_ENC_PASSPHRASE} # Set encryption password
+
+      - DB01_TYPE=pgsql
+      - DB01_HOST=linkding-db
+      - DB01_NAME=linkding
+      - DB01_USER=linkding
+      - DB01_PORT=5432
+      - DB01_PASS=${LINKDING_DB_PASSWORD}
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+
+volumes:
+  linkding_data:
+  linkding_db_data:
+
+networks:
+  linkding-backend:
+    name: linkding-backend
+    driver: bridge

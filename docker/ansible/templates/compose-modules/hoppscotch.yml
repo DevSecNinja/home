@@ -1,0 +1,195 @@
+services:
+  hoppscotch:
+    image: hoppscotch/hoppscotch:2025.12.1@sha256:8cb58bf214d08360453aa4b4be748295e4c8a8abedc22850bc800272d9c41850
+    container_name: hoppscotch
+    depends_on:
+      - traefik
+      - hoppscotch-db
+    restart: always
+    mem_limit: 1024m
+    security_opt:
+      - no-new-privileges=true
+    environment:
+      - TZ=${TZ}
+      # Prisma Config
+      - DATABASE_URL=postgresql://hoppscotch:${HOPPSCOTCH_DB_PASSWORD}@hoppscotch-db:5432/hoppscotch?connect_timeout=300
+      # Auth Tokens Config
+      - JWT_SECRET=${HOPPSCOTCH_JWT_SECRET}
+      - TOKEN_SALT_COMPLEXITY=10
+      - MAGIC_LINK_TOKEN_VALIDITY=3
+      - REFRESH_TOKEN_VALIDITY=604800000
+      - ACCESS_TOKEN_VALIDITY=86400000
+      - SESSION_SECRET=${HOPPSCOTCH_SESSION_SECRET}
+      - DATA_ENCRYPTION_KEY=${HOPPSCOTCH_DB_DATA_ENCRYPTION_KEY}
+      # Hoppscotch App Domain Config
+      - REDIRECT_URL=https://api-tester.$DOMAINNAME
+      - WHITELISTED_ORIGINS=https://api-tester.$DOMAINNAME,https://api-tester-api.$DOMAINNAME,https://api-tester-admin.$DOMAINNAME,http://localhost:3170,http://localhost:3000,http://localhost:3100
+      - VITE_ALLOWED_AUTH_PROVIDERS=GITHUB,EMAIL # TODO: [hoppscotch] Check why allowed auth provider doesn't work
+      # Github Auth Config
+      - GITHUB_CLIENT_ID=${HOPPSCOTCH_GITHUB_CLIENT_ID}
+      - GITHUB_CLIENT_SECRET=${HOPPSCOTCH_GITHUB_CLIENT_SECRET}
+      - GITHUB_CALLBACK_URL=https://api-tester-api.$DOMAINNAME/v1/auth/github/callback
+      - GITHUB_SCOPE=user:email
+      # Mailer config
+      - MAILER_SMTP_URL=smtp://$NOTIFICATIONS_EMAIL_USERNAME:$NOTIFICATIONS_EMAIL_PASSWORD@$NOTIFICATIONS_EMAIL_HOST:$NOTIFICATIONS_EMAIL_PORT
+      - MAILER_ADDRESS_FROM=$NOTIFICATIONS_EMAIL_FROM
+      # Rate Limit Config
+      - RATE_LIMIT_TTL=60
+      - RATE_LIMIT_MAX=100
+      #-----------------------Frontend Config------------------------------#
+      # Base URLs
+      - VITE_BASE_URL=https://api-tester.$DOMAINNAME
+      - VITE_SHORTCODE_BASE_URL=https://api-tester.$DOMAINNAME
+      - VITE_ADMIN_URL=https://api-tester-admin.$DOMAINNAME
+      # Backend URLs
+      - VITE_BACKEND_GQL_URL=https://api-tester-api.$DOMAINNAME/graphql
+      - VITE_BACKEND_WS_URL=wss://api-tester-api.$DOMAINNAME/graphql
+      - VITE_BACKEND_API_URL=https://api-tester-api.$DOMAINNAME/v1
+      # Custom
+      - ENABLE_SUBPATH_BASED_ACCESS=false # Setting this to true caused connection issues and needed config changes are unclear
+    networks:
+      - hoppscotch-frontend
+      - hoppscotch-backend
+    labels:
+      # Homepage
+      - homepage.group=Infrastructure
+      - homepage.name=Hoppscotch
+      - homepage.icon=hoppscotch
+      - homepage.href=https://api-tester.$DOMAINNAME
+      - homepage.description=API Tester like Postman
+      # Traefik
+      - "traefik.enable=true"
+      - "traefik.docker.network=hoppscotch-frontend"
+      ## Middlewares
+      - "traefik.http.routers.hoppscotch-rtr.middlewares=chain-auth-cors@file"
+      - "traefik.http.routers.hoppscotch-rtr.rule=Host(`api-tester.$DOMAINNAME`)"
+      ## HTTP Services
+      - "traefik.http.routers.hoppscotch-rtr.service=hoppscotch"
+      - "traefik.http.services.hoppscotch.loadbalancer.server.port=3000"
+      ## Extra admin endpoint
+      - "traefik.http.routers.hoppscotch-admin-rtr.middlewares=chain-no-auth-cors@file"
+      - "traefik.http.routers.hoppscotch-admin-rtr.rule=Host(`api-tester-admin.$DOMAINNAME`)"
+      - "traefik.http.routers.hoppscotch-admin-rtr.service=hoppscotch-admin"
+      - "traefik.http.services.hoppscotch-admin.loadbalancer.server.port=3100"
+      ## Extra API endpoint
+      - "traefik.http.routers.hoppscotch-api-rtr.middlewares=chain-no-auth-cors@file"
+      - "traefik.http.routers.hoppscotch-api-rtr.rule=Host(`api-tester-api.$DOMAINNAME`)"
+      - "traefik.http.routers.hoppscotch-api-rtr.service=hoppscotch-api"
+      - "traefik.http.services.hoppscotch-api.loadbalancer.server.port=3170"
+      ## Router for Gatus — bypass auth if secret header is present
+      - "traefik.http.routers.hoppscotch-monitor-rtr.rule=Host(`api-tester.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
+      - "traefik.http.routers.hoppscotch-monitor-rtr.service=hoppscotch"
+      - "traefik.http.routers.hoppscotch-monitor-rtr.priority=100"  # Higher priority so it matches first
+
+
+  hoppscotch-db:
+    image: docker.io/library/postgres:17.7-alpine@sha256:ff4ccc02b97e0ebb6b328ef9ff92522f95586f83be6801896b615088defc8ad2
+    container_name: hoppscotch-db
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+    mem_limit: 1024m
+    shm_size: 128mb
+    depends_on:
+      hoppscotch-db-upgrade:
+        condition: service_completed_successfully
+    volumes:
+      - hoppscotch_db_data:/var/lib/postgresql/data
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - POSTGRES_DB=hoppscotch
+      - POSTGRES_USER=hoppscotch
+      - POSTGRES_PASSWORD=${HOPPSCOTCH_DB_PASSWORD}
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - hoppscotch-backend
+
+  hoppscotch-db-backup:
+    container_name: hoppscotch-db-backup
+    image: tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
+    depends_on:
+      - hoppscotch-db
+    mem_limit: 1024m
+    networks:
+      - hoppscotch-backend
+    environment:
+      - TIMEZONE=${TZ}
+      - USER_DBBACKUP=${PUID}
+      - GROUP_DBBACKUP=${PGID}
+      - CONTAINER_NAME=hoppscotch-db-backup
+      - CONTAINER_ENABLE_MONITORING=FALSE # Disables Zabbix backup statistics
+
+      - ENABLE_NOTIFICATIONS=FALSE # TODO: Fix n8n/hoppscotch backup permission issue
+      - NOTIFICATION_TYPE=EMAIL
+      - SMTP_HOST=${NOTIFICATIONS_EMAIL_HOST}
+      - SMTP_DOMAIN=${NOTIFICATIONS_EMAIL_DOMAIN}
+      - SMTP_PORT=${NOTIFICATIONS_EMAIL_PORT}
+      - SMTP_USER=${NOTIFICATIONS_EMAIL_USERNAME}
+      - SMTP_PASS=${NOTIFICATIONS_EMAIL_PASSWORD}
+      - MAIL_TO=${NOTIFICATIONS_EMAIL_TO}
+      - MAIL_FROM=${NOTIFICATIONS_EMAIL_FROM}
+      - SMTP_AUTHENTICATION="on"
+      - SMTP_TLSCERTCHECK=TRUE
+      - SMTP_STARTTLS=on
+      - SMTP_TLS=on
+
+      - DEFAULT_CHECKSUM=SHA1        # Set standard checksum to SHA1
+      - DEFAULT_COMPRESSION=ZSTD     # Compress all with ZSTD
+      - DEFAULT_BACKUP_INTERVAL=1440 # Backup every 1440 minutes = 24 hours
+      - DEFAULT_BACKUP_BEGIN=0000    # Start backing up at midnight
+      - DEFAULT_CLEANUP_TIME=2880    # Cleanup backups after two days
+
+      - DEFAULT_ENCRYPT=TRUE                            # Encrypt backup files with GPG
+      - DEFAULT_ENCRYPT_PASSPHRASE=${DB_ENC_PASSPHRASE} # Set encryption password
+
+      - DEFAULT_BACKUP_LOCATION=blobxfer
+      - DEFAULT_BLOBXFER_STORAGE_ACCOUNT=${DB_BACKUP_SA_NAME}
+      - DEFAULT_BLOBXFER_STORAGE_ACCOUNT_KEY=${DB_BACKUP_SA_KEY}
+      - DEFAULT_BLOBXFER_REMOTE_PATH=${DB_BACKUP_SA_PATH}/hoppscotch
+      - DEFAULT_BLOBXFER_MODE=${DB_BACKUP_SA_MODE}
+
+      - DB01_TYPE=pgsql
+      - DB01_HOST=hoppscotch-db
+      - DB01_NAME=hoppscotch
+      - DB01_USER=hoppscotch
+      - DB01_PORT=5432
+      - DB01_PASS=${HOPPSCOTCH_DB_PASSWORD}
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+
+  hoppscotch-db-upgrade:
+    image: pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:6a429e7e047643ca38f25cd0b2e6e3d4b42bf4924a5280a31ab8c907bcf1bbda
+    container_name: hoppscotch-db-upgrade
+    restart: "no"
+    security_opt:
+      - no-new-privileges=true
+    mem_limit: 1024m
+    shm_size: 128mb
+    volumes:
+      - hoppscotch_db_data:/var/lib/postgresql/data
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - POSTGRES_DB=hoppscotch
+      - POSTGRES_USER=hoppscotch
+      - POSTGRES_PASSWORD=${HOPPSCOTCH_DB_PASSWORD}
+      - PGDATA=/var/lib/postgresql/data
+      - PGAUTO_ONESHOT=yes
+    network_mode: none
+
+volumes:
+  hoppscotch_db_data:
+
+networks:
+  hoppscotch-frontend:
+    name: hoppscotch-frontend
+  hoppscotch-backend:
+    name: hoppscotch-backend

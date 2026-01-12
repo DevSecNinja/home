@@ -1,0 +1,101 @@
+#
+#### DEPRECATION NOTICE
+## This compose module is no longer in use
+## Replaced by: Kubernetes cluster resource
+## Last used version: 2.7-alpine@sha256:407ed49d0b3e32362bbf9ee21740240893e62b9249a02397613a229652f64947
+#
+
+services:
+  influxdb:
+    image: influxdb
+    container_name: influxdb
+    depends_on:
+      - traefik
+    volumes:
+      # Mount for influxdb data directory and configuration
+      - influxdb_data:/var/lib/influxdb2:rw
+    mem_limit: 1024m
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=${INFLUXDB_USERNAME}
+      - DOCKER_INFLUXDB_INIT_PASSWORD=${INFLUXDB_PASSWORD}
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=${INFLUXDB_ADMIN_TOKEN}
+      - DOCKER_INFLUXDB_INIT_ORG=${INFLUXDB_ORGANIZATION}
+      - DOCKER_INFLUXDB_INIT_BUCKET=init-bucket
+    restart: always
+    networks:
+      - t2_proxy
+      - influxdb
+    security_opt:
+      - no-new-privileges=true
+    labels:
+      # Homepage
+      - homepage.group=Infrastructure
+      - homepage.name=InfluxDB
+      - homepage.icon=influxdb.svg
+      - homepage.href=https://influxdb.$DOMAINNAME
+      - homepage.description=Time Series Data Platform
+      # Group
+      - org.label-schema.group=infrastructure
+      # Traefik
+      - "traefik.enable=true"
+      ## Middlewares
+      - "traefik.http.routers.influxdb-rtr.middlewares=chain-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.influxdb-rtr.service=influxdb"
+      ### Enable the server port
+      - "traefik.http.services.influxdb.loadbalancer.server.port=8086"
+      ## Extra no-auth endpoint. No need to create a new service
+      - "traefik.http.routers.influxdb-noauth-rtr.rule=Host(`influxdb-noauth.$DOMAINNAME`)"
+      - "traefik.http.routers.influxdb-noauth-rtr.middlewares=chain-no-auth@file"
+      - "traefik.http.routers.influxdb-noauth-rtr.service=influxdb"
+
+  influxdb-backup:
+    container_name: influxdb-backup
+    image: tiredofit/db-backup:4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
+    depends_on:
+      - influxdb
+    volumes:
+      - $DOCKERDIR/data/backup:/backup
+    networks:
+      - influxdb
+    mem_limit: 1024m
+    environment:
+      - TIMEZONE=${TZ}
+      - USER_DBBACKUP=${PUID}
+      - GROUP_DBBACKUP=${PGID}
+      - CONTAINER_NAME=influxdb-backup
+      - CONTAINER_ENABLE_MONITORING=FALSE # Disables Zabbix backup statistics
+
+      - ENABLE_NOTIFICATIONS=FALSE   # TODO: [db-backup] Use notifications (SMTP auth not supported)
+
+      - DEFAULT_CHECKSUM=SHA1        # Set standard checksum to SHA1
+      - DEFAULT_COMPRESSION=ZSTD     # Compress all with ZSTD
+      - DEFAULT_BACKUP_INTERVAL=1440 # Backup every 1440 minutes = 24 hours
+      - DEFAULT_BACKUP_BEGIN=0000    # Start backing up at midnight
+      - DEFAULT_CLEANUP_TIME=2880    # Cleanup backups after two days
+
+      - DEFAULT_ENCRYPT=TRUE                            # Encrypt backup files with GPG
+      - DEFAULT_ENCRYPT_PASSPHRASE=${DB_ENC_PASSPHRASE} # Set encryption password
+
+      - DB01_TYPE=influx
+      - DB01_HOST=http://influxdb
+      - DB01_PORT=8086
+      - DB01_NAME=ALL
+      - DB01_USER=${INFLUXDB_USERNAME}
+      - DB01_PASS=${INFLUXDB_ADMIN_TOKEN}
+      - DB01_INFLUX_VERSION=2
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+
+volumes:
+  influxdb_data:
+
+networks:
+  influxdb:
+    name: influxdb
+    driver: bridge

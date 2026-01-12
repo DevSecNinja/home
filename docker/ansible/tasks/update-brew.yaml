@@ -1,0 +1,27 @@
+---
+- name: Checking if Homebrew is installed
+  stat:
+    path: /home/linuxbrew/.linuxbrew/bin/brew
+  register: homebrew_check
+
+- name: Get outdated Homebrew packages
+  shell: "/home/linuxbrew/.linuxbrew/bin/brew outdated --verbose"
+  args:
+    executable: /bin/bash
+  register: outdated_packages
+  become: false # Homebrew as root is dangerous and not supported
+  changed_when: false
+  when: homebrew_check.stat.exists
+
+- name: Updating Homebrew & all packages
+  homebrew:
+    update_homebrew: true
+    upgrade_all: true
+  when: homebrew_check.stat.exists
+  become: false # Homebrew as root is dangerous and not supported
+  register: homebrew_updates
+
+- name: Display updated packages
+  debug:
+    var: outdated_packages.stdout_lines
+  when: homebrew_updates.changed

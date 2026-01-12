@@ -1,0 +1,52 @@
+---
+- hosts: svldmz.ravensberg.org
+  become: true
+  pre_tasks:
+    - include_tasks: ../tasks/update-os.yaml
+    - include_tasks: ../tasks/new-server.yaml
+    - include_tasks: ../tasks/configure-ufw.yaml
+
+  roles:
+    - role: geerlingguy.docker
+      # TODO: Investigate if I should use a separate user for docker
+      docker_users: ['{{ ansible_user }}']
+      docker_daemon_options:
+        log-driver: "journald"
+        bridge: "none"
+        features:
+          buildkit: true
+        hosts:
+          - "unix:///var/run/docker.sock"
+        default-address-pools:
+          - base: "172.17.0.0/12"
+            size: 20
+          - base: "192.168.0.0/16"
+            size: 24
+        no-new-privileges: true
+      become: true
+
+  post_tasks:
+    - name: Create Docker configuration directories
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: "directory"
+        owner: "{{ansible_user}}"
+        group: "docker"
+        mode: "0755"
+      loop:
+        - "/srv/docker/data"
+        - "/srv/docker/data/backup"
+        - "/srv/docker/data/compose"
+        - "/srv/docker/data/traefik/acme"
+
+    - name: Create acme config file for Traefik
+      file:
+        path: "/srv/docker/data/traefik/acme/acme.json"
+        state: touch
+        mode: '0600'
+
+    - include_tasks: ../tasks/configure-dns-server.yaml
+    - include_tasks: ../tasks/configure-docker.yaml
+
+  handlers:
+    - import_tasks: ../handlers/main.yml

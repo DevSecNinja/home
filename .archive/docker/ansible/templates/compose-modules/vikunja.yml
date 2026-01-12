@@ -1,0 +1,144 @@
+#
+#### DEPRECATION NOTICE
+## This compose module is no longer in use
+## Replaced by: nothing
+## Reason: Currently unused
+## Last used version: 0.23.0@sha256:c824f99b0b09b7f03a1d77ad6691fbce38edf8d737e73e3242d8b87dd96d21e0
+#
+
+services:
+  vikunja:
+    image: vikunja/vikunja
+    container_name: vikunja
+    depends_on:
+      - traefik
+      - vikunja-db
+    restart: always
+    networks:
+      - t2_proxy
+      - vikunja-backend
+    security_opt:
+      - no-new-privileges=true
+    mem_limit: 200m
+    environment:
+      - TZ=${TZ}
+      # MySQL
+      - VIKUNJA_DATABASE_TYPE=mysql
+      - VIKUNJA_DATABASE_HOST=vikunja-db
+      - VIKUNJA_DATABASE_DATABASE=vikunja
+      - VIKUNJA_DATABASE_USER=vikunja
+      - VIKUNJA_DATABASE_PASSWORD=${VIKUNJA_MYSQL_PASSWORD}
+      # Vikunja
+      - VIKUNJA_SERVICE_PUBLICURL=vikunja.$DOMAINNAME
+      - VIKUNJA_SERVICE_JWTSECRET=${VIKUNJA_JWT_SECRET}
+      - VIKUNJA_SERVICE_ENABLEREGISTRATION=false
+      - VIKUNJA_SERVICE_TIMEZONE=${TZ}
+      # TODO: [vikunja] Add mail notifications
+    volumes:
+      - vikunja_data:/app/vikunja/files
+    labels:
+      # Homepage
+      - homepage.group=Productivity
+      - homepage.name=Vikunja
+      - homepage.icon=vikunja.svg
+      - homepage.href=https://vikunja.$DOMAINNAME
+      - homepage.description=To-do Application
+      # Group
+      - org.label-schema.group=productivity
+      # Traefik
+      - "traefik.enable=true"
+      ## Middlewares
+      - "traefik.http.routers.vikunja-rtr.middlewares=chain-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.vikunja-rtr.service=vikunja"
+      ### Enable the server port
+      - "traefik.http.services.vikunja.loadbalancer.server.port=3456"
+
+  vikunja-db:
+    # 11.3.2@sha256:f0a6faee9d0e55492f238d1d11ff13d77616ea12d8c38bedf090da2ee05532be
+    image: mariadb
+    container_name: vikunja-db
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+    networks:
+      - vikunja-backend
+    volumes:
+      - vikunja_db_data:/var/lib/mysql
+    mem_limit: 1024m
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - MYSQL_ROOT_PASSWORD=${VIKUNJA_MYSQL_ROOT_PASSWORD}
+      - MYSQL_PASSWORD=${VIKUNJA_MYSQL_PASSWORD}
+      - MYSQL_DATABASE=vikunja
+      - MYSQL_USER=vikunja
+      - MARIADB_AUTO_UPGRADE=1
+      - MARIADB_DISABLE_UPGRADE_BACKUP=1
+    healthcheck:
+      interval: 30s
+      retries: 3
+      test:
+        [
+          "CMD",
+          "healthcheck.sh",
+          "--su-mysql",
+          "--connect",
+          "--innodb_initialized"
+        ]
+      timeout: 30s
+
+  vikunja-db-backup:
+    # 4.0.35@sha256:794ffd160cf01057d0f64ef7baf5da3cd8925a48f1f65653e016f58c7d69b13c
+    container_name: vikunja-db-backup
+    image: tiredofit/db-backup
+    depends_on:
+      - vikunja-db
+    volumes:
+      - $DOCKERDIR/data/backup:/backup
+    networks:
+      - vikunja-backend
+    mem_limit: 1024m
+    environment:
+      - TIMEZONE=${TZ}
+      - USER_DBBACKUP=${PUID}
+      - GROUP_DBBACKUP=${PGID}
+      - CONTAINER_NAME=vikunja-db-backup
+      - CONTAINER_ENABLE_MONITORING=FALSE # Disables Zabbix backup statistics
+
+      - ENABLE_NOTIFICATIONS=TRUE
+      - NOTIFICATION_TYPE=EMAIL
+      - SMTP_HOST=mailrise
+      - SMTP_PORT=${NOTIFICATIONS_MAILRISE_SMTP_PORT}
+      - MAIL_TO=msteams@mailrise.xyz
+      - MAIL_FROM=vikunja-db-backup
+
+      - DEFAULT_CHECKSUM=SHA1        # Set standard checksum to SHA1
+      - DEFAULT_COMPRESSION=ZSTD     # Compress all with ZSTD
+      - DEFAULT_BACKUP_INTERVAL=1440 # Backup every 1440 minutes = 24 hours
+      - DEFAULT_BACKUP_BEGIN=0000    # Start backing up at midnight
+      - DEFAULT_CLEANUP_TIME=2880    # Cleanup backups after two days
+
+      - DEFAULT_ENCRYPT=TRUE                            # Encrypt backup files with GPG
+      - DEFAULT_ENCRYPT_PASSPHRASE=${DB_ENC_PASSPHRASE} # Set encryption password
+
+      - DB01_TYPE=mysql
+      - DB01_HOST=vikunja-db
+      - DB01_NAME=vikunja
+      - DB01_USER=vikunja
+      - DB01_PORT=3306
+      - DB01_PASS=${VIKUNJA_MYSQL_PASSWORD}
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+
+volumes:
+  vikunja_data:
+  vikunja_db_data:
+
+networks:
+  vikunja-backend:
+    name: vikunja-backend
+    driver: bridge

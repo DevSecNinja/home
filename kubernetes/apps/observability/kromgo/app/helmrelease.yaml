@@ -1,0 +1,112 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: kromgo
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  values:
+    controllers:
+      kromgo:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        pod:
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 65534
+            runAsGroup: 65534
+            seccompProfile: { type: RuntimeDefault }
+        containers:
+          app:
+            image:
+              repository: ghcr.io/kashalls/kromgo
+              tag: v0.4.2@sha256:89eab1c6604d8ef79fb0e7340620d6559ef296cc469c4eabf22598bbaf93ff42
+            env:
+              SERVER_HOST: 0.0.0.0
+              HEALTH_HOST: 0.0.0.0
+              PROMETHEUS_URL: http://prometheus-operated.observability.svc.cluster.local:9090
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /-/health
+                    port: &healthPort 8888
+                  initialDelaySeconds: 0
+                  periodSeconds: 5
+                  timeoutSeconds: 1
+                  failureThreshold: 5
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /-/ready
+                    port: *healthPort
+                  initialDelaySeconds: 0
+                  periodSeconds: 5
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 64Mi
+    service:
+      app:
+        controller: kromgo
+        ports:
+          http:
+            port: &port 8080
+    ingress:
+      app:
+        # className: external
+        className: internal
+        annotations:
+          # external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/description: "Safely expose metrics and health checks"
+          gethomepage.dev/group: Observability
+          gethomepage.dev/icon: mdi-list-status
+          gethomepage.dev/widget.type: customapi
+          gethomepage.dev/widget.url: http://${APP}.observability.svc.cluster.local:8080/cluster_uptime_days
+          gethomepage.dev/widget.mappings.0.field: message
+          gethomepage.dev/widget.mappings.0.label: Cluster Uptime
+          gethomepage.dev/widget.mappings.0.format: text
+        hosts:
+          - host: kromgo.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+    persistence:
+      config-file:
+        type: configMap
+        name: kromgo
+        globalMounts:
+          - path: /kromgo/config.yaml
+            subPath: config.yaml
+            readOnly: true

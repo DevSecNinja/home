@@ -1,0 +1,76 @@
+---
+- name: Update data disks and its partition, file system and mounts
+  hosts: svlprod.PRODUCTION
+  become: yes
+  gather_facts: yes
+  vars:
+    partition_number: 1
+    volume_fstype: "ext4"
+  tasks:
+    - name: Load encrypted credentials
+      community.sops.load_vars:
+        file: ../inventory/group_vars/all/secrets.sops.yml
+        age_keyfile: $HOME/git/home/age.key
+        config_path: $HOME/git/home/.sops.yaml
+        expressions: ignore  # explicitly do not evaluate expressions
+                             # on load (this is the default)
+
+    - name: Run the storage role for the data disk
+      include_role:
+        name: robertdebock.storage
+      vars:
+        # Get label after creating a disk: sudo fdisk -l
+        # TODO: [ansible] Instead of label, use the UUID since Proxmox might swap labels
+        disk_name: "/dev/sdb"
+        mount_path: "/mnt/data"
+
+        storage_partitions:
+          - name: "{{ disk_name }}"
+            number: "{{ partition_number }}"
+            part_end: 100%
+            label: gpt
+        storage_filesystems:
+          - name: "{{ disk_name }}{{ partition_number }}"
+            fstype: "{{ volume_fstype }}"
+        storage_mounts:
+          - name: "{{ mount_path }}"
+            src: "{{ disk_name }}{{ partition_number }}"
+            fstype: "{{ volume_fstype }}"
+            owner: root
+            group: root
+            mode: "0755"
+
+    - name: Run the storage role for the archive disk
+      include_role:
+        name: robertdebock.storage
+      vars:
+        disk_name: "/dev/sdc"
+        mount_path: "/mnt/archive"
+
+        storage_partitions:
+          - name: "{{ disk_name }}"
+            number: "{{ partition_number }}"
+            part_end: 100%
+            label: gpt
+        storage_filesystems:
+          - name: "{{ disk_name }}{{ partition_number }}"
+            fstype: "{{ volume_fstype }}"
+        storage_mounts:
+          - name: "{{ mount_path }}"
+            src: "{{ disk_name }}{{ partition_number }}"
+            fstype: "{{ volume_fstype }}"
+            owner: root
+            group: root
+            mode: "0755"
+
+  post_tasks:
+    - name: Create directories in new partition
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: "directory"
+        owner: "{{ansible_user}}"
+        group: "docker"
+        mode: "0755"
+      loop:
+        - "/mnt/data"
+        - "/mnt/archive"

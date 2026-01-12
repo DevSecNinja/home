@@ -1,0 +1,48 @@
+---
+- name: Ensure docker group exists with specific GID
+  ansible.builtin.group:
+    name: docker
+    gid: 994 # Ensure we enforce the default GID for the docker group
+    state: present
+
+- name: Ensure service acount group exists with specific GID
+  ansible.builtin.group:
+    name: "svc-{{ inventory_hostname_short }}"
+    gid: "{{ puid }}"
+    state: present
+  when: inventory_hostname_short in docker__uid_map
+
+- name: Create Docker user with specific UID and group
+  ansible.builtin.user:
+    name: "svc-{{ inventory_hostname_short }}"
+    comment: Docker User to run containers with specific UID and group
+    uid: "{{ puid }}"
+    group: "svc-{{ inventory_hostname_short }}"
+    shell: /usr/sbin/nologin
+  when: inventory_hostname_short in docker__uid_map
+
+- name: Remove Docker related cron jobs
+  ansible.builtin.file:
+    path: "/etc/cron.d/{{ item.cron_file }}"
+    state: "absent"
+  loop: "{{ docker__cron_jobs }}"
+  when:
+    - item.state | d("present") == "absent"
+    - item.cron_file | d()
+
+- name: Create Docker related cron jobs
+  ansible.builtin.cron:
+    name: "{{ item.name }}"
+    job: "{{ item.job }}"
+    minute: "{{ item.schedule[0] }}"
+    hour: "{{ item.schedule[1] }}"
+    day: "{{ item.schedule[2] }}"
+    month: "{{ item.schedule[3] }}"
+    weekday: "{{ item.schedule[4] }}"
+    cron_file: "{{ item.cron_file }}"
+    user: "{{ item.user | d('root') }}"
+  loop: "{{ docker__cron_jobs }}"
+  when:
+    - item.state | d("present") != "absent"
+    - item.name | d() and item.job | d()
+    - item.schedule | d() and item.cron_file | d()

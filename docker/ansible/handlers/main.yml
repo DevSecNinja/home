@@ -1,0 +1,40 @@
+---
+
+# Note:
+# "Handlers are executed in the order they are defined in the handlers section,
+# not in the order listed in the notify statement."
+
+- name: restart nginx
+  service: name=nginx state=restarted
+
+- name: restart ssh
+  service: name=ssh state=restarted
+
+- name: restart ufw
+  service: name=ufw state=restarted
+
+- name: restart server
+  command: /sbin/reboot
+
+- name: Remove STUB
+  file:
+    path: /etc/resolv.conf
+    state: absent
+
+- name: Unmask and Restart systemd-resolved
+  systemd:
+    name: systemd-resolved
+    state: restarted
+    masked: no
+
+- name: Docker Prune
+  command: docker image prune --force
+
+- name: Reload systemd daemon
+  ansible.builtin.systemd:
+    daemon_reload: true
+
+- name: Restart Docker
+  ansible.builtin.systemd:
+    name: "docker"
+    state: "restarted"

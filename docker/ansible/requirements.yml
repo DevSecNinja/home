@@ -1,0 +1,14 @@
+---
+collections:
+  - name: vladgh.samba
+    version: 3.5.4
+roles:
+  - name: robertdebock.storage
+    src: https://github.com/robertdebock/ansible-role-storage
+    version: 6.0.4
+  - name: geerlingguy.docker
+    src: https://github.com/geerlingguy/ansible-role-docker
+    version: 7.9.0
+  - name: geerlingguy.security
+    src: https://github.com/geerlingguy/ansible-role-security
+    version: 3.0.0

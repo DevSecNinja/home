@@ -1,0 +1,19 @@
+---
+- name: Flush DNS of Unbound
+  hosts: dnsservers
+  become: yes
+  gather_facts: no
+  # vars:
+  #   domain: www.google.com
+  tasks:
+    # - name: Run containers
+    #   register: docker_container_run_result
+    #   shell:
+    #     cmd: "docker exec -it unbound unbound-control flush www.youtube.com"
+    #     chdir: /srv/docker
+
+    - name: Restart Unbound DNS container
+      shell:
+        cmd: "docker restart unbound 2>&1"
+        chdir: /srv/docker
+      when: inventory_hostname in groups['dnsservers']

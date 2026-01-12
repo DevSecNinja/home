@@ -1,0 +1,178 @@
+groups:
+- name: targets
+  rules:
+  - alert: monitor_service_down
+    expr: up == 0
+    for: 30s
+    labels:
+      severity: critical
+    annotations:
+      summary: "Monitor service non-operational"
+      description: "Service {{ $labels.instance }} is down."
+
+- name: host
+  rules:
+  - alert: high_cpu_load
+    expr: node_load1 > 1.5
+    for: 120s # Changed from 60s
+    labels:
+      severity: warning
+    annotations:
+      summary: "Server under high load"
+      description: "Docker host is under high load, the avg load 1m is at {{ $value }}. Reported by instance {{ $labels.instance }} of job {{ $labels.job }}."
+
+  - alert: high_memory_load
+    expr: (sum(node_memory_MemTotal_bytes) - sum(node_memory_MemFree_bytes + node_memory_Buffers_bytes + node_memory_Cached_bytes) ) / sum(node_memory_MemTotal_bytes) * 100 > 85
+    for: 30s
+    labels:
+      severity: warning
+    annotations:
+      summary: "Server memory is almost full"
+      description: "Docker host memory usage is {{ humanize $value }} %. Reported by instance {{ $labels.instance }} of job {{ $labels.job }}."
+
+  - alert: high_storage_load
+    expr: 100 - ((node_filesystem_avail_bytes{mountpoint="/",fstype!="rootfs"} * 100) / node_filesystem_size_bytes{mountpoint="/",fstype!="rootfs"}) > 85
+    for: 30s
+    labels:
+      severity: warning
+    annotations:
+      summary: "Server storage is almost full"
+      description: "Docker host storage usage is {{ humanize $value }} %. Reported by instance {{ $labels.instance }} of job {{ $labels.job }}."
+
+  - alert: high_data_storage_load
+    expr: 100 - ((node_filesystem_avail_bytes{mountpoint="/mnt/data",fstype!="rootfs"} * 100) / node_filesystem_size_bytes{mountpoint="/mnt/data",fstype!="rootfs"}) > 85
+    for: 30s
+    labels:
+      severity: warning
+    annotations:
+      summary: "Server data storage is almost full"
+      description: "Docker host data storage usage is {{ humanize $value }} %. Reported by instance {{ $labels.instance }} of job {{ $labels.job }}."
+
+  - alert: high_archive_storage_load
+    expr: 100 - ((node_filesystem_avail_bytes{mountpoint="/mnt/archive",fstype!="rootfs"} * 100) / node_filesystem_size_bytes{mountpoint="/mnt/archive",fstype!="rootfs"}) > 85
+    for: 30s
+    labels:
+      severity: warning
+    annotations:
+      summary: "Server archive storage is almost full"
+      description: "Docker host archive storage usage is {{ humanize $value }} %. Reported by instance {{ $labels.instance }} of job {{ $labels.job }}."
+
+- name: ContainerHealthAlerts
+  rules:
+    - alert: CadvisorContainerDown
+      expr: up{job="cadvisor"} == 0
+      labels:
+        severity: 'critical'
+      annotations:
+        summary: 'Alert: Cadvisor container is down'
+        description: 'The Cadvisor container is down or not responding.'
+
+    - alert: ContainerKilled
+      expr: 'time() - container_last_seen > 60'
+      for: 0m
+      labels:
+        severity: warning
+      annotations:
+        summary: Container killed (instance {{ $labels.instance }})
+        description: "A container has disappeared\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: ContainerAbsent
+      expr: 'absent(container_last_seen)'
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: Container absent (instance {{ $labels.instance }})
+        description: "A container is absent for 5 min\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: ContainerHighMemoryUsage
+      expr: '(sum(container_memory_working_set_bytes{name!=""}) BY (instance, name) / sum(container_spec_memory_limit_bytes > 0) BY (instance, name) * 100) > 80'
+      for: 2m
+      labels:
+        severity: warning
+      annotations:
+        summary: Container High Memory usage (instance {{ $labels.instance }})
+        description: "Container Memory usage is above 80 %\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: ContainerHighThrottleRate
+      expr: 'rate(container_cpu_cfs_throttled_seconds_total[3m]) > 1'
+      for: 2m
+      labels:
+        severity: warning
+      annotations:
+        summary: Container high throttle rate (instance {{ $labels.instance }})
+        description: "Container is being throttled\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    # - alert: ContainerLowCpuUtilization
+    #   expr: '(sum(rate(container_cpu_usage_seconds_total{name!=""}[3m])) BY (instance, name) * 100) < 20'
+    #   for: 7d
+    #   labels:
+    #     severity: info
+    #   annotations:
+    #     summary: Container Low CPU utilization (instance {{ $labels.instance }})
+    #     description: "Container CPU utilization is under 20 % for 1 week. Consider reducing the allocated CPU.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    # - alert: ContainerLowMemoryUsage
+    #   expr: '(sum(container_memory_working_set_bytes{name!=""}) BY (instance, name) / sum(container_spec_memory_limit_bytes > 0) BY (instance, name) * 100) < 10'
+    #   for: 7d
+    #   labels:
+    #     severity: info
+    #   annotations:
+    #     summary: Container Low Memory usage (instance {{ $labels.instance }})
+    #     description: "Container Memory usage is under 10 % for 1 week. Consider reducing the allocated memory.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+- name: MySQLDatabaseHealth
+  rules:
+    - alert: MysqlDown
+      expr: 'mysql_up == 0'
+      for: 0m
+      labels:
+        severity: critical
+      annotations:
+        summary: MySQL down (instance {{ $labels.instance }})
+        description: "MySQL instance is down on {{ $labels.instance }}\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: MysqlTooManyConnections(>80%)
+      expr: 'max_over_time(mysql_global_status_threads_connected[1m]) / mysql_global_variables_max_connections * 100 > 80'
+      for: 2m
+      labels:
+        severity: warning
+      annotations:
+        summary: MySQL too many connections (> 80 %) (instance {{ $labels.instance }})
+        description: "More than 80 % of MySQL connections are in use on {{ $labels.instance }}\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: MysqlHighThreadsRunning
+      expr: 'max_over_time(mysql_global_status_threads_running[1m]) / mysql_global_variables_max_connections * 100 > 60'
+      for: 2m
+      labels:
+        severity: warning
+      annotations:
+        summary: MySQL high threads running (instance {{ $labels.instance }})
+        description: "More than 60 % of MySQL connections are in running state on {{ $labels.instance }}\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: MysqlSlowQueries
+      expr: 'increase(mysql_global_status_slow_queries[1m]) > 0'
+      for: 2m
+      labels:
+        severity: warning
+      annotations:
+        summary: MySQL slow queries (instance {{ $labels.instance }})
+        description: "MySQL server mysql has some new slow query.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: MysqlInnodbLogWaits
+      expr: 'rate(mysql_global_status_innodb_log_waits[15m]) > 10'
+      for: 0m
+      labels:
+        severity: warning
+      annotations:
+        summary: MySQL InnoDB log waits (instance {{ $labels.instance }})
+        description: "MySQL innodb log writes stalling\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: MysqlRestarted
+      expr: 'mysql_global_status_uptime < 60'
+      for: 0m
+      labels:
+        severity: info
+      annotations:
+        summary: MySQL restarted (instance {{ $labels.instance }})
+        description: "MySQL has just been restarted, less than one minute ago on {{ $labels.instance }}.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"

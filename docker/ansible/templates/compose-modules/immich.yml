@@ -1,0 +1,197 @@
+services:
+  immich-server:
+    image: ghcr.io/immich-app/immich-server:v2.4.1@sha256:e6a6298e67ae077808fdb7d8d5565955f60b0708191576143fc02d30ab1389d1
+    container_name: immich-server
+    depends_on:
+      - traefik
+      - immich-db
+      - immich-redis
+    restart: always
+    # 4096 is not enough and the server will be killed automatically
+    # Recommended: https://docs.immich.app/install/requirements/
+    mem_limit: 6144m
+    extends:
+      file: $DOCKERDIR/data/immich/hwaccel.transcoding.yml
+      service: quicksync # set to one of [cpu, nvenc, quicksync, rkmpp, vaapi, vaapi-wsl] for accelerated transcoding
+    volumes:
+      - /mnt/smb_share_photos/immich:/usr/src/app/upload
+      - /etc/localtime:/etc/localtime:ro
+    security_opt:
+      - no-new-privileges=true
+    healthcheck:
+      disable: false
+    environment:
+      - TZ=${TZ}
+      - DB_HOSTNAME=immich-db
+      - DB_USERNAME=immich
+      - DB_DATABASE_NAME=immich
+      - DB_PASSWORD=${IMMICH_DB_PASSWORD}
+      #- DB_URL=postgresql://immich:${IMMICH_DB_PASSWORD}@immich-db:5432/immich?connect_timeout=300
+      - REDIS_HOSTNAME=immich-redis
+      - REDIS_PASSWORD=${IMMICH_REDIS_PASSWORD}
+      #- REDIS_URL=redis://:${IMMICH_REDIS_PASSWORD}@immich-redis:6379
+    labels:
+      # Homepage
+      - homepage.group=Productivity
+      - homepage.name=Immich
+      - homepage.icon=sh-immich
+      - homepage.href=https://photos.$DOMAINNAME
+      - homepage.description=Photo Library
+      # Traefik
+      - "traefik.enable=true"
+      - "traefik.docker.network=immich-frontend"
+      ## Middlewares
+      - "traefik.http.routers.immich-rtr.middlewares=chain-auth@file"
+      - "traefik.http.routers.immich-rtr.rule=Host(`photos.$DOMAINNAME`)"
+      ## HTTP Services
+      - "traefik.http.routers.immich-rtr.service=immich"
+      - "traefik.http.services.immich.loadbalancer.server.port=2283"
+      ## Extra no-auth endpoint. No need to create a new service
+      - "traefik.http.routers.immich-noauth-rtr.rule=Host(`photos-noauth.$DOMAINNAME`)"
+      - "traefik.http.routers.immich-noauth-rtr.middlewares=chain-no-auth-immich-server@file"
+      - "traefik.http.routers.immich-noauth-rtr.service=immich"
+      ## Router for Gatus — bypass auth if secret header is present
+      - "traefik.http.routers.immich-monitor-rtr.rule=Host(`photos.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
+      - "traefik.http.routers.immich-monitor-rtr.service=immich"
+      - "traefik.http.routers.immich-monitor-rtr.priority=100"  # Higher priority so it matches first
+    networks:
+      - immich-frontend
+      - immich-backend
+
+  immich-machine-learning:
+    # For hardware acceleration, add one of -[armnn, cuda, rocm, openvino, rknn] to the image tag.
+    image: ghcr.io/immich-app/immich-machine-learning:v2.4.1@sha256:b3deefd1826f113824e9d7bc30d905e7f823535887d03f869330946b6db3b44a
+    container_name: immich-machine-learning
+    # extends: # uncomment this section for hardware acceleration - see https://immich.app/docs/features/ml-hardware-acceleration
+    #   file: hwaccel.ml.yml
+    #   service: cpu # set to one of [armnn, cuda, rocm, openvino, openvino-wsl, rknn] for accelerated inference - use the `-wsl` version for WSL2 where applicable
+    volumes:
+      - immich_model_cache_data:/cache
+    restart: always
+    healthcheck:
+      disable: false
+    mem_limit: 4096m
+    security_opt:
+      - no-new-privileges=true
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    networks:
+      - immich-backend
+
+  immich-redis:
+    image: docker.io/valkey/valkey:9-alpine@sha256:c106a0c03bcb23cbdf9febe693114cb7800646b11ca8b303aee7409de005faa8
+    container_name: immich-redis
+    # Requirepass is needed as environment variable isn't picked up
+    command: >
+      --requirepass ${IMMICH_REDIS_PASSWORD}
+    restart: always
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 30s
+      retries: 3
+    mem_limit: 1024m
+    security_opt:
+      - no-new-privileges=true
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - REDIS_PASSWORD=${IMMICH_REDIS_PASSWORD}
+    networks:
+      - immich-backend
+
+  immich-db:
+    # Note: The immich-app/postgres image is a custom build of the official Postgres image with pgvector support.
+    # Note 2: pgautoupgrade doesn't work as it doesn't include the extensions needed by Immich.
+    image: ghcr.io/immich-app/postgres:14-vectorchord0.3.0-pgvectors0.2.0@sha256:c570d9e1c2494f65d2a0a379a7f6df66e8441964254a30aa62cc58e8ebf1dee0
+    container_name: immich-db
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+    # Recommended: https://docs.immich.app/install/requirements/
+    mem_limit: 2048m
+    shm_size: 128mb
+    volumes:
+      - immich_db_data:/var/lib/postgresql/data
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - POSTGRES_DB=immich
+      - POSTGRES_USER=immich
+      - POSTGRES_PASSWORD=${IMMICH_DB_PASSWORD}
+      - POSTGRES_INITDB_ARGS=--data-checksums
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d immich -U immich"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+    networks:
+      - immich-backend
+
+  immich-db-backup:
+    container_name: immich-db-backup
+    image: tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
+    # Uses s6 overlay which requires running as uid 0 first
+    # S6 will drop to USER_DBBACKUP/GROUP_DBBACKUP after startup
+    # user: "${PUID}:${PGID}"
+    depends_on:
+      - immich-db
+    volumes:
+      - /mnt/smb_share_backup/immich-db:/backup
+    mem_limit: 1024m
+    networks:
+      - immich-backend
+      # - mailrise
+    environment:
+      - TIMEZONE=${TZ}
+      - USER_DBBACKUP=${PUID}
+      - GROUP_DBBACKUP=${PGID}
+      - CONTAINER_NAME=immich-db-backup
+      - CONTAINER_ENABLE_MONITORING=FALSE # Disables Zabbix backup statistics
+
+      - ENABLE_NOTIFICATIONS=TRUE
+      - NOTIFICATION_TYPE=EMAIL
+      - SMTP_HOST=${NOTIFICATIONS_EMAIL_HOST}
+      - SMTP_DOMAIN=${NOTIFICATIONS_EMAIL_DOMAIN}
+      - SMTP_PORT=${NOTIFICATIONS_EMAIL_PORT}
+      - SMTP_USER=${NOTIFICATIONS_EMAIL_USERNAME}
+      - SMTP_PASS=${NOTIFICATIONS_EMAIL_PASSWORD}
+      - MAIL_TO=${NOTIFICATIONS_EMAIL_TO}
+      - MAIL_FROM=${NOTIFICATIONS_EMAIL_FROM}
+      - SMTP_AUTHENTICATION="on"
+      - SMTP_TLSCERTCHECK=TRUE
+      - SMTP_STARTTLS=on
+      - SMTP_TLS=on
+
+      - DEFAULT_CHECKSUM=SHA1        # Set standard checksum to SHA1
+      - DEFAULT_COMPRESSION=ZSTD     # Compress all with ZSTD
+      - DEFAULT_BACKUP_INTERVAL=1440 # Backup every 1440 minutes = 24 hours
+      - DEFAULT_BACKUP_BEGIN=0000    # Start backing up at midnight
+      - DEFAULT_CLEANUP_TIME=2880    # Cleanup backups after two days
+
+      - DEFAULT_ENCRYPT=TRUE                            # Encrypt backup files with GPG
+      - DEFAULT_ENCRYPT_PASSPHRASE=${DB_ENC_PASSPHRASE} # Set encryption password
+
+      - DB01_TYPE=pgsql
+      - DB01_HOST=immich-db
+      - DB01_NAME=immich
+      - DB01_USER=immich
+      - DB01_PORT=5432
+      - DB01_PASS=${IMMICH_DB_PASSWORD}
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+
+volumes:
+  immich_model_cache_data:
+  immich_db_data:
+
+networks:
+  immich-frontend:
+    name: immich-frontend
+  immich-backend:
+    name: immich-backend

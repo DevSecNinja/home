@@ -5,6 +5,8 @@ set: [pipefail]
 shopt: [globstar]
 
 vars:
+  ANSIBLE_DIR: "{{.ROOT_DIR}}/ansible"
+  DOCKER_DIR: "{{.ROOT_DIR}}/docker"
   BOOTSTRAP_DIR: '{{.ROOT_DIR}}/bootstrap'
   KUBERNETES_DIR: '{{.ROOT_DIR}}/kubernetes'
   SCRIPTS_DIR: '{{.ROOT_DIR}}/scripts'
@@ -18,6 +20,9 @@ env:
   TALOSCONFIG: '{{.TALOSCONFIG}}'
 
 includes:
+  docker:
+    aliases: ["do"]
+    taskfile: .taskfiles/Docker/Taskfile.yaml
   bootstrap: .taskfiles/bootstrap
   talos: .taskfiles/talos
   template: .taskfiles/template

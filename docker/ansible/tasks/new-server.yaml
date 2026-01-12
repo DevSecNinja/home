@@ -1,0 +1,105 @@
+---
+- name: Update apt repo and cache
+  ansible.builtin.apt:
+    autoclean: true
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: Install minimal required packages
+  ansible.builtin.apt:
+    name: "{{ packages__base }}"
+
+- name: Set timezone to "{{ tz }}"
+  community.general.timezone:
+    name: "{{ tz }}"
+
+- name: Ensure NTP is started & enabled
+  service: name=ntp state=started enabled=yes
+
+- name: Check if system clock was recently synced with NTP
+  command: timedatectl status
+  register: timedatectl_output
+  failed_when: "'System clock synchronized: yes' not in timedatectl_output.stdout"
+
+- name: Ensure the locale "{{ locale }}"" exists
+  locale_gen:
+    name: "{{ locale }}"
+    state: present
+  # Doesn't seem to work with ARM or Ubuntu. Excluding RPI for now.
+  when: ansible_architecture == "x86_64"
+
+- name: Set "{{ locale }}" as default locale
+  command: localectl set-locale LANG="{{ locale }}"
+  # Doesn't seem to work with ARM or Ubuntu
+  when: ansible_architecture == "x86_64"
+
+- name: Set authorized key for remote user copying it from local user
+  ansible.posix.authorized_key:
+    user: "{{ansible_user}}"
+    state: present
+    exclusive: true
+    key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/authorized_keys') }}"
+
+- name: Remove non working Microsoft apt source
+  file:
+    path: /etc/apt/sources.list.d/microsoft-prod.list
+    state: absent
+
+- name: Remove non working apt source
+  file:
+    path: /etc/apt/trusted.gpg
+    state: absent
+
+- name: Add Microsoft APT key
+  apt_key:
+    url: "{{ msft__apt_repository_url }}/keys/microsoft.asc"
+    keyring: /etc/apt/trusted.gpg.d/microsoft.gpg
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Get sha256 sum of downloaded apt key
+  stat:
+    path: /etc/apt/trusted.gpg.d/microsoft.gpg
+    checksum_algorithm: sha256
+    get_checksum: yes
+  register: apt_key_stat
+
+- name: Verify sha256sum of downloaded apt key
+  fail:
+    msg: "Failure, SHA256 hash of downloaded apt key is not correct."
+  # TODO: Check why SHA256 hash is different on DMZ server
+  when: apt_key_stat.stat.checksum != msft__apt_key_checksum and inventory_hostname not in groups['untrusted']
+
+- name: Add Microsoft apt repository
+  apt_repository:
+    repo: "{{ msft__apt_repository }}"
+    update_cache: yes
+    state: present
+    filename: "microsoft-{{ msft__apt_channel }}"
+  when: ansible_os_family == "Debian"
+
+- name: Install other repositories
+  ansible.builtin.shell: |
+    # FastFetch
+    curl -S "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xEB65EE19D802F3EB1A13CFE47E2E5CB4D4865F21" \
+      | gpg --batch --yes --dearmor --output "/etc/apt/trusted.gpg.d/zhangsongcui3371-ubuntu-fastfetch.gpg"
+
+    if ! test -f /etc/apt/sources.list.d/zhangsongcui3371-ubuntu-fastfetch-jammy.list; then
+      echo "deb https://ppa.launchpadcontent.net/zhangsongcui3371/fastfetch/ubuntu/ jammy main" \
+        | tee /etc/apt/sources.list.d/zhangsongcui3371-ubuntu-fastfetch-jammy.list
+    fi
+
+    exit 0
+  args:
+    executable: /bin/bash
+
+- name: Update apt repo and cache
+  ansible.builtin.apt:
+    autoclean: true
+    update_cache: true
+    # Must refresh cache in case a new repository was added
+    cache_valid_time: 0
+
+- name: Install additional packages
+  ansible.builtin.apt:
+    name: "{{ packages__additional }}"

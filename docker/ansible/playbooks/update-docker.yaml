@@ -1,0 +1,202 @@
+---
+- hosts: docker
+  name: "Update Docker configs"
+  become: yes
+  vars:
+    # Directories
+    compose_dest_path: "/srv/docker/data/compose"
+    compose_src_path: "../templates/compose-modules"
+    templates_src_path: "../templates/data/{{inventory_hostname_short}}"
+    templates_common_src_path: "../templates/data/common"
+    templates_dest_path: "/srv/docker/data"
+  tasks:
+    - name: Run Docker Compose tests
+      shell:
+        cmd: "python3 tests/test_compose_files.py"
+        chdir: "{{ playbook_dir }}/../../.."
+      delegate_to: localhost
+      run_once: true
+
+    - name: Stop Folding at Home
+      shell:
+        cmd: "docker compose down foldingathome 2>&1"
+        chdir: /srv/docker
+      when: inventory_hostname in groups['external']
+      failed_when: false
+
+    - include_tasks: ../tasks/get-home-ip.yaml
+    - include_tasks: ../tasks/configure-ufw.yaml
+    - include_tasks: ../tasks/gather-frontend-networks.yaml
+    - include_tasks: ../tasks/load-credentials.yaml
+    - include_tasks: ../tasks/mount-smb-shares.yaml
+
+    - name: Dynamically create compose file
+      ansible.builtin.template:
+        src: "../templates/compose/compose.yml.j2"
+        dest: "/srv/docker/docker-compose.yml"
+        owner: "{{ansible_user}}"
+        group: "docker"
+        mode: "0755"
+        block_start_string: "#%"
+        block_end_string: "%#"
+
+    - name: Dynamically create .env file
+      ansible.builtin.template:
+        src: "../templates/env/env.j2"
+        dest: "/srv/docker/.env"
+        owner: "{{ansible_user}}"
+        group: "docker"
+        mode: "0755"
+        block_start_string: "#%"
+        block_end_string: "%#"
+
+    - name: Check if .env file contains values that couldn't be decrypted
+      ansible.builtin.lineinfile:
+        path: "/srv/docker/.env"
+        regexp: 'ENC\[AES256_GCM'
+        state: absent
+      register: check_string
+      check_mode: yes
+      failed_when: check_string.changed
+
+    # Common
+    - name: "[Common] Copy all data directories recursively"
+      file: dest={{templates_dest_path}}/{{ item|replace(templates_common_src_path+'/', '') }} state=directory owner={{ansible_user}} group=docker mode=0755
+      with_items: "{{ lookup('pipe', 'find '+ templates_common_src_path +'/ -type d').split('\n') }}"
+
+    - name: "[Common] Copy all data files recursively"
+      copy: src={{ item }} dest={{templates_dest_path}}/{{ item|replace(templates_common_src_path+'/', '') }} owner={{ansible_user}} group=docker mode=0755
+      with_items: "{{ lookup('pipe', 'find '+ templates_common_src_path +'/ -type f -not -name *.j2 ').split('\n') }}"
+
+    - name: "[Common] Copy data templates files recursively"
+      ansible.builtin.template: src={{ item }} dest={{templates_dest_path}}/{{ item|replace(templates_common_src_path+'/', '')|replace('.j2', '') }} owner={{ansible_user}} group=docker mode=0755  block_start_string="#%" block_end_string="%#"
+      with_items: "{{ lookup('pipe', 'find '+ templates_common_src_path +'/ -type f -name *.j2').split('\n') }}"
+      when:
+        - inventory_hostname in groups['trusted']
+
+    - name: "[Common] Copy selected data templates files recursively for untrusted servers"
+      ansible.builtin.template: src={{ item }} dest={{templates_dest_path}}/{{ item|replace(templates_common_src_path+'/', '')|replace('.j2', '') }} owner={{ansible_user}} group=docker mode=0755  block_start_string="#%" block_end_string="%#"
+      with_items:
+        - "{{ templates_common_src_path }}/traefik/traefik.yml.j2"
+        - "{{ templates_common_src_path }}/traefik/rules/middlewares.yml.j2"
+      when:
+        - inventory_hostname in groups['untrusted']
+
+    # Server specific
+    - name: Check if server specific folder exists
+      stat:
+        path: "{{ templates_src_path }}"
+      register: check_server_folder_exists
+      delegate_to: localhost
+
+    - name: "[Server] Get data directories"
+      shell: "find {{ templates_src_path }}/ -type d || true"
+      register: data_directories
+      delegate_to: localhost
+      when: check_server_folder_exists.stat.exists == true
+
+    - name: "[Server] Copy all data directories recursively"
+      file: dest={{templates_dest_path}}/{{ item|replace(templates_src_path+'/', '') }} state=directory owner={{ansible_user}} group=docker mode=0755
+      with_items: "{{ data_directories.stdout_lines }}"
+      when:
+        - check_server_folder_exists.stat.exists == true
+        - item != ""
+
+    - name: "[Server] Get data files and templates"
+      shell: "find {{ templates_src_path }}/ -type f -not -name *.j2 || true"
+      register: data_files
+      delegate_to: localhost
+      when: check_server_folder_exists.stat.exists == true
+
+    - name: "[Server] Copy all data files recursively"
+      copy: src={{ item }} dest={{templates_dest_path}}/{{ item|replace(templates_src_path+'/', '') }} owner={{ansible_user}} group=docker mode=0755
+      with_items: "{{ data_files.stdout_lines }}"
+      when:
+        - check_server_folder_exists.stat.exists == true
+        - item != ""
+
+    - name: "[Server] Get data templates"
+      shell: "find {{ templates_src_path }}/ -type f -name *.j2 || true"
+      register: data_templates
+      delegate_to: localhost
+      when: check_server_folder_exists.stat.exists == true
+
+    - name: "[Server] Copy data templates files recursively"
+      ansible.builtin.template: src={{ item }} dest={{templates_dest_path}}/{{ item|replace(templates_src_path+'/', '')|replace('.j2', '') }} owner={{ansible_user}} group=docker mode=0755 block_start_string="#%" block_end_string="%#"
+      with_items: "{{ data_templates.stdout_lines }}"
+      when:
+        - check_server_folder_exists.stat.exists == true
+        - item != ""
+
+    # Compose
+    - name: "[Compose] Copy all data files recursively"
+      copy: src={{ item }} dest={{compose_dest_path}}/{{ item|replace(compose_src_path+'/', '') }} owner={{ansible_user}} group=docker mode=0755
+      with_items: "{{ lookup('pipe', 'find '+ compose_src_path +'/ -type f -not -name *.j2 ').split('\n') }}"
+
+    - name: "[Compose] Copy data templates files recursively"
+      ansible.builtin.template: src={{ item }} dest={{compose_dest_path}}/{{ item|replace(compose_src_path+'/', '')|replace('.j2', '') }} owner={{ansible_user}} group=docker mode=0755 block_start_string="#%" block_end_string="%#"
+      with_items: "{{ lookup('pipe', 'find '+ compose_src_path +'/ -type f -name *.j2').split('\n') }}"
+
+    - name: "[Compose] Copy selected data templates files recursively for untrusted servers"
+      ansible.builtin.template: src={{ item }} dest={{compose_dest_path}}/{{ item|replace(compose_src_path+'/', '')|replace('.j2', '') }} owner={{ansible_user}} group=docker mode=0755 block_start_string="#%" block_end_string="%#"
+      with_items:
+        - "{{ compose_src_path }}/echo-server.yml.j2"
+      when:
+        - inventory_hostname in groups['untrusted']
+
+    - name: Pull images
+      shell:
+        cmd: "docker compose pull 2>&1"
+        chdir: /srv/docker
+
+  handlers:
+    - import_tasks: ../handlers/main.yml
+
+- hosts: dnsservers
+  gather_facts: no
+  name: "Update DNS containers"
+  become: yes
+  serial: 1
+  tasks:
+    - include_tasks: ../tasks/load-credentials.yaml
+
+    - name: Run DNS containers
+      register: docker_container_run_result
+      shell:
+        cmd: "docker compose up -d adguard unbound --remove-orphans --wait 2>&1"
+        chdir: /srv/docker
+
+    - name: Restart Unbound DNS container to enforce changes
+      shell:
+        cmd: "docker restart unbound 2>&1"
+        chdir: /srv/docker
+      when: inventory_hostname in groups['dnsservers']
+
+    - name: Show Output
+      debug: msg="{{ docker_container_run_result.stdout_lines }}"
+      when: docker_container_run_result.changed
+
+    - name: "[Test] Perform external DNS lookup"
+      command: "host github.com localhost"
+      register: host_output_ext
+      failed_when: "'has address' not in host_output_ext.stdout"
+
+    - name: "[Test] Perform internal DNS lookup"
+      command: "host draw.{{ generic__domain_name }} localhost"
+      register: host_output_int
+      failed_when: "'has address' not in host_output_int.stdout"
+
+- hosts: docker
+  gather_facts: no
+  name: "Update all containers"
+  become: yes
+  tasks:
+    - name: Run containers
+      register: docker_container_run_result
+      shell:
+        cmd: "docker compose up -d --remove-orphans --wait 2>&1"
+        chdir: /srv/docker
+
+    - name: Show Output
+      debug: msg="{{ docker_container_run_result.stdout_lines }}"
+      when: docker_container_run_result.changed

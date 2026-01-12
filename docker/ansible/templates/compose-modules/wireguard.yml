@@ -1,0 +1,49 @@
+services:
+  wireguard:
+    container_name: wireguard
+    image: lscr.io/linuxserver/wireguard:version-v1.0.20210914@sha256:c3c7a910e46c9bd25daf22e38bb48cbc10d32727c5ee1fe5ede32ee4c34f6a36
+    depends_on:
+      - traefik
+    networks:
+      - wireguard-frontend
+    restart: always
+    cap_add:
+      - NET_ADMIN
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
+    security_opt:
+      - no-new-privileges=true
+    mem_limit: 1024m
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      # Wireguard
+      - PEERS=${WIREGUARD_PEERS}
+      - SERVERURL=vpn.$DOMAINNAME
+      - PEERDNS=192.168.101.220
+      - LOG_CONFS=false
+    volumes:
+      - wireguard_data:/config
+    labels:
+      # # Homepage
+      # - homepage.group=Infrastructure
+      # - homepage.name=Wireguard
+      # - homepage.icon=wireguard.svg
+      # - homepage.href=https://vpn.$DOMAINNAME
+      # - homepage.description=Virtual Private Network
+      # Traefik
+      - "traefik.enable=true"
+      - "traefik.docker.network=wireguard-frontend"
+      ## Middlewares
+      - "traefik.udp.routers.wireguard-rtr.entrypoints=wireguard"
+      ## UDP Services
+      - "traefik.udp.routers.wireguard-rtr.service=wireguard-svc"
+      - "traefik.udp.services.wireguard-svc.loadbalancer.server.port=51820"
+
+volumes:
+  wireguard_data:
+
+networks:
+  wireguard-frontend:
+    name: wireguard-frontend

@@ -1,0 +1,45 @@
+#
+#### DEPRECATION NOTICE
+## This compose module is no longer in use
+## Replaced by: None
+## Last used version: 0.47.06@sha256:6e9dcf4abc1cfb0b1eeba6b6ff52a4b6f790110d6cdc8b7942c6cecf34e56265
+#
+
+services:
+  change-detection:
+    image: ghcr.io/dgtlmoon/changedetection.io
+    container_name: change-detection
+    depends_on:
+      - traefik
+    restart: always
+    mem_limit: 1024m
+    security_opt:
+      - no-new-privileges=true
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - PORT=5000
+      - BASE_URL=https://changedetection.${DOMAINNAME}
+      - HIDE_REFERER=true # Hide the referer header in outgoing requests
+    networks:
+      - t2_proxy
+    volumes:
+      - change_detection_data:/datastore
+    labels:
+      # Homepage
+      - homepage.group=Infrastructure
+      - homepage.name=Change Detection
+      - homepage.icon=sh-changedetection
+      - homepage.href=https://change-detection.$DOMAINNAME
+      - homepage.description=Detect Changes on Web Sites
+      # Traefik
+      - "traefik.enable=true"
+      ## Middlewares
+      - "traefik.http.routers.change-detection-rtr.middlewares=chain-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.change-detection-rtr.service=change-detection-svc"
+      - "traefik.http.services.change-detection-svc.loadbalancer.server.port=5000"
+
+volumes:
+  change_detection_data:

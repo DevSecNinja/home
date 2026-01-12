@@ -1,0 +1,65 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: kubernetes-dashboard
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: kubernetes-dashboard
+      version: 7.10.0
+      sourceRef:
+        kind: HelmRepository
+        name: kubernetes-dashboard
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    env:
+      TZ: "${TIMEZONE}"
+    app:
+      image:
+        pullPolicy: IfNotPresent
+      ingress:
+        enabled: true
+        ingressClassName: internal
+        annotations:
+          # TODO: [k8sdash] Fix Oauth authentication
+          ## Enable Oauth2 Authentication
+          # nginx.ingress.kubernetes.io/auth-url: "http://oauth2-proxy.security.svc.cluster.local:4180/oauth2/auth"
+          # nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_DOMAIN}/oauth2/auth/oauth2/start?rd=$scheme://$host$request_uri"
+          # nginx.ingress.kubernetes.io/auth-response-headers: "Authorization"
+          ##
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/icon: kubernetes-dashboard.png
+          gethomepage.dev/name: Kubernetes Dashboard
+          gethomepage.dev/description: "Web-based UI for Kubernetes clusters"
+          gethomepage.dev/group: Observability
+          gethomepage.dev/app: kubernetes-dashboard-web # HelmRelease deploys several components
+        hosts:
+          - &host "kubernetes.${SECRET_DOMAIN}"
+        tls:
+          # TODO: [kubedashboard] Replace generated TLS certificate with letsencrypt.
+          enabled: true
+      extras:
+        serviceMonitor:
+          # Whether to create a Prometheus Operator service monitor.
+          enabled: true
+      metricsScraper:
+        enabled: true
+      # Disable the following to avoid conflicts with the ingress controller.
+      nginx:
+        enabled: false
+      cert-manager:
+        enabled: false
+        installCRDs: false
+      metrics-server:
+        enabled: false

@@ -1,0 +1,32 @@
+---
+- name: Debug playbook
+  hosts: all
+  become: yes
+  gather_facts: yes
+  tasks:
+  - name: Show host IP
+    debug:
+      msg: "{{ ansible_default_ipv4.address|default(ansible_all_ipv4_addresses[0]) }}"
+
+  - name: Initialize empty list for devices
+    set_fact:
+      storage_devices: []
+    no_log: true
+
+  - name: Get SCSI devices
+    set_fact:
+      storage_devices: "{{ storage_devices + [item.key] }}"
+    no_log: true
+    with_dict: "{{ ansible_devices }}"
+    when: "item.value.host.startswith('SCSI storage controller: Red Hat, Inc. Virtio SCSI')"
+
+  - name: Show values for SCSI devices
+    debug: msg="{{ ansible_devices[item] }}"
+    loop: "{{ storage_devices }}"
+
+  - name: Get variable
+    shell: "cat /srv/docker/.env | grep OAUTH2_PROXY_AZURE_CLIENT_ID"
+    register: variable
+
+  - name: Show variable
+    debug: msg="{{ variable.stdout_lines }}"

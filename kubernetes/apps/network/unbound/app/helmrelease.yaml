@@ -1,0 +1,120 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app unbound
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controllers:
+      ${APP}:
+        strategy: RollingUpdate
+        rollingUpdate:
+          maxUnavailable: 0
+          maxSurge: 25%
+        annotations:
+          # Since we don't link the config map here but use k8s-sidecar,
+          # we have to tell stakater the config map it needs to monitor
+          configmap.reloader.stakater.com/reload: *app
+        pod:
+          dnsConfig:
+            options:
+              - { name: ndots, value: "1" }
+          # securityContext:
+          #   runAsNonRoot: true
+          #   runAsUser: 65534
+          #   runAsGroup: 65534
+          #   fsGroup: 65534
+          #   fsGroupChangePolicy: OnRootMismatch
+          #   seccompProfile: { type: RuntimeDefault }
+        initContainers:
+          init-config:
+            image: &configSyncImage
+              repository: ghcr.io/kiwigrid/k8s-sidecar
+              tag: 1.28.0@sha256:4166a019eeafd1f0fef4d867dc5f224f18d84ec8681dbb31f3ca258ecf07bcf2
+            env:
+              FOLDER: /opt/unbound/etc/unbound
+              LABEL: app.kubernetes.io/config-owner
+              LABEL_VALUE: *app
+              UNIQUE_FILENAMES: false
+              METHOD: LIST
+            resources: &configSyncResources
+              requests:
+                cpu: 10m
+                memory: 10Mi
+              limits:
+                memory: 128Mi
+        containers:
+          app:
+            image:
+              repository: mvance/unbound
+              tag: 1.22.0@sha256:76906da36d1806f3387338f15dcf8b357c51ce6897fb6450d6ce010460927e90
+            env:
+              TZ: ${TIMEZONE}
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: false
+                type: TCP
+              readiness: *probes
+            resources:
+              requests:
+                cpu: 10m
+                memory: 256M
+              limits:
+                memory: 512M
+            # TODO: [unbound] Add probes & service monitors
+          config-sync:
+            image: *configSyncImage
+            env:
+              FOLDER: /opt/unbound/etc/unbound
+              LABEL: app.kubernetes.io/config-owner
+              LABEL_VALUE: *app
+              UNIQUE_FILENAMES: false
+              METHOD: WATCH
+            resources: *configSyncResources
+    service:
+      app:
+        controller: *app
+        ports:
+          dns-tcp:
+            enabled: true
+            port: 53
+            protocol: TCP
+            targetPort: 53
+          dns-udp:
+            enabled: true
+            port: 53
+            protocol: UDP
+            targetPort: 53
+
+    # Required for the config sync init container
+    serviceAccount:
+      create: true
+      name: *app
+
+    persistence:
+      config:
+        storageClass: openebs-hostpath
+        accessMode: ReadWriteOnce
+        size: 1Gi
+        globalMounts:
+          - path: /opt/unbound/etc/unbound

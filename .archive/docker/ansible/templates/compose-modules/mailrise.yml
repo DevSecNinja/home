@@ -1,0 +1,28 @@
+#
+#### DEPRECATION NOTICE
+## This compose module is no longer in use
+## Replaced by: Kubernetes cluster resource
+## Last used version: 1.4.0@sha256:66082168090b9a83f01cc71a9d7b1994840adbbbffbe4d2cf644272fbbc23a1a
+#
+
+services:
+  mailrise:
+    image: yoryan/mailrise
+    container_name: mailrise
+    depends_on:
+      - traefik
+    restart: always
+    mem_limit: 1024m
+    security_opt:
+      - no-new-privileges=true
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    networks:
+      - mailrise
+    volumes:
+      - $DOCKERDIR/data/mailrise/mailrise.yml:/etc/mailrise.conf:ro
+
+networks:
+  mailrise:

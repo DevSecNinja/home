@@ -1,0 +1,95 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app kyverno-reporter
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: &chart policy-reporter
+      version: 3.0.0-rc.9
+      sourceRef:
+        kind: HelmRepository
+        name: kyverno-reporter
+        namespace: flux-system
+      interval: 15m
+  driftDetection:
+    mode: enabled
+  maxHistory: 3
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    api:
+      enabled: true
+    ui:
+      enabled: true
+      plugins:
+        kyverno: true
+      ingress:
+        enabled: true
+        className: internal
+        annotations:
+          ## Enable Oauth2 Authentication
+          nginx.ingress.kubernetes.io/auth-url: "http://oauth2-proxy.security.svc.cluster.local:4180/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_DOMAIN}/oauth2/auth/oauth2/start?rd=$scheme://$host$request_uri"
+          ##
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/name: "Kyverno Policy Reporter"
+          gethomepage.dev/group: "Observability"
+          gethomepage.dev/icon: "https://kyverno.github.io/policy-reporter/favicon.ico"
+          gethomepage.dev/description: "Policy Reporter"
+          gethomepage.dev/app: *chart
+          gethomepage.dev/podSelector: >-
+            app.kubernetes.io/instance in (
+                kyverno,
+                kyverno-reporter
+            )
+        hosts:
+          - host: &host ${GATUS_SUBDOMAIN:-${APP}}.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+
+    # Enables Prometheus operator
+    monitoring:
+      enabled: true
+
+    # TODO: [kyverno] Investigate the use of an external database & redis
+    # https://kyverno.github.io/policy-reporter/guide/helm-chart-core#external-databases-appversion-2150
+    # database:
+    #   type: "postgres"
+    #
+    # redis:
+    #   # enables the feature
+    #   enabled: false
+
+    target:
+      loki:
+        # loki host address
+        host: "http://loki.observability.svc.cluster.local:3100"
+        # loki API path, defaults to "/api/prom/push" (deprecated)
+        path: "/loki/api/v1/push"
+        # minimum priority "" < info < warning < critical < error
+        minimumPriority: "warning"
+        # Skip already existing PolicyReportResults on startup
+        skipExistingOnStartup: true
+        # # Send only results from the given sources
+        # customLabels:
+        #   cluster: rancher-desktop
+        sources:
+        - kyverno
+        - falco
+
+    kyvernoPlugin:
+      enabled: true
+
+    global:
+      plugins:
+        kyverno: true

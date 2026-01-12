@@ -1,0 +1,80 @@
+#
+#### DEPRECATION NOTICE
+## This compose module is no longer in use
+## Replaced by: Kubernetes cluster resource
+## Last used version: v2.55.1@sha256:2659f4c2ebb718e7695cb9b25ffa7d6be64db013daba13e05c875451cf51b0d3
+##       Pushgateway: v1.10.0@sha256:7a4d0696a24ef4e8bad62bee5656855a0aff2f26416d8cb32009dc28d6263604
+#
+
+services:
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - prometheus_data:/prometheus
+      - $DOCKERDIR/data/prometheus:/etc/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    mem_limit: 1024m
+    environment:
+      - TZ=${TZ}
+    restart: always
+    networks:
+      - t2_proxy
+    security_opt:
+      - no-new-privileges=true
+    labels:
+      # Homepage
+      - homepage.group=Infrastructure
+      - homepage.name=Prometheus
+      - homepage.icon=prometheus.svg
+      - homepage.href=https://prometheus.$DOMAINNAME
+      - homepage.description=Resource Monitoring
+      # Group
+      - org.label-schema.group=infrastructure
+      # Traefik
+      - "traefik.enable=true"
+      ## Middlewares
+      - "traefik.http.routers.prometheus-rtr.middlewares=chain-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.prometheus-rtr.service=prometheus"
+      ### Enable the server port
+      - "traefik.http.services.prometheus.loadbalancer.server.port=9090"
+
+  pushgateway:
+    image: prom/pushgateway
+    container_name: pushgateway
+    mem_limit: 1024m
+    environment:
+      - TZ=${TZ}
+    restart: always
+    networks:
+      - t2_proxy
+    security_opt:
+      - no-new-privileges=true
+    labels:
+      # # Homepage
+      # - homepage.group=Infrastructure
+      # - homepage.name=Pushgateway
+      # - homepage.icon=prometheus.svg
+      # - homepage.href=https://pushgateway.$DOMAINNAME
+      # - homepage.description=Resource Monitoring
+      # Group
+      - org.label-schema.group=infrastructure
+      # Traefik
+      - "traefik.enable=true"
+      ## Middlewares
+      ## Using no-auth chain but whitelisting management traffic so I can push logs from different servers
+      - "traefik.http.routers.pushgateway-rtr.middlewares=chain-no-auth-mgmt-whitelist@file"
+      ## HTTP Services
+      - "traefik.http.routers.pushgateway-rtr.service=pushgateway"
+      ### Enable the server port
+      - "traefik.http.services.pushgateway.loadbalancer.server.port=9091"
+
+volumes:
+  prometheus_data:

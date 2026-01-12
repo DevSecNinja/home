@@ -1,0 +1,167 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app immich-server
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    defaultPodOptions:
+      enableServiceLinks: false
+      securityContext:
+        runAsUser: 568
+        runAsGroup: 568
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
+        supplementalGroups: [65537]
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: *app
+
+    controllers:
+      main:
+        annotations:
+          reloader.stakater.com/auto: "true"
+          configmap.reloader.stakater.com/reload: &configMap immich
+          secret.reloader.stakater.com/reload: &secret immich
+        initContainers:
+          init-config:
+            image: &configSyncImage
+              repository: ghcr.io/kiwigrid/k8s-sidecar
+              tag: 1.28.0@sha256:4166a019eeafd1f0fef4d867dc5f224f18d84ec8681dbb31f3ca258ecf07bcf2
+            envFrom: &envFrom
+              - configMapRef:
+                  name: *configMap
+              - secretRef:
+                  name: *secret
+            env:
+              FOLDER: &configParentLocation /config
+              LABEL: app.kubernetes.io/config-owner
+              LABEL_VALUE: "immich"
+              UNIQUE_FILENAMES: false
+              METHOD: LIST
+            resources: &configSyncResources
+              requests:
+                cpu: 10m
+                memory: 10Mi
+              limits:
+                memory: 128Mi
+          init-db:
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: 16
+            envFrom: *envFrom
+
+        containers:
+          main:
+            image:
+              repository: ghcr.io/immich-app/immich-server
+              tag: v1.121.0@sha256:851c02f28891f1854c5b5762ee8d2e254e2de528cfe3627b2fbcb37a7f108ff3
+            envFrom: *envFrom
+            env:
+              TZ: ${TIMEZONE}
+              LOG_LEVEL: log
+              SERVER_PORT: &port 2283
+              IMMICH_MEDIA_LOCATION: &mediaLocation /usr/src/app/upload
+              IMMICH_CONFIG_FILE: &configLocation /config/immich-config.json
+            resources:
+              requests:
+                cpu: 50m
+              limits:
+                memory: 1100M
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/server/ping
+                    port: *port
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 30
+              readiness: *probes
+              startup:
+                enabled: false
+          config-sync:
+            image: *configSyncImage
+            envFrom: *envFrom
+            env:
+              FOLDER: *configParentLocation
+              LABEL: app.kubernetes.io/config-owner
+              LABEL_VALUE: "immich"
+              UNIQUE_FILENAMES: false
+              METHOD: WATCH
+            resources: *configSyncResources
+    service:
+      main:
+        # TODO: [immich] Investigate on rename 'No enabled controller found with this identifier. (service: 'app', controller: 'immich-server')'
+        controller: main
+        ports:
+          http:
+            port: *port
+    ingress:
+      main:
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Media
+          gethomepage.dev/name: Immich
+          gethomepage.dev/description: "Photo library and management"
+          gethomepage.dev/icon: immich
+          # TODO: [immich] Enable widget
+          # gethomepage.dev/widget.type: immich
+          # gethomepage.dev/widget.url: "http://photos.media.svc.cluster.local:2283"
+          # gethomepage.dev/widget.key: "tobeadded"
+          # gethomepage.dev/widget.version: "2"
+        hosts:
+          - host: &host ${GATUS_SUBDOMAIN:-${APP}}.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
+    serviceAccount:
+      create: true
+      name: immich
+
+    persistence:
+      config:
+        storageClass: openebs-hostpath
+        accessMode: ReadWriteOnce
+        size: 1Gi
+        globalMounts:
+          - path: *configParentLocation
+
+      data:
+        storageClass: openebs-hostpath
+        accessMode: ReadWriteOnce
+        retain: true
+        size: 10Gi
+        globalMounts:
+          - path: *mediaLocation

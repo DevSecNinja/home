@@ -1,0 +1,207 @@
+services:
+  # NOTE: MongoDB doesn't support auto upgrade of container
+  # Before upgrading to a new major version, run (change MONGO_VERSION to CURRENT version):
+  # export MONGO_VERSION=6.0
+  # docker compose exec unifi-db mongosh --eval 'db.adminCommand( { setFeatureCompatibilityVersion: "'$MONGO_VERSION'" } )'
+
+  unifi-db:
+    image: mongo:8.2.3@sha256:7f5bbdafebde7c42e42e33396d01c0eda3eb753da8dae99071a30e350568a0a4
+    container_name: unifi-db
+    mem_limit: 1024m
+    environment:
+      - TZ=${TZ}
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=${UNIFI_MONGO_ROOT_PASS}
+      # No need to pre-create the DB as Unifi will take care of that
+      #- MONGO_INITDB_DATABASE=unifi
+      - MONGO_USER=unifi
+      - MONGO_PASS=${UNIFI_MONGO_PASS}
+      - MONGO_DBNAME=unifi
+      # User gets created in the admin database
+      - MONGO_AUTHSOURCE=admin
+    security_opt:
+      - no-new-privileges=true
+    networks:
+      - unifi-backend
+    volumes:
+      - unifi_db_data:/data/db
+      - $DOCKERDIR/data/mongodb/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh:ro
+    restart: always
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping')"]
+      interval: 30s      # how often to run the check
+      timeout: 10s       # how long to wait for a response
+      retries: 3         # consecutive failures before unhealthy
+      start_period: 30s  # extra time to let Mongo start up
+
+  unifi-db-backup:
+    container_name: unifi-db-backup
+    image: tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
+    depends_on:
+      - unifi-db
+    volumes:
+      - /mnt/smb_share_backup/unifi:/backup
+    networks:
+      - unifi-backend
+    mem_limit: 1024m
+    environment:
+      - TIMEZONE=${TZ}
+      - USER_DBBACKUP=${PUID}
+      - GROUP_DBBACKUP=${PGID}
+      - CONTAINER_NAME=unifi-db-backup
+      - CONTAINER_ENABLE_MONITORING=FALSE # Disables Zabbix backup statistics
+
+      - ENABLE_NOTIFICATIONS=TRUE
+      - NOTIFICATION_TYPE=EMAIL
+      - SMTP_HOST=${NOTIFICATIONS_EMAIL_HOST}
+      - SMTP_DOMAIN=${NOTIFICATIONS_EMAIL_DOMAIN}
+      - SMTP_PORT=${NOTIFICATIONS_EMAIL_PORT}
+      - SMTP_USER=${NOTIFICATIONS_EMAIL_USERNAME}
+      - SMTP_PASS=${NOTIFICATIONS_EMAIL_PASSWORD}
+      - MAIL_TO=${NOTIFICATIONS_EMAIL_TO}
+      - MAIL_FROM=${NOTIFICATIONS_EMAIL_FROM}
+      - SMTP_AUTHENTICATION="on"
+      - SMTP_TLSCERTCHECK=TRUE
+      - SMTP_STARTTLS=on
+      - SMTP_TLS=on
+
+      - DEFAULT_CHECKSUM=SHA1        # Set standard checksum to SHA1
+      - DEFAULT_COMPRESSION=ZSTD     # Compress all with ZSTD
+      - DEFAULT_BACKUP_INTERVAL=1440 # Backup every 1440 minutes = 24 hours
+      - DEFAULT_BACKUP_BEGIN=0000    # Start backing up at midnight
+      - DEFAULT_CLEANUP_TIME=2880    # Cleanup backups after two days
+
+      - DEFAULT_ENCRYPT=TRUE                            # Encrypt backup files with GPG
+      - DEFAULT_ENCRYPT_PASSPHRASE=${DB_ENC_PASSPHRASE} # Set encryption password
+
+      - DB01_TYPE=mongo
+      - DB01_HOST=unifi-db
+      - DB01_NAME=unifi
+      - DB01_USER=unifi
+      - DB01_PORT=27017
+      - DB01_PASS=${UNIFI_MONGO_PASS}
+      - DB01_AUTH=admin
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+
+  unifi:
+    container_name: unifi
+    image: lscr.io/linuxserver/unifi-network-application:version-10.0.162@sha256:268340299e6a8a85c29800923e242c60ed7baa24557943f0ff5ec4ea52804232
+    depends_on:
+      - traefik
+      - unifi-db
+    networks:
+      - unifi-frontend
+      - unifi-backend
+    mem_limit: 2048m
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - MONGO_USER=unifi
+      - MONGO_PASS=${UNIFI_MONGO_PASS}
+      - MONGO_HOST=unifi-db
+      - MONGO_PORT=27017
+      - MONGO_DBNAME=unifi
+      # User gets created in the admin database- MONGO_AUTHSOURCE=admin
+      - MONGO_AUTHSOURCE=admin
+      - MEM_LIMIT=1024 #optional
+    volumes:
+      - unifi_data:/config
+    # Saves some CPU cycles + healthcheck doesn't do anything on failure
+    # healthcheck:
+    #   test: ["CMD", "curl", "-f", "-k", "https://localhost:8443"]
+    #   interval: 1m
+    #   timeout: 10s
+    #   retries: 3
+    #   start_period: 1m
+    ports:
+      - 3478:3478/udp # used for STUN
+      - 10001:10001/udp # used for device discovery
+      - 8080:8080 # used for device and controller communications
+      # - 1900:1900/udp #optional - used for "Make controller discoverable on L2 network" in controller settings # Currently turned off in settings
+      # - 8843:8843 #optional - used for HTTPS portal redirection
+      # - 8880:8880 #optional - used for HTTP portal redirection
+      - 6789:6789 #optional - used for UniFi mobile speed test
+      # - 5514:5514/udp #optional - used for remote syslog capture
+      - 2221:22/tcp # used for SSH
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+    labels:
+      # Homepage
+      - homepage.group=Infrastructure
+      - homepage.name=Unifi
+      - homepage.icon=unifi.svg
+      - homepage.href=https://unifi.$DOMAINNAME
+      - homepage.description=Ubiquiti Network Controller
+      # Backup
+      - docker-volume-backup.stop-during-backup=false # true - otherwise backup can't work with socketproxy
+      # Traefik
+      - "traefik.enable=true"
+      - "traefik.docker.network=unifi-frontend"
+      ## HTTP Routers
+      - "traefik.http.routers.unifi-guest-rtr.entrypoints=unifi-guest"
+      - "traefik.http.routers.unifi-guest-rtr.rule=Host(`unifi-guest.$DOMAINNAME`)"
+      ## Middlewares
+      ## Using no-auth chain so that Home Assistant can still access the portal
+      ## TODO: [unifi] Create a new router just for Home Assistant traffic
+      - "traefik.http.routers.unifi-rtr.middlewares=chain-no-auth@file" # No Authentication
+      ## Using no-auth chain so that guests can still access the guest portal
+      - "traefik.http.routers.unifi-guest-rtr.middlewares=chain-no-auth-custom-port@file" # No Authentication
+      ## HTTP Services
+      - "traefik.http.routers.unifi-rtr.service=unifi"
+      - "traefik.http.routers.unifi-guest-rtr.service=unifi-guest"
+      # Fixes 'This combination of host and port requires TLS' issue
+      - "traefik.http.services.unifi.loadbalancer.server.scheme=https"
+      - "traefik.http.services.unifi-guest.loadbalancer.server.scheme=https"
+      # Enable the management port
+      - "traefik.http.services.unifi.loadbalancer.server.port=8443"
+      - "traefik.http.services.unifi-guest.loadbalancer.server.port=8843"
+      ## Extra no-auth endpoint. No need to create a new service
+      - "traefik.http.routers.unifi-noauth-rtr.rule=Host(`unifi-noauth.$DOMAINNAME`)"
+      - "traefik.http.routers.unifi-noauth-rtr.middlewares=chain-no-auth@file"
+      - "traefik.http.routers.unifi-noauth-rtr.service=unifi"
+      ## Router for Gatus — bypass auth if secret header is present
+      - "traefik.http.routers.unifi-monitor-rtr.rule=Host(`unifi.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
+      - "traefik.http.routers.unifi-monitor-rtr.service=unifi"
+      - "traefik.http.routers.unifi-monitor-rtr.priority=100"  # Higher priority so it matches first
+
+  unifi-volume-backup:
+    container_name: unifi-volume-backup
+    image: offen/docker-volume-backup:v2.46.1@sha256:039188f012d26178e68a0bb906cd408b9fc197069e8076d03014a31a5fed1406
+    user: "${PUID}:${PGID}"
+    volumes:
+      - unifi_data:/backup:ro
+      # Backup destination location
+      - /mnt/smb_share_backup/unifi_data:/archive
+      # Ensure cron & backup logs are in my timezone
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    mem_limit: 512m
+    environment:
+      - TZ=${TZ}
+      - BACKUP_CRON_EXPRESSION=@daily
+      - BACKUP_RETENTION_DAYS=14
+      - GPG_PASSPHRASE=${DB_ENC_PASSPHRASE}
+      # Notification doesn't work as Auth Login doesn't seem supported: https://github.com/containrrr/shoutrrr/issues/334
+      #- NOTIFICATION_URLS=${NOTIFICATIONS_EMAIL_SHOUTRRR_URL}
+      # Backup source locations
+      # Backup specific to Unifi - only backup the folder that is used for auto backups in the Unifi application
+      - BACKUP_SOURCES=/backup/data/backup
+      # Backup destination location
+      - BACKUP_ARCHIVE=/archive
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+
+volumes:
+  unifi_data:
+  unifi_db_data:
+
+networks:
+  unifi-frontend:
+    name: unifi-frontend
+  unifi-backend:
+    name: unifi-backend

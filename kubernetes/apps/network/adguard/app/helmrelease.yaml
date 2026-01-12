@@ -1,0 +1,162 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app adguard
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controllers:
+      ${APP}:
+        annotations:
+          # Since we don't link the config map here but use k8s-sidecar,
+          # we have to tell stakater the config map it needs to monitor
+          configmap.reloader.stakater.com/reload: *app
+        pod:
+          dnsConfig:
+            options:
+              - { name: ndots, value: "1" }
+          securityContext:
+            runAsNonRoot: false # Adguard doesn't support running as non-root
+            runAsUser: 65534
+            runAsGroup: 65534
+            fsGroup: 65534
+            fsGroupChangePolicy: OnRootMismatch
+            seccompProfile: { type: RuntimeDefault }
+        initContainers:
+          init-config:
+            image: &configSyncImage
+              repository: ghcr.io/kiwigrid/k8s-sidecar
+              tag: 1.28.0@sha256:4166a019eeafd1f0fef4d867dc5f224f18d84ec8681dbb31f3ca258ecf07bcf2
+            env:
+              FOLDER: /opt/adguardhome/conf
+              LABEL: app.kubernetes.io/config-owner
+              LABEL_VALUE: *app
+              UNIQUE_FILENAMES: false
+              METHOD: LIST
+            resources: &configSyncResources
+              requests:
+                cpu: 10m
+                memory: 10Mi
+              limits:
+                memory: 128Mi
+        containers:
+          app:
+            image:
+              repository: adguard/adguardhome
+              tag: v0.107.54@sha256:ec59d9d8d083b74620f827879bee7ad88621f96bc0c4347c84c176ffa349484c
+            env:
+              TZ: ${TIMEZONE}
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: false
+                type: TCP
+              readiness: *probes
+            resources:
+              requests:
+                cpu: 10m
+                memory: 256M
+              limits:
+                memory: 512M
+            # TODO: [adguard] Add service monitors
+          config-sync:
+            image: *configSyncImage
+            env:
+              FOLDER: /opt/adguardhome/conf
+              LABEL: app.kubernetes.io/config-owner
+              LABEL_VALUE: *app
+              UNIQUE_FILENAMES: false
+              METHOD: WATCH
+            resources: *configSyncResources
+    service:
+      app:
+        controller: *app
+        type: LoadBalancer
+        externalTrafficPolicy: Local
+        annotations:
+          external-dns.alpha.kubernetes.io/hostname: "dns.${SECRET_DOMAIN}"
+          lbipam.cilium.io/ips: "192.168.60.56"
+        ports:
+          http:
+            enabled: true
+            port: 80
+            protocol: TCP
+            targetPort: 80
+          dns-tcp:
+            enabled: true
+            port: &dns-port 53
+            protocol: TCP
+            targetPort: *dns-port
+          dns-udp:
+            enabled: true
+            port: *dns-port
+            protocol: UDP
+            targetPort: *dns-port
+          dns-tcp-tls:
+            enabled: true
+            port: &dns-tls-port 853
+            protocol: TCP
+            targetPort: *dns-tls-port
+    ingress:
+      app:
+        enabled: true
+        annotations:
+          ## Enable Oauth2 Authentication
+          nginx.ingress.kubernetes.io/auth-url: "http://oauth2-proxy.security.svc.cluster.local:4180/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_DOMAIN}/oauth2/auth/oauth2/start?rd=$scheme://$host$request_uri"
+          ##
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/description: "DNS Ad-Blocking"
+          gethomepage.dev/group: Network
+          gethomepage.dev/icon: adguard-home.svg
+          gethomepage.dev/name: AdGuard
+          gethomepage.dev/widget.type: *app
+          gethomepage.dev/widget.url: http://${APP}.network.svc.cluster.local:80
+        hosts:
+          - host: &host ${GATUS_SUBDOMAIN:-${APP}}.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+        tls:
+         - hosts:
+             - *host
+
+    # Required for the config sync init container
+    serviceAccount:
+      create: true
+      name: *app
+
+    persistence:
+      config-work:
+        storageClass: openebs-hostpath
+        accessMode: ReadWriteOnce
+        size: 1Gi
+        globalMounts:
+          - path: /opt/adguardhome/work
+      config-conf:
+        storageClass: openebs-hostpath
+        accessMode: ReadWriteOnce
+        size: 1Gi
+        globalMounts:
+          - path: /opt/adguardhome/conf

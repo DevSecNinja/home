@@ -1,0 +1,104 @@
+#% if 'trusted' in group_names %#
+api:
+  dashboard: true
+#% endif %#
+
+global:
+  checkNewVersion: false
+  sendAnonymousUsage: false
+
+entryPoints:
+  http:
+    address: ":80"
+  https:
+    address: ":443"
+    http:
+      tls: {}
+    # Required for Immich imports to succeed:
+    # https://immich.app/docs/administration/reverse-proxy/#traefik-proxy-example-config
+    transport:
+      respondingTimeouts:
+        readTimeout: 600s
+        idleTimeout: 600s
+        writeTimeout: 600s
+#% if 'infra' in group_names %#
+  unifi-guest:
+    address: ":8843"
+    http:
+      tls: {}
+#% endif %#
+#% if 'external' in group_names %#
+  https-public:
+    address: ":{{ generic__public_https_port }}"
+    http:
+      tls: {}
+#% endif %#
+#% if 'vpnservers' in group_names %#
+  wireguard:
+    address: ":51820/udp"
+#% endif %#
+
+metrics:
+  prometheus:
+    buckets:
+      - 0.1
+      - 0.3
+      - 1.2
+      - 5.0
+      - 10.0
+
+http:
+  routers:
+    # HTTP-to-HTTPS Redirect
+    http-catchall:
+      entrypoints:
+        - "http"
+        - "unifi-guest"
+      rule: "HostRegexp(`{host:.+}`)"
+      middlewares: "middlewares-redirect-to-https"
+
+providers:
+  docker:
+    endpoint: tcp://traefik-docker-proxy:2375
+    # endpoint: "unix:///var/run/docker.sock"
+    exposedByDefault: false
+    defaultRule: Host(`{{ '{{' }} index .Labels "com.docker.compose.service"{{ '}}' }}.{{ generic__domain_name }}`)
+  file:
+    directory: "/rules"
+    watch: true
+
+certificatesResolvers:
+  dns-cloudflare:
+    acme:
+      # caServer: "https://acme-staging-v02.api.letsencrypt.org/directory" # LetsEncrypt Staging Server - uncomment when testing
+      email: {{ apps__cloudflare_email }}
+      storage: "/acme.json"
+      dnsChallenge:
+        provider: "cloudflare"
+        resolvers:
+          - "1.1.1.1:53"
+          - "1.0.0.1:53"
+
+#% if 'infra' in group_names %#
+serversTransport:
+  # TODO: [traefik] Investigate insecureSkipVerify still need to be set to true
+  # Required for Unifi to function. Prevents "Internal Server Error"
+  insecureSkipVerify: true
+#% endif %#
+
+accessLog:
+  # bufferingSize: 500
+  # filePath: "/logs/access.log" # Commenting the file path ensures logs are written to stdout and therefore docker logs
+  filters:
+    statusCodes: 400-499
+  fields:
+    headers:
+      names:
+        User-Agent: keep
+        Authorization: drop
+        Content-Type: keep
+
+log:
+  # filePath: "/logs/traefik.log" # Commenting the file path ensures logs are written to stdout and therefore docker logs
+  # (Default: error) DEBUG, INFO, WARN, ERROR, FATAL, PANIC
+  level: INFO

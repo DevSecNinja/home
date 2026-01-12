@@ -1,0 +1,22 @@
+# TODO: Decide services naming convention: foldingathome or folding-at-home
+
+services:
+  foldingathome:
+    container_name: foldingathome
+    image: lscr.io/linuxserver/foldingathome:version-8.3.18@sha256:a11530655be018bc43c9f973bce2a59344f2d140a9e5c843305f765299a5d141
+    # TODO: How to handle containers that don't need networks? (e.g. Folding@Home)
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+    mem_limit: 2048m
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - MACHINE_NAME=${folding-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME}
+      - ACCOUNT_TOKEN=${FOLDING_AT_HOME_ACCOUNT_TOKEN}
+    volumes:
+      - foldingathome_data:/config
+
+volumes:
+  foldingathome_data:

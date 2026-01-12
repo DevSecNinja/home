@@ -1,0 +1,15 @@
+configs:
+  msteams:
+    urls:
+      - {{ notifications__teams_webhook_containrrr }}
+
+# TODO: [mailrise] Re-enable SMTP Auth
+# Disabled SMTP Auth since docker-db-backup doesn't support SMTP Auth
+# For now, this risk is accepted by isolating the mailrise container
+# only within it's own network. Containers that want to mail need to
+# be added to the mailrise Docker network to do so.
+#
+# smtp:
+#   auth:
+#     basic:
+#       {{ notifications__mailrise_smtp_username }}: {{ notifications__mailrise_smtp_password }}

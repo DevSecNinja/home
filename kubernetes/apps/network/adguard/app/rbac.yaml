@@ -1,0 +1,32 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: adguard
+  labels:
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    meta.helm.sh/release-name: adguard
+    meta.helm.sh/release-namespace: network
+rules:
+  - apiGroups: [""]
+    resources: ["configmaps"] # ["configmaps", "secrets"]
+    verbs: ["get", "watch", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: adguard
+  labels:
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    meta.helm.sh/release-name: adguard
+    meta.helm.sh/release-namespace: network
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: adguard
+subjects:
+  - kind: ServiceAccount
+    name: adguard
+    namespace: network

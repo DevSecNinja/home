@@ -1,0 +1,86 @@
+services:
+#% if 'infra' in group_names %#
+  homepage:
+    container_name: homepage
+    #image: ghcr.io/gethomepage/homepage:v1.8.0@sha256:7dc099d5c6ec7fc945d858218565925b01ff8a60bcbfda990fc680a8b5cd0b6e
+    image: ghcr.io/gethomepage/homepage:dev@sha256:f74f1f5e00d8ca4bb8bb05bcd3bab324ccda10dd60d6768f830001a20229556d
+    # build:
+    #   context: https://github.com/devsecninja/homepage.git#copilot/add-custom-headers-authentication
+    #   dockerfile: Dockerfile
+    #   network: host
+    depends_on:
+      - traefik
+      - homepage-docker-proxy
+    restart: always
+    networks:
+      - homepage-frontend
+      - homepage-backend
+    environment:
+      # TODO: [Docker API] Enable Docker API so that Homepage doesn't need to run as root
+      # https://gethomepage.dev/latest/configs/docker/
+      # - PUID=${PUID}
+      # - PGID=${PGID}
+      - TZ=${TZ}
+      - HOMEPAGE_ALLOWED_HOSTS=apps.$DOMAINNAME # Hostname of the Traefik container
+    security_opt:
+      - no-new-privileges=true
+    mem_limit: 300m
+    volumes:
+      - $DOCKERDIR/data/homepage:/app/config
+      - /etc/ssl/docker-client:/app/config/certs/docker-client:ro
+    labels:
+      # Traefik
+      - "traefik.enable=true"
+      - "traefik.docker.network=homepage-frontend"
+      ## Middlewares
+      - "traefik.http.routers.homepage-rtr.middlewares=chain-no-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.homepage-rtr.rule=Host(`apps.$DOMAINNAME`)"
+      - "traefik.http.routers.homepage-rtr.service=homepage"
+      - "traefik.http.services.homepage.loadbalancer.server.port=3000"
+#% endif %#
+
+  homepage-docker-proxy:
+    image: lscr.io/linuxserver/socket-proxy:version-3.2.10-r0@sha256:0fce1fb8edeb8a891940ed4b3f6dd52c9517925a40bf9d1dbf540930c852ce66
+    container_name: homepage-docker-proxy
+    restart: always
+    networks:
+      - homepage-backend
+#% if 'apps' in group_names or 'media' in group_names or 'infra' in group_names or 'external' in group_names %#
+      - homepage-frontend
+#% endif %#
+    environment:
+      - TZ=${TZ}
+      - CONTAINERS=1 # Allow access to viewing containers
+      #- SERVICES=1 # Allow access to viewing services (necessary when using Docker Swarm)
+      #- TASKS=1 # Allow access to viewing tasks (necessary when using Docker Swarm)
+      - POST=0 # Disallow any POST operations (effectively read-only)
+    security_opt:
+      - no-new-privileges=true
+    mem_limit: 50m
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    read_only: true
+    tmpfs:
+      - /run
+    labels:
+      # Traefik
+      - "traefik.enable=true"
+      - "traefik.docker.network=homepage-frontend"
+#% if 'apps' in group_names or 'media' in group_names or 'infra' in group_names %#
+      ## Middlewares
+      - "traefik.http.routers.homepage-proxy-rtr.middlewares=chain-basic-auth-svlinfra-whitelist@file"
+#% elif 'external' in group_names %#
+      ## Middlewares
+      - "traefik.http.routers.homepage-proxy-rtr.middlewares=chain-basic-auth-home-whitelist@file"
+#% endif %#
+      ## HTTP Services
+      - "traefik.http.routers.homepage-proxy-rtr.rule=Host(`homepage-proxy-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
+      - "traefik.http.routers.homepage-proxy-rtr.service=homepage-proxy"
+      - "traefik.http.services.homepage-proxy.loadbalancer.server.port=2375"
+
+networks:
+  homepage-frontend:
+    name: homepage-frontend
+  homepage-backend:
+    name: homepage-backend

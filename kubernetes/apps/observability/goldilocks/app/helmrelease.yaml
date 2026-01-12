@@ -1,0 +1,67 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app goldilocks
+spec:
+  interval: 30m
+  chart:
+    spec:
+      interval: 15m
+      chart: goldilocks
+      version: 9.0.1
+      sourceRef:
+        kind: HelmRepository
+        name: fairwinds
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  # TODO: Investigate driftDetection
+  driftDetection:
+    mode: enabled
+  values:
+    controller:
+      resources:
+        requests:
+          memory: &memLimit 105M
+        limits:
+          memory: *memLimit
+    image:
+      repository: us-docker.pkg.dev/fairwinds-ops/oss/goldilocks
+      tag: v4.13.2@sha256:db993aa5c6944a6e7b534e28c0e1a4fd31bfdf7fb747e8a5fb1177805fcb7b77
+    vpa:
+      enabled: true
+    dashboard:
+      enabled: true
+      ingress:
+        enabled: true
+        ingressClassName: internal
+        annotations:
+          ## Enable Oauth2 Authentication
+          nginx.ingress.kubernetes.io/auth-url: "http://oauth2-proxy.security.svc.cluster.local:4180/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_DOMAIN}/oauth2/auth/oauth2/start?rd=$scheme://$host$request_uri"
+          ##
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/name: "Goldilocks"
+          gethomepage.dev/group: "Observability"
+          gethomepage.dev/icon: "https://raw.githubusercontent.com/FairwindsOps/goldilocks/master/pkg/dashboard/assets/images/favicon.ico"
+          gethomepage.dev/description: "Kubernetes Resource Recommendations"
+          gethomepage.dev/app: *app
+        hosts:
+          - host: &host ${GATUS_SUBDOMAIN:-${APP}}.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                type: Prefix
+        tls:
+          - hosts:
+              - *host
+      resources:
+        requests:
+          memory: *memLimit
+        limits:
+          memory: *memLimit

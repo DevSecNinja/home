@@ -1,0 +1,56 @@
+---
+- name: Install dotfiles dependencies
+  retries: 20
+  delay: 15
+  become: true
+  ansible.builtin.apt:
+    name:
+      - git
+      - curl
+      - zsh
+    state: present
+    update_cache: yes
+  when: inventory_hostname not in groups['hypervisor']
+
+- name: Check if folder exists
+  stat:
+    path: "/home/{{ ansible_user }}/.dotfiles"
+  register: folder_stat
+  when: inventory_hostname not in groups['hypervisor']
+
+- name: Clone repo if folder doesn't exist
+  become: true
+  git:
+    repo: https://github.com/DevSecNinja/dotfiles
+    dest: "/home/{{ ansible_user }}/.dotfiles"
+    single_branch: yes
+    version: main
+  when: inventory_hostname not in groups['hypervisor'] and not folder_stat.stat.exists
+
+- name: Pull latest changes to dotfiles
+  become: true
+  shell: git -c "url.https://github.com/.insteadOf=git@github.com:" pull
+  args:
+    chdir: "/home/{{ ansible_user }}/.dotfiles"
+    executable: /bin/bash
+  register: pull_result
+  changed_when: pull_result.stdout_lines[0] != "Already up to date."
+  when: inventory_hostname not in groups['hypervisor'] and folder_stat.stat.exists
+
+- name: Show git pull results
+  debug: msg="{{ pull_result.stdout_lines }}"
+  when: pull_result.stdout_lines
+
+- name: Run bootstrap script
+  become: false
+  shell: script/bootstrap
+  args:
+    chdir: "/home/{{ ansible_user }}/.dotfiles"
+    executable: /bin/bash
+  register: bootstrap_result
+  when: inventory_hostname not in groups['hypervisor'] and folder_stat.stat.exists
+
+- name: Show bootstrap results
+  become: false
+  debug: msg="{{ bootstrap_result.stdout_lines }}"
+  when: bootstrap_result.stdout_lines

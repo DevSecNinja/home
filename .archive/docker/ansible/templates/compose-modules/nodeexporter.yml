@@ -1,0 +1,50 @@
+#
+#### DEPRECATION NOTICE
+## This compose module is no longer in use
+## Replaced by: Kubernetes cluster resource
+## Last used version: v1.8.2@sha256:4032c6d5bfd752342c3e631c2f1de93ba6b86c41db6b167b9a35372c139e7706
+#
+
+services:
+  nodeexporter:
+    image: prom/node-exporter
+    container_name: nodeexporter
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      # TODO: [nodeexporter] Check what the implications are of not mounting root which is a security issue
+      #- /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
+    mem_limit: 1024m
+    environment:
+      - TZ=${TZ}
+    restart: always
+    networks:
+      - t2_proxy
+    security_opt:
+      - no-new-privileges=true
+    labels:
+      # Homepage
+      - homepage.group=Infrastructure
+      - homepage.name=Node Exporter
+      - homepage.icon=prometheus.svg
+      - homepage.href=https://nodeexporter-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
+      - homepage.description=Host Monitoring
+      # Group
+      - org.label-schema.group=infrastructure
+      # Traefik
+      - "traefik.enable=true"
+      ## Middlewares
+      - "traefik.http.routers.nodeexporter-rtr.middlewares=chain-auth@file"
+      ## Extra no-auth endpoint. No need to create a new service
+      - "traefik.http.routers.nodeexporter-noauth-rtr.rule=Host(`nodeexporter-noauth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
+      - "traefik.http.routers.nodeexporter-noauth-rtr.middlewares=chain-no-auth-mgmt-whitelist@file"
+      ## HTTP Services
+      - "traefik.http.routers.nodeexporter-rtr.rule=Host(`nodeexporter-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
+      - "traefik.http.routers.nodeexporter-rtr.service=nodeexporter"
+      ### Enable the server port
+      - "traefik.http.services.nodeexporter.loadbalancer.server.port=9100"

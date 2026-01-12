@@ -1,0 +1,47 @@
+services:
+  echo-server:
+    image: mendhak/http-https-echo:39@sha256:59e97f8417530cd88c2a4bb7b488153276e88df8a317a86641c575138ad81829
+    container_name: echo-server
+    depends_on:
+      - traefik
+    environment:
+        - TZ=${TZ}
+        - HTTP_PORT=80
+        - HTTPS_PORT=443
+    restart: always
+    networks:
+      - echo-server-frontend
+    mem_limit: 1024m
+    security_opt:
+      - no-new-privileges=true
+    # No Healthcheck possible since curl is not available in image
+    labels:
+      # Homepage
+      - homepage.group=Per Server Consoles
+      - homepage.name=Echo-Server - $GENERIC_HOSTNAME_SUFFIX
+      - homepage.icon=mdi-test-tube-#ffffff
+      - homepage.href=https://echo-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
+      - homepage.description=Testing Web Requests
+      # Traefik
+      - "traefik.enable=true"
+      - "traefik.docker.network=echo-server-frontend"
+      ## HTTP Routers
+      - "traefik.http.routers.echo-server-rtr.rule=Host(`echo-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
+      ## Middlewares
+#% if 'untrusted' in group_names %#
+      - "traefik.http.routers.echo-server-rtr.middlewares=chain-no-auth@file"
+#% else %#
+      - "traefik.http.routers.echo-server-rtr.middlewares=chain-auth@file"
+#% endif %#
+      ## HTTP Services
+      - "traefik.http.routers.echo-server-rtr.service=echo-server"
+      ### Enable the server port
+      - "traefik.http.services.echo-server.loadbalancer.server.port=80"
+      ## Router for Gatus — bypass auth if secret header is present
+      - "traefik.http.routers.echo-server-monitor-rtr.rule=Host(`echo-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
+      - "traefik.http.routers.echo-server-monitor-rtr.service=echo-server"
+      - "traefik.http.routers.echo-server-monitor-rtr.priority=100"  # Higher priority so it matches first
+
+networks:
+  echo-server-frontend:
+    name: echo-server-frontend

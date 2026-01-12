@@ -1,0 +1,48 @@
+services:
+  drawio:
+    image: jgraph/drawio:29.3.0@sha256:7dceba5523a1777a6ad67e4beb2911bfd9aea5e12630699287b6d18507d727ef
+    container_name: drawio
+    depends_on:
+      - traefik
+    restart: always
+    mem_limit: 1024m
+    security_opt:
+      - no-new-privileges=true
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    networks:
+      - drawio-frontend
+    labels:
+      # Homepage
+      - homepage.group=Productivity
+      - homepage.name=Draw.io
+      - homepage.icon=sh-draw-io
+      - homepage.href=https://draw.$DOMAINNAME
+      - homepage.description=Flowchart & Diagram Maker
+      # Traefik
+      - "traefik.enable=true"
+      - "traefik.docker.network=drawio-frontend"
+      ## HTTP Routers
+      - "traefik.http.routers.drawio-rtr.rule=Host(`draw.$DOMAINNAME`)"
+      ## Middlewares
+      - "traefik.http.routers.drawio-rtr.middlewares=chain-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.drawio-rtr.service=drawio"
+      - "traefik.http.services.drawio.loadbalancer.server.port=8080"
+      ## Router for Gatus — bypass auth if secret header is present
+      - "traefik.http.routers.drawio-monitor-rtr.rule=Host(`draw.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
+      - "traefik.http.routers.drawio-monitor-rtr.service=drawio"
+      - "traefik.http.routers.drawio-monitor-rtr.priority=100"  # Higher priority so it matches first
+    # Saves some CPU cycles + healthcheck doesn't do anything on failure
+    # healthcheck:
+    #   test: ["CMD-SHELL", "curl -f http://drawio:8080 || exit 1"]
+    #   interval: 20s
+    #   timeout: 3s
+    #   retries: 5
+    #   start_period: 3s
+
+networks:
+  drawio-frontend:
+    name: drawio-frontend

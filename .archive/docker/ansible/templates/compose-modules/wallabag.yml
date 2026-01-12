@@ -1,0 +1,182 @@
+#
+#### DEPRECATION NOTICE
+## This compose module is no longer in use
+## Replaced by: <none>
+## Last used version: 2.6.10@sha256:8854765d299d8e93f962d4be02ceb5703ed2ee24ec6c884f870bb7a18de41378
+##                DB: 11.6.2@sha256:0a620383fe05d20b3cc7510ebccc6749f83f1b0f97f3030d10dd2fa199371f07
+##         Backup DB: 4.1.9@sha256:0b2d0dee38fbe5dbffd63df59afc2b812d36f31ff1213a0f45f7e8901ac9de87
+##             Redis: alpine3.19@sha256:892b41c092a599f76c30b48e9dcfb185ce8cea3560970b1c4f2745c89bb34344
+#
+
+services:
+  # NOTE: Requires the following command on fresh install:
+  # docker exec -t wallabag /var/www/wallabag/bin/console wallabag:install --env=prod --no-interaction
+  wallabag:
+    image: wallabag/wallabag
+    container_name: wallabag
+    depends_on:
+      - traefik
+      - wallabag-db
+      - wallabag-redis
+    restart: always
+    networks:
+      - t2_proxy
+      - wallabag-backend
+    security_opt:
+      - no-new-privileges=true
+    mem_limit: 200m
+    environment:
+      - TZ=${TZ}
+      - POPULATE_DATABASE=false # Hands-off solution doesn't seem to work. Run manual command from line 2.
+      # MySQL
+      - SYMFONY__ENV__DATABASE_DRIVER=pdo_mysql
+      - SYMFONY__ENV__DATABASE_HOST=wallabag-db
+      - SYMFONY__ENV__DATABASE_PORT=3306
+      - SYMFONY__ENV__DATABASE_NAME=wallabag
+      - SYMFONY__ENV__DATABASE_USER=wallabag
+      - SYMFONY__ENV__DATABASE_PASSWORD=${WALLABAG_MYSQL_PASSWORD}
+      - SYMFONY__ENV__DATABASE_CHARSET=utf8mb4
+      # Redis
+      - SYMFONY__ENV__REDIS_HOST=wallabag-redis
+      - SYMFONY__ENV__REDIS_PORT=6379
+      - SYMFONY__ENV__REDIS_PASSWORD=${WALLABAG_REDIS_PASSWORD}
+      # Wallabag
+      - SYMFONY__ENV__SECRET=${WALLABAG_SECRET}
+      - SYMFONY__ENV__DOMAIN_NAME=https://wallabag.$DOMAINNAME
+      - SYMFONY__ENV__SERVER_NAME=${ORGANIZATION_NAME}
+      - SYMFONY__ENV__FOSUSER_REGISTRATION=false
+      - SYMFONY__ENV__FOSUSER_CONFIRMATION=false
+      - SYMFONY__ENV__TWOFACTOR_AUTH=false
+      # TODO: [wallabag] Add mail notifications
+    volumes:
+      - wallabag_data:/var/www/wallabag/web/assets/images
+    # healthcheck:
+    #   test: ["CMD", "wget" ,"--no-verbose", "--tries=1", "--spider", "http://localhost/api/info"]
+    #   interval: 1m
+    #   timeout: 3s
+    labels:
+      # Homepage
+      - homepage.group=Productivity
+      - homepage.name=Wallabag
+      - homepage.icon=wallabag.svg
+      - homepage.href=https://wallabag.$DOMAINNAME
+      - homepage.description=Bookmark Collector
+      # Group
+      - org.label-schema.group=productivity
+      # Traefik
+      - "traefik.enable=true"
+      ## Middlewares
+      - "traefik.http.routers.wallabag-rtr.middlewares=chain-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.wallabag-rtr.service=wallabag"
+      ### Enable the server port
+      - "traefik.http.services.wallabag.loadbalancer.server.port=80"
+
+  wallabag-db:
+    image: mariadb
+    container_name: wallabag-db
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+    networks:
+      - wallabag-backend
+    volumes:
+      - wallabag_db_data:/var/lib/mysql
+    mem_limit: 1024m
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - MYSQL_ROOT_PASSWORD=${WALLABAG_MYSQL_ROOT_PASSWORD}
+      - MYSQL_PASSWORD=${WALLABAG_MYSQL_PASSWORD}
+      - MYSQL_DATABASE=wallabag
+      - MYSQL_USER=wallabag
+      - MARIADB_AUTO_UPGRADE=1
+      - MARIADB_DISABLE_UPGRADE_BACKUP=1
+    healthcheck:
+      interval: 30s
+      retries: 3
+      test:
+        [
+          "CMD",
+          "healthcheck.sh",
+          "--su-mysql",
+          "--connect",
+          "--innodb_initialized"
+        ]
+      timeout: 30s
+
+  wallabag-db-backup:
+    container_name: wallabag-db-backup
+    image: tiredofit/db-backup
+    depends_on:
+      - wallabag-db
+    volumes:
+      - $DOCKERDIR/data/backup:/backup
+    mem_limit: 1024m
+    networks:
+      - wallabag-backend
+    environment:
+      - TIMEZONE=${TZ}
+      - USER_DBBACKUP=${PUID}
+      - GROUP_DBBACKUP=${PGID}
+      - CONTAINER_NAME=wallabag-db-backup
+      - CONTAINER_ENABLE_MONITORING=FALSE # Disables Zabbix backup statistics
+
+      - ENABLE_NOTIFICATIONS=TRUE
+      - NOTIFICATION_TYPE=EMAIL
+      - SMTP_HOST=mailrise
+      - SMTP_PORT=${NOTIFICATIONS_MAILRISE_SMTP_PORT}
+      - MAIL_TO=msteams@mailrise.xyz
+      - MAIL_FROM=wallabag-db-backup
+
+      - DEFAULT_CHECKSUM=SHA1        # Set standard checksum to SHA1
+      - DEFAULT_COMPRESSION=ZSTD     # Compress all with ZSTD
+      - DEFAULT_BACKUP_INTERVAL=1440 # Backup every 1440 minutes = 24 hours
+      - DEFAULT_BACKUP_BEGIN=0000    # Start backing up at midnight
+      - DEFAULT_CLEANUP_TIME=2880    # Cleanup backups after two days
+
+      - DEFAULT_ENCRYPT=TRUE                            # Encrypt backup files with GPG
+      - DEFAULT_ENCRYPT_PASSPHRASE=${DB_ENC_PASSPHRASE} # Set encryption password
+
+      - DB01_TYPE=mysql
+      - DB01_HOST=wallabag-db
+      - DB01_NAME=wallabag
+      - DB01_USER=wallabag
+      - DB01_PORT=3306
+      - DB01_PASS=${WALLABAG_MYSQL_PASSWORD}
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+
+  wallabag-redis:
+    image: redis
+    container_name: wallabag-redis
+    # Requirepass is needed as environment variable isn't picked up
+    command: >
+      --requirepass ${WALLABAG_REDIS_PASSWORD}
+    restart: always
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 20s
+      timeout: 3s
+    security_opt:
+      - no-new-privileges=true
+    mem_limit: 1024m
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - REDIS_PASSWORD=${WALLABAG_REDIS_PASSWORD}
+    networks:
+      - wallabag-backend
+
+volumes:
+  wallabag_data:
+  wallabag_db_data:
+
+networks:
+  wallabag-backend:
+    name: wallabag-backend
+    driver: bridge

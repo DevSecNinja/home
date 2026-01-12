@@ -1,0 +1,83 @@
+#
+# Manual work to implement on a new server:
+#
+# - Plex claim token must be refreshed
+# - Set 'Custom server access URLs' to https://plex.$DOMAINNAME (replace variable!) in Plex settings
+# - Set LAN networks in Plex settings to 192.168.0.0/16,172.16.0.0/16 (Traefik uses 172.16.0.0/16 network)
+#   - You should now see streams mentioned as 'Local' instead of 'Remote'
+#   - Within the Plex portal on the server settings, you'll still see 'Remote' being mentioned, but this is normal (it seems)
+# - Enable automatic library scanning in Plex settings
+# - Set backup directory in Plex settings under Scheduled Tasks
+
+services:
+  plex:
+    container_name: plex
+    image: lscr.io/linuxserver/plex:version-1.42.2.10156-f737b826c@sha256:1720efa8e919a724ff3003cce7c1c0ae91a54e097ca3c8f6713a780c6fd73432
+    restart: always
+    depends_on:
+      - traefik
+    networks:
+      - plex-frontend
+    # ports:
+    #   - target: 32400
+    #     published: 32400
+    #     protocol: tcp
+    #     mode: host
+    ulimits:
+      sigpending: 62793
+      nproc: 131072
+      nofile: 60000
+      core: 0
+    security_opt:
+      - no-new-privileges=true
+    mem_limit: 2048m
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - HOSTNAME=plex
+      - VERSION=docker
+      - PLEX_CLAIM=${PLEX_CLAIM_TOKEN} # Get it from: https://www.plex.tv/claim/
+    devices:
+      - /dev/dri/renderD128:/dev/dri/renderD128
+    volumes:
+      - plex_config_data:/config
+      # Note: make sure to set "Transcoder temporary directory" to /data/transcode in Plex settings
+      - /dev/shm:/data/transcode
+      # SMB Media Shares
+      - /mnt/smb_share_audiobooks:/mnt/smb_share_audiobooks
+      - /mnt/smb_share_movies:/mnt/smb_share_movies
+      - /mnt/smb_share_music:/mnt/smb_share_music
+      - /mnt/smb_share_study:/mnt/smb_share_study
+      - /mnt/smb_share_tv:/mnt/smb_share_tv
+      - /mnt/smb_share_youtube:/mnt/smb_share_youtube
+    labels:
+      # Homepage
+      - homepage.group=Media
+      - homepage.name=Plex
+      - homepage.icon=plex.svg
+      - homepage.href=https://plex.$DOMAINNAME
+      - homepage.description=Media Services
+      # Group
+      - org.label-schema.group=media
+      # Traefik
+      - "traefik.enable=true"
+      - "traefik.docker.network=plex-frontend"
+      ## Middlewares
+      ## Using no-auth chain since Plex app doesn't support auth proxy
+      - "traefik.http.routers.plex-rtr.middlewares=chain-no-auth-plex@file"
+      ## HTTP Services
+      - "traefik.http.routers.plex-rtr.service=plex"
+      ### Enable the server port
+      - "traefik.http.services.plex.loadbalancer.server.port=32400"
+      ## Extra no-auth endpoint. No need to create a new service
+      - "traefik.http.routers.plex-noauth-rtr.rule=Host(`plex-noauth.$DOMAINNAME`)"
+      - "traefik.http.routers.plex-noauth-rtr.middlewares=chain-no-auth-plex@file"
+      - "traefik.http.routers.plex-noauth-rtr.service=plex"
+
+volumes:
+  plex_config_data:
+
+networks:
+  plex-frontend:
+    name: plex-frontend
