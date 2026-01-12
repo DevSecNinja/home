@@ -1,7 +1,7 @@
 services:
   hadiscover-api:
     container_name: hadiscover-api
-    image: ghcr.io/devsecninja/hadiscover/backend:0.2.13@sha256:7daa79ec1b01cc17bc619d3848f5c4f78d6879d38a4ba3ab68e96517fe3db860
+    image: ghcr.io/devsecninja/hadiscover/backend:0.2.14@sha256:cbf696794b817b6fa08345c9fda852da829323f97884b3b48dea3b316d864af4
     depends_on:
       - traefik
     networks:
