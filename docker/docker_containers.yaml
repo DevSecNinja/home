@@ -21,7 +21,7 @@
 - container_name: dawarich-sidekiq
   image: freikin/dawarich:0.37.3@sha256:efab2e677baf912f5cc68363ec26e648015fa2c703b4a0cf8e03418415e1ed0d
 - container_name: drawio
-  image: jgraph/drawio:29.2.9@sha256:fff32eb35e0dc5d76ed234799c7312ce367db2e2d222bd40e55b003381584cb6
+  image: jgraph/drawio:29.3.0@sha256:7dceba5523a1777a6ad67e4beb2911bfd9aea5e12630699287b6d18507d727ef
   url: draw.$DOMAINNAME
 - container_name: excalidraw
   image: excalidraw/excalidraw:latest@sha256:3c2513e830bb6e195147c05b34ecf8393d0ba2b1cc86e93b407a5777d6135c6c
