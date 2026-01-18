@@ -76,7 +76,7 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:29.3.0@sha256:7dceba5523a1777a6ad67e4beb2911bfd9aea5e12630699287b6d18507d727ef
+**image:** jgraph/drawio:29.3.2@sha256:c5cbcdb5c86e67621f242e95910b148dd1f4dda0b0466d213f9a1185e4891012
 
 **url:** draw.$DOMAINNAME
 
@@ -124,7 +124,7 @@
 
 **container_name:** gatus-db-upgrade
 
-**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:6a429e7e047643ca38f25cd0b2e6e3d4b42bf4924a5280a31ab8c907bcf1bbda
+**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:6fad95123e06937a692cb53ca8e226caf8995160ed21841071d623767f5b7891
 
 ## docker/ansible/templates/compose-modules/hadiscover.yml
 
@@ -162,7 +162,7 @@
 
 **container_name:** hoppscotch-db-upgrade
 
-**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:6a429e7e047643ca38f25cd0b2e6e3d4b42bf4924a5280a31ab8c907bcf1bbda
+**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:6fad95123e06937a692cb53ca8e226caf8995160ed21841071d623767f5b7891
 
 ## docker/ansible/templates/compose-modules/immich.yml
 
@@ -214,7 +214,7 @@
 
 **container_name:** lidarr
 
-**image:** lscr.io/linuxserver/lidarr:version-3.1.0.4875@sha256:0922867151c5175f394f4d865f6b3e63e8c05141132188e8790a1e66358e7196
+**image:** lscr.io/linuxserver/lidarr:version-3.1.0.4875@sha256:be65454ba890ad01a93b01cfc178adfa1a397b487bfdce2ac23bd956c473d10d
 
 **url:** lidarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
@@ -254,7 +254,7 @@
 
 **container_name:** n8n-db-upgrade
 
-**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:6a429e7e047643ca38f25cd0b2e6e3d4b42bf4924a5280a31ab8c907bcf1bbda
+**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:6fad95123e06937a692cb53ca8e226caf8995160ed21841071d623767f5b7891
 
 ## docker/ansible/templates/compose-modules/open-webui.yml
 
@@ -292,7 +292,7 @@
 
 **container_name:** prowlarr
 
-**image:** lscr.io/linuxserver/prowlarr:version-2.3.0.5236@sha256:67a8aaedcfd6989f3030b937a6a07007310b1dfc7ee8df16d2cbfa48d1c1158c
+**image:** lscr.io/linuxserver/prowlarr:version-2.3.0.5236@sha256:d3e9307b320b6772749a2cf8fc2712e9e824c4930b034680ad4d08a9e2f25884
 
 **url:** prowlarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
@@ -302,7 +302,7 @@
 
 **container_name:** qbittorrent
 
-**image:** lscr.io/linuxserver/qbittorrent:5.1.4@sha256:95114034a7f74672b76f795f6938921b0ca795f85b59b48691035dc66714f34c
+**image:** lscr.io/linuxserver/qbittorrent:5.1.4@sha256:f430d70c70d1547fded30fbc3181c4750cef354212a5138ab754eba9ba8bd9e1
 
 **url:** qbittorrent.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
@@ -312,7 +312,7 @@
 
 **container_name:** radarr
 
-**image:** lscr.io/linuxserver/radarr:version-6.0.4.10291@sha256:6c0948b42c149e36bb3dbc0b64d36c77b2d3c9dccf1b424c4f72af1e57ba0c21
+**image:** lscr.io/linuxserver/radarr:version-6.0.4.10291@sha256:270f25698624b57b86ca119cc95399d7ff15be8297095b4e1223fd5b549b732c
 
 **url:** radarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
@@ -332,7 +332,7 @@
 
 **container_name:** sonarr
 
-**image:** lscr.io/linuxserver/sonarr:version-4.0.16.2944@sha256:8b9f2138ec50fc9e521960868f79d2ad0d529bc610aef19031ea8ff80b54c5e0
+**image:** lscr.io/linuxserver/sonarr:version-4.0.16.2944@sha256:02b4d538d351d6e35882a021c08e8600fe95d28860fb1dd724b597166e7221ca
 
 **url:** sonarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
@@ -380,7 +380,7 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:8.2.3@sha256:7f5bbdafebde7c42e42e33396d01c0eda3eb753da8dae99071a30e350568a0a4
+**image:** mongo:8.2.3@sha256:d6b569590880bca35e43318418133a426b024bcb649eeb63bb071bc1490bee41
 
 ### Service: unifi-db-backup
 
