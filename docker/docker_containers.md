@@ -42,7 +42,7 @@
 
 **container_name:** dawarich
 
-**image:** freikin/dawarich:0.37.1@sha256:299596d1ddebd47a5baacf271a6d647f7e11d7c13041d5d70430dc61e1be3bd8
+**image:** freikin/dawarich:0.37.3@sha256:efab2e677baf912f5cc68363ec26e648015fa2c703b4a0cf8e03418415e1ed0d
 
 **url:** dawarich-noauth.$DOMAINNAME
 
@@ -50,7 +50,7 @@
 
 **container_name:** dawarich-db
 
-**image:** postgis/postgis:17-3.5-alpine@sha256:4294c33e9e52ed2ba617419286923d97ddc5483207cdd5e4d326cc64f0a45c96
+**image:** postgis/postgis:17-3.5-alpine@sha256:3ca0a5e29f27d7f789f120e29fb84d748397d65fae63ab9f9967bf9a5a3eff71
 
 ### Service: dawarich-db-backup
 
@@ -68,7 +68,7 @@
 
 **container_name:** dawarich-sidekiq
 
-**image:** freikin/dawarich:0.37.1@sha256:299596d1ddebd47a5baacf271a6d647f7e11d7c13041d5d70430dc61e1be3bd8
+**image:** freikin/dawarich:0.37.3@sha256:efab2e677baf912f5cc68363ec26e648015fa2c703b4a0cf8e03418415e1ed0d
 
 ## docker/ansible/templates/compose-modules/drawio.yml
 
@@ -76,7 +76,7 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:29.2.9@sha256:4c064d20674e9ef24b4b7ca1a9b9fb6596d9cd8b2fb7bf042435f23ce4c361c2
+**image:** jgraph/drawio:29.3.0@sha256:7dceba5523a1777a6ad67e4beb2911bfd9aea5e12630699287b6d18507d727ef
 
 **url:** draw.$DOMAINNAME
 
@@ -86,7 +86,7 @@
 
 **container_name:** excalidraw
 
-**image:** excalidraw/excalidraw:latest@sha256:95d528cb4f8d18e0fbdc42ae3d09b5c4a899bfbd6bb89eeaf94b904330d79714
+**image:** excalidraw/excalidraw:latest@sha256:3c2513e830bb6e195147c05b34ecf8393d0ba2b1cc86e93b407a5777d6135c6c
 
 **url:** excalidraw.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
@@ -132,7 +132,7 @@
 
 **container_name:** hadiscover-api
 
-**image:** ghcr.io/devsecninja/hadiscover/backend:0.2.13@sha256:7daa79ec1b01cc17bc619d3848f5c4f78d6879d38a4ba3ab68e96517fe3db860
+**image:** ghcr.io/devsecninja/hadiscover/backend:0.2.14@sha256:cbf696794b817b6fa08345c9fda852da829323f97884b3b48dea3b316d864af4
 
 **url:** api.hadiscover.com
 
@@ -142,7 +142,7 @@
 
 **container_name:** hoppscotch
 
-**image:** hoppscotch/hoppscotch:2025.12.0@sha256:0bf0d0c1a34399d8bc4a0d89126b41c717db771c5a451d69d076cb4305b9eaff
+**image:** hoppscotch/hoppscotch:2025.12.1@sha256:8cb58bf214d08360453aa4b4be748295e4c8a8abedc22850bc800272d9c41850
 
 **url:** api-tester.$DOMAINNAME
 
@@ -214,7 +214,7 @@
 
 **container_name:** lidarr
 
-**image:** lscr.io/linuxserver/lidarr:version-3.1.0.4875@sha256:ede2bb17350cc97a0d3f24389aa91803f655eac29aa022c77a71f4a61cc621e4
+**image:** lscr.io/linuxserver/lidarr:version-3.1.0.4875@sha256:0922867151c5175f394f4d865f6b3e63e8c05141132188e8790a1e66358e7196
 
 **url:** lidarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
@@ -224,7 +224,7 @@
 
 **container_name:** metube
 
-**image:** ghcr.io/alexta69/metube:latest@sha256:3c5e59886f404583196a45aa3e3fa9fb7b06e16fcdb71d2db5159b7c4e51b38a
+**image:** ghcr.io/alexta69/metube:latest@sha256:dbbf9a25660b6255cc0726a00c06cf2968941803e29813e1d23863919794713c
 
 **url:** metube.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
@@ -234,7 +234,7 @@
 
 **container_name:** n8n
 
-**image:** n8nio/n8n:2.2.2@sha256:913ad6aa6dd4c9b3c7990cef306eda98ef8c99fe1a099b1729f5cb1c37ffef44
+**image:** n8nio/n8n:2.3.2@sha256:aba343e23c1c757c535c73f33f1b7a5c940b1495d8910bf6cde9c2b5e4ac53a7
 
 **url:** n8n.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
@@ -262,7 +262,7 @@
 
 **container_name:** open-webui
 
-**image:** ghcr.io/open-webui/open-webui:0.6.43@sha256:9cb724e0bc84f05ba2f81a3da5f53f5add07e1001065d83f3b6b70b9a9eeef19
+**image:** ghcr.io/open-webui/open-webui:0.7.2@sha256:16d9a3615b45f14a0c89f7ad7a3bf151f923ed32c2e68f9204eb17d1ce40774b
 
 **url:** chat.$DOMAINNAME
 
@@ -302,7 +302,7 @@
 
 **container_name:** qbittorrent
 
-**image:** lscr.io/linuxserver/qbittorrent:5.1.4@sha256:1497b6e047ad47b738f94739219f0e5c5b2ad7a5953b7cf0050f2fedddd8c601
+**image:** lscr.io/linuxserver/qbittorrent:5.1.4@sha256:95114034a7f74672b76f795f6938921b0ca795f85b59b48691035dc66714f34c
 
 **url:** qbittorrent.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
@@ -342,7 +342,7 @@
 
 **container_name:** spottarr
 
-**image:** ghcr.io/spottarr/spottarr:1.13.0@sha256:ce70a1c98cb58ea1a30949c9230a7f5ed5fd5dd278eeedb97c224b697eb5e0a2
+**image:** ghcr.io/spottarr/spottarr:1.14.0@sha256:0b790654ab2b1f7eed75afd23d7f76aafeb9360f0e96e163f09d4d480b3380ad
 
 **url:** spottarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
@@ -352,7 +352,7 @@
 
 **container_name:** traefik-forward-auth
 
-**image:** ghcr.io/italypaleale/traefik-forward-auth:4.5.0@sha256:4bc20751924975b6c06589efdb4bbf8db98768abcea361f0d6484873f707ccbc
+**image:** ghcr.io/italypaleale/traefik-forward-auth:4.6.0@sha256:bb9475ea74de9befca2730bd56e4c97a1d333fb5cc250382dcf39ba92a974f8a
 
 **url:** auth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 

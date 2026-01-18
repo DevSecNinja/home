@@ -1,6 +1,6 @@
 services:
   hoppscotch:
-    image: hoppscotch/hoppscotch:2025.12.0@sha256:0bf0d0c1a34399d8bc4a0d89126b41c717db771c5a451d69d076cb4305b9eaff
+    image: hoppscotch/hoppscotch:2025.12.1@sha256:8cb58bf214d08360453aa4b4be748295e4c8a8abedc22850bc800272d9c41850
     container_name: hoppscotch
     depends_on:
       - traefik
@@ -165,7 +165,7 @@ services:
       - no-new-privileges=true
 
   hoppscotch-db-upgrade:
-    image: pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:6a429e7e047643ca38f25cd0b2e6e3d4b42bf4924a5280a31ab8c907bcf1bbda
+    image: pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:6fad95123e06937a692cb53ca8e226caf8995160ed21841071d623767f5b7891
     container_name: hoppscotch-db-upgrade
     restart: "no"
     security_opt:

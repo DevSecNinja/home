@@ -23,7 +23,7 @@ services:
       timeout: 10s
 
   dawarich-db:
-    image: postgis/postgis:17-3.5-alpine@sha256:4294c33e9e52ed2ba617419286923d97ddc5483207cdd5e4d326cc64f0a45c96
+    image: postgis/postgis:17-3.5-alpine@sha256:3ca0a5e29f27d7f789f120e29fb84d748397d65fae63ab9f9967bf9a5a3eff71
     shm_size: 1G
     container_name: dawarich-db
     volumes:
@@ -102,7 +102,7 @@ services:
       - no-new-privileges=true
 
   dawarich:
-    image: freikin/dawarich:0.37.1@sha256:299596d1ddebd47a5baacf271a6d647f7e11d7c13041d5d70430dc61e1be3bd8
+    image: freikin/dawarich:0.37.3@sha256:efab2e677baf912f5cc68363ec26e648015fa2c703b4a0cf8e03418415e1ed0d
     container_name: dawarich
     volumes:
       - dawarich_public:/var/app/public
@@ -187,7 +187,7 @@ services:
         restart: true
 
   dawarich-sidekiq:
-    image: freikin/dawarich:0.37.1@sha256:299596d1ddebd47a5baacf271a6d647f7e11d7c13041d5d70430dc61e1be3bd8
+    image: freikin/dawarich:0.37.3@sha256:efab2e677baf912f5cc68363ec26e648015fa2c703b4a0cf8e03418415e1ed0d
     container_name: dawarich-sidekiq
     volumes:
       - dawarich_public:/var/app/public

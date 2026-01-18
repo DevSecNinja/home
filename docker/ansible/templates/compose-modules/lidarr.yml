@@ -1,6 +1,6 @@
 services:
   lidarr:
-    image: lscr.io/linuxserver/lidarr:version-3.1.0.4875@sha256:ede2bb17350cc97a0d3f24389aa91803f655eac29aa022c77a71f4a61cc621e4
+    image: lscr.io/linuxserver/lidarr:version-3.1.0.4875@sha256:be65454ba890ad01a93b01cfc178adfa1a397b487bfdce2ac23bd956c473d10d
     container_name: lidarr
     depends_on:
       - traefik
