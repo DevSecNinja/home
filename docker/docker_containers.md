@@ -234,7 +234,7 @@
 
 **container_name:** n8n
 
-**image:** n8nio/n8n:2.3.2@sha256:aba343e23c1c757c535c73f33f1b7a5c940b1495d8910bf6cde9c2b5e4ac53a7
+**image:** n8nio/n8n:2.4.4@sha256:69226d5f1eb13bc303418730939799239fa96545513f571f2890442b77c7a522
 
 **url:** n8n.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
@@ -392,7 +392,7 @@
 
 **container_name:** unifi-volume-backup
 
-**image:** offen/docker-volume-backup:v2.46.1@sha256:039188f012d26178e68a0bb906cd408b9fc197069e8076d03014a31a5fed1406
+**image:** offen/docker-volume-backup:v2.47.0@sha256:2017b0e180cfe7f896117e2c10a05d6036c396de426112875456b808d8a51c6b
 
 ## docker/ansible/templates/compose-modules/wireguard.yml
 
