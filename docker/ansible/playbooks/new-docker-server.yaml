@@ -15,8 +15,6 @@
         bridge: "none"
         features:
           buildkit: true
-        hosts:
-          - "unix:///var/run/docker.sock"
         default-address-pools:
           - base: "172.17.0.0/12"
             size: 20
