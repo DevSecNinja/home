@@ -124,7 +124,7 @@
 
 **container_name:** gatus-db-upgrade
 
-**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:6fad95123e06937a692cb53ca8e226caf8995160ed21841071d623767f5b7891
+**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:c0c6d6021b270bef14cb137f3fbb22582dcc365824551a1a584458738cf2ae4d
 
 ## docker/ansible/templates/compose-modules/hadiscover.yml
 
@@ -162,7 +162,7 @@
 
 **container_name:** hoppscotch-db-upgrade
 
-**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:6fad95123e06937a692cb53ca8e226caf8995160ed21841071d623767f5b7891
+**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:c0c6d6021b270bef14cb137f3fbb22582dcc365824551a1a584458738cf2ae4d
 
 ## docker/ansible/templates/compose-modules/immich.yml
 
@@ -254,7 +254,7 @@
 
 **container_name:** n8n-db-upgrade
 
-**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:6fad95123e06937a692cb53ca8e226caf8995160ed21841071d623767f5b7891
+**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:c0c6d6021b270bef14cb137f3fbb22582dcc365824551a1a584458738cf2ae4d
 
 ## docker/ansible/templates/compose-modules/open-webui.yml
 
