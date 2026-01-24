@@ -13,7 +13,7 @@
   image: freikin/dawarich:0.37.3@sha256:efab2e677baf912f5cc68363ec26e648015fa2c703b4a0cf8e03418415e1ed0d
   url: dawarich-noauth.$DOMAINNAME
 - container_name: dawarich-db
-  image: postgis/postgis:17-3.5-alpine@sha256:3ca0a5e29f27d7f789f120e29fb84d748397d65fae63ab9f9967bf9a5a3eff71
+  image: postgis/postgis:17-3.5-alpine@sha256:0ccc4f581a6d6016d9ebee67f0496702005e6b5650b710b9ae6edbd5ccf7ceff
 - container_name: dawarich-db-backup
   image: tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
 - container_name: dawarich-redis
@@ -21,7 +21,7 @@
 - container_name: dawarich-sidekiq
   image: freikin/dawarich:0.37.3@sha256:efab2e677baf912f5cc68363ec26e648015fa2c703b4a0cf8e03418415e1ed0d
 - container_name: drawio
-  image: jgraph/drawio:29.3.2@sha256:c5cbcdb5c86e67621f242e95910b148dd1f4dda0b0466d213f9a1185e4891012
+  image: jgraph/drawio:29.3.5@sha256:f7794421a5a8eb55ff81446b3149bb96d06cd024c662eabdfe18a3fdd74d205b
   url: draw.$DOMAINNAME
 - container_name: excalidraw
   image: excalidraw/excalidraw:latest@sha256:3c2513e830bb6e195147c05b34ecf8393d0ba2b1cc86e93b407a5777d6135c6c
@@ -70,7 +70,7 @@
   image: ghcr.io/alexta69/metube:latest@sha256:dbbf9a25660b6255cc0726a00c06cf2968941803e29813e1d23863919794713c
   url: metube.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 - container_name: n8n
-  image: n8nio/n8n:2.4.4@sha256:69226d5f1eb13bc303418730939799239fa96545513f571f2890442b77c7a522
+  image: n8nio/n8n:2.5.2@sha256:54c34f83b2294f3bef7fd684913873f575e51975e7443cf835dce5ede8a175df
   url: n8n.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 - container_name: n8n-db
   image: docker.io/library/postgres:17.7-alpine@sha256:ff4ccc02b97e0ebb6b328ef9ff92522f95586f83be6801896b615088defc8ad2
@@ -85,7 +85,7 @@
   image: openspeedtest/latest:v2.0.6@sha256:a6a7e3b3e9e93cfe7b9b2eb49c60b2a93644149a0a600845d4df57148b193ff6
   url: speedtest.$DOMAINNAME
 - container_name: plex
-  image: lscr.io/linuxserver/plex:version-1.42.2.10156-f737b826c@sha256:1720efa8e919a724ff3003cce7c1c0ae91a54e097ca3c8f6713a780c6fd73432
+  image: lscr.io/linuxserver/plex:version-1.42.2.10156-f737b826c@sha256:b19a5e34c6f8dd42abf88556b8aa5c8987c0c34820aaeaa320a02d8c17fdaab3
   url: plex-noauth.$DOMAINNAME
 - container_name: prowlarr
   image: lscr.io/linuxserver/prowlarr:version-2.3.0.5236@sha256:d3e9307b320b6772749a2cf8fc2712e9e824c4930b034680ad4d08a9e2f25884
@@ -112,7 +112,7 @@
   image: ghcr.io/meeb/tubesync:v0.16.1@sha256:f39af04e3a6739f42ae5237ae6420f41a6eb44e7e640cdeb3098d737e1f23bc9
   url: tubesync.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 - container_name: unifi
-  image: lscr.io/linuxserver/unifi-network-application:version-10.0.162@sha256:268340299e6a8a85c29800923e242c60ed7baa24557943f0ff5ec4ea52804232
+  image: lscr.io/linuxserver/unifi-network-application:version-10.0.162@sha256:7948b8c2ca4cd9bf9e1839f3e399c320e0a8318cd54dc807c247f48702f4b157
   url: unifi-guest.$DOMAINNAME
 - container_name: unifi-db
   image: mongo:8.2.3@sha256:d6b569590880bca35e43318418133a426b024bcb649eeb63bb071bc1490bee41

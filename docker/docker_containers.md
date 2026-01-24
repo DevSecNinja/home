@@ -50,7 +50,7 @@
 
 **container_name:** dawarich-db
 
-**image:** postgis/postgis:17-3.5-alpine@sha256:3ca0a5e29f27d7f789f120e29fb84d748397d65fae63ab9f9967bf9a5a3eff71
+**image:** postgis/postgis:17-3.5-alpine@sha256:0ccc4f581a6d6016d9ebee67f0496702005e6b5650b710b9ae6edbd5ccf7ceff
 
 ### Service: dawarich-db-backup
 
@@ -76,7 +76,7 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:29.3.2@sha256:c5cbcdb5c86e67621f242e95910b148dd1f4dda0b0466d213f9a1185e4891012
+**image:** jgraph/drawio:29.3.5@sha256:f7794421a5a8eb55ff81446b3149bb96d06cd024c662eabdfe18a3fdd74d205b
 
 **url:** draw.$DOMAINNAME
 
@@ -234,7 +234,7 @@
 
 **container_name:** n8n
 
-**image:** n8nio/n8n:2.4.4@sha256:69226d5f1eb13bc303418730939799239fa96545513f571f2890442b77c7a522
+**image:** n8nio/n8n:2.5.2@sha256:54c34f83b2294f3bef7fd684913873f575e51975e7443cf835dce5ede8a175df
 
 **url:** n8n.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
@@ -282,7 +282,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.42.2.10156-f737b826c@sha256:1720efa8e919a724ff3003cce7c1c0ae91a54e097ca3c8f6713a780c6fd73432
+**image:** lscr.io/linuxserver/plex:version-1.42.2.10156-f737b826c@sha256:b19a5e34c6f8dd42abf88556b8aa5c8987c0c34820aaeaa320a02d8c17fdaab3
 
 **url:** plex-noauth.$DOMAINNAME
 
@@ -372,7 +372,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-10.0.162@sha256:268340299e6a8a85c29800923e242c60ed7baa24557943f0ff5ec4ea52804232
+**image:** lscr.io/linuxserver/unifi-network-application:version-10.0.162@sha256:7948b8c2ca4cd9bf9e1839f3e399c320e0a8318cd54dc807c247f48702f4b157
 
 **url:** unifi-guest.$DOMAINNAME
 
