@@ -42,7 +42,7 @@
 
 **container_name:** dawarich
 
-**image:** freikin/dawarich:0.37.3@sha256:efab2e677baf912f5cc68363ec26e648015fa2c703b4a0cf8e03418415e1ed0d
+**image:** freikin/dawarich:1.0.0@sha256:d87c0e63a7475cfa50ebbc5b7d7dd814a010a48f989a35ca0c4affdcf63c278b
 
 **url:** dawarich-noauth.$DOMAINNAME
 
@@ -68,7 +68,7 @@
 
 **container_name:** dawarich-sidekiq
 
-**image:** freikin/dawarich:0.37.3@sha256:efab2e677baf912f5cc68363ec26e648015fa2c703b4a0cf8e03418415e1ed0d
+**image:** freikin/dawarich:1.0.0@sha256:d87c0e63a7475cfa50ebbc5b7d7dd814a010a48f989a35ca0c4affdcf63c278b
 
 ## docker/ansible/templates/compose-modules/drawio.yml
 
