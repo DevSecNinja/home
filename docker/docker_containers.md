@@ -182,7 +182,7 @@
 
 **container_name:** immich-machine-learning
 
-**image:** ghcr.io/immich-app/immich-machine-learning:v2.4.1@sha256:b3deefd1826f113824e9d7bc30d905e7f823535887d03f869330946b6db3b44a
+**image:** ghcr.io/immich-app/immich-machine-learning:v2.5.2@sha256:531d2bccbe20d0412496e36455715a18d692911eca5e2ee37d32e1e4f50e14bb
 
 ### Service: immich-redis
 
@@ -194,7 +194,7 @@
 
 **container_name:** immich-server
 
-**image:** ghcr.io/immich-app/immich-server:v2.4.1@sha256:e6a6298e67ae077808fdb7d8d5565955f60b0708191576143fc02d30ab1389d1
+**image:** ghcr.io/immich-app/immich-server:v2.5.2@sha256:8ac5a6d471fbb6fcfec6bc34854dd5a947c1795547f0d9345d9bf1803d1209e3
 
 **url:** photos.$DOMAINNAME
 
@@ -234,7 +234,7 @@
 
 **container_name:** n8n
 
-**image:** n8nio/n8n:2.5.2@sha256:54c34f83b2294f3bef7fd684913873f575e51975e7443cf835dce5ede8a175df
+**image:** n8nio/n8n:2.6.2@sha256:ff6fe9eca746b7455c9e6e4fbc6f5753c3204e82279e015fa62f1bfe309e6343
 
 **url:** n8n.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
@@ -362,7 +362,7 @@
 
 **container_name:** tubesync
 
-**image:** ghcr.io/meeb/tubesync:v0.16.1@sha256:f39af04e3a6739f42ae5237ae6420f41a6eb44e7e640cdeb3098d737e1f23bc9
+**image:** ghcr.io/meeb/tubesync:v0.16.2@sha256:e31f1743b9db2c3deea959a056015b58404f0ddb12f59e6a6fa028aaac704af3
 
 **url:** tubesync.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
