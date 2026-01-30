@@ -142,7 +142,7 @@
 
 **container_name:** hoppscotch
 
-**image:** hoppscotch/hoppscotch:2025.12.1@sha256:8cb58bf214d08360453aa4b4be748295e4c8a8abedc22850bc800272d9c41850
+**image:** hoppscotch/hoppscotch:2026.1.0@sha256:a194f6d49deb804914f506b3f00fb1c875841caf02da2ac818c5d80f333c447a
 
 **url:** api-tester.$DOMAINNAME
 
@@ -282,7 +282,7 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.42.2.10156-f737b826c@sha256:c9d8dc46147dd1c3bfe6e80b50da12a973598ec86cfe672244e5d040ab3e62df
+**image:** lscr.io/linuxserver/plex:version-1.43.0.10467-2b1ba6e69@sha256:66c6a46ec3dc244aea20508b49dce4b46291c2fd2dba8851117e675d1c5dd52d
 
 **url:** plex-noauth.$DOMAINNAME
 
