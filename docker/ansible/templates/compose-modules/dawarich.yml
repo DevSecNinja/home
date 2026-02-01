@@ -102,7 +102,7 @@ services:
       - no-new-privileges=true
 
   dawarich:
-    image: freikin/dawarich:1.0.1@sha256:ce2a337a1c2d521cf7d5265abe5abb1f9a645322e7184b6a20fd8ff59943a9e1
+    image: freikin/dawarich:1.0.3@sha256:99784fa3664f9773e587751abb634231772fe0fad5377ca3ed6c70912731dfdd
     container_name: dawarich
     volumes:
       - dawarich_public:/var/app/public
@@ -187,7 +187,7 @@ services:
         restart: true
 
   dawarich-sidekiq:
-    image: freikin/dawarich:1.0.1@sha256:ce2a337a1c2d521cf7d5265abe5abb1f9a645322e7184b6a20fd8ff59943a9e1
+    image: freikin/dawarich:1.0.3@sha256:99784fa3664f9773e587751abb634231772fe0fad5377ca3ed6c70912731dfdd
     container_name: dawarich-sidekiq
     volumes:
       - dawarich_public:/var/app/public
