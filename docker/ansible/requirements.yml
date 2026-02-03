@@ -1,5 +1,7 @@
 ---
 collections:
+  - name: community.general
+    version: 12.3.0
   - name: vladgh.samba
     version: 3.5.4
 roles:
