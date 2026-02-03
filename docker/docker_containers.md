@@ -42,7 +42,7 @@
 
 **container_name:** dawarich
 
-**image:** freikin/dawarich:1.0.1@sha256:ce2a337a1c2d521cf7d5265abe5abb1f9a645322e7184b6a20fd8ff59943a9e1
+**image:** freikin/dawarich:1.0.4@sha256:69d9c81d08886c83c0259dbe03ab9b27330fceee25d890725dc1347382f304e0
 
 **url:** dawarich-noauth.$DOMAINNAME
 
@@ -68,7 +68,7 @@
 
 **container_name:** dawarich-sidekiq
 
-**image:** freikin/dawarich:1.0.1@sha256:ce2a337a1c2d521cf7d5265abe5abb1f9a645322e7184b6a20fd8ff59943a9e1
+**image:** freikin/dawarich:1.0.4@sha256:69d9c81d08886c83c0259dbe03ab9b27330fceee25d890725dc1347382f304e0
 
 ## docker/ansible/templates/compose-modules/drawio.yml
 
@@ -124,7 +124,7 @@
 
 **container_name:** gatus-db-upgrade
 
-**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:10605ed2b76f454ff506c3558cc44117f2b2c23a2782fd4bb6a07202dc158e18
+**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:c1382acd97519dd0fbea17ac6e08678eca79197ab9115bd6a3ddacbf50c69bdd
 
 ## docker/ansible/templates/compose-modules/hadiscover.yml
 
@@ -162,7 +162,7 @@
 
 **container_name:** hoppscotch-db-upgrade
 
-**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:10605ed2b76f454ff506c3558cc44117f2b2c23a2782fd4bb6a07202dc158e18
+**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:c1382acd97519dd0fbea17ac6e08678eca79197ab9115bd6a3ddacbf50c69bdd
 
 ## docker/ansible/templates/compose-modules/immich.yml
 
@@ -224,7 +224,7 @@
 
 **container_name:** metube
 
-**image:** ghcr.io/alexta69/metube:latest@sha256:86a2c0afcbf9b192fa858923377fe423438ac9504d28c3a32439b6b037352ece
+**image:** ghcr.io/alexta69/metube:latest@sha256:6c353248e1db1232e6c3db138c7ed492a516f736c25740e705ed96a5f67c5643
 
 **url:** metube.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
@@ -254,7 +254,7 @@
 
 **container_name:** n8n-db-upgrade
 
-**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:10605ed2b76f454ff506c3558cc44117f2b2c23a2782fd4bb6a07202dc158e18
+**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:c1382acd97519dd0fbea17ac6e08678eca79197ab9115bd6a3ddacbf50c69bdd
 
 ## docker/ansible/templates/compose-modules/open-webui.yml
 
@@ -312,7 +312,7 @@
 
 **container_name:** radarr
 
-**image:** lscr.io/linuxserver/radarr:version-6.0.4.10291@sha256:270f25698624b57b86ca119cc95399d7ff15be8297095b4e1223fd5b549b732c
+**image:** lscr.io/linuxserver/radarr:version-6.0.4.10291@sha256:ba2693dd704b84eb0b404d40b3902bd3e62a1768dc5ee0d89b1f1d7cd51a66eb
 
 **url:** radarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 

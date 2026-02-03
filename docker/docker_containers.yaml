@@ -10,7 +10,7 @@
   image: ghcr.io/gchq/cyberchef:10.20.0@sha256:c3013e479e3657103c864433969008845356f3b726bf99cb1606f56a10d5946f
   url: cyberchef.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 - container_name: dawarich
-  image: freikin/dawarich:1.0.1@sha256:ce2a337a1c2d521cf7d5265abe5abb1f9a645322e7184b6a20fd8ff59943a9e1
+  image: freikin/dawarich:1.0.4@sha256:69d9c81d08886c83c0259dbe03ab9b27330fceee25d890725dc1347382f304e0
   url: dawarich-noauth.$DOMAINNAME
 - container_name: dawarich-db
   image: postgis/postgis:17-3.5-alpine@sha256:ca4874d25e47b6b0cf370db8990ef5ae2690d3803d64550222e1fd013217df8b
@@ -19,7 +19,7 @@
 - container_name: dawarich-redis
   image: redis:8.4.0-alpine@sha256:4eec4565e45aa0b3966554c866bc73211e281b0b3d89fe9a33c982e6faca809d
 - container_name: dawarich-sidekiq
-  image: freikin/dawarich:1.0.1@sha256:ce2a337a1c2d521cf7d5265abe5abb1f9a645322e7184b6a20fd8ff59943a9e1
+  image: freikin/dawarich:1.0.4@sha256:69d9c81d08886c83c0259dbe03ab9b27330fceee25d890725dc1347382f304e0
 - container_name: drawio
   image: jgraph/drawio:29.3.6@sha256:e0951391432a0d8bc587d649107563166a2e52c8648e3c809429a9f56da6f386
   url: draw.$DOMAINNAME
@@ -36,7 +36,7 @@
 - container_name: gatus-db-backup
   image: tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
 - container_name: gatus-db-upgrade
-  image: pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:10605ed2b76f454ff506c3558cc44117f2b2c23a2782fd4bb6a07202dc158e18
+  image: pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:c1382acd97519dd0fbea17ac6e08678eca79197ab9115bd6a3ddacbf50c69bdd
 - container_name: hadiscover-api
   image: ghcr.io/devsecninja/hadiscover/backend:0.2.14@sha256:cbf696794b817b6fa08345c9fda852da829323f97884b3b48dea3b316d864af4
   url: api.hadiscover.com
@@ -48,7 +48,7 @@
 - container_name: hoppscotch-db-backup
   image: tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
 - container_name: hoppscotch-db-upgrade
-  image: pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:10605ed2b76f454ff506c3558cc44117f2b2c23a2782fd4bb6a07202dc158e18
+  image: pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:c1382acd97519dd0fbea17ac6e08678eca79197ab9115bd6a3ddacbf50c69bdd
 - container_name: immich-db
   image: ghcr.io/immich-app/postgres:14-vectorchord0.3.0-pgvectors0.2.0@sha256:c570d9e1c2494f65d2a0a379a7f6df66e8441964254a30aa62cc58e8ebf1dee0
 - container_name: immich-db-backup
@@ -67,7 +67,7 @@
   image: lscr.io/linuxserver/lidarr:version-3.1.0.4875@sha256:fbc96b5d7eab74230feb5bcbdb29fcbfaa6d0afa7a2cb2fe28171209ea9bc956
   url: lidarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 - container_name: metube
-  image: ghcr.io/alexta69/metube:latest@sha256:86a2c0afcbf9b192fa858923377fe423438ac9504d28c3a32439b6b037352ece
+  image: ghcr.io/alexta69/metube:latest@sha256:6c353248e1db1232e6c3db138c7ed492a516f736c25740e705ed96a5f67c5643
   url: metube.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 - container_name: n8n
   image: n8nio/n8n:2.6.2@sha256:ff6fe9eca746b7455c9e6e4fbc6f5753c3204e82279e015fa62f1bfe309e6343
@@ -77,7 +77,7 @@
 - container_name: n8n-db-backup
   image: tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
 - container_name: n8n-db-upgrade
-  image: pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:10605ed2b76f454ff506c3558cc44117f2b2c23a2782fd4bb6a07202dc158e18
+  image: pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:c1382acd97519dd0fbea17ac6e08678eca79197ab9115bd6a3ddacbf50c69bdd
 - container_name: open-webui
   image: ghcr.io/open-webui/open-webui:0.7.2@sha256:16d9a3615b45f14a0c89f7ad7a3bf151f923ed32c2e68f9204eb17d1ce40774b
   url: chat.$DOMAINNAME
@@ -94,7 +94,7 @@
   image: lscr.io/linuxserver/qbittorrent:5.1.4@sha256:b8a08ffba8850e2e71153e153cf5eed2dedbf499ef9b123262735ce924b65586
   url: qbittorrent.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 - container_name: radarr
-  image: lscr.io/linuxserver/radarr:version-6.0.4.10291@sha256:270f25698624b57b86ca119cc95399d7ff15be8297095b4e1223fd5b549b732c
+  image: lscr.io/linuxserver/radarr:version-6.0.4.10291@sha256:ba2693dd704b84eb0b404d40b3902bd3e62a1768dc5ee0d89b1f1d7cd51a66eb
   url: radarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 - container_name: sabnzbd
   image: docker.io/linuxserver/sabnzbd:amd64-4.5.1@sha256:39952ab247d97c9d3345a572385ebee158ce497887652d8421f4c0ac44cddf7e
