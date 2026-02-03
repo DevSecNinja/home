@@ -17,7 +17,7 @@ tasks:
       Args:
         playbook: Playbook to run (required)
     # prompt: Run Ansible playbook '{{.playbook}}'... continue?
-    cmd: "{{.VIRTUAL_ENV}}/bin/ansible-playbook --inventory {{.ANSIBLE_INVENTORY_FILE}} {{.DOCKER_DIR}}/ansible/playbooks/{{.playbook}}.yaml {{.CLI_ARGS}}"
+    cmd: "ansible-playbook --inventory {{.ANSIBLE_INVENTORY_FILE}} {{.DOCKER_DIR}}/ansible/playbooks/{{.playbook}}.yaml {{.CLI_ARGS}}"
     requires:
       vars: ["playbook"]
     preconditions:
@@ -28,7 +28,7 @@ tasks:
     summary: |
       Args:
         container: Docker container to restart (required)
-    cmd: "{{.VIRTUAL_ENV}}/bin/ansible docker --inventory {{.ANSIBLE_INVENTORY_FILE}} -a 'chdir=/srv/docker docker compose restart {{.container}}'"
+    cmd: "ansible docker --inventory {{.ANSIBLE_INVENTORY_FILE}} -a 'chdir=/srv/docker docker compose restart {{.container}}'"
     requires:
       vars: ["container"]
     preconditions:
@@ -36,6 +36,6 @@ tasks:
 
   install-roles:
     desc: Install Ansible roles from requirements.yml
-    cmd: "{{.VIRTUAL_ENV}}/bin/ansible-galaxy install -r {{.DOCKER_DIR}}/ansible/requirements.yml -vvv"
+    cmd: "ansible-galaxy install -r {{.DOCKER_DIR}}/ansible/requirements.yml -vvv"
     preconditions:
       - { msg: "requirements.yml not found", sh: "test -f {{.DOCKER_DIR}}/ansible/requirements.yml" }

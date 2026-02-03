@@ -1,2 +1,5 @@
 os__architecture: "amd64"
 os__architecture_long: "amd64"
+
+# Explicitly set Python interpreter to avoid auto-discovery warnings
+ansible_python_interpreter: "/usr/bin/python3.11"
