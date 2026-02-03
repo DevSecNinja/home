@@ -1,5 +1,4 @@
 [env]
-_.python.venv = { path = "{{config_root}}/.venv", create = true }
 KUBECONFIG = "{{config_root}}/kubeconfig"
 PYTHONDONTWRITEBYTECODE = "1"
 SOPS_AGE_KEY_FILE = "{{config_root}}/age.key"
@@ -8,8 +7,8 @@ TASK_X_ENV_PRECEDENCE = 1
 TASK_X_MAP_VARIABLES = 0
 
 [tasks.install]
-description = "Install Python dependencies"
-run = "uv pip install -r requirements.txt"
+description = "Install all Python dependencies"
+run = "python -m pip install -r requirements.txt"
 
 [tools]
 python = "3.14.2"
