@@ -342,7 +342,7 @@
 
 **container_name:** spottarr
 
-**image:** ghcr.io/spottarr/spottarr:1.14.0@sha256:0b790654ab2b1f7eed75afd23d7f76aafeb9360f0e96e163f09d4d480b3380ad
+**image:** ghcr.io/spottarr/spottarr:1.15.0@sha256:ae04eb63892ad62e34468e377074ec50b0240ca9740ff4148a1033fa75c2ec89
 
 **url:** spottarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
