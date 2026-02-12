@@ -21,7 +21,7 @@ run = "echo 'All dependencies installed successfully!'"
 depends = ["install", "install:ansible"]
 
 [tools]
-python = "3.14.2"
+python = "3.14.3"
 "aqua:astral-sh/uv" = "latest"
 "aqua:budimanjojo/talhelper" = "latest"
 "aqua:cloudflare/cloudflared" = "latest"
