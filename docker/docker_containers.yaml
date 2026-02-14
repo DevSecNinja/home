@@ -7,13 +7,13 @@
   image: lscr.io/linuxserver/bazarr:version-v1.5.3@sha256:001875e61839c8a50743f0bc0fa4da2a55ed8a038b9b5ed0dd2c663dd3d0bfc7
   url: bazarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 - container_name: cyberchef
-  image: ghcr.io/gchq/cyberchef:10.20.0@sha256:c3013e479e3657103c864433969008845356f3b726bf99cb1606f56a10d5946f
+  image: ghcr.io/gchq/cyberchef:10.20.0@sha256:925058eb6af4bcc6300d529ab5d5d4dc40abdf1aa80919e1fb6e1d9694b15bc5
   url: cyberchef.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 - container_name: dawarich
   image: freikin/dawarich:1.0.4@sha256:69d9c81d08886c83c0259dbe03ab9b27330fceee25d890725dc1347382f304e0
   url: dawarich-noauth.$DOMAINNAME
 - container_name: dawarich-db
-  image: postgis/postgis:17-3.5-alpine@sha256:ca4874d25e47b6b0cf370db8990ef5ae2690d3803d64550222e1fd013217df8b
+  image: postgis/postgis:17-3.5-alpine@sha256:57e27aa2ce05a3b5800253bbfd8777e4ab5c938b8a7727b950c11b546289cff9
 - container_name: dawarich-db-backup
   image: tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
 - container_name: dawarich-redis
@@ -21,7 +21,7 @@
 - container_name: dawarich-sidekiq
   image: freikin/dawarich:1.0.4@sha256:69d9c81d08886c83c0259dbe03ab9b27330fceee25d890725dc1347382f304e0
 - container_name: drawio
-  image: jgraph/drawio:29.3.6@sha256:e0951391432a0d8bc587d649107563166a2e52c8648e3c809429a9f56da6f386
+  image: jgraph/drawio:29.3.6@sha256:c8971352ceec3e76564369bbe76ebc7e66742f5f3b284c703f956bb78761cf3a
   url: draw.$DOMAINNAME
 - container_name: excalidraw
   image: excalidraw/excalidraw:latest@sha256:3c2513e830bb6e195147c05b34ecf8393d0ba2b1cc86e93b407a5777d6135c6c
@@ -36,38 +36,38 @@
 - container_name: gatus-db-backup
   image: tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
 - container_name: gatus-db-upgrade
-  image: pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:c1382acd97519dd0fbea17ac6e08678eca79197ab9115bd6a3ddacbf50c69bdd
+  image: pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:624a676aa93b02ea9018207fd33914d6b7749ecd5c93091d77e1b9ed918489da
 - container_name: hadiscover-api
   image: ghcr.io/devsecninja/hadiscover/backend:0.2.14@sha256:cbf696794b817b6fa08345c9fda852da829323f97884b3b48dea3b316d864af4
   url: api.hadiscover.com
 - container_name: hoppscotch
-  image: hoppscotch/hoppscotch:2026.1.0@sha256:a194f6d49deb804914f506b3f00fb1c875841caf02da2ac818c5d80f333c447a
+  image: hoppscotch/hoppscotch:2026.1.1@sha256:211a005dd4df2bbec15ab684e8c428f073df2da7c6813360225bb37620bdc380
   url: api-tester.$DOMAINNAME
 - container_name: hoppscotch-db
   image: docker.io/library/postgres:17.7-alpine@sha256:bb377b7239d2774ac8cc76f481596ce96c5a6b5e9d141f6d0a0ee371a6e7c0f2
 - container_name: hoppscotch-db-backup
   image: tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
 - container_name: hoppscotch-db-upgrade
-  image: pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:c1382acd97519dd0fbea17ac6e08678eca79197ab9115bd6a3ddacbf50c69bdd
+  image: pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:624a676aa93b02ea9018207fd33914d6b7749ecd5c93091d77e1b9ed918489da
 - container_name: immich-db
   image: ghcr.io/immich-app/postgres:14-vectorchord0.3.0-pgvectors0.2.0@sha256:c570d9e1c2494f65d2a0a379a7f6df66e8441964254a30aa62cc58e8ebf1dee0
 - container_name: immich-db-backup
   image: tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
 - container_name: immich-machine-learning
-  image: ghcr.io/immich-app/immich-machine-learning:v2.5.2@sha256:531d2bccbe20d0412496e36455715a18d692911eca5e2ee37d32e1e4f50e14bb
+  image: ghcr.io/immich-app/immich-machine-learning:v2.5.5@sha256:2e17e15855907ece0d5b3a7bf625b12f6d987a5854fa71d888641acae28b0323
 - container_name: immich-redis
-  image: docker.io/valkey/valkey:9-alpine@sha256:c106a0c03bcb23cbdf9febe693114cb7800646b11ca8b303aee7409de005faa8
+  image: docker.io/valkey/valkey:9-alpine@sha256:68677f85c863830af7836ff07c4a13b7f085ebeff62f4dedb71499ca27d229f2
 - container_name: immich-server
-  image: ghcr.io/immich-app/immich-server:v2.5.2@sha256:8ac5a6d471fbb6fcfec6bc34854dd5a947c1795547f0d9345d9bf1803d1209e3
+  image: ghcr.io/immich-app/immich-server:v2.5.5@sha256:161b1ec8af9e0478797cfd75ea857c7e55af271fa7cea103cb30ab1ba5b418d8
   url: photos.$DOMAINNAME
 - container_name: it-tools
   image: ghcr.io/corentinth/it-tools:2023.12.21-5ed3693@sha256:4aaf67eab769afc9dac5614a15614537446e11150d53eab3be34ac9775a27e3a
   url: tools.$DOMAINNAME
 - container_name: lidarr
-  image: lscr.io/linuxserver/lidarr:version-3.1.0.4875@sha256:fbc96b5d7eab74230feb5bcbdb29fcbfaa6d0afa7a2cb2fe28171209ea9bc956
+  image: lscr.io/linuxserver/lidarr:version-3.1.0.4875@sha256:37a3df74f4c2a6f10eead66f4d8034362ebf2866f935026b4a71dd888b9e7f08
   url: lidarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 - container_name: metube
-  image: ghcr.io/alexta69/metube:latest@sha256:6c353248e1db1232e6c3db138c7ed492a516f736c25740e705ed96a5f67c5643
+  image: ghcr.io/alexta69/metube:latest@sha256:0a8a575017b92818bae78813317119d7adfc531e5301f56e5bb0a78f8382d6b6
   url: metube.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 - container_name: n8n
   image: n8nio/n8n:2.6.2@sha256:ff6fe9eca746b7455c9e6e4fbc6f5753c3204e82279e015fa62f1bfe309e6343
@@ -77,7 +77,7 @@
 - container_name: n8n-db-backup
   image: tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
 - container_name: n8n-db-upgrade
-  image: pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:c1382acd97519dd0fbea17ac6e08678eca79197ab9115bd6a3ddacbf50c69bdd
+  image: pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:624a676aa93b02ea9018207fd33914d6b7749ecd5c93091d77e1b9ed918489da
 - container_name: open-webui
   image: ghcr.io/open-webui/open-webui:0.7.2@sha256:16d9a3615b45f14a0c89f7ad7a3bf151f923ed32c2e68f9204eb17d1ce40774b
   url: chat.$DOMAINNAME
@@ -85,37 +85,37 @@
   image: openspeedtest/latest:v2.0.6@sha256:a6a7e3b3e9e93cfe7b9b2eb49c60b2a93644149a0a600845d4df57148b193ff6
   url: speedtest.$DOMAINNAME
 - container_name: plex
-  image: lscr.io/linuxserver/plex:version-1.43.0.10467-2b1ba6e69@sha256:66c6a46ec3dc244aea20508b49dce4b46291c2fd2dba8851117e675d1c5dd52d
+  image: lscr.io/linuxserver/plex:version-1.43.0.10492-121068a07@sha256:bbe0118e39e2c071fc5fe39af3f32072207bf4146d56b6a8901bcb23082df207
   url: plex-noauth.$DOMAINNAME
 - container_name: prowlarr
-  image: lscr.io/linuxserver/prowlarr:version-2.3.0.5236@sha256:d3e9307b320b6772749a2cf8fc2712e9e824c4930b034680ad4d08a9e2f25884
+  image: lscr.io/linuxserver/prowlarr:version-2.3.0.5236@sha256:e74a1e093dcc223d671d4b7061e2b4946f1989a4d3059654ff4e623b731c9134
   url: prowlarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 - container_name: qbittorrent
-  image: lscr.io/linuxserver/qbittorrent:5.1.4@sha256:b8a08ffba8850e2e71153e153cf5eed2dedbf499ef9b123262735ce924b65586
+  image: lscr.io/linuxserver/qbittorrent:5.1.4@sha256:dfa75bc534ad4f36262f75b5c1d4c4f0ddd5e7ed5711ebc581c70920cce204ee
   url: qbittorrent.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 - container_name: radarr
-  image: lscr.io/linuxserver/radarr:version-6.0.4.10291@sha256:ba2693dd704b84eb0b404d40b3902bd3e62a1768dc5ee0d89b1f1d7cd51a66eb
+  image: lscr.io/linuxserver/radarr:version-6.0.4.10291@sha256:f08dda38e7d12e5a722d9a5cb6e54acaf63c8598fefeefec88effe0c0d0038dd
   url: radarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 - container_name: sabnzbd
   image: docker.io/linuxserver/sabnzbd:amd64-4.5.1@sha256:39952ab247d97c9d3345a572385ebee158ce497887652d8421f4c0ac44cddf7e
   url: sabnzbd.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 - container_name: sonarr
-  image: lscr.io/linuxserver/sonarr:version-4.0.16.2944@sha256:02b4d538d351d6e35882a021c08e8600fe95d28860fb1dd724b597166e7221ca
+  image: lscr.io/linuxserver/sonarr:version-4.0.16.2944@sha256:37be832b78548e3f55f69c45b50e3b14d18df1b6def2a4994258217e67efb1a1
   url: sonarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 - container_name: spottarr
   image: ghcr.io/spottarr/spottarr:1.15.0@sha256:ae04eb63892ad62e34468e377074ec50b0240ca9740ff4148a1033fa75c2ec89
   url: spottarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 - container_name: traefik-forward-auth
-  image: ghcr.io/italypaleale/traefik-forward-auth:4.6.0@sha256:bb9475ea74de9befca2730bd56e4c97a1d333fb5cc250382dcf39ba92a974f8a
+  image: ghcr.io/italypaleale/traefik-forward-auth:4.6.1@sha256:dfbce2959ea91ad6855918bf6b41417b6f5b512b23d4bd67f78cc0a62d23f375
   url: auth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 - container_name: tubesync
   image: ghcr.io/meeb/tubesync:v0.16.2@sha256:e31f1743b9db2c3deea959a056015b58404f0ddb12f59e6a6fa028aaac704af3
   url: tubesync.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 - container_name: unifi
-  image: lscr.io/linuxserver/unifi-network-application:version-10.0.162@sha256:7948b8c2ca4cd9bf9e1839f3e399c320e0a8318cd54dc807c247f48702f4b157
+  image: lscr.io/linuxserver/unifi-network-application:version-10.0.162@sha256:1c3667f6f145b49dcbd105b090a3740a6403f2ae02a164ae9231649e073e2f84
   url: unifi-guest.$DOMAINNAME
 - container_name: unifi-db
-  image: mongo:8.2.4@sha256:6f55a078e025aa29fea2826c82f67ff2f774b82efd816c4c30bbfe67904f0bb8
+  image: mongo:8.2.5@sha256:9e52bf8768ae4f59b9ca734845d15cee0e523ced14b900cc3692d241eec9154c
 - container_name: unifi-db-backup
   image: tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
 - container_name: unifi-volume-backup
