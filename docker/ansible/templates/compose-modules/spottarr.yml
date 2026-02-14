@@ -1,6 +1,6 @@
 services:
   spottarr:
-    image: ghcr.io/spottarr/spottarr:1.15.0@sha256:ae04eb63892ad62e34468e377074ec50b0240ca9740ff4148a1033fa75c2ec89
+    image: ghcr.io/spottarr/spottarr:1.16.0@sha256:bf4663c5d54d47b2beb888bf980f9d6d26457e6939759c193229a2ebff2cbecc
     container_name: spottarr
     depends_on:
       - traefik
