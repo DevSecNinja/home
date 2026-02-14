@@ -48,6 +48,10 @@ services:
       - $DOCKERDIR/data/traefik/certchain:/certchain
       - $DOCKERDIR/data/traefik/rules:/rules
       - $DOCKERDIR/data/traefik/traefik.yml:/etc/traefik/traefik.yml:ro
+#% if apps__traefik_use_local_certs | default(false) %#
+      - "/etc/ssl/certs/{{ generic__domain_name }}-fullchain.crt:/etc/ssl/certs/{{ generic__domain_name }}-fullchain.crt:ro"
+      - "/etc/ssl/private/{{ generic__domain_name }}.key:/etc/ssl/private/{{ generic__domain_name }}.key:ro"
+#% endif %#
     mem_limit: 1024m
     environment:
       - TZ=${TZ}
@@ -67,7 +71,9 @@ services:
       # Traefik
       - "traefik.enable=true"
       ## TLS
+#% if not (apps__traefik_use_local_certs | default(false)) %#
       - "traefik.http.routers.traefik-rtr.tls.certresolver=dns-cloudflare"
+#% endif %#
       - "traefik.http.routers.traefik-rtr.tls.domains[0].main=$DOMAINNAME"
       - "traefik.http.routers.traefik-rtr.tls.domains[0].sans=*.$DOMAINNAME"
 #% if 'untrusted' in group_names %#

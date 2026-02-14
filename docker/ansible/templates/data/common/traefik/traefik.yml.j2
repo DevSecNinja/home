@@ -67,6 +67,7 @@ providers:
     directory: "/rules"
     watch: true
 
+#% if not (apps__traefik_use_local_certs | default(false)) %#
 certificatesResolvers:
   dns-cloudflare:
     acme:
@@ -78,6 +79,7 @@ certificatesResolvers:
         resolvers:
           - "1.1.1.1:53"
           - "1.0.0.1:53"
+#% endif %#
 
 #% if 'infra' in group_names %#
 serversTransport:

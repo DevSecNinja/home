@@ -1,4 +1,16 @@
 tls:
+#% if apps__traefik_use_local_certs | default(false) %#
+  certificates:
+    - certFile: /etc/ssl/certs/{{ generic__domain_name }}-fullchain.crt
+      keyFile: /etc/ssl/private/{{ generic__domain_name }}.key
+      stores:
+        - default
+  stores:
+    default:
+      defaultCertificate:
+        certFile: /etc/ssl/certs/{{ generic__domain_name }}-fullchain.crt
+        keyFile: /etc/ssl/private/{{ generic__domain_name }}.key
+#% endif %#
   options:
     default:
       # TODO: [tls1.3] Check why DNS (Adguard?) fails after setting minVersion to VersionTLS13 and removing cipherSuites
