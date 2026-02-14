@@ -4,7 +4,7 @@
   vars:
     acme_directory: "https://acme-v02.api.letsencrypt.org/directory"  # Production
     # acme_directory: "https://acme-staging-v02.api.letsencrypt.org/directory"  # Staging for testing
-    cert_dir: "{{ ansible_env.HOME }}/.letsencrypt"
+    cert_dir: "{{ ansible_facts['env'].HOME }}/.letsencrypt"
 
   tasks:
     - name: Load encrypted credentials on localhost

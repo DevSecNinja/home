@@ -76,5 +76,5 @@
     masked: yes
   notify:
     - "Remove STUB"
-  # ansible_architecture == "x86_64" because the service doesn't seem to exist on my RPI with Debian ARM
-  when: inventory_hostname in groups['dnsservers'] and ansible_architecture == "x86_64"
+  # ansible_facts['architecture'] == "x86_64" because the service doesn't seem to exist on my RPI with Debian ARM
+  when: inventory_hostname in groups['dnsservers'] and ansible_facts['architecture'] == "x86_64"

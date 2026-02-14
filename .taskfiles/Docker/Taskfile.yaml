@@ -6,6 +6,7 @@ vars:
   ANSIBLE_INVENTORY_FILE: "{{.DOCKER_DIR}}/ansible/inventory/hosts.yaml"
 
 env:
+  ANSIBLE_CONFIG: "{{.DOCKER_DIR}}/ansible/ansible.cfg"
   ANSIBLE_VARS_ENABLED: "host_group_vars,community.sops.sops"
   ANSIBLE_INVENTORY: "{{.DOCKER_DIR}}/ansible/inventory/hosts"
 

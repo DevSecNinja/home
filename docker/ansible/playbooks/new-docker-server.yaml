@@ -9,7 +9,7 @@
   roles:
     - role: geerlingguy.docker
       # TODO: Investigate if I should use a separate user for docker
-      docker_users: ['{{ ansible_user }}']
+      docker_users: ['{{ ansible_facts["user_id"] }}']
       docker_daemon_options:
         log-driver: "journald"
         bridge: "none"
@@ -28,7 +28,7 @@
       ansible.builtin.file:
         path: "{{ item }}"
         state: "directory"
-        owner: "{{ansible_user}}"
+        owner: "{{ ansible_facts['user_id'] }}"
         group: "docker"
         mode: "0755"
       loop:
