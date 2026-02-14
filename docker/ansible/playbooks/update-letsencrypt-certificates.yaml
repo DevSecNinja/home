@@ -1,0 +1,226 @@
+---
+- name: Update Let's Encrypt certificates
+  hosts: svlmedia.ravensberg.org
+  vars:
+    acme_directory: "https://acme-v02.api.letsencrypt.org/directory"  # Production
+    # acme_directory: "https://acme-staging-v02.api.letsencrypt.org/directory"  # Staging for testing
+    cert_dir: "{{ ansible_env.HOME }}/.letsencrypt"
+
+  tasks:
+    - name: Load encrypted credentials on localhost
+      community.sops.load_vars:
+        file: ../inventory/group_vars/all/secrets.sops.yml
+        age_keyfile: $HOME/git/home/age.key
+        config_path: $HOME/git/home/.sops.yaml
+        expressions: ignore  # explicitly do not evaluate expressions
+                             # on load (this is the default)
+      delegate_to: localhost
+      run_once: true
+
+    - name: Load encrypted Docker credentials on localhost
+      community.sops.load_vars:
+        file: ../inventory/group_vars/docker/secrets.sops.yml
+        age_keyfile: $HOME/git/home/age.key
+        config_path: $HOME/git/home/.sops.yaml
+        expressions: ignore  # explicitly do not evaluate expressions
+                             # on load (this is the default)
+      delegate_to: localhost
+      run_once: true
+
+    - name: Load encrypted credentials on target hosts
+      community.sops.load_vars:
+        file: ../inventory/group_vars/all/secrets.sops.yml
+        age_keyfile: $HOME/git/home/age.key
+        config_path: $HOME/git/home/.sops.yaml
+        expressions: ignore  # explicitly do not evaluate expressions
+                             # on load (this is the default)
+
+    - name: Load encrypted Docker credentials on target hosts
+      community.sops.load_vars:
+        file: ../inventory/group_vars/docker/secrets.sops.yml
+        age_keyfile: $HOME/git/home/age.key
+        config_path: $HOME/git/home/.sops.yaml
+        expressions: ignore  # explicitly do not evaluate expressions
+                             # on load (this is the default)
+      when: inventory_hostname in groups['docker']
+
+    # Certificate generation tasks run on localhost
+    - name: Install required Python packages on localhost
+      ansible.builtin.pip:
+        name:
+          - cryptography
+          - requests
+        state: present
+      delegate_to: localhost
+      run_once: true
+
+    - name: Create local certificate directory
+      ansible.builtin.file:
+        path: "{{ cert_dir }}"
+        state: directory
+        mode: '0700'
+      delegate_to: localhost
+      run_once: true
+
+    - name: Generate Let's Encrypt account private key
+      community.crypto.openssl_privatekey:
+        path: "{{ cert_dir }}/account.key"
+        size: 4096
+        mode: '0600'
+      delegate_to: localhost
+      run_once: true
+
+    - name: Generate domain private key
+      community.crypto.openssl_privatekey:
+        path: "{{ cert_dir }}/{{ generic__domain_name }}.key"
+        size: 4096
+        mode: '0600'
+      delegate_to: localhost
+      run_once: true
+
+    - name: Generate certificate signing request (CSR)
+      community.crypto.openssl_csr:
+        path: "{{ cert_dir }}/{{ generic__domain_name }}.csr"
+        privatekey_path: "{{ cert_dir }}/{{ generic__domain_name }}.key"
+        common_name: "{{ generic__domain_name }}"
+        subject_alt_name:
+          - "DNS:{{ generic__domain_name }}"
+          - "DNS:*.{{ generic__domain_name }}"
+        mode: '0644'
+      delegate_to: localhost
+      run_once: true
+
+    - name: Create ACME certificate challenge
+      community.crypto.acme_certificate:
+        account_key_src: "{{ cert_dir }}/account.key"
+        account_email: "{{ apps__cloudflare_email }}"
+        acme_directory: "{{ acme_directory }}"
+        acme_version: 2
+        challenge: dns-01
+        csr: "{{ cert_dir }}/{{ generic__domain_name }}.csr"
+        fullchain_dest: "{{ cert_dir }}/{{ generic__domain_name }}-fullchain.crt"
+        terms_agreed: true
+        remaining_days: 30
+      register: acme_challenge
+      delegate_to: localhost
+      run_once: true
+
+    - name: Create Cloudflare DNS TXT records for ACME challenge
+      community.general.cloudflare_dns:
+        api_token: "{{ apps__cloudflare_api_token }}"
+        zone: "{{ generic__domain_name }}"
+        record: "{{ acme_challenge.challenge_data[item]['dns-01'].resource }}"
+        type: TXT
+        value: "{{ acme_challenge.challenge_data[item]['dns-01'].resource_value }}"
+        state: present
+      loop: "{{ acme_challenge.challenge_data.keys() | list }}"
+      when: acme_challenge is changed
+      delegate_to: localhost
+      run_once: true
+
+    - name: Display DNS TXT record information
+      ansible.builtin.debug:
+        msg: |
+          ACME DNS challenge record created:
+          Record: {{ acme_challenge.challenge_data[item]['dns-01'].resource }}
+          Value: {{ acme_challenge.challenge_data[item]['dns-01'].resource_value }}
+          Zone: {{ generic__domain_name }}
+
+          Waiting for DNS propagation...
+      loop: "{{ acme_challenge.challenge_data.keys() | list }}"
+      when: acme_challenge is changed
+      delegate_to: localhost
+      run_once: true
+
+    - name: Wait for DNS propagation
+      ansible.builtin.wait_for:
+        timeout: 60
+      when: acme_challenge is changed
+      delegate_to: localhost
+      run_once: true
+
+    - name: Validate ACME certificate challenge
+      community.crypto.acme_certificate:
+        account_key_src: "{{ cert_dir }}/account.key"
+        account_email: "{{ apps__cloudflare_email }}"
+        acme_directory: "{{ acme_directory }}"
+        acme_version: 2
+        challenge: dns-01
+        csr: "{{ cert_dir }}/{{ generic__domain_name }}.csr"
+        data: "{{ acme_challenge }}"
+        fullchain_dest: "{{ cert_dir }}/{{ generic__domain_name }}-fullchain.crt"
+        terms_agreed: true
+      when: acme_challenge is changed
+      delegate_to: localhost
+      run_once: true
+
+    - name: Remove Cloudflare DNS TXT records after validation
+      community.general.cloudflare_dns:
+        api_token: "{{ apps__cloudflare_api_token }}"
+        zone: "{{ generic__domain_name }}"
+        record: "{{ acme_challenge.challenge_data[item]['dns-01'].resource }}"
+        type: TXT
+        value: "{{ acme_challenge.challenge_data[item]['dns-01'].resource_value }}"
+        state: absent
+      loop: "{{ acme_challenge.challenge_data.keys() | list }}"
+      when: acme_challenge is changed
+      delegate_to: localhost
+      run_once: true
+
+    # Certificate deployment tasks run on target hosts
+    - name: Ensure /etc/ssl/certs directory exists
+      ansible.builtin.file:
+        path: /etc/ssl/certs
+        state: directory
+        mode: '0755'
+        owner: root
+        group: root
+      become: true
+
+    - name: Ensure /etc/ssl/private directory exists
+      ansible.builtin.file:
+        path: /etc/ssl/private
+        state: directory
+        mode: '0700'
+        owner: root
+        group: root
+      become: true
+
+    - name: Copy full chain certificate to remote host
+      ansible.builtin.copy:
+        src: "{{ cert_dir }}/{{ generic__domain_name }}-fullchain.crt"
+        dest: "/etc/ssl/certs/{{ generic__domain_name }}-fullchain.crt"
+        mode: '0644'
+        owner: root
+        group: root
+      become: true
+
+    - name: Copy certificate to remote host (individual cert)
+      ansible.builtin.copy:
+        src: "{{ cert_dir }}/{{ generic__domain_name }}-fullchain.crt"
+        dest: "/etc/ssl/certs/{{ generic__domain_name }}.crt"
+        mode: '0644'
+        owner: root
+        group: root
+      become: true
+
+    - name: Copy private key to remote host
+      ansible.builtin.copy:
+        src: "{{ cert_dir }}/{{ generic__domain_name }}.key"
+        dest: "/etc/ssl/private/{{ generic__domain_name }}.key"
+        mode: '0600'
+        owner: root
+        group: root
+      become: true
+
+    - name: Display certificate information
+      ansible.builtin.debug:
+        msg: |
+          Certificates have been successfully created and deployed:
+          - Local directory: {{ cert_dir }}
+          - Remote certificate: /etc/ssl/certs/{{ generic__domain_name }}.crt
+          - Remote full chain: /etc/ssl/certs/{{ generic__domain_name }}-fullchain.crt
+          - Remote private key: /etc/ssl/private/{{ generic__domain_name }}.key
+
+          Certificate is valid for: {{ generic__domain_name }} and *.{{ generic__domain_name }}
+      run_once: true

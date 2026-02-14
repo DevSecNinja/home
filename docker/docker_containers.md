@@ -6,7 +6,7 @@
 
 **container_name:** adguard
 
-**image:** adguard/adguardhome:v0.107.69@sha256:8a4107ec812023842ccab9e04600c5d39d3be6b15e907c34a36339c184c8fccf
+**image:** adguard/adguardhome:v0.107.71@sha256:92929135ced2554aaf94706f766a98ad348f211df61b0704e2db7e8498cc00b7
 
 **url:** adguard-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -16,13 +16,15 @@
 
 **image:** mvance/unbound:1.22.0@sha256:76906da36d1806f3387338f15dcf8b357c51ce6897fb6450d6ce010460927e90
 
-## docker/ansible/templates/compose-modules/cloudflare.yml
+## docker/ansible/templates/compose-modules/bazarr.yml
 
-### Service: cloudflare-ddns
+### Service: bazarr
 
-**container_name:** cloudflare-ddns
+**container_name:** bazarr
 
-**image:** favonia/cloudflare-ddns:1.15.1@sha256:a4e2089b3531eec8c9328c7a9a586f80e8d67dcd94856e0b596b7896e1de3f62
+**image:** lscr.io/linuxserver/bazarr:version-v1.5.3@sha256:001875e61839c8a50743f0bc0fa4da2a55ed8a038b9b5ed0dd2c663dd3d0bfc7
+
+**url:** bazarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
 ## docker/ansible/templates/compose-modules/cyberchef.yml
 
@@ -30,7 +32,7 @@
 
 **container_name:** cyberchef
 
-**image:** ghcr.io/gchq/cyberchef:10.19.4@sha256:a2bfe382b2547bdd0a3d0523b9a6b85fab833c56bcec86d600ba6266910b533e
+**image:** ghcr.io/gchq/cyberchef:10.20.0@sha256:c3013e479e3657103c864433969008845356f3b726bf99cb1606f56a10d5946f
 
 **url:** cyberchef.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
@@ -40,27 +42,33 @@
 
 **container_name:** dawarich
 
-**image:** freikin/dawarich:latest
+**image:** freikin/dawarich:1.0.4@sha256:69d9c81d08886c83c0259dbe03ab9b27330fceee25d890725dc1347382f304e0
 
-**url:** dawarich.$DOMAINNAME
+**url:** dawarich-noauth.$DOMAINNAME
 
 ### Service: dawarich-db
 
 **container_name:** dawarich-db
 
-**image:** postgis/postgis:17-3.5-alpine
+**image:** postgis/postgis:17-3.5-alpine@sha256:ca4874d25e47b6b0cf370db8990ef5ae2690d3803d64550222e1fd013217df8b
+
+### Service: dawarich-db-backup
+
+**container_name:** dawarich-db-backup
+
+**image:** tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
 
 ### Service: dawarich-redis
 
 **container_name:** dawarich-redis
 
-**image:** redis:7.4.5-alpine@sha256:bb186d083732f669da90be8b0f975a37812b15e913465bb14d845db72a4e3e08
+**image:** redis:8.4.0-alpine@sha256:4eec4565e45aa0b3966554c866bc73211e281b0b3d89fe9a33c982e6faca809d
 
 ### Service: dawarich-sidekiq
 
 **container_name:** dawarich-sidekiq
 
-**image:** freikin/dawarich:latest
+**image:** freikin/dawarich:1.0.4@sha256:69d9c81d08886c83c0259dbe03ab9b27330fceee25d890725dc1347382f304e0
 
 ## docker/ansible/templates/compose-modules/drawio.yml
 
@@ -68,19 +76,9 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:29.0.2@sha256:5b4429b9e2222f337342d053c7b1bb211f93831e7956dfb6b4afc89da16c5e7f
+**image:** jgraph/drawio:29.3.6@sha256:e0951391432a0d8bc587d649107563166a2e52c8648e3c809429a9f56da6f386
 
 **url:** draw.$DOMAINNAME
-
-## docker/ansible/templates/compose-modules/echo-server.yml
-
-### Service: echo-server
-
-**container_name:** echo-server
-
-**image:** mendhak/http-https-echo:38@sha256:c73e039e883944a38e37eaba829eb9a67641cd03eff868827683951feceef96e
-
-**url:** echo-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
 ## docker/ansible/templates/compose-modules/excalidraw.yml
 
@@ -88,7 +86,7 @@
 
 **container_name:** excalidraw
 
-**image:** excalidraw/excalidraw:latest@sha256:67c6b93d6155fac09d30759ea5f28e5ce01b4e865a783fb418c878806bf5397d
+**image:** excalidraw/excalidraw:latest@sha256:3c2513e830bb6e195147c05b34ecf8393d0ba2b1cc86e93b407a5777d6135c6c
 
 **url:** excalidraw.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
@@ -106,7 +104,7 @@
 
 **container_name:** gatus
 
-**image:** twinproduction/gatus:v5.31.0@sha256:3a432fcc2826b8eb2b38caceb83e7777fda139b8058b1d022c73a82be7342682
+**image:** twinproduction/gatus:v5.34.0@sha256:3fff895e77d35ee62e898860f4613755bc2344127d93e3f326429d40270e2115
 
 **url:** status-docker.$DOMAINNAME
 
@@ -114,7 +112,7 @@
 
 **container_name:** gatus-db
 
-**image:** docker.io/library/postgres:17.7-alpine@sha256:9a78577340f3d26384b6aebeb475c0d46d664fd4ffa68503b4be4e4462745f94
+**image:** docker.io/library/postgres:17.7-alpine@sha256:bb377b7239d2774ac8cc76f481596ce96c5a6b5e9d141f6d0a0ee371a6e7c0f2
 
 ### Service: gatus-db-backup
 
@@ -126,7 +124,17 @@
 
 **container_name:** gatus-db-upgrade
 
-**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:9d5f6551a8b5771e0162c36b5ac16b2d6533b439806dfcc1c24928bd383fefd6
+**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:c1382acd97519dd0fbea17ac6e08678eca79197ab9115bd6a3ddacbf50c69bdd
+
+## docker/ansible/templates/compose-modules/hadiscover.yml
+
+### Service: hadiscover-api
+
+**container_name:** hadiscover-api
+
+**image:** ghcr.io/devsecninja/hadiscover/backend:0.2.14@sha256:cbf696794b817b6fa08345c9fda852da829323f97884b3b48dea3b316d864af4
+
+**url:** api.hadiscover.com
 
 ## docker/ansible/templates/compose-modules/hoppscotch.yml
 
@@ -134,7 +142,7 @@
 
 **container_name:** hoppscotch
 
-**image:** hoppscotch/hoppscotch:2025.10.1@sha256:4c632010dc3c700d0c76b631d6ece726d5a6fe45a0f9e62d488e5392c54aec25
+**image:** hoppscotch/hoppscotch:2026.1.0@sha256:a194f6d49deb804914f506b3f00fb1c875841caf02da2ac818c5d80f333c447a
 
 **url:** api-tester.$DOMAINNAME
 
@@ -142,7 +150,7 @@
 
 **container_name:** hoppscotch-db
 
-**image:** docker.io/library/postgres:17.7-alpine@sha256:9a78577340f3d26384b6aebeb475c0d46d664fd4ffa68503b4be4e4462745f94
+**image:** docker.io/library/postgres:17.7-alpine@sha256:bb377b7239d2774ac8cc76f481596ce96c5a6b5e9d141f6d0a0ee371a6e7c0f2
 
 ### Service: hoppscotch-db-backup
 
@@ -154,7 +162,7 @@
 
 **container_name:** hoppscotch-db-upgrade
 
-**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:9d5f6551a8b5771e0162c36b5ac16b2d6533b439806dfcc1c24928bd383fefd6
+**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:c1382acd97519dd0fbea17ac6e08678eca79197ab9115bd6a3ddacbf50c69bdd
 
 ## docker/ansible/templates/compose-modules/immich.yml
 
@@ -174,19 +182,19 @@
 
 **container_name:** immich-machine-learning
 
-**image:** ghcr.io/immich-app/immich-machine-learning:v2.2.3@sha256:bf339cbb44af6c2ef25d9128e1da51b2bec0cfd524846a83e3017c21bd71ddb4
+**image:** ghcr.io/immich-app/immich-machine-learning:v2.5.2@sha256:531d2bccbe20d0412496e36455715a18d692911eca5e2ee37d32e1e4f50e14bb
 
 ### Service: immich-redis
 
 **container_name:** immich-redis
 
-**image:** docker.io/valkey/valkey:9-alpine@sha256:b4ee67d73e00393e712accc72cfd7003b87d0fcd63f0eba798b23251bfc9c394
+**image:** docker.io/valkey/valkey:9-alpine@sha256:c106a0c03bcb23cbdf9febe693114cb7800646b11ca8b303aee7409de005faa8
 
 ### Service: immich-server
 
 **container_name:** immich-server
 
-**image:** ghcr.io/immich-app/immich-server:v2.2.3@sha256:4504d794123c3f5410cc45bbc61e4d7dbcacec1e1b0cd2e599691430c94e5849
+**image:** ghcr.io/immich-app/immich-server:v2.5.2@sha256:8ac5a6d471fbb6fcfec6bc34854dd5a947c1795547f0d9345d9bf1803d1209e3
 
 **url:** photos.$DOMAINNAME
 
@@ -200,15 +208,25 @@
 
 **url:** tools.$DOMAINNAME
 
+## docker/ansible/templates/compose-modules/lidarr.yml
+
+### Service: lidarr
+
+**container_name:** lidarr
+
+**image:** lscr.io/linuxserver/lidarr:version-3.1.0.4875@sha256:fbc96b5d7eab74230feb5bcbdb29fcbfaa6d0afa7a2cb2fe28171209ea9bc956
+
+**url:** lidarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
+
 ## docker/ansible/templates/compose-modules/metube.yml
 
 ### Service: metube
 
 **container_name:** metube
 
-**image:** ghcr.io/alexta69/metube:latest@sha256:75c227ff12ffbcb3bcbfe9cb0b8ff067cde30de2771d7992f41d9680ba46fdd9
+**image:** ghcr.io/alexta69/metube:latest@sha256:6c353248e1db1232e6c3db138c7ed492a516f736c25740e705ed96a5f67c5643
 
-**url:** metube.$DOMAINNAME
+**url:** metube.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
 ## docker/ansible/templates/compose-modules/n8n.yml
 
@@ -216,15 +234,15 @@
 
 **container_name:** n8n
 
-**image:** n8nio/n8n:1.120.3@sha256:e047444709aa5ce8e2be7c952b51d95c35989ea8a36ed7b4ed478c2193df5825
+**image:** n8nio/n8n:2.6.2@sha256:ff6fe9eca746b7455c9e6e4fbc6f5753c3204e82279e015fa62f1bfe309e6343
 
-**url:** n8n.$DOMAINNAME
+**url:** n8n.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
 ### Service: n8n-db
 
 **container_name:** n8n-db
 
-**image:** docker.io/library/postgres:17.7-alpine@sha256:9a78577340f3d26384b6aebeb475c0d46d664fd4ffa68503b4be4e4462745f94
+**image:** docker.io/library/postgres:17.7-alpine@sha256:bb377b7239d2774ac8cc76f481596ce96c5a6b5e9d141f6d0a0ee371a6e7c0f2
 
 ### Service: n8n-db-backup
 
@@ -236,7 +254,7 @@
 
 **container_name:** n8n-db-upgrade
 
-**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:9d5f6551a8b5771e0162c36b5ac16b2d6533b439806dfcc1c24928bd383fefd6
+**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:c1382acd97519dd0fbea17ac6e08678eca79197ab9115bd6a3ddacbf50c69bdd
 
 ## docker/ansible/templates/compose-modules/open-webui.yml
 
@@ -244,7 +262,7 @@
 
 **container_name:** open-webui
 
-**image:** ghcr.io/open-webui/open-webui:v0.6.36@sha256:dfe43b30a5474164b1a81e1cce298a6769bb22144f74df556beefee4ccca5394
+**image:** ghcr.io/open-webui/open-webui:0.7.2@sha256:16d9a3615b45f14a0c89f7ad7a3bf151f923ed32c2e68f9204eb17d1ce40774b
 
 **url:** chat.$DOMAINNAME
 
@@ -264,9 +282,39 @@
 
 **container_name:** plex
 
-**image:** lscr.io/linuxserver/plex:version-1.42.2.10156-f737b826c@sha256:a4749f3b84dc3f923a7bd4d2bc4ddc1e871b5a656b62022d3827d3d98afd5efd
+**image:** lscr.io/linuxserver/plex:version-1.43.0.10467-2b1ba6e69@sha256:66c6a46ec3dc244aea20508b49dce4b46291c2fd2dba8851117e675d1c5dd52d
 
-**url:** plex.$DOMAINNAME
+**url:** plex-noauth.$DOMAINNAME
+
+## docker/ansible/templates/compose-modules/prowlarr.yml
+
+### Service: prowlarr
+
+**container_name:** prowlarr
+
+**image:** lscr.io/linuxserver/prowlarr:version-2.3.0.5236@sha256:d3e9307b320b6772749a2cf8fc2712e9e824c4930b034680ad4d08a9e2f25884
+
+**url:** prowlarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
+
+## docker/ansible/templates/compose-modules/qbittorrent.yml
+
+### Service: qbittorrent
+
+**container_name:** qbittorrent
+
+**image:** lscr.io/linuxserver/qbittorrent:5.1.4@sha256:b8a08ffba8850e2e71153e153cf5eed2dedbf499ef9b123262735ce924b65586
+
+**url:** qbittorrent.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
+
+## docker/ansible/templates/compose-modules/radarr.yml
+
+### Service: radarr
+
+**container_name:** radarr
+
+**image:** lscr.io/linuxserver/radarr:version-6.0.4.10291@sha256:ba2693dd704b84eb0b404d40b3902bd3e62a1768dc5ee0d89b1f1d7cd51a66eb
+
+**url:** radarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
 ## docker/ansible/templates/compose-modules/sabnzbd.yml
 
@@ -276,7 +324,27 @@
 
 **image:** docker.io/linuxserver/sabnzbd:amd64-4.5.1@sha256:39952ab247d97c9d3345a572385ebee158ce497887652d8421f4c0ac44cddf7e
 
-**url:** sabnzbd.$DOMAINNAME
+**url:** sabnzbd.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
+
+## docker/ansible/templates/compose-modules/sonarr.yml
+
+### Service: sonarr
+
+**container_name:** sonarr
+
+**image:** lscr.io/linuxserver/sonarr:version-4.0.16.2944@sha256:02b4d538d351d6e35882a021c08e8600fe95d28860fb1dd724b597166e7221ca
+
+**url:** sonarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
+
+## docker/ansible/templates/compose-modules/spottarr.yml
+
+### Service: spottarr
+
+**container_name:** spottarr
+
+**image:** ghcr.io/spottarr/spottarr:1.15.0@sha256:ae04eb63892ad62e34468e377074ec50b0240ca9740ff4148a1033fa75c2ec89
+
+**url:** spottarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
 ## docker/ansible/templates/compose-modules/traefik-forward-auth.yml
 
@@ -284,7 +352,7 @@
 
 **container_name:** traefik-forward-auth
 
-**image:** ghcr.io/italypaleale/traefik-forward-auth:4.1.0@sha256:1d01039c168dd88308b670ff2823798f0acbdd1661870cbcb0f46ea46518344c
+**image:** ghcr.io/italypaleale/traefik-forward-auth:4.6.0@sha256:bb9475ea74de9befca2730bd56e4c97a1d333fb5cc250382dcf39ba92a974f8a
 
 **url:** auth-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -294,9 +362,9 @@
 
 **container_name:** tubesync
 
-**image:** ghcr.io/meeb/tubesync:v0.15.11@sha256:6f916006740963ea58dd91139e20c95b670840f41803eae785cfabc77ca756d3
+**image:** ghcr.io/meeb/tubesync:v0.16.2@sha256:e31f1743b9db2c3deea959a056015b58404f0ddb12f59e6a6fa028aaac704af3
 
-**url:** tubesync.$DOMAINNAME
+**url:** tubesync.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
 ## docker/ansible/templates/compose-modules/unifi.yml
 
@@ -304,15 +372,15 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-9.4.19@sha256:6e44301b9a6a6c8bccdf04a30d01d3f04f613e96c7888be0c2d81492f76a05b8
+**image:** lscr.io/linuxserver/unifi-network-application:version-10.0.162@sha256:7948b8c2ca4cd9bf9e1839f3e399c320e0a8318cd54dc807c247f48702f4b157
 
-**url:** unifi.$DOMAINNAME
+**url:** unifi-guest.$DOMAINNAME
 
 ### Service: unifi-db
 
 **container_name:** unifi-db
 
-**image:** mongo:8.2.1@sha256:e64a984d36b24419327c558b49a9100cf78191706222da6a7c8cf56a743ad3db
+**image:** mongo:8.2.4@sha256:6f55a078e025aa29fea2826c82f67ff2f774b82efd816c4c30bbfe67904f0bb8
 
 ### Service: unifi-db-backup
 
@@ -324,7 +392,7 @@
 
 **container_name:** unifi-volume-backup
 
-**image:** offen/docker-volume-backup:v2.46.1@sha256:039188f012d26178e68a0bb906cd408b9fc197069e8076d03014a31a5fed1406
+**image:** offen/docker-volume-backup:v2.47.0@sha256:2017b0e180cfe7f896117e2c10a05d6036c396de426112875456b808d8a51c6b
 
 ## docker/ansible/templates/compose-modules/wireguard.yml
 

@@ -23,26 +23,34 @@ compute:
           children:
             linux_amd64:
               children:
-                internal:
+                trusted:
                   children:
-                    apps:
+                    internal:
+                      children:
+                        apps:
+                          hosts:
+                            svlapps.ravensberg.org:
+                              ansible_user: "jean-paul"
+                        infra:
+                          hosts:
+                            svlinfra.MANAGEMENT:
+                              ansible_user: "jean-paul"
+                        production:
+                          hosts:
+                        media:
+                          hosts:
+                            svlmedia.ravensberg.org:
+                              ansible_user: "jean-paul"
+                    external:
                       hosts:
-                        svlapps.ravensberg.org:
+                        svlext.ravensberg.org:
                           ansible_user: "jean-paul"
-                    infra:
+                untrusted:
+                  children:
+                    dmz:
                       hosts:
-                        svlinfra.MANAGEMENT:
+                        svldmz.ravensberg.org:
                           ansible_user: "jean-paul"
-                    production:
-                      hosts:
-                    media:
-                      hosts:
-                        svlmedia.ravensberg.org:
-                          ansible_user: "jean-paul"
-                external:
-                  hosts:
-                    svlext.ravensberg.org:
-                      ansible_user: "jean-paul"
 
             linux_arm64_v8:
               children:

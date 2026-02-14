@@ -6,6 +6,12 @@ forward-zone:
     forward-addr: 192.168.60.59
 
 forward-zone:
+    # Forwarding my DDNS domain queries to Quad9 servers
+    name: "{{ apps__cloudflare_domain_1_obfuscated_fqdn }}"
+    forward-addr: 9.9.9.9@853#dns.quad9.net
+    forward-addr: 149.112.112.112@853#dns.quad9.net
+
+forward-zone:
     # Security: prevent WPAD lookups, ref: DEF CON 32 2024.
     name: "wpad"
     forward-addr: 127.0.0.1

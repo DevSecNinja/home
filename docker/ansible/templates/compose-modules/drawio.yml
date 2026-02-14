@@ -1,6 +1,6 @@
 services:
   drawio:
-    image: jgraph/drawio:29.0.3@sha256:ef3b524cb5c4195cf4abde2880bbdb24cae6fa90567936a0dddc790bdde6d1d0
+    image: jgraph/drawio:29.3.6@sha256:c8971352ceec3e76564369bbe76ebc7e66742f5f3b284c703f956bb78761cf3a
     container_name: drawio
     depends_on:
       - traefik
@@ -29,11 +29,11 @@ services:
       ## Middlewares
       - "traefik.http.routers.drawio-rtr.middlewares=chain-auth@file"
       ## HTTP Services
-      - "traefik.http.routers.drawio-rtr.service=drawio-svc"
-      - "traefik.http.services.drawio-svc.loadbalancer.server.port=8080"
+      - "traefik.http.routers.drawio-rtr.service=drawio"
+      - "traefik.http.services.drawio.loadbalancer.server.port=8080"
       ## Router for Gatus — bypass auth if secret header is present
       - "traefik.http.routers.drawio-monitor-rtr.rule=Host(`draw.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
-      - "traefik.http.routers.drawio-monitor-rtr.service=drawio-svc"
+      - "traefik.http.routers.drawio-monitor-rtr.service=drawio"
       - "traefik.http.routers.drawio-monitor-rtr.priority=100"  # Higher priority so it matches first
     # Saves some CPU cycles + healthcheck doesn't do anything on failure
     # healthcheck:

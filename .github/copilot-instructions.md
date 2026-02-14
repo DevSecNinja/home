@@ -17,11 +17,21 @@
   # OR if mise not available:
   python3 -m pip install -r requirements.txt
   ```
+- Install Ansible collections and roles:
+  ```sh
+  mise run install:ansible
+  # OR if mise not available:
+  ansible-galaxy install -r docker/ansible/requirements.yml
+  ```
+- Install ALL dependencies (recommended):
+  ```sh
+  mise run install:all
+  ```
 
 ### Building and Testing
 - Run Docker Compose file tests: `python3 tests/test_compose_files.py` -- takes <1 second. NEVER CANCEL.
 - Lint all YAML files: `yamllint .` -- takes ~3 seconds. NEVER CANCEL. Set timeout to 30+ seconds.
-- Install Ansible roles: `ansible-galaxy install -r docker/ansible/requirements.yml` -- takes ~10 seconds. NEVER CANCEL. Set timeout to 60+ seconds.
+- Install all dependencies: `mise run install:all` -- takes ~15 seconds. NEVER CANCEL. Set timeout to 60+ seconds.
 - Run container overview generation: `python3 scripts/generate-containers-overview.py` -- takes <1 second. NEVER CANCEL.
 
 ### Template Generation and Configuration
@@ -137,7 +147,7 @@ ALWAYS test actual functionality after making changes:
 
 ### Expected Command Timings
 - Python tests: <1 second
-- YAML linting: ~3 seconds  
+- YAML linting: ~3 seconds
 - Ansible role install: ~10 seconds (may fail on network)
 - Template generation: <1 second
 - Kubernetes validation: ~30 seconds (may fail on network)

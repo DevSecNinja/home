@@ -1,6 +1,6 @@
 services:
   gatus:
-    image: twinproduction/gatus:v5.31.0@sha256:3a432fcc2826b8eb2b38caceb83e7777fda139b8058b1d022c73a82be7342682
+    image: twinproduction/gatus:v5.34.0@sha256:3fff895e77d35ee62e898860f4613755bc2344127d93e3f326429d40270e2115
     container_name: gatus
     depends_on:
       - traefik
@@ -44,6 +44,7 @@ services:
       ## Widget
       - homepage.widget.type=gatus
       - homepage.widget.url=https://status-docker.$DOMAINNAME
+      - homepage.widget.headers.X-Monitor-Key=${GENERIC_MONITORING_HEADER_SECRET}
       # Group
       - org.label-schema.group=productivity
       # Traefik
@@ -56,9 +57,13 @@ services:
       - "traefik.http.routers.gatus-rtr.service=gatus"
       ### Enable the server port
       - "traefik.http.services.gatus.loadbalancer.server.port=8080"
+      ## Router for Gatus — bypass auth if secret header is present
+      - "traefik.http.routers.gatus-monitor-rtr.rule=Host(`status-docker.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
+      - "traefik.http.routers.gatus-monitor-rtr.service=gatus"
+      - "traefik.http.routers.gatus-monitor-rtr.priority=100"  # Higher priority so it matches first
 
   gatus-db:
-    image: docker.io/library/postgres:17.7-alpine@sha256:9a78577340f3d26384b6aebeb475c0d46d664fd4ffa68503b4be4e4462745f94
+    image: docker.io/library/postgres:17.7-alpine@sha256:bb377b7239d2774ac8cc76f481596ce96c5a6b5e9d141f6d0a0ee371a6e7c0f2
     container_name: gatus-db
     restart: always
     security_opt:
@@ -136,7 +141,7 @@ services:
       - no-new-privileges=true
 
   gatus-db-upgrade:
-    image: pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:9d5f6551a8b5771e0162c36b5ac16b2d6533b439806dfcc1c24928bd383fefd6
+    image: pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:624a676aa93b02ea9018207fd33914d6b7749ecd5c93091d77e1b9ed918489da
     container_name: gatus-db-upgrade
     restart: "no"
     security_opt:

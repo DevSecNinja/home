@@ -1,6 +1,6 @@
 services:
   tubesync:
-    image: ghcr.io/meeb/tubesync:v0.15.11@sha256:6f916006740963ea58dd91139e20c95b670840f41803eae785cfabc77ca756d3
+    image: ghcr.io/meeb/tubesync:v0.16.2@sha256:e31f1743b9db2c3deea959a056015b58404f0ddb12f59e6a6fa028aaac704af3
     container_name: tubesync
     depends_on:
       - traefik
@@ -32,7 +32,6 @@ services:
       ## Middlewares
       - "traefik.http.routers.tubesync-rtr.middlewares=chain-auth@file"
       ## HTTP Services
-      - "traefik.http.routers.tubesync-rtr.rule=Host(`tubesync.$DOMAINNAME`)"
       - "traefik.http.routers.tubesync-rtr.service=tubesync"
       # Enable the management port
       - "traefik.http.services.tubesync.loadbalancer.server.port=4848"

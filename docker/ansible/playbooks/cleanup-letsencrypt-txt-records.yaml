@@ -1,0 +1,76 @@
+---
+- name: Update Let's Encrypt certificates
+  hosts: localhost
+  vars:
+  tasks:
+    - name: Load encrypted credentials on localhost
+      community.sops.load_vars:
+        file: ../inventory/group_vars/all/secrets.sops.yml
+        age_keyfile: $HOME/git/home/age.key
+        config_path: $HOME/git/home/.sops.yaml
+        expressions: ignore  # explicitly do not evaluate expressions
+                             # on load (this is the default)
+      delegate_to: localhost
+      run_once: true
+
+    - name: Load encrypted Docker credentials on localhost
+      community.sops.load_vars:
+        file: ../inventory/group_vars/docker/secrets.sops.yml
+        age_keyfile: $HOME/git/home/age.key
+        config_path: $HOME/git/home/.sops.yaml
+        expressions: ignore  # explicitly do not evaluate expressions
+                             # on load (this is the default)
+      delegate_to: localhost
+      run_once: true
+
+    - name: Load encrypted trusted credentials on localhost
+      community.sops.load_vars:
+        file: ../inventory/group_vars/trusted/secrets.sops.yml
+        age_keyfile: $HOME/git/home/age.key
+        config_path: $HOME/git/home/.sops.yaml
+        expressions: ignore  # explicitly do not evaluate expressions
+                             # on load (this is the default)
+      delegate_to: localhost
+      run_once: true
+
+    - name: Get all existing ACME challenge TXT records via Cloudflare API
+      ansible.builtin.uri:
+        url: "https://api.cloudflare.com/client/v4/zones/{{ apps__cloudflare_domain_1_zone_id }}/dns_records"
+        method: GET
+        headers:
+          Authorization: "Bearer {{ apps__cloudflare_api_token }}"
+          Content-Type: "application/json"
+        body_format: form-urlencoded
+        status_code: 200
+      register: cloudflare_records
+      delegate_to: localhost
+      run_once: true
+
+    - name: Filter ACME challenge TXT records
+      ansible.builtin.set_fact:
+        acme_txt_records: "{{ cloudflare_records.json.result | selectattr('type', 'equalto', 'TXT') | selectattr('name', 'equalto', '_acme-challenge.' + generic__domain_name) | list }}"
+      delegate_to: localhost
+      run_once: true
+
+    - name: Display found ACME challenge TXT records
+      ansible.builtin.debug:
+        msg: |
+          Found {{ acme_txt_records | length }} ACME challenge TXT records:
+          {% for record in acme_txt_records %}
+          - ID: {{ record.id }}, Name: {{ record.name }}, Content: {{ record.content }}
+          {% endfor %}
+      delegate_to: localhost
+      run_once: true
+
+    - name: Remove each ACME challenge TXT record individually
+      community.general.cloudflare_dns:
+        api_token: "{{ apps__cloudflare_api_token }}"
+        zone: "{{ generic__domain_name }}"
+        record: "{{ item.name }}"
+        type: TXT
+        value: "{{ item.content }}"
+        state: absent
+      loop: "{{ acme_txt_records }}"
+      delegate_to: localhost
+      run_once: true
+      ignore_errors: true

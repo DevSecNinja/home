@@ -15,9 +15,11 @@ include:
 #% endif %#
 #% if 'webservers' in group_names %#
   - $DOCKERDIR/data/compose/echo-server.yml
+  - $DOCKERDIR/data/compose/traefik-proxy.yml
+#% endif %#
+#% if 'webservers' in group_names and 'trusted' in group_names %#
   - $DOCKERDIR/data/compose/homepage.yml
   - $DOCKERDIR/data/compose/traefik-forward-auth.yml
-  - $DOCKERDIR/data/compose/traefik-proxy.yml
 #% endif %#
 #% if 'webservers' in group_names and 'external' in group_names %#
   #- $DOCKERDIR/data/compose/beaverhabits.yml
@@ -34,7 +36,14 @@ include:
   - $DOCKERDIR/data/compose/wireguard.yml
 #% endif %#
 #% if 'media' in group_names %#
+  - $DOCKERDIR/data/compose/bazarr.yml
+  - $DOCKERDIR/data/compose/lidarr.yml
+  - $DOCKERDIR/data/compose/prowlarr.yml
+  - $DOCKERDIR/data/compose/qbittorrent.yml
+  - $DOCKERDIR/data/compose/radarr.yml
   - $DOCKERDIR/data/compose/sabnzbd.yml
+  - $DOCKERDIR/data/compose/sonarr.yml
+  - $DOCKERDIR/data/compose/spottarr.yml
 #% endif %#
 #% if 'apps' in group_names %#
   - $DOCKERDIR/data/compose/immich.yml
@@ -46,9 +55,11 @@ include:
   - $DOCKERDIR/data/compose/tubesync.yml
 #% endif %#
 #% if 'infra' in group_names %#
-  - $DOCKERDIR/data/compose/cloudflare.yml
   - $DOCKERDIR/data/compose/gatus.yml
   - $DOCKERDIR/data/compose/unifi.yml
+#% endif %#
+#% if 'untrusted' in group_names %#
+  - $DOCKERDIR/data/compose/hadiscover.yml
 #% endif %#
 
 networks:

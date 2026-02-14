@@ -1,0 +1,65 @@
+services:
+  spottarr:
+    image: ghcr.io/spottarr/spottarr:1.15.0@sha256:ae04eb63892ad62e34468e377074ec50b0240ca9740ff4148a1033fa75c2ec89
+    container_name: spottarr
+    depends_on:
+      - traefik
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+    # Started with 2048m to test
+    mem_limit: 2048m
+    volumes:
+      - spottarr_config_data:/data
+    # TODO: Fix Spottarr permissions issue
+    # "Spottarr can not be started. The database path '/data/spottarr.db' is not writeable"
+    #user: "$PUID:$PGID"
+    healthcheck:
+      test: curl -f http://localhost:8383 || exit 1
+      interval: 10s
+      timeout: 3s
+      start_period: 60s
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      ## spottarr
+      - "USENET__HOSTNAME=${SPOTTARR_USENET_HOSTNAME}"
+      - "USENET__USERNAME=${SPOTTARR_USENET_USERNAME}"
+      - "USENET__PASSWORD=${SPOTTARR_USENET_PASSWORD}"
+      - "USENET__PORT=${SPOTTARR_USENET_PORT}"
+      - "USENET__USETLS=${SPOTTARR_USENET_USETLS}"
+      - "USENET__MAXCONNECTIONS=${SPOTTARR_USENET_MAXCONNECTIONS}"
+      - "SPOTNET__RETRIEVEAFTER=${SPOTTARR_SPOTNET_RETRIEVEAFTER}"
+      - "SPOTNET__IMPORTBATCHSIZE=${SPOTTARR_SPOTNET_IMPORTBATCHSIZE}"
+      - "SPOTNET__RETENTIONDAYS=${SPOTTARR_SPOTNET_RETENTIONDAYS}"
+    networks:
+      - spottarr-frontend
+      - arr-stack-backend
+    labels:
+      # Homepage
+      - homepage.group=Media
+      - homepage.name=Spottarr
+      - homepage.icon=https://raw.githubusercontent.com/Spottarr/Spottarr/refs/heads/main/logo.png
+      - homepage.href=https://spottarr.$DOMAINNAME
+      - homepage.description=Spotnet Client
+      # Traefik
+      - "traefik.enable=true"
+      - "traefik.docker.network=spottarr-frontend"
+      ## Middlewares
+      - "traefik.http.routers.spottarr-rtr.middlewares=chain-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.spottarr-rtr.service=spottarr"
+      # Enable the management port
+      - "traefik.http.services.spottarr.loadbalancer.server.port=8383"
+      ## Router for Gatus — bypass auth if secret header is present
+      - "traefik.http.routers.spottarr-monitor-rtr.rule=Host(`spottarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
+      - "traefik.http.routers.spottarr-monitor-rtr.service=spottarr"
+      - "traefik.http.routers.spottarr-monitor-rtr.priority=100"  # Higher priority so it matches first
+
+volumes:
+  spottarr_config_data:
+
+networks:
+  spottarr-frontend:
+    name: spottarr-frontend

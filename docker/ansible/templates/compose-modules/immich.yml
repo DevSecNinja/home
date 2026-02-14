@@ -1,6 +1,6 @@
 services:
   immich-server:
-    image: ghcr.io/immich-app/immich-server:v2.2.3@sha256:4504d794123c3f5410cc45bbc61e4d7dbcacec1e1b0cd2e599691430c94e5849
+    image: ghcr.io/immich-app/immich-server:v2.5.5@sha256:161b1ec8af9e0478797cfd75ea857c7e55af271fa7cea103cb30ab1ba5b418d8
     container_name: immich-server
     depends_on:
       - traefik
@@ -44,15 +44,15 @@ services:
       - "traefik.http.routers.immich-rtr.middlewares=chain-auth@file"
       - "traefik.http.routers.immich-rtr.rule=Host(`photos.$DOMAINNAME`)"
       ## HTTP Services
-      - "traefik.http.routers.immich-rtr.service=immich-svc"
-      - "traefik.http.services.immich-svc.loadbalancer.server.port=2283"
+      - "traefik.http.routers.immich-rtr.service=immich"
+      - "traefik.http.services.immich.loadbalancer.server.port=2283"
       ## Extra no-auth endpoint. No need to create a new service
       - "traefik.http.routers.immich-noauth-rtr.rule=Host(`photos-noauth.$DOMAINNAME`)"
       - "traefik.http.routers.immich-noauth-rtr.middlewares=chain-no-auth-immich-server@file"
-      - "traefik.http.routers.immich-noauth-rtr.service=immich-svc"
+      - "traefik.http.routers.immich-noauth-rtr.service=immich"
       ## Router for Gatus — bypass auth if secret header is present
       - "traefik.http.routers.immich-monitor-rtr.rule=Host(`photos.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
-      - "traefik.http.routers.immich-monitor-rtr.service=immich-svc"
+      - "traefik.http.routers.immich-monitor-rtr.service=immich"
       - "traefik.http.routers.immich-monitor-rtr.priority=100"  # Higher priority so it matches first
     networks:
       - immich-frontend
@@ -60,7 +60,7 @@ services:
 
   immich-machine-learning:
     # For hardware acceleration, add one of -[armnn, cuda, rocm, openvino, rknn] to the image tag.
-    image: ghcr.io/immich-app/immich-machine-learning:v2.2.3@sha256:bf339cbb44af6c2ef25d9128e1da51b2bec0cfd524846a83e3017c21bd71ddb4
+    image: ghcr.io/immich-app/immich-machine-learning:v2.5.5@sha256:2e17e15855907ece0d5b3a7bf625b12f6d987a5854fa71d888641acae28b0323
     container_name: immich-machine-learning
     # extends: # uncomment this section for hardware acceleration - see https://immich.app/docs/features/ml-hardware-acceleration
     #   file: hwaccel.ml.yml
@@ -81,7 +81,7 @@ services:
       - immich-backend
 
   immich-redis:
-    image: docker.io/valkey/valkey:9-alpine@sha256:b4ee67d73e00393e712accc72cfd7003b87d0fcd63f0eba798b23251bfc9c394
+    image: docker.io/valkey/valkey:9-alpine@sha256:68677f85c863830af7836ff07c4a13b7f085ebeff62f4dedb71499ca27d229f2
     container_name: immich-redis
     # Requirepass is needed as environment variable isn't picked up
     command: >

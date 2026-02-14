@@ -1,7 +1,7 @@
 services:
   cyberchef:
     container_name: cyberchef
-    image: ghcr.io/gchq/cyberchef:10.19.4@sha256:a2bfe382b2547bdd0a3d0523b9a6b85fab833c56bcec86d600ba6266910b533e
+    image: ghcr.io/gchq/cyberchef:10.20.0@sha256:925058eb6af4bcc6300d529ab5d5d4dc40abdf1aa80919e1fb6e1d9694b15bc5
     depends_on:
       - traefik
     networks:
@@ -25,11 +25,11 @@ services:
       ## Middlewares
       - "traefik.http.routers.cyberchef-rtr.middlewares=chain-auth@file"
       ## HTTP Services
-      - "traefik.http.routers.cyberchef-rtr.service=cyberchef-svc"
-      - "traefik.http.services.cyberchef-svc.loadbalancer.server.port=80"
+      - "traefik.http.routers.cyberchef-rtr.service=cyberchef"
+      - "traefik.http.services.cyberchef.loadbalancer.server.port=80"
       ## Router for Gatus — bypass auth if secret header is present
       - "traefik.http.routers.cyberchef-monitor-rtr.rule=Host(`cyberchef.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
-      - "traefik.http.routers.cyberchef-monitor-rtr.service=cyberchef-svc"
+      - "traefik.http.routers.cyberchef-monitor-rtr.service=cyberchef"
       - "traefik.http.routers.cyberchef-monitor-rtr.priority=100"  # Higher priority so it matches first
 
 networks:

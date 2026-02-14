@@ -23,6 +23,7 @@ http:
         stsPreload: true
         forceSTSHeader: true
         # frameDeny: true # overwritten by customFrameOptionsValue
+        customFrameOptionsValue: "DENY"
         contentTypeNosniff: true
         browserXssFilter: true
         referrerPolicy: "same-origin"
@@ -42,9 +43,11 @@ http:
           - "X-Forwarded-User"
           - "X-Forwarded-DisplayName"
     middlewares-docker-proxy-auth:
+#% if 'trusted' in group_names %#
       basicAuth:
         users:
           - "{{ generic__docker_traefik_htpasswd_entry }}"
+#% endif %#
     middlewares-whitelist-infra:
       ipAllowList:
         sourceRange:

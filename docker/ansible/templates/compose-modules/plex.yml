@@ -12,7 +12,7 @@
 services:
   plex:
     container_name: plex
-    image: lscr.io/linuxserver/plex:version-1.42.2.10156-f737b826c@sha256:a4749f3b84dc3f923a7bd4d2bc4ddc1e871b5a656b62022d3827d3d98afd5efd
+    image: lscr.io/linuxserver/plex:version-1.43.0.10492-121068a07@sha256:bbe0118e39e2c071fc5fe39af3f32072207bf4146d56b6a8901bcb23082df207
     restart: always
     depends_on:
       - traefik
@@ -67,7 +67,6 @@ services:
       ## Using no-auth chain since Plex app doesn't support auth proxy
       - "traefik.http.routers.plex-rtr.middlewares=chain-no-auth-plex@file"
       ## HTTP Services
-      - "traefik.http.routers.plex-rtr.rule=Host(`plex.$DOMAINNAME`)"
       - "traefik.http.routers.plex-rtr.service=plex"
       ### Enable the server port
       - "traefik.http.services.plex.loadbalancer.server.port=32400"

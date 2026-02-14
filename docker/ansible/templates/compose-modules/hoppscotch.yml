@@ -1,6 +1,6 @@
 services:
   hoppscotch:
-    image: hoppscotch/hoppscotch:2025.10.1@sha256:4c632010dc3c700d0c76b631d6ece726d5a6fe45a0f9e62d488e5392c54aec25
+    image: hoppscotch/hoppscotch:2026.1.1@sha256:211a005dd4df2bbec15ab684e8c428f073df2da7c6813360225bb37620bdc380
     container_name: hoppscotch
     depends_on:
       - traefik
@@ -64,26 +64,26 @@ services:
       - "traefik.http.routers.hoppscotch-rtr.middlewares=chain-auth-cors@file"
       - "traefik.http.routers.hoppscotch-rtr.rule=Host(`api-tester.$DOMAINNAME`)"
       ## HTTP Services
-      - "traefik.http.routers.hoppscotch-rtr.service=hoppscotch-svc"
-      - "traefik.http.services.hoppscotch-svc.loadbalancer.server.port=3000"
+      - "traefik.http.routers.hoppscotch-rtr.service=hoppscotch"
+      - "traefik.http.services.hoppscotch.loadbalancer.server.port=3000"
       ## Extra admin endpoint
       - "traefik.http.routers.hoppscotch-admin-rtr.middlewares=chain-no-auth-cors@file"
       - "traefik.http.routers.hoppscotch-admin-rtr.rule=Host(`api-tester-admin.$DOMAINNAME`)"
-      - "traefik.http.routers.hoppscotch-admin-rtr.service=hoppscotch-admin-svc"
-      - "traefik.http.services.hoppscotch-admin-svc.loadbalancer.server.port=3100"
+      - "traefik.http.routers.hoppscotch-admin-rtr.service=hoppscotch-admin"
+      - "traefik.http.services.hoppscotch-admin.loadbalancer.server.port=3100"
       ## Extra API endpoint
       - "traefik.http.routers.hoppscotch-api-rtr.middlewares=chain-no-auth-cors@file"
       - "traefik.http.routers.hoppscotch-api-rtr.rule=Host(`api-tester-api.$DOMAINNAME`)"
-      - "traefik.http.routers.hoppscotch-api-rtr.service=hoppscotch-api-svc"
-      - "traefik.http.services.hoppscotch-api-svc.loadbalancer.server.port=3170"
+      - "traefik.http.routers.hoppscotch-api-rtr.service=hoppscotch-api"
+      - "traefik.http.services.hoppscotch-api.loadbalancer.server.port=3170"
       ## Router for Gatus — bypass auth if secret header is present
       - "traefik.http.routers.hoppscotch-monitor-rtr.rule=Host(`api-tester.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
-      - "traefik.http.routers.hoppscotch-monitor-rtr.service=hoppscotch-svc"
+      - "traefik.http.routers.hoppscotch-monitor-rtr.service=hoppscotch"
       - "traefik.http.routers.hoppscotch-monitor-rtr.priority=100"  # Higher priority so it matches first
 
 
   hoppscotch-db:
-    image: docker.io/library/postgres:17.7-alpine@sha256:9a78577340f3d26384b6aebeb475c0d46d664fd4ffa68503b4be4e4462745f94
+    image: docker.io/library/postgres:17.7-alpine@sha256:bb377b7239d2774ac8cc76f481596ce96c5a6b5e9d141f6d0a0ee371a6e7c0f2
     container_name: hoppscotch-db
     restart: always
     security_opt:
@@ -165,7 +165,7 @@ services:
       - no-new-privileges=true
 
   hoppscotch-db-upgrade:
-    image: pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:9d5f6551a8b5771e0162c36b5ac16b2d6533b439806dfcc1c24928bd383fefd6
+    image: pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:624a676aa93b02ea9018207fd33914d6b7749ecd5c93091d77e1b9ed918489da
     container_name: hoppscotch-db-upgrade
     restart: "no"
     security_opt:

@@ -1,6 +1,6 @@
 services:
   echo-server:
-    image: mendhak/http-https-echo:38@sha256:c73e039e883944a38e37eaba829eb9a67641cd03eff868827683951feceef96e
+    image: mendhak/http-https-echo:39@sha256:59e97f8417530cd88c2a4bb7b488153276e88df8a317a86641c575138ad81829
     container_name: echo-server
     depends_on:
       - traefik
@@ -28,7 +28,11 @@ services:
       ## HTTP Routers
       - "traefik.http.routers.echo-server-rtr.rule=Host(`echo-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME`)"
       ## Middlewares
+#% if 'untrusted' in group_names %#
+      - "traefik.http.routers.echo-server-rtr.middlewares=chain-no-auth@file"
+#% else %#
       - "traefik.http.routers.echo-server-rtr.middlewares=chain-auth@file"
+#% endif %#
       ## HTTP Services
       - "traefik.http.routers.echo-server-rtr.service=echo-server"
       ### Enable the server port

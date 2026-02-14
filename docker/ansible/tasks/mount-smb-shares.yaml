@@ -40,7 +40,7 @@
   loop: "{{ generic__svlnas_smb_shares }}"
   become: true
   when:
-    - inventory_hostname in groups['apps']
+    - inventory_hostname in groups['apps'] or inventory_hostname in groups['media']
     - nas_smb.state | default('') == 'started'
 
 - name: Mount Plex SMB volumes
@@ -53,7 +53,7 @@
   loop: "{{ generic__svlnas_smb_shares }}"
   become: true
   when:
-    - inventory_hostname in groups['apps']
+    - inventory_hostname in groups['apps'] or inventory_hostname in groups['media']
     - nas_smb.state | default('') == 'started'
 
 - name: Mount Backup SMB volume

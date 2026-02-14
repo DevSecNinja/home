@@ -1,6 +1,6 @@
 services:
   metube:
-    image: ghcr.io/alexta69/metube:latest@sha256:75c227ff12ffbcb3bcbfe9cb0b8ff067cde30de2771d7992f41d9680ba46fdd9
+    image: ghcr.io/alexta69/metube:latest@sha256:0a8a575017b92818bae78813317119d7adfc531e5301f56e5bb0a78f8382d6b6
     container_name: metube
     depends_on:
       - traefik
@@ -41,7 +41,6 @@ services:
       ## Middlewares
       - "traefik.http.routers.metube-rtr.middlewares=chain-auth@file"
       ## HTTP Services
-      - "traefik.http.routers.metube-rtr.rule=Host(`metube.$DOMAINNAME`)"
       - "traefik.http.routers.metube-rtr.service=metube"
       # Enable the management port
       - "traefik.http.services.metube.loadbalancer.server.port=8081"

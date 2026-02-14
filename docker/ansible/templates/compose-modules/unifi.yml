@@ -5,7 +5,7 @@ services:
   # docker compose exec unifi-db mongosh --eval 'db.adminCommand( { setFeatureCompatibilityVersion: "'$MONGO_VERSION'" } )'
 
   unifi-db:
-    image: mongo:8.2.1@sha256:e64a984d36b24419327c558b49a9100cf78191706222da6a7c8cf56a743ad3db
+    image: mongo:8.2.5@sha256:9e52bf8768ae4f59b9ca734845d15cee0e523ced14b900cc3692d241eec9154c
     container_name: unifi-db
     mem_limit: 1024m
     environment:
@@ -87,7 +87,7 @@ services:
 
   unifi:
     container_name: unifi
-    image: lscr.io/linuxserver/unifi-network-application:version-9.4.19@sha256:6e44301b9a6a6c8bccdf04a30d01d3f04f613e96c7888be0c2d81492f76a05b8
+    image: lscr.io/linuxserver/unifi-network-application:version-10.0.162@sha256:1c3667f6f145b49dcbd105b090a3740a6403f2ae02a164ae9231649e073e2f84
     depends_on:
       - traefik
       - unifi-db
@@ -142,7 +142,6 @@ services:
       - "traefik.enable=true"
       - "traefik.docker.network=unifi-frontend"
       ## HTTP Routers
-      - "traefik.http.routers.unifi-rtr.rule=Host(`unifi.$DOMAINNAME`)"
       - "traefik.http.routers.unifi-guest-rtr.entrypoints=unifi-guest"
       - "traefik.http.routers.unifi-guest-rtr.rule=Host(`unifi-guest.$DOMAINNAME`)"
       ## Middlewares
@@ -171,7 +170,7 @@ services:
 
   unifi-volume-backup:
     container_name: unifi-volume-backup
-    image: offen/docker-volume-backup:v2.46.1@sha256:039188f012d26178e68a0bb906cd408b9fc197069e8076d03014a31a5fed1406
+    image: offen/docker-volume-backup:v2.47.0@sha256:2017b0e180cfe7f896117e2c10a05d6036c396de426112875456b808d8a51c6b
     user: "${PUID}:${PGID}"
     volumes:
       - unifi_data:/backup:ro

@@ -1,0 +1,60 @@
+services:
+  radarr:
+    image: lscr.io/linuxserver/radarr:version-6.0.4.10291@sha256:f08dda38e7d12e5a722d9a5cb6e54acaf63c8598fefeefec88effe0c0d0038dd
+    container_name: radarr
+    depends_on:
+      - traefik
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+    # Started with 2048m to test
+    mem_limit: 2048m
+    volumes:
+      - radarr_config_data:/config
+      - /mnt/smb_share_downloads-staging/sabnzbd:/downloads
+      - /mnt/smb_share_downloads-staging/torrents:/torrents
+      - /mnt/smb_share_movies:/movies
+    # Linuxserver uses s6 overlay which requires root permissions to set correct /run permissions
+    # Root permissions will be dropped after initialization
+    # user: "$PUID:$PGID"
+    healthcheck:
+      test: curl -f http://localhost:7878/ping || exit 1
+      interval: 10s
+      timeout: 3s
+      start_period: 60s
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    networks:
+      - radarr-frontend
+      - arr-stack-backend
+    labels:
+      # Homepage
+      - homepage.group=Media
+      - homepage.name=Radarr
+      - homepage.icon=radarr
+      - homepage.href=https://radarr.$DOMAINNAME
+      - homepage.description=Movie Collection Manager
+      # Traefik
+      - "traefik.enable=true"
+      - "traefik.docker.network=radarr-frontend"
+      ## Middlewares
+      - "traefik.http.routers.radarr-rtr.middlewares=chain-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.radarr-rtr.service=radarr"
+      # Enable the management port
+      - "traefik.http.services.radarr.loadbalancer.server.port=7878"
+      ## Router for Gatus — bypass auth if secret header is present
+      - "traefik.http.routers.radarr-monitor-rtr.rule=Host(`radarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET`)"
+      - "traefik.http.routers.radarr-monitor-rtr.service=radarr"
+      - "traefik.http.routers.radarr-monitor-rtr.priority=100"  # Higher priority so it matches first
+
+volumes:
+  radarr_config_data:
+
+networks:
+  radarr-frontend:
+    name: radarr-frontend
+  arr-stack-backend:
+    name: arr-stack-backend
