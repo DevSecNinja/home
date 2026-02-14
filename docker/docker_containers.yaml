@@ -112,7 +112,7 @@
   image: ghcr.io/meeb/tubesync:v0.16.2@sha256:e31f1743b9db2c3deea959a056015b58404f0ddb12f59e6a6fa028aaac704af3
   url: tubesync.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 - container_name: unifi
-  image: lscr.io/linuxserver/unifi-network-application:version-10.1.85@sha256:3dc07d42ca5ee4dec6084def7102ffa02a9e02136572cbf34a1bc2f4ccf6e5d0
+  image: lscr.io/linuxserver/unifi-network-application:version-10.0.162@sha256:1c3667f6f145b49dcbd105b090a3740a6403f2ae02a164ae9231649e073e2f84
   url: unifi-guest.$DOMAINNAME
 - container_name: unifi-db
   image: mongo:8.2.5@sha256:9e52bf8768ae4f59b9ca734845d15cee0e523ced14b900cc3692d241eec9154c
