@@ -29,8 +29,8 @@ msft__apt_key_checksum: "812c0606c9f9dcb8cd03c24232d0c3970efecbc257b079fd9cfce54
 msft__apt_channel: prod
 msft__apt_repository: >
   deb [arch=arm64,armhf,amd64]
-  {{ msft__apt_repository_url }}/{{ ansible_os_family | lower }}/{{ ansible_distribution_major_version }}/{{ msft__apt_channel }}
-  {{ ansible_distribution_release | lower }} main
+  {{ msft__apt_repository_url }}/{{ ansible_facts['os_family'] | lower }}/{{ ansible_facts['distribution_major_version'] }}/{{ msft__apt_channel }}
+  {{ ansible_facts['distribution_release'] | lower }} main
 
 #
 # Sops

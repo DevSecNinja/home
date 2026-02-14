@@ -34,7 +34,7 @@
       ansible.builtin.template:
         src: "../templates/compose/compose.yml.j2"
         dest: "/srv/docker/docker-compose.yml"
-        owner: "{{ansible_user}}"
+        owner: "{{ ansible_facts['user_id'] }}"
         group: "docker"
         mode: "0755"
         block_start_string: "#%"
@@ -44,7 +44,7 @@
       ansible.builtin.template:
         src: "../templates/env/env.j2"
         dest: "/srv/docker/.env"
-        owner: "{{ansible_user}}"
+        owner: "{{ ansible_facts['user_id'] }}"
         group: "docker"
         mode: "0755"
         block_start_string: "#%"
@@ -61,21 +61,21 @@
 
     # Common
     - name: "[Common] Copy all data directories recursively"
-      file: dest={{templates_dest_path}}/{{ item|replace(templates_common_src_path+'/', '') }} state=directory owner={{ansible_user}} group=docker mode=0755
+      file: dest={{templates_dest_path}}/{{ item|replace(templates_common_src_path+'/', '') }} state=directory owner={{ ansible_facts['user_id'] }} group=docker mode=0755
       with_items: "{{ lookup('pipe', 'find '+ templates_common_src_path +'/ -type d').split('\n') }}"
 
     - name: "[Common] Copy all data files recursively"
-      copy: src={{ item }} dest={{templates_dest_path}}/{{ item|replace(templates_common_src_path+'/', '') }} owner={{ansible_user}} group=docker mode=0755
+      copy: src={{ item }} dest={{templates_dest_path}}/{{ item|replace(templates_common_src_path+'/', '') }} owner={{ ansible_facts['user_id'] }} group=docker mode=0755
       with_items: "{{ lookup('pipe', 'find '+ templates_common_src_path +'/ -type f -not -name *.j2 ').split('\n') }}"
 
     - name: "[Common] Copy data templates files recursively"
-      ansible.builtin.template: src={{ item }} dest={{templates_dest_path}}/{{ item|replace(templates_common_src_path+'/', '')|replace('.j2', '') }} owner={{ansible_user}} group=docker mode=0755  block_start_string="#%" block_end_string="%#"
+      ansible.builtin.template: src={{ item }} dest={{templates_dest_path}}/{{ item|replace(templates_common_src_path+'/', '')|replace('.j2', '') }} owner={{ ansible_facts['user_id'] }} group=docker mode=0755  block_start_string="#%" block_end_string="%#"
       with_items: "{{ lookup('pipe', 'find '+ templates_common_src_path +'/ -type f -name *.j2').split('\n') }}"
       when:
         - inventory_hostname in groups['trusted']
 
     - name: "[Common] Copy selected data templates files recursively for untrusted servers"
-      ansible.builtin.template: src={{ item }} dest={{templates_dest_path}}/{{ item|replace(templates_common_src_path+'/', '')|replace('.j2', '') }} owner={{ansible_user}} group=docker mode=0755  block_start_string="#%" block_end_string="%#"
+      ansible.builtin.template: src={{ item }} dest={{templates_dest_path}}/{{ item|replace(templates_common_src_path+'/', '')|replace('.j2', '') }} owner={{ ansible_facts['user_id'] }} group=docker mode=0755  block_start_string="#%" block_end_string="%#"
       with_items:
         - "{{ templates_common_src_path }}/traefik/traefik.yml.j2"
         - "{{ templates_common_src_path }}/traefik/rules/middlewares.yml.j2"
@@ -96,7 +96,7 @@
       when: check_server_folder_exists.stat.exists == true
 
     - name: "[Server] Copy all data directories recursively"
-      file: dest={{templates_dest_path}}/{{ item|replace(templates_src_path+'/', '') }} state=directory owner={{ansible_user}} group=docker mode=0755
+      file: dest={{templates_dest_path}}/{{ item|replace(templates_src_path+'/', '') }} state=directory owner={{ ansible_facts['user_id'] }} group=docker mode=0755
       with_items: "{{ data_directories.stdout_lines }}"
       when:
         - check_server_folder_exists.stat.exists == true
@@ -109,7 +109,7 @@
       when: check_server_folder_exists.stat.exists == true
 
     - name: "[Server] Copy all data files recursively"
-      copy: src={{ item }} dest={{templates_dest_path}}/{{ item|replace(templates_src_path+'/', '') }} owner={{ansible_user}} group=docker mode=0755
+      copy: src={{ item }} dest={{templates_dest_path}}/{{ item|replace(templates_src_path+'/', '') }} owner={{ ansible_facts['user_id'] }} group=docker mode=0755
       with_items: "{{ data_files.stdout_lines }}"
       when:
         - check_server_folder_exists.stat.exists == true
@@ -122,7 +122,7 @@
       when: check_server_folder_exists.stat.exists == true
 
     - name: "[Server] Copy data templates files recursively"
-      ansible.builtin.template: src={{ item }} dest={{templates_dest_path}}/{{ item|replace(templates_src_path+'/', '')|replace('.j2', '') }} owner={{ansible_user}} group=docker mode=0755 block_start_string="#%" block_end_string="%#"
+      ansible.builtin.template: src={{ item }} dest={{templates_dest_path}}/{{ item|replace(templates_src_path+'/', '')|replace('.j2', '') }} owner={{ ansible_facts['user_id'] }} group=docker mode=0755 block_start_string="#%" block_end_string="%#"
       with_items: "{{ data_templates.stdout_lines }}"
       when:
         - check_server_folder_exists.stat.exists == true
@@ -130,15 +130,15 @@
 
     # Compose
     - name: "[Compose] Copy all data files recursively"
-      copy: src={{ item }} dest={{compose_dest_path}}/{{ item|replace(compose_src_path+'/', '') }} owner={{ansible_user}} group=docker mode=0755
+      copy: src={{ item }} dest={{compose_dest_path}}/{{ item|replace(compose_src_path+'/', '') }} owner={{ ansible_facts['user_id'] }} group=docker mode=0755
       with_items: "{{ lookup('pipe', 'find '+ compose_src_path +'/ -type f -not -name *.j2 ').split('\n') }}"
 
     - name: "[Compose] Copy data templates files recursively"
-      ansible.builtin.template: src={{ item }} dest={{compose_dest_path}}/{{ item|replace(compose_src_path+'/', '')|replace('.j2', '') }} owner={{ansible_user}} group=docker mode=0755 block_start_string="#%" block_end_string="%#"
+      ansible.builtin.template: src={{ item }} dest={{compose_dest_path}}/{{ item|replace(compose_src_path+'/', '')|replace('.j2', '') }} owner={{ ansible_facts['user_id'] }} group=docker mode=0755 block_start_string="#%" block_end_string="%#"
       with_items: "{{ lookup('pipe', 'find '+ compose_src_path +'/ -type f -name *.j2').split('\n') }}"
 
     - name: "[Compose] Copy selected data templates files recursively for untrusted servers"
-      ansible.builtin.template: src={{ item }} dest={{compose_dest_path}}/{{ item|replace(compose_src_path+'/', '')|replace('.j2', '') }} owner={{ansible_user}} group=docker mode=0755 block_start_string="#%" block_end_string="%#"
+      ansible.builtin.template: src={{ item }} dest={{compose_dest_path}}/{{ item|replace(compose_src_path+'/', '')|replace('.j2', '') }} owner={{ ansible_facts['user_id'] }} group=docker mode=0755 block_start_string="#%" block_end_string="%#"
       with_items:
         - "{{ compose_src_path }}/echo-server.yml.j2"
       when:

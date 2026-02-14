@@ -26,16 +26,16 @@
     name: "{{ locale }}"
     state: present
   # Doesn't seem to work with ARM or Ubuntu. Excluding RPI for now.
-  when: ansible_architecture == "x86_64"
+  when: ansible_facts['architecture'] == "x86_64"
 
 - name: Set "{{ locale }}" as default locale
   command: localectl set-locale LANG="{{ locale }}"
   # Doesn't seem to work with ARM or Ubuntu
-  when: ansible_architecture == "x86_64"
+  when: ansible_facts['architecture'] == "x86_64"
 
 - name: Set authorized key for remote user copying it from local user
   ansible.posix.authorized_key:
-    user: "{{ansible_user}}"
+    user: "{{ ansible_facts['user_id'] }}"
     state: present
     exclusive: true
     key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/authorized_keys') }}"
@@ -55,7 +55,7 @@
     url: "{{ msft__apt_repository_url }}/keys/microsoft.asc"
     keyring: /etc/apt/trusted.gpg.d/microsoft.gpg
     state: present
-  when: ansible_os_family == "Debian"
+  when: ansible_facts['os_family'] == "Debian"
 
 - name: Get sha256 sum of downloaded apt key
   stat:
@@ -76,7 +76,7 @@
     update_cache: yes
     state: present
     filename: "microsoft-{{ msft__apt_channel }}"
-  when: ansible_os_family == "Debian"
+  when: ansible_facts['os_family'] == "Debian"
 
 - name: Install other repositories
   ansible.builtin.shell: |

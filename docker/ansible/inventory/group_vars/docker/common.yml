@@ -17,7 +17,7 @@ docker__uid_map:
   svlinfra: 3003
   svlmedia: 3004
 
-docker__users: ["{{ ansible_env.SUDO_USER | d('root') }}"]
+docker__users: ["{{ ansible_facts['env'].SUDO_USER | d('root') }}"]
 
 docker__cron_jobs_prune_flags: "af"
 docker__cron_jobs_prune_schedule: ["0", "0", "*", "*", "0"]

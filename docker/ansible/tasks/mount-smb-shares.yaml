@@ -5,7 +5,7 @@
 
 - name: Print user ID and group ID
   debug:
-      msg: "{{ ansible_user }}: {{ getent_passwd[ansible_user].1 }}:{{ getent_passwd[ansible_user].2 }}"
+      msg: "{{ ansible_facts['user_id'] }}: {{ ansible_facts['getent_passwd'][ansible_facts['user_id']].1 }}:{{ ansible_facts['getent_passwd'][ansible_facts['user_id']].2 }}"
 
 - name: Test if NAS is reachable on TCP/445
   ansible.builtin.wait_for:
