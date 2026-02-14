@@ -32,7 +32,7 @@
 
 **container_name:** cyberchef
 
-**image:** ghcr.io/gchq/cyberchef:10.20.0@sha256:925058eb6af4bcc6300d529ab5d5d4dc40abdf1aa80919e1fb6e1d9694b15bc5
+**image:** ghcr.io/gchq/cyberchef:10.22.1@sha256:3aa4eb2c52c9f9e22bda450cae3187e1de114581f7850d8136c98164837a406c
 
 **url:** cyberchef.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
@@ -42,7 +42,7 @@
 
 **container_name:** dawarich
 
-**image:** freikin/dawarich:1.0.4@sha256:69d9c81d08886c83c0259dbe03ab9b27330fceee25d890725dc1347382f304e0
+**image:** freikin/dawarich:1.1.0@sha256:31aad0680a0da32d60970f0781bdde793b8ba9fc75a744171427767ea0ad358b
 
 **url:** dawarich-noauth.$DOMAINNAME
 
@@ -68,7 +68,7 @@
 
 **container_name:** dawarich-sidekiq
 
-**image:** freikin/dawarich:1.0.4@sha256:69d9c81d08886c83c0259dbe03ab9b27330fceee25d890725dc1347382f304e0
+**image:** freikin/dawarich:1.1.0@sha256:31aad0680a0da32d60970f0781bdde793b8ba9fc75a744171427767ea0ad358b
 
 ## docker/ansible/templates/compose-modules/drawio.yml
 
@@ -112,7 +112,7 @@
 
 **container_name:** gatus-db
 
-**image:** docker.io/library/postgres:17.7-alpine@sha256:bb377b7239d2774ac8cc76f481596ce96c5a6b5e9d141f6d0a0ee371a6e7c0f2
+**image:** docker.io/library/postgres:17.8-alpine@sha256:3430fe182f5065a6ea505c3d432d2c7fff18fbab954df8f277c1dbf4c70124af
 
 ### Service: gatus-db-backup
 
@@ -150,7 +150,7 @@
 
 **container_name:** hoppscotch-db
 
-**image:** docker.io/library/postgres:17.7-alpine@sha256:bb377b7239d2774ac8cc76f481596ce96c5a6b5e9d141f6d0a0ee371a6e7c0f2
+**image:** docker.io/library/postgres:17.8-alpine@sha256:3430fe182f5065a6ea505c3d432d2c7fff18fbab954df8f277c1dbf4c70124af
 
 ### Service: hoppscotch-db-backup
 
@@ -234,7 +234,7 @@
 
 **container_name:** n8n
 
-**image:** n8nio/n8n:2.6.2@sha256:ff6fe9eca746b7455c9e6e4fbc6f5753c3204e82279e015fa62f1bfe309e6343
+**image:** n8nio/n8n:2.8.3@sha256:53004142b0e93de1e9e31943e601ed9bd4b24ca82a307864ccadf1820b627e5e
 
 **url:** n8n.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
@@ -242,7 +242,7 @@
 
 **container_name:** n8n-db
 
-**image:** docker.io/library/postgres:17.7-alpine@sha256:bb377b7239d2774ac8cc76f481596ce96c5a6b5e9d141f6d0a0ee371a6e7c0f2
+**image:** docker.io/library/postgres:17.8-alpine@sha256:3430fe182f5065a6ea505c3d432d2c7fff18fbab954df8f277c1dbf4c70124af
 
 ### Service: n8n-db-backup
 
@@ -342,7 +342,7 @@
 
 **container_name:** spottarr
 
-**image:** ghcr.io/spottarr/spottarr:1.15.0@sha256:ae04eb63892ad62e34468e377074ec50b0240ca9740ff4148a1033fa75c2ec89
+**image:** ghcr.io/spottarr/spottarr:1.16.0@sha256:bf4663c5d54d47b2beb888bf980f9d6d26457e6939759c193229a2ebff2cbecc
 
 **url:** spottarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
@@ -372,7 +372,7 @@
 
 **container_name:** unifi
 
-**image:** lscr.io/linuxserver/unifi-network-application:version-10.1.85@sha256:3dc07d42ca5ee4dec6084def7102ffa02a9e02136572cbf34a1bc2f4ccf6e5d0
+**image:** lscr.io/linuxserver/unifi-network-application:version-10.0.162@sha256:1c3667f6f145b49dcbd105b090a3740a6403f2ae02a164ae9231649e073e2f84
 
 **url:** unifi-guest.$DOMAINNAME
 
