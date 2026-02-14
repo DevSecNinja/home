@@ -135,6 +135,10 @@ endpoints:
     headers:
       X-Monitor-Key: "${GENERIC_MONITORING_HEADER_SECRET}"
 
+  - name: Home Assistant - HTTP
+    <<: *defaults
+    url: "https://home.${DOMAINNAME}"
+
   - name: Homepage - HTTP
     <<: *defaults
     url: "https://apps.${DOMAINNAME}"
@@ -236,6 +240,10 @@ endpoints:
     url: "https://tubesync.${DOMAINNAME}"
     headers:
       X-Monitor-Key: "${GENERIC_MONITORING_HEADER_SECRET}"
+
+  - name: V60 - HTTP
+    <<: *defaults
+    url: "https://v60.${DOMAINNAME}"
 
   - name: UniFi - HTTP
     <<: *defaults

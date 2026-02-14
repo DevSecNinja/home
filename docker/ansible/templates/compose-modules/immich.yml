@@ -1,6 +1,6 @@
 services:
   immich-server:
-    image: ghcr.io/immich-app/immich-server:v2.5.2@sha256:8ac5a6d471fbb6fcfec6bc34854dd5a947c1795547f0d9345d9bf1803d1209e3
+    image: ghcr.io/immich-app/immich-server:v2.5.6@sha256:aa163d2e1cc2b16a9515dd1fef901e6f5231befad7024f093d7be1f2da14341a
     container_name: immich-server
     depends_on:
       - traefik
@@ -60,7 +60,7 @@ services:
 
   immich-machine-learning:
     # For hardware acceleration, add one of -[armnn, cuda, rocm, openvino, rknn] to the image tag.
-    image: ghcr.io/immich-app/immich-machine-learning:v2.5.2@sha256:531d2bccbe20d0412496e36455715a18d692911eca5e2ee37d32e1e4f50e14bb
+    image: ghcr.io/immich-app/immich-machine-learning:v2.5.6@sha256:b213fa3c82d27a21a299c46ffbb38a091f18384db1ad67d409a3b34fe0fce556
     container_name: immich-machine-learning
     # extends: # uncomment this section for hardware acceleration - see https://immich.app/docs/features/ml-hardware-acceleration
     #   file: hwaccel.ml.yml
@@ -81,7 +81,7 @@ services:
       - immich-backend
 
   immich-redis:
-    image: docker.io/valkey/valkey:9-alpine@sha256:c106a0c03bcb23cbdf9febe693114cb7800646b11ca8b303aee7409de005faa8
+    image: docker.io/valkey/valkey:9-alpine@sha256:68677f85c863830af7836ff07c4a13b7f085ebeff62f4dedb71499ca27d229f2
     container_name: immich-redis
     # Requirepass is needed as environment variable isn't picked up
     command: >

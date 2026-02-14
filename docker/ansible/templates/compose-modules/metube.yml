@@ -1,6 +1,6 @@
 services:
   metube:
-    image: ghcr.io/alexta69/metube:latest@sha256:6c353248e1db1232e6c3db138c7ed492a516f736c25740e705ed96a5f67c5643
+    image: ghcr.io/alexta69/metube:latest@sha256:eddc5430c1e3299f2df3a3c413af7b50fdbcbb12c7065fe32d29b4bc83557aac
     container_name: metube
     depends_on:
       - traefik
