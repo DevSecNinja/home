@@ -90,6 +90,16 @@ endpoints:
       - "[BODY].total_repositories > 0"
       - "[BODY].total_automations > 10"
 
+  - name: V60 - HTTP
+    <<: *defaults
+    url: "https://v60.${DOMAINNAME}"
+    group: External
+    conditions:
+      - "[BODY] == pat(*Built by DevSecNinja*)"
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 48h"
+      - "[RESPONSE_TIME] < 1000"
+
   - name: Bing - HTTP
     <<: *defaults
     url: "https://bing.com/"
@@ -240,10 +250,6 @@ endpoints:
     url: "https://tubesync.${DOMAINNAME}"
     headers:
       X-Monitor-Key: "${GENERIC_MONITORING_HEADER_SECRET}"
-
-  - name: V60 - HTTP
-    <<: *defaults
-    url: "https://v60.${DOMAINNAME}"
 
   - name: UniFi - HTTP
     <<: *defaults
