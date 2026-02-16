@@ -14,14 +14,13 @@ services:
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TZ}
-      - ENABLE_OAUTH_SIGNUP=true
       - WEBUI_AUTH_TRUSTED_EMAIL_HEADER=x-forwarded-user
       - WEBUI_AUTH_TRUSTED_NAME_HEADER=x-forwarded-displayname
       - WEBUI_URL=https://chat.$DOMAINNAME
       - WEBUI_SECRET_KEY=${OPEN_WEBUI_SECRET_KEY}
-      - ENABLE_LOGIN_FORM=true # Required for OAuth to work. Otherwise you'll get a strange error
       - ENABLE_OPENAI_API=true
       - ENABLE_EVALUATION_ARENA_MODELS=false
+      - DEFAULT_USER_ROLE=user
 
       # TODO: [open-webui] Fix adding OpenAI and Ollama API keys. Somehow getting error 500
       # NOTE: Specifying multiple keys & base URLs doesn't seem to work yet and results in a 500 error
