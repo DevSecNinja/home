@@ -124,7 +124,7 @@
 
 **container_name:** gatus-db-upgrade
 
-**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:624a676aa93b02ea9018207fd33914d6b7749ecd5c93091d77e1b9ed918489da
+**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:091e51fb5347d48aec720b139f3b1ede45d4721310274c688cead29e77845921
 
 ## docker/ansible/templates/compose-modules/hadiscover.yml
 
@@ -162,7 +162,7 @@
 
 **container_name:** hoppscotch-db-upgrade
 
-**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:624a676aa93b02ea9018207fd33914d6b7749ecd5c93091d77e1b9ed918489da
+**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:091e51fb5347d48aec720b139f3b1ede45d4721310274c688cead29e77845921
 
 ## docker/ansible/templates/compose-modules/immich.yml
 
@@ -254,7 +254,7 @@
 
 **container_name:** n8n-db-upgrade
 
-**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:624a676aa93b02ea9018207fd33914d6b7749ecd5c93091d77e1b9ed918489da
+**image:** pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:091e51fb5347d48aec720b139f3b1ede45d4721310274c688cead29e77845921
 
 ## docker/ansible/templates/compose-modules/open-webui.yml
 
@@ -302,7 +302,7 @@
 
 **container_name:** qbittorrent
 
-**image:** lscr.io/linuxserver/qbittorrent:5.1.4@sha256:dfa75bc534ad4f36262f75b5c1d4c4f0ddd5e7ed5711ebc581c70920cce204ee
+**image:** lscr.io/linuxserver/qbittorrent:5.1.4@sha256:85eb27d2d09cd4cb748036a4c7f261321da516b6f88229176cf05a92ccd26815
 
 **url:** qbittorrent.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
@@ -312,7 +312,7 @@
 
 **container_name:** radarr
 
-**image:** lscr.io/linuxserver/radarr:version-6.0.4.10291@sha256:f08dda38e7d12e5a722d9a5cb6e54acaf63c8598fefeefec88effe0c0d0038dd
+**image:** lscr.io/linuxserver/radarr:version-6.0.4.10291@sha256:6d3e68474ea146f995af98d3fb2cb1a14e2e4457ddaf035aa5426889e2f9249c
 
 **url:** radarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 

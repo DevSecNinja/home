@@ -36,7 +36,7 @@
 - container_name: gatus-db-backup
   image: tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
 - container_name: gatus-db-upgrade
-  image: pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:624a676aa93b02ea9018207fd33914d6b7749ecd5c93091d77e1b9ed918489da
+  image: pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:091e51fb5347d48aec720b139f3b1ede45d4721310274c688cead29e77845921
 - container_name: hadiscover-api
   image: ghcr.io/devsecninja/hadiscover/backend:0.2.14@sha256:cbf696794b817b6fa08345c9fda852da829323f97884b3b48dea3b316d864af4
   url: api.hadiscover.com
@@ -48,7 +48,7 @@
 - container_name: hoppscotch-db-backup
   image: tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
 - container_name: hoppscotch-db-upgrade
-  image: pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:624a676aa93b02ea9018207fd33914d6b7749ecd5c93091d77e1b9ed918489da
+  image: pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:091e51fb5347d48aec720b139f3b1ede45d4721310274c688cead29e77845921
 - container_name: immich-db
   image: ghcr.io/immich-app/postgres:14-vectorchord0.3.0-pgvectors0.2.0@sha256:c570d9e1c2494f65d2a0a379a7f6df66e8441964254a30aa62cc58e8ebf1dee0
 - container_name: immich-db-backup
@@ -77,7 +77,7 @@
 - container_name: n8n-db-backup
   image: tiredofit/db-backup:4.1.21@sha256:36e7888e4887e57e3ab3ec5ecd4782f345226084df6d3fdd93b2d3e4a2162274
 - container_name: n8n-db-upgrade
-  image: pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:624a676aa93b02ea9018207fd33914d6b7749ecd5c93091d77e1b9ed918489da
+  image: pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:091e51fb5347d48aec720b139f3b1ede45d4721310274c688cead29e77845921
 - container_name: open-webui
   image: ghcr.io/open-webui/open-webui:v0.8.1@sha256:882a4aab2cb573feeb681f7f800ac5ada4751d03981cc324718757c74ecc1c70
   url: chat.$DOMAINNAME
@@ -91,10 +91,10 @@
   image: lscr.io/linuxserver/prowlarr:version-2.3.0.5236@sha256:e74a1e093dcc223d671d4b7061e2b4946f1989a4d3059654ff4e623b731c9134
   url: prowlarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 - container_name: qbittorrent
-  image: lscr.io/linuxserver/qbittorrent:5.1.4@sha256:dfa75bc534ad4f36262f75b5c1d4c4f0ddd5e7ed5711ebc581c70920cce204ee
+  image: lscr.io/linuxserver/qbittorrent:5.1.4@sha256:85eb27d2d09cd4cb748036a4c7f261321da516b6f88229176cf05a92ccd26815
   url: qbittorrent.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 - container_name: radarr
-  image: lscr.io/linuxserver/radarr:version-6.0.4.10291@sha256:f08dda38e7d12e5a722d9a5cb6e54acaf63c8598fefeefec88effe0c0d0038dd
+  image: lscr.io/linuxserver/radarr:version-6.0.4.10291@sha256:6d3e68474ea146f995af98d3fb2cb1a14e2e4457ddaf035aa5426889e2f9249c
   url: radarr.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 - container_name: sabnzbd
   image: docker.io/linuxserver/sabnzbd:amd64-4.5.1@sha256:39952ab247d97c9d3345a572385ebee158ce497887652d8421f4c0ac44cddf7e
