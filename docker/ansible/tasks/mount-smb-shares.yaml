@@ -47,7 +47,7 @@
   ansible.posix.mount:
     src: "//{{ generic__ips_nas }}/{{ item }}"
     path: "/mnt/smb_share_{{ item | lower }}"
-    opts: "rw,vers=3,file_mode=0600,dir_mode=0700,uid={{ puid }},gid={{ pgid }},username={{ generic__svlnas_smb_user }},password={{ generic__svlnas_smb_password }}"
+    opts: "rw,vers=3,file_mode=0660,dir_mode=0770,uid={{ puid }},gid={{ pgid }},username={{ generic__svlnas_smb_user }},password={{ generic__svlnas_smb_password }}"
     fstype: cifs
     state: mounted
   loop: "{{ generic__svlnas_smb_shares }}"
