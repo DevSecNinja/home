@@ -6,7 +6,7 @@
 
 **container_name:** adguard
 
-**image:** adguard/adguardhome:v0.107.71@sha256:92929135ced2554aaf94706f766a98ad348f211df61b0704e2db7e8498cc00b7
+**image:** adguard/adguardhome:v0.107.72@sha256:4956b35b590286e5872fb4336d84a7862a2030c6efb4ca16442580c37d7ba32d
 
 **url:** adguard-$GENERIC_HOSTNAME_SUFFIX.$DOMAINNAME
 
@@ -50,7 +50,7 @@
 
 **container_name:** dawarich-db
 
-**image:** postgis/postgis:17-3.5-alpine@sha256:57e27aa2ce05a3b5800253bbfd8777e4ab5c938b8a7727b950c11b546289cff9
+**image:** postgis/postgis:17-3.5-alpine@sha256:f494c66c1cb419cd03de1456ae8847879db2f849df3e1567719a02d1bc7ae31c
 
 ### Service: dawarich-db-backup
 
@@ -76,7 +76,7 @@
 
 **container_name:** drawio
 
-**image:** jgraph/drawio:29.3.6@sha256:c8971352ceec3e76564369bbe76ebc7e66742f5f3b284c703f956bb78761cf3a
+**image:** jgraph/drawio:29.3.6@sha256:c7c7f7912c2eb5e747978ad4d62a7f21c129df457d2e9711d0abc235993fdfa2
 
 **url:** draw.$DOMAINNAME
 
@@ -224,7 +224,7 @@
 
 **container_name:** metube
 
-**image:** ghcr.io/alexta69/metube:latest@sha256:eddc5430c1e3299f2df3a3c413af7b50fdbcbb12c7065fe32d29b4bc83557aac
+**image:** ghcr.io/alexta69/metube:latest@sha256:4bad68f5d369b3e1deda1edd47f42801e76aa545e72df3405998c0f4c2227f13
 
 **url:** metube.$DOMAINNAME`) && Header(`X-Monitor-Key`, `$GENERIC_MONITORING_HEADER_SECRET
 
@@ -262,7 +262,7 @@
 
 **container_name:** open-webui
 
-**image:** ghcr.io/open-webui/open-webui:v0.8.1@sha256:882a4aab2cb573feeb681f7f800ac5ada4751d03981cc324718757c74ecc1c70
+**image:** ghcr.io/open-webui/open-webui:v0.8.3@sha256:205e9cf23b66553643b065afcdeffb7f86b35bf36e0ce643dc56946a911954b7
 
 **url:** chat.$DOMAINNAME
 
@@ -380,7 +380,7 @@
 
 **container_name:** unifi-db
 
-**image:** mongo:8.2.5@sha256:9e52bf8768ae4f59b9ca734845d15cee0e523ced14b900cc3692d241eec9154c
+**image:** mongo:8.2.5@sha256:474f5c3bf0e355bb97dafda730e725169a4d51c5578abf7be9ec7ad3fdee4481
 
 ### Service: unifi-db-backup
 
@@ -392,7 +392,7 @@
 
 **container_name:** unifi-volume-backup
 
-**image:** offen/docker-volume-backup:v2.47.0@sha256:2017b0e180cfe7f896117e2c10a05d6036c396de426112875456b808d8a51c6b
+**image:** offen/docker-volume-backup:v2.47.1@sha256:65a395b7531675ebd4ce9fac611da0d954ea628786d683e3d473ce7e65a61769
 
 ## docker/ansible/templates/compose-modules/wireguard.yml
 
