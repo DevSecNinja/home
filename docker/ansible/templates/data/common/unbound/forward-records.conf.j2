@@ -12,6 +12,12 @@ forward-zone:
     forward-addr: 149.112.112.112@853#dns.quad9.net
 
 forward-zone:
+    # Forwarding my V60 app domain queries to Quad9 servers
+    name: "v60.{{ generic__domain_name }}"
+    forward-addr: 9.9.9.9@853#dns.quad9.net
+    forward-addr: 149.112.112.112@853#dns.quad9.net
+
+forward-zone:
     # Security: prevent WPAD lookups, ref: DEF CON 32 2024.
     name: "wpad"
     forward-addr: 127.0.0.1
