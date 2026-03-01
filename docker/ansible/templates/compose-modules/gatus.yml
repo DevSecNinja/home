@@ -141,7 +141,7 @@ services:
       - no-new-privileges=true
 
   gatus-db-upgrade:
-    image: pgautoupgrade/pgautoupgrade:17.7-alpine@sha256:091e51fb5347d48aec720b139f3b1ede45d4721310274c688cead29e77845921
+    image: pgautoupgrade/pgautoupgrade:17.9-alpine@sha256:8409699241d35103ba9f0502a671e0016837f0f4e35f39d095cb9fe781a5542f
     container_name: gatus-db-upgrade
     restart: "no"
     security_opt:
