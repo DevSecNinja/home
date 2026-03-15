@@ -1,6 +1,6 @@
 services:
   n8n:
-    image: n8nio/n8n:2.8.3@sha256:53004142b0e93de1e9e31943e601ed9bd4b24ca82a307864ccadf1820b627e5e
+    image: n8nio/n8n:2.12.2@sha256:1e764de257f2b1eb6fc0e2477bd82cf8f5de9e68b82ac243b1a2db1551426723
     container_name: n8n
     depends_on:
       - traefik
